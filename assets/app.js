@@ -6,37 +6,14 @@
   'use strict';
 
   // ────────────────────────────────────────────────────────
-  // Track detection (Standard vs Plus)
-  // ────────────────────────────────────────────────────────
-  const path = window.location.pathname;
-  const isAlt = path.startsWith('/alt/') || path === '/alt' || path === '/alt/index.html';
-  const altPrefix = isAlt ? '/alt' : '';
-
-  // Map current path to its sibling track URL
-  function siblingTrack() {
-    let p = path;
-    if (p.endsWith('index.html')) p = p.slice(0, -'index.html'.length);
-    if (isAlt) {
-      // strip /alt
-      let rest = p.replace(/^\/alt/, '');
-      if (rest === '') rest = '/';
-      return rest;
-    } else {
-      if (p === '/') return '/alt/';
-      return '/alt' + p;
-    }
-  }
-
-  // ────────────────────────────────────────────────────────
   // Nav + Mobile drawer + Footer (injected into mount points)
   // ────────────────────────────────────────────────────────
   function navHTML() {
-    const link = (href, label, key) => `<a href="${altPrefix}${href}" data-nav-key="${key}">${label}</a>`;
-    const sibling = siblingTrack();
+    const link = (href, label, key) => `<a href="${href}" data-nav-key="${key}">${label}</a>`;
     return `
       <header>
         <nav class="nav" aria-label="Primary">
-          <a href="${altPrefix}/" class="nav-logo">Foundry Art</a>
+          <a href="/" class="nav-logo">Foundry Art</a>
           <div class="nav-links">
             ${link('/shop/', 'Tiles', 'shop')}
             ${link('/shop/', 'Hardware', 'hardware')}
@@ -48,33 +25,23 @@
             <span></span><span></span><span></span>
           </button>
           <div class="nav-right">
-            <span class="version-pill" role="tablist" aria-label="Site version">
-              <a href="${isAlt ? sibling : path}" class="${isAlt ? '' : 'active'}" data-version="standard">Standard</a>
-              <a href="${isAlt ? path : sibling}" class="${isAlt ? 'active' : ''}" data-version="plus">Plus</a>
-            </span>
-            <a href="${altPrefix}/cart/" class="nav-cart" aria-label="Cart">
+            <a href="/cart/" class="nav-cart" aria-label="Cart">
               Cart<span class="nav-cart-count" data-cart-count>2</span>
             </a>
-            <a href="${altPrefix}/shop/" class="nav-cta">Shop Now</a>
+            <a href="/shop/" class="nav-cta">Shop Now</a>
           </div>
         </nav>
       </header>
 
       <div class="drawer-scrim" data-drawer-scrim></div>
       <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile menu" aria-hidden="true">
-        <a href="${altPrefix}/shop/" data-drawer-link>Tiles</a>
-        <a href="${altPrefix}/shop/" data-drawer-link>Hardware</a>
-        <a href="${altPrefix}/#design-ideas" data-drawer-link>Design Ideas</a>
-        <a href="${altPrefix}/#story" data-drawer-link>Our Story</a>
-        <a href="${altPrefix}/#guidance" data-drawer-link>How to Buy</a>
-        <a href="${altPrefix}/cart/" data-drawer-link>Cart</a>
-        <a href="${altPrefix}/shop/" class="mobile-cta" data-drawer-link>Shop Now</a>
-        <div class="mobile-version-row">
-          <span class="version-pill">
-            <a href="${isAlt ? sibling : path}" class="${isAlt ? '' : 'active'}">Standard</a>
-            <a href="${isAlt ? path : sibling}" class="${isAlt ? 'active' : ''}">Plus</a>
-          </span>
-        </div>
+        <a href="/shop/" data-drawer-link>Tiles</a>
+        <a href="/shop/" data-drawer-link>Hardware</a>
+        <a href="/#design-ideas" data-drawer-link>Design Ideas</a>
+        <a href="/#story" data-drawer-link>Our Story</a>
+        <a href="/#guidance" data-drawer-link>How to Buy</a>
+        <a href="/cart/" data-drawer-link>Cart</a>
+        <a href="/shop/" class="mobile-cta" data-drawer-link>Shop Now</a>
       </aside>
     `;
   }
@@ -410,7 +377,7 @@
   // ────────────────────────────────────────────────────────
   // Render helpers (shop grid + cross-sell)
   // ────────────────────────────────────────────────────────
-  function productCardHTML(p, prefix) {
+  function productCardHTML(p) {
     const onSale = !!p.salePrice;
     const priceBlock = onSale
       ? `<div class="product-price"><span class="was">${window.FA_FMT.price(p.wasPrice)}</span><span class="sale">${window.FA_FMT.price(p.salePrice)}</span></div>`
@@ -419,7 +386,7 @@
     const imgSrc = `/assets/images/products/${p.slug}/main.jpg`;
     const imgAlt = `${p.name} ${p.sizeLabel} ${p.pattern} accent tile`;
     return `
-      <a href="${prefix}/product/${p.slug}/" class="product-card">
+      <a href="/product/${p.slug}/" class="product-card">
         <div class="img-wrap">
           ${badge}
           <div class="wire-img" role="img" aria-label="${p.name} ${p.sizeLabel}">
@@ -437,7 +404,7 @@
   function renderShopGrid() {
     const grid = document.querySelector('[data-shop-grid]');
     if (!grid || !window.FA_PRODUCTS) return;
-    grid.innerHTML = window.FA_PRODUCTS.map(p => productCardHTML(p, altPrefix)).join('');
+    grid.innerHTML = window.FA_PRODUCTS.map(p => productCardHTML(p)).join('');
   }
 
   function renderCrossSell() {
@@ -445,7 +412,7 @@
     if (!wrap || !window.FA_PRODUCTS) return;
     const exclude = wrap.dataset.exclude || '';
     const picks = window.FA_PRODUCTS.filter(p => p.slug !== exclude).slice(0, 3);
-    wrap.innerHTML = picks.map(p => productCardHTML(p, altPrefix)).join('');
+    wrap.innerHTML = picks.map(p => productCardHTML(p)).join('');
   }
 
   function renderShopSidebar() {

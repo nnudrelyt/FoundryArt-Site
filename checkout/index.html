@@ -25,9 +25,31 @@
       <p class="page-sub">Returning customer? <a href="#" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">Click to log in</a></p>
     </header>
 
+    <!-- Trade-pro toggle (Plus differentiator) -->
+    <div class="trade-row">
+      <input type="checkbox" id="trade-toggle" data-trade-toggle>
+      <label for="trade-toggle"><strong>I'm a trade professional</strong> — designer, architect, or contractor. Apply 20% trade discount.</label>
+      <input type="text" class="trade-id-input" data-trade-id placeholder="Trade ID #">
+    </div>
+
     <form class="checkout-layout" onsubmit="event.preventDefault(); window.location.href='/checkout/order-received/';">
 
       <section aria-label="Checkout form">
+
+        <!-- Project name field (Plus differentiator) -->
+        <div class="checkout-section">
+          <h2>Project</h2>
+          <div class="field-grid">
+            <div class="form-group full">
+              <label for="project">Project name (optional)</label>
+              <input id="project" type="text" placeholder="e.g. Lincoln Park kitchen — backsplash">
+            </div>
+            <div class="form-group full">
+              <label for="designer">Designer / contractor (optional)</label>
+              <input id="designer" type="text" placeholder="Name + email of designer for delivery coordination">
+            </div>
+          </div>
+        </div>
 
         <!-- BILLING -->
         <div class="checkout-section">
@@ -88,6 +110,13 @@
                 <span>$28.00</span>
               </div>
             </label>
+            <label class="option-row">
+              <input type="radio" name="shipping" value="white-glove">
+              <div class="opt-main">
+                <div><strong>White-glove (designer)</strong><span class="opt-sub">Coordinated delivery to your designer or jobsite</span></div>
+                <span>$45.00</span>
+              </div>
+            </label>
           </div>
         </div>
 
@@ -108,9 +137,9 @@
               </div>
             </label>
             <label class="option-row">
-              <input type="radio" name="payment" value="check">
+              <input type="radio" name="payment" value="invoice">
               <div class="opt-main">
-                <div><strong>Check payment</strong><span class="opt-sub">Mail your check to our Chicago studio — order ships once received</span></div>
+                <div><strong>Trade invoice (Net 30)</strong><span class="opt-sub">Trade accounts only — verified at order review</span></div>
               </div>
             </label>
           </div>
@@ -147,6 +176,7 @@
         </div>
 
         <div class="summary-row" style="margin-top:14px;border-top:1px solid var(--rule);padding-top:14px;"><span>Subtotal</span><span>$277.50</span></div>
+        <div class="summary-row" data-trade-discount><span>Trade discount (20%)</span><span class="trade-discount-line">−$55.50</span></div>
         <div class="summary-row"><span>Shipping (Ground)</span><span>$12.00</span></div>
         <div class="summary-row"><span>Tax</span><span>$0.00</span></div>
         <div class="summary-row total"><span>Total</span><span>$289.50</span></div>

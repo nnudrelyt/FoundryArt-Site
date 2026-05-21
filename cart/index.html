@@ -23,8 +23,22 @@
       <p class="page-sub">2 items · ready to ship from Chicago</p>
     </header>
 
+    <!-- Sample-order toggle (Plus differentiator) -->
+    <div class="trade-row">
+      <input type="checkbox" id="sample-toggle">
+      <label for="sample-toggle"><strong>This is a sample order</strong> — free shipping on your first 2 tiles, applies on checkout.</label>
+    </div>
+
     <div class="cart-layout">
       <section aria-label="Cart line items">
+
+        <!-- Project field (Plus differentiator) -->
+        <div class="form-group" style="margin-bottom:24px">
+          <label for="project">Project name (optional)</label>
+          <input id="project" type="text" placeholder="e.g. Lincoln Park kitchen — backsplash">
+          <p style="font-size:10px;color:var(--mid);margin-top:6px;">Save this cart as a named project to revisit later. <a href="#" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">Save as project →</a></p>
+        </div>
+
         <table class="cart-table">
           <thead>
             <tr>
@@ -48,7 +62,12 @@
                   </div>
                 </div>
               </td>
-              <td data-label="Material">Traditional Bronze</td>
+              <td data-label="Material">
+                <span class="swatch" style="padding:4px 8px 4px 6px;display:inline-flex;">
+                  <span class="swatch-chip traditional" style="width:14px;height:14px;"></span>
+                  <span class="swatch-label" style="font-size:11px;">Traditional</span>
+                </span>
+              </td>
               <td class="num" data-label="Price">$92.50</td>
               <td data-label="Qty">
                 <div class="qty-stepper" aria-label="Quantity">
@@ -71,7 +90,12 @@
                   </div>
                 </div>
               </td>
-              <td data-label="Material">White Bronze</td>
+              <td data-label="Material">
+                <span class="swatch" style="padding:4px 8px 4px 6px;display:inline-flex;">
+                  <span class="swatch-chip white" style="width:14px;height:14px;"></span>
+                  <span class="swatch-label" style="font-size:11px;">White</span>
+                </span>
+              </td>
               <td class="num" data-label="Price">$92.50</td>
               <td data-label="Qty">
                 <div class="qty-stepper" aria-label="Quantity">
@@ -89,7 +113,7 @@
 
         <div class="cart-actions">
           <form class="coupon-form" aria-label="Coupon code">
-            <input type="text" placeholder="Coupon code" aria-label="Coupon code">
+            <input type="text" placeholder="Coupon or trade code" aria-label="Coupon code">
             <button type="button" class="btn-secondary">Apply</button>
           </form>
           <button type="button" class="btn-secondary">Update cart</button>
@@ -109,7 +133,7 @@
           <div class="stub-form">
             <select aria-label="Country"><option>United States (US)</option><option>Canada</option></select>
             <select aria-label="State"><option>Illinois</option><option>California</option><option>New York</option></select>
-            <input type="text" placeholder="ZIP / Postcode" aria-label="ZIP">
+            <input type="text" placeholder="ZIP / Postcode">
             <button type="button" class="btn-secondary" style="margin-top:4px;">Update</button>
           </div>
         </details>

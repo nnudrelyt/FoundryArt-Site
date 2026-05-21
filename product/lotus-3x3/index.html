@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lotus 3×3 inch — Foundry Art [Standard]</title>
+<title>Lotus 3×3 inch — Foundry Art</title>
 <meta name="description" content="A stylized lotus blossom motif — one of our oldest patterns, originally carved in 1991. Used singly as a focal inset or repeated in a band.">
 <meta name="theme-color" content="#1A1814">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A1814'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23C9A84C' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
@@ -44,11 +44,17 @@
         <p class="pdp-desc">A stylized lotus blossom motif — one of our oldest patterns, originally carved in 1991. Used singly as a focal inset or repeated in a band.</p>
 
         <div class="form-group">
-          <label for="material">Material</label>
-          <select id="material">
-            <option>Traditional Bronze</option>
-            <option>White Bronze</option>
-          </select>
+          <label>Material</label>
+          <div class="swatch-row" role="radiogroup" aria-label="Material">
+            <button type="button" class="swatch selected" role="radio" aria-checked="true">
+              <span class="swatch-chip traditional"></span>
+              <span class="swatch-label">Traditional Bronze<small>Warm aged tone</small></span>
+            </button>
+            <button type="button" class="swatch" role="radio" aria-checked="false">
+              <span class="swatch-chip white"></span>
+              <span class="swatch-label">White Bronze<small>Cool silver-pewter</small></span>
+            </button>
+          </div>
         </div>
 
         <div class="qty-row">
@@ -62,14 +68,41 @@
 
         <div class="pdp-actions">
           <button type="button" class="btn-primary">Add to cart — Lotus 3×3</button>
-          
+          <button type="button" class="btn-sample">Request a free sample</button>
         </div>
-        
-        
-        <aside class="sample-cta">
-          <strong>Order just one as a sample!</strong>
-          Sign up for a free account to get free shipping on your first two sample tiles. <a href="#">Learn more →</a>
+        <aside class="coverage-calc" aria-label="Coverage calculator" data-price="92.5">
+          <h5>Coverage calculator</h5>
+          <p class="calc-sub">How many tiles for your space?</p>
+          <div class="calc-row">
+            <label for="sqft-lotus-3x3">Area</label>
+            <input id="sqft-lotus-3x3" type="number" min="1" value="10" data-sqft>
+            <label>sq ft</label>
+            <select data-density>
+              <option value="16" selected>Standard (16 tiles/sq ft)</option>
+              <option value="8">Sparse (every other)</option>
+              <option value="4">Accent only</option>
+            </select>
+          </div>
+          <div class="calc-result">
+            <div><span class="label">You'll need</span><strong data-tile-count>—</strong> tiles</div>
+            <div><span class="label">Estimated cost</span><strong data-cost>—</strong></div>
+          </div>
         </aside>
+        <aside class="visualizer-slot" aria-label="In-room visualizer" data-visualizer>
+          <div class="visualizer-image">
+            <img src="/assets/images/lifestyle/bath-cabochon-glass-mosaic.jpg" alt="See Lotus tile in a bathroom" loading="lazy">
+          </div>
+          <div class="visualizer-overlay">
+            <strong>See it in your space</strong>
+            <span>The Lotus tile in real rooms — tap a room below</span>
+            <div class="visualizer-tabs" role="tablist">
+              <button type="button" data-vis="bath" class="active">Bath</button>
+              <button type="button" data-vis="kitchen">Kitchen</button>
+              <button type="button" data-vis="fireplace">Fireplace</button>
+            </div>
+          </div>
+        </aside>
+        
 
         <div class="pdp-meta-row">
           <span>SKU: <strong>FA-LOT-3-TB</strong></span>
@@ -121,7 +154,32 @@
       </div>
 
       <div class="tab-panel" data-tab="reviews">
-        <p>No reviews yet. <a href="#" style="border-bottom:1px solid var(--bronze-l);color:var(--bronze)">Be the first to review this product</a>.</p>
+        <div class="reviews-list">
+            <article class="review">
+              <header class="review-header">
+                <div class="review-stars" aria-label="5 of 5">★ ★ ★ ★ ★</div>
+                <p class="review-meta">— Lauren M., Designer · Verified buyer · 4 months ago</p>
+              </header>
+              <h4 class="review-title">Anchored the whole backsplash</h4>
+              <p class="review-body">Used six of these as a band over the range. The bronze warms up the marble field in a way photographs never quite captured — guests always notice.</p>
+            </article>
+            <article class="review">
+              <header class="review-header">
+                <div class="review-stars" aria-label="5 of 5">★ ★ ★ ★ ★</div>
+                <p class="review-meta">— Andrew T., Homeowner · Verified buyer · 8 months ago</p>
+              </header>
+              <h4 class="review-title">Heavier than expected — in a great way</h4>
+              <p class="review-body">You feel the weight the moment you pick it up. Installer had no trouble setting it level with the surrounding 3×6 field. Worth every penny.</p>
+            </article>
+            <article class="review">
+              <header class="review-header">
+                <div class="review-stars" aria-label="4 of 5">★ ★ ★ ★ ☆</div>
+                <p class="review-meta">— Priya R., Architect · 1 year ago</p>
+              </header>
+              <h4 class="review-title">Beautiful — wished for more sizes</h4>
+              <p class="review-body">The 3×3 worked but I would have ordered the 2×2 if it had been in stock at the time. Finish is exquisite.</p>
+            </article>
+          </div>
       </div>
     </section>
 
