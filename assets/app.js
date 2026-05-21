@@ -212,6 +212,8 @@
   // ────────────────────────────────────────────────────────
   function initGallery() {
     const main = document.querySelector('.pdp-gallery .main-image');
+    const mainImg = main ? main.querySelector('img') : null;
+    const mainLabel = main ? main.querySelector('span') : null;
     const thumbs = document.querySelectorAll('.pdp-gallery .thumb');
     if (!main || !thumbs.length) return;
 
@@ -219,7 +221,20 @@
       t.addEventListener('click', () => {
         thumbs.forEach(x => x.classList.remove('active'));
         t.classList.add('active');
-        main.textContent = t.dataset.label || t.textContent;
+
+        const src = t.dataset.src;
+        const label = t.dataset.label || t.textContent.trim();
+
+        if (mainImg && src) {
+          // Quick fade then swap
+          mainImg.style.opacity = '0';
+          setTimeout(() => {
+            mainImg.src = src;
+            mainImg.alt = label;
+            mainImg.style.opacity = '';
+          }, 120);
+        }
+        if (mainLabel) mainLabel.textContent = label;
       });
     });
   }
@@ -368,11 +383,16 @@
       ? `<div class="product-price"><span class="was">${window.FA_FMT.price(p.wasPrice)}</span><span class="sale">${window.FA_FMT.price(p.salePrice)}</span></div>`
       : `<div class="product-price">${window.FA_FMT.price(p.price)}</div>`;
     const badge = onSale ? `<span class="product-badge">Sale</span>` : '';
+    const imgSrc = `/assets/images/products/${p.slug}/main.jpg`;
+    const imgAlt = `${p.name} ${p.sizeLabel} ${p.pattern} accent tile`;
     return `
       <a href="${prefix}/product/${p.slug}/" class="product-card">
         <div class="img-wrap">
           ${badge}
-          <div class="wire-img" role="img" aria-label="${p.name} ${p.sizeLabel}">${p.pattern} ${p.size}</div>
+          <div class="wire-img" role="img" aria-label="${p.name} ${p.sizeLabel}">
+            <span>${p.pattern} ${p.size}</span>
+            <img src="${imgSrc}" alt="${imgAlt}" loading="lazy">
+          </div>
         </div>
         <div class="product-name">${p.name}</div>
         <div class="product-meta">${p.sizeLabel} · ${p.finishes.length} finish${p.finishes.length === 1 ? '' : 'es'}</div>

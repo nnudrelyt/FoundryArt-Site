@@ -53,6 +53,39 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   color: var(--label);
   text-align: center;
   padding: 8px;
+  position: relative;
+  overflow: hidden;
+}
+/* When a real <img> lives inside any placeholder slot, it covers the wire-fill */
+.wire-img > img,
+.main-image > img,
+.thumb > img,
+.cart-thumb > img,
+.summary-item-thumb > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+/* Make any slot that holds an image also positioned + clipped */
+.main-image, .thumb, .cart-thumb, .summary-item-thumb {
+  position: relative;
+  overflow: hidden;
+}
+/* Soft fade-in for real images once they decode */
+.wire-img > img,
+.main-image > img,
+.thumb > img,
+.cart-thumb > img,
+.summary-item-thumb > img {
+  animation: fa-img-in 0.25s ease-out both;
+}
+@keyframes fa-img-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* ══════════════════════════════════════ NAV ══════════════════════════════════════ */
