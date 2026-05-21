@@ -278,6 +278,39 @@
   }
 
   // ────────────────────────────────────────────────────────
+  // Track B in-room visualizer (tab → swap photo)
+  // ────────────────────────────────────────────────────────
+  function initVisualizer() {
+    const slot = document.querySelector('[data-visualizer]');
+    if (!slot) return;
+    const img = slot.querySelector('.visualizer-image img');
+    const buttons = slot.querySelectorAll('.visualizer-tabs button[data-vis]');
+    if (!img || !buttons.length) return;
+
+    const SCENES = {
+      bath:      { src: '/assets/images/lifestyle/bath-cabochon-glass-mosaic.jpg', label: 'in a bath' },
+      kitchen:   { src: '/assets/images/lifestyle/kitchen-moon-blossom-beige.jpg', label: 'in a kitchen' },
+      fireplace: { src: '/assets/images/lifestyle/fireplace-sun-travertine.jpg',   label: 'in a fireplace surround' },
+    };
+
+    buttons.forEach(b => {
+      b.addEventListener('click', () => {
+        const key = b.dataset.vis;
+        const scene = SCENES[key];
+        if (!scene) return;
+        buttons.forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = scene.src;
+          img.alt = `See the tile ${scene.label}`;
+          img.style.opacity = '';
+        }, 140);
+      });
+    });
+  }
+
+  // ────────────────────────────────────────────────────────
   // Track B faceted filters (visual toggle)
   // ────────────────────────────────────────────────────────
   function initFacets() {
@@ -440,6 +473,7 @@
     initGallery();
     initSwatches();
     initCoverageCalc();
+    initVisualizer();
     initFacets();
     initOptionRows();
     initShipToggle();

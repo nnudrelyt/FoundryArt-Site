@@ -1481,28 +1481,71 @@ body.drawer-open { overflow: hidden; }
 .coverage-calc .calc-result strong { color: var(--charcoal); font-weight: 500; }
 .coverage-calc .calc-result .label { color: var(--mid); font-size: 11px; display: block; }
 
-/* In-room visualizer slot (Track B PDP) */
+/* In-room visualizer slot (Track B PDP) — interactive room swap */
 .visualizer-slot {
+  position: relative;
   margin: 24px 0;
-  padding: 36px 20px;
   background: var(--wire-fill);
-  border: 1px dashed var(--wire-stroke);
-  text-align: center;
-  cursor: pointer;
-  transition: background 0.2s ease;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  min-height: 320px;
+  padding: 0;
 }
-.visualizer-slot:hover { background: #E7E2D5; }
-.visualizer-slot strong {
+.visualizer-image {
+  position: absolute;
+  inset: 0;
+}
+.visualizer-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.25s ease;
+}
+.visualizer-overlay {
+  position: relative;
+  z-index: 1;
+  padding: 220px 20px 18px;
+  background: linear-gradient(to top,
+    rgba(26,24,20,0.85) 0%,
+    rgba(26,24,20,0.6) 35%,
+    rgba(26,24,20,0) 75%);
+  color: var(--white);
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.visualizer-overlay strong {
   display: block;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 400;
   margin-bottom: 4px;
-  color: var(--charcoal);
+  color: var(--white);
 }
-.visualizer-slot span { font-size: 11px; color: var(--mid); }
-.visualizer-tabs { display: inline-flex; gap: 12px; margin-top: 12px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); }
-.visualizer-tabs span { padding-bottom: 2px; border-bottom: 1px solid var(--bronze-l); }
+.visualizer-overlay > span { font-size: 11px; color: rgba(255,255,255,0.78); }
+.visualizer-tabs {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+.visualizer-tabs button {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--white);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.visualizer-tabs button:hover { background: rgba(255,255,255,0.18); }
+.visualizer-tabs button.active {
+  background: var(--bronze);
+  border-color: var(--bronze);
+}
 
 /* Sample request CTA (Track B PDP) */
 .btn-sample {
