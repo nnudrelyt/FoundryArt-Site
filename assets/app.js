@@ -16,7 +16,6 @@
           <a href="/" class="nav-logo">Foundry Art</a>
           <div class="nav-links">
             ${link('/shop/', 'Tiles', 'shop')}
-            ${link('/shop/', 'Hardware', 'hardware')}
             ${link('/#design-ideas', 'Design Ideas', 'design')}
             ${link('/#story', 'Our Story', 'story')}
             ${link('/#guidance', 'How to Buy', 'guide')}
@@ -36,7 +35,6 @@
       <div class="drawer-scrim" data-drawer-scrim></div>
       <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile menu" aria-hidden="true">
         <a href="/shop/" data-drawer-link>Tiles</a>
-        <a href="/shop/" data-drawer-link>Hardware</a>
         <a href="/#design-ideas" data-drawer-link>Design Ideas</a>
         <a href="/#story" data-drawer-link>Our Story</a>
         <a href="/#guidance" data-drawer-link>How to Buy</a>
@@ -202,20 +200,70 @@
           }, 120);
         }
         if (mainLabel) mainLabel.textContent = label;
+
+        // If this thumb's src matches a finish swatch, sync the swatch state
+        // (so clicking the Traditional / White Bronze thumb also updates which
+        // finish the user is buying)
+        const matchingSwatch = document.querySelector(`.swatch-row .swatch[data-finish-src="${src}"]`);
+        if (matchingSwatch && !matchingSwatch.classList.contains('selected')) {
+          document.querySelectorAll('.swatch-row .swatch').forEach(s => {
+            s.classList.remove('selected');
+            s.setAttribute('aria-checked', 'false');
+          });
+          matchingSwatch.classList.add('selected');
+          matchingSwatch.setAttribute('aria-checked', 'true');
+        }
       });
     });
   }
 
   // ────────────────────────────────────────────────────────
-  // Swatch picker (Track B PDP material chooser)
+  // Swatch picker (PDP material chooser) — swaps main image
   // ────────────────────────────────────────────────────────
   function initSwatches() {
     const swatches = document.querySelectorAll('.swatch-row .swatch');
     if (!swatches.length) return;
+
+    const mainImage = document.querySelector('.pdp-gallery .main-image img');
+    const mainLabel = document.querySelector('.pdp-gallery .main-image span');
+    const thumbs = Array.from(document.querySelectorAll('.pdp-gallery .thumb'));
+
     swatches.forEach(s => {
       s.addEventListener('click', () => {
-        swatches.forEach(x => x.classList.remove('selected'));
+        swatches.forEach(x => {
+          x.classList.remove('selected');
+          x.setAttribute('aria-checked', 'false');
+        });
         s.classList.add('selected');
+        s.setAttribute('aria-checked', 'true');
+
+        const newSrc = s.dataset.finishSrc;
+        if (!newSrc || !mainImage) return;
+
+        // Derive finish label from the swatch chip class
+        const chip = s.querySelector('.swatch-chip');
+        const finishLabel = chip && chip.classList.contains('white') ? 'White Bronze' : 'Traditional';
+
+        // Quick fade-swap on main image
+        mainImage.style.opacity = '0';
+        setTimeout(() => {
+          mainImage.src = newSrc;
+          mainImage.alt = mainImage.alt.replace(/Traditional Bronze finish|White Bronze finish/, finishLabel + (finishLabel === 'White Bronze' ? ' finish' : ' Bronze finish'));
+          mainImage.style.opacity = '';
+        }, 130);
+
+        // Update label overlay
+        if (mainLabel) {
+          mainLabel.textContent = mainLabel.textContent.replace(/Traditional|White Bronze/, finishLabel);
+        }
+
+        // Sync the corresponding thumb to the active state
+        thumbs.forEach(t => {
+          if (t.dataset.src === newSrc) {
+            thumbs.forEach(x => x.classList.remove('active'));
+            t.classList.add('active');
+          }
+        });
       });
     });
   }
