@@ -555,8 +555,11 @@ body.drawer-open { overflow: hidden; }
 .product-cta:hover { color: var(--charcoal); border-color: var(--charcoal); }
 
 /* ══════════════════════════════════════ DESIGN IDEAS (homepage) ══════════════════════════════════════ */
-.design-ideas { padding: 80px 40px; background: var(--cream); }
+.design-ideas { padding: 80px 40px; background: var(--charcoal); }
 .design-ideas-header { text-align: center; margin-bottom: 48px; }
+.design-ideas .section-eyebrow { color: var(--bronze-l); }
+.design-ideas .section-headline { color: var(--white); }
+.design-ideas .section-body { color: rgba(255,255,255,0.72); }
 .insitu-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
@@ -569,7 +572,7 @@ body.drawer-open { overflow: hidden; }
   text-align: center;
   margin-top: 24px;
   font-size: 11px;
-  color: var(--mid);
+  color: rgba(255,255,255,0.55);
   font-style: italic;
 }
 
@@ -584,30 +587,34 @@ body.drawer-open { overflow: hidden; }
 
 /* ══════════════════════════════════════ EXPERT GUIDANCE (homepage) ══════════════════════════════════════ */
 .guidance {
-  background: var(--charcoal);
+  background: var(--wire-fill);
   padding: 80px 40px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 40px;
   align-items: start;
 }
-.guidance-intro .section-eyebrow { color: var(--bronze-l); }
-.guidance-intro .section-headline { color: var(--white); font-size: 30px; }
-.guidance-intro .section-body { color: #9A9088; }
+.guidance-intro .section-eyebrow { color: var(--bronze); }
+.guidance-intro .section-headline { color: var(--charcoal); font-size: 30px; }
+.guidance-intro .section-body { color: var(--slate); }
 .guidance-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .guidance-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--white);
+  border: 1px solid var(--rule);
   padding: 24px;
   cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
   display: block;
+  box-shadow: 0 1px 2px rgba(26,24,20,0.03);
 }
-.guidance-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(201,168,76,0.35); }
+.guidance-card:hover {
+  border-color: var(--bronze-l);
+  box-shadow: 0 6px 18px rgba(26,24,20,0.08);
+  transform: translateY(-2px);
+}
 .guidance-card-icon {
   width: 32px; height: 32px;
   background: var(--bronze);
-  opacity: 0.8;
   margin-bottom: 16px;
   display: flex;
   align-items: center;
@@ -620,22 +627,22 @@ body.drawer-open { overflow: hidden; }
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px;
   font-weight: 400;
-  color: var(--white);
+  color: var(--charcoal);
   margin-bottom: 8px;
 }
-.guidance-card p { font-size: 11px; color: #9A9088; line-height: 1.6; }
+.guidance-card p { font-size: 11px; color: var(--mid); line-height: 1.6; }
 .guidance-card-cta {
   display: inline-block;
   margin-top: 14px;
   font-size: 9px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--bronze-l);
-  border-bottom: 1px solid var(--bronze);
+  color: var(--bronze);
+  border-bottom: 1px solid var(--bronze-l);
   padding-bottom: 2px;
   transition: color 0.2s ease;
 }
-.guidance-card:hover .guidance-card-cta { color: var(--white); }
+.guidance-card:hover .guidance-card-cta { color: var(--charcoal); }
 
 /* ══════════════════════════════════════ SOCIAL PROOF (homepage) ══════════════════════════════════════ */
 .social-proof { padding: 80px 40px; background: var(--white); }
