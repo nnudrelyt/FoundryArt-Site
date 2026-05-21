@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — Foundry Art</title>
+<meta name="theme-color" content="#1A1814">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A1814'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23C9A84C' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body data-page="checkout">
+
+  <div data-nav></div>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span>
+    <a href="/cart/">Cart</a><span class="sep">/</span>
+    <span class="current">Checkout</span>
+  </nav>
+
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">Checkout</h1>
+      <p class="page-sub">Returning customer? <a href="#" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">Click to log in</a></p>
+    </header>
+
+    <form class="checkout-layout" onsubmit="event.preventDefault(); window.location.href='/checkout/order-received/';">
+
+      <section aria-label="Checkout form">
+
+        <!-- BILLING -->
+        <div class="checkout-section">
+          <h2>Billing details</h2>
+          <div class="field-grid">
+            <div class="form-group"><label for="bf">First name *</label><input id="bf" type="text" required></div>
+            <div class="form-group"><label for="bl">Last name *</label><input id="bl" type="text" required></div>
+            <div class="form-group full"><label for="bc">Company (optional)</label><input id="bc" type="text"></div>
+            <div class="form-group full"><label for="bco">Country / Region *</label>
+              <select id="bco"><option>United States (US)</option><option>Canada</option></select>
+            </div>
+            <div class="form-group full"><label for="ba1">Street address *</label><input id="ba1" type="text" placeholder="House number and street name" required></div>
+            <div class="form-group full"><label for="ba2"><span aria-hidden="true">&nbsp;</span></label><input id="ba2" type="text" placeholder="Apartment, suite, unit, etc. (optional)"></div>
+            <div class="form-group"><label for="bci">Town / City *</label><input id="bci" type="text" required></div>
+            <div class="form-group"><label for="bst">State *</label>
+              <select id="bst"><option>Illinois</option><option>California</option><option>New York</option></select>
+            </div>
+            <div class="form-group"><label for="bz">ZIP *</label><input id="bz" type="text" required></div>
+            <div class="form-group"><label for="bp">Phone *</label><input id="bp" type="tel" required></div>
+            <div class="form-group full"><label for="be">Email address *</label><input id="be" type="email" required></div>
+          </div>
+
+          <label class="checkbox-row">
+            <input type="checkbox" data-ship-toggle>
+            <span>Ship to a different address?</span>
+          </label>
+
+          <div class="field-grid" data-shipping-fields style="margin-top:18px;">
+            <div class="form-group"><label>Recipient first name *</label><input type="text"></div>
+            <div class="form-group"><label>Recipient last name *</label><input type="text"></div>
+            <div class="form-group full"><label>Address *</label><input type="text"></div>
+            <div class="form-group"><label>City *</label><input type="text"></div>
+            <div class="form-group"><label>State *</label><select><option>Illinois</option><option>California</option></select></div>
+            <div class="form-group"><label>ZIP *</label><input type="text"></div>
+          </div>
+
+          <div class="form-group" style="margin-top:18px">
+            <label for="notes">Order notes (optional)</label>
+            <textarea id="notes" rows="3" placeholder="Notes about your order, e.g. special delivery instructions"></textarea>
+          </div>
+        </div>
+
+        <!-- SHIPPING METHOD -->
+        <div class="checkout-section">
+          <h2>Shipping method</h2>
+          <div class="shipping-options option-group">
+            <label class="option-row">
+              <input type="radio" name="shipping" value="ground" checked>
+              <div class="opt-main">
+                <div><strong>Ground</strong><span class="opt-sub">5–7 business days</span></div>
+                <span>$12.00</span>
+              </div>
+            </label>
+            <label class="option-row">
+              <input type="radio" name="shipping" value="express">
+              <div class="opt-main">
+                <div><strong>Express</strong><span class="opt-sub">2–3 business days</span></div>
+                <span>$28.00</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- PAYMENT -->
+        <div class="checkout-section">
+          <h2>Payment method</h2>
+          <div class="payment-options option-group">
+            <label class="option-row">
+              <input type="radio" name="payment" value="card" checked>
+              <div class="opt-main">
+                <div><strong>Credit / debit card</strong><span class="opt-sub">Visa · Mastercard · Amex · Discover</span></div>
+              </div>
+            </label>
+            <label class="option-row">
+              <input type="radio" name="payment" value="paypal">
+              <div class="opt-main">
+                <div><strong>PayPal</strong><span class="opt-sub">You'll be redirected to PayPal to complete payment</span></div>
+              </div>
+            </label>
+            <label class="option-row">
+              <input type="radio" name="payment" value="check">
+              <div class="opt-main">
+                <div><strong>Check payment</strong><span class="opt-sub">Mail your check to our Chicago studio — order ships once received</span></div>
+              </div>
+            </label>
+          </div>
+
+          <label class="checkbox-row" style="margin-top:18px;">
+            <input type="checkbox" required>
+            <span>I have read and agree to the <a href="#" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">website terms and conditions</a> *</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary" style="padding:16px 36px; font-size:11px; letter-spacing:2px;">Place Order — $289.50</button>
+
+      </section>
+
+      <!-- ORDER SUMMARY -->
+      <aside class="summary-card checkout-summary" aria-label="Order summary">
+        <h3>Your order</h3>
+
+        <div class="summary-item">
+          <div class="summary-item-thumb">Cabochon 3×3</div>
+          <div class="summary-item-info">
+            <strong>Cabochon × 2</strong>
+            <span>3×3 · Traditional Bronze</span>
+          </div>
+          <div class="summary-item-price">$185.00</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-thumb">Lotus 3×3</div>
+          <div class="summary-item-info">
+            <strong>Lotus × 1</strong>
+            <span>3×3 · White Bronze</span>
+          </div>
+          <div class="summary-item-price">$92.50</div>
+        </div>
+
+        <div class="summary-row" style="margin-top:14px;border-top:1px solid var(--rule);padding-top:14px;"><span>Subtotal</span><span>$277.50</span></div>
+        <div class="summary-row"><span>Shipping (Ground)</span><span>$12.00</span></div>
+        <div class="summary-row"><span>Tax</span><span>$0.00</span></div>
+        <div class="summary-row total"><span>Total</span><span>$289.50</span></div>
+
+        <p class="summary-note">Your information will be used to process your order, support your experience, and for other purposes described in our <a href="#">privacy policy</a>.</p>
+      </aside>
+
+    </form>
+  </main>
+
+  <div data-footer></div>
+
+  <script src="/assets/products.js"></script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

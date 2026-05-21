@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart — Foundry Art</title>
+<meta name="theme-color" content="#1A1814">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A1814'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23C9A84C' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body data-page="cart">
+
+  <div data-nav></div>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span class="sep">/</span><span class="current">Cart</span>
+  </nav>
+
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">Your Cart</h1>
+      <p class="page-sub">2 items · ready to ship from Chicago</p>
+    </header>
+
+    <div class="cart-layout">
+      <section aria-label="Cart line items">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Material</th>
+              <th class="num">Price</th>
+              <th>Qty</th>
+              <th class="num">Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td class="cart-item-cell" data-label="Product">
+                <div class="cart-item">
+                  <div class="cart-thumb">Cabochon 3×3</div>
+                  <div class="cart-item-info">
+                    <strong>Cabochon</strong>
+                    <span>3×3 inch · SKU: FA-CAB-3-TB</span>
+                  </div>
+                </div>
+              </td>
+              <td data-label="Material">Traditional Bronze</td>
+              <td class="num" data-label="Price">$92.50</td>
+              <td data-label="Qty">
+                <div class="qty-stepper" aria-label="Quantity">
+                  <button type="button" data-qty="-" aria-label="Decrease">−</button>
+                  <input type="number" value="2" min="1" max="99">
+                  <button type="button" data-qty="+" aria-label="Increase">+</button>
+                </div>
+              </td>
+              <td class="num" data-label="Subtotal">$185.00</td>
+              <td data-label="Remove"><button type="button" class="cart-remove" aria-label="Remove">Remove</button></td>
+            </tr>
+
+            <tr>
+              <td class="cart-item-cell" data-label="Product">
+                <div class="cart-item">
+                  <div class="cart-thumb">Lotus 3×3</div>
+                  <div class="cart-item-info">
+                    <strong>Lotus</strong>
+                    <span>3×3 inch · SKU: FA-LOT-3-TB</span>
+                  </div>
+                </div>
+              </td>
+              <td data-label="Material">White Bronze</td>
+              <td class="num" data-label="Price">$92.50</td>
+              <td data-label="Qty">
+                <div class="qty-stepper" aria-label="Quantity">
+                  <button type="button" data-qty="-" aria-label="Decrease">−</button>
+                  <input type="number" value="1" min="1" max="99">
+                  <button type="button" data-qty="+" aria-label="Increase">+</button>
+                </div>
+              </td>
+              <td class="num" data-label="Subtotal">$92.50</td>
+              <td data-label="Remove"><button type="button" class="cart-remove" aria-label="Remove">Remove</button></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <div class="cart-actions">
+          <form class="coupon-form" aria-label="Coupon code">
+            <input type="text" placeholder="Coupon code" aria-label="Coupon code">
+            <button type="button" class="btn-secondary">Apply</button>
+          </form>
+          <button type="button" class="btn-secondary">Update cart</button>
+        </div>
+
+        <p style="margin-top:24px;font-size:12px;color:var(--mid);"><a href="/shop/" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">← Continue shopping</a></p>
+      </section>
+
+      <aside class="summary-card" aria-label="Order totals">
+        <h3>Order Summary</h3>
+        <div class="summary-row"><span>Subtotal (3 items)</span><span>$277.50</span></div>
+        <div class="summary-row"><span>Shipping</span><span>Calculated at checkout</span></div>
+        <div class="summary-row"><span>Tax</span><span>Calculated at checkout</span></div>
+
+        <details class="shipping-stub">
+          <summary>Estimate shipping</summary>
+          <div class="stub-form">
+            <select aria-label="Country"><option>United States (US)</option><option>Canada</option></select>
+            <select aria-label="State"><option>Illinois</option><option>California</option><option>New York</option></select>
+            <input type="text" placeholder="ZIP / Postcode" aria-label="ZIP">
+            <button type="button" class="btn-secondary" style="margin-top:4px;">Update</button>
+          </div>
+        </details>
+
+        <div class="summary-row total"><span>Estimated total</span><span>$277.50</span></div>
+
+        <a href="/checkout/" class="btn-primary">Proceed to Checkout</a>
+        <p class="summary-note">Secure checkout · Major cards accepted · Made in Chicago</p>
+      </aside>
+    </div>
+  </main>
+
+  <div data-footer></div>
+
+  <script src="/assets/products.js"></script>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
