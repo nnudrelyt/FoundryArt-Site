@@ -274,10 +274,10 @@ body.drawer-open { overflow: hidden; }
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(20, 37, 40,0.82) 0%,
-    rgba(20, 37, 40,0.56) 38%,
-    rgba(20, 37, 40,0.18) 70%,
-    rgba(20, 37, 40,0) 100%
+    rgba(45, 46, 47, 0.82) 0%,
+    rgba(45, 46, 47, 0.56) 38%,
+    rgba(45, 46, 47, 0.18) 70%,
+    rgba(45, 46, 47, 0)    100%
   );
   z-index: 1;
   pointer-events: none;
@@ -535,7 +535,7 @@ body.drawer-open { overflow: hidden; }
 .product-cta:hover { color: var(--charcoal); border-color: var(--charcoal); }
 
 /* ══════════════════════════════════════ DESIGN IDEAS (homepage) ══════════════════════════════════════ */
-.design-ideas { padding: 80px 40px; background: var(--charcoal); }
+.design-ideas { padding: 80px 40px; background: var(--charcoal-warm); }
 .design-ideas-header { text-align: center; margin-bottom: 48px; }
 .design-ideas .section-eyebrow { color: var(--bronze-l); }
 .design-ideas .section-headline { color: var(--white); }
@@ -698,7 +698,7 @@ body.drawer-open { overflow: hidden; }
 
 /* ══════════════════════════════════════ FOOTER ══════════════════════════════════════ */
 .footer {
-  background: var(--charcoal-warm);
+  background: var(--charcoal);
   padding: 32px 40px;
   display: flex;
   justify-content: space-between;
@@ -1682,10 +1682,10 @@ body.drawer-open { overflow: hidden; }
   .hero::after {
     background: linear-gradient(
       to right,
-      rgba(20,37,40,0.86) 0%,
-      rgba(20,37,40,0.65) 55%,
-      rgba(20,37,40,0.25) 88%,
-      rgba(20,37,40,0) 100%);
+      rgba(45,46,47,0.86) 0%,
+      rgba(45,46,47,0.65) 55%,
+      rgba(45,46,47,0.25) 88%,
+      rgba(45,46,47,0) 100%);
   }
 
   .craft { grid-template-columns: 1fr; }
@@ -1748,9 +1748,9 @@ body.drawer-open { overflow: hidden; }
   .hero::after {
     background: linear-gradient(
       to bottom,
-      rgba(20,37,40,0.55) 0%,
-      rgba(20,37,40,0.75) 70%,
-      rgba(20,37,40,0.85) 100%);
+      rgba(45,46,47,0.55) 0%,
+      rgba(45,46,47,0.75) 70%,
+      rgba(45,46,47,0.85) 100%);
   }
 
   .brand-band { padding: 40px 16px; }
