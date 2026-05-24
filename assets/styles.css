@@ -95,51 +95,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   to   { opacity: 1; }
 }
 
-/* ══════════════════════════════════════ BRAND-FAMILY BAR ══════════════════════════════════════ */
-/* Slim utility bar above the main nav — expresses the Linden Workshops hierarchy.
-   Sister brands appear as text links only — no competing logos. */
-.brand-family-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 40px;
-  background: var(--charcoal);
-  color: rgba(255,255,255,0.85);
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  gap: 24px;
-}
-.brand-family-bar .parent {
-  color: var(--bronze-l);
-  cursor: pointer;
-  transition: color 0.2s ease;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-}
-.brand-family-bar .parent:hover { color: var(--white); }
-.brand-family-bar .siblings {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.brand-family-bar .siblings a {
-  color: rgba(255,255,255,0.55);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-.brand-family-bar .siblings a:hover { color: var(--white); }
-.brand-family-bar .siblings a.active,
-.brand-family-bar .siblings a[aria-current="page"] {
-  color: var(--white);
-  cursor: default;
-}
-.brand-family-bar .siblings .dot {
-  color: rgba(255,255,255,0.25);
-  font-size: 11px;
-  letter-spacing: 0;
-}
-
 /* ══════════════════════════════════════ NAV ══════════════════════════════════════ */
 .nav {
   display: flex;
@@ -273,50 +228,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   border-bottom: none;
 }
 .mobile-drawer .mobile-cta:hover { background: var(--bronze); color: var(--white); }
-
-/* Linden Workshops studios — appended below the main drawer links */
-.drawer-studios {
-  margin-top: 28px;
-  padding-top: 18px;
-  border-top: 1px solid var(--rule);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.drawer-studios h5 {
-  font-size: 9px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--bronze);
-  margin-bottom: 8px;
-  font-weight: 500;
-  border-bottom: none;
-  padding: 0;
-}
-.drawer-studios a {
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--slate);
-  padding: 10px 0;
-  border-bottom: 1px solid var(--rule);
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-.drawer-studios a:hover { color: var(--bronze); }
-.drawer-studios a.active,
-.drawer-studios a[aria-current="page"] {
-  color: var(--charcoal);
-  cursor: default;
-  font-weight: 500;
-}
-.drawer-studios .parent-link {
-  margin-top: 10px;
-  color: var(--bronze);
-  border-bottom: none;
-  font-weight: 500;
-}
-.drawer-studios .parent-link:hover { color: var(--charcoal); }
 .drawer-scrim {
   position: fixed;
   inset: 0;
@@ -1760,9 +1671,6 @@ body.drawer-open { overflow: hidden; }
    RESPONSIVE — Tablet (≤ 900px)
    ────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .brand-family-bar { padding: 9px 24px; justify-content: center; gap: 0; }
-  .brand-family-bar .siblings { display: none; }
-
   .nav { padding: 16px 24px; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
@@ -1828,8 +1736,6 @@ body.drawer-open { overflow: hidden; }
    RESPONSIVE — Mobile (≤ 560px)
    ────────────────────────────────────────────────────────── */
 @media (max-width: 560px) {
-  .brand-family-bar { padding: 8px 16px; font-size: 9px; }
-
   .nav { padding: 14px 16px; }
   .nav-cta { display: none; }
   .nav-cart { display: none; }
@@ -1913,11 +1819,6 @@ body.drawer-open { overflow: hidden; }
    RESPONSIVE — Wide desktop (≥ 1440px) — Luxury air
    ────────────────────────────────────────────────────────── */
 @media (min-width: 1440px) {
-
-  /* Brand-family bar — slightly more air at large screen */
-  .brand-family-bar { padding: 12px 64px; font-size: 11px; gap: 32px; }
-  .brand-family-bar .siblings { gap: 18px; }
-  .brand-family-bar .parent { letter-spacing: 3px; }
 
   /* Nav breathes a bit more */
   .nav { padding: 24px 64px; }

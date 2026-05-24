@@ -12,17 +12,6 @@
     const link = (href, label, key) => `<a href="${href}" data-nav-key="${key}">${label}</a>`;
     return `
       <header>
-        <div class="brand-family-bar" aria-label="Linden Workshops studios">
-          <a class="parent" href="https://lindenworkshops.com/" target="_blank" rel="noopener">Linden Workshops</a>
-          <nav class="siblings" aria-label="Sibling studios">
-            <a href="/" aria-current="page" class="active">Foundry Art</a>
-            <span class="dot" aria-hidden="true">·</span>
-            <a href="https://lindenworkshops.com/bronzeworks-studio/" target="_blank" rel="noopener">Bronzeworks Studio</a>
-            <span class="dot" aria-hidden="true">·</span>
-            <a href="https://lindenworkshops.com/talisman/" target="_blank" rel="noopener">Talisman</a>
-          </nav>
-        </div>
-
         <nav class="nav" aria-label="Primary">
           <a href="/" class="nav-logo">Foundry Art</a>
           <div class="nav-links">
@@ -51,14 +40,6 @@
         <a href="/#guidance" data-drawer-link>How to Buy</a>
         <a href="/cart/" data-drawer-link>Cart</a>
         <a href="/shop/" class="mobile-cta" data-drawer-link>Shop Now</a>
-
-        <div class="drawer-studios" aria-label="Linden Workshops studios">
-          <h5>Linden Workshops studios</h5>
-          <a href="/" aria-current="page" class="active" data-drawer-link>Foundry Art</a>
-          <a href="https://lindenworkshops.com/bronzeworks-studio/" target="_blank" rel="noopener" data-drawer-link>Bronzeworks Studio</a>
-          <a href="https://lindenworkshops.com/talisman/" target="_blank" rel="noopener" data-drawer-link>Talisman</a>
-          <a href="https://lindenworkshops.com/" target="_blank" rel="noopener" class="parent-link" data-drawer-link>Linden Workshops →</a>
-        </div>
       </aside>
     `;
   }
@@ -66,7 +47,7 @@
   function footerHTML() {
     return `
       <footer class="footer">
-        <p>© 2026 <a href="https://lindenworkshops.com/" target="_blank" rel="noopener">Linden Workshops</a> · Foundry Art is a Linden Workshops studio</p>
+        <p>© 2026 Linden Workshops · Foundry Art is a Linden Workshops brand</p>
         <p><a href="tel:7737842628">773 784-2628</a> &nbsp;·&nbsp; <a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">Houzz</a></p>
       </footer>
     `;
