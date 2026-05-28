@@ -139,7 +139,7 @@
       <div class="studios-scrim" data-studios-scrim></div>
       <aside class="studios-drawer" id="studios-drawer" aria-label="Linden Workshops studios" aria-hidden="true">
         <button class="studios-close" aria-label="Close studios menu" data-studios-close>×</button>
-        <p class="studios-eyebrow">Linden Workshops · Studios</p>
+        <a href="/" class="studios-eyebrow" data-studios-link>Linden Workshops</a>
 
         <div class="studios-acc${expanded('bronzework-studio')}${active('bronzework-studio')}" data-studios-acc>
           <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('bronzework-studio')}">

@@ -2366,13 +2366,18 @@ body.drawer-open { overflow: hidden; }
   right: 24px;
 }
 .studios-drawer .studios-eyebrow {
+  display: block;
   padding: 0 32px 24px;
   margin-bottom: 0;
   border-bottom: 1px solid rgba(255,255,255,0.14);
   font-size: 9px;
   letter-spacing: 3px;
+  text-transform: uppercase;
   color: var(--bronze-l);
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
+.studios-drawer .studios-eyebrow:hover { color: var(--white); }
 
 /* Accordion item */
 .studios-acc {
@@ -2471,7 +2476,7 @@ body.drawer-open { overflow: hidden; }
 
 /* Wipe the old studios-drawer > a / studios-parent-link / studios-header rules
    they're not used by the new accordion structure */
-.studios-drawer > a:not(.studios-acc a) { display: none; }
+.studios-drawer > a:not(.studios-acc a):not(.studios-eyebrow) { display: none; }
 .studios-header,
 .studios-parent,
 .studios-parent-link { display: none; }
