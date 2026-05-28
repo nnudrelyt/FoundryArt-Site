@@ -12,15 +12,12 @@
 </head>
 <body data-page="linden" data-section="linden">
 
-  <!-- Sand top bar (rebrand notice) -->
   <div class="lw2-topbar" role="status">
     Lowitz &amp; Company is now Linden Workshops. Updates coming soon!
   </div>
 
-  <!-- Studios drawer mount (still uses my drawer system) -->
   <div data-nav></div>
 
-  <!-- Live-site style header (logo + nav) — dot grid restored on the left -->
   <header class="lw2-header">
     <div class="lw2-header-left">
       <button class="studios-toggle lw2-studios-toggle" aria-label="Open Linden Workshops studios" aria-controls="studios-drawer" aria-expanded="false">
@@ -46,7 +43,7 @@
 
   <main>
 
-  <!-- HERO — dark photo bg with centered text + three wordmark cards -->
+  <!-- HERO -->
   <section class="lw2-hero" aria-label="Hero">
     <div class="lw2-hero-bg">
       <img src="/assets/images/linden/hero-mcqueen.jpg" alt="" loading="eager">
@@ -70,7 +67,9 @@
 
   <!-- BRONZEWORK STUDIO -->
   <section class="lw2-studio" id="bronzework-studio">
-    <h2>Bronzework Studio</h2>
+    <div class="lw2-section-mark">
+      <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
+    </div>
     <p class="lw2-studio-blurb">Metal inset tiles, liners, and trim.</p>
     <p class="lw2-studio-avail">Available at <a href="/bronzework-studio/">fine tile showrooms</a></p>
     <div class="lw2-collection-grid">
@@ -98,9 +97,11 @@
     </div>
   </section>
 
-  <!-- FOUNDRY ART -->
-  <section class="lw2-studio" id="foundry-art">
-    <h2>Foundry Art</h2>
+  <!-- FOUNDRY ART (with background tint) -->
+  <section class="lw2-studio lw2-studio--foundry" id="foundry-art">
+    <div class="lw2-section-mark">
+      <img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art">
+    </div>
     <p class="lw2-studio-blurb">Bronze tiles, liners, cabinet hardware.</p>
     <p class="lw2-studio-avail">Available <a href="/foundry-art/">direct from our studio</a></p>
     <div class="lw2-collection-grid lw2-collection-grid--two">
@@ -121,15 +122,17 @@
     </div>
   </section>
 
-  <!-- TALISMAN -->
-  <section class="lw2-studio" id="talisman">
-    <h2>Talisman</h2>
+  <!-- TALISMAN (with background tint + new cover image) -->
+  <section class="lw2-studio lw2-studio--talisman" id="talisman">
+    <div class="lw2-section-mark">
+      <img src="/assets/images/linden/wordmarks/talisman.png" alt="Talisman">
+    </div>
     <p class="lw2-studio-blurb">Stony white ceramic tiles.</p>
     <p class="lw2-studio-avail">Field Patterns and Borders</p>
-    <div class="lw2-collection-grid lw2-collection-grid--one">
-      <a href="/talisman/" class="lw2-card">
+    <div class="lw2-collection-grid lw2-collection-grid--one lw2-collection-grid--talisman">
+      <a href="/talisman/" class="lw2-card lw2-card--wide">
         <div class="lw2-card-img">
-          <img src="/assets/images/talisman/white-ceramic-collection.jpg" alt="Talisman white ceramic tiles and borders" loading="lazy">
+          <img src="/assets/images/linden/talisman-cover.jpg" alt="Talisman white ceramic tile collection" loading="lazy">
         </div>
         <h3>White Ceramic Tiles &amp; Borders</h3>
         <p class="lw2-card-body">Hand-sculpted ceramic tiles in a sophisticated white glaze. A contemporary classic <em>»</em></p>
@@ -152,8 +155,8 @@
     </a>
   </section>
 
-  <!-- TWO-UP BUY CTA BLOCKS -->
-  <section class="lw2-buy-grid" aria-label="How to buy">
+  <!-- DARK BUY CTA BLOCKS -->
+  <section class="lw2-buy-grid lw2-buy-grid--dark" aria-label="How to buy">
     <div class="lw2-buy-card">
       <h2>Buy Bronzework Studio at a showroom near you</h2>
       <a href="/bronzework-studio/" class="lw2-featured-cta">Find a Showroom</a>
@@ -164,46 +167,30 @@
     </div>
   </section>
 
-  <!-- PHILOSOPHY (placeholder slot) -->
-  <section class="lw2-mission" aria-label="Studio philosophy">
-    <p class="lw-mission-placeholder">[Philosophy paragraph — the full "When you choose tile…" passage from lindenworkshops.com goes here. Wireframe leaves this as a slot so the canonical wording stays on the live site / in your CMS.]</p>
-    <a href="/our-team/" class="lw2-mission-cta">Learn more about our team »</a>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="lw2-contact" id="contact" aria-label="Contact">
-    <div>
-      <h2>Contact us!</h2>
-      <p>Our friendly crew is eager to help you! Please get in touch if you have any questions.</p>
-      <p class="lw2-contact-phone"><strong>Phone:</strong> <a href="tel:7737842628">773 784-2628</a></p>
+  <!-- TEAM GIF + COPY (2-col) -->
+  <section class="lw2-team-row-home" aria-label="Meet the studio">
+    <div class="lw2-team-row-img">
+      <img src="/assets/images/linden/team/stacza-larsen-marideth.gif" alt="Stacza, Larsen, and Marideth in the studio" loading="lazy">
     </div>
-    <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
-      <div>
-        <label for="cname">Name <span class="req">(Required)</span></label>
-        <input id="cname" type="text" required>
-      </div>
-      <div>
-        <label for="cemail">Email <span class="req">(Required)</span></label>
-        <input id="cemail" type="email" required>
-      </div>
-      <div>
-        <label for="cmessage">Message <span class="req">(Required)</span></label>
-        <textarea id="cmessage" rows="6" required></textarea>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <div class="lw2-team-row-text">
+      <h2>Our studio</h2>
+      <p class="lw-mission-placeholder">[Studio intro / lead sentence — short tagline from the live site, to be pasted in.]</p>
+      <p class="lw-mission-placeholder">[Philosophy paragraph — the full "When you choose tile…" passage from lindenworkshops.com goes here. Wireframe leaves this as a slot so the canonical wording stays on the live site / CMS rather than being duplicated into static markup.]</p>
+      <a href="/our-team/" class="lw-mission-cta">Learn more about our team »</a>
+    </div>
   </section>
 
   </main>
 
-  <!-- Live-site style footer -->
+  <!-- COMBINED FOOTER + CONTACT FORM (2-col row) -->
   <footer class="footer">
-    <div class="lw2-footer-top">
+    <div class="lw2-footer-row">
+
       <div class="lw2-footer-left">
         <div class="lw2-footer-logo">
           <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops">
         </div>
-        <p class="lw2-footer-blurb">When you choose tile, you make a decision you will live with for a long time. Our friendly crew is eager to help you — please get in touch if you have any questions.</p>
+        <p class="lw2-footer-blurb">[Footer blurb — short intro paragraph from the live site, to be pasted in.]</p>
         <div class="lw2-footer-links">
           <div>
             <a href="/bronzework-studio/">Bronzework Studio</a>
@@ -225,6 +212,28 @@
           <a href="https://www.tileheritage.org/" target="_blank" rel="noopener"><img src="/assets/images/linden/footer/tile-heritage.jpg" alt="Tile Heritage Foundation"></a>
         </div>
       </div>
+
+      <div class="lw2-footer-form-col" id="contact">
+        <h2>Contact us!</h2>
+        <p>Our friendly crew is eager to help you! Please get in touch if you have any questions.</p>
+        <p class="lw2-contact-phone"><strong>Phone:</strong> <a href="tel:7737842628">773 784-2628</a></p>
+        <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
+          <div>
+            <label for="cname">Name <span class="req">(Required)</span></label>
+            <input id="cname" type="text" required>
+          </div>
+          <div>
+            <label for="cemail">Email <span class="req">(Required)</span></label>
+            <input id="cemail" type="email" required>
+          </div>
+          <div>
+            <label for="cmessage">Message <span class="req">(Required)</span></label>
+            <textarea id="cmessage" rows="6" required></textarea>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
     </div>
     <p>©2026 Linden Workshops</p>
   </footer>

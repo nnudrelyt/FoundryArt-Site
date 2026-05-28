@@ -3465,3 +3465,185 @@ body[data-section="talisman"] .footer p {
   .lw2-team-role { font-size: 15px; }
   .lw2-team-caption { font-size: 20px; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   LW HOMEPAGE — TIGHTENING PASS
+   No italics, section wordmarks, dark buy CTAs, team GIF section,
+   combined footer+form
+   ────────────────────────────────────────────────────────── */
+
+/* Drop italics across LW pages — live site uses Fanwood Text upright */
+body[data-section="linden"] h1,
+body[data-section="linden"] h2,
+body[data-section="linden"] h3,
+body[data-section="linden"] h4,
+body[data-section="bronzework-studio"] h1,
+body[data-section="bronzework-studio"] h2,
+body[data-section="bronzework-studio"] h3,
+body[data-section="bronzework-studio"] h4,
+body[data-section="talisman"] h1,
+body[data-section="talisman"] h2,
+body[data-section="talisman"] h3,
+body[data-section="talisman"] h4 {
+  font-style: normal !important;
+}
+.lw2-hero .lw2-hero-sub,
+.lw2-studio-blurb,
+.lw2-card h3,
+.lw2-card-body,
+.lw2-card-body em,
+.lw2-featured-cta,
+.lw2-mission p,
+.lw2-contact-phone,
+.lw2-footer-blurb,
+.lw2-team-caption,
+.lw2-team-text h2 {
+  font-style: normal !important;
+}
+
+/* Section header — wordmark image replaces typed brand name */
+.lw2-section-mark {
+  display: block;
+  margin: 0 auto 14px;
+  max-width: 340px;
+  width: auto;
+  height: auto;
+}
+.lw2-section-mark img { display: block; width: 100%; height: auto; }
+
+/* Per-studio section background tints (subtle, matches live site palette) */
+.lw2-studio--foundry { background: #efebe1; }
+.lw2-studio--talisman { background: #f4f1eb; }
+
+/* Talisman card — wider aspect for the new cover image */
+.lw2-card--wide .lw2-card-img { aspect-ratio: 3 / 2; }
+.lw2-collection-grid--talisman { max-width: 980px; }
+
+/* Buy CTA blocks — dark treatment (restored) */
+.lw2-buy-grid--dark {
+  background: #1f1f1f;
+  max-width: none;
+  padding: 80px 40px;
+  gap: 4px;
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+.lw2-buy-grid--dark .lw2-buy-card {
+  text-align: center;
+  padding: 56px 40px;
+  background: #1f1f1f;
+  border: 1px solid #333;
+}
+.lw2-buy-grid--dark .lw2-buy-card h2 {
+  color: #fff !important;
+  font-style: normal !important;
+  font-size: 28px !important;
+  margin-bottom: 28px;
+}
+.lw2-buy-grid--dark .lw2-buy-card .lw2-featured-cta {
+  background: transparent;
+  color: #fff !important;
+  border: 1px solid #fff;
+}
+.lw2-buy-grid--dark .lw2-buy-card .lw2-featured-cta:hover {
+  background: #fff;
+  color: #1f1f1f !important;
+}
+
+/* Team GIF section — 2-col, image left, copy right (homepage philosophy) */
+.lw2-team-row-home {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.lw2-team-row-home .lw2-team-row-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f0ede6;
+}
+.lw2-team-row-home .lw2-team-row-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.lw2-team-row-home .lw2-team-row-text { padding: 0 16px; }
+.lw2-team-row-home h2 { font-size: 32px !important; margin-bottom: 18px; font-style: normal !important; }
+.lw2-team-row-home p {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #000;
+  margin-bottom: 16px;
+  font-style: normal !important;
+}
+.lw2-team-row-home .lw2-mission-cta {
+  display: inline-block;
+  border: 1px solid #000;
+  padding: 12px 24px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #000 !important;
+  cursor: pointer;
+  margin-top: 8px;
+}
+.lw2-team-row-home .lw2-mission-cta:hover { background: #000; color: #fff !important; }
+
+/* Combined footer + form — 2-col row (2/3 left, 1/3 right) */
+.lw2-footer-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 40px 40px;
+}
+.lw2-footer-row .lw2-footer-form-col h2 {
+  font-size: 30px !important;
+  margin-bottom: 12px;
+  font-style: normal !important;
+}
+.lw2-footer-row .lw2-footer-form-col p {
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+.lw2-footer-row .lw2-footer-form-col .lw2-contact-phone {
+  font-size: 16px;
+  font-family: 'Fanwood Text', Georgia, serif;
+  margin-bottom: 24px;
+  font-style: normal !important;
+}
+
+/* Responsive overrides */
+@media (max-width: 900px) {
+  .lw2-team-row-home { grid-template-columns: 1fr; padding: 56px 24px; }
+  .lw2-buy-grid--dark { padding: 56px 24px; grid-template-columns: 1fr; }
+  .lw2-buy-grid--dark .lw2-buy-card { padding: 40px 24px; }
+  .lw2-footer-row { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px; }
+}
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .lw2-section-mark { max-width: 420px; }
+  .lw2-buy-grid--dark { padding: 110px 64px; }
+  .lw2-buy-grid--dark .lw2-buy-card { padding: 80px 56px; }
+  .lw2-buy-grid--dark .lw2-buy-card h2 { font-size: 34px !important; }
+  .lw2-team-row-home { padding: 110px 64px; gap: 64px; max-width: 1480px; }
+  .lw2-team-row-home h2 { font-size: 40px !important; }
+  .lw2-team-row-home p { font-size: 19px; }
+  .lw2-footer-row { padding: 96px 64px 56px; max-width: 1480px; }
+  .lw2-footer-row .lw2-footer-form-col h2 { font-size: 38px !important; }
+}
+@media (min-width: 1920px) {
+  .lw2-section-mark { max-width: 480px; }
+  .lw2-buy-grid--dark { padding: 140px 96px; }
+  .lw2-buy-grid--dark .lw2-buy-card { padding: 96px 64px; }
+  .lw2-buy-grid--dark .lw2-buy-card h2 { font-size: 40px !important; }
+  .lw2-team-row-home { padding: 140px 96px; gap: 80px; max-width: 1680px; }
+  .lw2-team-row-home h2 { font-size: 48px !important; }
+  .lw2-team-row-home p { font-size: 21px; }
+  .lw2-footer-row { padding: 120px 96px 64px; max-width: 1680px; }
+  .lw2-footer-row .lw2-footer-form-col h2 { font-size: 44px !important; }
+}
