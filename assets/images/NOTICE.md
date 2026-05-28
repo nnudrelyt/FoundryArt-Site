@@ -61,3 +61,25 @@ Until then, the `updates` branch is the only place these images live. Do not pro
 A "Wall Hook" hardware item on the homepage has no real photography available yet — it falls back to the `wire-img` label "Wall Hook — photography pending".
 
 Total image weight: ~23 MB across ~63 files. All within reason for Vercel; no CDN or optimization step yet.
+
+---
+
+## Content provenance (LW master + Talisman pages)
+
+The non-Foundry-Art sections (`/` Linden Workshops master landing, `/talisman/`, `/bronzework-studio/`) are wireframes intended to mirror the structure of `lindenworkshops.com`. Short functional labels are reproduced as-is from the live site so the IA reads true:
+
+- Hero headlines and taglines (e.g. "Luxury designer metal accent tile.")
+- Section eyebrows ("Available at fine tile showrooms", "Field Patterns and Borders")
+- Collection card titles + short descriptors with the live site's `»` arrow style
+- CTA button labels ("Find a Showroom", "Contact us directly", "Tear Sheet »")
+- Status notices (e.g. Talisman's "not currently in production" banner)
+- The rebrand banner ("Lowitz & Company is now Linden Workshops. Updates coming soon!")
+
+**Longer brand-defining prose (the "When you choose tile…" philosophy paragraph, the lead "Since 1990…" sentence) is intentionally left as a marked placeholder slot** styled with a dashed `wire-img` border. The brand owner should paste the canonical copy directly during content review — that keeps the wording in one authoritative place and avoids drift between this static wireframe and the live CMS.
+
+**Claremont Tile mentions** were stripped per brand owner directive:
+- The "Buy Foundry Art from our online shop at Claremont Tile" headline now reads "Buy Foundry Art from our online shop" and links to the internal `/foundry-art/shop/`.
+- The "Shop claremonttile.com" button became "Shop Foundry Art".
+- The drawer's "Foundry Art / Available at ClaremontTile.com" submenu was replaced by "Available direct".
+
+**`/bronzework-studio/` is awaiting source content.** The live page at `lindenworkshops.com/bronzework-studio/` is currently password-protected, so the body could not be inventoried. The current wireframe for that page is a placeholder structure (Classic / Autograph / Precision intros) — it should be updated with canonical copy from the brand owner before this is shared externally.

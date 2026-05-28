@@ -2547,3 +2547,233 @@ body.drawer-open { overflow: hidden; }
   .studios-acc-body a { padding: 14px 40px; font-size: 14px; }
   .studios-drawer .studios-eyebrow { padding: 0 40px 26px; font-size: 10px; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   LW MASTER + TALISMAN — additional content classes
+   ────────────────────────────────────────────────────────── */
+
+/* Rebrand banner (top of LW + sub-brand pages) */
+.lw-banner {
+  background: var(--bronze);
+  color: var(--white);
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+/* Two-up Buy CTA blocks (Bronzework / Foundry Art) on LW master */
+.lw-buy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 96px 40px;
+  background: var(--charcoal);
+  max-width: none;
+}
+.lw-buy-card {
+  text-align: center;
+  padding: 56px 40px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.lw-buy-card .section-eyebrow { color: var(--bronze-l); }
+.lw-buy-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 28px;
+  line-height: 1.2;
+}
+
+/* Mission paragraph block — used on / and /talisman/ */
+.lw-mission-lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px !important;
+  font-style: italic !important;
+  color: var(--bronze) !important;
+  margin-bottom: 24px;
+}
+.lw-mission-team {
+  margin-top: 32px;
+  font-size: 12px;
+}
+.lw-mission p {
+  margin-bottom: 16px;
+}
+.lw-mission p:last-child { margin-bottom: 0; }
+.lw-mission-placeholder {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 12px !important;
+  font-style: normal !important;
+  letter-spacing: 0.5px;
+  color: var(--label) !important;
+  background: var(--wire-fill);
+  border: 1px dashed var(--wire-stroke);
+  padding: 24px 28px;
+  text-align: left;
+  line-height: 1.65;
+  max-width: 720px;
+  margin: 0 auto 16px !important;
+}
+
+/* Contact section on LW landing */
+.lw-contact {
+  padding: 96px 40px;
+  background: var(--cream);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  align-items: start;
+  border-top: 1px solid var(--rule);
+}
+.lw-contact-intro .section-headline {
+  font-size: 32px;
+  margin-bottom: 14px;
+}
+.lw-contact-phone {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--slate);
+}
+.lw-contact-phone strong { color: var(--charcoal); }
+.lw-contact-phone a {
+  color: var(--bronze);
+  border-bottom: 1px solid var(--bronze-l);
+}
+.lw-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.lw-contact-form .form-group label span {
+  color: var(--bronze);
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-left: 4px;
+}
+.lw-contact-form .btn-primary {
+  align-self: flex-start;
+  margin-top: 8px;
+  padding: 14px 36px;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+/* Talisman page custom styles */
+.talisman-hero {
+  padding: 96px 40px 80px;
+  background: var(--cream);
+  text-align: center;
+}
+.talisman-hero .hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 22px;
+}
+.talisman-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.12;
+  color: var(--charcoal);
+  max-width: 1020px;
+  margin: 0 auto 56px;
+  letter-spacing: -0.5px;
+}
+.talisman-hero-image .wire-img {
+  max-width: 1320px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+}
+
+.talisman-notice {
+  background: var(--charcoal-warm);
+  color: var(--white);
+  padding: 28px 40px;
+  text-align: center;
+}
+.talisman-notice p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--bronze-l);
+  margin: 0 auto;
+  max-width: 880px;
+}
+
+.talisman-legacy {
+  background: var(--bronze-bg);
+  padding: 48px 40px;
+  text-align: center;
+}
+.talisman-legacy p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--slate);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.talisman-fullwidth {
+  padding: 0;
+}
+.talisman-fullwidth .wire-img {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  margin: 0;
+}
+
+/* Guidance-cards 3-column override (matches Talisman Tear Sheet trio) */
+.guidance-cards--three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .lw-buy-grid { grid-template-columns: 1fr; padding: 72px 24px; gap: 18px; }
+  .lw-buy-card { padding: 40px 24px; }
+  .lw-buy-card h3 { font-size: 24px; }
+  .lw-contact { grid-template-columns: 1fr; padding: 72px 24px; gap: 40px; }
+  .talisman-hero { padding: 72px 24px 56px; }
+  .talisman-headline { font-size: 36px; }
+  .talisman-notice { padding: 22px 24px; }
+  .talisman-notice p { font-size: 18px; }
+  .talisman-legacy { padding: 36px 24px; }
+  .talisman-legacy p { font-size: 13px; }
+  .guidance-cards--three { grid-template-columns: 1fr 1fr; }
+  .lw-mission-lead { font-size: 19px !important; }
+}
+@media (max-width: 560px) {
+  .lw-banner { font-size: 10px; padding: 9px 16px; }
+  .lw-buy-grid { padding: 48px 16px; }
+  .lw-buy-card { padding: 32px 18px; }
+  .lw-buy-card h3 { font-size: 20px; }
+  .lw-contact { padding: 48px 16px; }
+  .talisman-hero { padding: 48px 16px 36px; }
+  .talisman-headline { font-size: 28px; }
+  .talisman-notice p { font-size: 16px; }
+  .guidance-cards--three { grid-template-columns: 1fr; }
+  .lw-mission-lead { font-size: 17px !important; }
+}
+@media (min-width: 1440px) {
+  .lw-banner { font-size: 12px; padding: 12px 20px; }
+  .lw-buy-grid { padding: 130px 80px; gap: 36px; }
+  .lw-buy-card { padding: 72px 56px; }
+  .lw-buy-card h3 { font-size: 34px; margin-bottom: 36px; }
+  .lw-contact { padding: 130px 80px; gap: 72px; }
+  .lw-contact-intro .section-headline { font-size: 40px; }
+  .talisman-hero { padding: 130px 80px 100px; }
+  .talisman-headline { font-size: 64px; }
+  .talisman-notice { padding: 36px 80px; }
+  .talisman-notice p { font-size: 26px; }
+  .talisman-legacy { padding: 64px 80px; }
+  .talisman-legacy p { font-size: 16px; }
+  .lw-mission-lead { font-size: 28px !important; }
+}
