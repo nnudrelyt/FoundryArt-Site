@@ -13,7 +13,22 @@
     return `
       <header>
         <nav class="nav" aria-label="Primary">
-          <a href="/" class="nav-logo">Foundry Art</a>
+          <div class="nav-left">
+            <button class="studios-toggle" aria-label="Open Linden Workshops studios" aria-controls="studios-drawer" aria-expanded="false">
+              <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+                <circle cx="3"  cy="3"  r="1.4"/>
+                <circle cx="10" cy="3"  r="1.4"/>
+                <circle cx="17" cy="3"  r="1.4"/>
+                <circle cx="3"  cy="10" r="1.4"/>
+                <circle cx="10" cy="10" r="1.4"/>
+                <circle cx="17" cy="10" r="1.4"/>
+                <circle cx="3"  cy="17" r="1.4"/>
+                <circle cx="10" cy="17" r="1.4"/>
+                <circle cx="17" cy="17" r="1.4"/>
+              </svg>
+            </button>
+            <a href="/" class="nav-logo">Foundry Art</a>
+          </div>
           <div class="nav-links">
             ${link('/shop/', 'Tiles', 'shop')}
             ${link('/#design-ideas', 'Design Ideas', 'design')}
@@ -40,6 +55,19 @@
         <a href="/#guidance" data-drawer-link>How to Buy</a>
         <a href="/cart/" data-drawer-link>Cart</a>
         <a href="/shop/" class="mobile-cta" data-drawer-link>Shop Now</a>
+      </aside>
+
+      <div class="studios-scrim" data-studios-scrim></div>
+      <aside class="studios-drawer" id="studios-drawer" aria-label="Linden Workshops studios" aria-hidden="true">
+        <div class="studios-header">
+          <a href="https://lindenworkshops.com/" target="_blank" rel="noopener" class="studios-parent" data-studios-link>Linden Workshops</a>
+          <button class="studios-close" aria-label="Close studios menu" data-studios-close>×</button>
+        </div>
+        <p class="studios-eyebrow">Studios</p>
+        <a href="/" class="active" aria-current="page" data-studios-link>Foundry Art</a>
+        <a href="https://lindenworkshops.com/bronzeworks-studio/" target="_blank" rel="noopener" data-studios-link>Bronzeworks Studio</a>
+        <a href="https://lindenworkshops.com/talisman/" target="_blank" rel="noopener" data-studios-link>Talisman</a>
+        <a href="https://lindenworkshops.com/" target="_blank" rel="noopener" class="studios-parent-link" data-studios-link>Visit Linden Workshops →</a>
       </aside>
     `;
   }
@@ -96,6 +124,37 @@
     });
     scrim.addEventListener('click', () => setOpen(false));
     document.querySelectorAll('[data-drawer-link]').forEach(a => {
+      a.addEventListener('click', () => setOpen(false));
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    });
+  }
+
+  // ────────────────────────────────────────────────────────
+  // Linden Workshops studios drawer (left side)
+  // ────────────────────────────────────────────────────────
+  function initStudiosDrawer() {
+    const toggle = document.querySelector('.studios-toggle');
+    const drawer = document.getElementById('studios-drawer');
+    const scrim = document.querySelector('[data-studios-scrim]');
+    const closeBtn = document.querySelector('[data-studios-close]');
+    if (!toggle || !drawer || !scrim) return;
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', String(open));
+      drawer.setAttribute('aria-hidden', String(!open));
+      drawer.classList.toggle('open', open);
+      scrim.classList.toggle('open', open);
+      document.body.classList.toggle('drawer-open', open);
+    }
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+    scrim.addEventListener('click', () => setOpen(false));
+    if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+    document.querySelectorAll('[data-studios-link]').forEach(a => {
+      // External or active-page links close the drawer on click
       a.addEventListener('click', () => setOpen(false));
     });
     document.addEventListener('keydown', (e) => {
@@ -482,6 +541,7 @@
   ready(() => {
     initLayout();
     initDrawer();
+    initStudiosDrawer();
     initFilterTabs();
     initQtySteppers();
     initTabs();
