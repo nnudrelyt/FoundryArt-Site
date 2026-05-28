@@ -2799,14 +2799,13 @@ body[data-section="talisman"] {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Hide the Foundry-Art-styled <header> injected by navHTML on LW pages —
-   they use the live-site .lw2-header instead. The drawer + scrim that
-   navHTML also injects remain accessible because they're separate elements. */
-body[data-section="linden"] > header:not(.lw2-header),
-body[data-section="bronzework-studio"] > header:not(.lw2-header),
-body[data-section="talisman"] > header:not(.lw2-header) {
-  display: none;
-}
+/* On pages that ship with a .lw2-header, hide the Foundry-Art-styled
+   <header> that navHTML injects (we don't want both). The drawer +
+   scrim that navHTML also injects remain accessible because they're
+   separate elements at the body root.
+   Scoped to body:has(.lw2-header) so pages that haven't been upgraded
+   yet keep their existing .nav. */
+body:has(.lw2-header) > header:not(.lw2-header) { display: none; }
 
 /* All headings on LW pages → Fanwood Text */
 body[data-section="linden"] h1,
@@ -2860,6 +2859,25 @@ body[data-section="talisman"] .lw2-header {
   padding: 22px 40px;
   background: #fff;
 }
+.lw2-header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.lw2-studios-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  cursor: pointer;
+  background: transparent;
+  color: #757367;
+  transition: color 0.2s ease;
+  border: none;
+}
+.lw2-studios-toggle:hover { color: #a31414; }
+.lw2-studios-toggle svg { display: block; fill: currentColor; }
+.lw2-studios-toggle[aria-expanded="true"] { color: #a31414; }
 .lw2-header .lw2-logo { display: block; height: 48px; width: auto; }
 .lw2-header .lw2-nav {
   display: flex;
@@ -3300,4 +3318,150 @@ body[data-section="talisman"] .footer p {
   .lw2-team-row, .lw2-team-row--alt { grid-template-columns: 1fr; gap: 28px; }
   .lw2-team-row--alt .lw2-team-portrait { order: -1; }
   .lw2-team-portrait { max-width: 360px; margin: 0 auto; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   LW LIVE-SITE — WIDE BREAKPOINTS (1440-1919, 1920+)
+   ────────────────────────────────────────────────────────── */
+
+/* Mid-large: 1440px–1919px — open up padding, scale type one step */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  body[data-section="linden"],
+  body[data-section="bronzework-studio"],
+  body[data-section="talisman"] {
+    font-size: 16px;
+  }
+
+  .lw2-topbar { padding: 12px 64px; font-size: 14px; }
+  .lw2-header { padding: 28px 64px; }
+  .lw2-header .lw2-logo { height: 56px; }
+  .lw2-header .lw2-nav { gap: 36px; font-size: 13px; }
+
+  .lw2-hero {
+    padding: 130px 64px 110px;
+    min-height: 640px;
+  }
+  .lw2-hero h1 { font-size: 48px !important; margin-bottom: 18px; }
+  .lw2-hero .lw2-hero-sub { font-size: 28px; margin-bottom: 72px; }
+
+  .lw2-wordmark-row { gap: 28px; max-width: 1500px; }
+  .lw2-wordmark-link { height: 100px; padding: 28px 26px; }
+  .lw2-wordmark-link img { max-height: 48px; }
+
+  .lw2-studio { padding: 110px 64px; }
+  .lw2-studio h2 { font-size: 44px !important; margin-bottom: 16px; }
+  .lw2-studio-blurb { font-size: 22px; }
+  .lw2-studio-avail { font-size: 16px; margin-bottom: 60px; }
+
+  .lw2-collection-grid { max-width: 1480px; }
+  .lw2-card h3 { font-size: 26px !important; margin-top: 24px; }
+  .lw2-card-body { font-size: 17px; padding: 0 24px 28px; }
+
+  .lw2-featured { padding: 100px 64px; gap: 48px; }
+  .lw2-featured-content h2 { font-size: 38px !important; }
+  .lw2-featured-portrait { width: 280px; height: 280px; }
+  .lw2-featured-caption { font-size: 15px; }
+
+  .lw2-buy-grid { padding: 100px 64px; gap: 48px; max-width: 1480px; }
+  .lw2-buy-card h2 { font-size: 30px !important; }
+
+  .lw2-mission { padding: 96px 64px; max-width: 960px; }
+  .lw2-mission p { font-size: 21px; line-height: 1.75; }
+
+  .lw2-contact { padding: 100px 64px; gap: 80px; max-width: 1480px; }
+  .lw2-contact h2 { font-size: 38px !important; }
+  .lw2-contact-phone { font-size: 21px; }
+
+  body[data-section="linden"] .footer,
+  body[data-section="bronzework-studio"] .footer,
+  body[data-section="talisman"] .footer {
+    padding: 72px 64px 36px;
+  }
+  .lw2-footer-top { max-width: 1480px; gap: 80px; }
+  .lw2-footer-logo { max-width: 320px; }
+  .lw2-footer-blurb { font-size: 17px; }
+  .lw2-footer-links a { font-size: 13px; }
+  .lw2-footer-badges img { height: 38px; }
+
+  /* Team page */
+  .lw2-team { max-width: 1320px; padding: 72px 64px 110px; }
+  .lw2-team-row { padding: 48px 0; gap: 64px; }
+  .lw2-team-text h2 { font-size: 38px !important; }
+  .lw2-team-role { font-size: 14px; }
+  .lw2-team-caption { font-size: 18px; }
+}
+
+/* Cinema: 1920px+ — luxury air, content capped so it doesn't sprawl */
+@media (min-width: 1920px) {
+  body[data-section="linden"],
+  body[data-section="bronzework-studio"],
+  body[data-section="talisman"] {
+    font-size: 17px;
+  }
+
+  .lw2-topbar { padding: 14px 96px; font-size: 15px; }
+  .lw2-header { padding: 32px 96px; }
+  .lw2-header .lw2-logo { height: 64px; }
+  .lw2-header .lw2-nav { gap: 44px; font-size: 14px; }
+
+  .lw2-hero {
+    padding: 160px 96px 140px;
+    min-height: 760px;
+  }
+  .lw2-hero h1 { font-size: 56px !important; margin-bottom: 22px; }
+  .lw2-hero .lw2-hero-sub { font-size: 32px; margin-bottom: 88px; }
+
+  .lw2-wordmark-row { gap: 36px; max-width: 1680px; }
+  .lw2-wordmark-link { height: 116px; padding: 32px 32px; }
+  .lw2-wordmark-link img { max-height: 56px; }
+
+  .lw2-studio { padding: 140px 96px; }
+  .lw2-studio h2 { font-size: 56px !important; margin-bottom: 20px; }
+  .lw2-studio-blurb { font-size: 26px; }
+  .lw2-studio-avail { font-size: 18px; margin-bottom: 76px; }
+
+  .lw2-collection-grid { max-width: 1680px; }
+  .lw2-card h3 { font-size: 30px !important; margin-top: 28px; }
+  .lw2-card-body { font-size: 19px; padding: 0 28px 32px; }
+
+  .lw2-featured { padding: 130px 96px; gap: 64px; }
+  .lw2-featured-content h2 { font-size: 44px !important; margin-bottom: 24px; }
+  .lw2-featured-portrait { width: 320px; height: 320px; margin-bottom: 24px; }
+  .lw2-featured-caption { font-size: 17px; margin-bottom: 32px; }
+  .lw2-featured-cta { padding: 14px 28px; font-size: 13px; }
+
+  .lw2-buy-grid { padding: 130px 96px; gap: 64px; max-width: 1680px; }
+  .lw2-buy-card h2 { font-size: 36px !important; margin-bottom: 32px; }
+
+  .lw2-mission { padding: 120px 96px; max-width: 1080px; }
+  .lw2-mission p { font-size: 24px; line-height: 1.8; }
+
+  .lw2-contact { padding: 130px 96px; gap: 100px; max-width: 1680px; }
+  .lw2-contact h2 { font-size: 44px !important; }
+  .lw2-contact-phone { font-size: 24px; }
+  .lw2-form input, .lw2-form textarea { font-size: 16px; padding: 12px 14px; }
+  .lw2-form button { font-size: 14px; padding: 14px 32px; }
+
+  body[data-section="linden"] .footer,
+  body[data-section="bronzework-studio"] .footer,
+  body[data-section="talisman"] .footer {
+    padding: 96px 96px 48px;
+  }
+  .lw2-footer-top { max-width: 1680px; gap: 96px; }
+  .lw2-footer-logo { max-width: 380px; }
+  .lw2-footer-blurb { font-size: 19px; }
+  .lw2-footer-links a { font-size: 14px; }
+  .lw2-footer-badges img { height: 44px; }
+  body[data-section="linden"] .footer p,
+  body[data-section="bronzework-studio"] .footer p,
+  body[data-section="talisman"] .footer p {
+    font-size: 13px;
+  }
+
+  /* Team page */
+  .lw2-team { max-width: 1440px; padding: 96px 96px 140px; }
+  .lw2-team-row { padding: 64px 0; gap: 80px; }
+  .lw2-team-text h2 { font-size: 44px !important; }
+  .lw2-team-role { font-size: 15px; }
+  .lw2-team-caption { font-size: 20px; }
 }
