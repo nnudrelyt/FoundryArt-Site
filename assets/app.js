@@ -246,21 +246,29 @@
   // Linden Workshops studios drawer (left side)
   // ────────────────────────────────────────────────────────
   function initStudiosDrawer() {
-    const toggle = document.querySelector('.studios-toggle');
+    // There may be MORE THAN ONE .studios-toggle in the DOM — one in the
+    // navHTML-injected header (used by Foundry Art pages) and one in the
+    // .lw2-header (used by LW / sub-brand pages). Wire all of them.
+    const toggles = document.querySelectorAll('.studios-toggle');
     const drawer = document.getElementById('studios-drawer');
     const scrim = document.querySelector('[data-studios-scrim]');
     const closeBtn = document.querySelector('[data-studios-close]');
-    if (!toggle || !drawer || !scrim) return;
+    if (!toggles.length || !drawer || !scrim) return;
 
     function setOpen(open) {
-      toggle.setAttribute('aria-expanded', String(open));
+      toggles.forEach(t => t.setAttribute('aria-expanded', String(open)));
       drawer.setAttribute('aria-hidden', String(!open));
       drawer.classList.toggle('open', open);
       scrim.classList.toggle('open', open);
       document.body.classList.toggle('drawer-open', open);
     }
-    toggle.addEventListener('click', () => {
-      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        // Read state from drawer rather than from one toggle, so the two
+        // buttons stay in sync.
+        const isOpen = drawer.classList.contains('open');
+        setOpen(!isOpen);
+      });
     });
     scrim.addEventListener('click', () => setOpen(false));
     if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
