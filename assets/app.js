@@ -9,65 +9,176 @@
   // Nav + Mobile drawer + Footer (injected into mount points)
   // ────────────────────────────────────────────────────────
   function navHTML() {
-    const link = (href, label, key) => `<a href="${href}" data-nav-key="${key}">${label}</a>`;
-    return `
-      <header>
-        <nav class="nav" aria-label="Primary">
-          <div class="nav-left">
-            <button class="studios-toggle" aria-label="Open Linden Workshops studios" aria-controls="studios-drawer" aria-expanded="false">
-              <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
-                <circle cx="3"  cy="3"  r="1.4"/>
-                <circle cx="10" cy="3"  r="1.4"/>
-                <circle cx="17" cy="3"  r="1.4"/>
-                <circle cx="3"  cy="10" r="1.4"/>
-                <circle cx="10" cy="10" r="1.4"/>
-                <circle cx="17" cy="10" r="1.4"/>
-                <circle cx="3"  cy="17" r="1.4"/>
-                <circle cx="10" cy="17" r="1.4"/>
-                <circle cx="17" cy="17" r="1.4"/>
-              </svg>
-            </button>
-            <a href="/" class="nav-logo">Foundry Art</a>
+    const section = document.body.dataset.section || 'foundry-art';
+
+    const dotGrid = `
+              <button class="studios-toggle" aria-label="Open Linden Workshops studios" aria-controls="studios-drawer" aria-expanded="false">
+                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+                  <circle cx="3"  cy="3"  r="1.4"/><circle cx="10" cy="3"  r="1.4"/><circle cx="17" cy="3"  r="1.4"/>
+                  <circle cx="3"  cy="10" r="1.4"/><circle cx="10" cy="10" r="1.4"/><circle cx="17" cy="10" r="1.4"/>
+                  <circle cx="3"  cy="17" r="1.4"/><circle cx="10" cy="17" r="1.4"/><circle cx="17" cy="17" r="1.4"/>
+                </svg>
+              </button>`;
+
+    // Per-section nav variants
+    let navInner = '';
+    let mobileDrawer = '';
+
+    if (section === 'foundry-art') {
+      const link = (href, label, key) => `<a href="${href}" data-nav-key="${key}">${label}</a>`;
+      navInner = `
+          <div class="nav-left">${dotGrid}
+            <a href="/foundry-art/" class="nav-logo">Foundry Art</a>
           </div>
           <div class="nav-links">
-            ${link('/shop/', 'Tiles', 'shop')}
-            ${link('/#design-ideas', 'Design Ideas', 'design')}
-            ${link('/#story', 'Our Story', 'story')}
-            ${link('/#guidance', 'How to Buy', 'guide')}
+            ${link('/foundry-art/shop/', 'Tiles', 'shop')}
+            ${link('/foundry-art/#design-ideas', 'Design Ideas', 'design')}
+            ${link('/foundry-art/#story', 'Our Story', 'story')}
+            ${link('/foundry-art/#guidance', 'How to Buy', 'guide')}
           </div>
           <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
             <span></span><span></span><span></span>
           </button>
           <div class="nav-right">
-            <a href="/cart/" class="nav-cart" aria-label="Cart">
-              Cart<span class="nav-cart-count" data-cart-count>2</span>
-            </a>
-            <a href="/shop/" class="nav-cta">Shop Now</a>
+            <a href="/foundry-art/cart/" class="nav-cart" aria-label="Cart">Cart<span class="nav-cart-count" data-cart-count>2</span></a>
+            <a href="/foundry-art/shop/" class="nav-cta">Shop Now</a>
+          </div>`;
+      mobileDrawer = `
+        <a href="/foundry-art/shop/" data-drawer-link>Tiles</a>
+        <a href="/foundry-art/#design-ideas" data-drawer-link>Design Ideas</a>
+        <a href="/foundry-art/#story" data-drawer-link>Our Story</a>
+        <a href="/foundry-art/#guidance" data-drawer-link>How to Buy</a>
+        <a href="/foundry-art/cart/" data-drawer-link>Cart</a>
+        <a href="/foundry-art/shop/" class="mobile-cta" data-drawer-link>Shop Now</a>`;
+    } else if (section === 'linden') {
+      navInner = `
+          <div class="nav-left">${dotGrid}
+            <a href="/" class="nav-logo">Linden Workshops</a>
           </div>
+          <div class="nav-links">
+            <a href="/#bronzework-studio">Studios</a>
+            <a href="#">Inspiration</a>
+            <a href="#">Our Team</a>
+            <a href="#">Where to Buy</a>
+          </div>
+          <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="nav-right">
+            <a href="#" class="nav-cart" aria-label="Showroom Login">Showroom</a>
+            <a href="#" class="nav-cta">Contact</a>
+          </div>`;
+      mobileDrawer = `
+        <a href="/#bronzework-studio" data-drawer-link>Studios</a>
+        <a href="#" data-drawer-link>Inspiration</a>
+        <a href="#" data-drawer-link>Our Team</a>
+        <a href="#" data-drawer-link>Where to Buy</a>
+        <a href="#" data-drawer-link>Showroom Login</a>
+        <a href="#" class="mobile-cta" data-drawer-link>Contact</a>`;
+    } else if (section === 'bronzework-studio') {
+      navInner = `
+          <div class="nav-left">${dotGrid}
+            <a href="/bronzework-studio/" class="nav-logo">Bronzework Studio</a>
+          </div>
+          <div class="nav-links">
+            <a href="/bronzework-studio/#classic">Classic</a>
+            <a href="/bronzework-studio/#autograph">Autograph</a>
+            <a href="/bronzework-studio/#precision">Precision</a>
+            <a href="#">Inspiration</a>
+          </div>
+          <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="nav-right">
+            <a href="#showrooms" class="nav-cta">Find a Showroom</a>
+          </div>`;
+      mobileDrawer = `
+        <a href="/bronzework-studio/#classic" data-drawer-link>Classic</a>
+        <a href="/bronzework-studio/#autograph" data-drawer-link>Autograph</a>
+        <a href="/bronzework-studio/#precision" data-drawer-link>Precision</a>
+        <a href="#" data-drawer-link>Inspiration</a>
+        <a href="#showrooms" class="mobile-cta" data-drawer-link>Find a Showroom</a>`;
+    } else if (section === 'talisman') {
+      navInner = `
+          <div class="nav-left">${dotGrid}
+            <a href="/talisman/" class="nav-logo">Talisman</a>
+          </div>
+          <div class="nav-links">
+            <a href="/talisman/#patterns">Patterns</a>
+            <a href="#">Inspiration</a>
+            <a href="#">Documentation</a>
+          </div>
+          <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="nav-right">
+            <a href="#contact" class="nav-cta">Contact</a>
+          </div>`;
+      mobileDrawer = `
+        <a href="/talisman/#patterns" data-drawer-link>Patterns</a>
+        <a href="#" data-drawer-link>Inspiration</a>
+        <a href="#" data-drawer-link>Documentation</a>
+        <a href="#contact" class="mobile-cta" data-drawer-link>Contact</a>`;
+    }
+
+    // Studios drawer — accordion structure with each sub-brand's sub-collections
+    const expanded = (s) => section === s ? ' open' : '';
+    const ariaExpanded = (s) => section === s ? 'true' : 'false';
+    const active = (s) => section === s ? ' active' : '';
+
+    return `
+      <header>
+        <nav class="nav" aria-label="Primary">${navInner}
         </nav>
       </header>
 
       <div class="drawer-scrim" data-drawer-scrim></div>
-      <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile menu" aria-hidden="true">
-        <a href="/shop/" data-drawer-link>Tiles</a>
-        <a href="/#design-ideas" data-drawer-link>Design Ideas</a>
-        <a href="/#story" data-drawer-link>Our Story</a>
-        <a href="/#guidance" data-drawer-link>How to Buy</a>
-        <a href="/cart/" data-drawer-link>Cart</a>
-        <a href="/shop/" class="mobile-cta" data-drawer-link>Shop Now</a>
+      <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile menu" aria-hidden="true">${mobileDrawer}
       </aside>
 
       <div class="studios-scrim" data-studios-scrim></div>
       <aside class="studios-drawer" id="studios-drawer" aria-label="Linden Workshops studios" aria-hidden="true">
-        <div class="studios-header">
-          <a href="https://lindenworkshops.com/" target="_blank" rel="noopener" class="studios-parent" data-studios-link>Linden Workshops</a>
-          <button class="studios-close" aria-label="Close studios menu" data-studios-close>×</button>
+        <button class="studios-close" aria-label="Close studios menu" data-studios-close>×</button>
+        <p class="studios-eyebrow">Linden Workshops · Studios</p>
+
+        <div class="studios-acc${expanded('bronzework-studio')}${active('bronzework-studio')}" data-studios-acc>
+          <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('bronzework-studio')}">
+            <span class="studios-acc-name">Bronzework Studio</span>
+            <span class="studios-acc-meta">Find a showroom</span>
+            <span class="studios-acc-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="studios-acc-body">
+            <a href="/bronzework-studio/" data-studios-link><strong>Studio overview</strong></a>
+            <a href="/bronzework-studio/#classic" data-studios-link>Classic <small>Hand-Carved Bronze &amp; Zinc</small></a>
+            <a href="/bronzework-studio/#autograph" data-studios-link>Autograph <small>Graphic Bronze Borders &amp; Insets</small></a>
+            <a href="/bronzework-studio/#precision" data-studios-link>Precision <small>Extra Long Metal Liners &amp; Trim</small></a>
+          </div>
         </div>
-        <p class="studios-eyebrow">Studios</p>
-        <a href="/" class="active" aria-current="page" data-studios-link>Foundry Art</a>
-        <a href="https://lindenworkshops.com/bronzeworks-studio/" target="_blank" rel="noopener" data-studios-link>Bronzeworks Studio</a>
-        <a href="https://lindenworkshops.com/talisman/" target="_blank" rel="noopener" data-studios-link>Talisman</a>
-        <a href="https://lindenworkshops.com/" target="_blank" rel="noopener" class="studios-parent-link" data-studios-link>Visit Linden Workshops →</a>
+
+        <div class="studios-acc${expanded('foundry-art')}${active('foundry-art')}" data-studios-acc>
+          <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('foundry-art')}">
+            <span class="studios-acc-name">Foundry Art</span>
+            <span class="studios-acc-meta">Available direct</span>
+            <span class="studios-acc-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="studios-acc-body">
+            <a href="/foundry-art/" data-studios-link><strong>Studio overview</strong></a>
+            <a href="/foundry-art/shop/" data-studios-link>Bronze Inset Tiles &amp; Liners <small>Shop the collection</small></a>
+            <a href="/foundry-art/shop/" data-studios-link>Cabinet Hardware <small>Knobs &amp; Pulls</small></a>
+          </div>
+        </div>
+
+        <div class="studios-acc${expanded('talisman')}${active('talisman')}" data-studios-acc>
+          <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('talisman')}">
+            <span class="studios-acc-name">Talisman</span>
+            <span class="studios-acc-meta">Contact us directly</span>
+            <span class="studios-acc-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="studios-acc-body">
+            <a href="/talisman/" data-studios-link><strong>Studio overview</strong></a>
+            <a href="/talisman/" data-studios-link>White Ceramic Tiles &amp; Borders <small>Legacy reorders</small></a>
+          </div>
+        </div>
       </aside>
     `;
   }
@@ -75,7 +186,7 @@
   function footerHTML() {
     return `
       <footer class="footer">
-        <p>© 2026 Linden Workshops · Foundry Art is a Linden Workshops brand</p>
+        <p>© 2026 Linden Workshops · Luxury designer metal accent tile since 1990</p>
         <p><a href="tel:7737842628">773 784-2628</a> &nbsp;·&nbsp; <a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">Houzz</a></p>
       </footer>
     `;
@@ -159,6 +270,25 @@
     });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') setOpen(false);
+    });
+
+    // Accordion toggles inside the drawer
+    document.querySelectorAll('[data-studios-acc-toggle]').forEach(head => {
+      head.addEventListener('click', () => {
+        const acc = head.closest('[data-studios-acc]');
+        if (!acc) return;
+        const willOpen = !acc.classList.contains('open');
+        // Close other accordions for clean one-at-a-time UX
+        document.querySelectorAll('[data-studios-acc].open').forEach(other => {
+          if (other !== acc) {
+            other.classList.remove('open');
+            const otherHead = other.querySelector('[data-studios-acc-toggle]');
+            if (otherHead) otherHead.setAttribute('aria-expanded', 'false');
+          }
+        });
+        acc.classList.toggle('open', willOpen);
+        head.setAttribute('aria-expanded', String(willOpen));
+      });
     });
   }
 
@@ -493,7 +623,7 @@
     const imgSrc = `/assets/images/products/${p.slug}/main.jpg`;
     const imgAlt = `${p.name} ${p.sizeLabel} ${p.pattern} accent tile`;
     return `
-      <a href="/product/${p.slug}/" class="product-card">
+      <a href="/foundry-art/product/${p.slug}/" class="product-card">
         <div class="img-wrap">
           ${badge}
           <div class="wire-img" role="img" aria-label="${p.name} ${p.sizeLabel}">
