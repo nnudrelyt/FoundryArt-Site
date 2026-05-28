@@ -4,179 +4,221 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Linden Workshops — Luxury Designer Metal Accent Tile</title>
-<meta name="description" content="Linden Workshops: luxury designer metal accent tile. Bronzework Studio, Foundry Art, and Talisman — three studios sharing a 35-year commitment to timeless craft.">
-<meta name="theme-color" content="#142528">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Linden Workshops: luxury designer metal accent tile. Bronzework Studio, Foundry Art, and Talisman.">
+<meta name="theme-color" content="#e6e4dd">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body data-page="linden" data-section="linden">
 
-  <div data-nav></div>
-
-  <!-- Rebrand announcement banner (from live site) -->
-  <div class="lw-banner" role="status">
+  <!-- Sand top bar (rebrand notice) -->
+  <div class="lw2-topbar" role="status">
     Lowitz &amp; Company is now Linden Workshops. Updates coming soon!
   </div>
 
+  <!-- Studios drawer mount (still uses my drawer system) -->
+  <div data-nav></div>
+
+  <!-- Live-site style header (logo + nav) -->
+  <header class="lw2-header">
+    <a href="/" class="lw2-logo" aria-label="Linden Workshops home">
+      <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops" style="height:48px;width:auto;">
+    </a>
+    <nav class="lw2-nav" aria-label="Primary">
+      <a href="#">Tile Collections ▾</a>
+      <a href="#">Inspiration</a>
+      <a href="/our-team/">Our Team</a>
+      <a href="#">Where to buy</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="lw2-login">[Showroom Login]</a>
+    </nav>
+  </header>
+
   <main>
 
-  <!-- HERO -->
-  <section class="lw-hero" aria-label="Hero">
-    <h1 class="lw-headline">Luxury designer<br>metal accent tile.</h1>
-    <p class="lw-sub">Elevate your home from beautiful to extraordinary.</p>
+  <!-- HERO — dark photo bg with centered text + three wordmark cards -->
+  <section class="lw2-hero" aria-label="Hero">
+    <div class="lw2-hero-bg">
+      <img src="/assets/images/bronzework/precision-array.jpg" alt="" loading="eager">
+    </div>
+    <div class="lw2-hero-inner">
+      <h1>Luxury designer metal accent tile.</h1>
+      <p class="lw2-hero-sub">Elevate your home from beautiful to extraordinary.</p>
+      <div class="lw2-wordmark-row">
+        <a href="/bronzework-studio/" class="lw2-wordmark-link">
+          <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
+        </a>
+        <a href="/foundry-art/" class="lw2-wordmark-link">
+          <img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art">
+        </a>
+        <a href="/talisman/" class="lw2-wordmark-link">
+          <img src="/assets/images/linden/wordmarks/talisman.png" alt="Talisman">
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- BRONZEWORK STUDIO -->
-  <section class="lw-studio" id="bronzework-studio" aria-label="Bronzework Studio">
-    <div class="lw-studio-intro">
-      <p class="section-eyebrow">Available at fine tile showrooms</p>
-      <h2 class="section-headline">Bronzework Studio</h2>
-      <p class="section-body">Metal inset tiles, liners, and trim.</p>
-    </div>
-    <div class="lw-collection-grid">
-      <a href="/bronzework-studio/#autograph" class="lw-collection-card">
-        <div class="wire-img" role="img" aria-label="Autograph collection — graphic bronze borders and insets">
-          <span>Autograph — array</span>
-          <img src="/assets/images/bronzework/autograph-array.jpg" alt="Bronzework Studio Autograph collection — graphic bronze borders and insets" loading="lazy">
+  <section class="lw2-studio" id="bronzework-studio">
+    <h2>Bronzework Studio</h2>
+    <p class="lw2-studio-blurb">Metal inset tiles, liners, and trim.</p>
+    <p class="lw2-studio-avail">Available at <a href="/bronzework-studio/">fine tile showrooms</a></p>
+    <div class="lw2-collection-grid">
+      <a href="/bronzework-studio/#autograph" class="lw2-card">
+        <div class="lw2-card-img">
+          <img src="/assets/images/bronzework/autograph-array.jpg" alt="Bronzework Studio Autograph collection" loading="lazy">
         </div>
-        <p class="lw-collection-name">Autograph Collection</p>
-        <p class="lw-collection-body">Graphic borders and insets cast in solid bronze »</p>
+        <h3>Autograph Collection</h3>
+        <p class="lw2-card-body">Graphic borders and insets cast in solid bronze <em>»</em></p>
       </a>
-      <a href="/bronzework-studio/#precision" class="lw-collection-card">
-        <div class="wire-img" role="img" aria-label="Precision collection — extra long metal liners and trim">
-          <span>Precision — array</span>
-          <img src="/assets/images/bronzework/precision-array.jpg" alt="Bronzework Studio Precision collection — extra long metal liners and trim" loading="lazy">
+      <a href="/bronzework-studio/#precision" class="lw2-card">
+        <div class="lw2-card-img">
+          <img src="/assets/images/bronzework/precision-array.jpg" alt="Bronzework Studio Precision collection" loading="lazy">
         </div>
-        <p class="lw-collection-name">Precision Collection</p>
-        <p class="lw-collection-body">Long, sleek metal liners and trim for wall and floor »</p>
+        <h3>Precision Collection</h3>
+        <p class="lw2-card-body">Long, sleek metal liners and trim for wall and floor <em>»</em></p>
       </a>
-      <a href="/bronzework-studio/#classic" class="lw-collection-card">
-        <div class="wire-img" role="img" aria-label="Classic collection — hand-carved bronze and zinc tiles">
-          <span>Classic — array</span>
-          <img src="/assets/images/bronzework/classic-array.jpg" alt="Bronzework Studio Classic collection — hand-carved bronze and zinc tiles" loading="lazy">
+      <a href="/bronzework-studio/#classic" class="lw2-card">
+        <div class="lw2-card-img">
+          <img src="/assets/images/bronzework/classic-array.jpg" alt="Bronzework Studio Classic collection" loading="lazy">
         </div>
-        <p class="lw-collection-name">Classic Collection</p>
-        <p class="lw-collection-body">Handcarved metal tiles and liners for floor and wall »</p>
+        <h3>Classic Collection</h3>
+        <p class="lw2-card-body">Handcarved metal tiles and liners for floor and wall <em>»</em></p>
       </a>
     </div>
   </section>
 
   <!-- FOUNDRY ART -->
-  <section class="lw-studio lw-studio--alt" id="foundry-art" aria-label="Foundry Art">
-    <div class="lw-studio-intro">
-      <p class="section-eyebrow">Available direct from our studio</p>
-      <h2 class="section-headline">Foundry Art</h2>
-      <p class="section-body">Bronze tiles, liners, cabinet hardware.</p>
-    </div>
-    <div class="lw-collection-grid lw-collection-grid--two">
-      <a href="/foundry-art/shop/" class="lw-collection-card">
-        <div class="wire-img" role="img" aria-label="Foundry Art bronze inset tiles and liners">
-          <span>Inset Tiles &amp; Liners — array</span>
-          <img src="/assets/images/foundry-art-arrays/inset-tiles-array.jpg" alt="Foundry Art bronze inset tile and liner collection" loading="lazy">
+  <section class="lw2-studio" id="foundry-art">
+    <h2>Foundry Art</h2>
+    <p class="lw2-studio-blurb">Bronze tiles, liners, cabinet hardware.</p>
+    <p class="lw2-studio-avail">Available <a href="/foundry-art/">direct from our studio</a></p>
+    <div class="lw2-collection-grid lw2-collection-grid--two">
+      <a href="/foundry-art/shop/" class="lw2-card">
+        <div class="lw2-card-img">
+          <img src="/assets/images/foundry-art-arrays/inset-tiles-array.jpg" alt="Foundry Art bronze inset tiles and liners" loading="lazy">
         </div>
-        <p class="lw-collection-name">Inset Tiles &amp; Liners</p>
-        <p class="lw-collection-body">Handcarved tiles and borders. Our pioneering collection of metal tiles »</p>
+        <h3>Inset Tiles &amp; Liners</h3>
+        <p class="lw2-card-body">Handcarved tiles and borders. Our pioneering collection of metal tiles <em>»</em></p>
       </a>
-      <a href="/foundry-art/shop/" class="lw-collection-card">
-        <div class="wire-img" role="img" aria-label="Foundry Art cabinet hardware — knobs and pulls">
-          <span>Cabinet Hardware — array</span>
-          <img src="/assets/images/foundry-art-arrays/knobs-pulls-array.jpg" alt="Foundry Art bronze cabinet hardware — knobs and pulls" loading="lazy">
+      <a href="/foundry-art/shop/" class="lw2-card">
+        <div class="lw2-card-img">
+          <img src="/assets/images/foundry-art-arrays/knobs-pulls-array.jpg" alt="Foundry Art bronze cabinet hardware" loading="lazy">
         </div>
-        <p class="lw-collection-name">Cabinet Hardware</p>
-        <p class="lw-collection-body">Handcarved knobs and pulls make opening a drawer an enlightening experience »</p>
+        <h3>Cabinet Hardware</h3>
+        <p class="lw2-card-body">Handcarved knobs and pulls make opening a drawer an enlightening experience <em>»</em></p>
       </a>
     </div>
   </section>
 
   <!-- TALISMAN -->
-  <section class="lw-studio" id="talisman" aria-label="Talisman">
-    <div class="lw-studio-intro">
-      <p class="section-eyebrow">Field Patterns and Borders</p>
-      <h2 class="section-headline">Talisman</h2>
-      <p class="section-body">Stony white ceramic tiles.</p>
-    </div>
-    <div class="lw-collection-grid lw-collection-grid--one">
-      <a href="/talisman/" class="lw-collection-card">
-        <div class="wire-img" role="img" aria-label="Talisman white ceramic tiles and borders">
-          <span>Talisman — array</span>
-          <img src="/assets/images/talisman/white-ceramic-collection.jpg" alt="Talisman white ceramic tile collection with decorative patterns" loading="lazy">
+  <section class="lw2-studio" id="talisman">
+    <h2>Talisman</h2>
+    <p class="lw2-studio-blurb">Stony white ceramic tiles.</p>
+    <p class="lw2-studio-avail">Field Patterns and Borders</p>
+    <div class="lw2-collection-grid lw2-collection-grid--one">
+      <a href="/talisman/" class="lw2-card">
+        <div class="lw2-card-img">
+          <img src="/assets/images/talisman/white-ceramic-collection.jpg" alt="Talisman white ceramic tiles and borders" loading="lazy">
         </div>
-        <p class="lw-collection-name">Field Patterns and Borders</p>
-        <p class="lw-collection-body">Hand-sculpted ceramic tiles in a sophisticated white glaze. A contemporary classic »</p>
+        <h3>White Ceramic Tiles &amp; Borders</h3>
+        <p class="lw2-card-body">Hand-sculpted ceramic tiles in a sophisticated white glaze. A contemporary classic <em>»</em></p>
       </a>
     </div>
   </section>
 
-  <!-- DESIGN INSPIRATION / FEATURED DESIGNER -->
-  <section class="lw-inspiration" aria-label="Design inspiration">
-    <div class="lw-inspiration-content">
-      <p class="section-eyebrow">Design Inspiration</p>
-      <h2 class="section-headline">Featured Designer</h2>
-      <p class="section-body">Award winning designer, Gail Drury, CMKBD. We love her sophisticated designs using our metal accent tiles.</p>
-      <a href="#" class="btn-secondary">Explore kitchens by Drury Design</a>
+  <!-- FEATURED DESIGNER -->
+  <section class="lw2-featured" aria-label="Featured designer">
+    <div class="lw2-featured-content">
+      <h2>Featured Designer</h2>
+      <a href="#" class="lw2-featured-portrait">
+        <img src="/assets/images/linden/gail-drury-250.jpg" alt="Gail Drury, CMKBD" loading="lazy">
+      </a>
+      <p class="lw2-featured-caption">Award winning designer, Gail Drury, <span class="lw2-smallcaps">CMKBD</span>. We love her sophisticated designs using our metal accent tiles.</p>
+      <a href="#" class="lw2-featured-cta">Explore kitchens by<br>Drury Design</a>
     </div>
-    <div class="lw-inspiration-feature">
-      <div class="wire-img" role="img" aria-label="Drury Design featured kitchen with Bronzework Studio tile">
-        <span>Drury Design feature</span>
-        <img src="/assets/images/linden/drury-design-feature.jpg" alt="Drury Design kitchen featuring Bronzework Studio tile" loading="lazy">
-      </div>
-      <div class="wire-img lw-inspiration-portrait" role="img" aria-label="Gail Drury at her desk">
-        <span>Gail Drury portrait</span>
-        <img src="/assets/images/linden/gail-drury-portrait.jpg" alt="Designer Gail Drury at her desk" loading="lazy">
-      </div>
+    <a href="#" class="lw2-featured-image">
+      <img src="/assets/images/linden/drury-design-feature.jpg" alt="Drury Design kitchen featuring Bronzework Studio tile" loading="lazy">
+    </a>
+  </section>
+
+  <!-- TWO-UP BUY CTA BLOCKS -->
+  <section class="lw2-buy-grid" aria-label="How to buy">
+    <div class="lw2-buy-card">
+      <h2>Buy Bronzework Studio at a showroom near you</h2>
+      <a href="/bronzework-studio/" class="lw2-featured-cta">Find a Showroom</a>
+    </div>
+    <div class="lw2-buy-card">
+      <h2>Buy Foundry Art from our online shop</h2>
+      <a href="/foundry-art/shop/" class="lw2-featured-cta">Shop Foundry Art</a>
     </div>
   </section>
 
-  <!-- BUY CTA BLOCKS (two side-by-side) -->
-  <section class="lw-buy-grid" aria-label="How to buy">
-    <div class="lw-buy-card">
-      <p class="section-eyebrow">Bronzework Studio</p>
-      <h3>Buy Bronzework Studio at a showroom near you</h3>
-      <a href="/bronzework-studio/" class="btn-primary-lg">Find a Showroom</a>
-    </div>
-    <div class="lw-buy-card">
-      <p class="section-eyebrow">Foundry Art</p>
-      <h3>Buy Foundry Art from our online shop</h3>
-      <a href="/foundry-art/shop/" class="btn-primary-lg">Shop Foundry Art</a>
-    </div>
-  </section>
-
-  <!-- PHILOSOPHY -->
-  <section class="lw-mission" aria-label="Company philosophy">
-    <p class="lw-mission-lead">[Lead sentence — Since 1990 customer-service tagline from the live site, to be pasted in.]</p>
-    <p class="lw-mission-placeholder">[Philosophy paragraph — the full "When you choose tile…" passage from lindenworkshops.com goes here. Wireframe leaves this as a slot so the canonical wording stays on the live site / in your CMS rather than being duplicated into static markup.]</p>
-    <p class="lw-mission-team"><a href="#" class="btn-secondary">Learn more about our team »</a></p>
+  <!-- PHILOSOPHY (placeholder slot) -->
+  <section class="lw2-mission" aria-label="Studio philosophy">
+    <p class="lw-mission-placeholder">[Philosophy paragraph — the full "When you choose tile…" passage from lindenworkshops.com goes here. Wireframe leaves this as a slot so the canonical wording stays on the live site / in your CMS.]</p>
+    <a href="/our-team/" class="lw2-mission-cta">Learn more about our team »</a>
   </section>
 
   <!-- CONTACT -->
-  <section class="lw-contact" id="contact" aria-label="Contact the studio">
-    <div class="lw-contact-intro">
-      <p class="section-eyebrow">Contact us</p>
-      <h2 class="section-headline">Our friendly crew is eager to help you!</h2>
-      <p class="section-body">Please get in touch if you have any questions.</p>
-      <p class="lw-contact-phone"><strong>Phone:</strong> <a href="tel:7737842628">773 784-2628</a></p>
+  <section class="lw2-contact" id="contact" aria-label="Contact">
+    <div>
+      <h2>Contact us!</h2>
+      <p>Our friendly crew is eager to help you! Please get in touch if you have any questions.</p>
+      <p class="lw2-contact-phone"><strong>Phone:</strong> <a href="tel:7737842628">773 784-2628</a></p>
     </div>
-    <form class="lw-contact-form" aria-label="Contact form" onsubmit="event.preventDefault();">
-      <div class="form-group">
-        <label for="cname">Name <span aria-hidden="true">(Required)</span></label>
+    <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
+      <div>
+        <label for="cname">Name <span class="req">(Required)</span></label>
         <input id="cname" type="text" required>
       </div>
-      <div class="form-group">
-        <label for="cemail">Email <span aria-hidden="true">(Required)</span></label>
+      <div>
+        <label for="cemail">Email <span class="req">(Required)</span></label>
         <input id="cemail" type="email" required>
       </div>
-      <div class="form-group">
-        <label for="cmessage">Message <span aria-hidden="true">(Required)</span></label>
-        <textarea id="cmessage" rows="5" required></textarea>
+      <div>
+        <label for="cmessage">Message <span class="req">(Required)</span></label>
+        <textarea id="cmessage" rows="6" required></textarea>
       </div>
-      <button type="submit" class="btn-primary">Send</button>
+      <button type="submit">Submit</button>
     </form>
   </section>
 
   </main>
 
-  <div data-footer></div>
+  <!-- Live-site style footer -->
+  <footer class="footer">
+    <div class="lw2-footer-top">
+      <div class="lw2-footer-left">
+        <div class="lw2-footer-logo">
+          <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops">
+        </div>
+        <p class="lw2-footer-blurb">When you choose tile, you make a decision you will live with for a long time. Our friendly crew is eager to help you — please get in touch if you have any questions.</p>
+        <div class="lw2-footer-links">
+          <div>
+            <a href="/bronzework-studio/">Bronzework Studio</a>
+            <a href="/foundry-art/">Foundry Art</a>
+            <a href="/talisman/">Talisman</a>
+          </div>
+          <div>
+            <a href="#">Inspiration</a>
+            <a href="/our-team/">About</a>
+            <a href="#">Where to Buy</a>
+          </div>
+          <div>
+            <a href="#">[Showroom Login]</a>
+          </div>
+        </div>
+        <div class="lw2-footer-badges">
+          <a href="https://www.instagram.com/lowitzandcompany" target="_blank" rel="noopener"><img src="/assets/images/linden/footer/instagram.png" alt="Instagram"></a>
+          <a href="#" target="_blank" rel="noopener"><img src="/assets/images/linden/footer/houzz.png" alt="Featured on Houzz"></a>
+          <a href="https://www.tileheritage.org/" target="_blank" rel="noopener"><img src="/assets/images/linden/footer/tile-heritage.jpg" alt="Tile Heritage Foundation"></a>
+        </div>
+      </div>
+    </div>
+    <p>©2026 Linden Workshops</p>
+  </footer>
 
   <script src="/assets/app.js"></script>
 </body>
