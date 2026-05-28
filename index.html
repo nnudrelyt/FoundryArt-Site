@@ -103,7 +103,10 @@
       <img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art">
     </div>
     <p class="lw2-studio-blurb">Bronze tiles, liners, cabinet hardware.</p>
-    <p class="lw2-studio-avail">Available <a href="/foundry-art/">direct from our studio</a></p>
+    <div class="lw2-studio-shop">
+      <p class="lw2-studio-shop-eyebrow">Visit our online shop</p>
+      <a href="/foundry-art/shop/" class="lw2-studio-shop-btn">Shop Foundry Art</a>
+    </div>
     <div class="lw2-collection-grid lw2-collection-grid--two">
       <a href="/foundry-art/shop/" class="lw2-card">
         <div class="lw2-card-img">
@@ -122,19 +125,22 @@
     </div>
   </section>
 
-  <!-- TALISMAN (with background tint + new cover image) -->
+  <!-- TALISMAN -->
   <section class="lw2-studio lw2-studio--talisman" id="talisman">
     <div class="lw2-section-mark">
       <img src="/assets/images/linden/wordmarks/talisman.png" alt="Talisman">
     </div>
     <p class="lw2-studio-blurb">Stony white ceramic tiles.</p>
-    <p class="lw2-studio-avail">Field Patterns and Borders</p>
-    <div class="lw2-collection-grid lw2-collection-grid--one lw2-collection-grid--talisman">
+    <p class="lw2-studio-avail">Available <a href="/talisman/">direct from our studio</a></p>
+    <div class="lw2-talisman-stack">
+      <a href="/talisman/" class="lw2-talisman-hero">
+        <img src="/assets/images/linden/talisman-cover.jpg" alt="Talisman white ceramic tile field patterns and borders" loading="lazy">
+      </a>
       <a href="/talisman/" class="lw2-card lw2-card--wide">
         <div class="lw2-card-img">
-          <img src="/assets/images/linden/talisman-cover.jpg" alt="Talisman white ceramic tile collection" loading="lazy">
+          <img src="/assets/images/linden/talisman-cover.jpg" alt="Talisman field patterns and borders" loading="lazy">
         </div>
-        <h3>White Ceramic Tiles &amp; Borders</h3>
+        <h3>Field Patterns and Borders</h3>
         <p class="lw2-card-body">Hand-sculpted ceramic tiles in a sophisticated white glaze. A contemporary classic <em>»</em></p>
       </a>
     </div>
@@ -173,16 +179,14 @@
       <img src="/assets/images/linden/team/stacza-larsen-marideth.gif" alt="Stacza, Larsen, and Marideth in the studio" loading="lazy">
     </div>
     <div class="lw2-team-row-text">
-      <h2>Our studio</h2>
       <p class="lw2-team-row-lead">Since 1990, we've been making some of the most sought-after decorative tiles in the world — and earning a reputation for friendly, impeccable customer service.</p>
-      <p class="lw2-team-row-body">When you choose tile, you make a decision you will live with for a long time. The decision can be daunting. You know what appeals to you today, but what will appeal to you tomorrow? At Linden Workshops, we strive to interpret timeless designs in a personal way. The patterns on our tiles appear in countless variations in art and architecture — from prehistoric stone carvings and classical friezes to modern abstract sculpture. They are timeless designs that resonate in our minds. We hope you will find our tiles to be engagingly new and yet deeply familiar.</p>
       <a href="/our-team/" class="lw-mission-cta">Learn more about our team »</a>
     </div>
   </section>
 
   </main>
 
-  <!-- COMBINED FOOTER + CONTACT FORM (2-col row) -->
+  <!-- COMBINED FOOTER + CONTACT FORM (2-col row) + DARK BOTTOM BAND -->
   <footer class="footer">
     <div class="lw2-footer-row">
 
@@ -191,6 +195,33 @@
           <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops">
         </div>
         <p class="lw2-footer-blurb">When you choose tile, you make a decision you will live with for a long time. The decision can be daunting. You know what appeals to you today, but what will appeal to you tomorrow? At Linden Workshops, we strive to interpret timeless designs in a personal way. The patterns on our tiles appear in countless variations in art and architecture — from prehistoric stone carvings and classical friezes to modern abstract sculpture. They are timeless designs that resonate in our minds. We hope you will find our tiles to be engagingly new and yet deeply familiar.</p>
+        <p class="lw2-footer-intro">Our friendly crew is eager to help you! Please get in touch if you have any questions.</p>
+      </div>
+
+      <div class="lw2-footer-form-col" id="contact">
+        <h2>Contact us!</h2>
+        <p class="lw2-contact-phone"><strong>Phone:</strong> <a href="tel:7737842628">773 784-2628</a></p>
+        <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
+          <div>
+            <label for="cname">Name <span class="req">(Required)</span></label>
+            <input id="cname" type="text" required>
+          </div>
+          <div>
+            <label for="cemail">Email <span class="req">(Required)</span></label>
+            <input id="cemail" type="email" required>
+          </div>
+          <div>
+            <label for="cmessage">Message <span class="req">(Required)</span></label>
+            <textarea id="cmessage" rows="6" required></textarea>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="lw2-footer-band">
+      <div class="lw2-footer-band-inner">
         <div class="lw2-footer-links">
           <div>
             <a href="/bronzework-studio/">Bronzework Studio</a>
@@ -211,31 +242,9 @@
           <a href="#" target="_blank" rel="noopener"><img src="/assets/images/linden/footer/houzz.png" alt="Featured on Houzz"></a>
           <a href="https://www.tileheritage.org/" target="_blank" rel="noopener"><img src="/assets/images/linden/footer/tile-heritage.jpg" alt="Tile Heritage Foundation"></a>
         </div>
+        <p class="lw2-footer-copyright">©2026 Linden Workshops</p>
       </div>
-
-      <div class="lw2-footer-form-col" id="contact">
-        <h2>Contact us!</h2>
-        <p>Our friendly crew is eager to help you! Please get in touch if you have any questions.</p>
-        <p class="lw2-contact-phone"><strong>Phone:</strong> <a href="tel:7737842628">773 784-2628</a></p>
-        <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
-          <div>
-            <label for="cname">Name <span class="req">(Required)</span></label>
-            <input id="cname" type="text" required>
-          </div>
-          <div>
-            <label for="cemail">Email <span class="req">(Required)</span></label>
-            <input id="cemail" type="email" required>
-          </div>
-          <div>
-            <label for="cmessage">Message <span class="req">(Required)</span></label>
-            <textarea id="cmessage" rows="6" required></textarea>
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-
     </div>
-    <p>©2026 Linden Workshops</p>
   </footer>
 
   <script src="/assets/app.js"></script>

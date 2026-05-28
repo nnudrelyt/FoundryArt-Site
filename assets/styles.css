@@ -3048,9 +3048,9 @@ body[data-section="talisman"] .lw2-eyebrow {
   grid-template-columns: 1fr 4fr;
   gap: 32px;
   padding: 56px 40px 72px;
-  background: #f7f5f0;
+  background: #ececec;
   align-items: center;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #e0e0e0;
 }
 .lw2-featured-content {
   text-align: center;
@@ -3504,8 +3504,8 @@ body[data-section="talisman"] h4 {
 /* Section header — wordmark image replaces typed brand name */
 .lw2-section-mark {
   display: block;
-  margin: 0 auto 14px;
-  max-width: 340px;
+  margin: 56px auto 14px;
+  max-width: 560px;
   width: auto;
   height: auto;
 }
@@ -3515,9 +3515,66 @@ body[data-section="talisman"] h4 {
 .lw2-studio--foundry { background: #cfc3ad; }
 /* Talisman uses default white per live site — no tint */
 
+/* Foundry Art "Visit our online shop" eyebrow + outlined CTA (matches live live, minus Claremont branding) */
+.lw2-studio-shop {
+  text-align: center;
+  margin: 0 auto 36px;
+  padding: 14px 20px 18px;
+  max-width: 360px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(0,0,0,0.12);
+}
+.lw2-studio-shop-eyebrow {
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  color: #3a3a3a;
+  letter-spacing: 0.02em;
+  margin: 0 0 8px;
+}
+.lw2-studio-shop-btn {
+  display: inline-block;
+  font-family: "Fanwood Text", Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  text-decoration: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background: #fff;
+  transition: background .15s ease, color .15s ease;
+}
+.lw2-studio-shop-btn:hover { background: #1a1a1a; color: #fff; }
+
 /* Talisman card — wider aspect for the new cover image */
 .lw2-card--wide .lw2-card-img { aspect-ratio: 3 / 2; }
 .lw2-collection-grid--talisman { max-width: 980px; }
+
+/* Talisman section stack — hero photo above wide caption card (matches live) */
+.lw2-talisman-stack {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.lw2-talisman-hero {
+  display: block;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ece9e0;
+  padding: 6px;
+  box-sizing: border-box;
+}
+.lw2-talisman-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.lw2-talisman-stack .lw2-card--wide { width: 100%; }
+.lw2-talisman-stack .lw2-card--wide .lw2-card-img { aspect-ratio: 16 / 5; }
 
 /* Buy CTA blocks — dark treatment (restored) */
 .lw2-buy-grid--dark {
@@ -3550,62 +3607,89 @@ body[data-section="talisman"] h4 {
   color: #1f1f1f !important;
 }
 
-/* Team GIF section — 2-col, image left, copy right (homepage philosophy) */
+/* Team B&W section — 2-col, image left, narrow centered text right (matches live) */
 .lw2-team-row-home {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 48px;
   align-items: center;
-  padding: 80px 40px;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 72px 40px;
+  background: #e6e4dd;
+  max-width: none;
+  margin: 0;
 }
 .lw2-team-row-home .lw2-team-row-img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  max-width: 720px;
+  margin-left: auto;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   background: #f0ede6;
 }
 .lw2-team-row-home .lw2-team-row-img img {
   width: 100%; height: 100%; object-fit: cover; display: block;
 }
-.lw2-team-row-home .lw2-team-row-text { padding: 0 16px; }
-.lw2-team-row-home h2 { font-size: 32px !important; margin-bottom: 18px; font-style: normal !important; }
-.lw2-team-row-home p {
+.lw2-team-row-home .lw2-team-row-text {
+  text-align: center;
+  max-width: 280px;
+  margin-right: auto;
+  padding: 0 16px;
+}
+.lw2-team-row-home .lw2-team-row-lead {
   font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 17px;
-  line-height: 1.7;
+  font-size: 18px;
+  line-height: 1.6;
   color: #000;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   font-style: normal !important;
 }
-.lw2-team-row-home .lw2-mission-cta {
-  display: inline-block;
-  border: 1px solid #000;
-  padding: 12px 24px;
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #000 !important;
-  cursor: pointer;
-  margin-top: 8px;
+.lw2-team-row-home .lw-mission-cta {
+  display: inline;
+  border: none;
+  padding: 0;
+  background: none;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #a31414 !important;
+  text-decoration: none;
 }
-.lw2-team-row-home .lw2-mission-cta:hover { background: #000; color: #fff !important; }
+.lw2-team-row-home .lw-mission-cta:hover { color: #7a0e0e !important; text-decoration: underline; }
 
 /* Combined footer + form — 2-col row (2/3 left, 1/3 right) */
 .lw2-footer-row {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 64px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 64px 40px 40px;
+  padding: 64px 40px 56px;
+}
+.lw2-footer-row .lw2-footer-left {
+  text-align: center;
+}
+.lw2-footer-row .lw2-footer-left .lw2-footer-logo {
+  max-width: 360px;
+  margin: 0 auto 22px;
+}
+.lw2-footer-row .lw2-footer-left .lw2-footer-blurb {
+  margin-bottom: 22px;
+}
+.lw2-footer-row .lw2-footer-left .lw2-footer-intro {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.6;
+  color: #000;
+  margin: 0 auto;
+  max-width: 420px;
 }
 .lw2-footer-row .lw2-footer-form-col h2 {
   font-size: 30px !important;
   margin-bottom: 12px;
   font-style: normal !important;
+  text-align: center;
 }
 .lw2-footer-row .lw2-footer-form-col p {
   margin-bottom: 14px;
@@ -3616,14 +3700,82 @@ body[data-section="talisman"] h4 {
   font-family: 'Fanwood Text', Georgia, serif;
   margin-bottom: 24px;
   font-style: normal !important;
+  text-align: center;
+}
+
+/* Dark footer band — links + badges + copyright on charcoal bg (matches live) */
+.lw2-footer-band {
+  background: #1a1a1a;
+  padding: 40px 24px 28px;
+}
+.lw2-footer-band-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.lw2-footer-band .lw2-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 36px;
+  margin: 0;
+}
+.lw2-footer-band .lw2-footer-links > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+.lw2-footer-band .lw2-footer-links a {
+  display: inline-block;
+  margin: 0;
+  color: #d8d4c8 !important;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+.lw2-footer-band .lw2-footer-links a:hover { color: #fff !important; }
+.lw2-footer-band .lw2-footer-badges { gap: 28px; }
+.lw2-footer-band .lw2-footer-badges img {
+  filter: brightness(0) invert(1);
+  height: 28px;
+  opacity: 0.85;
+  transition: opacity .2s ease;
+}
+.lw2-footer-band .lw2-footer-badges a:hover img { opacity: 1; }
+.lw2-footer-band .lw2-footer-copyright {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #888 !important;
+  text-align: center;
+  margin: 0;
+  padding-top: 8px;
+  border-top: none !important;
+}
+
+/* Suppress the legacy "footer p" rule's border-top now that we use the band */
+body[data-section="linden"] .footer .lw2-footer-band p {
+  border-top: none !important;
+  padding-top: 0 !important;
+  max-width: none !important;
 }
 
 /* Responsive overrides */
 @media (max-width: 900px) {
-  .lw2-team-row-home { grid-template-columns: 1fr; padding: 56px 24px; }
+  .lw2-team-row-home {
+    grid-template-columns: 1fr;
+    padding: 56px 24px;
+  }
+  .lw2-team-row-home .lw2-team-row-img { max-width: 100%; margin: 0 auto; }
+  .lw2-team-row-home .lw2-team-row-text { max-width: 100%; margin: 0 auto; }
   .lw2-buy-grid--dark { padding: 56px 24px; grid-template-columns: 1fr; }
   .lw2-buy-grid--dark .lw2-buy-card { padding: 40px 24px; }
   .lw2-footer-row { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px; }
+  .lw2-footer-band { padding: 32px 16px 24px; }
+  .lw2-talisman-stack { max-width: 100%; }
+  .lw2-studio-shop { max-width: 100%; }
 }
 @media (min-width: 1440px) and (max-width: 1919px) {
   .lw2-section-mark { max-width: 420px; }
