@@ -3877,9 +3877,12 @@ body[data-section="linden"] .lw2-section-mark img {
   width: auto;
 }
 /* Wordmark heights from measured PDF source: */
-body[data-section="linden"] #bronzework-studio .lw2-section-mark img { height: 54px; }
-body[data-section="linden"] #foundry-art .lw2-section-mark img { height: 54px; }
-body[data-section="linden"] #talisman .lw2-section-mark img { height: 66px; }
+/* Section header wordmarks — reduced 15% AND cap-heights matched to Foundry Art.
+   PNG cap-height ratios (sampled): Bronzework 87.5%, FA 89.3%, Talisman 96.3%.
+   Target cap-height after 15% reduction: 41 css px → render heights below. */
+body[data-section="linden"] #bronzework-studio .lw2-section-mark img { height: 47px; }
+body[data-section="linden"] #foundry-art .lw2-section-mark img { height: 46px; }
+body[data-section="linden"] #talisman .lw2-section-mark img { height: 43px; }
 
 /* Studio tagline + avail link */
 body[data-section="linden"] .lw2-studio-blurb {
@@ -4274,6 +4277,20 @@ body[data-section="linden"] .lw2-featured-cta:hover {
   color: #FFFFFF !important;
 }
 body[data-section="linden"] .lw2-featured-cta br { display: none; }
+
+/* Hero wordmark buttons — match cap-heights so all three marks read the same
+   visual size as Foundry Art. Per-PNG ratios: BW 87.5%, FA 89.3%, TAL 96.3%. */
+body[data-section="linden"] .lw2-wordmark-row .lw2-wordmark-link:nth-child(1) img { max-height: 37px !important; }
+body[data-section="linden"] .lw2-wordmark-row .lw2-wordmark-link:nth-child(2) img { max-height: 36px !important; }
+body[data-section="linden"] .lw2-wordmark-row .lw2-wordmark-link:nth-child(3) img { max-height: 33px !important; }
+@media (min-width: 1440px) {
+  body[data-section="linden"] .lw2-wordmark-row .lw2-wordmark-link:nth-child(1) img { max-height: 49px !important; }
+  body[data-section="linden"] .lw2-wordmark-row .lw2-wordmark-link:nth-child(2) img { max-height: 48px !important; }
+  body[data-section="linden"] .lw2-wordmark-row .lw2-wordmark-link:nth-child(3) img { max-height: 45px !important; }
+}
+
+/* Remove "Visit our online shop" eyebrow on Foundry Art panel */
+body[data-section="linden"] #foundry-art .lw2-studio-shop-eyebrow { display: none !important; }
 body[data-section="linden"] .lw2-team-row-home .lw2-team-row-img {
   flex: 0 0 auto;
   width: 790px;
