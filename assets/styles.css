@@ -4464,7 +4464,7 @@ body[data-section="linden"] .lw2-buy-grid--dark {
 body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card {
   border: none !important;
   background: #1f1f1f;
-  padding: 80px 40px !important;  /* moved padding here from grid */
+  padding: 136px 40px !important;  /* 80 (was on grid) + 56 (was on card) = match prior height */
 }
 body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card:first-child {
   border-right: 1px solid rgba(255,255,255,0.18) !important;
