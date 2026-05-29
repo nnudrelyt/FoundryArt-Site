@@ -3005,21 +3005,21 @@ body[data-section="talisman"] .lw2-eyebrow {
 .lw2-collection-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  max-width: 960px;
+  gap: 28px;
+  max-width: 1080px;
   margin: 0 auto;
 }
-.lw2-collection-grid--two { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+.lw2-collection-grid--two { grid-template-columns: repeat(2, 1fr); max-width: 800px; }
 .lw2-collection-grid--one { grid-template-columns: 1fr; max-width: 560px; }
 
 .lw2-card {
   display: block;
   cursor: pointer;
   text-align: center;
-  transition: opacity 0.2s ease;
-  background: #fbfaf6;
-  border: 1px solid #e6e3da;
-  padding: 8px 8px 22px;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #d4ccb8;
+  padding: 10px 10px 26px;
 }
 .lw2-card:hover { opacity: 0.85; }
 .lw2-card-img {
@@ -3516,8 +3516,9 @@ body[data-section="talisman"] h4 {
 .lw2-section-mark img { display: block; width: 100%; height: auto; }
 
 /* Per-studio section background tints (matched against live PDF reference) */
+.lw2-studio { background: #f5f2e9; }
 .lw2-studio--foundry { background: #cfc3ad; }
-/* Talisman uses default white per live site — no tint */
+.lw2-studio--talisman { background: #f5f2e9; }
 
 /* Foundry Art "Visit our online shop" eyebrow + outlined CTA (matches live live, minus Claremont branding) */
 .lw2-studio-shop {
