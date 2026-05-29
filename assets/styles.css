@@ -4053,3 +4053,387 @@ body[data-section="linden"] .lw2-studio,
 body[data-section="linden"] .lw2-featured,
 body[data-section="linden"] .lw2-buy-grid--dark,
 body[data-section="linden"] .lw2-team-row-home { border-top: 0 !important; }
+
+/* ══════════════════════════════════════════════════════════
+   LW MASTER LANDING — PIXEL-MATCH PASS v3
+   Round 2 of user-specified fixes:
+   - Inner panel L/R padding for Bronzework + Foundry Art
+   - 16px Open Sans body across page
+   - 32px Fanwood Foundry shop CTA + rollover
+   - Talisman gap + type updates
+   - Featured Designer 1:3 ratio, full-width
+   - Our Team 24px Fanwood, 790x635 photo, full-width
+   - Footer restructure: no dark band, links inline left, copyright under form
+   ────────────────────────────────────────────────────────── */
+
+/* === Inner panel padding so cards have L/R margin === */
+body[data-section="linden"] .lw2-studio {
+  padding: 80px 60px 60px;
+}
+body[data-section="linden"] .lw2-studio--talisman {
+  padding: 60px 40px 40px;
+}
+
+/* === Small text → 16px Open Sans regular === */
+body[data-section="linden"] .lw2-studio-blurb,
+body[data-section="linden"] .lw2-studio-avail {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+}
+body[data-section="linden"] .lw2-studio-blurb { margin-top: 22px; }
+body[data-section="linden"] .lw2-studio-avail { margin-top: 6px; }
+body[data-section="linden"] .lw2-studio-avail a {
+  color: #A31414;
+  text-decoration: none;
+  border: none;
+}
+body[data-section="linden"] .lw2-studio-avail a:hover { text-decoration: underline; }
+
+/* Card text — body sans, title fanwood */
+body[data-section="linden"] .lw2-card h3 {
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  font-size: 24px !important;
+  font-weight: 400;
+  font-style: normal !important;
+  background: transparent !important;
+  padding: 30px 16px 10px !important;
+  margin: 0;
+  color: #000;
+}
+body[data-section="linden"] .lw2-card-body {
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  background: transparent !important;
+  padding: 0 16px 36px !important;
+  margin: 0;
+  color: #000;
+  line-height: 1.5;
+}
+body[data-section="linden"] .lw2-card-body em {
+  color: #A31414;
+  font-style: normal;
+}
+
+/* === Foundry Art "Visit our online shop" CTA — no outer stroke, 32px Fanwood button === */
+body[data-section="linden"] #foundry-art .lw2-studio-shop {
+  background: transparent;
+  border: none !important;
+  padding: 0;
+  margin: 30px auto 0;
+  max-width: none;
+  text-align: center;
+}
+body[data-section="linden"] #foundry-art .lw2-studio-shop-eyebrow {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  color: #000;
+  margin: 0 0 18px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+body[data-section="linden"] #foundry-art .lw2-studio-shop-btn {
+  display: inline-block;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #A31414;
+  background: transparent;
+  border: 2px solid #A31414;
+  padding: 14px 40px;
+  transition: background 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+body[data-section="linden"] #foundry-art .lw2-studio-shop-btn:hover {
+  background: #A31414;
+  color: #FFFFFF;
+}
+
+/* === Talisman fix: gap between hero photo and Field Patterns card === */
+body[data-section="linden"] .lw2-talisman-stack {
+  gap: 25px;
+}
+/* Talisman card caption typography matches the body system */
+body[data-section="linden"] .lw2-talisman-stack .lw2-card h3 {
+  font-size: 28px !important;
+  padding: 30px 16px 10px !important;
+}
+
+/* === Featured Designer: full-width, no white margin, 1:3 ratio === */
+body[data-section="linden"] .lw2-featured {
+  background: #F0F0F0;
+  margin: 25px 0 0 !important;
+  max-width: none;
+  padding: 0;
+  grid-template-columns: 1fr 3fr;
+  gap: 0;
+}
+body[data-section="linden"] .lw2-featured-content {
+  padding: 60px 40px;
+}
+body[data-section="linden"] .lw2-featured-content h2 {
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  font-size: 22px !important;
+  font-style: normal !important;
+  margin-bottom: 18px;
+}
+body[data-section="linden"] .lw2-featured-caption {
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 20px;
+}
+body[data-section="linden"] .lw2-featured-cta {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px !important;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid #000;
+  color: #000 !important;
+  padding: 10px 22px;
+  text-decoration: none;
+}
+body[data-section="linden"] .lw2-featured-cta:hover { background: #000; color: #fff !important; }
+
+/* === Buy CTAs (kept dark per exception) — full-width, no white margin === */
+body[data-section="linden"] .lw2-buy-grid--dark {
+  margin: 25px 0 0 !important;
+}
+
+/* === Team B&W: full-width, 24px Fanwood, 790x635 photo === */
+body[data-section="linden"] .lw2-team-row-home {
+  background: #E0DED5;
+  margin: 25px 0 0 !important;
+  max-width: none;
+  padding: 60px 40px;
+  display: grid;
+  grid-template-columns: 790px 1fr;
+  gap: 48px;
+  align-items: center;
+  justify-content: center;
+}
+body[data-section="linden"] .lw2-team-row-home .lw2-team-row-img {
+  width: 790px;
+  max-width: 100%;
+  aspect-ratio: 790 / 635;
+  margin: 0 auto;
+}
+body[data-section="linden"] .lw2-team-row-home .lw2-team-row-text {
+  max-width: 360px;
+  padding: 0;
+  margin: 0;
+}
+body[data-section="linden"] .lw2-team-row-home .lw2-team-row-lead {
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 1.4;
+  margin-bottom: 24px;
+}
+body[data-section="linden"] .lw2-team-row-home .lw-mission-cta {
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  color: #A31414 !important;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+}
+body[data-section="linden"] .lw2-team-row-home .lw-mission-cta:hover {
+  text-decoration: underline;
+  color: #7a0e0e !important;
+}
+
+/* === Footer (no dark band) — restructured layout === */
+body[data-section="linden"] .lw2-footer-band { display: none !important; }
+body[data-section="linden"] .footer {
+  background: #FFFFFF;
+  margin: 0;
+}
+body[data-section="linden"] .lw2-footer-row {
+  background: #FFFFFF;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding: 80px 60px 40px;
+  max-width: none;
+  margin: 0;
+}
+body[data-section="linden"] .lw2-footer-left {
+  text-align: center;
+  padding: 0;
+}
+body[data-section="linden"] .lw2-footer-logo {
+  max-width: 460px;
+  margin: 0 auto 28px;
+}
+body[data-section="linden"] .lw2-footer-blurb {
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #000;
+  margin: 0 auto 30px;
+  max-width: 520px;
+  text-align: center;
+}
+body[data-section="linden"] .lw2-footer-intro {
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400;
+  color: #000;
+  margin: 0 auto 50px;
+  max-width: 520px;
+  text-align: center;
+}
+body[data-section="linden"] .lw2-footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin: 30px auto 36px;
+  max-width: 640px;
+}
+body[data-section="linden"] .lw2-footer-links > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+body[data-section="linden"] .lw2-footer-links a {
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 14px !important;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #A31414 !important;
+  background: none;
+  text-decoration: none;
+  margin: 0;
+  display: block;
+  padding: 4px 0;
+}
+body[data-section="linden"] .lw2-footer-links a:hover { color: #7a0e0e !important; }
+body[data-section="linden"] .lw2-footer-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  margin: 40px auto 0;
+}
+body[data-section="linden"] .lw2-footer-badges img {
+  max-height: 50px;
+  width: auto;
+  height: auto;
+  filter: none;
+  opacity: 1;
+}
+
+/* Form column */
+body[data-section="linden"] .lw2-footer-form-col {
+  padding: 0;
+}
+body[data-section="linden"] .lw2-footer-form-col h2 {
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  font-size: 36px !important;
+  font-style: normal !important;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 8px;
+}
+body[data-section="linden"] .lw2-contact-phone {
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 32px;
+  color: #000;
+}
+body[data-section="linden"] .lw2-contact-phone strong { font-weight: 400; }
+body[data-section="linden"] .lw2-contact-phone a { color: #000; text-decoration: none; }
+
+body[data-section="linden"] .lw2-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 100%;
+}
+body[data-section="linden"] .lw2-form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+body[data-section="linden"] .lw2-form label {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+}
+body[data-section="linden"] .lw2-form label .req {
+  font-size: 12px;
+  color: #666;
+  margin-left: 4px;
+}
+body[data-section="linden"] .lw2-form input,
+body[data-section="linden"] .lw2-form textarea {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,0.3);
+  background: #FFFFFF;
+  border-radius: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+body[data-section="linden"] .lw2-form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+body[data-section="linden"] .lw2-form button {
+  background: #CCCCCC;
+  border: none;
+  padding: 12px 36px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 12px;
+}
+body[data-section="linden"] .lw2-form button:hover { background: #999; }
+
+/* Copyright under form, right-aligned */
+body[data-section="linden"] .lw2-footer-copyright {
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 400;
+  color: #999 !important;
+  text-align: right;
+  margin: 40px 0 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  max-width: none !important;
+}
+
+/* Remove the legacy LW-section .footer p border-top rule for our new copyright */
+body[data-section="linden"] .footer p {
+  border-top: none !important;
+  padding-top: 0 !important;
+  max-width: none !important;
+}
