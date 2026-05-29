@@ -3017,6 +3017,9 @@ body[data-section="talisman"] .lw2-eyebrow {
   cursor: pointer;
   text-align: center;
   transition: opacity 0.2s ease;
+  background: #fbfaf6;
+  border: 1px solid #e6e3da;
+  padding: 8px 8px 22px;
 }
 .lw2-card:hover { opacity: 0.85; }
 .lw2-card-img {
@@ -3037,7 +3040,8 @@ body[data-section="talisman"] .lw2-eyebrow {
   font-size: 15px;
   font-style: italic;
   color: #000;
-  padding: 0 16px 24px;
+  padding: 0 16px;
+  margin: 0;
   line-height: 1.5;
 }
 .lw2-card-body em { color: #a31414; font-style: italic; }
