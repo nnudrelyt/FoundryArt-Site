@@ -3804,3 +3804,252 @@ body[data-section="linden"] .footer .lw2-footer-band p {
   .lw2-footer-row { padding: 120px 96px 64px; max-width: 1680px; }
   .lw2-footer-row .lw2-footer-form-col h2 { font-size: 44px !important; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   LW MASTER LANDING — PIXEL-MATCH PASS (audit v2)
+   All values derived from /Site Update/Screenshots/LIndenWorkshops_1440.png
+   (2x retina, sampled in CSS px).
+   Exceptions retained from earlier user calls:
+   - Dark McQueen hero photo
+   - Dark #1f1f1f Buy CTA grid
+   ────────────────────────────────────────────────────────── */
+
+/* Reset page bg to white */
+body[data-section="linden"] { background: #FFFFFF !important; }
+body[data-section="linden"] main { background: #FFFFFF; }
+
+/* Top notice bar */
+body[data-section="linden"] .lw2-topbar {
+  background: #D7DDE0;
+  color: #000;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  text-align: center;
+  padding: 12px 20px;
+  line-height: 1.4;
+}
+
+/* Header bar */
+body[data-section="linden"] .lw2-header {
+  background: #E6E4DD;
+  padding: 18px 30px;
+}
+body[data-section="linden"] .lw2-header .lw2-logo img {
+  height: 30px !important;
+  width: auto;
+}
+
+/* Studio panel base — applies to Bronzework + Foundry Art (full-width insets) */
+body[data-section="linden"] .lw2-studio {
+  background: #E0E0E0;
+  margin: 25px 25px 0;
+  padding: 80px 0 30px;
+  border-top: none !important;
+  border-bottom: none !important;
+  text-align: center;
+}
+body[data-section="linden"] .lw2-studio:first-of-type {
+  margin-top: 25px;
+}
+
+/* Per-studio bg */
+body[data-section="linden"] .lw2-studio--foundry { background: #E0DED5; }
+
+/* Talisman = centered NARROW inset panel, very light bg */
+body[data-section="linden"] .lw2-studio--talisman {
+  background: #F7F7F7;
+  max-width: 814px;
+  margin: 25px auto 0;
+  padding: 60px 0 40px;
+}
+
+/* Section wordmark image — render at native size (PNGs at 2x source) */
+body[data-section="linden"] .lw2-section-mark {
+  margin: 0 auto;
+  max-width: none;
+  width: auto;
+  height: auto;
+}
+body[data-section="linden"] .lw2-section-mark img {
+  display: block;
+  margin: 0 auto;
+  width: auto;
+}
+/* Wordmark heights from measured PDF source: */
+body[data-section="linden"] #bronzework-studio .lw2-section-mark img { height: 54px; }
+body[data-section="linden"] #foundry-art .lw2-section-mark img { height: 54px; }
+body[data-section="linden"] #talisman .lw2-section-mark img { height: 66px; }
+
+/* Studio tagline + avail link */
+body[data-section="linden"] .lw2-studio-blurb {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: normal;
+  font-size: 18px;
+  color: #000;
+  text-align: center;
+  margin: 24px auto 0;
+  padding: 0;
+}
+body[data-section="linden"] .lw2-studio-avail {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: normal;
+  font-size: 18px;
+  color: #000;
+  text-align: center;
+  margin: 4px auto 0;
+  padding: 0;
+}
+body[data-section="linden"] .lw2-studio-avail a {
+  color: #A31414;
+  border: none;
+  text-decoration: none;
+}
+body[data-section="linden"] .lw2-studio-avail a:hover { text-decoration: underline; }
+
+/* Foundry Art "Visit our online shop" eyebrow + outlined button */
+body[data-section="linden"] #foundry-art .lw2-studio-shop {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.18);
+  margin: 24px auto 0;
+  max-width: 460px;
+  padding: 14px 24px 18px;
+}
+body[data-section="linden"] #foundry-art .lw2-studio-shop-eyebrow {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 13px;
+  color: #000;
+  margin: 0 0 8px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+body[data-section="linden"] #foundry-art .lw2-studio-shop-btn {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 16px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #A31414;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.3);
+  padding: 8px 22px;
+}
+body[data-section="linden"] #foundry-art .lw2-studio-shop-btn:hover { background: #1a1a1a; color: #fff; }
+
+/* Collection grid — square cards, NO BORDER, NO inner padding, 42px gap */
+body[data-section="linden"] .lw2-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 42px;
+  max-width: none;
+  margin: 60px 0 0;
+  padding: 0;
+}
+body[data-section="linden"] .lw2-collection-grid--two {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: none;
+}
+
+/* Card — image stacked over caption strip with lighter bg */
+body[data-section="linden"] .lw2-card {
+  background: transparent;
+  border: none !important;
+  padding: 0 !important;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+}
+body[data-section="linden"] .lw2-card-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: block;
+  overflow: hidden;
+  background: #f0ede6;
+}
+body[data-section="linden"] .lw2-card-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+/* Caption strip = lighter shade than panel, contains title + descriptor */
+body[data-section="linden"] .lw2-card h3 {
+  background: #EDECEC;
+  margin: 0;
+  padding: 36px 16px 8px;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+}
+body[data-section="linden"] .lw2-card-body {
+  background: #EDECEC;
+  margin: 0;
+  padding: 0 24px 42px;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: normal;
+  font-size: 15px;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+  line-height: 1.55;
+}
+body[data-section="linden"] .lw2-card-body em {
+  color: #A31414;
+  font-style: normal;
+}
+
+/* Talisman stacked layout — adjust for narrow inset */
+body[data-section="linden"] .lw2-talisman-stack {
+  max-width: 100%;
+  margin: 40px auto 0;
+  padding: 0 32px;
+  gap: 0;
+}
+body[data-section="linden"] .lw2-talisman-hero {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+body[data-section="linden"] .lw2-talisman-hero img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+body[data-section="linden"] .lw2-talisman-stack .lw2-card--wide .lw2-card-img {
+  aspect-ratio: 16 / 5;
+}
+
+/* Featured Designer panel — match live #F0F0F0 full-width inset */
+body[data-section="linden"] .lw2-featured {
+  background: #F0F0F0;
+  margin: 25px 25px 0;
+  max-width: none;
+  padding: 0;
+  border-top: none;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+/* Buy CTAs — kept dark per exception, but resized for new layout */
+body[data-section="linden"] .lw2-buy-grid--dark {
+  margin: 25px 25px 0;
+}
+
+/* Team B&W row — bg should match live tan */
+body[data-section="linden"] .lw2-team-row-home {
+  background: #E0DED5;
+  margin: 25px 25px 0;
+  max-width: none;
+}
+
+/* Footer row spacing match */
+body[data-section="linden"] .footer {
+  margin-top: 25px;
+}
+body[data-section="linden"] .lw2-footer-row {
+  background: #FFFFFF;
+}
+
+/* Lock down all the legacy panel border-tops that produced the old "white line" */
+body[data-section="linden"] .lw2-studio,
+body[data-section="linden"] .lw2-featured,
+body[data-section="linden"] .lw2-buy-grid--dark,
+body[data-section="linden"] .lw2-team-row-home { border-top: 0 !important; }
