@@ -4224,24 +4224,56 @@ body[data-section="linden"] .lw2-team-row-home {
   gap: 48px;
 }
 
-/* Featured Designer round-4 fixes: headline 32px, square photo, narrow copy column */
+/* Featured Designer round-5: headline 32px, square photo, wide centered caption,
+   "Explore kitchens" CTA restyled to Fanwood with thin black border. */
+body[data-section="linden"] .lw2-featured-content {
+  padding: 60px 40px !important;
+  text-align: center;
+}
 body[data-section="linden"] .lw2-featured-content h2 {
   font-size: 32px !important;
   font-style: normal !important;
   font-family: 'Fanwood Text', Georgia, serif !important;
-  margin: 0 0 24px;
+  margin: 0 0 32px;
 }
 body[data-section="linden"] .lw2-featured-portrait {
   border-radius: 0 !important;
   width: 220px !important;
   height: 220px !important;
   aspect-ratio: 1 / 1;
+  margin: 0 auto 32px;
 }
 body[data-section="linden"] .lw2-featured-caption {
-  max-width: 220px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  max-width: none !important;
+  margin: 0 auto 32px !important;
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 400;
+  font-style: normal !important;
+  line-height: 1.5;
+  color: #000;
+  text-align: center;
 }
+body[data-section="linden"] .lw2-featured-cta {
+  display: inline-block;
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  font-size: 24px !important;
+  font-weight: 400;
+  font-style: normal !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: #000 !important;
+  background: transparent !important;
+  border: 1px solid #000 !important;
+  padding: 18px 40px !important;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+body[data-section="linden"] .lw2-featured-cta:hover {
+  background: #000 !important;
+  color: #FFFFFF !important;
+}
+body[data-section="linden"] .lw2-featured-cta br { display: none; }
 body[data-section="linden"] .lw2-team-row-home .lw2-team-row-img {
   flex: 0 0 auto;
   width: 790px;
