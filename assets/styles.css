@@ -4256,8 +4256,8 @@ body[data-section="linden"] .lw2-featured-caption {
 }
 body[data-section="linden"] .lw2-featured-cta {
   display: inline-block;
-  font-family: 'Fanwood Text', Georgia, serif !important;
-  font-size: 24px !important;
+  font-family: 'Open Sans', Helvetica, sans-serif !important;
+  font-size: 16px !important;
   font-weight: 400;
   font-style: normal !important;
   letter-spacing: 0 !important;
@@ -4265,7 +4265,7 @@ body[data-section="linden"] .lw2-featured-cta {
   color: #000 !important;
   background: transparent !important;
   border: 1px solid #000 !important;
-  padding: 18px 40px !important;
+  padding: 14px 32px !important;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
 }
