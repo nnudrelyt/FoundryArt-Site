@@ -4291,6 +4291,54 @@ body[data-section="linden"] .lw2-wordmark-row .lw2-wordmark-link:nth-child(3) im
 
 /* Remove "Visit our online shop" eyebrow on Foundry Art panel */
 body[data-section="linden"] #foundry-art .lw2-studio-shop-eyebrow { display: none !important; }
+
+/* ══════════════════════════════════════════════════════════
+   Header polish round-5
+   - Hide announcement topbar
+   - Match nav copy color to body (#000)
+   - Vertically center LW wordmark against dot grid + nav items
+   - Showroom Login restyled now that brackets are gone in HTML
+   ────────────────────────────────────────────────────────── */
+
+body[data-section="linden"] .lw2-topbar { display: none !important; }
+
+body[data-section="linden"] .lw2-header .lw2-nav a {
+  color: #000 !important;
+}
+body[data-section="linden"] .lw2-header .lw2-nav a:hover {
+  color: #A31414 !important;
+}
+
+/* Ensure flex centering wins over any inline/IMG default baselines */
+body[data-section="linden"] .lw2-header {
+  align-items: center !important;
+}
+body[data-section="linden"] .lw2-header-left {
+  align-items: center !important;
+}
+body[data-section="linden"] .lw2-header .lw2-logo {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+body[data-section="linden"] .lw2-header .lw2-logo img {
+  display: block !important;
+  vertical-align: middle;
+  margin: 0;
+}
+
+/* Showroom Login: brackets stripped in HTML, keep its slight emphasis but
+   align color with the rest of the nav */
+body[data-section="linden"] .lw2-header .lw2-nav .lw2-login {
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.3);
+  color: #000 !important;
+  padding: 6px 14px;
+}
+body[data-section="linden"] .lw2-header .lw2-nav .lw2-login:hover {
+  background: #000;
+  color: #FFFFFF !important;
+}
 body[data-section="linden"] .lw2-team-row-home .lw2-team-row-img {
   flex: 0 0 auto;
   width: 790px;
