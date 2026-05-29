@@ -4223,6 +4223,25 @@ body[data-section="linden"] .lw2-team-row-home {
   justify-content: center;
   gap: 48px;
 }
+
+/* Featured Designer round-4 fixes: headline 32px, square photo, narrow copy column */
+body[data-section="linden"] .lw2-featured-content h2 {
+  font-size: 32px !important;
+  font-style: normal !important;
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  margin: 0 0 24px;
+}
+body[data-section="linden"] .lw2-featured-portrait {
+  border-radius: 0 !important;
+  width: 220px !important;
+  height: 220px !important;
+  aspect-ratio: 1 / 1;
+}
+body[data-section="linden"] .lw2-featured-caption {
+  max-width: 220px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 body[data-section="linden"] .lw2-team-row-home .lw2-team-row-img {
   flex: 0 0 auto;
   width: 790px;
