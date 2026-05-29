@@ -4215,7 +4215,7 @@ body[data-section="linden"] .lw2-buy-grid--dark {
 /* === Team B&W: full-width, 24px Fanwood, 790x635 photo === */
 body[data-section="linden"] .lw2-team-row-home {
   background: #E0DED5;
-  margin: 25px 0 0 !important;
+  margin: 0 !important;
   max-width: none;
   padding: 60px 40px;
   display: flex;
