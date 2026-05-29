@@ -4437,3 +4437,53 @@ body[data-section="linden"] .footer p {
   padding-top: 0 !important;
   max-width: none !important;
 }
+
+/* ══════════════════════════════════════════════════════════
+   LW MASTER LANDING — PIXEL-MATCH PASS v4 (round-3 feedback)
+   ────────────────────────────────────────────────────────── */
+
+/* (1) Talisman — duplicate hero removed in HTML.
+   Make remaining card image full square hero-style (was 16:5 wide) */
+body[data-section="linden"] .lw2-talisman-stack .lw2-card--wide .lw2-card-img {
+  aspect-ratio: 1 / 1 !important;
+}
+
+/* (2) Featured Designer — 1:2 ratio per user's 670/2012 measurement */
+body[data-section="linden"] .lw2-featured {
+  grid-template-columns: 1fr 2fr !important;
+}
+
+/* (3) Buy CTAs — remove individual card borders, separate row with 1px
+       vertical rule, add rollover, no margin above/below */
+body[data-section="linden"] .lw2-buy-grid--dark {
+  margin: 0 !important;
+  gap: 0 !important;
+}
+body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card {
+  border: none !important;
+  background: #1f1f1f;
+}
+body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card:first-child {
+  border-right: 1px solid rgba(255,255,255,0.18) !important;
+}
+/* Button rollover — both direct hover AND parent-card hover */
+body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card .lw2-featured-cta,
+body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card .lw2-studio-shop-btn {
+  transition: background 0.2s ease, color 0.2s ease;
+}
+body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card:hover .lw2-featured-cta,
+body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card .lw2-featured-cta:hover {
+  background: #ffffff !important;
+  color: #1f1f1f !important;
+}
+
+/* (4) Our Team — narrow text column to match source line-wrap */
+body[data-section="linden"] .lw2-team-row-home .lw2-team-row-text {
+  max-width: 200px !important;
+}
+
+/* (5) Footer badges — Instagram 50% smaller, Houzz 20% larger,
+       Tile Heritage keeps base size */
+body[data-section="linden"] .lw2-footer-badges a:nth-child(1) img { max-height: 25px !important; }
+body[data-section="linden"] .lw2-footer-badges a:nth-child(2) img { max-height: 60px !important; }
+body[data-section="linden"] .lw2-footer-badges a:nth-child(3) img { max-height: 50px !important; }
