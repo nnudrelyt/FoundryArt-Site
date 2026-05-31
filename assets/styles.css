@@ -4620,3 +4620,192 @@ body[data-section="linden"] #foundry-art .lw2-card h3,
 body[data-section="linden"] #foundry-art .lw2-card-body {
   background: #EDECEC !important;
 }
+
+/* ══════════════════════════════════════════════════════════
+   LW MASTER LANDING — MOBILE RESPONSIVE PASS
+   Source: /Site Update/Screenshots/LindenWorkshops_320.png
+   (375 CSS px wide, 2x retina)
+   Breakpoints: ≤768 mobile/tablet, ≤480 small mobile fine-tune.
+   ────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+
+  /* HEADER — hide nav links (keep dot-grid as menu access), shrink wordmark */
+  body[data-section="linden"] .lw2-header {
+    padding: 14px 18px !important;
+  }
+  body[data-section="linden"] .lw2-header .lw2-nav { display: none; }
+  body[data-section="linden"] .lw2-header .lw2-logo img {
+    height: 24px !important;
+  }
+  body[data-section="linden"] .lw2-studios-toggle { padding: 6px; }
+
+  /* HERO — keep dark McQueen photo, hide wordmark buttons on mobile (live
+     mobile shows headline + sub only) */
+  body[data-section="linden"] .lw2-hero { min-height: 340px; }
+  body[data-section="linden"] .lw2-hero h1 {
+    font-size: 26px !important;
+    padding: 0 24px;
+  }
+  body[data-section="linden"] .lw2-hero .lw2-hero-sub {
+    font-size: 14px !important;
+    padding: 0 24px;
+  }
+  body[data-section="linden"] .lw2-wordmark-row { display: none !important; }
+
+  /* STUDIO PANELS — reduce side margin from 25 → 8, tighten padding,
+     stack collection grids to 1 column */
+  body[data-section="linden"] .lw2-studio {
+    margin: 8px 8px 0 !important;
+    padding: 40px 22px 30px !important;
+  }
+  body[data-section="linden"] .lw2-studio:first-of-type { margin-top: 8px !important; }
+  body[data-section="linden"] .lw2-studio--talisman {
+    max-width: none !important;
+    margin: 8px 8px 0 !important;
+    padding: 40px 22px 30px !important;
+  }
+
+  /* Section wordmarks scale down ~30% on mobile */
+  body[data-section="linden"] #bronzework-studio .lw2-section-mark img,
+  body[data-section="linden"] #foundry-art .lw2-section-mark img { height: 32px !important; }
+  body[data-section="linden"] #talisman .lw2-section-mark img { height: 30px !important; }
+
+  /* Tagline + avail */
+  body[data-section="linden"] .lw2-studio-blurb { font-size: 14px !important; }
+  body[data-section="linden"] .lw2-studio-avail { font-size: 14px !important; }
+
+  /* Collection grids — single column with proper gap */
+  body[data-section="linden"] .lw2-collection-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    margin-top: 30px !important;
+  }
+  body[data-section="linden"] .lw2-collection-grid--two {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Card text sizes for mobile */
+  body[data-section="linden"] .lw2-card h3 {
+    font-size: 18px !important;
+    padding: 20px 12px 6px !important;
+  }
+  body[data-section="linden"] .lw2-card-body {
+    font-size: 14px !important;
+    padding: 0 16px 24px !important;
+  }
+
+  /* Foundry Art "Visit our online shop" CTA — compact */
+  body[data-section="linden"] #foundry-art .lw2-studio-shop {
+    margin-top: 18px !important;
+  }
+  body[data-section="linden"] #foundry-art .lw2-studio-shop-btn {
+    font-size: 18px !important;
+    padding: 10px 22px !important;
+  }
+
+  /* Talisman stack: narrow + tight */
+  body[data-section="linden"] .lw2-talisman-stack {
+    padding: 0 !important;
+    margin-top: 24px !important;
+  }
+  body[data-section="linden"] .lw2-talisman-stack .lw2-card h3 {
+    font-size: 18px !important;
+  }
+
+  /* FEATURED DESIGNER — stack as single column (photo on top, copy below).
+     Remove the inner kitchen image since it duplicates the section feel. */
+  body[data-section="linden"] .lw2-featured {
+    grid-template-columns: 1fr !important;
+    padding: 0 !important;
+  }
+  body[data-section="linden"] .lw2-featured-content {
+    padding: 36px 22px !important;
+  }
+  body[data-section="linden"] .lw2-featured-content h2 {
+    font-size: 22px !important;
+    margin-bottom: 20px;
+  }
+  body[data-section="linden"] .lw2-featured-portrait {
+    width: 160px !important;
+    height: 160px !important;
+    margin-bottom: 22px;
+  }
+  body[data-section="linden"] .lw2-featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* BUY CTAs — stack vertically (kept dark per exception) */
+  body[data-section="linden"] .lw2-buy-grid--dark {
+    grid-template-columns: 1fr !important;
+  }
+  body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card {
+    padding: 56px 28px !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.18) !important;
+  }
+  body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card:last-child {
+    border-bottom: none !important;
+  }
+  body[data-section="linden"] .lw2-buy-grid--dark .lw2-buy-card h2 {
+    font-size: 20px !important;
+  }
+
+  /* TEAM B&W — stack photo + text vertically */
+  body[data-section="linden"] .lw2-team-row-home {
+    flex-direction: column !important;
+    padding: 40px 24px !important;
+    gap: 28px !important;
+  }
+  body[data-section="linden"] .lw2-team-row-home .lw2-team-row-img {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  body[data-section="linden"] .lw2-team-row-home .lw2-team-row-text {
+    max-width: 100% !important;
+    text-align: center;
+  }
+  body[data-section="linden"] .lw2-team-row-home .lw2-team-row-lead {
+    font-size: 18px !important;
+  }
+
+  /* FOOTER + FORM — collapse to single column, full-width form */
+  body[data-section="linden"] .lw2-footer-row {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    padding: 40px 24px !important;
+  }
+  body[data-section="linden"] .lw2-footer-logo { max-width: 280px !important; }
+  body[data-section="linden"] .lw2-footer-blurb,
+  body[data-section="linden"] .lw2-footer-intro {
+    font-size: 14px !important;
+    max-width: 100% !important;
+  }
+  body[data-section="linden"] .lw2-footer-links {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    max-width: 100% !important;
+  }
+  body[data-section="linden"] .lw2-footer-row .lw2-footer-form-col h2 {
+    font-size: 28px !important;
+  }
+  body[data-section="linden"] .lw2-footer-copyright {
+    text-align: center !important;
+    margin-top: 28px !important;
+  }
+}
+
+/* SMALL MOBILE FINE-TUNE (≤480) */
+@media (max-width: 480px) {
+  body[data-section="linden"] .lw2-hero h1 { font-size: 22px !important; }
+  body[data-section="linden"] .lw2-hero .lw2-hero-sub { font-size: 13px !important; }
+  body[data-section="linden"] .lw2-studio,
+  body[data-section="linden"] .lw2-studio--talisman {
+    padding: 32px 18px 24px !important;
+  }
+  body[data-section="linden"] #bronzework-studio .lw2-section-mark img,
+  body[data-section="linden"] #foundry-art .lw2-section-mark img,
+  body[data-section="linden"] #talisman .lw2-section-mark img { height: 26px !important; }
+}
