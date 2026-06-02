@@ -4713,23 +4713,30 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
     font-size: 18px !important;
   }
 
-  /* FEATURED DESIGNER — stack as single column (photo on top, copy below).
-     Remove the inner kitchen image since it duplicates the section feel. */
+  /* FEATURED DESIGNER — match live mobile: heading + wide kitchen image + CTA.
+     Portrait and caption hidden on mobile to keep the section punchy. */
   body[data-section="linden"] .lw2-featured {
     grid-template-columns: 1fr !important;
     padding: 0 !important;
+    gap: 0 !important;
   }
   body[data-section="linden"] .lw2-featured-content {
-    padding: 36px 22px !important;
+    padding: 32px 22px 24px !important;
+    order: 1;
   }
   body[data-section="linden"] .lw2-featured-content h2 {
     font-size: 22px !important;
-    margin-bottom: 20px;
+    margin: 0 0 18px;
   }
-  body[data-section="linden"] .lw2-featured-portrait {
-    width: 160px !important;
-    height: 160px !important;
-    margin-bottom: 22px;
+  body[data-section="linden"] .lw2-featured-portrait { display: none !important; }
+  body[data-section="linden"] .lw2-featured-caption { display: none !important; }
+  body[data-section="linden"] .lw2-featured-content .lw2-featured-cta {
+    font-size: 14px !important;
+    padding: 12px 24px !important;
+  }
+  body[data-section="linden"] .lw2-featured-image {
+    order: 2;
+    display: block;
   }
   body[data-section="linden"] .lw2-featured-image img {
     width: 100%;
