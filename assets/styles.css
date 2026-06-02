@@ -4653,46 +4653,46 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
   }
   body[data-section="linden"] .lw2-wordmark-row { display: none !important; }
 
-  /* STUDIO PANELS — reduce side margin from 25 → 8, tighten padding,
-     stack collection grids to 1 column */
+  /* STUDIO PANELS — tighter margins + padding to match live mobile */
   body[data-section="linden"] .lw2-studio {
-    margin: 8px 8px 0 !important;
-    padding: 40px 22px 30px !important;
+    margin: 6px 6px 0 !important;
+    padding: 28px 16px 22px !important;
   }
-  body[data-section="linden"] .lw2-studio:first-of-type { margin-top: 8px !important; }
+  body[data-section="linden"] .lw2-studio:first-of-type { margin-top: 6px !important; }
   body[data-section="linden"] .lw2-studio--talisman {
     max-width: none !important;
-    margin: 8px 8px 0 !important;
-    padding: 40px 22px 30px !important;
+    margin: 6px 6px 0 !important;
+    padding: 28px 16px 22px !important;
   }
 
-  /* Section wordmarks scale down ~30% on mobile */
+  /* Section wordmarks scaled to match live mobile (~26 css tall cap-height) */
   body[data-section="linden"] #bronzework-studio .lw2-section-mark img,
-  body[data-section="linden"] #foundry-art .lw2-section-mark img { height: 32px !important; }
-  body[data-section="linden"] #talisman .lw2-section-mark img { height: 30px !important; }
+  body[data-section="linden"] #foundry-art .lw2-section-mark img { height: 26px !important; }
+  body[data-section="linden"] #talisman .lw2-section-mark img { height: 22px !important; }
 
-  /* Tagline + avail */
-  body[data-section="linden"] .lw2-studio-blurb { font-size: 14px !important; }
-  body[data-section="linden"] .lw2-studio-avail { font-size: 14px !important; }
+  /* Tagline + avail — bumped to 16 to match live readability */
+  body[data-section="linden"] .lw2-studio-blurb { font-size: 16px !important; margin-top: 14px !important; }
+  body[data-section="linden"] .lw2-studio-avail { font-size: 16px !important; margin-top: 4px !important; }
 
   /* Collection grids — single column with proper gap */
   body[data-section="linden"] .lw2-collection-grid {
     grid-template-columns: 1fr !important;
-    gap: 24px !important;
-    margin-top: 30px !important;
+    gap: 18px !important;
+    margin-top: 22px !important;
   }
   body[data-section="linden"] .lw2-collection-grid--two {
     grid-template-columns: 1fr !important;
   }
 
-  /* Card text sizes for mobile */
+  /* Card text sizes for mobile — tighter to match live */
   body[data-section="linden"] .lw2-card h3 {
     font-size: 18px !important;
-    padding: 20px 12px 6px !important;
+    padding: 18px 12px 6px !important;
   }
   body[data-section="linden"] .lw2-card-body {
     font-size: 14px !important;
-    padding: 0 16px 24px !important;
+    padding: 0 16px 20px !important;
+    line-height: 1.45;
   }
 
   /* Foundry Art "Visit our online shop" CTA — compact */
