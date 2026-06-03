@@ -4653,22 +4653,21 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
   }
   body[data-section="linden"] .lw2-wordmark-row { display: none !important; }
 
-  /* STUDIO PANELS — tighter margins + padding to match live mobile */
+  /* STUDIO PANELS — pixel-matched from live mobile screenshot:
+     panel margin 25 L/R, inner padding 39 L/R */
   body[data-section="linden"] .lw2-studio {
-    margin: 6px 6px 0 !important;
-    padding: 28px 16px 22px !important;
+    margin: 10px 25px 0 !important;
+    padding: 36px 39px 32px !important;
   }
-  body[data-section="linden"] .lw2-studio:first-of-type { margin-top: 6px !important; }
+  body[data-section="linden"] .lw2-studio:first-of-type { margin-top: 25px !important; }
   body[data-section="linden"] .lw2-studio--talisman {
     max-width: none !important;
-    margin: 6px 6px 0 !important;
-    padding: 28px 16px 22px !important;
+    margin: 10px 25px 0 !important;
+    padding: 36px 39px 32px !important;
   }
 
-  /* Section wordmarks scaled to match live mobile.
-     Constrain WIDTH (not height) per section so each mark renders at a
-     matched ~18 css-px cap-height regardless of PNG aspect ratio. The
-     image then auto-scales height proportionally and never overflows. */
+  /* Section wordmarks — width constrained, height auto. Matches live mobile:
+     BW wordmark ~248 css wide (76% of panel internal width 247). */
   body[data-section="linden"] .lw2-section-mark img {
     height: auto !important;
     max-height: none !important;
@@ -4676,10 +4675,10 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
   }
   body[data-section="linden"] #bronzework-studio .lw2-section-mark img,
   body[data-section="linden"] #foundry-art .lw2-section-mark img {
-    max-width: 290px !important;
+    max-width: 248px !important;
   }
   body[data-section="linden"] #talisman .lw2-section-mark img {
-    max-width: 130px !important;
+    max-width: 118px !important;
   }
   body[data-section="linden"] .lw2-section-mark { max-width: 100%; }
 
