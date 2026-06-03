@@ -4665,10 +4665,23 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
     padding: 28px 16px 22px !important;
   }
 
-  /* Section wordmarks scaled to match live mobile (~26 css tall cap-height) */
+  /* Section wordmarks scaled to match live mobile.
+     Constrain WIDTH (not height) per section so each mark renders at a
+     matched ~18 css-px cap-height regardless of PNG aspect ratio. The
+     image then auto-scales height proportionally and never overflows. */
+  body[data-section="linden"] .lw2-section-mark img {
+    height: auto !important;
+    max-height: none !important;
+    width: 100% !important;
+  }
   body[data-section="linden"] #bronzework-studio .lw2-section-mark img,
-  body[data-section="linden"] #foundry-art .lw2-section-mark img { height: 26px !important; }
-  body[data-section="linden"] #talisman .lw2-section-mark img { height: 22px !important; }
+  body[data-section="linden"] #foundry-art .lw2-section-mark img {
+    max-width: 290px !important;
+  }
+  body[data-section="linden"] #talisman .lw2-section-mark img {
+    max-width: 130px !important;
+  }
+  body[data-section="linden"] .lw2-section-mark { max-width: 100%; }
 
   /* Tagline + avail — bumped to 16 to match live readability */
   body[data-section="linden"] .lw2-studio-blurb { font-size: 16px !important; margin-top: 14px !important; }
