@@ -5249,12 +5249,18 @@ body[data-page="our-team"] .lw2-team-text h2, body[data-page="about"] .lw2-team-
   margin: 0 0 4px;
   line-height: 1.2;
 }
-body[data-page="our-team"] .lw2-team-role, body[data-page="about"] .lw2-team-role {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 24px;
-  font-style: normal;
+/* Role uses <p class="lw2-team-role"> which is also targeted by
+   `.lw2-team-text p` (Open Sans 16). We bump specificity by adding
+   `.lw2-team-text` to the selector AND keep !important — bulletproof. */
+body[data-page="our-team"] .lw2-team-text p.lw2-team-role,
+body[data-page="about"] .lw2-team-text p.lw2-team-role {
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  font-size: 24px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
   color: #000;
   margin: 0 0 22px;
+  line-height: 1.25;
 }
 body[data-page="our-team"] .lw2-team-text p, body[data-page="about"] .lw2-team-text p {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -5274,11 +5280,11 @@ body[data-page="our-team"] .lw2-team-text a, body[data-page="about"] .lw2-team-t
 body[data-page="our-team"] .lw2-team-text a:hover, body[data-page="about"] .lw2-team-text a:hover { color: #7A0E0E; }
 
 /* Group photo — full-bleed wide + center caption.
-   Background matches the FOOTER (#F7F7F7) so there's no white strip
-   between the team-group section and the footer. */
+   Per spec: white background behind the Ted + Stacza photo so it sits
+   on its own white panel above the gray footer band. */
 body[data-page="our-team"] .lw2-team-group, body[data-page="about"] .lw2-team-group {
-  background: #F7F7F7;
-  padding: 48px 24px;
+  background: #FFFFFF;
+  padding: 48px 24px 60px;
   text-align: center;
 }
 body[data-page="our-team"] .lw2-team-group img, body[data-page="about"] .lw2-team-group img {
@@ -5351,7 +5357,8 @@ body[data-page="our-team"] .footer p, body[data-page="about"] .footer p {
     margin: 0;
   }
   body[data-page="our-team"] .lw2-team-text h2, body[data-page="about"] .lw2-team-text h2 { font-size: 28px !important; }
-  body[data-page="our-team"] .lw2-team-role, body[data-page="about"] .lw2-team-role { font-size: 20px; }
+  body[data-page="our-team"] p.lw2-team-role,
+  body[data-page="about"] p.lw2-team-role { font-size: 20px; }
   body[data-page="our-team"] .lw2-team-text p, body[data-page="about"] .lw2-team-text p { font-size: 16px; line-height: 26px; }
   body[data-page="our-team"] .lw2-team-group, body[data-page="about"] .lw2-team-group { padding: 32px 16px; }
 }
@@ -6341,19 +6348,22 @@ body[data-page="where-to-buy"] .lw2-wtb-brand-row {
   margin: 0 auto;
   padding: 32px 24px 64px;
 }
-body[data-page="where-to-buy"] .lw2-wtb-brand-name {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-weight: 400;
-  font-size: 22px;
-  letter-spacing: 0.04em;
-  color: #000;
-  margin: 0 0 16px;
-  text-align: center;
+/* Wordmark in the brand-row replaces the old all-caps text title.
+   Constrain both axes — same belt-and-braces approach used on the
+   tile-collections panel wordmarks. */
+body[data-page="where-to-buy"] .lw2-wtb-brand-wordmark {
+  display: block !important;
+  height: auto !important;
+  width: auto !important;
+  max-width: 280px !important;
+  max-height: 28px !important;
+  margin: 0 auto 20px !important;
+  object-fit: contain;
 }
 body[data-page="where-to-buy"] .lw2-wtb-brand p {
   font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 28px;
   color: #222;
   margin: 0;
   text-align: center;
@@ -6469,37 +6479,47 @@ body[data-page="where-to-buy"] .lw2-wtb-map-note {
   margin: 0;
 }
 
-/* BRAND × REGION SELECTOR GRID */
+/* BRAND × REGION SELECTOR GRID — three "cards" under the map.
+   Each column = one gray card with a wordmark on top + tabs below
+   (or, for Talisman, a phone + CTA card). */
 body[data-page="where-to-buy"] .lw2-wtb-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 36px;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 32px 24px 16px;
+  padding: 48px 24px 64px;
 }
-body[data-page="where-to-buy"] .lw2-wtb-col-title {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-weight: 400;
-  font-size: 22px;
-  margin: 0 0 18px;
-  color: #000;
+body[data-page="where-to-buy"] .lw2-wtb-col {
+  background: #F7F7F7;
+  padding: 32px 24px 32px;
   text-align: center;
+}
+body[data-page="where-to-buy"] .lw2-wtb-col-wordmark {
+  display: block !important;
+  height: auto !important;
+  width: auto !important;
+  max-width: 240px !important;
+  max-height: 24px !important;
+  margin: 0 auto 22px !important;
+  object-fit: contain;
 }
 body[data-page="where-to-buy"] .lw2-wtb-tabs {
   display: flex;
   flex-direction: column;
   gap: 0;
   border: 1px solid #E5E5E5;
+  background: #FFFFFF;
 }
 body[data-page="where-to-buy"] .lw2-wtb-tab {
   background: #FFF;
   border: none;
   border-bottom: 1px solid #E5E5E5;
   padding: 14px 16px;
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 18px;
-  color: #000;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 28px;
+  color: #555;
   cursor: pointer;
   text-align: center;
   transition: background 0.15s ease, color 0.15s ease;
@@ -6512,37 +6532,55 @@ body[data-page="where-to-buy"] .lw2-wtb-tab.is-active {
   font-weight: 600;
 }
 
-/* Talisman: direct-studio card (no tabs) */
+/* Talisman: direct-studio card (no tabs) — sits inside .lw2-wtb-col
+   so it inherits the gray panel; this just lays out its contents. */
 body[data-page="where-to-buy"] .lw2-wtb-talisman-card {
-  border: 1px solid #E5E5E5;
-  padding: 24px 18px;
+  padding: 0;
   text-align: center;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-line {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 17px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 28px;
   color: #A31414;
-  margin: 0 0 8px;
-  line-height: 1.3;
+  margin: 0 0 6px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-phone {
   font-family: 'Fanwood Text', Georgia, serif;
   font-size: 22px;
-  margin: 0 0 18px;
+  margin: 0 0 20px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-phone a { color: #A31414; text-decoration: none; }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-cta {
   display: inline-block;
-  padding: 10px 22px;
+  padding: 12px 26px;
   border: 1px solid #333;
   font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.04em;
   color: #000;
   text-decoration: none;
+  background: #FFFFFF;
   transition: background 0.15s ease, color 0.15s ease;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-cta:hover { background: #000; color: #FFF; }
+
+/* Footer treatment for where-to-buy:
+   - Gray bg (#F7F7F7) on the wrapper + the row, matching the our-team
+     pattern, so the footer reads as one unified panel.
+   - Suppress the legacy `.footer p { border-top: 1px solid #eee }` rule
+     that draws a thin horizontal rule above the copyright/credits. */
+body[data-page="where-to-buy"] .footer {
+  background: #F7F7F7;
+  border-top: none !important;
+}
+body[data-page="where-to-buy"] .lw2-footer-row {
+  background: #F7F7F7 !important;
+  padding-top: 80px !important;
+}
+body[data-page="where-to-buy"] .footer p {
+  border-top: none !important;
+}
 
 /* TAB PANELS — only the active one shows */
 body[data-page="where-to-buy"] .lw2-wtb-panel {
