@@ -5127,14 +5127,17 @@ body[data-section="linden"] .lw2-talisman-hero img {
   object-fit: cover;
   object-position: center;
 }
+/* The line break between 'that' and 'redefined' is forced in the
+   HTML via <br>. The panel measure here only needs to be wide
+   enough for the longer second line. */
 body[data-section="linden"] .lw2-talisman-hero-quote {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.45);
-  padding: 56px 72px;
-  max-width: 880px;
+  padding: 56px 64px;
+  max-width: 760px;
   width: calc(100% - 96px);
   text-align: center;
   z-index: 2;
