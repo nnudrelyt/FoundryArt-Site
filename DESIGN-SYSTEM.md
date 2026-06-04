@@ -1,0 +1,298 @@
+# Linden Workshops — Design System
+
+Single source of truth for the LW visual language as shipped on the master landing (`/`). All values are codified in `/assets/tokens.css` and documented here.
+
+This is what every other LW page should look like — `/bronzework-studio/`, `/talisman/`, `/our-team/`, collection detail pages, `/about/`, `/contact/`, `/where-to-buy/`, and any future LW page. The Foundry Art e-commerce flows (`/foundry-art/**`) are scoped separately and keep their own redesign aesthetic.
+
+---
+
+## 1. Scope
+
+The LW design system is active wherever `<body data-section="linden|bronzework-studio|talisman">` is set. The selectors in `/assets/styles.css` are explicitly namespaced by this attribute (lines 2790–5007).
+
+The Foundry Art shop (`/foundry-art/**`) sets `data-page` instead and inherits a different visual system. **Don't apply LW tokens to Foundry Art pages.**
+
+---
+
+## 2. Token reference
+
+All tokens live in `/assets/tokens.css` under `:root`. Cite them with `var(--lw-name)` — never hard-code raw hex or px values in new work inside the LW scope.
+
+### Colors
+
+| Token | Value | Used for |
+|---|---|---|
+| `--lw-bg-page` | `#FFFFFF` | Page background, footer-row background |
+| `--lw-bg-header` | `#E6E4DD` | Top header strip behind LW wordmark + nav |
+| `--lw-bg-panel-bronzework` | `#E0E0E0` | Bronzework studio panel |
+| `--lw-bg-panel-foundry` | `#E0DED5` | Foundry Art studio panel |
+| `--lw-bg-panel-talisman` | `#F7F7F7` | Talisman studio panel |
+| `--lw-bg-caption-strip` | `#EDECEC` | Lighter shade behind card title + body |
+| `--lw-bg-featured-designer` | `#F0F0F0` | Featured Designer section |
+| `--lw-bg-team-row` | `#E0DED5` | Team B&W row |
+| `--lw-bg-buy-dark` | `#1F1F1F` | **Exception** — dark Buy CTA band |
+| `--lw-text-primary` | `#000000` | Body copy, headlines |
+| `--lw-text-secondary` | `#757367` | (Reserved for muted secondary nav text — currently unused after the round-5 nav recolor) |
+| `--lw-text-muted` | `#999999` | Copyright |
+| `--lw-accent-red` | `#A31414` | Inline links, "fine tile showrooms", FA shop CTA |
+| `--lw-accent-red-hover` | `#7A0E0E` | Hover state on red links |
+| `--lw-border-subtle` | `rgba(0,0,0,0.18)` | Showroom Login outline, FA shop CTA outline |
+| `--lw-border-dark-divider` | `rgba(255,255,255,0.18)` | Vertical rule between Buy CTA cards |
+| `--lw-border-input` | `rgba(0,0,0,0.30)` | Form input borders |
+| `--lw-btn-gray` | `#CCCCCC` | Submit button background |
+| `--lw-btn-gray-hover` | `#999999` | Submit hover |
+
+### Typography
+
+Two families:
+- **`--lw-font-serif`** = `'Fanwood Text', Georgia, serif` — Headlines, section headings, card titles, taglines on mobile/tablet
+- **`--lw-font-sans`** = `'Open Sans', Helvetica, sans-serif` — Body copy, nav, form labels, footer copy, card descriptors
+
+Sizes scale by breakpoint. The token suffix indicates target:
+- `-m` mobile (≤768)
+- `-t` tablet (769–1024)
+- no suffix = desktop (1025–1439, the system "base")
+- `-w` wide (1440+)
+
+See the token reference table in `tokens.css` for all sizes.
+
+### Spacing
+
+| Token | Value | Used for |
+|---|---|---|
+| `--lw-panel-margin` | `25px` | White inset border around studio panels — all breakpoints |
+| `--lw-panel-padding-m` | `36px 32px 32px` | Mobile inner padding (gives 261 px cards at 375 vp) |
+| `--lw-panel-padding-t` | `56px` | Tablet uniform padding |
+| `--lw-panel-padding-d` | `80px 60px 60px` | Desktop |
+| `--lw-card-gap-m` | `25px` | Stacked single-column cards |
+| `--lw-card-gap-t` | `36px` | Tablet single-column cards |
+| `--lw-card-gap-d` | `42px` | Desktop 3-up grid |
+| `--lw-team-photo-w` | `790px` | Team B&W photo width (desktop) |
+| `--lw-footer-logo-max` | `460px` | Linden Workshops wordmark in footer |
+| `--lw-form-gap` | `22px` | Vertical gap between form fields |
+
+### Breakpoints (literal — used in `@media`)
+
+| Range | Behaviour |
+|---|---|
+| **≤ 768** mobile | 1-col cards (261 px wide at 375 vp), hero wordmark buttons hidden, nav hidden, type scaled down |
+| **769 – 1024** tablet | 1-col cards full panel width, hero wordmark buttons visible, type scaled up |
+| **1025 – 1439** desktop | 3-col cards (Bronzework), 2-col (Foundry), 1-col (Talisman) |
+| **1440 – 1919** wide | Same as desktop with bumped type sizes and padding |
+| **≥ 1920** cinema | Further bumped type + padding |
+
+CSS variables can't drive `@media` directly, so the literal pixel values appear inline in the `@media` rules. Keep them in sync with the comments in `tokens.css`.
+
+---
+
+## 3. Components
+
+Each entry lists: structure (HTML), classes, tokens used, behaviour notes, and the CSS line range in `styles.css`.
+
+### 3.1 Header
+
+```html
+<header class="lw2-header">
+  <div class="lw2-header-left">
+    <button class="studios-toggle lw2-studios-toggle">...</button>  <!-- dot-grid drawer trigger -->
+    <a href="/" class="lw2-logo"><img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops"></a>
+  </div>
+  <nav class="lw2-nav">
+    <a>...</a>
+    <a class="lw2-login">Showroom Login</a>
+  </nav>
+</header>
+```
+
+- Tokens: `--lw-bg-header`, `--lw-text-primary`, `--lw-border-subtle`, `--lw-font-sans`
+- Logo `vertical-align: middle` + parent `display: flex` so the wordmark is true-centered against the dot-grid + nav row
+- Showroom Login: thin black border, fills black on hover
+- Mobile: nav hidden, logo height 24 px
+- CSS: lines 2852–2899, 4313–4341
+
+### 3.2 Hero
+
+```html
+<section class="lw2-hero">
+  <div class="lw2-hero-bg"><img src="/assets/images/linden/hero-mcqueen.jpg"></div>
+  <div class="lw2-hero-inner">
+    <h1>Luxury designer metal accent tile.</h1>
+    <p class="lw2-hero-sub">Elevate your home from beautiful to extraordinary.</p>
+    <div class="lw2-wordmark-row">
+      <a class="lw2-wordmark-link"><img src=".../bronzework-studio.png"></a>
+      <a class="lw2-wordmark-link"><img src=".../foundry-art.png"></a>
+      <a class="lw2-wordmark-link"><img src=".../talisman.png"></a>
+    </div>
+  </div>
+</section>
+```
+
+- Tokens: hero sizes vary by breakpoint (`--lw-fs-hero-h1-m` / `-t` / `-w`, same pattern for sub)
+- Dark McQueen photo background (kept as exception vs the live tile-band hero)
+- Mobile: wordmark row hidden
+- CSS: lines 2903–2946, 3344–3357, 4643–4660
+
+### 3.3 Studio panel
+
+```html
+<section class="lw2-studio [lw2-studio--foundry|--talisman]" id="bronzework-studio">
+  <div class="lw2-section-mark"><img src=".../bronzework-studio.png" alt="Bronzework Studio"></div>
+  <p class="lw2-studio-blurb">Metal inset tiles, liners, and trim.</p>
+  <p class="lw2-studio-avail">Available at <a>fine tile showrooms</a></p>
+  <div class="lw2-collection-grid">...</div>
+</section>
+```
+
+- White-inset-bordered panel — `margin: var(--lw-panel-margin)` uniform top/right/left
+- bg per studio: `--lw-bg-panel-bronzework` / `-foundry` / `-talisman`
+- Padding scales by breakpoint
+- Wordmark image rendered at native aspect, width-constrained on mobile (so the cap-height matches across the three brands)
+- CSS: lines 3843–3865, 4073–4078, 4664–4673
+
+### 3.4 Section wordmark (cap-height matching)
+
+The three section wordmark PNGs have wildly different aspect ratios:
+
+| Mark | Native | Aspect | Ink ratio (PNG ink ÷ canvas h) |
+|---|---|---|---|
+| Bronzework Studio | 800 × 56 | 14.3 : 1 | 87.5 % |
+| Foundry Art | 800 × 56 | 14.3 : 1 | 89.3 % |
+| Talisman | 1280 × 188 | 6.81 : 1 | 96.3 % |
+
+To make them read at the **same visible cap-height**, we use different strategies per breakpoint:
+
+- **Desktop**: explicit `height: N px`. The values `47 / 46 / 43` give matching cap-heights to ~ 41 px each.
+- **Mobile / tablet**: `max-width: N px` + `height: auto` + `object-fit: contain`. Different widths per mark (`--lw-wordmark-width-{bw|fa|tal}-{m|t}`) so each visible cap-height lands at ~ 18 / 22 px respectively.
+
+When adding a fourth brand:
+1. Sample the new PNG's ink-to-canvas ratio (Python: count non-transparent pixels per row, find topmost and bottommost rows).
+2. Compute heights / widths to land at the same visible cap-height as Foundry Art (the baseline).
+3. Add new tokens `--lw-wordmark-width-X-{m|t}` and `--lw-wordmark-height-X-d`.
+
+CSS: lines 2868–2885, 4675–4693, 4281–4289
+
+### 3.5 Collection card
+
+```html
+<a class="lw2-card" href="/...">
+  <div class="lw2-card-img"><img src="..." loading="lazy"></div>
+  <h3>Autograph Collection</h3>
+  <p class="lw2-card-body">Graphic borders and insets cast in solid bronze <em>»</em></p>
+</a>
+```
+
+- No border, no padding on `.lw2-card` itself
+- `.lw2-card-img` → `aspect-ratio: 1/1`, `object-fit: cover`
+- Caption strip (`h3` + `.lw2-card-body`) has `--lw-bg-caption-strip` background on Bronzework + Foundry Art cards. Talisman card sits on the Talisman panel directly (no separate strip).
+- Mobile: card width capped at 261 px (panel inner width at 375 vp)
+- CSS: lines 3942–4001, 4718–4736
+
+### 3.6 Foundry Art shop CTA
+
+```html
+<div class="lw2-studio-shop">
+  <p class="lw2-studio-shop-eyebrow">Visit our online shop</p>
+  <a href="/foundry-art/shop/" class="lw2-studio-shop-btn">Shop Foundry Art</a>
+</div>
+```
+
+- Outer container: no border, transparent bg
+- Eyebrow currently `display: none` (live mobile shows no eyebrow). Flip via CSS to show.
+- Button: 32 px Fanwood, red text, 2 px red border, transparent bg → fills red with white text on hover
+- CSS: lines 4125–4162
+
+### 3.7 Featured Designer block
+
+- Full-width, no side margins (overrides the 25 px panel margin)
+- Desktop: 1 : 2 grid (portrait + caption + CTA on left, big kitchen photo on right)
+- Mobile: 1-col stack — portrait + caption hidden, headline + CTA + kitchen photo only
+- Portrait: 220 × 220 square (no border-radius)
+- CSS: lines 4024–4030, 4174–4211, 4231–4279
+
+### 3.8 Buy CTA grid (exception — kept dark)
+
+- Two cards on `--lw-bg-buy-dark` background
+- 1 px vertical white-alpha rule between them (full container height)
+- Each card padding `136 px 40 px` (= legacy grid 80 + card 56 combined so divider spans full height)
+- Mobile: stacks vertically, horizontal divider instead of vertical
+- Rollover: button fills white with dark text on either button hover OR parent card hover
+- CSS: lines 4035–4036, 4575–4597
+
+### 3.9 Team B&W row
+
+- Desktop: flex row, centered group. 790 × 635 photo + 200 px narrow text column
+- Lead copy: 24 px Fanwood
+- CTA: inline red `Open Sans 16 px` link
+- Mobile: flex column, photo full-width, text centered
+- CSS: lines 4218–4375, 4803–4824
+
+### 3.10 Footer (no dark band)
+
+- 2-column grid: philosophy column on left, contact form on right
+- Left column: Linden Workshops wordmark + philosophy paragraph + "Our friendly crew" intro + 3-col link grid + vertically-stacked badges (Instagram, Houzz, Tile Heritage with size differentiation: 25 px / 60 px / 50 px)
+- Right column: "Contact us!" h2 + phone + form + copyright bottom-right
+- Mobile: single column, link grid 1-col, copyright centered
+- CSS: lines 4047–4051, 4377–4549
+
+---
+
+## 4. Responsive ladder
+
+| Element | ≤ 768 mobile | 769–1024 tablet | 1025–1439 desktop | 1440 + wide |
+|---|---|---|---|---|
+| Hero h1 | 36 px Fanwood | 44 px Fanwood | 48 px Fanwood | 76 px Fanwood |
+| Hero sub | 22 px Fanwood | 22 px Fanwood | 16 px | 28 px |
+| Hero wordmark buttons | hidden | visible | visible | visible |
+| Nav | hidden | shown | shown | shown |
+| LW header logo | 24 px tall | 32 px | 36 px | 36 px |
+| Studio panel margin | 25 px all sides | 25 px | 25 px | 25 px |
+| Studio panel padding | 36 / 32 / 32 | 56 px | 80 / 60 / 60 | larger |
+| Section wordmark | width-constrained per brand | width-constrained per brand | height-constrained per brand (cap-height matched) | larger heights |
+| Studio tagline | 19 px Fanwood | 22 px Fanwood | 16 px Open Sans | 17 px |
+| Bronzework grid | 1-col, card cap 261 px | 1-col, full panel | 3-col | 3-col |
+| Foundry Art grid | 1-col | 1-col | 2-col | 2-col |
+| Card h3 | 24 px Fanwood | 28 px Fanwood | 24 px Fanwood | 26 px |
+| Card body | 16 px Open Sans | 18 px Open Sans | 16 px | 17 px |
+| Featured Designer | 1-col, simplified (no portrait / caption) | 1-col with portrait + caption + CTA | 1 : 2 grid | 1 : 2 grid |
+| Buy CTAs | stack vertical, horizontal divider | stack vertical, horizontal divider | 2-col, vertical divider | 2-col |
+| Team B&W | flex column, photo full-width | flex column, photo max 600 px | flex row, 790 × 635 photo + 200 px text | row |
+| Footer | 1-col | 2-col, link grid 3-col | 2-col, link grid 3-col | 2-col |
+
+---
+
+## 5. Exceptions
+
+These are deliberate divergences from `lindenworkshops.com`, retained per brand-owner direction:
+
+1. **Dark McQueen hero** — `/index.html` uses a dark tile-detail photo overlaid with white type. The live LW landing uses a lighter bronze-tile-on-marble band with three wordmark buttons stacked below on white. Our version overlays the wordmark buttons on the dark photo.
+2. **Dark `#1F1F1F` Buy CTA grid** — the live site shows two light bordered cards on tan. Ours stays dark.
+3. **Foundry Art shop CTA** — links to internal `/foundry-art/shop/` with the text "Shop Foundry Art", not the live's `claremonttile.com` button. Per brand-owner directive in NOTICE.md.
+4. **`/foundry-art/` keeps the Foundry Art *redesign*** — dark McQueen hero, "Cast by hand", shop CTAs. The live LW-styled FA landing is not replicated. The master landing's "Foundry Art" section still links to `/foundry-art/`.
+5. **Studios drawer (dot-grid trigger)** — present in our header, not in the live header.
+6. **Top notice bar hidden** — the live site shows a "Lowitz & Company is now Linden Workshops" notice. Our build hides it; the markup is left in place so it can be toggled back with one CSS line.
+
+---
+
+## 6. Asset sourcing
+
+For pages being built from the live site:
+
+1. Identify referenced imagery — `curl https://lindenworkshops.com/<path>/ | grep wp-content/uploads`.
+2. Download to `assets/images/linden/<page>/`.
+3. Append a row to `NOTICE.md` covering source URL + that it's a placeholder.
+4. Higher-resolution originals from the brand owner should swap in before any production launch.
+
+Brand assets we already have:
+- All 4 wordmark PNGs in `assets/images/linden/wordmarks/`
+- Hero, team, Featured Designer, Talisman cover under `assets/images/linden/`
+- 3 footer badges under `assets/images/linden/footer/`
+
+---
+
+## 7. Workflow
+
+1. New page work cites `var(--lw-*)` exclusively. No raw hex / px inside the LW scope.
+2. After implementing a new page, grep the file for stray hex literals — `grep -nE "#[0-9A-Fa-f]{3,6}"`. Exceptions only for documented divergences (see §5).
+3. Render local + lindenworkshops.com side-by-side at 1440 + 375 before pushing (existing `/tmp/lw-audit/sxsN.jpg` workflow).
+4. Cache buster on `styles.css` + `tokens.css` bumped at every release.
+5. Single commit per page or template propagation batch.

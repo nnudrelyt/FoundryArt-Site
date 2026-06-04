@@ -1,0 +1,204 @@
+/* ══════════════════════════════════════════════════════════
+   LINDEN WORKSHOPS — Design Tokens
+   ────────────────────────────────────────────────────────────
+   Single source of truth for the LW design system.
+   All values are extracted from the master landing's working CSS
+   (assets/styles.css, lines 2790–5007) which has been iterated
+   to high fidelity against lindenworkshops.com.
+
+   Loaded BEFORE assets/styles.css so existing rules can adopt
+   tokens incrementally. New page work should cite var(--lw-*)
+   instead of raw hex / px values.
+
+   Token namespace: --lw-*
+   Scope: tokens are declared on :root and inherited by every
+   page. Pages with body[data-section="linden|bronzework-studio|
+   talisman"] use the LW palette + type stack; pages without that
+   data-section attribute (the Foundry Art redesign) are not
+   bound by these tokens.
+
+   Reference doc: /DESIGN-SYSTEM.md
+   ────────────────────────────────────────────────────────── */
+
+:root {
+
+  /* ════════════════════════════════════════
+     COLORS
+     ════════════════════════════════════════ */
+
+  /* Page surface */
+  --lw-bg-page:                #FFFFFF;
+  --lw-bg-header:              #E6E4DD;   /* warm sand */
+
+  /* Studio panels (the white-bordered inset blocks) */
+  --lw-bg-panel-bronzework:    #E0E0E0;
+  --lw-bg-panel-foundry:       #E0DED5;
+  --lw-bg-panel-talisman:      #F7F7F7;
+
+  /* In-panel surfaces */
+  --lw-bg-caption-strip:       #EDECEC;   /* lighter shade behind card title + body */
+  --lw-bg-featured-designer:   #F0F0F0;
+  --lw-bg-team-row:            #E0DED5;
+
+  /* Exceptions kept intentionally */
+  --lw-bg-buy-dark:            #1F1F1F;   /* dark Buy CTA band (user exception) */
+
+  /* Text */
+  --lw-text-primary:           #000000;
+  --lw-text-secondary:         #757367;
+  --lw-text-muted:             #999999;
+
+  /* Accent */
+  --lw-accent-red:             #A31414;   /* links, red CTAs, "fine tile showrooms" */
+  --lw-accent-red-hover:       #7A0E0E;
+
+  /* Dividers / borders */
+  --lw-border-subtle:          rgba(0, 0, 0, 0.18);
+  --lw-border-dark-divider:    rgba(255, 255, 255, 0.18);  /* vertical rule between Buy CTA cards */
+  --lw-border-input:           rgba(0, 0, 0, 0.30);
+
+  /* Buttons */
+  --lw-btn-gray:               #CCCCCC;   /* submit button bg */
+  --lw-btn-gray-hover:         #999999;
+
+
+  /* ════════════════════════════════════════
+     TYPOGRAPHY
+     ════════════════════════════════════════ */
+
+  --lw-font-serif:             'Fanwood Text', Georgia, serif;
+  --lw-font-sans:              'Open Sans', Helvetica, sans-serif;
+
+  /* Type scale — mobile */
+  --lw-fs-hero-h1-m:           36px;
+  --lw-fs-hero-sub-m:          22px;
+  --lw-fs-wordmark-section-m:  auto;       /* width-constrained on mobile, see --lw-wordmark-width-* */
+  --lw-fs-tagline-m:           19px;
+  --lw-fs-avail-m:             19px;
+  --lw-fs-card-h3-m:           24px;
+  --lw-fs-card-body-m:         16px;
+  --lw-fs-footer-h2-m:         28px;
+
+  /* Type scale — tablet (769–1024) */
+  --lw-fs-hero-h1-t:           44px;
+  --lw-fs-hero-sub-t:          22px;
+  --lw-fs-tagline-t:           22px;
+  --lw-fs-card-h3-t:           28px;
+  --lw-fs-card-body-t:         18px;
+  --lw-fs-foundry-cta-t:       24px;
+
+  /* Type scale — desktop (1025–1439, base) */
+  --lw-fs-hero-h1:             48px;        /* @1440 actually 76; this is the small-desktop base */
+  --lw-fs-tagline:             16px;
+  --lw-fs-card-h3:             24px;
+  --lw-fs-card-body:           16px;
+  --lw-fs-foundry-cta:         32px;       /* "SHOP FOUNDRY ART" button */
+  --lw-fs-featured-h2:         32px;
+  --lw-fs-team-lead:           24px;
+  --lw-fs-footer-h2:           36px;
+  --lw-fs-form-label:          16px;
+  --lw-fs-link:                14px;
+
+  /* Type scale — wide (1440+) */
+  --lw-fs-hero-h1-w:           76px;
+  --lw-fs-hero-sub-w:          28px;
+
+  /* Weights / styles */
+  --lw-fw-regular:             400;
+  --lw-fw-medium:              500;
+  --lw-letter-spacing-link:    1.5px;
+  --lw-letter-spacing-foundry-cta: 0.06em;
+
+
+  /* ════════════════════════════════════════
+     SPACING
+     ════════════════════════════════════════ */
+
+  /* Panel architecture */
+  --lw-panel-margin:           25px;       /* white inset border around studio panels — mobile + tablet + desktop */
+  --lw-panel-padding-m:        36px 32px 32px;
+  --lw-panel-padding-t:        56px;       /* tablet uniform */
+  --lw-panel-padding-d:        80px 60px 60px;
+
+  /* Cards */
+  --lw-card-gap-m:             25px;       /* gap between stacked single-column cards */
+  --lw-card-gap-t:             36px;
+  --lw-card-gap-d:             42px;       /* between 3 desktop columns */
+
+  /* Card text */
+  --lw-card-title-padding-m:   24px 12px 8px;
+  --lw-card-title-padding-d:   30px 16px 10px;
+  --lw-card-body-padding-m:    0 16px 24px;
+  --lw-card-body-padding-d:    0 16px 36px;
+
+  /* Featured Designer */
+  --lw-fd-content-padding:     60px 40px;
+  --lw-fd-portrait-size:       220px;
+
+  /* Buy CTA */
+  --lw-buy-card-padding:       136px 40px; /* desktop — matches prior height after moving padding off grid */
+
+  /* Team B&W */
+  --lw-team-padding-m:         40px 24px;
+  --lw-team-padding-d:         60px 40px;
+  --lw-team-photo-w:           790px;
+  --lw-team-photo-aspect:      790/635;
+  --lw-team-text-max:          200px;
+
+  /* Footer */
+  --lw-footer-row-padding-m:   40px 24px;
+  --lw-footer-row-padding-d:   80px 60px 40px;
+  --lw-footer-gap-d:           80px;
+  --lw-footer-logo-max:        460px;
+  --lw-form-gap:               22px;
+
+  /* Foundry Art shop CTA */
+  --lw-foundry-cta-padding:    14px 40px;
+  --lw-foundry-cta-border:     2px solid var(--lw-accent-red);
+
+
+  /* ════════════════════════════════════════
+     WORDMARK WIDTHS (mobile)
+     ════════════════════════════════════════
+     The PNG aspect ratios are wildly different (BW/FA ≈ 14.3:1,
+     Talisman ≈ 6.81:1), so we constrain WIDTH per mark to match
+     cap-heights visually. height: auto on every mark.
+     ════════════════════════════════════════ */
+  --lw-wordmark-width-bw-m:    248px;
+  --lw-wordmark-width-fa-m:    248px;
+  --lw-wordmark-width-tal-m:   118px;
+
+  /* Wordmark widths (tablet) */
+  --lw-wordmark-width-bw-t:    480px;
+  --lw-wordmark-width-fa-t:    480px;
+  --lw-wordmark-width-tal-t:   240px;
+
+  /* Wordmark heights (desktop) — cap-height-matched from
+     measured PNG ink ratios: BW 87.5%, FA 89.3%, Talisman 96.3% */
+  --lw-wordmark-height-bw-d:   47px;
+  --lw-wordmark-height-fa-d:   46px;
+  --lw-wordmark-height-tal-d:  43px;
+
+
+  /* ════════════════════════════════════════
+     BREAKPOINTS (reference only — CSS variables
+     cannot drive @media queries; the literal
+     values are kept here as the source of truth
+     so future @media rules use the same numbers)
+     ════════════════════════════════════════
+     --bp-mobile-max:    768px;
+     --bp-tablet-min:    769px;
+     --bp-tablet-max:   1024px;
+     --bp-desktop-min:  1025px;
+     --bp-wide-min:     1440px;
+     --bp-cinema-min:   1920px;
+     ════════════════════════════════════════ */
+
+
+  /* ════════════════════════════════════════
+     RADII / BORDERS
+     ════════════════════════════════════════ */
+  --lw-radius-none:            0;          /* card corners, button corners — sharp by spec */
+  --lw-border-thin:            1px;
+  --lw-border-medium:          2px;
+}
