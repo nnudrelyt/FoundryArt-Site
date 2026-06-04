@@ -5129,14 +5129,15 @@ body[data-section="linden"] .lw2-talisman-hero img {
 }
 /* The line break between 'that' and 'redefined' is forced in the
    HTML via <br>. The panel measure here only needs to be wide
-   enough for the longer second line. */
+   enough for the longer second line.
+   Padding 48 / 24 / 32 / 24 per live-site inspector spec. */
 body[data-section="linden"] .lw2-talisman-hero-quote {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.45);
-  padding: 56px 64px;
+  padding: 48px 24px 32px;
   max-width: 760px;
   width: calc(100% - 96px);
   text-align: center;
@@ -5278,7 +5279,7 @@ body[data-section="linden"] .lw2-tal-craft img {
   body[data-section="linden"] .lw2-tal-intro { padding: 8px 24px 32px; }
   body[data-section="linden"] .lw2-tal-intro-line { font-size: 26px; }
   body[data-section="linden"] .lw2-talisman-hero { height: 960px; }
-  body[data-section="linden"] .lw2-talisman-hero-quote { padding: 40px 48px; }
+  body[data-section="linden"] .lw2-talisman-hero-quote { padding: 40px 20px 28px; }
   body[data-section="linden"] .lw2-talisman-hero-quote p { font-size: 32px; }
   body[data-section="linden"] .lw2-tal-info-grid { gap: 32px; }
   body[data-section="linden"] .lw2-tal-info-thumb { max-width: 220px; }
@@ -5292,7 +5293,7 @@ body[data-section="linden"] .lw2-tal-craft img {
   body[data-section="linden"] .lw2-talisman-hero-quote {
     max-width: 88%;
     width: auto;
-    padding: 24px 22px;
+    padding: 28px 18px 22px;
   }
   body[data-section="linden"] .lw2-talisman-hero-quote p { font-size: 22px; }
   body[data-section="linden"] .lw2-tal-info { padding: 48px 18px 56px; }
