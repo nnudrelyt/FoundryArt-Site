@@ -91,3 +91,33 @@ The non-Foundry-Art sections (`/` Linden Workshops master landing, `/talisman/`,
 ## Talisman page (added Phase 2)
 
 - assets/images/linden/talisman/hero-tile-pattern.jpg — source: lindenworkshops.com/wp-content/uploads/white-ceramic-tile-decorative-pattern-design-ideas-1280x1280.jpg. Used as Talisman page full-bleed hero with overlaid tagline. Placeholder pending brand-owner asset swap.
+
+## Autograph collection page (added Phase 3, prototype for collection-detail template)
+
+All images below were pulled from `lindenworkshops.com/wp-content/uploads/` and live in `assets/images/linden/autograph/`. Filenames preserved verbatim from source so provenance is unambiguous. Used as placeholder pending brand-owner asset swap before production launch.
+
+**Lifestyle / hero photos** (`750x450` crops of `1900x{1267,1068}` originals):
+- `Autograph-Dahlia-Whiskey-1-1900x1267-750x450.jpg` — Traditional Bronze Octave + Dahlia, white marble
+- `Autograph-Bebop-mirrors-e1494948609232-1900x1068-750x450.jpg` — Traditional Bronze Bebop + Squares, white marble
+
+**1×12 inch accent liner strips** (1900×~180):
+- `Octave_full-1900x182.jpg`, `Galileo-1900x181.jpg`, `Quadrile_full-1900x187.jpg`, `Tuxedo_full-1900x183.jpg`, `Beebop_full-1900x178.jpg`
+
+**Featured tile portraits — character-named installs** (220×345):
+- `James-Bond-2016-1-220x345.jpg`, `Juliet-2016-220x345.jpg`, `Bruce-Wayne-2016-220x345.jpg`, `Mrs-Robinson-2016-220x345.jpg`, `Holly-Go-Lightly-2016-2-220x345.jpg`
+
+**Inset tile catalog**:
+- `Square-600-1-325x225.jpg` — 1×1 inch inset, Traditional Bronze
+- `Dhalia_full-325x225.jpg` — 2½ inch inset, Traditional Bronze
+- `Dahlia-600-293x293.jpg` — Dahlia, Traditional Bronze square crop
+- `BWS-Dahlia-White-Bronze-300x300.jpg` — Dahlia, White Bronze square crop
+
+**Tear sheet PDFs (preview images only — the actual PDFs are not mirrored here)**:
+- `BWS-tear-sheet-Autograph-2024-08-08_Page_1-230x300.jpg`
+- `BWS-2024-How-We-Make-Our-Tiles-230x300.jpg`
+- `BWS-2024-Recycled-Content-230x300.jpg`
+- `BWS-Installation-and-Cleaning-BRONZE-and-ZINC-2024-08-08-230x300.jpg`
+
+**"Also available from" sibling-collection cross-link cards**:
+- `Bronzework-Studio-Precision-Square-Brass-herringbone-floor.jpg` — links to /precision/
+- `Bronzework-Studio-Beach-Grass-Liner-Zinc-black-stone-floor.jpg` — links to /classic/

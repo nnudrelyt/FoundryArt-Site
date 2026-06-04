@@ -5355,3 +5355,628 @@ body[data-page="our-team"] .footer p {
   body[data-page="our-team"] .lw2-team-text p { font-size: 16px; line-height: 26px; }
   body[data-page="our-team"] .lw2-team-group { padding: 32px 16px; }
 }
+
+/* ============================================================
+   COLLECTION-DETAIL TEMPLATE (Phase 3 prototype on /autograph/,
+   propagated to /precision/, /classic/, /instinct/).
+
+   Scope: body[data-page="autograph"|"precision"|"classic"|"instinct"]
+   under data-section="linden".
+
+   Components (in document order):
+     .lw2-coll-masthead   — parent wordmark + H1 + eyebrow + banner
+     .lw2-coll-intro      — Fitzgerald pull-quote + collection lede
+     .lw2-coll-lifestyle  — 2-up hero lifestyle photos
+     .lw2-coll-portraits  — 5-up portrait gallery
+     .lw2-coll-liners     — stacked full-bleed liner strips
+     .lw2-coll-insets     — small inset-tile grid
+     .lw2-coll-info       — 4-up tear-sheet PDF cards
+     .lw2-coll-also       — 2-up sibling-collection cards
+   ============================================================ */
+
+body[data-page="autograph"],
+body[data-page="precision"],
+body[data-page="classic"],
+body[data-page="instinct"] {
+  background: var(--lw-bg-page, #FFFFFF);
+}
+
+body[data-page="autograph"] .lw2-collection,
+body[data-page="precision"] .lw2-collection,
+body[data-page="classic"] .lw2-collection,
+body[data-page="instinct"] .lw2-collection {
+  background: #FFFFFF;
+}
+
+/* -- MASTHEAD ----------------------------------------------- */
+body[data-page="autograph"] .lw2-coll-masthead,
+body[data-page="precision"] .lw2-coll-masthead,
+body[data-page="classic"] .lw2-coll-masthead,
+body[data-page="instinct"] .lw2-coll-masthead {
+  padding: 60px 24px 32px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+body[data-page="autograph"] .lw2-coll-parent-wordmark,
+body[data-page="precision"] .lw2-coll-parent-wordmark,
+body[data-page="classic"] .lw2-coll-parent-wordmark,
+body[data-page="instinct"] .lw2-coll-parent-wordmark {
+  display: block;
+  height: 32px;
+  width: auto;
+  margin: 0 auto 22px;
+}
+body[data-page="autograph"] .lw2-coll-title,
+body[data-page="precision"] .lw2-coll-title,
+body[data-page="classic"] .lw2-coll-title,
+body[data-page="instinct"] .lw2-coll-title {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1.15;
+  color: #000;
+  margin: 0 0 14px;
+  letter-spacing: 0.005em;
+}
+body[data-page="autograph"] .lw2-coll-eyebrow,
+body[data-page="precision"] .lw2-coll-eyebrow,
+body[data-page="classic"] .lw2-coll-eyebrow,
+body[data-page="instinct"] .lw2-coll-eyebrow {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #000;
+  margin: 0 0 36px;
+}
+body[data-page="autograph"] .lw2-coll-banner,
+body[data-page="precision"] .lw2-coll-banner,
+body[data-page="classic"] .lw2-coll-banner,
+body[data-page="instinct"] .lw2-coll-banner {
+  margin: 0;
+}
+body[data-page="autograph"] .lw2-coll-banner img,
+body[data-page="precision"] .lw2-coll-banner img,
+body[data-page="classic"] .lw2-coll-banner img,
+body[data-page="instinct"] .lw2-coll-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* -- INTRO PULL-QUOTE --------------------------------------- */
+body[data-page="autograph"] .lw2-coll-intro,
+body[data-page="precision"] .lw2-coll-intro,
+body[data-page="classic"] .lw2-coll-intro,
+body[data-page="instinct"] .lw2-coll-intro {
+  padding: 80px 24px 56px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+body[data-page="autograph"] .lw2-coll-quote,
+body[data-page="precision"] .lw2-coll-quote,
+body[data-page="classic"] .lw2-coll-quote,
+body[data-page="instinct"] .lw2-coll-quote {
+  margin: 0 0 38px;
+}
+body[data-page="autograph"] .lw2-coll-quote p,
+body[data-page="precision"] .lw2-coll-quote p,
+body[data-page="classic"] .lw2-coll-quote p,
+body[data-page="instinct"] .lw2-coll-quote p {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.4;
+  color: #000;
+  margin: 0 0 14px;
+}
+body[data-page="autograph"] .lw2-coll-quote cite,
+body[data-page="precision"] .lw2-coll-quote cite,
+body[data-page="classic"] .lw2-coll-quote cite,
+body[data-page="instinct"] .lw2-coll-quote cite {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  color: #444;
+}
+body[data-page="autograph"] .lw2-coll-lede,
+body[data-page="precision"] .lw2-coll-lede,
+body[data-page="classic"] .lw2-coll-lede,
+body[data-page="instinct"] .lw2-coll-lede {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 22px;
+  line-height: 1.5;
+  color: #000;
+  margin: 0;
+}
+
+/* -- LIFESTYLE 2-UP ----------------------------------------- */
+body[data-page="autograph"] .lw2-coll-lifestyle,
+body[data-page="precision"] .lw2-coll-lifestyle,
+body[data-page="classic"] .lw2-coll-lifestyle,
+body[data-page="instinct"] .lw2-coll-lifestyle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 0 24px 64px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+body[data-page="autograph"] .lw2-coll-lifestyle figure,
+body[data-page="precision"] .lw2-coll-lifestyle figure,
+body[data-page="classic"] .lw2-coll-lifestyle figure,
+body[data-page="instinct"] .lw2-coll-lifestyle figure { margin: 0; }
+body[data-page="autograph"] .lw2-coll-lifestyle img,
+body[data-page="precision"] .lw2-coll-lifestyle img,
+body[data-page="classic"] .lw2-coll-lifestyle img,
+body[data-page="instinct"] .lw2-coll-lifestyle img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="autograph"] .lw2-coll-lifestyle figcaption,
+body[data-page="precision"] .lw2-coll-lifestyle figcaption,
+body[data-page="classic"] .lw2-coll-lifestyle figcaption,
+body[data-page="instinct"] .lw2-coll-lifestyle figcaption {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #444;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* -- SECTION TITLE (shared) --------------------------------- */
+body[data-page="autograph"] .lw2-coll-section-title,
+body[data-page="precision"] .lw2-coll-section-title,
+body[data-page="classic"] .lw2-coll-section-title,
+body[data-page="instinct"] .lw2-coll-section-title {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.25;
+  color: #000;
+  margin: 0 0 12px;
+  text-align: center;
+}
+body[data-page="autograph"] .lw2-coll-section-sub,
+body[data-page="precision"] .lw2-coll-section-sub,
+body[data-page="classic"] .lw2-coll-section-sub,
+body[data-page="instinct"] .lw2-coll-section-sub {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #444;
+  text-align: center;
+  margin: 0 0 36px;
+}
+
+/* -- PORTRAIT 5-UP GALLERY ---------------------------------- */
+body[data-page="autograph"] .lw2-coll-portraits,
+body[data-page="precision"] .lw2-coll-portraits,
+body[data-page="classic"] .lw2-coll-portraits,
+body[data-page="instinct"] .lw2-coll-portraits {
+  background: #F7F6F1;
+  padding: 72px 24px 76px;
+}
+body[data-page="autograph"] .lw2-coll-portrait-grid,
+body[data-page="precision"] .lw2-coll-portrait-grid,
+body[data-page="classic"] .lw2-coll-portrait-grid,
+body[data-page="instinct"] .lw2-coll-portrait-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 28px;
+  max-width: 1280px;
+  margin: 40px auto 0;
+}
+body[data-page="autograph"] .lw2-coll-portrait-grid figure,
+body[data-page="precision"] .lw2-coll-portrait-grid figure,
+body[data-page="classic"] .lw2-coll-portrait-grid figure,
+body[data-page="instinct"] .lw2-coll-portrait-grid figure {
+  margin: 0;
+}
+body[data-page="autograph"] .lw2-coll-portrait-grid img,
+body[data-page="precision"] .lw2-coll-portrait-grid img,
+body[data-page="classic"] .lw2-coll-portrait-grid img,
+body[data-page="instinct"] .lw2-coll-portrait-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 220/345;
+  object-fit: cover;
+}
+body[data-page="autograph"] .lw2-coll-portrait-grid figcaption,
+body[data-page="precision"] .lw2-coll-portrait-grid figcaption,
+body[data-page="classic"] .lw2-coll-portrait-grid figcaption,
+body[data-page="instinct"] .lw2-coll-portrait-grid figcaption {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  color: #000;
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.45;
+}
+body[data-page="autograph"] .lw2-coll-portrait-grid em,
+body[data-page="precision"] .lw2-coll-portrait-grid em,
+body[data-page="classic"] .lw2-coll-portrait-grid em,
+body[data-page="instinct"] .lw2-coll-portrait-grid em {
+  font-style: italic;
+}
+
+/* -- LINER STRIPS ------------------------------------------- */
+body[data-page="autograph"] .lw2-coll-liners,
+body[data-page="precision"] .lw2-coll-liners,
+body[data-page="classic"] .lw2-coll-liners,
+body[data-page="instinct"] .lw2-coll-liners {
+  padding: 80px 0 56px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+body[data-page="autograph"] .lw2-coll-liner-list,
+body[data-page="precision"] .lw2-coll-liner-list,
+body[data-page="classic"] .lw2-coll-liner-list,
+body[data-page="instinct"] .lw2-coll-liner-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+body[data-page="autograph"] .lw2-coll-liner-list li,
+body[data-page="precision"] .lw2-coll-liner-list li,
+body[data-page="classic"] .lw2-coll-liner-list li,
+body[data-page="instinct"] .lw2-coll-liner-list li {
+  margin: 0 0 24px;
+}
+body[data-page="autograph"] .lw2-coll-liner-list figure,
+body[data-page="precision"] .lw2-coll-liner-list figure,
+body[data-page="classic"] .lw2-coll-liner-list figure,
+body[data-page="instinct"] .lw2-coll-liner-list figure {
+  margin: 0;
+}
+body[data-page="autograph"] .lw2-coll-liner-list img,
+body[data-page="precision"] .lw2-coll-liner-list img,
+body[data-page="classic"] .lw2-coll-liner-list img,
+body[data-page="instinct"] .lw2-coll-liner-list img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="autograph"] .lw2-coll-liner-list figcaption,
+body[data-page="precision"] .lw2-coll-liner-list figcaption,
+body[data-page="classic"] .lw2-coll-liner-list figcaption,
+body[data-page="instinct"] .lw2-coll-liner-list figcaption {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 20px;
+  color: #000;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* -- INSET TILES -------------------------------------------- */
+body[data-page="autograph"] .lw2-coll-insets,
+body[data-page="precision"] .lw2-coll-insets,
+body[data-page="classic"] .lw2-coll-insets,
+body[data-page="instinct"] .lw2-coll-insets {
+  padding: 64px 24px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+body[data-page="autograph"] .lw2-coll-inset-grid,
+body[data-page="precision"] .lw2-coll-inset-grid,
+body[data-page="classic"] .lw2-coll-inset-grid,
+body[data-page="instinct"] .lw2-coll-inset-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+body[data-page="autograph"] .lw2-coll-inset-grid figure,
+body[data-page="precision"] .lw2-coll-inset-grid figure,
+body[data-page="classic"] .lw2-coll-inset-grid figure,
+body[data-page="instinct"] .lw2-coll-inset-grid figure {
+  margin: 0;
+}
+body[data-page="autograph"] .lw2-coll-inset-grid img,
+body[data-page="precision"] .lw2-coll-inset-grid img,
+body[data-page="classic"] .lw2-coll-inset-grid img,
+body[data-page="instinct"] .lw2-coll-inset-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+body[data-page="autograph"] .lw2-coll-inset-grid figcaption,
+body[data-page="precision"] .lw2-coll-inset-grid figcaption,
+body[data-page="classic"] .lw2-coll-inset-grid figcaption,
+body[data-page="instinct"] .lw2-coll-inset-grid figcaption {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  color: #000;
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.45;
+}
+
+/* -- FURTHER INFORMATION (PDF cards) ------------------------ */
+body[data-page="autograph"] .lw2-coll-info,
+body[data-page="precision"] .lw2-coll-info,
+body[data-page="classic"] .lw2-coll-info,
+body[data-page="instinct"] .lw2-coll-info {
+  background: #F2F0E9;
+  padding: 80px 24px 88px;
+}
+body[data-page="autograph"] .lw2-coll-info-grid,
+body[data-page="precision"] .lw2-coll-info-grid,
+body[data-page="classic"] .lw2-coll-info-grid,
+body[data-page="instinct"] .lw2-coll-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+}
+body[data-page="autograph"] .lw2-coll-info-card,
+body[data-page="precision"] .lw2-coll-info-card,
+body[data-page="classic"] .lw2-coll-info-card,
+body[data-page="instinct"] .lw2-coll-info-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  text-align: center;
+}
+body[data-page="autograph"] .lw2-coll-info-img,
+body[data-page="precision"] .lw2-coll-info-img,
+body[data-page="classic"] .lw2-coll-info-img,
+body[data-page="instinct"] .lw2-coll-info-img {
+  background: #FFFFFF;
+  padding: 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+body[data-page="autograph"] .lw2-coll-info-img img,
+body[data-page="precision"] .lw2-coll-info-img img,
+body[data-page="classic"] .lw2-coll-info-img img,
+body[data-page="instinct"] .lw2-coll-info-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="autograph"] .lw2-coll-info-card h3,
+body[data-page="precision"] .lw2-coll-info-card h3,
+body[data-page="classic"] .lw2-coll-info-card h3,
+body[data-page="instinct"] .lw2-coll-info-card h3 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #000;
+  margin: 18px 0 0;
+}
+body[data-page="autograph"] .lw2-coll-arrow,
+body[data-page="precision"] .lw2-coll-arrow,
+body[data-page="classic"] .lw2-coll-arrow,
+body[data-page="instinct"] .lw2-coll-arrow {
+  color: #A31414;
+  font-style: italic;
+  margin-left: 2px;
+}
+body[data-page="autograph"] .lw2-coll-info-card:hover h3,
+body[data-page="precision"] .lw2-coll-info-card:hover h3,
+body[data-page="classic"] .lw2-coll-info-card:hover h3,
+body[data-page="instinct"] .lw2-coll-info-card:hover h3 {
+  color: #A31414;
+}
+
+/* -- ALSO AVAILABLE FROM (cross-link) ----------------------- */
+body[data-page="autograph"] .lw2-coll-also,
+body[data-page="precision"] .lw2-coll-also,
+body[data-page="classic"] .lw2-coll-also,
+body[data-page="instinct"] .lw2-coll-also {
+  background: #FFFFFF;
+  padding: 80px 24px 90px;
+}
+body[data-page="autograph"] .lw2-coll-also-grid,
+body[data-page="precision"] .lw2-coll-also-grid,
+body[data-page="classic"] .lw2-coll-also-grid,
+body[data-page="instinct"] .lw2-coll-also-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+}
+body[data-page="autograph"] .lw2-coll-also-card,
+body[data-page="precision"] .lw2-coll-also-card,
+body[data-page="classic"] .lw2-coll-also-card,
+body[data-page="instinct"] .lw2-coll-also-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  text-align: center;
+}
+body[data-page="autograph"] .lw2-coll-also-img,
+body[data-page="precision"] .lw2-coll-also-img,
+body[data-page="classic"] .lw2-coll-also-img,
+body[data-page="instinct"] .lw2-coll-also-img {
+  margin: 0 0 16px;
+}
+body[data-page="autograph"] .lw2-coll-also-img img,
+body[data-page="precision"] .lw2-coll-also-img img,
+body[data-page="classic"] .lw2-coll-also-img img,
+body[data-page="instinct"] .lw2-coll-also-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+body[data-page="autograph"] .lw2-coll-also-card h3,
+body[data-page="precision"] .lw2-coll-also-card h3,
+body[data-page="classic"] .lw2-coll-also-card h3,
+body[data-page="instinct"] .lw2-coll-also-card h3 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  color: #000;
+  margin: 0 0 6px;
+}
+body[data-page="autograph"] .lw2-coll-also-card p,
+body[data-page="precision"] .lw2-coll-also-card p,
+body[data-page="classic"] .lw2-coll-also-card p,
+body[data-page="instinct"] .lw2-coll-also-card p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #444;
+  margin: 0;
+}
+body[data-page="autograph"] .lw2-coll-also-card:hover h3,
+body[data-page="precision"] .lw2-coll-also-card:hover h3,
+body[data-page="classic"] .lw2-coll-also-card:hover h3,
+body[data-page="instinct"] .lw2-coll-also-card:hover h3 {
+  color: #A31414;
+}
+
+/* -- RESPONSIVE: tablet ------------------------------------- */
+@media (max-width: 1024px) and (min-width: 769px) {
+  body[data-page="autograph"] .lw2-coll-title,
+  body[data-page="precision"] .lw2-coll-title,
+  body[data-page="classic"] .lw2-coll-title,
+  body[data-page="instinct"] .lw2-coll-title { font-size: 44px; }
+
+  body[data-page="autograph"] .lw2-coll-quote p,
+  body[data-page="precision"] .lw2-coll-quote p,
+  body[data-page="classic"] .lw2-coll-quote p,
+  body[data-page="instinct"] .lw2-coll-quote p { font-size: 26px; }
+
+  body[data-page="autograph"] .lw2-coll-portrait-grid,
+  body[data-page="precision"] .lw2-coll-portrait-grid,
+  body[data-page="classic"] .lw2-coll-portrait-grid,
+  body[data-page="instinct"] .lw2-coll-portrait-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  body[data-page="autograph"] .lw2-coll-inset-grid,
+  body[data-page="precision"] .lw2-coll-inset-grid,
+  body[data-page="classic"] .lw2-coll-inset-grid,
+  body[data-page="instinct"] .lw2-coll-inset-grid { gap: 20px; }
+  body[data-page="autograph"] .lw2-coll-info-grid,
+  body[data-page="precision"] .lw2-coll-info-grid,
+  body[data-page="classic"] .lw2-coll-info-grid,
+  body[data-page="instinct"] .lw2-coll-info-grid { gap: 24px; }
+}
+
+/* -- RESPONSIVE: mobile ------------------------------------- */
+@media (max-width: 768px) {
+  body[data-page="autograph"] .lw2-coll-masthead,
+  body[data-page="precision"] .lw2-coll-masthead,
+  body[data-page="classic"] .lw2-coll-masthead,
+  body[data-page="instinct"] .lw2-coll-masthead { padding: 40px 18px 24px; }
+
+  body[data-page="autograph"] .lw2-coll-title,
+  body[data-page="precision"] .lw2-coll-title,
+  body[data-page="classic"] .lw2-coll-title,
+  body[data-page="instinct"] .lw2-coll-title { font-size: 34px; }
+
+  body[data-page="autograph"] .lw2-coll-eyebrow,
+  body[data-page="precision"] .lw2-coll-eyebrow,
+  body[data-page="classic"] .lw2-coll-eyebrow,
+  body[data-page="instinct"] .lw2-coll-eyebrow { font-size: 12px; margin-bottom: 26px; }
+
+  body[data-page="autograph"] .lw2-coll-intro,
+  body[data-page="precision"] .lw2-coll-intro,
+  body[data-page="classic"] .lw2-coll-intro,
+  body[data-page="instinct"] .lw2-coll-intro { padding: 48px 20px 32px; }
+
+  body[data-page="autograph"] .lw2-coll-quote p,
+  body[data-page="precision"] .lw2-coll-quote p,
+  body[data-page="classic"] .lw2-coll-quote p,
+  body[data-page="instinct"] .lw2-coll-quote p { font-size: 22px; }
+
+  body[data-page="autograph"] .lw2-coll-lede,
+  body[data-page="precision"] .lw2-coll-lede,
+  body[data-page="classic"] .lw2-coll-lede,
+  body[data-page="instinct"] .lw2-coll-lede { font-size: 18px; }
+
+  body[data-page="autograph"] .lw2-coll-lifestyle,
+  body[data-page="precision"] .lw2-coll-lifestyle,
+  body[data-page="classic"] .lw2-coll-lifestyle,
+  body[data-page="instinct"] .lw2-coll-lifestyle {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 0 18px 40px;
+  }
+
+  body[data-page="autograph"] .lw2-coll-section-title,
+  body[data-page="precision"] .lw2-coll-section-title,
+  body[data-page="classic"] .lw2-coll-section-title,
+  body[data-page="instinct"] .lw2-coll-section-title { font-size: 26px; }
+
+  body[data-page="autograph"] .lw2-coll-portraits,
+  body[data-page="precision"] .lw2-coll-portraits,
+  body[data-page="classic"] .lw2-coll-portraits,
+  body[data-page="instinct"] .lw2-coll-portraits { padding: 48px 18px 52px; }
+
+  body[data-page="autograph"] .lw2-coll-portrait-grid,
+  body[data-page="precision"] .lw2-coll-portrait-grid,
+  body[data-page="classic"] .lw2-coll-portrait-grid,
+  body[data-page="instinct"] .lw2-coll-portrait-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  body[data-page="autograph"] .lw2-coll-liners,
+  body[data-page="precision"] .lw2-coll-liners,
+  body[data-page="classic"] .lw2-coll-liners,
+  body[data-page="instinct"] .lw2-coll-liners { padding: 48px 0 32px; }
+
+  body[data-page="autograph"] .lw2-coll-liner-list figcaption,
+  body[data-page="precision"] .lw2-coll-liner-list figcaption,
+  body[data-page="classic"] .lw2-coll-liner-list figcaption,
+  body[data-page="instinct"] .lw2-coll-liner-list figcaption { font-size: 17px; }
+
+  body[data-page="autograph"] .lw2-coll-insets,
+  body[data-page="precision"] .lw2-coll-insets,
+  body[data-page="classic"] .lw2-coll-insets,
+  body[data-page="instinct"] .lw2-coll-insets { padding: 40px 18px 48px; }
+
+  body[data-page="autograph"] .lw2-coll-inset-grid,
+  body[data-page="precision"] .lw2-coll-inset-grid,
+  body[data-page="classic"] .lw2-coll-inset-grid,
+  body[data-page="instinct"] .lw2-coll-inset-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  body[data-page="autograph"] .lw2-coll-info,
+  body[data-page="precision"] .lw2-coll-info,
+  body[data-page="classic"] .lw2-coll-info,
+  body[data-page="instinct"] .lw2-coll-info { padding: 48px 18px 52px; }
+
+  body[data-page="autograph"] .lw2-coll-info-grid,
+  body[data-page="precision"] .lw2-coll-info-grid,
+  body[data-page="classic"] .lw2-coll-info-grid,
+  body[data-page="instinct"] .lw2-coll-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  body[data-page="autograph"] .lw2-coll-also,
+  body[data-page="precision"] .lw2-coll-also,
+  body[data-page="classic"] .lw2-coll-also,
+  body[data-page="instinct"] .lw2-coll-also { padding: 48px 18px 56px; }
+
+  body[data-page="autograph"] .lw2-coll-also-grid,
+  body[data-page="precision"] .lw2-coll-also-grid,
+  body[data-page="classic"] .lw2-coll-also-grid,
+  body[data-page="instinct"] .lw2-coll-also-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  body[data-page="autograph"] .lw2-coll-also-card h3,
+  body[data-page="precision"] .lw2-coll-also-card h3,
+  body[data-page="classic"] .lw2-coll-also-card h3,
+  body[data-page="instinct"] .lw2-coll-also-card h3 { font-size: 24px; }
+}
