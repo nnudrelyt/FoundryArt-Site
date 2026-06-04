@@ -13,11 +13,10 @@
 
     const dotGrid = `
               <button class="studios-toggle" aria-label="Open Linden Workshops studios" aria-controls="studios-drawer" aria-expanded="false">
-                <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
-                  <circle cx="3"  cy="3"  r="1.4"/><circle cx="10" cy="3"  r="1.4"/><circle cx="17" cy="3"  r="1.4"/>
-                  <circle cx="3"  cy="10" r="1.4"/><circle cx="10" cy="10" r="1.4"/><circle cx="17" cy="10" r="1.4"/>
-                  <circle cx="3"  cy="17" r="1.4"/><circle cx="10" cy="17" r="1.4"/><circle cx="17" cy="17" r="1.4"/>
-                </svg>
+                <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
+          <rect x="2" y="6" width="16" height="1.6" rx="0.4"/>
+          <rect x="2" y="12.4" width="16" height="1.6" rx="0.4"/>
+        </svg>
               </button>`;
 
     // Per-section nav variants
