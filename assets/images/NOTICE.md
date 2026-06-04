@@ -87,3 +87,7 @@ The non-Foundry-Art sections (`/` Linden Workshops master landing, `/talisman/`,
 ## Bronzework Studio page (added Phase 2)
 
 - assets/images/linden/inspiration/drury-glen-ellyn-kitchen.jpg — source: lindenworkshops.com/wp-content/uploads/1600-x-900-Well-Dressed-Traditional-Glen-Ellyn-Kitchen-drury-design21.jpg. Used in /bronzework-studio/ design inspiration callout. Placeholder pending brand-owner asset swap before production.
+
+## Talisman page (added Phase 2)
+
+- assets/images/linden/talisman/hero-tile-pattern.jpg — source: lindenworkshops.com/wp-content/uploads/white-ceramic-tile-decorative-pattern-design-ideas-1280x1280.jpg. Used as Talisman page full-bleed hero with overlaid tagline. Placeholder pending brand-owner asset swap.

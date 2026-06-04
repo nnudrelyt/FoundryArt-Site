@@ -5104,3 +5104,91 @@ body[data-section="linden"] .lw2-inspiration-image img {
     aspect-ratio: 16/9;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   Talisman page — masthead (wordmark + production-status notice)
+   and full-bleed hero with overlaid tagline.
+   ────────────────────────────────────────────────────────── */
+
+/* Masthead — centered wordmark + 3-paragraph status notice */
+body[data-section="linden"] .lw2-talisman-masthead {
+  background: #FFFFFF;
+  text-align: center;
+  padding: 56px 24px 40px;
+  margin: 0;
+}
+body[data-section="linden"] .lw2-talisman-mark {
+  margin: 0 auto 22px;
+  max-width: 360px;
+}
+body[data-section="linden"] .lw2-talisman-mark img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+}
+body[data-section="linden"] .lw2-talisman-notice {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 1.55;
+  color: #000;
+  margin: 0 auto 8px;
+  max-width: 640px;
+}
+body[data-section="linden"] .lw2-talisman-notice:last-of-type { margin-bottom: 0; }
+
+/* Hero — full-bleed tile pattern photo with center-overlaid tagline.
+   Live shows a very tall photo — we use a portrait aspect with
+   the quote floating over the center. */
+body[data-section="linden"] .lw2-talisman-hero {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #f6f4ec;
+  overflow: hidden;
+}
+body[data-section="linden"] .lw2-talisman-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 1400px;
+  object-fit: cover;
+}
+body[data-section="linden"] .lw2-talisman-hero-quote {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(247, 247, 247, 0.92);
+  padding: 24px 36px;
+  max-width: 460px;
+  text-align: center;
+  z-index: 2;
+}
+body[data-section="linden"] .lw2-talisman-hero-quote p {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 22px;
+  font-style: normal;
+  line-height: 1.4;
+  color: #000;
+  margin: 0;
+}
+
+/* Tablet + mobile: tighten masthead + quote */
+@media (max-width: 1024px) {
+  body[data-section="linden"] .lw2-talisman-masthead {
+    padding: 40px 24px 28px;
+  }
+  body[data-section="linden"] .lw2-talisman-mark { max-width: 240px; }
+  body[data-section="linden"] .lw2-talisman-notice { font-size: 15px; }
+}
+@media (max-width: 768px) {
+  body[data-section="linden"] .lw2-talisman-mark { max-width: 180px; }
+  body[data-section="linden"] .lw2-talisman-hero-quote {
+    max-width: 80%;
+    padding: 18px 22px;
+  }
+  body[data-section="linden"] .lw2-talisman-hero-quote p { font-size: 18px; }
+}
