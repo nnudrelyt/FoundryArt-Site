@@ -3276,7 +3276,7 @@ body[data-section="talisman"] .footer p {
   .lw2-header .lw2-nav { display: none; }
 }
 
-/* (Old Our Team CSS removed — superseded by body[data-page="our-team"]
+/* (Old Our Team CSS removed — superseded by body[data-page="our-team"], body[data-page="about"]
    rules further down. The orphan rules were turning .lw2-team-row into
    a 2-col grid and squeezing my new .lw2-team-row-inner.) */
 
@@ -3343,7 +3343,7 @@ body[data-section="talisman"] .footer p {
   .lw2-footer-links a { font-size: 13px; }
   .lw2-footer-badges img { height: 38px; }
 
-  /* (Old Team page wide-breakpoint overrides removed — see body[data-page="our-team"] rules) */
+  /* (Old Team page wide-breakpoint overrides removed — see body[data-page="our-team"], body[data-page="about"] rules) */
 }
 
 /* Cinema: 1920px+ — luxury air, content capped so it doesn't sprawl */
@@ -3413,7 +3413,7 @@ body[data-section="talisman"] .footer p {
     font-size: 13px;
   }
 
-  /* (Old Team page cinema overrides removed — see body[data-page="our-team"] rules) */
+  /* (Old Team page cinema overrides removed — see body[data-page="our-team"], body[data-page="about"] rules) */
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -5199,23 +5199,23 @@ body[data-page="bronzework"] .lw2-card-body {
    Matches live https://lindenworkshops.com/about/
    ────────────────────────────────────────────────────────── */
 
-body[data-page="our-team"] main.lw2-team {
+body[data-page="our-team"], body[data-page="about"] main.lw2-team {
   background: #FFFFFF;
 }
 
 /* Each team-row is full-width with its own bg.
    60px top padding, 50px bottom padding (per spec).
    Stacza is FIRST and stays white; alternation starts from Larsen. */
-body[data-page="our-team"] .lw2-team-row {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-row {
   background: #FFFFFF;
   padding: 60px 24px 50px;
 }
-body[data-page="our-team"] .lw2-team-row--alt-bg {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-row--alt-bg {
   background: #F2F0E9;
 }
 
 /* Inner: portrait left + bio text right, centered max-width */
-body[data-page="our-team"] .lw2-team-row-inner {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-row-inner {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 48px;
@@ -5224,23 +5224,23 @@ body[data-page="our-team"] .lw2-team-row-inner {
   align-items: start;
 }
 
-body[data-page="our-team"] .lw2-team-portrait {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-portrait {
   display: block;
   width: 240px;
   height: 320px;
   overflow: hidden;
 }
-body[data-page="our-team"] .lw2-team-portrait img {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-body[data-page="our-team"] .lw2-team-text {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-text {
   padding: 0;
 }
-body[data-page="our-team"] .lw2-team-text h2 {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-text h2 {
   font-family: 'Fanwood Text', Georgia, serif !important;
   font-size: 32px !important;
   font-style: normal !important;
@@ -5249,14 +5249,14 @@ body[data-page="our-team"] .lw2-team-text h2 {
   margin: 0 0 4px;
   line-height: 1.2;
 }
-body[data-page="our-team"] .lw2-team-role {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-role {
   font-family: 'Fanwood Text', Georgia, serif;
   font-size: 24px;
   font-style: normal;
   color: #000;
   margin: 0 0 22px;
 }
-body[data-page="our-team"] .lw2-team-text p {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-text p {
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -5264,31 +5264,31 @@ body[data-page="our-team"] .lw2-team-text p {
   color: #000;
   margin: 0 0 18px;
 }
-body[data-page="our-team"] .lw2-team-text p:last-of-type {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-text p:last-of-type {
   margin-bottom: 0;
 }
-body[data-page="our-team"] .lw2-team-text a {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-text a {
   color: #A31414;
   text-decoration: underline;
 }
-body[data-page="our-team"] .lw2-team-text a:hover { color: #7A0E0E; }
+body[data-page="our-team"], body[data-page="about"] .lw2-team-text a:hover { color: #7A0E0E; }
 
 /* Group photo — full-bleed wide + center caption.
    Background matches the FOOTER (#F7F7F7) so there's no white strip
    between the team-group section and the footer. */
-body[data-page="our-team"] .lw2-team-group {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-group {
   background: #F7F7F7;
   padding: 48px 24px;
   text-align: center;
 }
-body[data-page="our-team"] .lw2-team-group img {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-group img {
   display: block;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
   height: auto;
 }
-body[data-page="our-team"] .lw2-team-group-caption {
+body[data-page="our-team"], body[data-page="about"] .lw2-team-group-caption {
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -5303,11 +5303,11 @@ body[data-page="our-team"] .lw2-team-group-caption {
    The legacy LW-scope .footer p { border-top: 1px solid #eee } rule
    added a horizontal rule above the copyright — suppressed here so
    there's no line between the group caption and the footer bg. */
-body[data-page="our-team"] .footer {
+body[data-page="our-team"], body[data-page="about"] .footer {
   background: #F7F7F7;
   border-top: none !important;
 }
-body[data-page="our-team"] .lw2-footer-row {
+body[data-page="our-team"], body[data-page="about"] .lw2-footer-row {
   background: #F7F7F7 !important;
   padding-top: 80px !important;
 }
@@ -5318,18 +5318,18 @@ body[data-page="our-team"] .lw2-footer-row {
 /* Suppress the legacy LW-section .footer p { border-top: 1px solid #eee }
    rule that draws a thin horizontal line above any <p> in the footer.
    Only neutralize that border — not the padding-top: 80px on the row. */
-body[data-page="our-team"] .footer p {
+body[data-page="our-team"], body[data-page="about"] .footer p {
   border-top: none !important;
 }
 
 /* Tablet — narrower portrait */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body[data-page="our-team"] .lw2-team-row-inner {
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-row-inner {
     grid-template-columns: 210px 1fr;
     gap: 36px;
     max-width: 900px;
   }
-  body[data-page="our-team"] .lw2-team-portrait {
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-portrait {
     width: 210px;
     height: 280px;
   }
@@ -5337,23 +5337,23 @@ body[data-page="our-team"] .footer p {
 
 /* Mobile — stack portrait above bio */
 @media (max-width: 768px) {
-  body[data-page="our-team"] .lw2-team-row {
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-row {
     padding: 40px 22px 36px;
   }
-  body[data-page="our-team"] .lw2-team-row-inner {
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-row-inner {
     grid-template-columns: 1fr;
     gap: 22px;
     max-width: 100%;
   }
-  body[data-page="our-team"] .lw2-team-portrait {
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-portrait {
     width: 200px;
     height: 268px;
     margin: 0;
   }
-  body[data-page="our-team"] .lw2-team-text h2 { font-size: 28px !important; }
-  body[data-page="our-team"] .lw2-team-role { font-size: 20px; }
-  body[data-page="our-team"] .lw2-team-text p { font-size: 16px; line-height: 26px; }
-  body[data-page="our-team"] .lw2-team-group { padding: 32px 16px; }
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-text h2 { font-size: 28px !important; }
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-role { font-size: 20px; }
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-text p { font-size: 16px; line-height: 26px; }
+  body[data-page="our-team"], body[data-page="about"] .lw2-team-group { padding: 32px 16px; }
 }
 
 /* ============================================================
@@ -6198,3 +6198,503 @@ body[data-page="instinct"] .lw2-coll-also-grid--three {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   PHASE 4 — LEAF PAGES
+
+   Shared scope: body[data-page="contact"|"where-to-buy"|"about"|
+   "tile-collections"|"feature-drury"] under data-section="linden".
+
+   Three component families:
+     .lw2-leaf-*    — generic hero/header + form/card scaffolding,
+                      used by /contact/, /where-to-buy/, /tile-collections/
+     .lw2-wtb-*     — where-to-buy state listings + brand routing
+     .lw2-tc-*      — tile-collections panels + sub-collection grid
+     .lw2-article-* — long-form designer feature (/feature-gail-drury/)
+   ============================================================ */
+
+/* -- LEAF HERO (shared across contact / where-to-buy / tile-collections) -- */
+body[data-page="contact"] .lw2-leaf,
+body[data-page="where-to-buy"] .lw2-leaf,
+body[data-page="tile-collections"] .lw2-leaf {
+  background: #FFFFFF;
+}
+body[data-page="contact"] .lw2-leaf-hero,
+body[data-page="where-to-buy"] .lw2-leaf-hero,
+body[data-page="tile-collections"] .lw2-leaf-hero {
+  padding: 88px 24px 56px;
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto;
+}
+body[data-page="contact"] .lw2-leaf-hero h1,
+body[data-page="where-to-buy"] .lw2-leaf-hero h1,
+body[data-page="tile-collections"] .lw2-leaf-hero h1 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1.15;
+  color: #000;
+  margin: 0 0 18px;
+}
+body[data-page="contact"] .lw2-leaf-lede,
+body[data-page="where-to-buy"] .lw2-leaf-lede,
+body[data-page="tile-collections"] .lw2-leaf-lede {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 22px;
+  line-height: 1.5;
+  color: #000;
+  margin: 0;
+}
+body[data-page="contact"] .lw2-leaf-lede a,
+body[data-page="where-to-buy"] .lw2-leaf-lede a,
+body[data-page="tile-collections"] .lw2-leaf-lede a {
+  color: #A31414;
+  text-decoration: underline;
+}
+
+/* -- CONTACT page-specific layout -- */
+body[data-page="contact"] .lw2-leaf-form-wrap {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 24px 96px;
+}
+body[data-page="contact"] .lw2-leaf-form-card {
+  background: #F7F6F1;
+  padding: 40px;
+}
+body[data-page="contact"] .lw2-leaf-form-card h2 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  color: #000;
+  margin: 0 0 22px;
+}
+body[data-page="contact"] .lw2-leaf-contact-card {
+  background: #F2F0E9;
+  padding: 36px;
+}
+body[data-page="contact"] .lw2-leaf-contact-card h2 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #000;
+  margin: 0 0 22px;
+}
+body[data-page="contact"] .lw2-leaf-contact-line {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #000;
+  margin: 0 0 18px;
+}
+body[data-page="contact"] .lw2-leaf-contact-line strong {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 2px;
+  color: #555;
+}
+body[data-page="contact"] .lw2-leaf-contact-line a {
+  color: #A31414;
+  text-decoration: underline;
+}
+
+/* -- WHERE-TO-BUY -- */
+body[data-page="where-to-buy"] .lw2-wtb-routes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-route {
+  background: #F7F6F1;
+  padding: 32px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-route h3 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0 0 12px;
+  color: #000;
+}
+body[data-page="where-to-buy"] .lw2-wtb-route p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+body[data-page="where-to-buy"] .lw2-wtb-route a {
+  color: #A31414;
+  text-decoration: underline;
+}
+body[data-page="where-to-buy"] .lw2-wtb-region {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-region-title {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 36px;
+  text-align: center;
+  margin: 32px 0 6px;
+  color: #000;
+}
+body[data-page="where-to-buy"] .lw2-wtb-region-sub {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+  letter-spacing: 0.08em;
+  margin: 0 0 56px;
+  text-transform: uppercase;
+}
+body[data-page="where-to-buy"] .lw2-wtb-region-head {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #000;
+  border-top: 1px solid #DDD;
+  padding-top: 32px;
+  margin: 48px 0 28px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state h4 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #A31414;
+  margin: 0 0 12px;
+  padding-top: 8px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state h4:first-child { padding-top: 0; }
+body[data-page="where-to-buy"] .lw2-wtb-state p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #222;
+  margin: 0 0 18px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state p strong {
+  font-weight: 600;
+  color: #A31414;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state a {
+  color: #A31414;
+  text-decoration: underline;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state--note {
+  background: #F7F6F1;
+  padding: 24px;
+}
+
+/* -- TILE COLLECTIONS -- */
+body[data-page="tile-collections"] .lw2-tc-panel {
+  background: #FFFFFF;
+  padding: 56px 24px 80px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+body[data-page="tile-collections"] .lw2-tc-panel--foundry { background: #E0DED5; }
+body[data-page="tile-collections"] .lw2-tc-panel--talisman { background: #F7F7F7; }
+body[data-page="tile-collections"] .lw2-tc-panel--instinct { background: #F2F0E9; }
+body[data-page="tile-collections"] .lw2-tc-panel--foundry,
+body[data-page="tile-collections"] .lw2-tc-panel--talisman,
+body[data-page="tile-collections"] .lw2-tc-panel--instinct { max-width: none; }
+body[data-page="tile-collections"] .lw2-tc-panel-head {
+  text-align: center;
+  margin: 0 auto 48px;
+  max-width: 760px;
+}
+body[data-page="tile-collections"] .lw2-tc-wordmark {
+  display: block;
+  height: 40px;
+  width: auto;
+  margin: 0 auto 18px;
+}
+body[data-page="tile-collections"] .lw2-tc-wordmark--small {
+  height: 24px;
+}
+body[data-page="tile-collections"] .lw2-tc-blurb {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  color: #000;
+  margin: 0;
+}
+body[data-page="tile-collections"] .lw2-tc-sub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+body[data-page="tile-collections"] .lw2-tc-sub-grid--two { grid-template-columns: repeat(2, 1fr); max-width: 820px; }
+body[data-page="tile-collections"] .lw2-tc-sub-grid--one { grid-template-columns: 1fr; max-width: 560px; }
+body[data-page="tile-collections"] .lw2-tc-sub-card {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  display: block;
+}
+body[data-page="tile-collections"] .lw2-tc-sub-img {
+  margin: 0 0 16px;
+  overflow: hidden;
+}
+body[data-page="tile-collections"] .lw2-tc-sub-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  transition: opacity 0.25s ease;
+}
+body[data-page="tile-collections"] .lw2-tc-sub-card:hover .lw2-tc-sub-img img {
+  opacity: 0.9;
+}
+body[data-page="tile-collections"] .lw2-tc-sub-card h3 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 26px;
+  color: #000;
+  margin: 0 0 8px;
+}
+body[data-page="tile-collections"] .lw2-tc-sub-card p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #444;
+  margin: 0;
+  line-height: 1.55;
+}
+body[data-page="tile-collections"] .lw2-tc-sub-card a { color: #A31414; }
+body[data-page="tile-collections"] .lw2-tc-sub-card:hover h3 { color: #A31414; }
+
+/* -- DESIGNER FEATURE ARTICLE -- */
+body[data-page="feature-drury"] .lw2-article {
+  background: #FFFFFF;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+body[data-page="feature-drury"] .lw2-article-mast {
+  text-align: center;
+  padding: 88px 0 36px;
+}
+body[data-page="feature-drury"] .lw2-article-eyebrow {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #666;
+  margin: 0 0 32px;
+}
+body[data-page="feature-drury"] .lw2-article-title {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.05;
+  color: #000;
+  margin: 0 0 14px;
+}
+body[data-page="feature-drury"] .lw2-article-suffix {
+  font-size: 32px;
+  vertical-align: middle;
+  color: #666;
+}
+body[data-page="feature-drury"] .lw2-article-subtitle {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 20px;
+  color: #444;
+  margin: 0;
+}
+body[data-page="feature-drury"] .lw2-article-lede {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  margin: 32px 0 56px;
+  padding: 32px 0;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+}
+body[data-page="feature-drury"] .lw2-article-portrait {
+  margin: 0;
+}
+body[data-page="feature-drury"] .lw2-article-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+}
+body[data-page="feature-drury"] .lw2-article-lede-text h2 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  margin: 0 0 16px;
+  color: #000;
+}
+body[data-page="feature-drury"] .lw2-article-lede-text p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #222;
+  margin: 0 0 14px;
+}
+body[data-page="feature-drury"] .lw2-article-section {
+  padding: 32px 0 48px;
+}
+body[data-page="feature-drury"] .lw2-article-section h2 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.2;
+  color: #000;
+  margin: 0 0 22px;
+}
+body[data-page="feature-drury"] .lw2-article-section p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #222;
+  margin: 0 0 18px;
+}
+body[data-page="feature-drury"] .lw2-article-section a {
+  color: #A31414;
+  text-decoration: underline;
+}
+body[data-page="feature-drury"] .lw2-article-quote {
+  border-left: 3px solid #A31414;
+  padding: 8px 0 8px 28px;
+  margin: 0 0 28px;
+}
+body[data-page="feature-drury"] .lw2-article-quote p {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: #000;
+  margin: 0 0 14px;
+}
+body[data-page="feature-drury"] .lw2-article-quote p:last-child { margin-bottom: 0; }
+body[data-page="feature-drury"] .lw2-article-figure {
+  margin: 28px 0 0;
+}
+body[data-page="feature-drury"] .lw2-article-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="feature-drury"] .lw2-article-figure figcaption {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+  margin-top: 14px;
+  padding: 0 8px;
+  font-style: italic;
+}
+body[data-page="feature-drury"] .lw2-article-section--close {
+  padding-bottom: 88px;
+  border-bottom: 1px solid #DDD;
+}
+body[data-page="feature-drury"] .lw2-article-credit {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  color: #666;
+  margin-top: 36px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* -- RESPONSIVE: tablet -- */
+@media (max-width: 1024px) and (min-width: 769px) {
+  body[data-page="contact"] .lw2-leaf-hero h1,
+  body[data-page="where-to-buy"] .lw2-leaf-hero h1,
+  body[data-page="tile-collections"] .lw2-leaf-hero h1 { font-size: 44px; }
+
+  body[data-page="contact"] .lw2-leaf-form-wrap { grid-template-columns: 1fr; gap: 24px; }
+
+  body[data-page="where-to-buy"] .lw2-wtb-routes { grid-template-columns: 1fr; }
+  body[data-page="where-to-buy"] .lw2-wtb-state-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+
+  body[data-page="tile-collections"] .lw2-tc-sub-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  body[data-page="tile-collections"] .lw2-tc-sub-grid--one { grid-template-columns: 1fr; }
+
+  body[data-page="feature-drury"] .lw2-article-title { font-size: 50px; }
+  body[data-page="feature-drury"] .lw2-article-section h2 { font-size: 30px; }
+}
+
+/* -- RESPONSIVE: mobile -- */
+@media (max-width: 768px) {
+  body[data-page="contact"] .lw2-leaf-hero,
+  body[data-page="where-to-buy"] .lw2-leaf-hero,
+  body[data-page="tile-collections"] .lw2-leaf-hero {
+    padding: 56px 18px 32px;
+  }
+  body[data-page="contact"] .lw2-leaf-hero h1,
+  body[data-page="where-to-buy"] .lw2-leaf-hero h1,
+  body[data-page="tile-collections"] .lw2-leaf-hero h1 { font-size: 34px; }
+  body[data-page="contact"] .lw2-leaf-lede,
+  body[data-page="where-to-buy"] .lw2-leaf-lede,
+  body[data-page="tile-collections"] .lw2-leaf-lede { font-size: 18px; }
+
+  body[data-page="contact"] .lw2-leaf-form-wrap {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 12px 18px 64px;
+  }
+  body[data-page="contact"] .lw2-leaf-form-card,
+  body[data-page="contact"] .lw2-leaf-contact-card { padding: 28px 22px; }
+
+  body[data-page="where-to-buy"] .lw2-wtb-routes {
+    grid-template-columns: 1fr;
+    padding: 0 18px 48px;
+  }
+  body[data-page="where-to-buy"] .lw2-wtb-region { padding: 0 18px 64px; }
+  body[data-page="where-to-buy"] .lw2-wtb-state-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  body[data-page="where-to-buy"] .lw2-wtb-region-title { font-size: 28px; }
+
+  body[data-page="tile-collections"] .lw2-tc-panel { padding: 40px 18px 56px; }
+  body[data-page="tile-collections"] .lw2-tc-sub-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  body[data-page="feature-drury"] .lw2-article-mast { padding: 56px 0 24px; }
+  body[data-page="feature-drury"] .lw2-article-title { font-size: 36px; }
+  body[data-page="feature-drury"] .lw2-article-suffix { font-size: 22px; }
+  body[data-page="feature-drury"] .lw2-article-subtitle { font-size: 17px; }
+  body[data-page="feature-drury"] .lw2-article-lede {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 24px 0;
+  }
+  body[data-page="feature-drury"] .lw2-article-portrait img {
+    max-width: 220px;
+    margin: 0 auto;
+  }
+  body[data-page="feature-drury"] .lw2-article-section { padding: 24px 0 36px; }
+  body[data-page="feature-drury"] .lw2-article-section h2 { font-size: 26px; }
+  body[data-page="feature-drury"] .lw2-article-quote p { font-size: 18px; }
+}
+

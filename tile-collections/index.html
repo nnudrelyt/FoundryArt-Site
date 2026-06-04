@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bronzework Studio — Linden Workshops</title>
-<meta name="description" content="Bronzework Studio: metal accent tiles of the highest quality. Three collections — Classic, Precision, Autograph — exclusively at fine tile showrooms.">
+<title>Tile Collections — Linden Workshops</title>
+<meta name="description" content="All Linden Workshops tile collections: Bronzework Studio (Classic, Precision, Autograph), Foundry Art, Talisman.">
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/tokens.css?v=20260603-14">
 <link rel="stylesheet" href="/assets/styles.css?v=20260603-14">
 </head>
-<body data-page="bronzework" data-section="linden">
+<body data-page="tile-collections" data-section="linden">
 
   <div data-nav></div>
 
@@ -38,52 +38,89 @@
     </nav>
   </header>
 
-  <main>
+  <main class="lw2-leaf">
 
-  <!-- BRONZEWORK STUDIO PANEL — wordmark + tagline + 3 collection cards -->
-  <section class="lw2-studio" id="bronzework-studio">
-    <div class="lw2-section-mark">
-      <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
-    </div>
-    <p class="lw2-studio-blurb">Metal accent tiles of the highest quality.</p>
-    <p class="lw2-studio-avail">Exclusively at <a href="#showrooms">fine tile showrooms</a></p>
-    <div class="lw2-collection-grid">
-      <a href="/classic/" class="lw2-card">
-        <div class="lw2-card-img">
-          <img src="/assets/images/bronzework/classic-array.jpg" alt="Bronzework Studio Classic collection" loading="lazy">
-        </div>
-        <h3>Classic</h3>
-        <p class="lw2-card-body">Handcarved metal tiles and liners for floor and wall <em>»</em></p>
-      </a>
-      <a href="/precision/" class="lw2-card">
-        <div class="lw2-card-img">
-          <img src="/assets/images/bronzework/precision-array.jpg" alt="Bronzework Studio Precision collection" loading="lazy">
-        </div>
-        <h3>Precision</h3>
-        <p class="lw2-card-body">Long, sleek metal liners and trim for wall and floor <em>»</em></p>
-      </a>
-      <a href="/autograph/" class="lw2-card">
-        <div class="lw2-card-img">
-          <img src="/assets/images/bronzework/autograph-array.jpg" alt="Bronzework Studio Autograph collection" loading="lazy">
-        </div>
-        <h3>Autograph</h3>
-        <p class="lw2-card-body">Graphic borders and insets cast in solid bronze <em>»</em></p>
-      </a>
-    </div>
-  </section>
+    <section class="lw2-leaf-hero">
+      <h1>Tile Collections</h1>
+      <p class="lw2-leaf-lede">Three distinctive lines of artisan tile, made in our Chicago studio. Explore each collection below.</p>
+    </section>
 
-  <!-- DESIGN INSPIRATION CALLOUT — Looking for design inspiration? -->
-  <section class="lw2-inspiration" aria-label="Design inspiration">
-    <div class="lw2-inspiration-text">
-      <h2>Looking for design inspiration?</h2>
-      <a href="#" class="lw2-inspiration-cta">Explore seven spectacular kitchens</a>
-    </div>
-    <a href="#" class="lw2-inspiration-image" aria-label="Drury Design kitchen featuring Bronzework Studio tile">
-      <img src="/assets/images/linden/inspiration/drury-glen-ellyn-kitchen.jpg" alt="Drury Design Glen Ellyn kitchen featuring Bronzework Studio tile" loading="lazy">
-    </a>
-  </section>
+    <!-- BRONZEWORK STUDIO panel — parent wordmark + 3 sub-collection cards -->
+    <section class="lw2-tc-panel">
+      <div class="lw2-tc-panel-head">
+        <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio" class="lw2-tc-wordmark">
+        <p class="lw2-tc-blurb">Metal accent tiles of the highest quality.</p>
+      </div>
+      <div class="lw2-tc-sub-grid">
+        <a href="/classic/" class="lw2-tc-sub-card">
+          <div class="lw2-tc-sub-img"><img src="/assets/images/bronzework/classic-array.jpg" alt="Bronzework Studio Classic collection"></div>
+          <h3>Classic</h3>
+          <p>Hand-carved metal tiles and liners for floor and wall.</p>
+        </a>
+        <a href="/precision/" class="lw2-tc-sub-card">
+          <div class="lw2-tc-sub-img"><img src="/assets/images/bronzework/precision-array.jpg" alt="Bronzework Studio Precision collection"></div>
+          <h3>Precision</h3>
+          <p>Long, sleek metal liners and trim for wall and floor.</p>
+        </a>
+        <a href="/autograph/" class="lw2-tc-sub-card">
+          <div class="lw2-tc-sub-img"><img src="/assets/images/bronzework/autograph-array.jpg" alt="Bronzework Studio Autograph collection"></div>
+          <h3>Autograph</h3>
+          <p>Graphic borders and insets cast in solid bronze.</p>
+        </a>
+      </div>
+    </section>
 
-  <!-- COMBINED FOOTER + CONTACT FORM (mirrors master landing) -->
+    <!-- FOUNDRY ART panel — parent wordmark + 2 sub-collection cards -->
+    <section class="lw2-tc-panel lw2-tc-panel--foundry">
+      <div class="lw2-tc-panel-head">
+        <img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art" class="lw2-tc-wordmark">
+        <p class="lw2-tc-blurb">Bronze accent tiles, liners, and cabinet hardware.</p>
+      </div>
+      <div class="lw2-tc-sub-grid lw2-tc-sub-grid--two">
+        <a href="/foundry-art/" class="lw2-tc-sub-card">
+          <div class="lw2-tc-sub-img"><img src="/assets/images/hero/wall-liner-floor-inset.jpg" alt="Foundry Art tile and liner array"></div>
+          <h3>Foundry Art Tile</h3>
+          <p>Bronze inset tiles and liners for wall and floor.</p>
+        </a>
+        <a href="/foundry-art/hardware/" class="lw2-tc-sub-card">
+          <div class="lw2-tc-sub-img"><img src="/assets/images/hero/bronze-liners-marble.png" alt="Foundry Art cabinet hardware"></div>
+          <h3>Cabinet Hardware</h3>
+          <p>Solid bronze knobs and pulls.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- TALISMAN panel -->
+    <section class="lw2-tc-panel lw2-tc-panel--talisman">
+      <div class="lw2-tc-panel-head">
+        <img src="/assets/images/linden/wordmarks/talisman.png" alt="Talisman" class="lw2-tc-wordmark">
+        <p class="lw2-tc-blurb">White ceramic tiles and borders.</p>
+      </div>
+      <div class="lw2-tc-sub-grid lw2-tc-sub-grid--one">
+        <a href="/talisman/" class="lw2-tc-sub-card">
+          <div class="lw2-tc-sub-img"><img src="/assets/images/linden/talisman/hero-tile-pattern.jpg" alt="Talisman white ceramic tile patterns"></div>
+          <h3>Talisman Collection</h3>
+          <p>Hand-sculpted ceramic tiles in a sophisticated white glaze. A contemporary classic.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- INSTINCT (limited editions) -->
+    <section class="lw2-tc-panel lw2-tc-panel--instinct">
+      <div class="lw2-tc-panel-head">
+        <img src="/assets/images/linden/wordmarks/instinct.png" alt="Instinct" class="lw2-tc-wordmark lw2-tc-wordmark--small">
+        <p class="lw2-tc-blurb">Limited-edition art tile in the tradition of American abstract painting.</p>
+      </div>
+      <div class="lw2-tc-sub-grid lw2-tc-sub-grid--one">
+        <a href="/instinct/" class="lw2-tc-sub-card">
+          <h3>Instinct Collection »</h3>
+          <p>Available in limited editions. Please <a href="/contact/">contact us</a> for available designs.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
   <footer class="footer">
     <div class="lw2-footer-row">
 
@@ -103,7 +140,7 @@
           <div>
             <a href="#">Inspiration</a>
             <a href="/about/">About</a>
-            <a href="#">Where to Buy</a>
+            <a href="/where-to-buy/">Where to Buy</a>
           </div>
           <div>
             <a href="#">[Showroom Login]</a>
@@ -140,8 +177,6 @@
 
     </div>
   </footer>
-
-  </main>
 
   <script src="/assets/app.js"></script>
 </body>

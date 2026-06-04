@@ -175,3 +175,31 @@ Minimal placeholder per live `lindenworkshops.com/instinct/` — the brand owner
 
 - `assets/images/linden/wordmarks/instinct.png` — Instinct wordmark, source `lindenworkshops.com/wp-content/uploads/Instinct-logotype.png`
 - Sibling cards reuse existing assets from /assets/images/bronzework/, /assets/images/hero/, /assets/images/linden/talisman/.
+
+## Phase 4 leaf pages
+
+### /feature-gail-drury/
+
+Designer-feature article on Gail Drury, CMKBD, of Drury Design (Glen Ellyn, IL). Long-form interview with portrait + 7 in-context kitchen photos. All imagery in `assets/images/linden/drury/`, pulled from `lindenworkshops.com/wp-content/uploads/`. Filenames preserved verbatim.
+
+Photos:
+- `Gail-Drury-at-desk.jpg` — portrait, used in article lede
+- `Bronzework-Studio-Drury-Design-Tradtional-Kitchen-1-1600x1200-a.jpg`
+- `Bronzework-Studio-Drury-Design-Well-Dressed-Traditional-1600x1200-c.jpg`
+- `Bronzework-Studio-Drury-Design-Refined-Traditional-Kitchen-4-1198x899-c.jpg`
+- `Bronzework-Studio-Drury-Design-Tradtional-Kitchen-2-1600x1200-c.jpg`
+- `Bronzework-Studio-Drury-Design-Sophisiticated-Transistional-Kitchen-6-1600x1200-a.jpg`
+- `Bronzework-Studio-Drury-Design-Tailored-Timeless-Kitchen-1600x1200-a.jpg`
+- `Bronzework-Studio-Drury-Design-White-Warm-Kitchen-1600x1200-a..jpg`
+
+Photo credit (live-site footer): "All designs and photos ©Drury Design." Used here as placeholder pending brand-owner / Drury Design clearance for the redesigned site.
+
+### /where-to-buy/
+
+Showroom directory built from the verbatim live `lindenworkshops.com/where-to-buy/` listing, organized by US region (Midwest, Texas, East Coast, Mid-Atlantic & South, West) plus Canada and Europe. No imagery — all text content from the live page's content_text module. Includes Claremont Tile + Fired Earth referrals (kept here as factual where-to-buy guidance, since those are the live brand owner's official online-sales channels for Foundry Art).
+
+### /about/, /tile-collections/, /contact/
+
+- `/about/` is a content-identical mirror of `/our-team/`. CSS scope extended via comma-list selectors so any future restyle of one applies to both.
+- `/tile-collections/` is an index page: 4 brand panels (Bronzework Studio, Foundry Art, Talisman, Instinct) with sub-collection cards linking to the detail pages. Reuses existing wordmarks + sub-brand array imagery.
+- `/contact/` is a thin wrapper around the footer-form component with an extended form (Name / Email / Phone / Message) + a sidebar card with studio hours and phone. No new imagery.

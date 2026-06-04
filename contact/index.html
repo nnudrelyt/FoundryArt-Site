@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bronzework Studio — Linden Workshops</title>
-<meta name="description" content="Bronzework Studio: metal accent tiles of the highest quality. Three collections — Classic, Precision, Autograph — exclusively at fine tile showrooms.">
+<title>Contact — Linden Workshops</title>
+<meta name="description" content="Contact Linden Workshops. Phone, email, and a contact form to reach our Chicago studio.">
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/tokens.css?v=20260603-14">
 <link rel="stylesheet" href="/assets/styles.css?v=20260603-14">
 </head>
-<body data-page="bronzework" data-section="linden">
+<body data-page="contact" data-section="linden">
 
   <div data-nav></div>
 
@@ -38,52 +38,48 @@
     </nav>
   </header>
 
-  <main>
+  <main class="lw2-leaf">
 
-  <!-- BRONZEWORK STUDIO PANEL — wordmark + tagline + 3 collection cards -->
-  <section class="lw2-studio" id="bronzework-studio">
-    <div class="lw2-section-mark">
-      <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
-    </div>
-    <p class="lw2-studio-blurb">Metal accent tiles of the highest quality.</p>
-    <p class="lw2-studio-avail">Exclusively at <a href="#showrooms">fine tile showrooms</a></p>
-    <div class="lw2-collection-grid">
-      <a href="/classic/" class="lw2-card">
-        <div class="lw2-card-img">
-          <img src="/assets/images/bronzework/classic-array.jpg" alt="Bronzework Studio Classic collection" loading="lazy">
-        </div>
-        <h3>Classic</h3>
-        <p class="lw2-card-body">Handcarved metal tiles and liners for floor and wall <em>»</em></p>
-      </a>
-      <a href="/precision/" class="lw2-card">
-        <div class="lw2-card-img">
-          <img src="/assets/images/bronzework/precision-array.jpg" alt="Bronzework Studio Precision collection" loading="lazy">
-        </div>
-        <h3>Precision</h3>
-        <p class="lw2-card-body">Long, sleek metal liners and trim for wall and floor <em>»</em></p>
-      </a>
-      <a href="/autograph/" class="lw2-card">
-        <div class="lw2-card-img">
-          <img src="/assets/images/bronzework/autograph-array.jpg" alt="Bronzework Studio Autograph collection" loading="lazy">
-        </div>
-        <h3>Autograph</h3>
-        <p class="lw2-card-body">Graphic borders and insets cast in solid bronze <em>»</em></p>
-      </a>
-    </div>
-  </section>
+    <section class="lw2-leaf-hero">
+      <h1>We’d love to hear from you!</h1>
+      <p class="lw2-leaf-lede">Please call our studio at <a href="tel:7737842628">773 784-2628</a>, or send a message using the form below. Our friendly crew responds promptly.</p>
+    </section>
 
-  <!-- DESIGN INSPIRATION CALLOUT — Looking for design inspiration? -->
-  <section class="lw2-inspiration" aria-label="Design inspiration">
-    <div class="lw2-inspiration-text">
-      <h2>Looking for design inspiration?</h2>
-      <a href="#" class="lw2-inspiration-cta">Explore seven spectacular kitchens</a>
-    </div>
-    <a href="#" class="lw2-inspiration-image" aria-label="Drury Design kitchen featuring Bronzework Studio tile">
-      <img src="/assets/images/linden/inspiration/drury-glen-ellyn-kitchen.jpg" alt="Drury Design Glen Ellyn kitchen featuring Bronzework Studio tile" loading="lazy">
-    </a>
-  </section>
+    <!-- Contact form mirroring the footer-form component -->
+    <section class="lw2-leaf-form-wrap">
+      <div class="lw2-leaf-form-card">
+        <h2>Send us a message</h2>
+        <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
+          <div>
+            <label for="cname">Name <span class="req">(Required)</span></label>
+            <input id="cname" type="text" required>
+          </div>
+          <div>
+            <label for="cemail">Email <span class="req">(Required)</span></label>
+            <input id="cemail" type="email" required>
+          </div>
+          <div>
+            <label for="cphone">Phone</label>
+            <input id="cphone" type="tel">
+          </div>
+          <div>
+            <label for="cmessage">Message <span class="req">(Required)</span></label>
+            <textarea id="cmessage" rows="6" required></textarea>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
 
-  <!-- COMBINED FOOTER + CONTACT FORM (mirrors master landing) -->
+      <aside class="lw2-leaf-contact-card">
+        <h2>Linden Workshops</h2>
+        <p class="lw2-leaf-contact-line"><strong>Phone</strong><br><a href="tel:7737842628">773 784-2628</a></p>
+        <p class="lw2-leaf-contact-line"><strong>Studio hours</strong><br>Monday–Friday, 9am–5pm Central</p>
+        <p class="lw2-leaf-contact-line"><strong>For trade &amp; showrooms</strong><br>Please <a href="/where-to-buy/">see our showroom directory</a>.</p>
+      </aside>
+    </section>
+
+  </main>
+
   <footer class="footer">
     <div class="lw2-footer-row">
 
@@ -103,7 +99,7 @@
           <div>
             <a href="#">Inspiration</a>
             <a href="/about/">About</a>
-            <a href="#">Where to Buy</a>
+            <a href="/where-to-buy/">Where to Buy</a>
           </div>
           <div>
             <a href="#">[Showroom Login]</a>
@@ -122,16 +118,16 @@
         <p class="lw2-contact-phone"><strong>Phone:</strong> <a href="tel:7737842628">773 784-2628</a></p>
         <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
           <div>
-            <label for="cname">Name <span class="req">(Required)</span></label>
-            <input id="cname" type="text" required>
+            <label for="fname">Name <span class="req">(Required)</span></label>
+            <input id="fname" type="text" required>
           </div>
           <div>
-            <label for="cemail">Email <span class="req">(Required)</span></label>
-            <input id="cemail" type="email" required>
+            <label for="femail">Email <span class="req">(Required)</span></label>
+            <input id="femail" type="email" required>
           </div>
           <div>
-            <label for="cmessage">Message <span class="req">(Required)</span></label>
-            <textarea id="cmessage" rows="6" required></textarea>
+            <label for="fmessage">Message <span class="req">(Required)</span></label>
+            <textarea id="fmessage" rows="6" required></textarea>
           </div>
           <button type="submit">Submit</button>
         </form>
@@ -140,8 +136,6 @@
 
     </div>
   </footer>
-
-  </main>
 
   <script src="/assets/app.js"></script>
 </body>
