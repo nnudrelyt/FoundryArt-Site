@@ -3276,53 +3276,9 @@ body[data-section="talisman"] .footer p {
   .lw2-header .lw2-nav { display: none; }
 }
 
-/* Our Team page — alternating 2-col rows */
-.lw2-team {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 48px 40px 80px;
-}
-.lw2-team-row {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 48px;
-  align-items: center;
-  padding: 32px 0;
-}
-.lw2-team-row--alt { grid-template-columns: 1.4fr 1fr; }
-.lw2-team-portrait {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  overflow: hidden;
-}
-.lw2-team-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.lw2-team-text h2 { font-size: 30px !important; margin-bottom: 4px; font-style: italic; }
-.lw2-team-role {
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 13px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #757367;
-  margin-bottom: 18px;
-}
-.lw2-team-group {
-  margin: 32px 0 0;
-  text-align: center;
-}
-.lw2-team-group img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
-.lw2-team-caption {
-  margin-top: 16px;
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-style: italic;
-  font-size: 16px;
-  color: #757367;
-}
-@media (max-width: 900px) {
-  .lw2-team-row, .lw2-team-row--alt { grid-template-columns: 1fr; gap: 28px; }
-  .lw2-team-row--alt .lw2-team-portrait { order: -1; }
-  .lw2-team-portrait { max-width: 360px; margin: 0 auto; }
-}
+/* (Old Our Team CSS removed — superseded by body[data-page="our-team"]
+   rules further down. The orphan rules were turning .lw2-team-row into
+   a 2-col grid and squeezing my new .lw2-team-row-inner.) */
 
 /* ══════════════════════════════════════════════════════════
    LW LIVE-SITE — WIDE BREAKPOINTS (1440-1919, 1920+)
@@ -3387,12 +3343,7 @@ body[data-section="talisman"] .footer p {
   .lw2-footer-links a { font-size: 13px; }
   .lw2-footer-badges img { height: 38px; }
 
-  /* Team page */
-  .lw2-team { max-width: 1320px; padding: 72px 64px 110px; }
-  .lw2-team-row { padding: 48px 0; gap: 64px; }
-  .lw2-team-text h2 { font-size: 38px !important; }
-  .lw2-team-role { font-size: 14px; }
-  .lw2-team-caption { font-size: 18px; }
+  /* (Old Team page wide-breakpoint overrides removed — see body[data-page="our-team"] rules) */
 }
 
 /* Cinema: 1920px+ — luxury air, content capped so it doesn't sprawl */
@@ -3462,12 +3413,7 @@ body[data-section="talisman"] .footer p {
     font-size: 13px;
   }
 
-  /* Team page */
-  .lw2-team { max-width: 1440px; padding: 96px 96px 140px; }
-  .lw2-team-row { padding: 64px 0; gap: 80px; }
-  .lw2-team-text h2 { font-size: 44px !important; }
-  .lw2-team-role { font-size: 15px; }
-  .lw2-team-caption { font-size: 20px; }
+  /* (Old Team page cinema overrides removed — see body[data-page="our-team"] rules) */
 }
 
 /* ══════════════════════════════════════════════════════════
