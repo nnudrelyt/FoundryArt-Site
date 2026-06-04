@@ -4705,14 +4705,22 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
     margin-top: 4px !important;
   }
 
-  /* Collection grids — single column, 25px gap between cards */
+  /* Collection grids — single column, 25px gap, 261px card width */
   body[data-section="linden"] .lw2-collection-grid {
     grid-template-columns: 1fr !important;
     gap: 25px !important;
     margin-top: 25px !important;
+    max-width: 261px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
   body[data-section="linden"] .lw2-collection-grid--two {
     grid-template-columns: 1fr !important;
+  }
+  body[data-section="linden"] .lw2-card {
+    max-width: 261px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* Card h3 titles → 24px Fanwood Text per live spec */
