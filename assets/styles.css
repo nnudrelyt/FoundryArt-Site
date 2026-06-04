@@ -5004,3 +5004,103 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
 
 /* SMALL MOBILE FINE-TUNE (≤480) — minimal overrides; keep 32px hero h1
    and 19px hero sub from the ≤768 mobile rule so type stays readable. */
+
+/* ══════════════════════════════════════════════════════════
+   .lw2-inspiration — "Looking for design inspiration?" callout
+   New component for sub-brand pages (Bronzework Studio, etc.)
+   Light blue-gray panel: title + small CTA on the left, kitchen photo right.
+   Mirrors the live lindenworkshops.com Bronzework page.
+   ────────────────────────────────────────────────────────── */
+
+body[data-section="linden"] .lw2-inspiration,
+body[data-section="bronzework-studio"] .lw2-inspiration,
+body[data-section="talisman"] .lw2-inspiration {
+  background: #D7DDE0;
+  margin: 25px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 0;
+  align-items: center;
+  min-height: 320px;
+  overflow: hidden;
+}
+body[data-section="bronzework-studio"] .lw2-inspiration-text,
+body[data-section="talisman"] .lw2-inspiration-text,
+body[data-section="linden"] .lw2-inspiration-text {
+  padding: 40px 56px;
+  text-align: left;
+}
+body[data-section="bronzework-studio"] .lw2-inspiration-text h2,
+body[data-section="talisman"] .lw2-inspiration-text h2,
+body[data-section="linden"] .lw2-inspiration-text h2 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: italic;
+  color: #000;
+  margin: 0 0 28px;
+  line-height: 1.2;
+}
+body[data-section="bronzework-studio"] .lw2-inspiration-cta,
+body[data-section="talisman"] .lw2-inspiration-cta,
+body[data-section="linden"] .lw2-inspiration-cta {
+  display: inline-block;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #000;
+  background: transparent;
+  border: 1px solid #000;
+  padding: 12px 28px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+body[data-section="bronzework-studio"] .lw2-inspiration-cta:hover,
+body[data-section="talisman"] .lw2-inspiration-cta:hover,
+body[data-section="linden"] .lw2-inspiration-cta:hover {
+  background: #000;
+  color: #fff;
+}
+body[data-section="bronzework-studio"] .lw2-inspiration-image,
+body[data-section="talisman"] .lw2-inspiration-image,
+body[data-section="linden"] .lw2-inspiration-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+body[data-section="bronzework-studio"] .lw2-inspiration-image img,
+body[data-section="talisman"] .lw2-inspiration-image img,
+body[data-section="linden"] .lw2-inspiration-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile + tablet: stack vertically */
+@media (max-width: 1024px) {
+  body[data-section="linden"] .lw2-inspiration,
+  body[data-section="bronzework-studio"] .lw2-inspiration,
+  body[data-section="talisman"] .lw2-inspiration {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  body[data-section="bronzework-studio"] .lw2-inspiration-text,
+  body[data-section="talisman"] .lw2-inspiration-text,
+  body[data-section="linden"] .lw2-inspiration-text {
+    padding: 32px 24px;
+    text-align: center;
+  }
+  body[data-section="bronzework-studio"] .lw2-inspiration-text h2,
+  body[data-section="talisman"] .lw2-inspiration-text h2,
+  body[data-section="linden"] .lw2-inspiration-text h2 {
+    font-size: 26px;
+  }
+  body[data-section="bronzework-studio"] .lw2-inspiration-image,
+  body[data-section="talisman"] .lw2-inspiration-image,
+  body[data-section="linden"] .lw2-inspiration-image {
+    aspect-ratio: 16/9;
+  }
+}

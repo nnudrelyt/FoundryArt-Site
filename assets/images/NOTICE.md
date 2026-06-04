@@ -83,3 +83,7 @@ The non-Foundry-Art sections (`/` Linden Workshops master landing, `/talisman/`,
 - The drawer's "Foundry Art / Available at ClaremontTile.com" submenu was replaced by "Available direct".
 
 **`/bronzework-studio/` is awaiting source content.** The live page at `lindenworkshops.com/bronzework-studio/` is currently password-protected, so the body could not be inventoried. The current wireframe for that page is a placeholder structure (Classic / Autograph / Precision intros) — it should be updated with canonical copy from the brand owner before this is shared externally.
+
+## Bronzework Studio page (added Phase 2)
+
+- assets/images/linden/inspiration/drury-glen-ellyn-kitchen.jpg — source: lindenworkshops.com/wp-content/uploads/1600-x-900-Well-Dressed-Traditional-Glen-Ellyn-Kitchen-drury-design21.jpg. Used in /bronzework-studio/ design inspiration callout. Placeholder pending brand-owner asset swap before production.
