@@ -5203,10 +5203,12 @@ body[data-page="our-team"] main.lw2-team {
   background: #FFFFFF;
 }
 
-/* Each team-row is full-width with its own bg. Alternates via --alt-bg modifier. */
+/* Each team-row is full-width with its own bg.
+   60px top padding, 50px bottom padding (per spec).
+   Stacza is FIRST and stays white; alternation starts from Larsen. */
 body[data-page="our-team"] .lw2-team-row {
   background: #FFFFFF;
-  padding: 56px 24px;
+  padding: 60px 24px 50px;
 }
 body[data-page="our-team"] .lw2-team-row--alt-bg {
   background: #F0F0F0;
@@ -5215,17 +5217,17 @@ body[data-page="our-team"] .lw2-team-row--alt-bg {
 /* Inner: portrait left + bio text right, centered max-width */
 body[data-page="our-team"] .lw2-team-row-inner {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 40px;
-  max-width: 1000px;
+  grid-template-columns: 240px 1fr;
+  gap: 48px;
+  max-width: 1100px;
   margin: 0 auto;
   align-items: start;
 }
 
 body[data-page="our-team"] .lw2-team-portrait {
   display: block;
-  width: 200px;
-  aspect-ratio: 1 / 1;
+  width: 240px;
+  height: 320px;
   overflow: hidden;
 }
 body[data-page="our-team"] .lw2-team-portrait img {
@@ -5240,7 +5242,7 @@ body[data-page="our-team"] .lw2-team-text {
 }
 body[data-page="our-team"] .lw2-team-text h2 {
   font-family: 'Fanwood Text', Georgia, serif !important;
-  font-size: 26px !important;
+  font-size: 32px !important;
   font-style: normal !important;
   font-weight: 400;
   color: #000;
@@ -5249,16 +5251,16 @@ body[data-page="our-team"] .lw2-team-text h2 {
 }
 body[data-page="our-team"] .lw2-team-role {
   font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 18px;
+  font-size: 24px;
   font-style: normal;
   color: #000;
   margin: 0 0 22px;
 }
 body[data-page="our-team"] .lw2-team-text p {
   font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 28px;
   color: #000;
   margin: 0 0 18px;
 }
@@ -5285,27 +5287,37 @@ body[data-page="our-team"] .lw2-team-group img {
   height: auto;
 }
 body[data-page="our-team"] .lw2-team-group-caption {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 14px;
-  font-style: italic;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
   color: #000;
   margin: 18px auto 0;
 }
 
-/* Tablet — keep 2-col but narrower portrait */
+/* Footer: #F7F7F7 bg with 80px top padding (per spec) */
+body[data-page="our-team"] .lw2-footer-row {
+  background: #F7F7F7 !important;
+  padding-top: 80px !important;
+}
+
+/* Tablet — narrower portrait */
 @media (max-width: 1024px) and (min-width: 769px) {
   body[data-page="our-team"] .lw2-team-row-inner {
-    grid-template-columns: 180px 1fr;
-    gap: 32px;
-    max-width: 800px;
+    grid-template-columns: 210px 1fr;
+    gap: 36px;
+    max-width: 900px;
   }
-  body[data-page="our-team"] .lw2-team-portrait { width: 180px; }
+  body[data-page="our-team"] .lw2-team-portrait {
+    width: 210px;
+    height: 280px;
+  }
 }
 
 /* Mobile — stack portrait above bio */
 @media (max-width: 768px) {
   body[data-page="our-team"] .lw2-team-row {
-    padding: 40px 22px;
+    padding: 40px 22px 36px;
   }
   body[data-page="our-team"] .lw2-team-row-inner {
     grid-template-columns: 1fr;
@@ -5313,11 +5325,12 @@ body[data-page="our-team"] .lw2-team-group-caption {
     max-width: 100%;
   }
   body[data-page="our-team"] .lw2-team-portrait {
-    width: 160px;
+    width: 200px;
+    height: 268px;
     margin: 0;
   }
-  body[data-page="our-team"] .lw2-team-text h2 { font-size: 24px !important; }
-  body[data-page="our-team"] .lw2-team-role { font-size: 16px; }
-  body[data-page="our-team"] .lw2-team-text p { font-size: 14px; }
+  body[data-page="our-team"] .lw2-team-text h2 { font-size: 28px !important; }
+  body[data-page="our-team"] .lw2-team-role { font-size: 20px; }
+  body[data-page="our-team"] .lw2-team-text p { font-size: 16px; line-height: 26px; }
   body[data-page="our-team"] .lw2-team-group { padding: 32px 16px; }
 }
