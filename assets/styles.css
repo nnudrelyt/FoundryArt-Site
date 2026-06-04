@@ -2460,9 +2460,9 @@ body.drawer-open { overflow: hidden; }
 .studios-acc-body a:link,
 .studios-acc-body a:visited {
   display: block;
-  padding: 14px 32px;
+  padding: 16px 32px;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: 0.2px;
@@ -2479,19 +2479,20 @@ body.drawer-open { overflow: hidden; }
 .studios-acc-body a strong {
   font-family: 'Jost', sans-serif;
   font-weight: 500;
-  color: rgba(255,255,255,0.75);
-  letter-spacing: 1.5px;
-  font-size: 11px;
+  color: rgba(255,255,255,0.78);
+  letter-spacing: 1.6px;
+  font-size: 13px;
   text-transform: uppercase;
 }
+/* All-caps explainer under each collection title */
 .studios-acc-body a small {
   display: block;
-  margin-top: 4px;
+  margin-top: 6px;
   font-family: 'Jost', sans-serif;
-  font-size: 10px;
-  letter-spacing: 1.2px;
+  font-size: 12px;
+  letter-spacing: 1.3px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.6);
   font-weight: 400;
 }
 
@@ -2516,7 +2517,9 @@ body.drawer-open { overflow: hidden; }
   .studios-drawer .studios-eyebrow-mark { height: 44px; }
   .studios-acc-head { padding: 26px 40px; }
   .studios-acc-name { font-size: 30px; }
-  .studios-acc-body a { padding: 14px 40px; font-size: 23px; }
+  .studios-acc-body a { padding: 16px 40px; font-size: 30px; }
+  .studios-acc-body a strong { font-size: 13px; }
+  .studios-acc-body a small { font-size: 13px; }
   .studios-acc.open .studios-acc-body { padding: 8px 0 20px; }
 }
 @media (min-width: 1200px) {
@@ -2525,7 +2528,9 @@ body.drawer-open { overflow: hidden; }
   .studios-drawer .studios-eyebrow-mark { height: 48px; }
   .studios-acc-head { padding: 28px 48px; }
   .studios-acc-name { font-size: 34px; }
-  .studios-acc-body a { padding: 14px 48px; font-size: 24px; }
+  .studios-acc-body a { padding: 18px 48px; font-size: 32px; }
+  .studios-acc-body a strong { font-size: 14px; }
+  .studios-acc-body a small { font-size: 14px; margin-top: 8px; }
 }
 @media (min-width: 1600px) {
   .studios-drawer { width: 560px; }
@@ -2533,7 +2538,9 @@ body.drawer-open { overflow: hidden; }
   .studios-drawer .studios-eyebrow-mark { height: 52px; }
   .studios-acc-head { padding: 30px 56px; }
   .studios-acc-name { font-size: 38px; }
-  .studios-acc-body a { padding: 16px 56px; font-size: 26px; }
+  .studios-acc-body a { padding: 20px 56px; font-size: 36px; }
+  .studios-acc-body a strong { font-size: 15px; }
+  .studios-acc-body a small { font-size: 15px; }
 }
 
 /* Responsive — studios drawer + LW sections */
