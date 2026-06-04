@@ -6490,9 +6490,12 @@ body[data-page="where-to-buy"] .lw2-wtb-grid {
   margin: 0 auto;
   padding: 48px 24px 64px;
 }
+/* Column wrapper has NO background of its own — the visual weight
+   sits on the individual tab cells (or on the column content). This
+   lets the Talisman column read as just type on white. */
 body[data-page="where-to-buy"] .lw2-wtb-col {
-  background: #F7F7F7;
-  padding: 32px 24px 32px;
+  background: transparent;
+  padding: 0 8px;
   text-align: center;
 }
 body[data-page="where-to-buy"] .lw2-wtb-col-wordmark {
@@ -6501,21 +6504,22 @@ body[data-page="where-to-buy"] .lw2-wtb-col-wordmark {
   width: auto !important;
   max-width: 240px !important;
   max-height: 24px !important;
-  margin: 0 auto 22px !important;
+  margin: 0 auto 28px !important;
   object-fit: contain;
 }
 body[data-page="where-to-buy"] .lw2-wtb-tabs {
   display: flex;
   flex-direction: column;
-  gap: 0;
-  border: 1px solid #E5E5E5;
-  background: #FFFFFF;
-}
-body[data-page="where-to-buy"] .lw2-wtb-tab {
-  background: #FFF;
+  gap: 2px; /* thin white seam between tinted cells */
   border: none;
-  border-bottom: 1px solid #E5E5E5;
-  padding: 14px 16px;
+  background: transparent;
+}
+/* Each tab is its own gray-tinted cell. Active gets a warmer cream
+   tone + red text + weight to read as the current selection. */
+body[data-page="where-to-buy"] .lw2-wtb-tab {
+  background: #F2F0E9;
+  border: none;
+  padding: 16px 18px;
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 16px;
   line-height: 28px;
@@ -6524,31 +6528,32 @@ body[data-page="where-to-buy"] .lw2-wtb-tab {
   text-align: center;
   transition: background 0.15s ease, color 0.15s ease;
 }
-body[data-page="where-to-buy"] .lw2-wtb-tab:last-child { border-bottom: none; }
-body[data-page="where-to-buy"] .lw2-wtb-tab:hover { background: #F7F6F1; color: #A31414; }
+body[data-page="where-to-buy"] .lw2-wtb-tab:hover { background: #ECE7DA; color: #A31414; }
 body[data-page="where-to-buy"] .lw2-wtb-tab.is-active {
-  background: #F2F0E9;
+  background: #ECE7DA;
   color: #A31414;
   font-weight: 600;
 }
 
-/* Talisman: direct-studio card (no tabs) — sits inside .lw2-wtb-col
-   so it inherits the gray panel; this just lays out its contents. */
+/* Talisman: direct-studio card (no tabs, no background treatment).
+   Sits on the same transparent column as BWS/FA, but with no tinted
+   cells — pure type on white. Support copy in 24px Fanwood regular. */
 body[data-page="where-to-buy"] .lw2-wtb-talisman-card {
   padding: 0;
   text-align: center;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-line {
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: 28px;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.3;
   color: #A31414;
-  margin: 0 0 6px;
+  margin: 0 0 14px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-phone {
   font-family: 'Fanwood Text', Georgia, serif;
   font-size: 22px;
-  margin: 0 0 20px;
+  margin: 0 0 24px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-phone a { color: #A31414; text-decoration: none; }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-cta {
@@ -6560,7 +6565,7 @@ body[data-page="where-to-buy"] .lw2-wtb-talisman-cta {
   letter-spacing: 0.04em;
   color: #000;
   text-decoration: none;
-  background: #FFFFFF;
+  background: transparent;
   transition: background 0.15s ease, color 0.15s ease;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-cta:hover { background: #000; color: #FFF; }
