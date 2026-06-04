@@ -5084,10 +5084,32 @@ body[data-section="linden"] .lw2-talisman-notice {
 }
 body[data-section="linden"] .lw2-talisman-notice:last-of-type { margin-bottom: 0; }
 
+/* Production-status intro — three Fanwood 32px paragraphs above the
+   hero. Sits on white. */
+body[data-section="linden"] .lw2-tal-intro {
+  background: #FFFFFF;
+  padding: 12px 24px 48px;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+body[data-section="linden"] .lw2-tal-intro-line {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.35;
+  color: #000;
+  margin: 0 0 18px;
+}
+body[data-section="linden"] .lw2-tal-intro-line:last-child { margin-bottom: 0; }
+body[data-section="linden"] .lw2-tal-intro-line a {
+  color: #A31414;
+  text-decoration: underline;
+}
+
 /* Hero — full-bleed tile pattern photo with center-overlaid tagline.
-   Height reduced 10% from the previous build via a constrained
-   container + object-fit cover on the photo. Overlay panel uses a
-   ~45% white tint (matching the live site's lighter wash) so the
+   Photo height doubled (was 630 → now 1260) to give a much taller
+   editorial canvas. Overlay panel uses ~45% white tint so the
    tile-pattern textures still read through behind the type. */
 body[data-section="linden"] .lw2-talisman-hero {
   position: relative;
@@ -5096,7 +5118,7 @@ body[data-section="linden"] .lw2-talisman-hero {
   padding: 0;
   background: #f6f4ec;
   overflow: hidden;
-  height: 630px;        /* was effectively ~700px → reduced 10% */
+  height: 1260px;       /* doubled from 630 */
 }
 body[data-section="linden"] .lw2-talisman-hero img {
   display: block;
@@ -5156,21 +5178,25 @@ body[data-section="linden"] .lw2-tal-info-card {
   display: block;
   text-align: center;
 }
+/* Thumb frame uses 8.5×11 (US Letter) proportion so the previews
+   read as the actual PDF page they link to. */
 body[data-section="linden"] .lw2-tal-info-thumb {
   background: #FFFFFF;
-  padding: 0;
+  padding: 14px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.10);
   margin: 0 auto 18px;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 8.5 / 11;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 280px;
 }
 body[data-section="linden"] .lw2-tal-info-thumb img {
   display: block;
   width: 100%;
-  max-width: 240px;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
 }
 body[data-section="linden"] .lw2-tal-info-label {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -5185,7 +5211,7 @@ body[data-section="linden"] .lw2-tal-info-cta {
   display: inline-block;
   padding: 14px 32px;
   border: 1px solid #000;
-  background: transparent;
+  background: #FFFFFF;
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 16px;
   letter-spacing: 0.02em;
@@ -5208,8 +5234,8 @@ body[data-section="linden"] .lw2-tal-legacy {
 }
 body[data-section="linden"] .lw2-tal-legacy p {
   font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 22px;
-  line-height: 1.5;
+  font-size: 32px;
+  line-height: 1.4;
   color: #000;
   margin: 0;
 }
@@ -5246,16 +5272,20 @@ body[data-section="linden"] .lw2-tal-craft img {
   body[data-section="linden"] .lw2-talisman-notice { font-size: 15px; }
 }
 @media (max-width: 1024px) {
-  body[data-section="linden"] .lw2-talisman-hero { height: 480px; }
+  body[data-section="linden"] .lw2-tal-intro { padding: 8px 24px 32px; }
+  body[data-section="linden"] .lw2-tal-intro-line { font-size: 26px; }
+  body[data-section="linden"] .lw2-talisman-hero { height: 960px; }
   body[data-section="linden"] .lw2-talisman-hero-quote { padding: 40px 48px; }
   body[data-section="linden"] .lw2-talisman-hero-quote p { font-size: 32px; }
   body[data-section="linden"] .lw2-tal-info-grid { gap: 32px; }
-  body[data-section="linden"] .lw2-tal-info-thumb { min-height: 220px; }
-  body[data-section="linden"] .lw2-tal-info-thumb img { max-width: 180px; }
+  body[data-section="linden"] .lw2-tal-info-thumb { max-width: 220px; }
+  body[data-section="linden"] .lw2-tal-legacy p { font-size: 26px; }
 }
 @media (max-width: 768px) {
+  body[data-section="linden"] .lw2-tal-intro { padding: 4px 18px 24px; }
+  body[data-section="linden"] .lw2-tal-intro-line { font-size: 20px; margin-bottom: 14px; }
   body[data-section="linden"] .lw2-talisman-mark { max-width: 180px; }
-  body[data-section="linden"] .lw2-talisman-hero { height: 360px; }
+  body[data-section="linden"] .lw2-talisman-hero { height: 720px; }
   body[data-section="linden"] .lw2-talisman-hero-quote {
     max-width: 88%;
     width: auto;
@@ -5269,15 +5299,30 @@ body[data-section="linden"] .lw2-tal-craft img {
     gap: 28px;
     margin-bottom: 32px;
   }
-  body[data-section="linden"] .lw2-tal-info-thumb { min-height: 240px; }
-  body[data-section="linden"] .lw2-tal-info-thumb img { max-width: 200px; }
+  body[data-section="linden"] .lw2-tal-info-thumb { max-width: 220px; }
   body[data-section="linden"] .lw2-tal-info-cta {
     padding: 12px 24px;
     font-size: 14px;
   }
   body[data-section="linden"] .lw2-tal-legacy { padding: 40px 18px 24px; }
-  body[data-section="linden"] .lw2-tal-legacy p { font-size: 18px; }
+  body[data-section="linden"] .lw2-tal-legacy p { font-size: 20px; }
   body[data-section="linden"] .lw2-tal-craft { padding: 24px 18px 56px; }
+}
+
+/* Gray footer treatment for /talisman/ — same pattern as /our-team/
+   and /where-to-buy/: bg #F7F7F7 on the .footer wrapper + the row,
+   suppress the legacy `.footer p { border-top: 1px solid #eee }`
+   rule above the copyright. */
+body[data-page="talisman"] .footer {
+  background: #F7F7F7;
+  border-top: none !important;
+}
+body[data-page="talisman"] .lw2-footer-row {
+  background: #F7F7F7 !important;
+  padding-top: 80px !important;
+}
+body[data-page="talisman"] .footer p {
+  border-top: none !important;
 }
 
 /* ══════════════════════════════════════════════════════════
