@@ -5085,8 +5085,10 @@ body[data-section="linden"] .lw2-talisman-notice {
 body[data-section="linden"] .lw2-talisman-notice:last-of-type { margin-bottom: 0; }
 
 /* Hero — full-bleed tile pattern photo with center-overlaid tagline.
-   Live shows a very tall photo — we use a portrait aspect with
-   the quote floating over the center. */
+   Height reduced 10% from the previous build via a constrained
+   container + object-fit cover on the photo. Overlay panel uses a
+   ~45% white tint (matching the live site's lighter wash) so the
+   tile-pattern textures still read through behind the type. */
 body[data-section="linden"] .lw2-talisman-hero {
   position: relative;
   width: 100%;
@@ -5094,32 +5096,145 @@ body[data-section="linden"] .lw2-talisman-hero {
   padding: 0;
   background: #f6f4ec;
   overflow: hidden;
+  height: 630px;        /* was effectively ~700px → reduced 10% */
 }
 body[data-section="linden"] .lw2-talisman-hero img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 1400px;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 body[data-section="linden"] .lw2-talisman-hero-quote {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(247, 247, 247, 0.92);
-  padding: 24px 36px;
-  max-width: 460px;
+  background: rgba(255, 255, 255, 0.45);
+  padding: 56px 72px;
+  max-width: 880px;
+  width: calc(100% - 96px);
   text-align: center;
   z-index: 2;
 }
 body[data-section="linden"] .lw2-talisman-hero-quote p {
   font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 22px;
+  font-size: 44px;
+  font-weight: 400;
   font-style: normal;
-  line-height: 1.4;
+  line-height: 1.25;
   color: #000;
   margin: 0;
+}
+
+/* ── Further Information ──────────────────────────────────────
+   Gray panel containing 3 PDF tear-sheet cards + a centered
+   "Contact our studio" outlined-pill CTA. */
+body[data-section="linden"] .lw2-tal-info {
+  background: #DCDCDC;
+  padding: 72px 24px 88px;
+  text-align: center;
+}
+body[data-section="linden"] .lw2-tal-info-title {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #000;
+  margin: 0 0 48px;
+}
+body[data-section="linden"] .lw2-tal-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 64px;
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  align-items: end;
+}
+body[data-section="linden"] .lw2-tal-info-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  text-align: center;
+}
+body[data-section="linden"] .lw2-tal-info-thumb {
+  background: #FFFFFF;
+  padding: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+body[data-section="linden"] .lw2-tal-info-thumb img {
+  display: block;
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+}
+body[data-section="linden"] .lw2-tal-info-label {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  color: #000;
+  margin: 0;
+}
+body[data-section="linden"] .lw2-tal-info-card:hover .lw2-tal-info-label {
+  color: #A31414;
+}
+body[data-section="linden"] .lw2-tal-info-cta {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 1px solid #000;
+  background: transparent;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  color: #000;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+body[data-section="linden"] .lw2-tal-info-cta:hover {
+  background: #000;
+  color: #FFFFFF;
+}
+
+/* ── Legacy-pattern notice ────────────────────────────────── */
+body[data-section="linden"] .lw2-tal-legacy {
+  background: #FFFFFF;
+  padding: 56px 24px 28px;
+  text-align: center;
+  max-width: 880px;
+  margin: 0 auto;
+}
+body[data-section="linden"] .lw2-tal-legacy p {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 22px;
+  line-height: 1.5;
+  color: #000;
+  margin: 0;
+}
+body[data-section="linden"] .lw2-tal-legacy a {
+  color: #A31414;
+  text-decoration: underline;
+}
+
+/* ── Craft widescreen image (hands in clay) — 1060 × 640 ──── */
+body[data-section="linden"] .lw2-tal-craft {
+  padding: 32px 24px 88px;
+  text-align: center;
+}
+body[data-section="linden"] .lw2-tal-craft figure {
+  margin: 0 auto;
+  max-width: 1060px;
+}
+body[data-section="linden"] .lw2-tal-craft img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 1060px;
+  aspect-ratio: 1060 / 640;
+  object-fit: cover;
+  margin: 0 auto;
 }
 
 /* Tablet + mobile: tighten masthead + quote */
@@ -5130,13 +5245,39 @@ body[data-section="linden"] .lw2-talisman-hero-quote p {
   body[data-section="linden"] .lw2-talisman-mark { max-width: 240px; }
   body[data-section="linden"] .lw2-talisman-notice { font-size: 15px; }
 }
+@media (max-width: 1024px) {
+  body[data-section="linden"] .lw2-talisman-hero { height: 480px; }
+  body[data-section="linden"] .lw2-talisman-hero-quote { padding: 40px 48px; }
+  body[data-section="linden"] .lw2-talisman-hero-quote p { font-size: 32px; }
+  body[data-section="linden"] .lw2-tal-info-grid { gap: 32px; }
+  body[data-section="linden"] .lw2-tal-info-thumb { min-height: 220px; }
+  body[data-section="linden"] .lw2-tal-info-thumb img { max-width: 180px; }
+}
 @media (max-width: 768px) {
   body[data-section="linden"] .lw2-talisman-mark { max-width: 180px; }
+  body[data-section="linden"] .lw2-talisman-hero { height: 360px; }
   body[data-section="linden"] .lw2-talisman-hero-quote {
-    max-width: 80%;
-    padding: 18px 22px;
+    max-width: 88%;
+    width: auto;
+    padding: 24px 22px;
   }
-  body[data-section="linden"] .lw2-talisman-hero-quote p { font-size: 18px; }
+  body[data-section="linden"] .lw2-talisman-hero-quote p { font-size: 22px; }
+  body[data-section="linden"] .lw2-tal-info { padding: 48px 18px 56px; }
+  body[data-section="linden"] .lw2-tal-info-title { font-size: 26px; margin-bottom: 32px; }
+  body[data-section="linden"] .lw2-tal-info-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+  body[data-section="linden"] .lw2-tal-info-thumb { min-height: 240px; }
+  body[data-section="linden"] .lw2-tal-info-thumb img { max-width: 200px; }
+  body[data-section="linden"] .lw2-tal-info-cta {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+  body[data-section="linden"] .lw2-tal-legacy { padding: 40px 18px 24px; }
+  body[data-section="linden"] .lw2-tal-legacy p { font-size: 18px; }
+  body[data-section="linden"] .lw2-tal-craft { padding: 24px 18px 56px; }
 }
 
 /* ══════════════════════════════════════════════════════════
