@@ -6514,10 +6514,11 @@ body[data-page="where-to-buy"] .lw2-wtb-tabs {
   border: none;
   background: transparent;
 }
-/* Each tab is its own gray-tinted cell. Active gets a warmer cream
-   tone + red text + weight to read as the current selection. */
+/* Each tab is its own gray-tinted cell. Inactive cells use a neutral
+   #F7F7F7; the active cell switches to a warmer cream so it reads
+   as the current selection, plus red bolded text. */
 body[data-page="where-to-buy"] .lw2-wtb-tab {
-  background: #F2F0E9;
+  background: #F7F7F7;
   border: none;
   padding: 16px 18px;
   font-family: 'Open Sans', Helvetica, sans-serif;
