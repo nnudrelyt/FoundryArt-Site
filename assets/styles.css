@@ -5246,3 +5246,132 @@ body[data-page="bronzework"] .lw2-card-body {
   body[data-page="bronzework"] .lw2-studio-avail { font-size: 20px !important; }
   body[data-page="bronzework"] .lw2-collection-grid { gap: 25px; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   Our Team page — alternating gray/white sections, square portrait
+   on the left, bio paragraphs on the right.
+   Matches live https://lindenworkshops.com/about/
+   ────────────────────────────────────────────────────────── */
+
+body[data-page="our-team"] main.lw2-team {
+  background: #FFFFFF;
+}
+
+/* Each team-row is full-width with its own bg. Alternates via --alt-bg modifier. */
+body[data-page="our-team"] .lw2-team-row {
+  background: #FFFFFF;
+  padding: 56px 24px;
+}
+body[data-page="our-team"] .lw2-team-row--alt-bg {
+  background: #F0F0F0;
+}
+
+/* Inner: portrait left + bio text right, centered max-width */
+body[data-page="our-team"] .lw2-team-row-inner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+body[data-page="our-team"] .lw2-team-portrait {
+  display: block;
+  width: 200px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+body[data-page="our-team"] .lw2-team-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+body[data-page="our-team"] .lw2-team-text {
+  padding: 0;
+}
+body[data-page="our-team"] .lw2-team-text h2 {
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  font-size: 26px !important;
+  font-style: normal !important;
+  font-weight: 400;
+  color: #000;
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+body[data-page="our-team"] .lw2-team-role {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 18px;
+  font-style: normal;
+  color: #000;
+  margin: 0 0 22px;
+}
+body[data-page="our-team"] .lw2-team-text p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #000;
+  margin: 0 0 18px;
+}
+body[data-page="our-team"] .lw2-team-text p:last-of-type {
+  margin-bottom: 0;
+}
+body[data-page="our-team"] .lw2-team-text a {
+  color: #A31414;
+  text-decoration: underline;
+}
+body[data-page="our-team"] .lw2-team-text a:hover { color: #7A0E0E; }
+
+/* Group photo — full-bleed wide + center caption */
+body[data-page="our-team"] .lw2-team-group {
+  background: #FFFFFF;
+  padding: 48px 24px;
+  text-align: center;
+}
+body[data-page="our-team"] .lw2-team-group img {
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  height: auto;
+}
+body[data-page="our-team"] .lw2-team-group-caption {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+  color: #000;
+  margin: 18px auto 0;
+}
+
+/* Tablet — keep 2-col but narrower portrait */
+@media (max-width: 1024px) and (min-width: 769px) {
+  body[data-page="our-team"] .lw2-team-row-inner {
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
+    max-width: 800px;
+  }
+  body[data-page="our-team"] .lw2-team-portrait { width: 180px; }
+}
+
+/* Mobile — stack portrait above bio */
+@media (max-width: 768px) {
+  body[data-page="our-team"] .lw2-team-row {
+    padding: 40px 22px;
+  }
+  body[data-page="our-team"] .lw2-team-row-inner {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    max-width: 100%;
+  }
+  body[data-page="our-team"] .lw2-team-portrait {
+    width: 160px;
+    margin: 0;
+  }
+  body[data-page="our-team"] .lw2-team-text h2 { font-size: 24px !important; }
+  body[data-page="our-team"] .lw2-team-role { font-size: 16px; }
+  body[data-page="our-team"] .lw2-team-text p { font-size: 14px; }
+  body[data-page="our-team"] .lw2-team-group { padding: 32px 16px; }
+}
