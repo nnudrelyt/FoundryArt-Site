@@ -5211,7 +5211,7 @@ body[data-page="our-team"] .lw2-team-row {
   padding: 60px 24px 50px;
 }
 body[data-page="our-team"] .lw2-team-row--alt-bg {
-  background: #F0F0F0;
+  background: #F2F0E9;
 }
 
 /* Inner: portrait left + bio text right, centered max-width */
@@ -5273,9 +5273,11 @@ body[data-page="our-team"] .lw2-team-text a {
 }
 body[data-page="our-team"] .lw2-team-text a:hover { color: #7A0E0E; }
 
-/* Group photo — full-bleed wide + center caption */
+/* Group photo — full-bleed wide + center caption.
+   Background matches the FOOTER (#F7F7F7) so there's no white strip
+   between the team-group section and the footer. */
 body[data-page="our-team"] .lw2-team-group {
-  background: #FFFFFF;
+  background: #F7F7F7;
   padding: 48px 24px;
   text-align: center;
 }
@@ -5295,10 +5297,34 @@ body[data-page="our-team"] .lw2-team-group-caption {
   margin: 18px auto 0;
 }
 
-/* Footer: #F7F7F7 bg with 80px top padding (per spec) */
+/* Footer: #F7F7F7 bg with 80px top padding (per spec).
+   .footer wrapper bg also set so no white strip shows above the row.
+   Footer titles ("Linden Workshops", "Contact us!") → 24px Fanwood regular.
+   The legacy LW-scope .footer p { border-top: 1px solid #eee } rule
+   added a horizontal rule above the copyright — suppressed here so
+   there's no line between the group caption and the footer bg. */
+body[data-page="our-team"] .footer {
+  background: #F7F7F7;
+  border-top: none !important;
+}
 body[data-page="our-team"] .lw2-footer-row {
   background: #F7F7F7 !important;
   padding-top: 80px !important;
+}
+body[data-page="our-team"] .lw2-footer-row .lw2-footer-form-col h2,
+body[data-page="our-team"] .lw2-footer-blurb + * h2,
+body[data-page="our-team"] .lw2-footer-form-col h2,
+body[data-page="our-team"] .lw2-footer-left h2 {
+  font-family: 'Fanwood Text', Georgia, serif !important;
+  font-size: 24px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+/* Suppress the legacy LW-section .footer p { border-top: 1px solid #eee }
+   rule that draws a thin horizontal line above any <p> in the footer.
+   Only neutralize that border — not the padding-top: 80px on the row. */
+body[data-page="our-team"] .footer p {
+  border-top: none !important;
 }
 
 /* Tablet — narrower portrait */
