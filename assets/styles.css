@@ -5199,23 +5199,23 @@ body[data-page="bronzework"] .lw2-card-body {
    Matches live https://lindenworkshops.com/about/
    ────────────────────────────────────────────────────────── */
 
-body[data-page="our-team"], body[data-page="about"] main.lw2-team {
+body[data-page="our-team"] main.lw2-team, body[data-page="about"] main.lw2-team {
   background: #FFFFFF;
 }
 
 /* Each team-row is full-width with its own bg.
    60px top padding, 50px bottom padding (per spec).
    Stacza is FIRST and stays white; alternation starts from Larsen. */
-body[data-page="our-team"], body[data-page="about"] .lw2-team-row {
+body[data-page="our-team"] .lw2-team-row, body[data-page="about"] .lw2-team-row {
   background: #FFFFFF;
   padding: 60px 24px 50px;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-row--alt-bg {
+body[data-page="our-team"] .lw2-team-row--alt-bg, body[data-page="about"] .lw2-team-row--alt-bg {
   background: #F2F0E9;
 }
 
 /* Inner: portrait left + bio text right, centered max-width */
-body[data-page="our-team"], body[data-page="about"] .lw2-team-row-inner {
+body[data-page="our-team"] .lw2-team-row-inner, body[data-page="about"] .lw2-team-row-inner {
   display: grid;
   grid-template-columns: 240px 1fr;
   gap: 48px;
@@ -5224,23 +5224,23 @@ body[data-page="our-team"], body[data-page="about"] .lw2-team-row-inner {
   align-items: start;
 }
 
-body[data-page="our-team"], body[data-page="about"] .lw2-team-portrait {
+body[data-page="our-team"] .lw2-team-portrait, body[data-page="about"] .lw2-team-portrait {
   display: block;
   width: 240px;
   height: 320px;
   overflow: hidden;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-portrait img {
+body[data-page="our-team"] .lw2-team-portrait img, body[data-page="about"] .lw2-team-portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-body[data-page="our-team"], body[data-page="about"] .lw2-team-text {
+body[data-page="our-team"] .lw2-team-text, body[data-page="about"] .lw2-team-text {
   padding: 0;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-text h2 {
+body[data-page="our-team"] .lw2-team-text h2, body[data-page="about"] .lw2-team-text h2 {
   font-family: 'Fanwood Text', Georgia, serif !important;
   font-size: 32px !important;
   font-style: normal !important;
@@ -5249,14 +5249,14 @@ body[data-page="our-team"], body[data-page="about"] .lw2-team-text h2 {
   margin: 0 0 4px;
   line-height: 1.2;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-role {
+body[data-page="our-team"] .lw2-team-role, body[data-page="about"] .lw2-team-role {
   font-family: 'Fanwood Text', Georgia, serif;
   font-size: 24px;
   font-style: normal;
   color: #000;
   margin: 0 0 22px;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-text p {
+body[data-page="our-team"] .lw2-team-text p, body[data-page="about"] .lw2-team-text p {
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -5264,31 +5264,31 @@ body[data-page="our-team"], body[data-page="about"] .lw2-team-text p {
   color: #000;
   margin: 0 0 18px;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-text p:last-of-type {
+body[data-page="our-team"] .lw2-team-text p:last-of-type, body[data-page="about"] .lw2-team-text p:last-of-type {
   margin-bottom: 0;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-text a {
+body[data-page="our-team"] .lw2-team-text a, body[data-page="about"] .lw2-team-text a {
   color: #A31414;
   text-decoration: underline;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-text a:hover { color: #7A0E0E; }
+body[data-page="our-team"] .lw2-team-text a:hover, body[data-page="about"] .lw2-team-text a:hover { color: #7A0E0E; }
 
 /* Group photo — full-bleed wide + center caption.
    Background matches the FOOTER (#F7F7F7) so there's no white strip
    between the team-group section and the footer. */
-body[data-page="our-team"], body[data-page="about"] .lw2-team-group {
+body[data-page="our-team"] .lw2-team-group, body[data-page="about"] .lw2-team-group {
   background: #F7F7F7;
   padding: 48px 24px;
   text-align: center;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-group img {
+body[data-page="our-team"] .lw2-team-group img, body[data-page="about"] .lw2-team-group img {
   display: block;
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
   height: auto;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-team-group-caption {
+body[data-page="our-team"] .lw2-team-group-caption, body[data-page="about"] .lw2-team-group-caption {
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -5303,11 +5303,11 @@ body[data-page="our-team"], body[data-page="about"] .lw2-team-group-caption {
    The legacy LW-scope .footer p { border-top: 1px solid #eee } rule
    added a horizontal rule above the copyright — suppressed here so
    there's no line between the group caption and the footer bg. */
-body[data-page="our-team"], body[data-page="about"] .footer {
+body[data-page="our-team"] .footer, body[data-page="about"] .footer {
   background: #F7F7F7;
   border-top: none !important;
 }
-body[data-page="our-team"], body[data-page="about"] .lw2-footer-row {
+body[data-page="our-team"] .lw2-footer-row, body[data-page="about"] .lw2-footer-row {
   background: #F7F7F7 !important;
   padding-top: 80px !important;
 }
@@ -5318,18 +5318,18 @@ body[data-page="our-team"], body[data-page="about"] .lw2-footer-row {
 /* Suppress the legacy LW-section .footer p { border-top: 1px solid #eee }
    rule that draws a thin horizontal line above any <p> in the footer.
    Only neutralize that border — not the padding-top: 80px on the row. */
-body[data-page="our-team"], body[data-page="about"] .footer p {
+body[data-page="our-team"] .footer p, body[data-page="about"] .footer p {
   border-top: none !important;
 }
 
 /* Tablet — narrower portrait */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-row-inner {
+  body[data-page="our-team"] .lw2-team-row-inner, body[data-page="about"] .lw2-team-row-inner {
     grid-template-columns: 210px 1fr;
     gap: 36px;
     max-width: 900px;
   }
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-portrait {
+  body[data-page="our-team"] .lw2-team-portrait, body[data-page="about"] .lw2-team-portrait {
     width: 210px;
     height: 280px;
   }
@@ -5337,23 +5337,23 @@ body[data-page="our-team"], body[data-page="about"] .footer p {
 
 /* Mobile — stack portrait above bio */
 @media (max-width: 768px) {
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-row {
+  body[data-page="our-team"] .lw2-team-row, body[data-page="about"] .lw2-team-row {
     padding: 40px 22px 36px;
   }
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-row-inner {
+  body[data-page="our-team"] .lw2-team-row-inner, body[data-page="about"] .lw2-team-row-inner {
     grid-template-columns: 1fr;
     gap: 22px;
     max-width: 100%;
   }
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-portrait {
+  body[data-page="our-team"] .lw2-team-portrait, body[data-page="about"] .lw2-team-portrait {
     width: 200px;
     height: 268px;
     margin: 0;
   }
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-text h2 { font-size: 28px !important; }
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-role { font-size: 20px; }
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-text p { font-size: 16px; line-height: 26px; }
-  body[data-page="our-team"], body[data-page="about"] .lw2-team-group { padding: 32px 16px; }
+  body[data-page="our-team"] .lw2-team-text h2, body[data-page="about"] .lw2-team-text h2 { font-size: 28px !important; }
+  body[data-page="our-team"] .lw2-team-role, body[data-page="about"] .lw2-team-role { font-size: 20px; }
+  body[data-page="our-team"] .lw2-team-text p, body[data-page="about"] .lw2-team-text p { font-size: 16px; line-height: 26px; }
+  body[data-page="our-team"] .lw2-team-group, body[data-page="about"] .lw2-team-group { padding: 32px 16px; }
 }
 
 /* ============================================================
@@ -6305,102 +6305,349 @@ body[data-page="contact"] .lw2-leaf-contact-line a {
   text-decoration: underline;
 }
 
-/* -- WHERE-TO-BUY -- */
-body[data-page="where-to-buy"] .lw2-wtb-routes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+/* -- WHERE-TO-BUY (rebuilt to match live lindenworkshops.com/where-to-buy/)
+   Live UI structure:
+   1. Two-line headline (no map intro)
+   2. Three-brand routing row (BWS / FA / Talisman) — copy + links
+   3. Map widget (stubbed; production wires in the real Google Maps embed)
+   4. Brand × region tab row: BWS has 4 regions, FA has 2, Talisman has a direct-studio card
+   5. Tabbed showroom panels — one visible at a time per brand
+   --------------------------------------------------------------------- */
+
+/* HERO */
+body[data-page="where-to-buy"] .lw2-wtb-hero {
+  padding: 64px 24px 48px;
+  text-align: center;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 24px 72px;
 }
-body[data-page="where-to-buy"] .lw2-wtb-route {
-  background: #F7F6F1;
-  padding: 32px;
-}
-body[data-page="where-to-buy"] .lw2-wtb-route h3 {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-weight: 400;
-  font-size: 22px;
-  margin: 0 0 12px;
-  color: #000;
-}
-body[data-page="where-to-buy"] .lw2-wtb-route p {
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #333;
-  margin: 0;
-}
-body[data-page="where-to-buy"] .lw2-wtb-route a {
-  color: #A31414;
-  text-decoration: underline;
-}
-body[data-page="where-to-buy"] .lw2-wtb-region {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 24px 96px;
-}
-body[data-page="where-to-buy"] .lw2-wtb-region-title {
+body[data-page="where-to-buy"] .lw2-wtb-hero h1,
+body[data-page="where-to-buy"] .lw2-wtb-hero h2 {
   font-family: 'Fanwood Text', Georgia, serif;
   font-weight: 400;
   font-size: 36px;
-  text-align: center;
-  margin: 32px 0 6px;
+  line-height: 1.25;
   color: #000;
+  margin: 0 0 12px;
 }
-body[data-page="where-to-buy"] .lw2-wtb-region-sub {
+body[data-page="where-to-buy"] .lw2-wtb-hero h2 { margin-bottom: 0; }
+
+/* THREE-BRAND ROUTING ROW */
+body[data-page="where-to-buy"] .lw2-wtb-brand-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-brand-name {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: #000;
+  margin: 0 0 16px;
+  text-align: center;
+}
+body[data-page="where-to-buy"] .lw2-wtb-brand p {
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 14px;
+  line-height: 1.7;
+  color: #222;
+  margin: 0;
   text-align: center;
-  color: #666;
-  letter-spacing: 0.08em;
-  margin: 0 0 56px;
-  text-transform: uppercase;
 }
-body[data-page="where-to-buy"] .lw2-wtb-region-head {
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-weight: 600;
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+body[data-page="where-to-buy"] .lw2-wtb-brand a {
+  color: #A31414;
+  text-decoration: underline;
+}
+
+/* MAP WIDGET (stub) */
+body[data-page="where-to-buy"] .lw2-wtb-map-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-heading {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0 0 18px;
   color: #000;
-  border-top: 1px solid #DDD;
-  padding-top: 32px;
-  margin: 48px 0 28px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map {
+  border: 1px solid #DDD;
+  background: #FAFAF7;
+  position: relative;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-stub { padding: 0; }
+body[data-page="where-to-buy"] .lw2-wtb-map-controls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 10px;
+  background: #FFF;
+  border-bottom: 1px solid #E0E0E0;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-tab {
+  background: #FFF;
+  border: 1px solid #CCC;
+  padding: 6px 16px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  color: #222;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-tab + .lw2-wtb-map-tab { border-left: none; }
+body[data-page="where-to-buy"] .lw2-wtb-map-tab.is-active {
+  background: #F0F0F0;
+  font-weight: 600;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-search {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-search input {
+  padding: 5px 10px;
+  border: 1px solid #CCC;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  width: 140px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-search select {
+  padding: 5px 8px;
+  border: 1px solid #CCC;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-search button {
+  padding: 5px 14px;
+  background: #FFF;
+  border: 1px solid #CCC;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-canvas {
+  height: 380px;
+  background: linear-gradient(135deg, #E8E4D7 0%, #D9D2BD 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(0,0,0,0.04) 40px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(0,0,0,0.04) 40px);
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-canvas-inner {
+  position: relative;
+  text-align: center;
+  background: rgba(255,255,255,0.85);
+  padding: 24px 40px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-placeholder {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 20px;
+  color: #555;
+  margin: 0 0 6px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-note {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+/* BRAND × REGION SELECTOR GRID */
+body[data-page="where-to-buy"] .lw2-wtb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 16px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-col-title {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0 0 18px;
+  color: #000;
+  text-align: center;
+}
+body[data-page="where-to-buy"] .lw2-wtb-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #E5E5E5;
+}
+body[data-page="where-to-buy"] .lw2-wtb-tab {
+  background: #FFF;
+  border: none;
+  border-bottom: 1px solid #E5E5E5;
+  padding: 14px 16px;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 18px;
+  color: #000;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+body[data-page="where-to-buy"] .lw2-wtb-tab:last-child { border-bottom: none; }
+body[data-page="where-to-buy"] .lw2-wtb-tab:hover { background: #F7F6F1; color: #A31414; }
+body[data-page="where-to-buy"] .lw2-wtb-tab.is-active {
+  background: #F2F0E9;
+  color: #A31414;
+  font-weight: 600;
+}
+
+/* Talisman: direct-studio card (no tabs) */
+body[data-page="where-to-buy"] .lw2-wtb-talisman-card {
+  border: 1px solid #E5E5E5;
+  padding: 24px 18px;
+  text-align: center;
+}
+body[data-page="where-to-buy"] .lw2-wtb-talisman-line {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 17px;
+  color: #A31414;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+body[data-page="where-to-buy"] .lw2-wtb-talisman-phone {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 22px;
+  margin: 0 0 18px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-talisman-phone a { color: #A31414; text-decoration: none; }
+body[data-page="where-to-buy"] .lw2-wtb-talisman-cta {
+  display: inline-block;
+  padding: 10px 22px;
+  border: 1px solid #333;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: #000;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+body[data-page="where-to-buy"] .lw2-wtb-talisman-cta:hover { background: #000; color: #FFF; }
+
+/* TAB PANELS — only the active one shows */
+body[data-page="where-to-buy"] .lw2-wtb-panel {
+  display: none;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+  border-top: 1px solid #EEE;
+}
+body[data-page="where-to-buy"] .lw2-wtb-panel.is-active { display: block; }
+body[data-page="where-to-buy"] .lw2-wtb-panel-title {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #000;
+  margin: 0 0 28px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-panel-lede {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 0 24px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-state-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 36px;
 }
-body[data-page="where-to-buy"] .lw2-wtb-state h4 {
+body[data-page="where-to-buy"] .lw2-wtb-state-grid--narrow {
+  grid-template-columns: 1fr;
+  max-width: 480px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state h5 {
   font-family: 'Fanwood Text', Georgia, serif;
   font-weight: 400;
   font-size: 20px;
   color: #A31414;
-  margin: 0 0 12px;
-  padding-top: 8px;
+  margin: 16px 0 12px;
+  padding-top: 0;
 }
-body[data-page="where-to-buy"] .lw2-wtb-state h4:first-child { padding-top: 0; }
+body[data-page="where-to-buy"] .lw2-wtb-state h5:first-child { margin-top: 0; }
 body[data-page="where-to-buy"] .lw2-wtb-state p {
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.55;
   color: #222;
-  margin: 0 0 18px;
+  margin: 0 0 16px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-state p strong {
   font-weight: 600;
   color: #A31414;
 }
-body[data-page="where-to-buy"] .lw2-wtb-state a {
-  color: #A31414;
-  text-decoration: underline;
+body[data-page="where-to-buy"] .lw2-wtb-state a { color: #A31414; text-decoration: underline; }
+body[data-page="where-to-buy"] .lw2-wtb-state-note {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  margin: 24px 0 0;
 }
-body[data-page="where-to-buy"] .lw2-wtb-state--note {
+body[data-page="where-to-buy"] .lw2-wtb-state-note a { color: #A31414; text-decoration: underline; }
+
+/* Foundry Art channel cards */
+body[data-page="where-to-buy"] .lw2-wtb-channel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-channel-card {
   background: #F7F6F1;
-  padding: 24px;
+  padding: 28px;
+  border: 1px solid #E5E5E5;
+  text-align: center;
+}
+body[data-page="where-to-buy"] .lw2-wtb-channel-card h5 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0 0 14px;
+  color: #000;
+}
+body[data-page="where-to-buy"] .lw2-wtb-channel-card p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #222;
+  margin: 0 0 14px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-channel-card a { color: #A31414; text-decoration: underline; }
+body[data-page="where-to-buy"] .lw2-wtb-channel-cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 22px;
+  border: 1px solid #A31414 !important;
+  color: #A31414 !important;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+body[data-page="where-to-buy"] .lw2-wtb-channel-cta:hover {
+  background: #A31414;
+  color: #FFF !important;
 }
 
 /* -- TILE COLLECTIONS -- */
@@ -6642,8 +6889,13 @@ body[data-page="feature-drury"] .lw2-article-credit {
 
   body[data-page="contact"] .lw2-leaf-form-wrap { grid-template-columns: 1fr; gap: 24px; }
 
-  body[data-page="where-to-buy"] .lw2-wtb-routes { grid-template-columns: 1fr; }
+  body[data-page="where-to-buy"] .lw2-wtb-brand-row { grid-template-columns: 1fr; gap: 32px; }
+  body[data-page="where-to-buy"] .lw2-wtb-grid { grid-template-columns: 1fr; gap: 28px; }
   body[data-page="where-to-buy"] .lw2-wtb-state-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  body[data-page="where-to-buy"] .lw2-wtb-channel-grid { grid-template-columns: 1fr; }
+  body[data-page="where-to-buy"] .lw2-wtb-hero h1,
+  body[data-page="where-to-buy"] .lw2-wtb-hero h2 { font-size: 30px; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-canvas { height: 320px; }
 
   body[data-page="tile-collections"] .lw2-tc-sub-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   body[data-page="tile-collections"] .lw2-tc-sub-grid--one { grid-template-columns: 1fr; }
@@ -6674,16 +6926,34 @@ body[data-page="feature-drury"] .lw2-article-credit {
   body[data-page="contact"] .lw2-leaf-form-card,
   body[data-page="contact"] .lw2-leaf-contact-card { padding: 28px 22px; }
 
-  body[data-page="where-to-buy"] .lw2-wtb-routes {
-    grid-template-columns: 1fr;
-    padding: 0 18px 48px;
-  }
-  body[data-page="where-to-buy"] .lw2-wtb-region { padding: 0 18px 64px; }
-  body[data-page="where-to-buy"] .lw2-wtb-state-grid {
+  /* WTB mobile: stack everything vertically */
+  body[data-page="where-to-buy"] .lw2-wtb-hero { padding: 40px 18px 24px; }
+  body[data-page="where-to-buy"] .lw2-wtb-hero h1,
+  body[data-page="where-to-buy"] .lw2-wtb-hero h2 { font-size: 26px; line-height: 1.3; }
+  body[data-page="where-to-buy"] .lw2-wtb-brand-row {
     grid-template-columns: 1fr;
     gap: 28px;
+    padding: 24px 18px 40px;
   }
-  body[data-page="where-to-buy"] .lw2-wtb-region-title { font-size: 28px; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-wrap { padding: 0 18px 16px; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-heading { font-size: 18px; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  body[data-page="where-to-buy"] .lw2-wtb-map-search { margin-left: 0; width: 100%; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-search input { flex: 1; width: auto; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-canvas { height: 280px; }
+  body[data-page="where-to-buy"] .lw2-wtb-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px 18px 16px;
+  }
+  body[data-page="where-to-buy"] .lw2-wtb-panel { padding: 20px 18px 36px; }
+  body[data-page="where-to-buy"] .lw2-wtb-panel-title { font-size: 20px; }
+  body[data-page="where-to-buy"] .lw2-wtb-state-grid { grid-template-columns: 1fr; gap: 24px; }
+  body[data-page="where-to-buy"] .lw2-wtb-channel-grid { grid-template-columns: 1fr; gap: 18px; }
 
   body[data-page="tile-collections"] .lw2-tc-panel { padding: 40px 18px 56px; }
   /* Mobile: explicit max-width 280px (fits 320–390 viewports easily)

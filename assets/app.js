@@ -676,6 +676,47 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
+  /* Where-to-Buy: brand region tab switching.
+     Each brand column has its own group of tabs (data-region values
+     are prefixed bws- / fa-). Clicking a tab activates its panel and
+     deactivates the panel that shares the same brand prefix. */
+  function initWtbTabs() {
+    const tabs = document.querySelectorAll('.lw2-wtb-tab[data-region]');
+    if (!tabs.length) return;
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        const region = tab.getAttribute('data-region');
+        if (!region) return;
+        const brandPrefix = region.split('-')[0]; // 'bws' or 'fa'
+
+        // Deactivate sibling tabs in the same brand group
+        document.querySelectorAll('.lw2-wtb-tab[data-region^="' + brandPrefix + '-"]').forEach(t => {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+
+        // Swap panels in the same brand group
+        document.querySelectorAll('.lw2-wtb-panel[data-region^="' + brandPrefix + '-"]').forEach(p => {
+          p.classList.remove('is-active');
+        });
+        const panel = document.getElementById(region);
+        if (panel) panel.classList.add('is-active');
+      });
+    });
+
+    // Map mode toggle (Map / Satellite) — visual-only since map is stubbed
+    document.querySelectorAll('.lw2-wtb-map-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.lw2-wtb-map-tab').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+      });
+    });
+  }
+
   ready(() => {
     initLayout();
     initDrawer();
@@ -691,6 +732,7 @@
     initOptionRows();
     initShipToggle();
     initTradeToggle();
+    initWtbTabs();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();

@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260603-15">
-<link rel="stylesheet" href="/assets/styles.css?v=20260603-15">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260603-16">
+<link rel="stylesheet" href="/assets/styles.css?v=20260603-16">
 </head>
 <body data-page="where-to-buy" data-section="linden">
 
@@ -40,37 +40,100 @@
 
   <main class="lw2-leaf">
 
-    <section class="lw2-leaf-hero">
-      <h1>Where to Buy</h1>
-      <p class="lw2-leaf-lede">Our tiles are sold in fine showrooms around the world. We also sell tiles directly from our Chicago studio.</p>
+    <!-- HERO -->
+    <section class="lw2-wtb-hero">
+      <h1>Our tiles are sold in fine showrooms around the world.</h1>
+      <h2>We also sell tiles directly from our studio.</h2>
     </section>
 
-    <!-- ROUTING — by brand -->
-    <section class="lw2-wtb-routes">
-      <div class="lw2-wtb-route">
-        <h3>Bronzework Studio</h3>
-        <p>Please use the showroom list below. If there is no showroom within a 50 mile radius of your location, <a href="/contact/">contact our studio directly</a>.</p>
+    <!-- THREE-BRAND ROUTING HEADER (matches live layout) -->
+    <section class="lw2-wtb-brand-row">
+      <div class="lw2-wtb-brand">
+        <h3 class="lw2-wtb-brand-name">BRONZEWORK STUDIO</h3>
+        <p>For Bronzework Studio, please use the <a href="#map">showroom map</a> or <a href="#regions">list</a> below. If there is no showroom within a 50 mile radius of your location, <a href="/contact/">contact our studio directly</a>.</p>
       </div>
-      <div class="lw2-wtb-route">
-        <h3>Foundry Art</h3>
-        <p>Customers in the U.S. and Canada can order online at <a href="https://www.claremonttile.com/" target="_blank" rel="noopener">Claremont Tile</a>. Customers in the United Kingdom can contact <a href="https://www.firedearth.com/" target="_blank" rel="noopener">Fired Earth</a>. For all other inquiries, please <a href="/contact/">contact our studio directly</a>.</p>
+      <div class="lw2-wtb-brand">
+        <h3 class="lw2-wtb-brand-name">FOUNDRY ART</h3>
+        <p>For Foundry Art, customers in the U.S. and Canada can order online at <a href="https://www.claremonttile.com/" target="_blank" rel="noopener">Claremont Tile</a>. Customers in the United Kingdom can contact <a href="https://www.firedearth.com/" target="_blank" rel="noopener">Fired Earth</a>. For all other inquiries, please <a href="/contact/">contact our studio directly</a>.</p>
       </div>
-      <div class="lw2-wtb-route">
-        <h3>Talisman</h3>
-        <p>Currently sold direct from our Chicago studio. Please <a href="/contact/">contact us</a> for orders and availability.</p>
+      <div class="lw2-wtb-brand">
+        <h3 class="lw2-wtb-brand-name">TALISMAN</h3>
+        <p>For Talisman, please <a href="/contact/">contact our studio directly</a>.</p>
       </div>
     </section>
 
-    <!-- UNITED STATES — Bronzework Studio showrooms, grouped by region -->
-    <section class="lw2-wtb-region">
-      <h2 class="lw2-wtb-region-title">Locate a Bronzework Studio showroom</h2>
-      <p class="lw2-wtb-region-sub">United States · Canada · Europe</p>
+    <!-- MAP PLACEHOLDER + LOCATE HEADING -->
+    <section class="lw2-wtb-map-wrap" id="map">
+      <h3 class="lw2-wtb-map-heading">Locate a Bronzework Studio showroom</h3>
+      <div class="lw2-wtb-map" role="img" aria-label="Map of Bronzework Studio showroom locations — interactive map will be wired up at production launch">
+        <div class="lw2-wtb-map-stub">
+          <div class="lw2-wtb-map-controls">
+            <button type="button" class="lw2-wtb-map-tab is-active">Map</button>
+            <button type="button" class="lw2-wtb-map-tab">Satellite</button>
+            <div class="lw2-wtb-map-search">
+              <input type="text" placeholder="City / ZIP" aria-label="Search by city or ZIP">
+              <select aria-label="Search radius">
+                <option>50 mi</option>
+                <option>100 mi</option>
+                <option>250 mi</option>
+              </select>
+              <button type="button">Search</button>
+            </div>
+          </div>
+          <div class="lw2-wtb-map-canvas">
+            <div class="lw2-wtb-map-canvas-inner">
+              <p class="lw2-wtb-map-placeholder">Map placeholder</p>
+              <p class="lw2-wtb-map-note">Production launch will swap in the live Google Maps embed used at lindenworkshops.com.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h3 class="lw2-wtb-region-head">Midwest</h3>
+    <!-- BRAND × REGION GRID -->
+    <section class="lw2-wtb-grid" id="regions">
+      <!-- Bronzework Studio: 4 region tabs -->
+      <div class="lw2-wtb-col">
+        <h3 class="lw2-wtb-col-title">Bronzework Studio</h3>
+        <div class="lw2-wtb-tabs" role="tablist" aria-label="Bronzework Studio region">
+          <button type="button" class="lw2-wtb-tab is-active" role="tab" aria-selected="true" aria-controls="bws-central" data-region="bws-central">Central US</button>
+          <button type="button" class="lw2-wtb-tab" role="tab" aria-selected="false" aria-controls="bws-eastern" data-region="bws-eastern">Eastern US</button>
+          <button type="button" class="lw2-wtb-tab" role="tab" aria-selected="false" aria-controls="bws-western" data-region="bws-western">Western US</button>
+          <button type="button" class="lw2-wtb-tab" role="tab" aria-selected="false" aria-controls="bws-canada" data-region="bws-canada">Canada</button>
+        </div>
+      </div>
+
+      <!-- Foundry Art: 2 region tabs -->
+      <div class="lw2-wtb-col">
+        <h3 class="lw2-wtb-col-title">Foundry Art</h3>
+        <div class="lw2-wtb-tabs" role="tablist" aria-label="Foundry Art region">
+          <button type="button" class="lw2-wtb-tab is-active" role="tab" aria-selected="true" aria-controls="fa-us" data-region="fa-us">United States</button>
+          <button type="button" class="lw2-wtb-tab" role="tab" aria-selected="false" aria-controls="fa-canada-europe" data-region="fa-canada-europe">Canada &amp; Europe</button>
+        </div>
+      </div>
+
+      <!-- Talisman: direct studio contact -->
+      <div class="lw2-wtb-col">
+        <h3 class="lw2-wtb-col-title">Talisman</h3>
+        <div class="lw2-wtb-talisman-card">
+          <p class="lw2-wtb-talisman-line"><strong>Order directly from our Chicago studio</strong></p>
+          <p class="lw2-wtb-talisman-phone"><a href="tel:7737842628">1 773 784-2628</a></p>
+          <a href="/contact/" class="lw2-wtb-talisman-cta">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABBED SHOWROOM PANELS — one per region.
+         First in each column is visible by default; others hidden until tab clicked.
+         (CSS + tiny app.js handler power the show/hide.) -->
+
+    <!-- Bronzework Studio: Central US -->
+    <section class="lw2-wtb-panel is-active" id="bws-central" data-region="bws-central">
+      <h4 class="lw2-wtb-panel-title">Bronzework Studio — Central US</h4>
       <div class="lw2-wtb-state-grid">
 
         <div class="lw2-wtb-state">
-          <h4>Illinois</h4>
+          <h5>Illinois</h5>
           <p>Renaissance<br>225 W. Ohio St.<br><strong>Chicago</strong> IL 60654<br>(312) 467-9590</p>
           <p>Material Bespoke Stone + Tile<br>212 W. Kinzie St.<br><strong>Chicago</strong> IL 60654<br>(312) 226-0222</p>
           <p>Artistic Tile<br>222 Merchandise Mart Plaza, Suite 105A<br><strong>Chicago</strong> IL 60654<br>(312) 670-0612</p>
@@ -81,196 +144,162 @@
         </div>
 
         <div class="lw2-wtb-state">
-          <h4>Iowa</h4>
+          <h5>Iowa</h5>
           <p>Adams Tile &amp; Stone<br>1198 Grand Ave<br><strong>Marion</strong> IA 52302<br>(319) 377-0231</p>
-          <h4>Kansas</h4>
+          <h5>Kansas</h5>
           <p>Neufeldt’s Flooring<br>110 W. 2nd<br><strong>Buhler</strong> KS 67522<br>(620) 543-2274</p>
           <p>International Materials of Design<br>4691 Indian Creek Parkway<br><strong>Overland Park</strong> KS 66207<br>(913) 383-3383</p>
-          <h4>Michigan</h4>
+          <h5>Michigan</h5>
           <p>Cercan Tile<br>1700 Stutz Dr, Ste 122<br><strong>Troy</strong> MI 48084<br>(248) 643-6520</p>
-          <h4>Wisconsin</h4>
+          <h5>Wisconsin</h5>
           <p>Bella Tile &amp; Stone<br>609 Milwaukee Street<br><strong>Delafield</strong> WI 53108<br>(262) 303-9032</p>
         </div>
 
         <div class="lw2-wtb-state">
-          <h4>Louisiana</h4>
+          <h5>Louisiana</h5>
           <p>Palatial Stone &amp; Tile, LLC<br>1526 Religious Street<br><strong>New Orleans</strong> LA 70130<br>(504) 576-9000</p>
-          <h4>Oklahoma</h4>
+          <h5>Oklahoma</h5>
           <p>Artisan Tile Studio<br>300 W Wilshire Blvd<br><strong>Oklahoma City</strong> OK 73116<br>(405) 242-2227</p>
           <p>TileStone Distributors, Inc.<br>2309 East 69th St.<br><strong>Tulsa</strong> OK 74136<br>(918) 492-5434</p>
-          <h4>Tennessee</h4>
+          <h5>Tennessee</h5>
           <p>Haskell Interiors, LLC<br>85 First St. N.E.<br><strong>Cleveland</strong> TN 37311<br>(423) 472-6409</p>
           <p>Renaissance Tile &amp; Bath<br>1625 Broadway<br><strong>Nashville</strong> TN 37203<br>(615) 742-0054</p>
-        </div>
-      </div>
-
-      <h3 class="lw2-wtb-region-head">Texas</h3>
-      <div class="lw2-wtb-state-grid">
-        <div class="lw2-wtb-state">
-          <h4>Texas</h4>
+          <h5>Texas</h5>
           <p>Embellishments<br>621 N FM 1187<br><strong>Aledo</strong> TX 76008<br>(817) 475-7372</p>
-          <p>Architerra Studio at Evergreen<br>1701 Evergreen, Suite 2<br><strong>Austin</strong> TX 78704<br>(512) 441-5540</p>
-          <p>Material Bespoke Stone + Tile<br>701 Capitol Texas Hwy, Suite Q990<br><strong>Austin</strong> TX 78746<br>(512) 328-7682</p>
           <p>Material Bespoke Stone + Tile<br>1626 Hi Line Dr., Suite A<br><strong>Dallas</strong> TX 75207<br>(214) 752-1143</p>
-        </div>
-        <div class="lw2-wtb-state">
-          <h4>Texas (cont.)</h4>
-          <p>Renaissance Tile &amp; Bath<br>1617 Hi Line Drive, Suite 280<br><strong>Dallas</strong> TX 75207<br>(214) 571-9867</p>
-          <p>Artistic Tile<br>1617 Hi Line Drive, Suite 270<br><strong>Dallas</strong> TX 75207<br>(214) 760-1753</p>
           <p>Material Bespoke Stone + Tile<br>1335 West Gray St., Suite 100<br><strong>Houston</strong> TX 77019<br>(713) 960-8601</p>
         </div>
-        <div class="lw2-wtb-state">
-          <h4>Texas (cont.)</h4>
-          <p>Collected Coverings<br>408 Water Street<br><strong>Kerrville</strong> TX 78028<br>(830) 257-6088</p>
-          <p>Material Bespoke Stone + Tile<br>120 W. Josephine St.<br><strong>San Antonio</strong> TX 78212<br>(210) 731-8453</p>
-          <p>R. Gladwin i. Design Tile<br>100 Dolores St., Suite 290<br><strong>Fredericksburg</strong> TX 93923<br>(831) 629-1111</p>
-        </div>
       </div>
+    </section>
 
-      <h3 class="lw2-wtb-region-head">East Coast</h3>
+    <!-- Bronzework Studio: Eastern US -->
+    <section class="lw2-wtb-panel" id="bws-eastern" data-region="bws-eastern">
+      <h4 class="lw2-wtb-panel-title">Bronzework Studio — Eastern US</h4>
       <div class="lw2-wtb-state-grid">
+
         <div class="lw2-wtb-state">
-          <h4>Connecticut</h4>
+          <h5>Connecticut</h5>
           <p>Karen Buckmeyer Home<br>175 Post Road West<br><strong>Westport</strong> CT 06880<br>(203) 454-0032</p>
-          <h4>Massachusetts</h4>
+          <h5>Massachusetts</h5>
           <p>Discover Tile LLC<br>One Design Center Place, Suite 647<br><strong>Boston</strong> MA 02210<br>(617) 330-7900</p>
           <p>Nantucket Housefitters &amp; Tile Gallery<br>16A Sparks Avenue<br><strong>Nantucket</strong> MA 02554<br>(508) 228-2815</p>
-          <h4>Vermont</h4>
+          <h5>Vermont</h5>
           <p>Village Tile<br>685 Depot Street<br><strong>Manchester Center</strong> VT 05255<br>(802) 366-1040</p>
           <p>Best Tile of Vermont<br>287 Leroy Road<br><strong>Williston</strong> VT 05495<br>(802) 863-5800</p>
-          <h4>Rhode Island</h4>
+          <h5>Rhode Island</h5>
           <p>Dzyna Signature Kitchen &amp; Bath<br>3001 East Main Road<br><strong>Portsmouth</strong> RI 02871<br>(401) 293-5855</p>
         </div>
 
         <div class="lw2-wtb-state">
-          <h4>New York</h4>
+          <h5>New York</h5>
           <p>Urban Archaeology<br>158 Franklin Street<br><strong>New York</strong> NY 10013<br>(212) 431-4646</p>
           <p>Artistic Tile, Inc.<br>38 West 21st Street<br><strong>New York</strong> NY 10010<br>(212) 727-9331</p>
           <p>Artistic Tile<br>The A&amp;D Building – 150 East 58th Street<br><strong>New York</strong> NY 10155<br>(212) 838-3222</p>
           <p>Complete Tile Collection<br>42 West 15th Street<br><strong>New York</strong> NY 10011<br>(212) 255-4450</p>
-          <p>Homestone Gallery<br>2914 Walden Ave, Ste 400<br><strong>Depew</strong> NY 14043<br>(716) 651-0987</p>
-          <p>Fancy Fixtures Showroom<br>500 Old Bethpage Rd, Ste. B<br><strong>Plainview</strong> NY 11803<br>(516) 349-3003</p>
-          <p>Showcase Baths<br>1192 Northern Blvd<br><strong>Manhasset</strong> NY 11030<br>(516) 869-0300</p>
-          <p>Rye Ridge Ceramic Tile<br>520 North Main Street<br><strong>Port Chester</strong> NY 10573<br>(914) 939-1100</p>
-          <p>Blackman Plumbing Supply<br>444 County Road 39A<br><strong>Southampton</strong> NY 11968<br>(631) 283-1500</p>
-          <p>Artistic Tile<br>65 Tarrytown Road<br><strong>White Plains</strong> NY 10607<br>(914) 422-0041</p>
-        </div>
-
-        <div class="lw2-wtb-state">
-          <h4>New Jersey</h4>
-          <p>Mediterranean Tile &amp; Marble<br>7 Olcott Square<br><strong>Bernardsville</strong> NJ 07924<br>(908) 953-9990</p>
-          <p>Mediterranean Tile<br>461 Route 46, West Crown Plaza<br><strong>Fairfield</strong> NJ 07004<br>(973) 808-1267</p>
+          <h5>New Jersey</h5>
           <p>Monmouth Street Tile<br>44 Monmouth Street<br><strong>Red Bank</strong> NJ 07701<br>(732) 933-1760</p>
-          <p>Monmouth Street Tile<br>2175 Hwy. 35<br><strong>Sea Girt</strong> NJ 08750<br>(732) 974-0048</p>
           <p>Artistic Tile<br>520 Secaucus Road<br><strong>Secaucus</strong> NJ 07094<br>(201) 864-7000</p>
-          <p>Artistic Tile<br>777 Broad Street<br><strong>Shrewsbury</strong> NJ 07702<br>(732) 212-1616</p>
-          <p>Artistic Tile<br>727 Route 17<br><strong>Paramus</strong> NJ 07652<br>(201) 670-6100</p>
-          <p>W.D. Virtue Tile Co.<br>160 Broad Street<br><strong>Summit</strong> NJ 07901<br>(908) 273-6936</p>
         </div>
-      </div>
 
-      <h3 class="lw2-wtb-region-head">Mid-Atlantic &amp; South</h3>
-      <div class="lw2-wtb-state-grid">
         <div class="lw2-wtb-state">
-          <h4>Pennsylvania</h4>
+          <h5>Pennsylvania</h5>
           <p>Devon Tile &amp; Design Studio<br>111 E. Lancaster Avenue<br><strong>Devon</strong> PA 19333<br>(610) 687-3368</p>
-          <p>Tileology<br>245 Centerville Road<br><strong>Lancaster</strong> PA 17603<br>(717) 290-7444</p>
-          <p>Devon Tile – Philadelphia Navy Yard<br>4050 S 26th St #14, Ste 100B<br><strong>Philadelphia</strong> PA 19112<br>(610) 687-3368</p>
-          <p>Joanne Hudson Associates, LTD.<br>Marketplace Design Center, 2400 Market Street, Suite 310<br><strong>Philadelphia</strong> PA 19103<br>(215) 568-5501</p>
-          <h4>Maryland</h4>
+          <p>Joanne Hudson Associates, LTD.<br>Marketplace Design Center, Suite 310<br><strong>Philadelphia</strong> PA 19103<br>(215) 568-5501</p>
+          <h5>Maryland</h5>
           <p>Architectural Ceramics, Inc.<br>800 E. Gude Dr., Suite F<br><strong>Rockville</strong> MD 20850<br>(301) 762-4140</p>
-          <h4>Washington, DC</h4>
-          <p>Renaissance Tile &amp; Bath<br>Washington Design Center, 1099 14th St NW, Ste 460<br><strong>Washington</strong> DC 22314<br>(703) 549-7806</p>
-        </div>
-
-        <div class="lw2-wtb-state">
-          <h4>Florida</h4>
+          <h5>Florida</h5>
           <p>Innovative Surfaces<br>3218 Ponce de Leon Blvd.<br><strong>Coral Gables</strong> FL 33134<br>(305) 446-9059</p>
-          <p>Ceramic Matrix<br>1250 Wallace Drive, Suite N<br><strong>Delray Beach</strong> FL 33444<br>(561) 353-1449</p>
-          <p>Ceramic Matrix<br>3890 N 28th Terrace<br><strong>Hollywood</strong> FL 33020<br>(954) 990-8605</p>
-          <p>Ceramic Matrix<br>7924 NE 2nd Ave<br><strong>Miami</strong> FL 33138<br>(305) 573-5997</p>
-          <p>Ceramic Matrix<br>2160 Trade Center Way<br><strong>Naples</strong> FL 34109<br>(239) 596-7997</p>
-          <p>Moza &amp; Company<br>200 East Garden Street<br><strong>Pensacola</strong> FL 32502<br>(850) 497-6011</p>
-          <p>Beach House Tile &amp; Design<br>118 Spires Ln, Unit 1A<br><strong>Santa Rosa Beach</strong> FL 32459<br>(850) 622-1986</p>
-          <p>Ceramic Matrix<br>4009 W. Gandy Blvd<br><strong>Tampa</strong> FL 33611<br>(813) 284-6959</p>
-          <p>Decorum Tile &amp; Stone<br>3131 W. Kennedy Blvd<br><strong>Tampa</strong> FL 33609<br>(813) 793-7481</p>
-          <p>Alexander Morgan<br>345 S. Orlando Ave.<br><strong>Winter Park</strong> FL 32789<br>(407) 629-2393</p>
-        </div>
-
-        <div class="lw2-wtb-state">
-          <h4>Georgia</h4>
-          <p>Material Bespoke Stone + Tile<br>764 Miami Circle, Suite 128<br><strong>Atlanta</strong> GA 30324<br>(404) 478-2770</p>
-          <p>Renaissance Tile &amp; Bath<br>3955 Oakcliff Industrial Court #10<br><strong>Atlanta</strong> GA 30340<br>(404) 231-9203</p>
+          <p>Ceramic Matrix<br>(multiple Florida locations — see <a href="/contact/">studio directly</a>)</p>
+          <h5>Georgia</h5>
           <p>Renaissance Tile &amp; Bath — Corporate Office<br>349 Peachtree Hills Ave<br><strong>Atlanta</strong> GA 30305<br>(404) 231-5657</p>
-          <p>Simmer &amp; Soak<br>8 Market Street<br><strong>St. Simons Island</strong> GA 31522<br>(912) 268-4210</p>
-          <h4>North Carolina</h4>
-          <p>Renaissance Tile &amp; Bath<br>2041 South Blvd., Suite A<br><strong>Charlotte</strong> NC 28203<br>(704) 372-1575</p>
-          <p>Studio 321<br>321 Main Avenue N.E.<br><strong>Hickory</strong> NC 28601<br>(828) 304-8258</p>
-          <h4>South Carolina</h4>
+          <h5>South Carolina</h5>
           <p>KPM Flooring<br>35 Main St., Suite 110<br><strong>Hilton Head</strong> SC 29926<br>(843) 342-4955</p>
         </div>
       </div>
+    </section>
 
-      <h3 class="lw2-wtb-region-head">West</h3>
+    <!-- Bronzework Studio: Western US -->
+    <section class="lw2-wtb-panel" id="bws-western" data-region="bws-western">
+      <h4 class="lw2-wtb-panel-title">Bronzework Studio — Western US</h4>
       <div class="lw2-wtb-state-grid">
         <div class="lw2-wtb-state">
-          <h4>Arizona</h4>
+          <h5>Arizona</h5>
           <p>Craftsman Court Ceramics, Inc.<br>4237 N. Craftsman Court<br><strong>Scottsdale</strong> AZ 85251<br>(480) 970-6611</p>
           <p>Fractured Earth<br>98 East Fort Lowell Rd.<br><strong>Tucson</strong> AZ 85705<br>(520) 620-6219</p>
-          <h4>Colorado</h4>
+          <h5>Colorado</h5>
           <p>Aspen Tile &amp; Bath Gallery Inc.<br>601 Rio Grande Pl., Suite 102<br><strong>Aspen</strong> CO 81611<br>(970) 925-8453</p>
-          <p>Decorative Materials International<br>150 Basalt Center Circle<br><strong>Basalt</strong> CO 81621<br>(970) 927-0700</p>
           <p>Decorative Materials International Ltd.<br>595 S. Broadway, No. 121E<br><strong>Denver</strong> CO 80209<br>(303) 722-1333</p>
-          <p>Material Bespoke Stone + Tile<br>595 S. Broadway, Suite 107 S<br><strong>Denver</strong> CO 80209<br>(303) 777-6007</p>
-          <p>Decorative Materials International<br>105 Edwards Village Blvd.<br><strong>Edwards</strong> CO 81632<br>(970) 926-2322</p>
+          <h5>Idaho</h5>
+          <p>The Tile House<br>3203 W Chinden Blvd, Suite 3<br><strong>Garden City</strong> ID 83714<br>(208) 314-7505</p>
+          <h5>Nevada</h5>
+          <p>Truckee River Tile and Stone<br>615 Spice Islands Drive, Suite 1<br><strong>Sparks</strong> NV 89431<br>(775) 826-2551</p>
         </div>
 
         <div class="lw2-wtb-state">
-          <h4>California</h4>
+          <h5>California</h5>
           <p>Westside Tile &amp; Stone of Beverly Hills<br>331 N Robertson Blvd<br><strong>Beverly Hills</strong> CA 90211<br>(310) 276-9222</p>
-          <p>All Natural Stone<br>1575 Adrian Road<br><strong>Burlingame</strong> CA 94010<br>(650) 239-5200</p>
-          <p>Concept Studio<br>3195 Redhill Avenue, Suite G<br><strong>Costa Mesa</strong> CA 92626<br>(949) 759-0606</p>
-          <p>Material Bespoke Stone + Tile<br>250 Baker Street East, Suite 103<br><strong>Costa Mesa</strong> CA 92626<br>(949) 729-9881</p>
-          <p>Carmel Stone Imports<br>1725 Contra Costa St.<br><strong>Carmel</strong> CA 93955<br>(831) 250-7435</p>
-          <p>Design Collaborative USA<br>74-930 US Hwy 111<br><strong>Indian Wells</strong> CA 92210<br>(760) 774-5970</p>
-          <p>Modern Earth Tile<br>398 Ximeno Ave<br><strong>Long Beach</strong> CA 90892<br>(858) 245-7119</p>
-          <p>BDG Design Group<br>2827 Presidio Dr.<br><strong>San Diego</strong> CA 92110<br>(619) 291-3234</p>
           <p>Artistic Tile Design Center<br>2 Henry Adams Street, #140<br><strong>San Francisco</strong> CA 94103<br>(415) 690-5173</p>
           <p>NS Ceramic, Inc.<br>25 E. Ortega St.<br><strong>Santa Barbara</strong> CA 93101<br>(805) 962-1422</p>
+          <p>Concept Studio<br>3195 Redhill Avenue, Suite G<br><strong>Costa Mesa</strong> CA 92626<br>(949) 759-0606</p>
+          <p>Material Bespoke Stone + Tile<br>250 Baker Street East, Suite 103<br><strong>Costa Mesa</strong> CA 92626<br>(949) 729-9881</p>
+          <p>BDG Design Group<br>2827 Presidio Dr.<br><strong>San Diego</strong> CA 92110<br>(619) 291-3234</p>
+          <p>Modern Earth Tile<br>398 Ximeno Ave<br><strong>Long Beach</strong> CA 90892<br>(858) 245-7119</p>
+          <p>Carmel Stone Imports<br>1725 Contra Costa St.<br><strong>Carmel</strong> CA 93955<br>(831) 250-7435</p>
         </div>
 
         <div class="lw2-wtb-state">
-          <h4>Idaho</h4>
-          <p>The Tile House<br>3203 W Chinden Blvd, Suite 3<br><strong>Garden City</strong> ID 83714<br>(208) 314-7505</p>
-          <h4>Nevada</h4>
-          <p>Truckee River Tile and Stone<br>615 Spice Islands Drive, Suite 1<br><strong>Sparks</strong> NV 89431<br>(775) 826-2551</p>
-          <h4>Oregon</h4>
+          <h5>Oregon</h5>
           <p>Pratt &amp; Larson Tile<br>1204 SE Water Ave<br><strong>Portland</strong> OR 97214<br>(503) 231-9464</p>
-          <h4>Utah</h4>
+          <h5>Utah</h5>
           <p>European Marble &amp; Granite<br>2575 S 600 W<br><strong>Salt Lake City</strong> UT 84115<br>(801) 974-0333</p>
           <p>Venetian Tile &amp; Stone Gallery<br>825 West 2400 South<br><strong>Salt Lake City</strong> UT 84119<br>(801) 977-8888</p>
-          <h4>Washington</h4>
+          <h5>Washington</h5>
           <p>Dwellings<br>12200 Northup Way, Suite B<br><strong>Bellevue</strong> WA 98005<br>(425) 882-0707</p>
           <p>Cupboard &amp; Clay<br>2225 N 30th St.<br><strong>Tacoma</strong> WA 98403<br>(253) 244-3455</p>
-          <h4>Wyoming</h4>
+          <h5>Wyoming</h5>
           <p>Teton Tile &amp; Design<br>650 Elk Ave, #4<br><strong>Jackson</strong> WY 83001<br>(307) 733-0003</p>
         </div>
       </div>
+    </section>
 
-      <h3 class="lw2-wtb-region-head">Canada &amp; Europe</h3>
-      <div class="lw2-wtb-state-grid">
+    <!-- Bronzework Studio: Canada -->
+    <section class="lw2-wtb-panel" id="bws-canada" data-region="bws-canada">
+      <h4 class="lw2-wtb-panel-title">Bronzework Studio — Canada</h4>
+      <div class="lw2-wtb-state-grid lw2-wtb-state-grid--narrow">
         <div class="lw2-wtb-state">
-          <h4>Canada</h4>
+          <h5>British Columbia</h5>
           <p>Fifth + Fir<br>1745 West 4th Avenue<br><strong>Vancouver</strong> BC V6J 1N8<br>(604) 739-5966</p>
         </div>
-        <div class="lw2-wtb-state lw2-wtb-state--note">
-          <h4>Europe</h4>
-          <p>Foundry Art tiles can be found at any of Fired Earth’s showrooms in the United Kingdom, Denmark, Norway, and Switzerland. Please <a href="/contact/">contact our studio</a> for Bronzework Studio inquiries in Europe.</p>
+      </div>
+      <p class="lw2-wtb-state-note">For additional Canadian inquiries, please <a href="/contact/">contact our Chicago studio</a> directly.</p>
+    </section>
+
+    <!-- Foundry Art: United States -->
+    <section class="lw2-wtb-panel is-active" id="fa-us" data-region="fa-us">
+      <h4 class="lw2-wtb-panel-title">Foundry Art — United States</h4>
+      <p class="lw2-wtb-panel-lede">U.S. customers can order Foundry Art tile and cabinet hardware online from our official online retailer:</p>
+      <div class="lw2-wtb-channel-card">
+        <h5>Claremont Tile</h5>
+        <p>The full Foundry Art catalog — tile, liners, and cabinet hardware — is available at <a href="https://www.claremonttile.com/" target="_blank" rel="noopener"><strong>claremonttile.com</strong></a>.</p>
+        <a href="https://www.claremonttile.com/" target="_blank" rel="noopener" class="lw2-wtb-channel-cta">Visit Claremont Tile »</a>
+      </div>
+    </section>
+
+    <!-- Foundry Art: Canada & Europe -->
+    <section class="lw2-wtb-panel" id="fa-canada-europe" data-region="fa-canada-europe">
+      <h4 class="lw2-wtb-panel-title">Foundry Art — Canada &amp; Europe</h4>
+      <div class="lw2-wtb-channel-grid">
+        <div class="lw2-wtb-channel-card">
+          <h5>Canada</h5>
+          <p>Canadian customers can order online from <a href="https://www.claremonttile.com/" target="_blank" rel="noopener"><strong>Claremont Tile</strong></a> in the United States.</p>
         </div>
-        <div class="lw2-wtb-state lw2-wtb-state--note">
-          <h4>Direct from the Studio</h4>
-          <p>Order directly from our Chicago studio:<br><a href="tel:7737842628"><strong>1 773 784-2628</strong></a></p>
-          <p>For Foundry Art online ordering, visit <a href="https://www.claremonttile.com/" target="_blank" rel="noopener">claremonttile.com</a>.</p>
+        <div class="lw2-wtb-channel-card">
+          <h5>United Kingdom &amp; Europe</h5>
+          <p>Foundry Art tiles can be found at any of <a href="https://www.firedearth.com/" target="_blank" rel="noopener"><strong>Fired Earth</strong></a>’s showrooms in the United Kingdom, Denmark, Norway, and Switzerland.</p>
+        </div>
+        <div class="lw2-wtb-channel-card">
+          <h5>All other countries</h5>
+          <p>Please <a href="/contact/">contact our Chicago studio</a> directly.</p>
         </div>
       </div>
     </section>
