@@ -6421,14 +6421,25 @@ body[data-page="tile-collections"] .lw2-tc-panel-head {
   margin: 0 auto 48px;
   max-width: 760px;
 }
+/* Same root cause as the collection-detail parent wordmark fix: the
+   wordmark PNGs are wide (e.g. 800x56 ≈ 14:1) and any inherited
+   max-width / width-100% rule on container <img>s lets the height
+   recompute from aspect ratio at full container width. Lock both
+   axes explicitly with !important. */
+/* Hard cap both axes. Explicit pixel max-width + max-height with
+   !important survives any inherited img-stretching rule. Width: auto
+   lets the smaller of the two constraints govern via aspect ratio. */
 body[data-page="tile-collections"] .lw2-tc-wordmark {
-  display: block;
-  height: 40px;
-  width: auto;
-  margin: 0 auto 18px;
+  display: block !important;
+  height: auto !important;
+  width: auto !important;
+  max-width: 420px !important;
+  max-height: 36px !important;
+  margin: 0 auto 18px !important;
 }
 body[data-page="tile-collections"] .lw2-tc-wordmark--small {
-  height: 24px;
+  max-width: 220px !important;
+  max-height: 22px !important;
 }
 body[data-page="tile-collections"] .lw2-tc-blurb {
   font-family: 'Fanwood Text', Georgia, serif;
@@ -6675,9 +6686,28 @@ body[data-page="feature-drury"] .lw2-article-credit {
   body[data-page="where-to-buy"] .lw2-wtb-region-title { font-size: 28px; }
 
   body[data-page="tile-collections"] .lw2-tc-panel { padding: 40px 18px 56px; }
+  /* Mobile: explicit max-width 280px (fits 320–390 viewports easily)
+     + max-height 22px. BWS PNG (800x56) at 22px height = 314px wide,
+     but max-width 280px clamps before that so final size is 280px wide
+     × 19.6px tall — comfortable hierarchy below the H1. */
+  body[data-page="tile-collections"] .lw2-tc-wordmark {
+    max-width: 280px !important;
+    max-height: 22px !important;
+    margin-bottom: 14px !important;
+  }
+  body[data-page="tile-collections"] .lw2-tc-wordmark--small {
+    max-width: 160px !important;
+    max-height: 16px !important;
+  }
+  body[data-page="tile-collections"] .lw2-tc-blurb { font-size: 18px; }
   body[data-page="tile-collections"] .lw2-tc-sub-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+  body[data-page="where-to-buy"] .lw2-wtb-region-title {
+    font-size: 24px;
+    line-height: 1.25;
+    padding: 0 12px;
   }
 
   body[data-page="feature-drury"] .lw2-article-mast { padding: 56px 0 24px; }
