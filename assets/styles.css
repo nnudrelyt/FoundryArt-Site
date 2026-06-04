@@ -4640,10 +4640,10 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
   }
   body[data-section="linden"] .lw2-studios-toggle { padding: 6px; }
 
-  /* HERO — dark McQueen photo, 32px Fanwood headline */
+  /* HERO — dark McQueen photo, 36px Fanwood headline */
   body[data-section="linden"] .lw2-hero { min-height: 340px; }
   body[data-section="linden"] .lw2-hero h1 {
-    font-size: 32px !important;
+    font-size: 36px !important;
     font-family: 'Fanwood Text', Georgia, serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
@@ -4651,7 +4651,7 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
     line-height: 1.2;
   }
   body[data-section="linden"] .lw2-hero .lw2-hero-sub {
-    font-size: 19px !important;
+    font-size: 22px !important;
     font-family: 'Fanwood Text', Georgia, serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
