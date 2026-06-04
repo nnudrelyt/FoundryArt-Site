@@ -2359,25 +2359,37 @@ body.drawer-open { overflow: hidden; }
 /* ══════════════════════════════════════════════════════════
    STUDIOS DRAWER — ACCORDION REBUILD (overrides earlier rules)
    ────────────────────────────────────────────────────────── */
-.studios-drawer { padding: 28px 0 36px; gap: 0; }
+/* Drawer width scales by viewport — see the responsive block below.
+   On desktop the previous 340px felt cramped, so we step up at the
+   tablet and desktop breakpoints. */
+.studios-drawer { padding: 28px 0 36px; gap: 0; width: 340px; }
 .studios-drawer .studios-close {
   position: absolute;
   top: 20px;
   right: 24px;
 }
+
+/* Wordmark logo replaces the prior all-caps text. White-on-dark via
+   `filter: brightness(0) invert(1)` so the existing PNG (designed
+   for light backgrounds) reads on the charcoal drawer without
+   shipping a second asset. */
 .studios-drawer .studios-eyebrow {
   display: block;
-  padding: 0 32px 24px;
+  padding: 4px 32px 24px;
   margin-bottom: 0;
   border-bottom: 1px solid rgba(255,255,255,0.14);
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--bronze-l);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
-.studios-drawer .studios-eyebrow:hover { color: var(--white); }
+.studios-drawer .studios-eyebrow-mark {
+  display: block;
+  width: auto;
+  height: 40px;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+.studios-drawer .studios-eyebrow:hover .studios-eyebrow-mark { opacity: 1; }
 
 /* Accordion item */
 .studios-acc {
@@ -2399,20 +2411,15 @@ body.drawer-open { overflow: hidden; }
 .studios-acc-head:hover { color: var(--white); background: rgba(255,255,255,0.03); }
 .studios-acc-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 300;
   line-height: 1.15;
   grid-column: 1;
   grid-row: 1;
 }
-.studios-acc-meta {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
-  grid-column: 1;
-  grid-row: 2;
-}
+/* Per-brand descriptor lines ('Find a showroom', 'Available direct',
+   'Contact us directly') removed — the brand name carries the row. */
+.studios-acc-meta { display: none; }
 .studios-acc-chevron {
   grid-column: 2;
   grid-row: 1 / 3;
@@ -2442,35 +2449,49 @@ body.drawer-open { overflow: hidden; }
   max-height: 500px;
   padding: 6px 0 18px;
 }
-.studios-acc-body a {
+/* Collection titles: larger, full-white for high contrast on the dark
+   drawer. Sub-descriptors below stay all-caps but switch to a neutral
+   muted-white instead of the previous bronze accent so the row reads
+   as a single typographic system.
+
+   :link and :visited explicitly set to defeat both inherited LW link
+   color and the browser's default visited-purple. */
+.studios-acc-body a,
+.studios-acc-body a:link,
+.studios-acc-body a:visited {
   display: block;
-  padding: 12px 32px;
-  font-family: 'Jost', sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-  color: rgba(255,255,255,0.66);
+  padding: 14px 32px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: 0.2px;
+  color: #FFFFFF !important;
   transition: color 0.2s ease, background 0.2s ease;
   border: none !important;
   cursor: pointer;
 }
 .studios-acc-body a:hover {
-  color: var(--white);
-  background: rgba(255,255,255,0.04);
+  color: #FFFFFF !important;
+  background: rgba(255,255,255,0.06);
 }
+/* "Studio overview" eyebrow above each brand's sub-list */
 .studios-acc-body a strong {
+  font-family: 'Jost', sans-serif;
   font-weight: 500;
-  color: var(--bronze-l);
+  color: rgba(255,255,255,0.75);
   letter-spacing: 1.5px;
   font-size: 11px;
   text-transform: uppercase;
 }
 .studios-acc-body a small {
   display: block;
-  margin-top: 2px;
+  margin-top: 4px;
+  font-family: 'Jost', sans-serif;
   font-size: 10px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.55);
   font-weight: 400;
 }
 
@@ -2480,6 +2501,40 @@ body.drawer-open { overflow: hidden; }
 .studios-header,
 .studios-parent,
 .studios-parent-link { display: none; }
+
+/* ── Drawer width ladder ──────────────────────────────────────
+   Mobile  ≤ 768  : 340px (base)
+   Tablet  ≥ 769  : 400px
+   Desktop ≥ 1200 : 480px
+   Cinema  ≥ 1600 : 560px
+   The 85vw ceiling keeps it from eating the viewport on small
+   screens. Also slightly larger padding at the wider widths so
+   the type doesn't feel pinned to the edges. */
+@media (min-width: 769px) {
+  .studios-drawer { width: 400px; padding: 32px 0 40px; }
+  .studios-drawer .studios-eyebrow { padding: 4px 40px 28px; }
+  .studios-drawer .studios-eyebrow-mark { height: 44px; }
+  .studios-acc-head { padding: 26px 40px; }
+  .studios-acc-name { font-size: 30px; }
+  .studios-acc-body a { padding: 14px 40px; font-size: 23px; }
+  .studios-acc.open .studios-acc-body { padding: 8px 0 20px; }
+}
+@media (min-width: 1200px) {
+  .studios-drawer { width: 480px; padding: 36px 0 44px; }
+  .studios-drawer .studios-eyebrow { padding: 4px 48px 32px; }
+  .studios-drawer .studios-eyebrow-mark { height: 48px; }
+  .studios-acc-head { padding: 28px 48px; }
+  .studios-acc-name { font-size: 34px; }
+  .studios-acc-body a { padding: 14px 48px; font-size: 24px; }
+}
+@media (min-width: 1600px) {
+  .studios-drawer { width: 560px; }
+  .studios-drawer .studios-eyebrow { padding: 4px 56px 36px; }
+  .studios-drawer .studios-eyebrow-mark { height: 52px; }
+  .studios-acc-head { padding: 30px 56px; }
+  .studios-acc-name { font-size: 38px; }
+  .studios-acc-body a { padding: 16px 56px; font-size: 26px; }
+}
 
 /* Responsive — studios drawer + LW sections */
 @media (max-width: 900px) {

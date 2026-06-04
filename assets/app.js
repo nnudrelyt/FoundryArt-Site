@@ -139,26 +139,26 @@
       <div class="studios-scrim" data-studios-scrim></div>
       <aside class="studios-drawer" id="studios-drawer" aria-label="Linden Workshops studios" aria-hidden="true">
         <button class="studios-close" aria-label="Close studios menu" data-studios-close>×</button>
-        <a href="/" class="studios-eyebrow" data-studios-link>Linden Workshops</a>
+        <a href="/" class="studios-eyebrow" data-studios-link aria-label="Linden Workshops home">
+          <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops" class="studios-eyebrow-mark">
+        </a>
 
         <div class="studios-acc${expanded('bronzework-studio')}${active('bronzework-studio')}" data-studios-acc>
           <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('bronzework-studio')}">
             <span class="studios-acc-name">Bronzework Studio</span>
-            <span class="studios-acc-meta">Find a showroom</span>
             <span class="studios-acc-chevron" aria-hidden="true">▾</span>
           </button>
           <div class="studios-acc-body">
             <a href="/bronzework-studio/" data-studios-link><strong>Studio overview</strong></a>
-            <a href="/bronzework-studio/#classic" data-studios-link>Classic <small>Hand-Carved Bronze &amp; Zinc</small></a>
-            <a href="/bronzework-studio/#autograph" data-studios-link>Autograph <small>Graphic Bronze Borders &amp; Insets</small></a>
-            <a href="/bronzework-studio/#precision" data-studios-link>Precision <small>Extra Long Metal Liners &amp; Trim</small></a>
+            <a href="/classic/" data-studios-link>Classic <small>Hand-Carved Bronze &amp; Zinc</small></a>
+            <a href="/autograph/" data-studios-link>Autograph <small>Graphic Bronze Borders &amp; Insets</small></a>
+            <a href="/precision/" data-studios-link>Precision <small>Extra Long Metal Liners &amp; Trim</small></a>
           </div>
         </div>
 
         <div class="studios-acc${expanded('foundry-art')}${active('foundry-art')}" data-studios-acc>
           <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('foundry-art')}">
             <span class="studios-acc-name">Foundry Art</span>
-            <span class="studios-acc-meta">Available direct</span>
             <span class="studios-acc-chevron" aria-hidden="true">▾</span>
           </button>
           <div class="studios-acc-body">
@@ -171,7 +171,6 @@
         <div class="studios-acc${expanded('talisman')}${active('talisman')}" data-studios-acc>
           <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('talisman')}">
             <span class="studios-acc-name">Talisman</span>
-            <span class="studios-acc-meta">Contact us directly</span>
             <span class="studios-acc-chevron" aria-hidden="true">▾</span>
           </button>
           <div class="studios-acc-body">
