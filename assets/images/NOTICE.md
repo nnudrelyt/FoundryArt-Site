@@ -121,3 +121,57 @@ All images below were pulled from `lindenworkshops.com/wp-content/uploads/` and 
 **"Also available from" sibling-collection cross-link cards**:
 - `Bronzework-Studio-Precision-Square-Brass-herringbone-floor.jpg` — links to /precision/
 - `Bronzework-Studio-Beach-Grass-Liner-Zinc-black-stone-floor.jpg` — links to /classic/
+
+## Precision collection page (added Phase 3)
+
+Assets in `assets/images/linden/precision/`. All pulled from `lindenworkshops.com/wp-content/uploads/`, filenames preserved. Placeholder pending brand-owner swap.
+
+**Hero / lifestyle**:
+- `Bronzework-Studio-Hepburn-Brass-liner-Terrazzo-floor-1900x1267.jpg` — masthead banner
+- `Bronzework-Studio-Precision-Liner-Living-Brass-Herringbone-Floor-1280x720.jpg` — lifestyle 1
+- `Bronzework-Studio-Precision-Dome-Liner-Danish-Tea-2560x1440-1.jpg` — lifestyle 2
+- `10-Bronzework-Studio-Monmouth-Street-bath.jpg` — in-context install banner-strip
+
+**Profile arrays** (2-up Square + Dome):
+- `Precision-Square-Array-2025-web.jpg`, `Precision-Dome-Array.jpg`
+
+**Finish comparison**:
+- `Empire-and-Hepburn-13-v2-scaled.jpg` — Empire high-luster vs Hepburn low-luster
+
+**Named installs** (5-up portrait gallery):
+- `Genevieve-2016-…`, `Mondrian-2016.jpg`, `Annalees-Trio-2016-300x300.jpg`, `Debussy-2016-…`, `Fitzgerald-1-…-300x300.jpg`
+
+**Tear-sheet PDF previews**:
+- `BWS-tear-sheet-Precision-Square-…`, `BWS-tear-sheet-Precision-Dome-…`, `BWS-Installation-and-Cleaning-Precision-Square-Brass-Stainless-liners-…`
+- Reuses `BWS-2024-How-We-Make-Our-Tiles-230x300.jpg` from /autograph/
+
+## Classic collection page (added Phase 3)
+
+Assets in `assets/images/linden/classic/`. All pulled from `lindenworkshops.com/wp-content/uploads/`, filenames preserved. Placeholder pending brand-owner swap.
+
+**Hero / lifestyle**:
+- `Zinc-array-v2-1900x1106.jpg` — masthead banner
+- `traditional-bronze-tile-accent-petroglyph-black-bathroom.jpg` — lifestyle 1
+- `white-bronze-tile-accent-marble-glass-bathroom.jpg` — lifestyle 2
+- `BWS_BLL_Cello_Full_03-05.jpg` — Blooming Leaf family banner-strip
+
+**Hand-carved tile patterns** (5-up portrait gallery):
+- `BWS-BloomingLeaf-Lg-Traditional-Bronze.jpg`, `BWS-Mantra-Lg-Traditional-Bronze.jpg`, `BWS-Petroglyph-Lg-Traditional-Bronze.jpg`, `BWS-Sunrise-Med-Traditional-Bronze.jpg`, `BWS-Terrace-Lg-Traditional-Bronze.jpg`
+
+**Liners** (5 full-bleed strips):
+- `Origin-Edit-2-1-1900x254.jpg`, `BWS-Flowing-Lnr-Traditional-Bronze-1900x262.jpg`, `BWS-Roman-Lnr-Traditional-Bronze-1900x262.jpg`, `BWS-Mosaic-Lnr-Traditional-Bronze-1900x262.jpg`, `BWS-BeachGrass-Lnr-Traditional-Bronze-1900x262.jpg`
+
+**Inset tiles**:
+- `BWS-Water-Song-Inset-Traditional.jpg`, `BWS-Beach-Grass-Inset-Traditional1.jpg`
+- Plus 2 inset cards reused from /autograph/
+
+**Tear-sheet PDF previews**:
+- `BWS-tear-sheet-Classic-4-pages-2024-08-08_Page_1-230x300.jpg`
+- Reuses 3 other tear-sheet previews from /autograph/
+
+## Instinct collection page (added Phase 3)
+
+Minimal placeholder per live `lindenworkshops.com/instinct/` — the brand owner's live page has no imagery beyond the Instinct wordmark and cross-links to sibling tile collections.
+
+- `assets/images/linden/wordmarks/instinct.png` — Instinct wordmark, source `lindenworkshops.com/wp-content/uploads/Instinct-logotype.png`
+- Sibling cards reuse existing assets from /assets/images/bronzework/, /assets/images/hero/, /assets/images/linden/talisman/.

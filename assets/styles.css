@@ -5398,14 +5398,26 @@ body[data-page="instinct"] .lw2-coll-masthead {
   max-width: 1200px;
   margin: 0 auto;
 }
+/* Parent-brand wordmark sits above the collection H1 as a subtle
+   identifier — sized SMALLER than the H1 so the hierarchy reads
+   "Bronzework Studio → Autograph Collection".
+
+   The wordmark PNG is 800×56 (aspect ≈ 14.3:1). We constrain BOTH
+   axes with !important to defeat:
+   - any generic LW-scoped img rule that sets width: 100% / height: auto
+   - any inherited max-width: 100% that would let the image hit the
+     container edge and recompute height from aspect ratio.
+   At desktop: 24px tall → 343px wide.
+   At mobile:  18px tall → 257px wide (fits a 320px viewport with 18px gutter). */
 body[data-page="autograph"] .lw2-coll-parent-wordmark,
 body[data-page="precision"] .lw2-coll-parent-wordmark,
 body[data-page="classic"] .lw2-coll-parent-wordmark,
 body[data-page="instinct"] .lw2-coll-parent-wordmark {
-  display: block;
-  height: 32px;
-  width: auto;
-  margin: 0 auto 22px;
+  display: block !important;
+  height: 24px !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 auto 22px !important;
 }
 body[data-page="autograph"] .lw2-coll-title,
 body[data-page="precision"] .lw2-coll-title,
@@ -5874,6 +5886,14 @@ body[data-page="instinct"] .lw2-coll-also-card:hover h3 {
   body[data-page="classic"] .lw2-coll-masthead,
   body[data-page="instinct"] .lw2-coll-masthead { padding: 40px 18px 24px; }
 
+  body[data-page="autograph"] .lw2-coll-parent-wordmark,
+  body[data-page="precision"] .lw2-coll-parent-wordmark,
+  body[data-page="classic"] .lw2-coll-parent-wordmark,
+  body[data-page="instinct"] .lw2-coll-parent-wordmark {
+    height: 18px !important;
+    margin-bottom: 18px !important;
+  }
+
   body[data-page="autograph"] .lw2-coll-title,
   body[data-page="precision"] .lw2-coll-title,
   body[data-page="classic"] .lw2-coll-title,
@@ -5979,4 +5999,202 @@ body[data-page="instinct"] .lw2-coll-also-card:hover h3 {
   body[data-page="precision"] .lw2-coll-also-card h3,
   body[data-page="classic"] .lw2-coll-also-card h3,
   body[data-page="instinct"] .lw2-coll-also-card h3 { font-size: 24px; }
+}
+
+/* ============================================================
+   COLLECTION-DETAIL TEMPLATE — additional component variants
+   used by /precision/, /classic/, and /instinct/.
+
+   These extend the base collection-detail template (above) with:
+   - portrait-grid--two   — 2-up portrait grid (Square + Dome profiles)
+   - lw2-coll-finish      — Empire/Hepburn finish comparison section
+   - lw2-coll-banner-strip — single full-bleed in-context install
+   - lw2-coll-masthead--minimal — masthead WITHOUT a banner image
+                                 (used on /instinct/, which has no
+                                 banner imagery on the live site)
+   - lw2-coll-intro--centered  — intro with no quote, just lede + sub
+   - lw2-coll-lede-sub    — lighter, smaller secondary lede line
+   - lw2-coll-also-grid--three — 3-up sibling card grid (Instinct)
+   ============================================================ */
+
+/* 2-up portrait grid (e.g., Precision Square + Dome profile arrays) */
+body[data-page="autograph"] .lw2-coll-portrait-grid--two,
+body[data-page="precision"] .lw2-coll-portrait-grid--two,
+body[data-page="classic"] .lw2-coll-portrait-grid--two,
+body[data-page="instinct"] .lw2-coll-portrait-grid--two {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 880px;
+  gap: 36px;
+}
+body[data-page="autograph"] .lw2-coll-portrait-grid--two img,
+body[data-page="precision"] .lw2-coll-portrait-grid--two img,
+body[data-page="classic"] .lw2-coll-portrait-grid--two img,
+body[data-page="instinct"] .lw2-coll-portrait-grid--two img {
+  aspect-ratio: 1/1;
+}
+body[data-page="autograph"] .lw2-coll-portrait-grid--two figcaption,
+body[data-page="precision"] .lw2-coll-portrait-grid--two figcaption,
+body[data-page="classic"] .lw2-coll-portrait-grid--two figcaption,
+body[data-page="instinct"] .lw2-coll-portrait-grid--two figcaption {
+  font-size: 16px;
+}
+
+/* Empire/Hepburn finish section — single centered figure */
+body[data-page="autograph"] .lw2-coll-finish,
+body[data-page="precision"] .lw2-coll-finish,
+body[data-page="classic"] .lw2-coll-finish,
+body[data-page="instinct"] .lw2-coll-finish {
+  padding: 72px 24px 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+body[data-page="autograph"] .lw2-coll-finish-image,
+body[data-page="precision"] .lw2-coll-finish-image,
+body[data-page="classic"] .lw2-coll-finish-image,
+body[data-page="instinct"] .lw2-coll-finish-image {
+  margin: 32px auto 0;
+}
+body[data-page="autograph"] .lw2-coll-finish-image img,
+body[data-page="precision"] .lw2-coll-finish-image img,
+body[data-page="classic"] .lw2-coll-finish-image img,
+body[data-page="instinct"] .lw2-coll-finish-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="autograph"] .lw2-coll-finish-image figcaption,
+body[data-page="precision"] .lw2-coll-finish-image figcaption,
+body[data-page="classic"] .lw2-coll-finish-image figcaption,
+body[data-page="instinct"] .lw2-coll-finish-image figcaption {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #444;
+  margin-top: 12px;
+}
+
+/* Single full-bleed banner strip (in-context install photo) */
+body[data-page="autograph"] .lw2-coll-banner-strip,
+body[data-page="precision"] .lw2-coll-banner-strip,
+body[data-page="classic"] .lw2-coll-banner-strip,
+body[data-page="instinct"] .lw2-coll-banner-strip {
+  padding: 0 0 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+body[data-page="autograph"] .lw2-coll-banner-strip figure,
+body[data-page="precision"] .lw2-coll-banner-strip figure,
+body[data-page="classic"] .lw2-coll-banner-strip figure,
+body[data-page="instinct"] .lw2-coll-banner-strip figure {
+  margin: 0;
+}
+body[data-page="autograph"] .lw2-coll-banner-strip img,
+body[data-page="precision"] .lw2-coll-banner-strip img,
+body[data-page="classic"] .lw2-coll-banner-strip img,
+body[data-page="instinct"] .lw2-coll-banner-strip img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="autograph"] .lw2-coll-banner-strip figcaption,
+body[data-page="precision"] .lw2-coll-banner-strip figcaption,
+body[data-page="classic"] .lw2-coll-banner-strip figcaption,
+body[data-page="instinct"] .lw2-coll-banner-strip figcaption {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #444;
+  text-align: center;
+  margin-top: 14px;
+  padding: 0 24px;
+}
+
+/* Minimal masthead — no banner image, more vertical padding */
+body[data-page="autograph"] .lw2-coll-masthead--minimal,
+body[data-page="precision"] .lw2-coll-masthead--minimal,
+body[data-page="classic"] .lw2-coll-masthead--minimal,
+body[data-page="instinct"] .lw2-coll-masthead--minimal {
+  padding: 96px 24px 48px;
+}
+
+/* Centered intro with no quote — used by minimal pages (Instinct) */
+body[data-page="autograph"] .lw2-coll-intro--centered,
+body[data-page="precision"] .lw2-coll-intro--centered,
+body[data-page="classic"] .lw2-coll-intro--centered,
+body[data-page="instinct"] .lw2-coll-intro--centered {
+  padding: 40px 24px 88px;
+}
+body[data-page="autograph"] .lw2-coll-lede-sub,
+body[data-page="precision"] .lw2-coll-lede-sub,
+body[data-page="classic"] .lw2-coll-lede-sub,
+body[data-page="instinct"] .lw2-coll-lede-sub {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  margin: 14px 0 0;
+}
+body[data-page="autograph"] .lw2-coll-intro--centered a,
+body[data-page="precision"] .lw2-coll-intro--centered a,
+body[data-page="classic"] .lw2-coll-intro--centered a,
+body[data-page="instinct"] .lw2-coll-intro--centered a {
+  color: #A31414;
+  text-decoration: underline;
+}
+
+/* 3-up sibling grid (Instinct cross-links to all three studios) */
+body[data-page="autograph"] .lw2-coll-also-grid--three,
+body[data-page="precision"] .lw2-coll-also-grid--three,
+body[data-page="classic"] .lw2-coll-also-grid--three,
+body[data-page="instinct"] .lw2-coll-also-grid--three {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1200px;
+}
+
+/* Responsive: tablet */
+@media (max-width: 1024px) and (min-width: 769px) {
+  body[data-page="autograph"] .lw2-coll-portrait-grid--two,
+  body[data-page="precision"] .lw2-coll-portrait-grid--two,
+  body[data-page="classic"] .lw2-coll-portrait-grid--two,
+  body[data-page="instinct"] .lw2-coll-portrait-grid--two { gap: 24px; }
+}
+
+/* Responsive: mobile */
+@media (max-width: 768px) {
+  body[data-page="autograph"] .lw2-coll-masthead--minimal,
+  body[data-page="precision"] .lw2-coll-masthead--minimal,
+  body[data-page="classic"] .lw2-coll-masthead--minimal,
+  body[data-page="instinct"] .lw2-coll-masthead--minimal {
+    padding: 60px 18px 32px;
+  }
+  body[data-page="autograph"] .lw2-coll-portrait-grid--two,
+  body[data-page="precision"] .lw2-coll-portrait-grid--two,
+  body[data-page="classic"] .lw2-coll-portrait-grid--two,
+  body[data-page="instinct"] .lw2-coll-portrait-grid--two {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  body[data-page="autograph"] .lw2-coll-finish,
+  body[data-page="precision"] .lw2-coll-finish,
+  body[data-page="classic"] .lw2-coll-finish,
+  body[data-page="instinct"] .lw2-coll-finish {
+    padding: 48px 18px 36px;
+  }
+  body[data-page="autograph"] .lw2-coll-banner-strip,
+  body[data-page="precision"] .lw2-coll-banner-strip,
+  body[data-page="classic"] .lw2-coll-banner-strip,
+  body[data-page="instinct"] .lw2-coll-banner-strip {
+    padding: 0 0 48px;
+  }
+  body[data-page="autograph"] .lw2-coll-intro--centered,
+  body[data-page="precision"] .lw2-coll-intro--centered,
+  body[data-page="classic"] .lw2-coll-intro--centered,
+  body[data-page="instinct"] .lw2-coll-intro--centered {
+    padding: 24px 18px 56px;
+  }
+  body[data-page="autograph"] .lw2-coll-also-grid--three,
+  body[data-page="precision"] .lw2-coll-also-grid--three,
+  body[data-page="classic"] .lw2-coll-also-grid--three,
+  body[data-page="instinct"] .lw2-coll-also-grid--three {
+    grid-template-columns: 1fr;
+  }
 }
