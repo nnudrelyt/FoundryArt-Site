@@ -5311,15 +5311,10 @@ body[data-page="our-team"] .lw2-footer-row {
   background: #F7F7F7 !important;
   padding-top: 80px !important;
 }
-body[data-page="our-team"] .lw2-footer-row .lw2-footer-form-col h2,
-body[data-page="our-team"] .lw2-footer-blurb + * h2,
-body[data-page="our-team"] .lw2-footer-form-col h2,
-body[data-page="our-team"] .lw2-footer-left h2 {
-  font-family: 'Fanwood Text', Georgia, serif !important;
-  font-size: 24px !important;
-  font-weight: 400 !important;
-  font-style: normal !important;
-}
+/* Footer h2 titles ("Contact us!", footer-left h2) inherit the global
+   LW footer h2 sizing — do NOT override on this page. (Earlier round
+   mistakenly shrunk them to 24px; reverted.) */
+
 /* Suppress the legacy LW-section .footer p { border-top: 1px solid #eee }
    rule that draws a thin horizontal line above any <p> in the footer.
    Only neutralize that border — not the padding-top: 80px on the row. */
