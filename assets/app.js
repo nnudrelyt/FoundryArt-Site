@@ -14,8 +14,9 @@
     const dotGrid = `
               <button class="studios-toggle" aria-label="Open Linden Workshops studios" aria-controls="studios-drawer" aria-expanded="false">
                 <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
-          <rect x="2" y="6" width="16" height="1.6" rx="0.4"/>
-          <rect x="2" y="12.4" width="16" height="1.6" rx="0.4"/>
+          <rect x="2" y="4" width="16" height="1.6" rx="0.4"/>
+          <rect x="2" y="9.2" width="16" height="1.6" rx="0.4"/>
+          <rect x="2" y="14.4" width="16" height="1.6" rx="0.4"/>
         </svg>
               </button>`;
 
