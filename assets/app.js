@@ -57,7 +57,7 @@
           </div>
           <div class="nav-links">
             <a href="/#bronzework-studio">Studios</a>
-            <a href="#">Inspiration</a>
+            <a href="/feature-gail-drury/">Inspiration</a>
             <a href="#">Our Team</a>
             <a href="#">Where to Buy</a>
           </div>
@@ -70,7 +70,7 @@
           </div>`;
       mobileDrawer = `
         <a href="/#bronzework-studio" data-drawer-link>Studios</a>
-        <a href="#" data-drawer-link>Inspiration</a>
+        <a href="/feature-gail-drury/" data-drawer-link>Inspiration</a>
         <a href="#" data-drawer-link>Our Team</a>
         <a href="#" data-drawer-link>Where to Buy</a>
         <a href="#" data-drawer-link>Showroom Login</a>
@@ -84,7 +84,7 @@
             <a href="/bronzework-studio/#classic">Classic</a>
             <a href="/bronzework-studio/#autograph">Autograph</a>
             <a href="/bronzework-studio/#precision">Precision</a>
-            <a href="#">Inspiration</a>
+            <a href="/feature-gail-drury/">Inspiration</a>
           </div>
           <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
             <span></span><span></span><span></span>
@@ -96,7 +96,7 @@
         <a href="/bronzework-studio/#classic" data-drawer-link>Classic</a>
         <a href="/bronzework-studio/#autograph" data-drawer-link>Autograph</a>
         <a href="/bronzework-studio/#precision" data-drawer-link>Precision</a>
-        <a href="#" data-drawer-link>Inspiration</a>
+        <a href="/feature-gail-drury/" data-drawer-link>Inspiration</a>
         <a href="#showrooms" class="mobile-cta" data-drawer-link>Find a Showroom</a>`;
     } else if (section === 'talisman') {
       navInner = `
@@ -105,7 +105,7 @@
           </div>
           <div class="nav-links">
             <a href="/talisman/#patterns">Patterns</a>
-            <a href="#">Inspiration</a>
+            <a href="/feature-gail-drury/">Inspiration</a>
             <a href="#">Documentation</a>
           </div>
           <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
@@ -116,7 +116,7 @@
           </div>`;
       mobileDrawer = `
         <a href="/talisman/#patterns" data-drawer-link>Patterns</a>
-        <a href="#" data-drawer-link>Inspiration</a>
+        <a href="/feature-gail-drury/" data-drawer-link>Inspiration</a>
         <a href="#" data-drawer-link>Documentation</a>
         <a href="#contact" class="mobile-cta" data-drawer-link>Contact</a>`;
     }

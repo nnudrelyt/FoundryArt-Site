@@ -7164,6 +7164,22 @@ body[data-page="feature-drury"] .lw2-article-figure figcaption {
   padding: 0 8px;
   font-style: italic;
 }
+body[data-page="feature-drury"] .lw2-article-figure-credit {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  color: #888;
+  letter-spacing: 0.02em;
+}
+body[data-page="feature-drury"] .lw2-article-figure-credit a {
+  color: #888;
+  text-decoration: underline;
+}
+body[data-page="feature-drury"] .lw2-article-figure-credit a:hover {
+  color: #A31414;
+}
 body[data-page="feature-drury"] .lw2-article-section--close {
   padding-bottom: 88px;
   border-bottom: 1px solid #DDD;
