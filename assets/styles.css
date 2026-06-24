@@ -6815,7 +6815,7 @@ body[data-page="where-to-buy"] .lw2-wtb-map-footnote span {
 /* 3-COLUMN BRAND SHOWROOM REFERENCES — Bronzework / Foundry Art /
    Talisman. Each column has its own accordion or static card. */
 body[data-page="where-to-buy"] .lw2-wtb-regions {
-  max-width: 1280px;
+  max-width: 1100px;     /* match .lw2-wtb-map-wrap so columns line up with map above */
   margin: 0 auto;
   padding: 56px 24px 96px;
 }
@@ -6951,11 +6951,11 @@ body[data-page="where-to-buy"] .lw2-wtb-fa-body a {
   color: var(--lw-accent-red);
   text-decoration: underline;
 }
-/* Talisman static card */
+/* Talisman static card — no chrome, just centered content */
 body[data-page="where-to-buy"] .lw2-wtb-talisman-card {
-  background: #F7F7F7;
-  border: 1px solid #E5E5E5;
-  padding: 32px 24px;
+  background: transparent;
+  border: 0;
+  padding: 24px 24px 32px;
   text-align: center;
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-line,
