@@ -7160,6 +7160,19 @@ body[data-page="tile-collections"] .lw2-tc-sub-card:hover h3 { color: #A31414; }
   .lw2-media-arrow { opacity: 1; }
 }
 
+/* Mobile: shrink overlaid thumbs so 4 fit inside the stage width */
+@media (max-width: 768px) {
+  .lw2-media-thumb {
+    width: 60px;
+    flex: 0 0 60px;
+  }
+  .lw2-media-thumbs {
+    padding: 6px;
+    bottom: 10px;
+    gap: 4px;
+  }
+}
+
 /* -- DESIGNER FEATURE ARTICLE -- */
 
 /* Full-bleed image hero with centered overlay panel.
@@ -7374,16 +7387,31 @@ body[data-page="feature-drury"] .lw2-article-credit-block a:hover {
   color: var(--lw-accent-red);
 }
 
-/* Closing variant — extra padding-bottom + centered special-thanks line */
+/* Closing variant — extra padding-bottom on the final body section */
 body[data-page="feature-drury"] .lw2-article-body--close .lw2-article-text-col {
   padding-bottom: 88px;
 }
-body[data-page="feature-drury"] .lw2-article-special-thanks {
+
+/* SPECIAL THANKS CALLOUT — cream ground + inner bordered frame
+   that softly contains the closing credit line. */
+body[data-page="feature-drury"] .lw2-article-thanks-callout {
+  background: var(--lw-article-section-bg);
+  padding: 40px 24px 96px;
+}
+body[data-page="feature-drury"] .lw2-article-thanks-frame {
+  max-width: 1120px;
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  padding: 64px 32px;
   text-align: center;
-  font-style: italic;
-  font-size: 15px;
-  color: var(--lw-text-secondary);
-  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.25);
+}
+body[data-page="feature-drury"] .lw2-article-thanks-frame p {
+  margin: 0;
+  font-family: var(--lw-font-sans);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--lw-text-primary);
 }
 
 /* -- RESPONSIVE: tablet -- */
@@ -7545,6 +7573,19 @@ body[data-page="feature-drury"] .lw2-article-special-thanks {
   body[data-page="feature-drury"] .lw2-article-text-col p { font-size: 16px; }
   body[data-page="feature-drury"] .lw2-article-body--close .lw2-article-text-col {
     padding-bottom: 56px;
+  }
+  body[data-page="feature-drury"] .lw2-article-body--text-left .lw2-media-carousel,
+  body[data-page="feature-drury"] .lw2-article-body--media-left .lw2-media-carousel {
+    margin: 0;
+  }
+  body[data-page="feature-drury"] .lw2-article-thanks-callout {
+    padding: 32px 18px 56px;
+  }
+  body[data-page="feature-drury"] .lw2-article-thanks-frame {
+    padding: 36px 20px;
+  }
+  body[data-page="feature-drury"] .lw2-article-thanks-frame p {
+    font-size: 15px;
   }
 }
 
