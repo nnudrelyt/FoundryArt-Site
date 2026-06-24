@@ -6899,10 +6899,10 @@ body[data-page="where-to-buy"] .lw2-wtb-state-name {
    targets a different region-grid layout. */
 body[data-page="where-to-buy"] .lw2-wtb-accordion-panel p.lw2-wtb-listing {
   font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 1.55;
   color: #222;
-  margin: 0 0 18px;
+  margin: 0 0 14px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-listing-name {
   font-weight: 600;
