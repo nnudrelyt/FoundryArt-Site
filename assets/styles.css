@@ -6840,7 +6840,7 @@ body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger {
   text-align: left;
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   color: #000;
 }
 body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger:hover { color: var(--lw-accent-red); }
