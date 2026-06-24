@@ -716,6 +716,41 @@
     });
   }
 
+  // .lw2-media-carousel — reusable image-set component.
+  // Single image: just shows the slide, no thumbs/arrows.
+  // Multi: cross-fade between slides via thumb click, prev/next arrows, or keyboard.
+  function initMediaCarousels() {
+    document.querySelectorAll('.lw2-media-carousel').forEach(carousel => {
+      const slides = carousel.querySelectorAll('.lw2-media-slide');
+      const thumbs = carousel.querySelectorAll('.lw2-media-thumb');
+      const prevBtn = carousel.querySelector('.lw2-media-prev');
+      const nextBtn = carousel.querySelector('.lw2-media-next');
+      const count = slides.length;
+      carousel.dataset.slides = String(count);
+      if (count <= 1) return;
+
+      let active = 0;
+      function setActive(i) {
+        active = ((i % count) + count) % count;
+        slides.forEach((s, idx) => s.setAttribute('data-active', idx === active ? 'true' : 'false'));
+        thumbs.forEach((t, idx) => t.setAttribute('aria-selected', idx === active ? 'true' : 'false'));
+      }
+      setActive(0);
+
+      thumbs.forEach((t, idx) => {
+        t.addEventListener('click', () => setActive(idx));
+      });
+      if (prevBtn) prevBtn.addEventListener('click', () => setActive(active - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => setActive(active + 1));
+
+      // Keyboard arrows when the carousel (or anything inside it) is focused
+      carousel.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); setActive(active - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); setActive(active + 1); }
+      });
+    });
+  }
+
   ready(() => {
     initLayout();
     initDrawer();
@@ -732,6 +767,7 @@
     initShipToggle();
     initTradeToggle();
     initWtbTabs();
+    initMediaCarousels();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();

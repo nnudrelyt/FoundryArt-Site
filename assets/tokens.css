@@ -290,4 +290,29 @@
   --lw-article-lh-quote:           1.5;
   --lw-article-lh-body:            1.7;
   --lw-article-lh-caption:         1.6;
+
+
+  /* ════════════════════════════════════════
+     MEDIA CAROUSEL (.lw2-media-carousel)
+     ════════════════════════════════════════
+     Reusable image-set component. Single image when given
+     one slide; hero + thumb strip + prev/next arrows when
+     given multiple. Lives in the global LW scope so the
+     article body, collection-detail pages, sub-brand hero
+     photos, and studio panels can all adopt it.
+     ════════════════════════════════════════ */
+
+  --lw-carousel-thumb-opacity:        0.55;
+  --lw-carousel-thumb-opacity-active: 1;
+  --lw-carousel-thumb-gap:            4px;
+  --lw-carousel-thumb-aspect:         4/3;
+  --lw-carousel-slide-aspect:         4/3;
+
+  --lw-carousel-transition:           200ms ease;
+
+  --lw-carousel-arrow-size:           44px;
+  --lw-carousel-arrow-bg:             rgba(0, 0, 0, 0.40);
+  --lw-carousel-arrow-bg-hover:       rgba(0, 0, 0, 0.65);
+  --lw-carousel-arrow-color:          #FFFFFF;
+  --lw-carousel-arrow-inset:          16px;
 }
