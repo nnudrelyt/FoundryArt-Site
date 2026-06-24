@@ -5561,11 +5561,11 @@ body[data-page="our-team"] .lw2-team-group-caption, body[data-page="about"] .lw2
    The legacy LW-scope .footer p { border-top: 1px solid #eee } rule
    added a horizontal rule above the copyright — suppressed here so
    there's no line between the group caption and the footer bg. */
-body[data-page="our-team"] .footer, body[data-page="about"] .footer {
+body[data-page="our-team"] .footer, body[data-page="about"] .footer, body[data-page="tile-collections"] .footer {
   background: #F7F7F7;
   border-top: none !important;
 }
-body[data-page="our-team"] .lw2-footer-row, body[data-page="about"] .lw2-footer-row {
+body[data-page="our-team"] .lw2-footer-row, body[data-page="about"] .lw2-footer-row, body[data-page="tile-collections"] .lw2-footer-row {
   background: #F7F7F7 !important;
   padding-top: 80px !important;
 }
@@ -5576,7 +5576,7 @@ body[data-page="our-team"] .lw2-footer-row, body[data-page="about"] .lw2-footer-
 /* Suppress the legacy LW-section .footer p { border-top: 1px solid #eee }
    rule that draws a thin horizontal line above any <p> in the footer.
    Only neutralize that border — not the padding-top: 80px on the row. */
-body[data-page="our-team"] .footer p, body[data-page="about"] .footer p {
+body[data-page="our-team"] .footer p, body[data-page="about"] .footer p, body[data-page="tile-collections"] .footer p {
   border-top: none !important;
 }
 
@@ -6996,10 +6996,15 @@ body[data-page="tile-collections"] .lw2-brand-card-wordmark {
 body[data-page="tile-collections"] .lw2-brand-card-wordmark img {
   display: inline-block;
   height: auto;
-  max-width: 280px;
-  max-height: 32px;
   width: auto;
+  max-width: 100%;        /* never overflow card */
+  max-height: 24px;       /* base — per-brand overrides below */
 }
+/* Per-brand wordmark heights equalize cap-heights across the three
+   PNGs (different ink-to-canvas ratios: BWS 87.5%, FA 89.3%, TAL 96.3%) */
+body[data-page="tile-collections"] .lw2-brand-card--bws .lw2-brand-card-wordmark img { max-height: 22px; }
+body[data-page="tile-collections"] .lw2-brand-card--fa .lw2-brand-card-wordmark img { max-height: 22px; }
+body[data-page="tile-collections"] .lw2-brand-card--tal .lw2-brand-card-wordmark img { max-height: 20px; }
 body[data-page="tile-collections"] .lw2-brand-card-photo {
   display: block;
   background: #FFFFFF;
@@ -7016,13 +7021,13 @@ body[data-page="tile-collections"] .lw2-brand-card-photo:hover img {
   opacity: 0.92;
 }
 body[data-page="tile-collections"] .lw2-brand-card-body {
-  background: var(--lw-article-section-bg);  /* #F2F0E9 cream */
+  background: #F7F7F7;
   flex: 1;
-  padding: 32px 28px 36px;
+  padding: 36px 28px 40px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
   align-items: center;
   justify-content: space-between;
 }
@@ -7036,19 +7041,26 @@ body[data-page="tile-collections"] .lw2-brand-card-body p {
 }
 body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta {
   display: inline-block;
-  padding: 13px 26px;
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.55);
+  padding: 14px 32px;
+  background: transparent;
+  border: 1px solid var(--lw-accent-red);
   font-family: var(--lw-font-sans);
-  font-size: 13px;
-  letter-spacing: 0.04em;
-  color: var(--lw-text-primary);
+  font-size: 16px;
+  font-weight: var(--lw-fw-medium);
+  letter-spacing: 0.03em;
+  color: var(--lw-accent-red);
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta:hover {
-  background: var(--lw-text-primary);
+body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta:hover,
+body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta:focus-visible {
+  background: var(--lw-accent-red);
   color: #FFFFFF;
+  border-color: var(--lw-accent-red);
+}
+body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta:active {
+  background: var(--lw-accent-red-hover);
+  border-color: var(--lw-accent-red-hover);
 }
 
 /* -- MEDIA CAROUSEL (system primitive) --
