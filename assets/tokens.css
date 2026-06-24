@@ -274,6 +274,16 @@
   --lw-article-max-w:              1200px;
   --lw-article-gutter:             24px;
 
+  /* Section backgrounds — extracted from live (themify-built) */
+  --lw-article-section-bg:         #F2F0E9;     /* warm cream — body section ground */
+  --lw-article-callout-bg:         #D7DDE0;     /* light blue-gray — "We celebrate" band */
+  --lw-article-section-pad-y:      4em;         /* 4em top/bottom on lede + callout + body sections */
+
+  /* Body section columns (alternating) */
+  --lw-article-text-col-pad-d:     56px 72px;   /* text column internal padding */
+  --lw-article-text-col-pad-t:     40px 48px;
+  --lw-article-text-col-pad-m:     32px 24px;
+
   /* Line heights */
   --lw-article-lh-tight:           1.05;        /* hero title stack */
   --lw-article-lh-h2:              1.2;
