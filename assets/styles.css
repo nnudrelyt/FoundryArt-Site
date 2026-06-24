@@ -6877,7 +6877,10 @@ body[data-page="where-to-buy"] .lw2-wtb-state-name {
   padding-bottom: 6px;
   border-bottom: 1px solid #D8D5D0;
 }
-body[data-page="where-to-buy"] .lw2-wtb-listing {
+/* Selector tightened with .lw2-wtb-accordion-panel ancestor to win
+   over the legacy `.lw2-wtb-state p { font-size: 13px }` rule that
+   targets a different region-grid layout. */
+body[data-page="where-to-buy"] .lw2-wtb-accordion-panel p.lw2-wtb-listing {
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.55;
