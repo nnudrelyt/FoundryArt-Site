@@ -7363,8 +7363,9 @@ body[data-page="feature-drury"] .lw2-article-text-col a:hover {
   color: var(--lw-accent-red-hover);
 }
 
-/* Italic in-column photo caption — visually distinct from body paragraphs */
-body[data-page="feature-drury"] .lw2-article-photo-caption {
+/* Italic in-column photo caption — visually distinct from body paragraphs.
+   Selector includes .lw2-article-text-col to win over its `p` rule. */
+body[data-page="feature-drury"] .lw2-article-text-col p.lw2-article-photo-caption {
   font-style: italic;
   font-size: 13px;
   line-height: 1.6;
