@@ -7392,10 +7392,11 @@ body[data-page="feature-drury"] .lw2-article-body--close .lw2-article-text-col {
   padding-bottom: 88px;
 }
 
-/* SPECIAL THANKS CALLOUT — page ground (no fill) + inner bordered
-   frame that softly contains the closing credit line. */
+/* SPECIAL THANKS CALLOUT — cream ground (matches body sections) +
+   inner bordered frame (transparent) that softly contains the
+   closing credit line. */
 body[data-page="feature-drury"] .lw2-article-thanks-callout {
-  background: transparent;
+  background: var(--lw-article-section-bg);
   padding: 40px 24px 96px;
 }
 body[data-page="feature-drury"] .lw2-article-thanks-frame {
