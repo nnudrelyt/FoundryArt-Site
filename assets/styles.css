@@ -6735,130 +6735,70 @@ body[data-page="where-to-buy"] .lw2-wtb-map-search-go:focus-visible {
   border-color: var(--lw-accent-red-hover);
 }
 
-/* Map canvas — SVG US silhouette + absolutely-positioned showroom pins. */
+/* Map canvas — Leaflet mount point with custom diamond markers. */
 body[data-page="where-to-buy"] .lw2-wtb-map-canvas {
   position: relative;
-  aspect-ratio: 959 / 593;
-  background: #FAFAF7;
-  overflow: hidden;
+  height: 540px;
+  background: #F2F4F2;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-canvas-bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
+body[data-page="where-to-buy"] .lw2-wtb-map-canvas .leaflet-container {
   height: 100%;
-  object-fit: contain;
-  filter: brightness(0) saturate(100%) invert(91%) sepia(7%) saturate(132%) hue-rotate(7deg) brightness(96%) contrast(89%);
-  opacity: 1;
-  pointer-events: none;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-pins {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-pin {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border: 0;
-  padding: 0;
-  margin: -8px 0 0 -8px;        /* center on the x/y coord */
-  background: var(--lw-accent-red);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(255, 255, 255, 0.9);
-  pointer-events: auto;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  z-index: 2;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-pin:hover,
-body[data-page="where-to-buy"] .lw2-wtb-map-pin:focus-visible {
-  transform: scale(1.25);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.95);
-  outline: none;
-  z-index: 4;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-pin.is-active {
-  transform: scale(1.35);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.55), 0 0 0 3px #FFF;
-  z-index: 5;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-pin.is-dimmed {
-  opacity: 0.3;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-tooltip {
-  position: absolute;
-  transform: translate(-50%, -100%);
-  margin-top: -16px;
-  background: rgba(0, 0, 0, 0.85);
-  color: #FFF;
-  padding: 6px 10px;
+  width: 100%;
   font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.3;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 6;
+  background: #F2F4F2;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-pin:hover .lw2-wtb-map-tooltip,
-body[data-page="where-to-buy"] .lw2-wtb-map-pin:focus-visible .lw2-wtb-map-tooltip {
-  display: block;
+/* Diamond marker — 14px square rotated 45° in --lw-accent-red. */
+body[data-page="where-to-buy"] .lw2-wtb-diamond {
+  width: 14px;
+  height: 14px;
+  background: var(--lw-accent-red);
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  transform: rotate(45deg);
+  transform-origin: center;
+  transition: transform 0.18s ease;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-tooltip {
-  display: none;
-  left: 50%;
-  top: 0;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-card {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 280px;
-  background: #FFF;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  padding: 20px 22px;
-  z-index: 7;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-card[hidden] { display: none; }
-body[data-page="where-to-buy"] .lw2-wtb-map-card-close {
-  position: absolute;
-  top: 6px;
-  right: 8px;
-  border: 0;
-  background: transparent;
-  font-size: 22px;
-  line-height: 1;
-  color: #999;
+body[data-page="where-to-buy"] .lw2-wtb-diamond-wrap {
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
   cursor: pointer;
-  padding: 4px 8px;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-card-close:hover { color: #000; }
-body[data-page="where-to-buy"] .lw2-wtb-map-card-name {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 19px;
-  margin: 0 0 6px;
-  color: #000;
-  padding-right: 24px;
+body[data-page="where-to-buy"] .lw2-wtb-diamond-wrap:hover .lw2-wtb-diamond,
+body[data-page="where-to-buy"] .leaflet-marker-icon:focus .lw2-wtb-diamond {
+  transform: rotate(45deg) scale(1.25);
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-card-meta {
+/* Leaflet popup — overrides defaults so it matches LW typography. */
+body[data-page="where-to-buy"] .leaflet-popup-content-wrapper {
+  border-radius: 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  padding: 4px 6px;
+}
+body[data-page="where-to-buy"] .leaflet-popup-content {
+  margin: 12px 14px;
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 13px;
-  color: #555;
-  margin: 0 0 12px;
-}
-body[data-page="where-to-buy"] .lw2-wtb-map-card-note {
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 12px;
-  color: #777;
-  margin: 0;
   line-height: 1.5;
+  color: #222;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-card-note a {
+body[data-page="where-to-buy"] .leaflet-popup-content .lw2-wtb-popup-name {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 17px;
+  color: #000;
+  margin: 0 0 4px;
+}
+body[data-page="where-to-buy"] .leaflet-popup-content .lw2-wtb-popup-meta {
+  font-size: 12px;
+  color: #555;
+  margin: 0 0 6px;
+}
+body[data-page="where-to-buy"] .leaflet-popup-content .lw2-wtb-popup-phone a {
   color: var(--lw-accent-red);
-  text-decoration: underline;
+  font-weight: 600;
+  text-decoration: none;
+}
+body[data-page="where-to-buy"] .leaflet-popup-tip-container .leaflet-popup-tip {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
 }
 body[data-page="where-to-buy"] .lw2-wtb-map-footnote {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -6869,6 +6809,94 @@ body[data-page="where-to-buy"] .lw2-wtb-map-footnote {
 body[data-page="where-to-buy"] .lw2-wtb-map-footnote span {
   color: var(--lw-accent-red);
   font-size: 14px;
+  margin-right: 4px;
+}
+
+/* REGION ACCORDION — replicates the live state-by-state directory. */
+body[data-page="where-to-buy"] .lw2-wtb-regions {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 24px 96px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-accordion {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+body[data-page="where-to-buy"] .lw2-wtb-accordion-item {
+  border-top: 1px solid #DDD;
+}
+body[data-page="where-to-buy"] .lw2-wtb-accordion-item:last-child {
+  border-bottom: 1px solid #DDD;
+}
+body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 22px 4px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 24px;
+  color: #000;
+}
+body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger:hover { color: var(--lw-accent-red); }
+body[data-page="where-to-buy"] .lw2-wtb-accordion-icon {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--lw-accent-red);
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+body[data-page="where-to-buy"] .lw2-wtb-accordion-item.is-open .lw2-wtb-accordion-icon {
+  transform: rotate(45deg);
+}
+body[data-page="where-to-buy"] .lw2-wtb-accordion-panel {
+  display: none;
+  padding: 8px 4px 32px;
+  columns: 3;
+  column-gap: 40px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-accordion-item.is-open .lw2-wtb-accordion-panel {
+  display: block;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state {
+  break-inside: avoid;
+  margin: 0 0 18px;
+  padding-bottom: 4px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-state-name {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #000;
+  margin: 0 0 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #E8E5E0;
+}
+body[data-page="where-to-buy"] .lw2-wtb-listing {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #222;
+  margin: 0 0 14px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-listing-name {
+  font-weight: 600;
+  color: #000;
+  display: block;
+}
+body[data-page="where-to-buy"] .lw2-wtb-listing-city {
+  color: #800000;
+  font-weight: 600;
+}
+body[data-page="where-to-buy"] .lw2-wtb-listing-phone {
+  color: #555;
+  display: block;
 }
 
 /* BRAND × REGION SELECTOR GRID — three "cards" under the map.

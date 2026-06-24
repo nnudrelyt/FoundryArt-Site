@@ -716,102 +716,155 @@
     });
   }
 
-  // Where-to-Buy map — renders showroom pins on top of the US SVG canvas.
-  // Pins: hover/focus shows a tooltip; click opens a detail card.
-  // Search: stubbed — visually dims pins outside the matched state.
+  // Where-to-Buy map — Leaflet + CartoDB Positron tiles + custom diamond
+  // markers. Loads showrooms.json (full directory), renders ~120 pins,
+  // populates the region accordion below the map.
+  function decodeEntities(s) {
+    const t = document.createElement('textarea'); t.innerHTML = s; return t.value;
+  }
   function initWtbMap() {
-    const canvas = document.querySelector('[data-wtb-canvas]');
-    if (!canvas) return;
-    const pinsRoot = canvas.querySelector('[data-wtb-pins]');
-    const card = canvas.querySelector('[data-wtb-card]');
-    const cardName = canvas.querySelector('[data-wtb-card-name]');
-    const cardMeta = canvas.querySelector('[data-wtb-card-meta]');
-    const cardClose = canvas.querySelector('[data-wtb-card-close]');
+    const canvas = document.getElementById('wtb-leaflet-map');
+    if (!canvas || typeof L === 'undefined') return;
+
+    // Center on continental US, zoom out enough to see all CONUS pins.
+    const map = L.map(canvas, {
+      zoomControl: true,
+      scrollWheelZoom: false,    // avoid hijacking page scroll
+      worldCopyJump: false,
+    }).setView([39.5, -98.5], 4);
+
+    // CartoDB Positron — clean, light, similar to Google Maps Standard.
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 18,
+    }).addTo(map);
+
+    // Custom diamond marker via L.divIcon.
+    function diamondIcon() {
+      return L.divIcon({
+        className: 'lw2-wtb-diamond-wrap',
+        html: '<div class="lw2-wtb-diamond"></div>',
+        iconSize:   [14, 14],
+        iconAnchor: [7, 7],
+        popupAnchor:[0, -8],
+      });
+    }
 
     fetch('/assets/data/showrooms.json')
       .then(r => r.json())
-      .then(showrooms => renderPins(showrooms))
-      .catch(() => {});
-
-    function renderPins(showrooms) {
-      pinsRoot.innerHTML = '';
-      showrooms.forEach((s, i) => {
-        const pin = document.createElement('button');
-        pin.type = 'button';
-        pin.className = 'lw2-wtb-map-pin';
-        pin.style.left = s.x + '%';
-        pin.style.top  = s.y + '%';
-        pin.setAttribute('aria-label', s.name + ' — ' + s.city + ', ' + s.state);
-        pin.dataset.state = s.state;
-        pin.dataset.idx = String(i);
-
-        const tip = document.createElement('span');
-        tip.className = 'lw2-wtb-map-tooltip';
-        tip.textContent = s.name + ' · ' + s.city + ', ' + s.state;
-        pin.appendChild(tip);
-
-        pin.addEventListener('click', () => openCard(s, pin));
-        pinsRoot.appendChild(pin);
-      });
-
-      // Stub: search button highlights pins matching the entered ZIP/city.
-      // We use a tiny zip-prefix → state map for the mockup.
-      const form = document.querySelector('.lw2-wtb-map-search');
-      if (form) {
-        form.addEventListener('submit', () => {
-          const zip = form.querySelector('input[name="zip"]').value.trim().toLowerCase();
-          const stateMatch = guessState(zip);
-          pinsRoot.querySelectorAll('.lw2-wtb-map-pin').forEach(p => {
-            if (!stateMatch) p.classList.remove('is-dimmed');
-            else p.classList.toggle('is-dimmed', p.dataset.state !== stateMatch);
-          });
+      .then(showrooms => {
+        showrooms.forEach(s => {
+          const name = decodeEntities(s.name);
+          const addr = decodeEntities(s.address || '');
+          const phone = s.phone || '';
+          const html =
+            '<p class="lw2-wtb-popup-name">' + name + '</p>' +
+            '<p class="lw2-wtb-popup-meta">' + (addr ? addr + '<br>' : '') + s.city + ', ' + s.state + (s.zip ? ' ' + s.zip : '') + '</p>' +
+            (phone ? '<p class="lw2-wtb-popup-phone"><a href="tel:' + phone.replace(/\D/g,'') + '">' + phone + '</a></p>' : '');
+          L.marker([s.lat, s.lng], { icon: diamondIcon(), title: name + ' — ' + s.city + ', ' + s.state })
+            .addTo(map)
+            .bindPopup(html, { closeButton: true });
         });
-      }
-    }
+        // After pins render, fit to CONUS bounds (ignoring Vancouver outlier).
+        map.fitBounds([[25.5, -124], [49, -67]], { padding: [20, 20] });
+        initWtbAccordion(showrooms);
+        wireSearch(map, showrooms);
+      })
+      .catch(() => {});
+  }
 
-    function openCard(s, pin) {
-      pinsRoot.querySelectorAll('.lw2-wtb-map-pin.is-active').forEach(p => p.classList.remove('is-active'));
-      pin.classList.add('is-active');
-      cardName.textContent = s.name;
-      cardMeta.textContent = s.city + ', ' + s.state;
-      card.hidden = false;
-    }
-    if (cardClose) cardClose.addEventListener('click', () => {
-      card.hidden = true;
-      pinsRoot.querySelectorAll('.lw2-wtb-map-pin.is-active').forEach(p => p.classList.remove('is-active'));
+  function wireSearch(map, showrooms) {
+    const form = document.querySelector('.lw2-wtb-map-search');
+    if (!form) return;
+    form.addEventListener('submit', () => {
+      const q = form.querySelector('input[name="zip"]').value.trim().toLowerCase();
+      if (!q) return;
+      // Try city match first
+      let match = showrooms.find(s => s.city.toLowerCase() === q);
+      // Then state abbreviation
+      if (!match && q.length === 2) match = showrooms.find(s => s.state.toLowerCase() === q);
+      // Then ZIP prefix match
+      if (!match && /^\d{3,5}/.test(q)) {
+        const prefix = q.slice(0, 3);
+        match = showrooms.find(s => s.zip && s.zip.startsWith(prefix));
+      }
+      if (match) {
+        map.setView([match.lat, match.lng], 8);
+      }
+    });
+  }
+
+  // Region accordion — populated from showrooms.json grouped by region → state.
+  function initWtbAccordion(showrooms) {
+    const root = document.querySelector('[data-wtb-accordion]');
+    if (!root) return;
+    const REGION_ORDER = ['Central US', 'Eastern US', 'Western US', 'Canada'];
+    const byRegion = {};
+    showrooms.forEach(s => {
+      const r = s.region || 'Other';
+      if (!byRegion[r]) byRegion[r] = {};
+      const st = s.state;
+      if (!byRegion[r][st]) byRegion[r][st] = [];
+      byRegion[r][st].push(s);
     });
 
-    // Crude zip-prefix → state lookup so the stub feels responsive.
-    function guessState(input) {
-      if (!input) return null;
-      const cityMap = {
-        'boston': 'MA', 'new york': 'NY', 'nyc': 'NY', 'rockville': 'MD',
-        'atlanta': 'GA', 'miami': 'FL', 'chicago': 'IL', 'minneapolis': 'MN',
-        'dallas': 'TX', 'houston': 'TX', 'denver': 'CO', 'phoenix': 'AZ',
-        'los angeles': 'CA', 'la': 'CA', 'san francisco': 'CA', 'sf': 'CA',
-        'seattle': 'WA', 'palm springs': 'CA', 'palm desert': 'CA'
-      };
-      if (cityMap[input]) return cityMap[input];
-      // ZIP prefix → state (first digit + range)
-      const z = (input.match(/^\d{3}/) || [])[0];
-      if (!z) return null;
-      const n = parseInt(z, 10);
-      if (n >= 10 && n <= 27) return 'NY';      // NY metro
-      if (n >= 100 && n <= 149) return 'NY';
-      if (n >= 200 && n <= 219) return 'MD';
-      if (n >= 220 && n <= 246) return 'VA';
-      if (n >= 300 && n <= 319) return 'GA';
-      if (n >= 320 && n <= 349) return 'FL';
-      if (n >= 600 && n <= 629) return 'IL';
-      if (n >= 730 && n <= 749) return 'OK';
-      if (n >= 750 && n <= 799) return 'TX';
-      if (n >= 800 && n <= 816) return 'CO';
-      if (n >= 850 && n <= 865) return 'AZ';
-      if (n >= 900 && n <= 961) return 'CA';
-      if (n >= 980 && n <= 994) return 'WA';
-      if (n >= 550 && n <= 567) return 'MN';
-      return null;
-    }
+    const STATE_NAME = {
+      AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',DC:'Washington, DC',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',BC:'British Columbia',
+    };
+
+    const frag = document.createDocumentFragment();
+    REGION_ORDER.forEach(region => {
+      if (!byRegion[region]) return;
+      const li = document.createElement('li');
+      li.className = 'lw2-wtb-accordion-item';
+
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'lw2-wtb-accordion-trigger';
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.innerHTML = '<span>' + region + '</span><span class="lw2-wtb-accordion-icon" aria-hidden="true">+</span>';
+      trigger.addEventListener('click', () => {
+        const open = li.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      li.appendChild(trigger);
+
+      const panel = document.createElement('div');
+      panel.className = 'lw2-wtb-accordion-panel';
+
+      const states = Object.keys(byRegion[region]).sort((a, b) =>
+        (STATE_NAME[a] || a).localeCompare(STATE_NAME[b] || b)
+      );
+      states.forEach(st => {
+        const stateBlock = document.createElement('div');
+        stateBlock.className = 'lw2-wtb-state';
+        const h = document.createElement('h4');
+        h.className = 'lw2-wtb-state-name';
+        h.textContent = STATE_NAME[st] || st;
+        stateBlock.appendChild(h);
+
+        byRegion[region][st].forEach(s => {
+          const p = document.createElement('p');
+          p.className = 'lw2-wtb-listing';
+          const name = decodeEntities(s.name);
+          const addr = decodeEntities(s.address || '');
+          p.innerHTML =
+            '<span class="lw2-wtb-listing-name">' + name + '</span>' +
+            (addr ? addr + '<br>' : '') +
+            '<span class="lw2-wtb-listing-city">' + s.city + '</span>' +
+            ' ' + s.state + (s.zip ? ' ' + s.zip : '') +
+            (s.phone ? '<br><span class="lw2-wtb-listing-phone">' + s.phone + '</span>' : '');
+          stateBlock.appendChild(p);
+        });
+        panel.appendChild(stateBlock);
+      });
+
+      li.appendChild(panel);
+      frag.appendChild(li);
+    });
+    root.innerHTML = '';
+    root.appendChild(frag);
   }
 
   // .lw2-media-carousel — reusable image-set component.
