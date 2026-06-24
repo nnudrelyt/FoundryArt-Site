@@ -6833,13 +6833,14 @@ body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 24px 28px;
+  padding: 18px 28px;
   background: transparent;
   border: 0;
   cursor: pointer;
   text-align: left;
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 32px;     /* next step up from state-name 24px (matches --lw-fs-featured-h2) */
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
   color: #000;
 }
 body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger:hover { color: var(--lw-accent-red); }
