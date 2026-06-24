@@ -6824,17 +6824,16 @@ body[data-page="where-to-buy"] .lw2-wtb-accordion {
   padding: 0;
 }
 body[data-page="where-to-buy"] .lw2-wtb-accordion-item {
-  border-top: 1px solid #DDD;
-}
-body[data-page="where-to-buy"] .lw2-wtb-accordion-item:last-child {
-  border-bottom: 1px solid #DDD;
+  background: #F7F7F7;
+  border: 1px solid #E5E5E5;
+  margin-bottom: 12px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 22px 4px;
+  padding: 22px 28px;
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -6857,7 +6856,7 @@ body[data-page="where-to-buy"] .lw2-wtb-accordion-item.is-open .lw2-wtb-accordio
 }
 body[data-page="where-to-buy"] .lw2-wtb-accordion-panel {
   display: none;
-  padding: 8px 4px 32px;
+  padding: 8px 28px 32px;
   columns: 3;
   column-gap: 40px;
 }
@@ -6871,19 +6870,19 @@ body[data-page="where-to-buy"] .lw2-wtb-state {
 }
 body[data-page="where-to-buy"] .lw2-wtb-state-name {
   font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 400;
   color: #000;
-  margin: 0 0 10px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid #E8E5E0;
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #D8D5D0;
 }
 body[data-page="where-to-buy"] .lw2-wtb-listing {
   font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 1.55;
   color: #222;
-  margin: 0 0 14px;
+  margin: 0 0 18px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-listing-name {
   font-weight: 600;

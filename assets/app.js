@@ -733,8 +733,9 @@
       worldCopyJump: false,
     }).setView([39.5, -98.5], 4);
 
-    // CartoDB Positron — clean, light, similar to Google Maps Standard.
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    // CartoDB Voyager — full color (greens/blues/beige) matching the
+    // live Google Maps Standard look.
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
       maxZoom: 18,
