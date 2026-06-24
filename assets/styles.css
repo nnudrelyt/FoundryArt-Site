@@ -7030,6 +7030,8 @@ body[data-page="tile-collections"] .lw2-brand-card-body {
   gap: 28px;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  border-top: none;
 }
 body[data-page="tile-collections"] .lw2-brand-card-body p {
   font-family: var(--lw-font-sans);
