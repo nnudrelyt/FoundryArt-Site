@@ -6990,7 +6990,7 @@ body[data-page="tile-collections"] .lw2-brand-card {
 body[data-page="tile-collections"] .lw2-brand-card-wordmark {
   text-align: center;
   margin: 0;
-  padding: 36px 24px 24px;
+  padding: 36px 8px 24px;     /* horizontal padding tightened so wide BWS/FA wordmarks render at their target height without max-width clamping */
   background: #FFFFFF;
 }
 body[data-page="tile-collections"] .lw2-brand-card-wordmark img {
@@ -7001,10 +7001,11 @@ body[data-page="tile-collections"] .lw2-brand-card-wordmark img {
   max-height: 24px;       /* base — per-brand overrides below */
 }
 /* Per-brand wordmark heights equalize cap-heights across the three
-   PNGs (different ink-to-canvas ratios: BWS 87.5%, FA 89.3%, TAL 96.3%) */
-body[data-page="tile-collections"] .lw2-brand-card--bws .lw2-brand-card-wordmark img { max-height: 22px; }
-body[data-page="tile-collections"] .lw2-brand-card--fa .lw2-brand-card-wordmark img { max-height: 22px; }
-body[data-page="tile-collections"] .lw2-brand-card--tal .lw2-brand-card-wordmark img { max-height: 20px; }
+   PNGs (different ink-to-canvas ratios: BWS 87.5%, FA 89.3%, TAL 96.3%).
+   Scale: bumped +18% from 22/22/20 to 26/26/24 for stronger presence. */
+body[data-page="tile-collections"] .lw2-brand-card--bws .lw2-brand-card-wordmark img { max-height: 26px; }
+body[data-page="tile-collections"] .lw2-brand-card--fa .lw2-brand-card-wordmark img { max-height: 26px; }
+body[data-page="tile-collections"] .lw2-brand-card--tal .lw2-brand-card-wordmark img { max-height: 24px; }
 body[data-page="tile-collections"] .lw2-brand-card-photo {
   display: block;
   background: #FFFFFF;
