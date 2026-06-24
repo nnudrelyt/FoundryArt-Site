@@ -7255,10 +7255,10 @@ body[data-page="feature-drury"] .lw2-article-portrait img {
 }
 body[data-page="feature-drury"] .lw2-article-lede-text p {
   font-family: var(--lw-font-serif);
-  font-size: 22px;
-  line-height: 1.55;
+  font-size: 24px;
+  line-height: 1.5;
   color: var(--lw-text-primary);
-  margin: 0 0 20px;
+  margin: 0 0 22px;
 }
 body[data-page="feature-drury"] .lw2-article-lede-text p:last-child {
   margin-bottom: 0;
@@ -7372,8 +7372,9 @@ body[data-page="feature-drury"] .lw2-article-text-col p.lw2-article-photo-captio
   margin-top: 18px;
 }
 
-/* "Design and photo ©Drury Design / Portfolio page at drurydesigns.com" */
-body[data-page="feature-drury"] .lw2-article-credit-block {
+/* "Design and photo ©Drury Design / Portfolio page at drurydesigns.com"
+   Selector includes .lw2-article-text-col to win over its `p` rule. */
+body[data-page="feature-drury"] .lw2-article-text-col p.lw2-article-credit-block {
   font-family: var(--lw-font-sans);
   font-size: 13px;
   line-height: 1.5;
