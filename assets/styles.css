@@ -7055,6 +7055,7 @@ body[data-page="tile-collections"] .lw2-tc-sub-card:hover h3 { color: #A31414; }
   aspect-ratio: var(--lw-carousel-slide-aspect);
   overflow: hidden;
   background: #E0DED5;
+  border: var(--lw-carousel-stage-border);
 }
 .lw2-media-slide {
   position: absolute;
@@ -7117,6 +7118,7 @@ body[data-page="tile-collections"] .lw2-tc-sub-card:hover h3 { color: #A31414; }
   gap: var(--lw-carousel-thumb-gap);
   padding: var(--lw-carousel-thumb-overlay-pad);
   background: var(--lw-carousel-thumb-overlay-bg);
+  border-radius: var(--lw-carousel-thumb-overlay-radius);
   max-width: calc(100% - 32px);
   z-index: 3;
 }
@@ -7265,13 +7267,15 @@ body[data-page="feature-drury"] .lw2-article-callout p {
 }
 
 /* BODY SECTIONS — full-width warm cream (#F2F0E9), two columns, no gap,
-   image flush with text column edge, alternating 1fr 2fr / 2fr 1fr */
+   alternating 1fr 2fr / 2fr 1fr. Photo gets its own breathing room via
+   the carousel's margin so the cream container shows as a frame. */
 body[data-page="feature-drury"] .lw2-article-body {
   background: var(--lw-article-section-bg);
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: center;
   gap: 0;
+  padding: 40px 0;
 }
 body[data-page="feature-drury"] .lw2-article-body--media-left {
   grid-template-columns: 2fr 1fr;
@@ -7284,6 +7288,14 @@ body[data-page="feature-drury"] .lw2-article-media-col {
   flex-direction: column;
   gap: 0;
   margin: 0;
+}
+/* Carousel (the media column) — give the photo cream margin on the outer
+   side (closer to the viewport edge) so the cream container shows around it. */
+body[data-page="feature-drury"] .lw2-article-body--text-left .lw2-media-carousel {
+  margin: 0 40px 0 0;     /* photo right of text — cream on right edge */
+}
+body[data-page="feature-drury"] .lw2-article-body--media-left .lw2-media-carousel {
+  margin: 0 0 0 40px;     /* photo left of text — cream on left edge */
 }
 body[data-page="feature-drury"] .lw2-article-media-hero {
   display: block;
@@ -7319,12 +7331,12 @@ body[data-page="feature-drury"] .lw2-article-section-title em {
   font-style: italic;
 }
 
-/* Body copy + photo caption + credit block — all serif */
+/* Body copy — Open Sans (section title H3 + photo caption stay serif italic) */
 body[data-page="feature-drury"] .lw2-article-text-col p {
-  font-family: var(--lw-font-serif);
-  font-size: 17px;
-  line-height: 1.55;
-  color: var(--lw-text-primary);
+  font-family: var(--lw-font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--lw-article-text-body);
   margin: 0 0 16px;
 }
 body[data-page="feature-drury"] .lw2-article-text-col p:last-child {

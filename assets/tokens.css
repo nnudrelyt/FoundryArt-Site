@@ -280,8 +280,8 @@
   --lw-article-section-pad-y:      4em;         /* 4em top/bottom on lede + callout + body sections */
 
   /* Body section columns (alternating) */
-  --lw-article-text-col-pad-d:     56px 72px;   /* text column internal padding */
-  --lw-article-text-col-pad-t:     40px 48px;
+  --lw-article-text-col-pad-d:     24px 72px;   /* reduced — section now has its own 40px vertical pad */
+  --lw-article-text-col-pad-t:     20px 48px;
   --lw-article-text-col-pad-m:     32px 24px;
 
   /* Line heights */
@@ -304,13 +304,15 @@
 
   --lw-carousel-thumb-opacity:        0.55;
   --lw-carousel-thumb-opacity-active: 1;
-  --lw-carousel-thumb-gap:            4px;
+  --lw-carousel-thumb-gap:            6px;
   --lw-carousel-thumb-aspect:         4/3;
-  --lw-carousel-thumb-w:              72px;        /* overlaid thumb fixed width */
+  --lw-carousel-thumb-w:              108px;       /* overlaid thumb fixed width (50% larger than v1) */
   --lw-carousel-thumb-overlay-bg:     rgba(255, 255, 255, 0.85);
-  --lw-carousel-thumb-overlay-pad:    6px;
-  --lw-carousel-thumb-overlay-inset:  12px;        /* gap from bottom of hero */
+  --lw-carousel-thumb-overlay-pad:    9px;
+  --lw-carousel-thumb-overlay-inset:  18px;        /* gap from bottom of hero */
+  --lw-carousel-thumb-overlay-radius: 6px;         /* slight corner round on the pill */
   --lw-carousel-slide-aspect:         4/3;
+  --lw-carousel-stage-border:         1px solid rgba(0, 0, 0, 0.08);
 
   --lw-carousel-transition:           200ms ease;
 
