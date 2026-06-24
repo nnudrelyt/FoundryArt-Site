@@ -306,6 +306,10 @@
   --lw-carousel-thumb-opacity-active: 1;
   --lw-carousel-thumb-gap:            4px;
   --lw-carousel-thumb-aspect:         4/3;
+  --lw-carousel-thumb-w:              72px;        /* overlaid thumb fixed width */
+  --lw-carousel-thumb-overlay-bg:     rgba(255, 255, 255, 0.85);
+  --lw-carousel-thumb-overlay-pad:    6px;
+  --lw-carousel-thumb-overlay-inset:  12px;        /* gap from bottom of hero */
   --lw-carousel-slide-aspect:         4/3;
 
   --lw-carousel-transition:           200ms ease;

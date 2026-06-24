@@ -7106,11 +7106,19 @@ body[data-page="tile-collections"] .lw2-tc-sub-card:hover h3 { color: #A31414; }
 .lw2-media-next {
   right: var(--lw-carousel-arrow-inset);
 }
+/* Thumb strip — overlaid on the stage at bottom-center inside a
+   white-translucent pill that matches the hero overlay panel aesthetic. */
 .lw2-media-thumbs {
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-auto-flow: column;
+  position: absolute;
+  bottom: var(--lw-carousel-thumb-overlay-inset);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
   gap: var(--lw-carousel-thumb-gap);
+  padding: var(--lw-carousel-thumb-overlay-pad);
+  background: var(--lw-carousel-thumb-overlay-bg);
+  max-width: calc(100% - 32px);
+  z-index: 3;
 }
 .lw2-media-thumb {
   border: 0;
@@ -7119,15 +7127,16 @@ body[data-page="tile-collections"] .lw2-tc-sub-card:hover h3 { color: #A31414; }
   background: transparent;
   cursor: pointer;
   display: block;
-  width: 100%;
+  width: var(--lw-carousel-thumb-w);
+  flex: 0 0 var(--lw-carousel-thumb-w);
+  aspect-ratio: var(--lw-carousel-thumb-aspect);
   opacity: var(--lw-carousel-thumb-opacity);
   transition: opacity var(--lw-carousel-transition);
 }
 .lw2-media-thumb img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: var(--lw-carousel-thumb-aspect);
+  height: 100%;
   object-fit: cover;
 }
 .lw2-media-thumb:hover {
