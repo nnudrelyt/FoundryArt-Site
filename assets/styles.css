@@ -7222,7 +7222,7 @@ body[data-page="feature-drury"] .lw2-article-hero-suffix {
 }
 body[data-page="feature-drury"] .lw2-article-hero-sub {
   font-family: var(--lw-font-serif);
-  font-style: italic;
+  font-style: normal;
   font-size: var(--lw-fs-article-hero-sub);
   line-height: 1.45;
   color: var(--lw-article-text-body);
@@ -7267,15 +7267,15 @@ body[data-page="feature-drury"] .lw2-article-lede-text p:last-child {
 /* CALLOUT BAND — full-width light blue-gray (#D7DDE0), centered serif */
 body[data-page="feature-drury"] .lw2-article-callout {
   background: var(--lw-article-callout-bg);
-  padding: var(--lw-article-section-pad-y) var(--lw-article-gutter);
+  padding: 4.8em var(--lw-article-gutter);   /* +20% from 4em base */
   text-align: center;
 }
 body[data-page="feature-drury"] .lw2-article-callout p {
-  max-width: 880px;
+  max-width: 980px;
   margin: 0 auto;
   font-family: var(--lw-font-serif);
-  font-size: 26px;
-  line-height: 1.5;
+  font-size: 32px;
+  line-height: 1.45;
   color: var(--lw-text-primary);
 }
 
@@ -7366,8 +7366,8 @@ body[data-page="feature-drury"] .lw2-article-text-col a:hover {
 /* Italic in-column photo caption — visually distinct from body paragraphs */
 body[data-page="feature-drury"] .lw2-article-photo-caption {
   font-style: italic;
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.6;
   margin-top: 18px;
 }
 
