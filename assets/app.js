@@ -716,6 +716,104 @@
     });
   }
 
+  // Where-to-Buy map — renders showroom pins on top of the US SVG canvas.
+  // Pins: hover/focus shows a tooltip; click opens a detail card.
+  // Search: stubbed — visually dims pins outside the matched state.
+  function initWtbMap() {
+    const canvas = document.querySelector('[data-wtb-canvas]');
+    if (!canvas) return;
+    const pinsRoot = canvas.querySelector('[data-wtb-pins]');
+    const card = canvas.querySelector('[data-wtb-card]');
+    const cardName = canvas.querySelector('[data-wtb-card-name]');
+    const cardMeta = canvas.querySelector('[data-wtb-card-meta]');
+    const cardClose = canvas.querySelector('[data-wtb-card-close]');
+
+    fetch('/assets/data/showrooms.json')
+      .then(r => r.json())
+      .then(showrooms => renderPins(showrooms))
+      .catch(() => {});
+
+    function renderPins(showrooms) {
+      pinsRoot.innerHTML = '';
+      showrooms.forEach((s, i) => {
+        const pin = document.createElement('button');
+        pin.type = 'button';
+        pin.className = 'lw2-wtb-map-pin';
+        pin.style.left = s.x + '%';
+        pin.style.top  = s.y + '%';
+        pin.setAttribute('aria-label', s.name + ' — ' + s.city + ', ' + s.state);
+        pin.dataset.state = s.state;
+        pin.dataset.idx = String(i);
+
+        const tip = document.createElement('span');
+        tip.className = 'lw2-wtb-map-tooltip';
+        tip.textContent = s.name + ' · ' + s.city + ', ' + s.state;
+        pin.appendChild(tip);
+
+        pin.addEventListener('click', () => openCard(s, pin));
+        pinsRoot.appendChild(pin);
+      });
+
+      // Stub: search button highlights pins matching the entered ZIP/city.
+      // We use a tiny zip-prefix → state map for the mockup.
+      const form = document.querySelector('.lw2-wtb-map-search');
+      if (form) {
+        form.addEventListener('submit', () => {
+          const zip = form.querySelector('input[name="zip"]').value.trim().toLowerCase();
+          const stateMatch = guessState(zip);
+          pinsRoot.querySelectorAll('.lw2-wtb-map-pin').forEach(p => {
+            if (!stateMatch) p.classList.remove('is-dimmed');
+            else p.classList.toggle('is-dimmed', p.dataset.state !== stateMatch);
+          });
+        });
+      }
+    }
+
+    function openCard(s, pin) {
+      pinsRoot.querySelectorAll('.lw2-wtb-map-pin.is-active').forEach(p => p.classList.remove('is-active'));
+      pin.classList.add('is-active');
+      cardName.textContent = s.name;
+      cardMeta.textContent = s.city + ', ' + s.state;
+      card.hidden = false;
+    }
+    if (cardClose) cardClose.addEventListener('click', () => {
+      card.hidden = true;
+      pinsRoot.querySelectorAll('.lw2-wtb-map-pin.is-active').forEach(p => p.classList.remove('is-active'));
+    });
+
+    // Crude zip-prefix → state lookup so the stub feels responsive.
+    function guessState(input) {
+      if (!input) return null;
+      const cityMap = {
+        'boston': 'MA', 'new york': 'NY', 'nyc': 'NY', 'rockville': 'MD',
+        'atlanta': 'GA', 'miami': 'FL', 'chicago': 'IL', 'minneapolis': 'MN',
+        'dallas': 'TX', 'houston': 'TX', 'denver': 'CO', 'phoenix': 'AZ',
+        'los angeles': 'CA', 'la': 'CA', 'san francisco': 'CA', 'sf': 'CA',
+        'seattle': 'WA', 'palm springs': 'CA', 'palm desert': 'CA'
+      };
+      if (cityMap[input]) return cityMap[input];
+      // ZIP prefix → state (first digit + range)
+      const z = (input.match(/^\d{3}/) || [])[0];
+      if (!z) return null;
+      const n = parseInt(z, 10);
+      if (n >= 10 && n <= 27) return 'NY';      // NY metro
+      if (n >= 100 && n <= 149) return 'NY';
+      if (n >= 200 && n <= 219) return 'MD';
+      if (n >= 220 && n <= 246) return 'VA';
+      if (n >= 300 && n <= 319) return 'GA';
+      if (n >= 320 && n <= 349) return 'FL';
+      if (n >= 600 && n <= 629) return 'IL';
+      if (n >= 730 && n <= 749) return 'OK';
+      if (n >= 750 && n <= 799) return 'TX';
+      if (n >= 800 && n <= 816) return 'CO';
+      if (n >= 850 && n <= 865) return 'AZ';
+      if (n >= 900 && n <= 961) return 'CA';
+      if (n >= 980 && n <= 994) return 'WA';
+      if (n >= 550 && n <= 567) return 'MN';
+      return null;
+    }
+  }
+
   // .lw2-media-carousel — reusable image-set component.
   // Single image: just shows the slide, no thumbs/arrows.
   // Multi: cross-fade between slides via thumb click, prev/next arrows, or keyboard.
@@ -768,6 +866,7 @@
     initTradeToggle();
     initWtbTabs();
     initMediaCarousels();
+    initWtbMap();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();

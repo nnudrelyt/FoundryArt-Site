@@ -1,0 +1,16 @@
+[
+  { "name": "Ann Sacks",                    "city": "Boston",       "state": "MA", "x": 91.5, "y": 24.0 },
+  { "name": "AKDO Stone & Tile",            "city": "New York",     "state": "NY", "x": 88.0, "y": 30.5 },
+  { "name": "Architectural Ceramics",       "city": "Rockville",    "state": "MD", "x": 84.0, "y": 36.5 },
+  { "name": "Renaissance Tile & Bath",      "city": "Atlanta",      "state": "GA", "x": 73.5, "y": 56.0 },
+  { "name": "Architessa",                   "city": "Miami",        "state": "FL", "x": 80.5, "y": 76.5 },
+  { "name": "Ann Sacks",                    "city": "Chicago",      "state": "IL", "x": 64.0, "y": 36.0 },
+  { "name": "Studio41",                     "city": "Minneapolis",  "state": "MN", "x": 56.0, "y": 24.5 },
+  { "name": "Sonoma Tilemakers",            "city": "Dallas",       "state": "TX", "x": 53.5, "y": 64.5 },
+  { "name": "Tierra Sol",                   "city": "Houston",      "state": "TX", "x": 55.5, "y": 71.5 },
+  { "name": "Materials Marketing",          "city": "Denver",       "state": "CO", "x": 38.0, "y": 47.0 },
+  { "name": "Bedrosians",                   "city": "Phoenix",      "state": "AZ", "x": 25.0, "y": 60.5 },
+  { "name": "Mission Tile West",            "city": "Los Angeles",  "state": "CA", "x": 12.5, "y": 60.0 },
+  { "name": "Heath Ceramics",               "city": "San Francisco","state": "CA", "x": 6.5,  "y": 49.0 },
+  { "name": "Pratt & Larson",               "city": "Seattle",      "state": "WA", "x": 14.0, "y": 13.5 }
+]

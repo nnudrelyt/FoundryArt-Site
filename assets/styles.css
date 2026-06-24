@@ -6646,16 +6646,20 @@ body[data-page="where-to-buy"] .lw2-wtb-map {
 body[data-page="where-to-buy"] .lw2-wtb-map-stub { padding: 0; }
 body[data-page="where-to-buy"] .lw2-wtb-map-controls {
   display: flex;
-  align-items: center;
-  gap: 0;
-  padding: 10px;
+  align-items: end;
+  gap: 16px;
+  padding: 14px 16px;
   background: #FFF;
   border-bottom: 1px solid #E0E0E0;
+  flex-wrap: wrap;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-tabs {
+  display: flex;
 }
 body[data-page="where-to-buy"] .lw2-wtb-map-tab {
   background: #FFF;
   border: 1px solid #CCC;
-  padding: 6px 16px;
+  padding: 7px 18px;
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 13px;
   cursor: pointer;
@@ -6666,69 +6670,205 @@ body[data-page="where-to-buy"] .lw2-wtb-map-tab.is-active {
   background: #F0F0F0;
   font-weight: 600;
 }
+
+/* Redesigned zip/radius/search form — each field has its own label
+   so the radius select can never overlap label text again. */
 body[data-page="where-to-buy"] .lw2-wtb-map-search {
   margin-left: auto;
   display: flex;
-  align-items: center;
-  gap: 6px;
+  align-items: end;
+  gap: 10px;
+  margin-block: 0;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-search-label {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #757367;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-search input,
+body[data-page="where-to-buy"] .lw2-wtb-map-search select {
+  padding: 7px 12px;
+  border: 1px solid #CCC;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  background: #FFF;
+  color: #222;
 }
 body[data-page="where-to-buy"] .lw2-wtb-map-search input {
-  padding: 5px 10px;
-  border: 1px solid #CCC;
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 13px;
-  width: 140px;
+  width: 160px;
 }
+/* Custom chevron on the radius select — kills the native OS dropdown
+   indicator that was visually colliding with the "50 mi" option text. */
 body[data-page="where-to-buy"] .lw2-wtb-map-search select {
-  padding: 5px 8px;
-  border: 1px solid #CCC;
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 13px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23555' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 6px;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-search button {
-  padding: 5px 14px;
-  background: #FFF;
-  border: 1px solid #CCC;
+body[data-page="where-to-buy"] .lw2-wtb-map-search-go {
+  padding: 8px 18px;
+  background: var(--lw-accent-red);
+  border: 1px solid var(--lw-accent-red);
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #FFF;
   cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
+body[data-page="where-to-buy"] .lw2-wtb-map-search-go:hover,
+body[data-page="where-to-buy"] .lw2-wtb-map-search-go:focus-visible {
+  background: var(--lw-accent-red-hover);
+  border-color: var(--lw-accent-red-hover);
+}
+
+/* Map canvas — SVG US silhouette + absolutely-positioned showroom pins. */
 body[data-page="where-to-buy"] .lw2-wtb-map-canvas {
-  height: 380px;
-  background: linear-gradient(135deg, #E8E4D7 0%, #D9D2BD 100%);
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  aspect-ratio: 959 / 593;
+  background: #FAFAF7;
+  overflow: hidden;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-canvas::before {
-  content: '';
+body[data-page="where-to-buy"] .lw2-wtb-map-canvas-bg {
   position: absolute;
   inset: 0;
-  background-image:
-    repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(0,0,0,0.04) 40px),
-    repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(0,0,0,0.04) 40px);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(91%) sepia(7%) saturate(132%) hue-rotate(7deg) brightness(96%) contrast(89%);
+  opacity: 1;
+  pointer-events: none;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-canvas-inner {
-  position: relative;
-  text-align: center;
-  background: rgba(255,255,255,0.85);
-  padding: 24px 40px;
-  border: 1px solid rgba(0,0,0,0.08);
+body[data-page="where-to-buy"] .lw2-wtb-map-pins {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-placeholder {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-style: italic;
-  font-size: 20px;
-  color: #555;
-  margin: 0 0 6px;
+body[data-page="where-to-buy"] .lw2-wtb-map-pin {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 0;
+  padding: 0;
+  margin: -8px 0 0 -8px;        /* center on the x/y coord */
+  background: var(--lw-accent-red);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(255, 255, 255, 0.9);
+  pointer-events: auto;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  z-index: 2;
 }
-body[data-page="where-to-buy"] .lw2-wtb-map-note {
+body[data-page="where-to-buy"] .lw2-wtb-map-pin:hover,
+body[data-page="where-to-buy"] .lw2-wtb-map-pin:focus-visible {
+  transform: scale(1.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.95);
+  outline: none;
+  z-index: 4;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-pin.is-active {
+  transform: scale(1.35);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.55), 0 0 0 3px #FFF;
+  z-index: 5;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-pin.is-dimmed {
+  opacity: 0.3;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-tooltip {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  margin-top: -16px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #FFF;
+  padding: 6px 10px;
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 12px;
-  color: #666;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 6;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-pin:hover .lw2-wtb-map-tooltip,
+body[data-page="where-to-buy"] .lw2-wtb-map-pin:focus-visible .lw2-wtb-map-tooltip {
+  display: block;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-tooltip {
+  display: none;
+  left: 50%;
+  top: 0;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-card {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 280px;
+  background: #FFF;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  padding: 20px 22px;
+  z-index: 7;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-card[hidden] { display: none; }
+body[data-page="where-to-buy"] .lw2-wtb-map-card-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: 0;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  color: #999;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-card-close:hover { color: #000; }
+body[data-page="where-to-buy"] .lw2-wtb-map-card-name {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 19px;
+  margin: 0 0 6px;
+  color: #000;
+  padding-right: 24px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-card-meta {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  color: #555;
+  margin: 0 0 12px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-card-note {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 12px;
+  color: #777;
   margin: 0;
+  line-height: 1.5;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-card-note a {
+  color: var(--lw-accent-red);
+  text-decoration: underline;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-footnote {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 12px;
+  color: #888;
+  margin: 12px 16px 14px;
+}
+body[data-page="where-to-buy"] .lw2-wtb-map-footnote span {
+  color: var(--lw-accent-red);
+  font-size: 14px;
 }
 
 /* BRAND × REGION SELECTOR GRID — three "cards" under the map.
@@ -7459,7 +7599,8 @@ body[data-page="feature-drury"] .lw2-article-thanks-frame p {
   body[data-page="where-to-buy"] .lw2-wtb-channel-grid { grid-template-columns: 1fr; }
   body[data-page="where-to-buy"] .lw2-wtb-hero h1,
   body[data-page="where-to-buy"] .lw2-wtb-hero h2 { font-size: 30px; }
-  body[data-page="where-to-buy"] .lw2-wtb-map-canvas { height: 320px; }
+  /* Canvas now uses aspect-ratio for height; explicit height removed
+     so width fits viewport correctly. */
 
   body[data-page="tile-collections"] .lw2-tc-brand-row { gap: 24px; padding: 32px 18px 64px; }
   body[data-page="tile-collections"] .lw2-tc-hero h1 { font-size: 40px; }
@@ -7514,9 +7655,12 @@ body[data-page="feature-drury"] .lw2-article-thanks-frame p {
     align-items: stretch;
     gap: 8px;
   }
-  body[data-page="where-to-buy"] .lw2-wtb-map-search { margin-left: 0; width: 100%; }
-  body[data-page="where-to-buy"] .lw2-wtb-map-search input { flex: 1; width: auto; }
-  body[data-page="where-to-buy"] .lw2-wtb-map-canvas { height: 280px; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-search { margin-left: 0; width: 100%; flex-wrap: wrap; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-search-field { flex: 1 1 auto; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-search input { width: 100%; }
+  /* Pins shrink slightly on mobile so they don't crowd the smaller canvas. */
+  body[data-page="where-to-buy"] .lw2-wtb-map-pin { width: 14px; height: 14px; margin: -7px 0 0 -7px; }
+  body[data-page="where-to-buy"] .lw2-wtb-map-card { right: 8px; top: 8px; width: 220px; padding: 16px 18px; }
   body[data-page="where-to-buy"] .lw2-wtb-grid {
     grid-template-columns: 1fr;
     gap: 24px;
