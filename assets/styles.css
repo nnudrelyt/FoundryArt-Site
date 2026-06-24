@@ -6833,13 +6833,13 @@ body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 22px 28px;
+  padding: 24px 28px;
   background: transparent;
   border: 0;
   cursor: pointer;
   text-align: left;
   font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 24px;
+  font-size: 32px;     /* next step up from state-name 24px (matches --lw-fs-featured-h2) */
   color: #000;
 }
 body[data-page="where-to-buy"] .lw2-wtb-accordion-trigger:hover { color: var(--lw-accent-red); }
@@ -6870,10 +6870,10 @@ body[data-page="where-to-buy"] .lw2-wtb-state {
 }
 body[data-page="where-to-buy"] .lw2-wtb-state-name {
   font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 400;
   color: #000;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   padding-bottom: 6px;
   border-bottom: 1px solid #D8D5D0;
 }
