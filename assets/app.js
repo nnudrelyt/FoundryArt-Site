@@ -797,8 +797,11 @@
   }
 
   // Region accordion — populated from showrooms.json grouped by region → state.
+  // Targets only the Bronzework column; FA accordions are static markup
+  // wired up by initWtbStaticAccordions().
   function initWtbAccordion(showrooms) {
-    const root = document.querySelector('[data-wtb-accordion]');
+    const root = document.querySelector('[data-wtb-accordion="bws"]');
+    initWtbStaticAccordions();
     if (!root) return;
     const REGION_ORDER = ['Central US', 'Eastern US', 'Western US', 'Canada'];
     const byRegion = {};
@@ -866,6 +869,19 @@
     });
     root.innerHTML = '';
     root.appendChild(frag);
+  }
+
+  // Wire click toggles for static accordion items (Foundry Art column).
+  function initWtbStaticAccordions() {
+    document.querySelectorAll('[data-wtb-accordion="fa"] .lw2-wtb-accordion-item').forEach(item => {
+      const trigger = item.querySelector('.lw2-wtb-accordion-trigger');
+      if (!trigger || trigger.dataset.wired) return;
+      trigger.dataset.wired = '1';
+      trigger.addEventListener('click', () => {
+        const open = item.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
   }
 
   // .lw2-media-carousel — reusable image-set component.
