@@ -7392,10 +7392,10 @@ body[data-page="feature-drury"] .lw2-article-body--close .lw2-article-text-col {
   padding-bottom: 88px;
 }
 
-/* SPECIAL THANKS CALLOUT — cream ground + inner bordered frame
-   that softly contains the closing credit line. */
+/* SPECIAL THANKS CALLOUT — page ground (no fill) + inner bordered
+   frame that softly contains the closing credit line. */
 body[data-page="feature-drury"] .lw2-article-thanks-callout {
-  background: var(--lw-article-section-bg);
+  background: transparent;
   padding: 40px 24px 96px;
 }
 body[data-page="feature-drury"] .lw2-article-thanks-frame {
@@ -7404,7 +7404,7 @@ body[data-page="feature-drury"] .lw2-article-thanks-frame {
   border: 1px solid rgba(0, 0, 0, 0.10);
   padding: 64px 32px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.25);
+  background: transparent;
 }
 body[data-page="feature-drury"] .lw2-article-thanks-frame p {
   margin: 0;
