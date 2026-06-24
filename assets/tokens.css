@@ -307,7 +307,7 @@
   --lw-carousel-thumb-gap:            6px;
   --lw-carousel-thumb-aspect:         4/3;
   --lw-carousel-thumb-w:              108px;       /* overlaid thumb fixed width (50% larger than v1) */
-  --lw-carousel-thumb-overlay-bg:     rgba(255, 255, 255, 0.85);
+  --lw-carousel-thumb-overlay-bg:     rgba(255, 255, 255, 0.65);
   --lw-carousel-thumb-overlay-pad:    9px;
   --lw-carousel-thumb-overlay-inset:  18px;        /* gap from bottom of hero */
   --lw-carousel-thumb-overlay-radius: 6px;         /* slight corner round on the pill */
