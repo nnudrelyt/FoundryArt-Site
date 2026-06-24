@@ -201,4 +201,83 @@
   --lw-radius-none:            0;          /* card corners, button corners — sharp by spec */
   --lw-border-thin:            1px;
   --lw-border-medium:          2px;
+
+
+  /* ════════════════════════════════════════
+     EDITORIAL ARTICLE (.lw2-article-*)
+     ════════════════════════════════════════
+     Tokens for the long-form designer-feature template.
+     Hero treatment, article type scale, grey-hierarchy
+     text colors, divider, and spacing. Values calibrated
+     against lindenworkshops.com/feature-gail-drury/ and
+     the LW master landing's hero patterns.
+     ════════════════════════════════════════ */
+
+  /* Hero — full-bleed kitchen photo + centered overlay panel */
+  --lw-article-hero-min-h-d:       72vh;
+  --lw-article-hero-min-h-t:       64vh;
+  --lw-article-hero-min-h-m:       540px;
+  --lw-article-hero-bg-fallback:   #adaca4;
+  --lw-article-hero-overlay-bg:    rgba(255, 255, 255, 0.88);
+  --lw-article-hero-overlay-max:   720px;
+  --lw-article-hero-overlay-pad-d: 56px 72px 48px;
+  --lw-article-hero-overlay-pad-m: 36px 28px 32px;
+
+  /* Eyebrow (the "INSPIRING KITCHENS" navy line in the hero) */
+  --lw-article-eyebrow-color:      #264D73;     /* navy from live H1 span */
+  --lw-article-eyebrow-tracking:   0.08em;
+
+  /* Article type scale — desktop base */
+  --lw-fs-article-eyebrow:         14px;
+  --lw-fs-article-hero-title:      56px;        /* "Featured Designer" + name stack */
+  --lw-fs-article-hero-sub:        22px;
+  --lw-fs-article-section-h2:      36px;
+  --lw-fs-article-body:            16px;
+  --lw-fs-article-quote:           22px;
+  --lw-fs-article-caption:         14px;
+  --lw-fs-article-credit:          12px;
+  --lw-fs-article-suffix:          0.6em;       /* CMKBD after the name */
+
+  /* Article type scale — mobile overrides */
+  --lw-fs-article-eyebrow-m:       12px;
+  --lw-fs-article-hero-title-m:    34px;
+  --lw-fs-article-hero-sub-m:      17px;
+  --lw-fs-article-section-h2-m:    26px;
+
+  /* Grey hierarchy — article only (deliberately distinct from --lw-text-*) */
+  --lw-article-text-body:          #222222;
+  --lw-article-text-secondary:     #555555;
+  --lw-article-text-meta:          #666666;
+  --lw-article-text-muted:         #888888;
+
+  /* Divider treatment */
+  --lw-article-divider:            #DDDDDD;
+
+  /* Pull-quote */
+  --lw-article-quote-border-w:     3px;
+  --lw-article-quote-inset:        8px 0 8px 28px;
+
+  /* Article spacing */
+  --lw-article-section-pad-d:      40px 0 56px;
+  --lw-article-section-pad-m:      24px 0 36px;
+  --lw-article-row-gap-d:          56px;
+  --lw-article-row-gap-t:          36px;
+  --lw-article-row-gap-m:          22px;
+  --lw-article-lede-cols-d:        320px 1fr;
+  --lw-article-lede-cols-t:        260px 1fr;
+  --lw-article-lede-gap-d:         48px;
+  --lw-article-lede-gap-t:         32px;
+  --lw-article-thumbs-gap:         8px;
+  --lw-article-media-gap:          12px;
+
+  /* Article container */
+  --lw-article-max-w:              1200px;
+  --lw-article-gutter:             24px;
+
+  /* Line heights */
+  --lw-article-lh-tight:           1.05;        /* hero title stack */
+  --lw-article-lh-h2:              1.2;
+  --lw-article-lh-quote:           1.5;
+  --lw-article-lh-body:            1.7;
+  --lw-article-lh-caption:         1.6;
 }
