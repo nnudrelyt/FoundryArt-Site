@@ -6904,10 +6904,12 @@ body[data-page="where-to-buy"] .lw2-wtb-accordion-panel p.lw2-wtb-listing {
   color: #222;
   margin: 0 0 14px;
 }
-body[data-page="where-to-buy"] .lw2-wtb-listing-name {
+body[data-page="where-to-buy"] .lw2-wtb-accordion-panel .lw2-wtb-listing-name {
+  font-size: 16px;
   font-weight: 600;
   color: #000;
   display: block;
+  margin-bottom: 2px;
 }
 body[data-page="where-to-buy"] .lw2-wtb-listing-city {
   color: #800000;
