@@ -7112,6 +7112,177 @@ body[data-page="where-to-buy"] .lw2-wtb-panel {
   border-top: 1px solid #EEE;
 }
 body[data-page="where-to-buy"] .lw2-wtb-panel.is-active { display: block; }
+
+/* ============================================================
+   CONTACT PAGE — rebuilt 1:1 with live lindenworkshops.com/contact/
+   Live structure (top to bottom):
+     1. Centered serif headline ("We'd love to hear from you!")
+     2. Centered serif subhead ("Please call our studio at 773 784-2628")
+     3. "Contact" centered serif heading
+     4. Form: Name / Email / Message (no Phone field on live)
+     5. Cloudflare Turnstile widget (mocked here)
+     6. Small gray Submit button
+     7. Divider rule
+     8. Centered serif address block
+   ============================================================ */
+body[data-page="contact"] .lw2-contact-page {
+  background: #FFF;
+  padding: 0 24px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+body[data-page="contact"] .lw2-contact-hero {
+  text-align: center;
+  padding: 80px 0 56px;
+}
+body[data-page="contact"] .lw2-contact-hero h1 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  margin: 0 0 36px;
+}
+body[data-page="contact"] .lw2-contact-subhead {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #000;
+  margin: 0;
+}
+body[data-page="contact"] .lw2-contact-form-section {
+  padding: 24px 0 56px;
+}
+body[data-page="contact"] .lw2-contact-heading {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 36px;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 56px;
+  color: #000;
+}
+body[data-page="contact"] .lw2-contact-form {
+  max-width: 760px;
+  margin: 0 auto;
+}
+body[data-page="contact"] .lw2-contact-field {
+  margin: 0 0 22px;
+}
+body[data-page="contact"] .lw2-contact-field label {
+  display: block;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  margin: 0 0 6px;
+}
+body[data-page="contact"] .lw2-contact-req {
+  color: var(--lw-accent-red);
+  font-size: 13px;
+  margin-left: 2px;
+}
+body[data-page="contact"] .lw2-contact-field input,
+body[data-page="contact"] .lw2-contact-field textarea {
+  display: block;
+  width: 100%;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 15px;
+  color: #000;
+  background: #FFF;
+  border: 1px solid #666;
+  border-radius: 0;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+body[data-page="contact"] .lw2-contact-field input:focus,
+body[data-page="contact"] .lw2-contact-field textarea:focus {
+  outline: 2px solid #000;
+  outline-offset: -1px;
+}
+body[data-page="contact"] .lw2-contact-field textarea {
+  min-height: 180px;
+  line-height: 1.5;
+}
+/* Mock Cloudflare Turnstile widget — block so Submit drops below it */
+body[data-page="contact"] .lw2-contact-turnstile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #232323;
+  padding: 10px 14px;
+  margin: 18px 0 22px;
+  width: 300px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+body[data-page="contact"] .lw2-contact-turnstile-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #2BAA5B;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+body[data-page="contact"] .lw2-contact-turnstile-label {
+  flex: 1;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  color: #FFF;
+}
+body[data-page="contact"] .lw2-contact-turnstile-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #B5B5B5;
+}
+body[data-page="contact"] .lw2-contact-submit {
+  display: inline-block;
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #FFF;
+  background: #999;
+  border: 0;
+  padding: 8px 22px;
+  cursor: pointer;
+  margin: 8px 0 0;
+}
+body[data-page="contact"] .lw2-contact-submit:hover { background: #777; }
+
+body[data-page="contact"] .lw2-contact-divider {
+  border: 0;
+  border-top: 1px solid #DDD;
+  margin: 32px auto;
+  max-width: 760px;
+}
+body[data-page="contact"] .lw2-contact-address {
+  font-style: normal;
+  text-align: center;
+  padding: 60px 0 96px;
+}
+body[data-page="contact"] .lw2-contact-address p {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 22px;
+  line-height: 1.7;
+  color: #000;
+  margin: 0;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  body[data-page="contact"] .lw2-contact-hero { padding: 48px 0 32px; }
+  body[data-page="contact"] .lw2-contact-hero h1 { font-size: 32px; margin-bottom: 24px; }
+  body[data-page="contact"] .lw2-contact-subhead { font-size: 18px; }
+  body[data-page="contact"] .lw2-contact-heading { font-size: 28px; margin-bottom: 36px; }
+  body[data-page="contact"] .lw2-contact-address p { font-size: 18px; }
+}
 body[data-page="where-to-buy"] .lw2-wtb-panel-title {
   font-family: 'Fanwood Text', Georgia, serif;
   font-weight: 400;

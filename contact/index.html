@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260603-45">
-<link rel="stylesheet" href="/assets/styles.css?v=20260603-45">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260603-64">
+<link rel="stylesheet" href="/assets/styles.css?v=20260603-64">
 </head>
 <body data-page="contact" data-section="linden">
 
@@ -38,45 +38,54 @@
     </nav>
   </header>
 
-  <main class="lw2-leaf">
+  <main class="lw2-contact-page">
 
-    <section class="lw2-leaf-hero">
-      <h1>We’d love to hear from you!</h1>
-      <p class="lw2-leaf-lede">Please call our studio at <a href="tel:7737842628">773 784-2628</a>, or send a message using the form below. Our friendly crew responds promptly.</p>
+    <!-- HERO — centered serif headline + subhead (matches live spec) -->
+    <section class="lw2-contact-hero">
+      <h1>We&rsquo;d love to hear from you!</h1>
+      <p class="lw2-contact-subhead">Please call our studio at 773 784-2628</p>
     </section>
 
-    <!-- Contact form mirroring the footer-form component -->
-    <section class="lw2-leaf-form-wrap">
-      <div class="lw2-leaf-form-card">
-        <h2>Send us a message</h2>
-        <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
-          <div>
-            <label for="cname">Name <span class="req">(Required)</span></label>
-            <input id="cname" type="text" required>
-          </div>
-          <div>
-            <label for="cemail">Email <span class="req">(Required)</span></label>
-            <input id="cemail" type="email" required>
-          </div>
-          <div>
-            <label for="cphone">Phone</label>
-            <input id="cphone" type="tel">
-          </div>
-          <div>
-            <label for="cmessage">Message <span class="req">(Required)</span></label>
-            <textarea id="cmessage" rows="6" required></textarea>
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-
-      <aside class="lw2-leaf-contact-card">
-        <h2>Linden Workshops</h2>
-        <p class="lw2-leaf-contact-line"><strong>Phone</strong><br><a href="tel:7737842628">773 784-2628</a></p>
-        <p class="lw2-leaf-contact-line"><strong>Studio hours</strong><br>Monday–Friday, 9am–5pm Central</p>
-        <p class="lw2-leaf-contact-line"><strong>For trade &amp; showrooms</strong><br>Please <a href="/where-to-buy/">see our showroom directory</a>.</p>
-      </aside>
+    <!-- FORM — name / email / message, mock Turnstile widget, small gray submit -->
+    <section class="lw2-contact-form-section">
+      <h2 class="lw2-contact-heading">Contact</h2>
+      <form class="lw2-contact-form" onsubmit="event.preventDefault();" aria-label="Contact form">
+        <div class="lw2-contact-field">
+          <label for="cname">Name <span class="lw2-contact-req">(Required)</span></label>
+          <input id="cname" type="text" required>
+        </div>
+        <div class="lw2-contact-field">
+          <label for="cemail">Email <span class="lw2-contact-req">(Required)</span></label>
+          <input id="cemail" type="email" required>
+        </div>
+        <div class="lw2-contact-field">
+          <label for="cmessage">Message <span class="lw2-contact-req">(Required)</span></label>
+          <textarea id="cmessage" rows="6" required></textarea>
+        </div>
+        <!-- Mock of Cloudflare Turnstile (real widget wires up at launch) -->
+        <div class="lw2-contact-turnstile" aria-hidden="true">
+          <span class="lw2-contact-turnstile-check">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
+          <span class="lw2-contact-turnstile-label">Success!</span>
+          <span class="lw2-contact-turnstile-brand">
+            <svg viewBox="0 0 32 32" width="14" height="14" aria-hidden="true"><path d="M22.6 17.4l-7.8-9.6c-.4-.5-1.2-.6-1.7-.2L4.4 14.5c-.5.4-.6 1.2-.2 1.7l4.7 5.7h12.4c.6 0 1.1-.4 1.3-1l.1-2c.1-.6-.2-1.1-.7-1.5z" fill="#F38020"/></svg>
+          </span>
+        </div>
+        <button type="submit" class="lw2-contact-submit">Submit</button>
+      </form>
     </section>
+
+    <hr class="lw2-contact-divider">
+
+    <!-- STUDIO ADDRESS — centered serif block (matches live spec) -->
+    <address class="lw2-contact-address">
+      <p>Linden Workshops</p>
+      <p>1770 W Berteau Avenue</p>
+      <p>Suite 302-B</p>
+      <p>Chicago, IL 60613 USA</p>
+      <p>phone 773 784-2628</p>
+    </address>
 
   </main>
 
