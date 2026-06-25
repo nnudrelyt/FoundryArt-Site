@@ -587,65 +587,31 @@ body.drawer-open { overflow: hidden; }
   }
 }
 
-/* ====== BRAND BAND VARIANTS (toggleable via ?band= query) ======
-   Three layout variants featuring Ted. Wireframed for client review;
-   default presentation is the centered text-only band above. */
-
-/* Variant A — portrait left, quote right (editorial split). */
-.brand-band--portrait { display: grid; grid-template-columns: 5fr 7fr; align-items: center; gap: 64px; padding: 144px 64px; text-align: left; }
-.brand-band--portrait .brand-band-portrait {
-  position: relative; aspect-ratio: 4 / 5; overflow: hidden;
-  background: var(--charcoal-l);
-}
-.brand-band--portrait .brand-band-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.brand-band--portrait p { text-align: left; margin: 0; max-width: 100%; font-size: 44px; }
-.brand-band--portrait cite { text-align: left; }
-
-/* Variant B — full-bleed Ted photo as background with scrim. */
-.brand-band--fullbleed { padding: 200px 40px; }
-.brand-band--fullbleed .brand-band-portrait {
-  position: absolute; inset: 0; z-index: 0;
-}
-.brand-band--fullbleed .brand-band-portrait img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-  filter: brightness(0.55);
-}
-.brand-band--fullbleed .brand-band-portrait::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(20,37,40,0.45) 0%, rgba(20,37,40,0.7) 100%);
-}
-.brand-band--fullbleed p,
-.brand-band--fullbleed cite { position: relative; z-index: 1; }
-.brand-band--fullbleed p { color: #FFFFFF; }
-.brand-band--fullbleed cite { color: rgba(255,255,255,0.78); }
-
-/* Variant C — small round portrait above the quote (byline style). */
-.brand-band--byline { padding: 144px 40px; }
-.brand-band--byline .brand-band-portrait {
-  width: 120px; height: 120px; border-radius: 50%; overflow: hidden;
-  margin: 0 auto 40px; border: 1px solid rgba(255,255,255,0.18);
-}
-.brand-band--byline .brand-band-portrait img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
-
-/* Shared: ensure portrait blocks animate in too (when present) */
+/* Brand-band byline — small round portrait of Ted floats above the
+   quote. Attributes the line to a real person without dominating the
+   section. Locked as the default presentation (client picked from a
+   three-variant exploration on 2026-06-25). */
 .brand-band-portrait {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 40px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  /* Settles in alongside the quote with the same blur-up animation. */
   opacity: 0;
   transform: translateY(20px);
   filter: blur(8px);
   animation: brandSettle 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
 }
+.brand-band-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 @media (prefers-reduced-motion: reduce) {
   .brand-band-portrait { animation: none; opacity: 1; transform: none; filter: none; }
-}
-
-/* Mobile flatten for split variants */
-@media (max-width: 900px) {
-  .brand-band--portrait { grid-template-columns: 1fr; gap: 36px; padding: 96px 24px; text-align: center; }
-  .brand-band--portrait p, .brand-band--portrait cite { text-align: center; }
-  .brand-band--portrait .brand-band-portrait { aspect-ratio: 5 / 4; max-width: 480px; margin: 0 auto; }
-  .brand-band--fullbleed { padding: 140px 24px; }
 }
 
 /* ══════════════════════════════════════ SHARED SECTION TEXT ══════════════════════════════════════ */
@@ -2214,14 +2180,10 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .badge-item strong { font-size: 15px; }
 
   /* Brand band */
-  .brand-band { padding: 270px 40px; }      /* +50% taller per Tyler's call (was 180px) */
+  .brand-band { padding: 200px 40px; }      /* taller cinematic band */
   .brand-band p { font-size: 72px; max-width: 1280px; line-height: 1.2; letter-spacing: -0.6px; }
   .brand-band cite { font-size: 13px; margin-top: 40px; letter-spacing: 3.5px; }
-  .brand-band--portrait { padding: 220px 96px; }
-  .brand-band--portrait p { font-size: 60px; }
-  .brand-band--fullbleed { padding: 280px 40px; }
-  .brand-band--byline { padding: 200px 40px; }
-  .brand-band--byline .brand-band-portrait { width: 160px; height: 160px; margin-bottom: 56px; }
+  .brand-band-portrait { width: 160px; height: 160px; margin-bottom: 56px; }
 
   /* Section text scale */
   .section-eyebrow { font-size: 13px; margin-bottom: 22px; letter-spacing: 3.5px; }
