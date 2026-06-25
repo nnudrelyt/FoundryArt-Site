@@ -379,6 +379,22 @@ body.drawer-open { overflow: hidden; }
   background: var(--charcoal);
 }
 .hero-image { position: absolute; inset: 0; }
+/* Editorial-cover scrim — keeps the hero photo radiant on the right
+   while lifting headline / subhead / badges contrast on the left. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.55) 0%,
+    rgba(0,0,0,0.42) 28%,
+    rgba(0,0,0,0.10) 55%,
+    rgba(0,0,0,0) 78%
+  );
+  pointer-events: none;
+}
 .hero-image .wire-img {
   width: 100%;
   height: 100%;
@@ -422,10 +438,10 @@ body.drawer-open { overflow: hidden; }
   color: var(--white);
 }
 .hero-eyebrow {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--bronze-l);
+  color: #D9C0A3;     /* lighter bronze, reads against the scrim + photo */
   margin-bottom: 20px;
 }
 .hero-headline {
@@ -438,9 +454,9 @@ body.drawer-open { overflow: hidden; }
   letter-spacing: -0.5px;
 }
 .hero-sub {
-  font-size: 13px;
-  line-height: 1.75;
-  color: rgba(255,255,255,0.82);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.95);
   margin-bottom: 36px;
   max-width: 380px;
 }
@@ -502,16 +518,16 @@ body.drawer-open { overflow: hidden; }
 .hero-badge {
   margin-top: 40px;
   padding-top: 26px;
-  border-top: 1px solid rgba(255,255,255,0.18);
+  border-top: 1px solid rgba(255,255,255,0.12);
   display: flex;
   gap: 36px;
   flex-wrap: wrap;
 }
-.badge-item { font-size: 10px; color: rgba(255,255,255,0.65); line-height: 1.6; }
-.badge-item strong { display: block; font-size: 12px; color: var(--white); font-weight: 500; }
+.badge-item { font-size: 11px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+.badge-item strong { display: block; font-size: 13px; color: var(--white); font-weight: 500; }
 
 /* ══════════════════════════════════════ BRAND BAND ══════════════════════════════════════ */
-.brand-band { background: var(--charcoal); padding: 48px 40px; text-align: center; }
+.brand-band { background: var(--charcoal); padding: 72px 40px; text-align: center; }
 .brand-band p {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px;
@@ -535,10 +551,10 @@ body.drawer-open { overflow: hidden; }
 
 /* ══════════════════════════════════════ SHARED SECTION TEXT ══════════════════════════════════════ */
 .section-eyebrow {
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--bronze);
+  color: #5A3A22;     /* deeper walnut — hits ≥4.5:1 on cream and white */
   margin-bottom: 16px;
 }
 .section-headline {
@@ -547,7 +563,7 @@ body.drawer-open { overflow: hidden; }
   font-weight: 500;
   line-height: 1.2;
   color: var(--charcoal);
-  margin-bottom: 18px;
+  margin-bottom: 28px;
 }
 .section-body {
   font-size: 16px;
@@ -627,7 +643,7 @@ body.drawer-open { overflow: hidden; }
   color: var(--charcoal);
   margin-bottom: 4px;
 }
-.product-meta { font-size: 14px; color: var(--mid); margin-bottom: 10px; }
+.product-meta { font-size: 14px; color: #4A4640; margin-bottom: 10px; }
 .product-price { font-size: 16px; color: var(--charcoal); font-weight: 500; }
 .product-price .was { text-decoration: line-through; color: var(--mid); font-weight: 400; margin-right: 6px; }
 .product-price .sale { color: var(--sale); }
@@ -678,8 +694,8 @@ body.drawer-open { overflow: hidden; }
 .insitu-caption {
   text-align: center;
   margin-top: 24px;
-  font-size: 11px;
-  color: rgba(255,255,255,0.55);
+  font-size: 13px;
+  color: rgba(255,255,255,0.78);
   font-style: italic;
 }
 
@@ -720,15 +736,24 @@ body.drawer-open { overflow: hidden; }
   transform: translateY(-2px);
 }
 .guidance-card-icon {
-  width: 32px; height: 32px;
-  background: var(--bronze);
-  margin-bottom: 16px;
+  width: 40px; height: 40px;
+  background: transparent;
+  color: var(--bronze);
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.guidance-card-icon svg { display: block; width: 100%; height: 100%; }
+/* Visually-hidden fallback for guidance cards that haven't been
+   migrated to the SVG icon yet (keeps the "PDF" text in the a11y
+   tree without showing the orange square). */
+.guidance-card-icon:not(:has(svg)) {
+  background: var(--bronze);
   font-size: 9px;
-  color: var(--white);
   letter-spacing: 1px;
+  color: var(--white);
+  width: 32px; height: 32px;
 }
 .guidance-card h4 {
   font-family: 'Cormorant Garamond', serif;
@@ -945,6 +970,20 @@ body.drawer-open { overflow: hidden; }
   gap: 32px 24px;
 }
 .shop-grid .product-card { padding: 8px; margin: -8px; }
+
+/* 3×3 product photos crop tight to the tile in source, so they read
+   too large in the card next to the smaller-format tiles. Zoom the
+   image down 15% and inset the card text by the same offset so the
+   name / specs / price align with the tile edge, not the image edge. */
+.product-card[href*="-3x3"] .wire-img > img {
+  transform: scale(0.85);
+  transform-origin: center;
+}
+.product-card[href*="-3x3"] .product-name,
+.product-card[href*="-3x3"] .product-meta,
+.product-card[href*="-3x3"] .product-price {
+  padding-left: 7.5%;
+}
 
 .pagination {
   display: flex;
@@ -1884,7 +1923,7 @@ body.drawer-open { overflow: hidden; }
       rgba(45,46,47,0.85) 100%);
   }
 
-  .brand-band { padding: 40px 16px; }
+  .brand-band { padding: 60px 16px; }
   .brand-band p { font-size: 18px; }
 
   .craft-content { padding: 40px 16px; }
@@ -1965,22 +2004,22 @@ body.drawer-open { overflow: hidden; }
     padding: 120px 80px 120px 96px;
     max-width: 920px;
   }
-  .hero-eyebrow { font-size: 11px; margin-bottom: 26px; letter-spacing: 3.5px; }
+  .hero-eyebrow { font-size: 13px; margin-bottom: 26px; letter-spacing: 3.5px; }
   .hero-headline { font-size: 76px; line-height: 1.03; margin-bottom: 30px; letter-spacing: -0.8px; }
-  .hero-sub { font-size: 16px; max-width: 500px; margin-bottom: 48px; line-height: 1.75; }
+  .hero-sub { font-size: 17px; max-width: 500px; margin-bottom: 48px; line-height: 1.7; }
   .hero .btn-primary, .hero .btn-secondary { padding: 18px 40px; font-size: 12px; letter-spacing: 2.2px; }
   .hero-badge { gap: 52px; margin-top: 60px; padding-top: 34px; }
-  .badge-item { font-size: 12px; }
-  .badge-item strong { font-size: 14px; }
+  .badge-item { font-size: 13px; }
+  .badge-item strong { font-size: 15px; }
 
   /* Brand band */
-  .brand-band { padding: 84px 40px; }
+  .brand-band { padding: 126px 40px; }
   .brand-band p { font-size: 32px; max-width: 920px; line-height: 1.45; }
   .brand-band cite { font-size: 11px; margin-top: 18px; letter-spacing: 2.5px; }
 
   /* Section text scale */
-  .section-eyebrow { font-size: 11px; margin-bottom: 22px; letter-spacing: 3.5px; }
-  .section-headline { font-size: 52px; line-height: 1.12; margin-bottom: 24px; letter-spacing: -0.4px; }
+  .section-eyebrow { font-size: 13px; margin-bottom: 22px; letter-spacing: 3.5px; }
+  .section-headline { font-size: 52px; line-height: 1.12; margin-bottom: 32px; letter-spacing: -0.4px; }
   .section-body { font-size: 19px; line-height: 1.65; max-width: 680px; }
 
   /* Craft */
@@ -1997,7 +2036,7 @@ body.drawer-open { overflow: hidden; }
   .product-grid { gap: 48px 36px; }
   .product-card .wire-img { margin-bottom: 20px; }
   .product-name { font-size: 20px; }
-  .product-meta { font-size: 12px; margin-bottom: 14px; }
+  .product-meta { font-size: 14px; margin-bottom: 14px; }
   .product-price { font-size: 16px; }
   .product-cta { font-size: 10px; }
 
@@ -2007,7 +2046,7 @@ body.drawer-open { overflow: hidden; }
   .insitu-grid { gap: 6px; max-width: 1680px; margin: 0 auto; }
   .insitu-grid .wire-img:first-child { min-height: 660px; }
   .insitu-grid .wire-img { min-height: 325px; }
-  .insitu-caption { font-size: 13px; margin-top: 36px; }
+  .insitu-caption { font-size: 14px; margin-top: 36px; }
 
   /* Hardware */
   .hardware-content { padding: 130px 80px; }
