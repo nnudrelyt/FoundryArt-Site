@@ -7091,15 +7091,18 @@ body[data-page="where-to-buy"] .lw2-wtb-talisman-cta:hover { background: #000; c
      pattern, so the footer reads as one unified panel.
    - Suppress the legacy `.footer p { border-top: 1px solid #eee }` rule
      that draws a thin horizontal rule above the copyright/credits. */
-body[data-page="where-to-buy"] .footer {
+body[data-page="where-to-buy"] .footer,
+body[data-page="contact"] .footer {
   background: #F7F7F7;
   border-top: none !important;
 }
-body[data-page="where-to-buy"] .lw2-footer-row {
+body[data-page="where-to-buy"] .lw2-footer-row,
+body[data-page="contact"] .lw2-footer-row {
   background: #F7F7F7 !important;
   padding-top: 80px !important;
 }
-body[data-page="where-to-buy"] .footer p {
+body[data-page="where-to-buy"] .footer p,
+body[data-page="contact"] .footer p {
   border-top: none !important;
 }
 
