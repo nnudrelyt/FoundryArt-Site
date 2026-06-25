@@ -431,7 +431,7 @@ body.drawer-open { overflow: hidden; }
 .hero-headline {
   font-family: 'Cormorant Garamond', serif;
   font-size: 48px;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.08;
   color: var(--white);
   margin-bottom: 22px;
@@ -544,14 +544,14 @@ body.drawer-open { overflow: hidden; }
 .section-headline {
   font-family: 'Cormorant Garamond', serif;
   font-size: 34px;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.2;
   color: var(--charcoal);
   margin-bottom: 18px;
 }
 .section-body {
-  font-size: 12px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.7;
   color: var(--slate);
   margin-bottom: 24px;
 }
@@ -627,8 +627,8 @@ body.drawer-open { overflow: hidden; }
   color: var(--charcoal);
   margin-bottom: 4px;
 }
-.product-meta { font-size: 10px; color: var(--mid); margin-bottom: 10px; }
-.product-price { font-size: 12px; color: var(--charcoal); font-weight: 500; }
+.product-meta { font-size: 12px; color: var(--mid); margin-bottom: 10px; }
+.product-price { font-size: 14px; color: var(--charcoal); font-weight: 500; }
 .product-price .was { text-decoration: line-through; color: var(--mid); font-weight: 400; margin-right: 6px; }
 .product-price .sale { color: var(--sale); }
 .product-badge {
@@ -733,11 +733,11 @@ body.drawer-open { overflow: hidden; }
 .guidance-card h4 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--charcoal);
   margin-bottom: 8px;
 }
-.guidance-card p { font-size: 11px; color: var(--mid); line-height: 1.6; }
+.guidance-card p { font-size: 13px; color: var(--mid); line-height: 1.6; }
 .guidance-card-cta {
   display: inline-block;
   margin-top: 14px;
@@ -1027,7 +1027,7 @@ body.drawer-open { overflow: hidden; }
 .pdp-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 36px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.15;
   color: var(--charcoal);
   margin-bottom: 12px;
@@ -1041,8 +1041,8 @@ body.drawer-open { overflow: hidden; }
 .pdp-price .was { text-decoration: line-through; color: var(--mid); margin-right: 10px; font-size: 16px; font-weight: 400; }
 .pdp-price .sale { color: var(--sale); }
 .pdp-desc {
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--slate);
   margin-bottom: 28px;
   padding-bottom: 24px;
@@ -1160,7 +1160,7 @@ body.drawer-open { overflow: hidden; }
 }
 .tab-btn:hover { color: var(--charcoal); }
 .tab-btn.active { color: var(--charcoal); border-bottom-color: var(--bronze); }
-.tab-panel { display: none; font-size: 13px; line-height: 1.8; color: var(--slate); max-width: 760px; }
+.tab-panel { display: none; font-size: 14px; line-height: 1.7; color: var(--slate); max-width: 760px; }
 .tab-panel.active { display: block; }
 .tab-panel h4 {
   font-family: 'Cormorant Garamond', serif;
@@ -1532,8 +1532,12 @@ body.drawer-open { overflow: hidden; }
   border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.1);
 }
-.swatch-chip.traditional { background: linear-gradient(135deg, #A57458 0%, #8C6249 50%, #4A3225 100%); }
-.swatch-chip.white { background: linear-gradient(135deg, #d8d6cc 0%, #b5b09e 60%, #79735f 100%); }
+/* Bronze finish chips — sampled from real Foundry Art tile photography
+   (warm pewter for Traditional, cool muted pewter for White Bronze).
+   2-stop gradients instead of 3-stop avoid the "polished plastic" look
+   that read too extreme in the prior pass. */
+.swatch-chip.traditional { background: linear-gradient(135deg, #9C8470 0%, #6B5645 100%); }
+.swatch-chip.white { background: linear-gradient(135deg, #CCCAC0 0%, #8F8B7E 100%); }
 .swatch-label {
   font-size: 12px;
   color: var(--charcoal);
@@ -1977,7 +1981,7 @@ body.drawer-open { overflow: hidden; }
   /* Section text scale */
   .section-eyebrow { font-size: 11px; margin-bottom: 22px; letter-spacing: 3.5px; }
   .section-headline { font-size: 52px; line-height: 1.12; margin-bottom: 24px; letter-spacing: -0.4px; }
-  .section-body { font-size: 15px; line-height: 1.85; max-width: 600px; }
+  .section-body { font-size: 17px; line-height: 1.7; max-width: 640px; }
 
   /* Craft */
   .craft-content { padding: 130px 80px 130px 96px; }
@@ -2068,7 +2072,7 @@ body.drawer-open { overflow: hidden; }
   .pdp-title { font-size: 52px; margin-bottom: 16px; line-height: 1.08; }
   .pdp-price { font-size: 30px; margin-bottom: 26px; }
   .pdp-price .was { font-size: 19px; }
-  .pdp-desc { font-size: 15px; line-height: 1.8; margin-bottom: 36px; padding-bottom: 30px; }
+  .pdp-desc { font-size: 17px; line-height: 1.6; margin-bottom: 36px; padding-bottom: 30px; }
   .form-group label { font-size: 12px; margin-bottom: 10px; }
   .form-group select, .form-group input, .form-group textarea { font-size: 15px; padding: 13px 16px; }
   .qty-stepper button { width: 42px; height: 44px; font-size: 18px; }
@@ -2081,7 +2085,7 @@ body.drawer-open { overflow: hidden; }
   .pdp-tabs { margin-top: 110px; padding-top: 60px; }
   .tab-list { gap: 44px; margin-bottom: 44px; }
   .tab-btn { font-size: 13px; padding: 16px 0; letter-spacing: 2.2px; }
-  .tab-panel { font-size: 15px; line-height: 1.85; max-width: 960px; }
+  .tab-panel { font-size: 16px; line-height: 1.7; max-width: 960px; }
   .tab-panel h4 { font-size: 22px; margin-bottom: 12px; margin-top: 24px; }
   .specs-table th { font-size: 13px; padding: 16px 22px 16px 0; }
   .specs-table td { font-size: 15px; padding: 16px 0; }
@@ -2411,8 +2415,8 @@ body.drawer-open { overflow: hidden; }
 .studios-acc-head:hover { color: var(--white); background: rgba(255,255,255,0.03); }
 .studios-acc-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 28px;
-  font-weight: 300;
+  font-size: 32px;
+  font-weight: 500;
   line-height: 1.15;
   grid-column: 1;
   grid-row: 1;
@@ -2434,7 +2438,7 @@ body.drawer-open { overflow: hidden; }
 }
 .studios-acc.active .studios-acc-name {
   color: var(--white);
-  font-weight: 400;
+  font-weight: 600;
 }
 .studios-acc.active .studios-acc-meta { color: var(--bronze-l); }
 
@@ -2516,7 +2520,7 @@ body.drawer-open { overflow: hidden; }
   .studios-drawer .studios-eyebrow { padding: 4px 40px 28px; }
   .studios-drawer .studios-eyebrow-mark { height: 44px; }
   .studios-acc-head { padding: 26px 40px; }
-  .studios-acc-name { font-size: 30px; }
+  .studios-acc-name { font-size: 34px; }
   .studios-acc-body a { padding: 16px 40px; font-size: 30px; }
   .studios-acc-body a strong { font-size: 13px; }
   .studios-acc-body a small { font-size: 13px; }
@@ -2527,7 +2531,7 @@ body.drawer-open { overflow: hidden; }
   .studios-drawer .studios-eyebrow { padding: 4px 48px 32px; }
   .studios-drawer .studios-eyebrow-mark { height: 48px; }
   .studios-acc-head { padding: 28px 48px; }
-  .studios-acc-name { font-size: 34px; }
+  .studios-acc-name { font-size: 38px; }
   .studios-acc-body a { padding: 18px 48px; font-size: 32px; }
   .studios-acc-body a strong { font-size: 14px; }
   .studios-acc-body a small { font-size: 14px; margin-top: 8px; }
@@ -2537,7 +2541,7 @@ body.drawer-open { overflow: hidden; }
   .studios-drawer .studios-eyebrow { padding: 4px 56px 36px; }
   .studios-drawer .studios-eyebrow-mark { height: 52px; }
   .studios-acc-head { padding: 30px 56px; }
-  .studios-acc-name { font-size: 38px; }
+  .studios-acc-name { font-size: 42px; }
   .studios-acc-body a { padding: 20px 56px; font-size: 36px; }
   .studios-acc-body a strong { font-size: 15px; }
   .studios-acc-body a small { font-size: 15px; }
@@ -2586,7 +2590,7 @@ body.drawer-open { overflow: hidden; }
       rgba(45,46,47,0.85) 100%);
   }
   .studios-acc-head { padding: 20px 24px; }
-  .studios-acc-name { font-size: 20px; }
+  .studios-acc-name { font-size: 22px; }
   .studios-acc-body a { padding: 12px 24px; }
 }
 @media (min-width: 1440px) {
@@ -2604,7 +2608,7 @@ body.drawer-open { overflow: hidden; }
   .sub-hero { min-height: 760px; }
   .sub-hero-content { padding: 120px 80px 120px 96px; max-width: 920px; }
   .studios-acc-head { padding: 26px 40px; }
-  .studios-acc-name { font-size: 24px; }
+  .studios-acc-name { font-size: 26px; }
   .studios-acc-meta { font-size: 11px; }
   .studios-acc-body a { padding: 14px 40px; font-size: 14px; }
   .studios-drawer .studios-eyebrow { padding: 0 40px 26px; font-size: 10px; }

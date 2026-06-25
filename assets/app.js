@@ -937,8 +937,27 @@
     initWtbTabs();
     initMediaCarousels();
     initWtbMap();
+    initTaglineVariants();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();
   });
+
+  // FA hero tagline A/B toggle for client review:
+  // /foundry-art/?tagline=<key> swaps the .hero-headline copy on load.
+  // Keys map to copy variants Stacia listed; "current" leaves the markup.
+  function initTaglineVariants() {
+    const el = document.querySelector('.hero-headline[data-tagline]');
+    if (!el) return;
+    const params = new URLSearchParams(window.location.search);
+    const key = (params.get('tagline') || '').toLowerCase();
+    const variants = {
+      'elegance-unsurpassed':  'Small details.<br>Unsurpassed elegance.',
+      'elegance-unmistakable': 'Small details.<br>Unmistakable elegance.',
+      'elegance-understated':  'Small details.<br>Understated elegance.',
+      'artistry-unmatched':    'Small details.<br>Unmatched artistry.',
+      'impact-unmistakable':   'Small details.<br>Unmistakable impact.',
+    };
+    if (variants[key]) el.innerHTML = variants[key];
+  }
 })();
