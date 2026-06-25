@@ -7162,7 +7162,7 @@ body[data-page="contact"] .lw2-contact-heading {
   color: #000;
 }
 body[data-page="contact"] .lw2-contact-form {
-  max-width: 760px;
+  max-width: 600px;
   margin: 0 auto;
 }
 body[data-page="contact"] .lw2-contact-field {
@@ -7260,7 +7260,7 @@ body[data-page="contact"] .lw2-contact-divider {
   border: 0;
   border-top: 1px solid #DDD;
   margin: 32px auto;
-  max-width: 760px;
+  max-width: 600px;
 }
 body[data-page="contact"] .lw2-contact-address {
   font-style: normal;
@@ -7269,7 +7269,7 @@ body[data-page="contact"] .lw2-contact-address {
 }
 body[data-page="contact"] .lw2-contact-address p {
   font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 22px;
+  font-size: 16px;
   line-height: 1.7;
   color: #000;
   margin: 0;
@@ -7281,7 +7281,7 @@ body[data-page="contact"] .lw2-contact-address p {
   body[data-page="contact"] .lw2-contact-hero h1 { font-size: 32px; margin-bottom: 24px; }
   body[data-page="contact"] .lw2-contact-subhead { font-size: 18px; }
   body[data-page="contact"] .lw2-contact-heading { font-size: 28px; margin-bottom: 36px; }
-  body[data-page="contact"] .lw2-contact-address p { font-size: 18px; }
+  body[data-page="contact"] .lw2-contact-address p { font-size: 15px; }
 }
 body[data-page="where-to-buy"] .lw2-wtb-panel-title {
   font-family: 'Fanwood Text', Georgia, serif;
