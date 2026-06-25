@@ -938,6 +938,7 @@
     initMediaCarousels();
     initWtbMap();
     initTaglineVariants();
+    initBrandBandVariants();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();
@@ -946,6 +947,24 @@
   // FA hero tagline A/B toggle for client review:
   // /foundry-art/?tagline=<key> swaps the .hero-headline copy on load.
   // Keys map to copy variants Stacia listed; "current" leaves the markup.
+  // FA brand-band layout variants for client review:
+  //   /foundry-art/?band=portrait   — Ted portrait left, quote right
+  //   /foundry-art/?band=fullbleed  — Ted photo as full-bleed bg + scrim
+  //   /foundry-art/?band=byline     — small round portrait above quote
+  // Default (no query) is the text-only centered band.
+  function initBrandBandVariants() {
+    const band = document.querySelector('[data-brand-band]');
+    if (!band) return;
+    const params = new URLSearchParams(window.location.search);
+    const variant = (params.get('band') || '').toLowerCase();
+    const portrait = band.querySelector('.brand-band-portrait');
+    const variants = ['portrait', 'fullbleed', 'byline'];
+    if (variants.includes(variant)) {
+      band.classList.add('brand-band--' + variant);
+      if (portrait) portrait.hidden = false;
+    }
+  }
+
   function initTaglineVariants() {
     const el = document.querySelector('.hero-headline[data-tagline]');
     if (!el) return;
