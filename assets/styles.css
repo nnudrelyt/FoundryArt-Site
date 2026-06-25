@@ -7162,7 +7162,7 @@ body[data-page="contact"] .lw2-contact-heading {
   color: #000;
 }
 body[data-page="contact"] .lw2-contact-form {
-  max-width: 600px;
+  max-width: 320px;     /* matches a single .lw2-card on the Bronzework page */
   margin: 0 auto;
 }
 body[data-page="contact"] .lw2-contact-field {
@@ -7260,7 +7260,7 @@ body[data-page="contact"] .lw2-contact-divider {
   border: 0;
   border-top: 1px solid #DDD;
   margin: 32px auto;
-  max-width: 600px;
+  max-width: 320px;
 }
 body[data-page="contact"] .lw2-contact-address {
   font-style: normal;
