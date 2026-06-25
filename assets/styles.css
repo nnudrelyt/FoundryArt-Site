@@ -554,33 +554,46 @@ body.drawer-open { overflow: hidden; }
   max-width: 1280px;
   margin: 0 auto;
   letter-spacing: 0.3px;
-  /* Bronze metallic sheen with patina depth — gradient clipped to the
-     type so the italic reads as aged, hand-finished bronze. Deep
-     mahogany-patina shadows at top/bottom edges (kept above the
-     charcoal-bg luminance so the type stays legible at the dark
-     stops) climb through warm bronze into a single cream highlight
-     peak just above center. Fallback color set first for browsers
-     without background-clip:text. */
+  /* Bronze metallic sheen — gradient clipped to the type so the
+     italic reads as hand-finished bronze under a soft, moving light.
+     Narrow luminance range (warm patina mid-shadow → soft cream
+     highlight) keeps the contrast subtle — the depth comes from
+     the highlight DRIFTING, not from harsh contrast stops.
+     Direction 110deg = light catches diagonally across the italic
+     slant. Background sized 200% so the highlight has room to
+     travel across the text without revealing edges. Fallback color
+     set first for browsers without background-clip:text. */
   color: var(--bronze-l);
   background: linear-gradient(
-    180deg,
-    #4F3522  0%,     /* deep mahogany patina */
-    #7A573D 16%,     /* warm bronze shadow */
-    #B58C68 38%,     /* mid bronze body */
-    #E5C8A0 50%,     /* cream highlight peak */
-    #B58C68 62%,     /* descend through mid bronze */
-    #7A573D 84%,     /* warm bronze shadow */
-    #4F3522 100%     /* deep mahogany patina */
+    110deg,
+    #8C6E51  0%,     /* warm bronze mid-shadow */
+    #B59070 30%,     /* bronze body */
+    #D2B493 50%,     /* soft cream highlight peak */
+    #B59070 70%,     /* bronze body */
+    #8C6E51 100%     /* warm bronze mid-shadow */
   );
+  background-size: 200% 100%;
+  background-position: 50% 50%;
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* Graceful cinematic fade-up: longer duration, softer ease,
-     gentle blur clear, larger settle distance. */
+  /* Two layered animations on the same element:
+       1. brandSettle — one-shot cinematic fade/blur up on load.
+       2. bronzeShimmer — slow infinite drift of the highlight
+          across the type (starts after the settle completes).
+     The shimmer drifts highlight LEFT→RIGHT→LEFT (alternate) on
+     a 9s ease-in-out — fast through center, slow at the edges,
+     like light catching as you tilt a bronze surface. */
   opacity: 0;
   transform: translateY(24px);
   filter: blur(6px);
-  animation: brandSettle 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+  animation:
+    brandSettle    2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards,
+    bronzeShimmer  9s ease-in-out 2.5s infinite alternate;
+}
+@keyframes bronzeShimmer {
+  from { background-position: 100% 50%; }
+  to   { background-position:   0% 50%; }
 }
 .brand-band cite {
   display: block;
@@ -604,6 +617,7 @@ body.drawer-open { overflow: hidden; }
     opacity: 1;
     transform: none;
     filter: none;
+    background-position: 50% 50%;     /* halt the shimmer mid-sweep */
   }
 }
 
