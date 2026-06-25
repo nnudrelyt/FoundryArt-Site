@@ -28,7 +28,7 @@
       const link = (href, label, key) => `<a href="${href}" data-nav-key="${key}">${label}</a>`;
       navInner = `
           <div class="nav-left">${dotGrid}
-            <a href="/foundry-art/" class="nav-logo">Foundry Art</a>
+            <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art"></a>
           </div>
           <div class="nav-links">
             ${link('/foundry-art/shop/', 'Tiles', 'shop')}
