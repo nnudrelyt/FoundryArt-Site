@@ -550,11 +550,25 @@ body.drawer-open { overflow: hidden; }
   font-size: 36px;
   font-weight: 300;
   font-style: italic;
-  color: var(--bronze-l);
   line-height: 1.3;
   max-width: 1280px;
   margin: 0 auto;
-  letter-spacing: -0.2px;
+  letter-spacing: 0.3px;
+  /* Subtle bronze metallic sheen — gradient clipped to the type so the
+     italic catches a soft top-down highlight against the charcoal band.
+     Fallback color set first for browsers without background-clip:text. */
+  color: var(--bronze-l);
+  background: linear-gradient(
+    180deg,
+    #A78164 0%,
+    #C9AC8E 35%,
+    #DEC4A4 50%,
+    #C9AC8E 65%,
+    #A78164 100%
+  );
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
   /* Graceful cinematic fade-up: longer duration, softer ease,
      gentle blur clear, larger settle distance. */
   opacity: 0;
@@ -587,32 +601,6 @@ body.drawer-open { overflow: hidden; }
   }
 }
 
-/* Brand-band byline — small round portrait of Ted floats above the
-   quote. Attributes the line to a real person without dominating the
-   section. Locked as the default presentation (client picked from a
-   three-variant exploration on 2026-06-25). */
-.brand-band-portrait {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 auto 40px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  /* Settles in alongside the quote with the same blur-up animation. */
-  opacity: 0;
-  transform: translateY(20px);
-  filter: blur(8px);
-  animation: brandSettle 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
-}
-.brand-band-portrait img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-@media (prefers-reduced-motion: reduce) {
-  .brand-band-portrait { animation: none; opacity: 1; transform: none; filter: none; }
-}
 
 /* ══════════════════════════════════════ SHARED SECTION TEXT ══════════════════════════════════════ */
 .section-eyebrow {
@@ -2089,7 +2077,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   }
 
   .brand-band { padding: 72px 16px; }
-  .brand-band p { font-size: 28px; line-height: 1.35; }
+  .brand-band p { font-size: 28px; line-height: 1.35; letter-spacing: 0.2px; }
   .brand-band cite { font-size: 10px; margin-top: 22px; }
 
   .craft-content { padding: 40px 16px; }
@@ -2181,9 +2169,8 @@ body[data-page="home"] .footer p { border: 0 !important; }
 
   /* Brand band */
   .brand-band { padding: 200px 40px; }      /* taller cinematic band */
-  .brand-band p { font-size: 72px; max-width: 1280px; line-height: 1.2; letter-spacing: -0.6px; }
+  .brand-band p { font-size: 72px; max-width: 1280px; line-height: 1.2; letter-spacing: 0.8px; }
   .brand-band cite { font-size: 13px; margin-top: 40px; letter-spacing: 3.5px; }
-  .brand-band-portrait { width: 160px; height: 160px; margin-bottom: 56px; }
 
   /* Section text scale */
   .section-eyebrow { font-size: 13px; margin-bottom: 22px; letter-spacing: 3.5px; }
