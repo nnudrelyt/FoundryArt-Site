@@ -540,7 +540,7 @@ body.drawer-open { overflow: hidden; }
 /* ══════════════════════════════════════ BRAND BAND ══════════════════════════════════════ */
 .brand-band {
   background: var(--charcoal);
-  padding: 144px 40px;       /* ~60% taller than the prior 96px */
+  padding: 200px 40px;       /* reclaims the visual mass the portrait had been occupying */
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -554,17 +554,23 @@ body.drawer-open { overflow: hidden; }
   max-width: 1280px;
   margin: 0 auto;
   letter-spacing: 0.3px;
-  /* Subtle bronze metallic sheen — gradient clipped to the type so the
-     italic catches a soft top-down highlight against the charcoal band.
-     Fallback color set first for browsers without background-clip:text. */
+  /* Bronze metallic sheen with patina depth — gradient clipped to the
+     type so the italic reads as aged, hand-finished bronze. Deep
+     mahogany-patina shadows at top/bottom edges (kept above the
+     charcoal-bg luminance so the type stays legible at the dark
+     stops) climb through warm bronze into a single cream highlight
+     peak just above center. Fallback color set first for browsers
+     without background-clip:text. */
   color: var(--bronze-l);
   background: linear-gradient(
     180deg,
-    #A78164 0%,
-    #C9AC8E 35%,
-    #DEC4A4 50%,
-    #C9AC8E 65%,
-    #A78164 100%
+    #4F3522  0%,     /* deep mahogany patina */
+    #7A573D 16%,     /* warm bronze shadow */
+    #B58C68 38%,     /* mid bronze body */
+    #E5C8A0 50%,     /* cream highlight peak */
+    #B58C68 62%,     /* descend through mid bronze */
+    #7A573D 84%,     /* warm bronze shadow */
+    #4F3522 100%     /* deep mahogany patina */
   );
   -webkit-background-clip: text;
           background-clip: text;
@@ -2076,7 +2082,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
       rgba(45,46,47,0.85) 100%);
   }
 
-  .brand-band { padding: 72px 16px; }
+  .brand-band { padding: 104px 16px; }
   .brand-band p { font-size: 28px; line-height: 1.35; letter-spacing: 0.2px; }
   .brand-band cite { font-size: 10px; margin-top: 22px; }
 
@@ -2168,7 +2174,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .badge-item strong { font-size: 15px; }
 
   /* Brand band */
-  .brand-band { padding: 200px 40px; }      /* taller cinematic band */
+  .brand-band { padding: 290px 40px; }      /* full cinematic gravity */
   .brand-band p { font-size: 72px; max-width: 1280px; line-height: 1.2; letter-spacing: 0.8px; }
   .brand-band cite { font-size: 13px; margin-top: 40px; letter-spacing: 3.5px; }
 
