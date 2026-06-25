@@ -7128,7 +7128,7 @@ body[data-page="where-to-buy"] .lw2-wtb-panel.is-active { display: block; }
 body[data-page="contact"] .lw2-contact-page {
   background: #FFF;
   padding: 0 24px;
-  max-width: 880px;
+  max-width: 1080px;       /* matches the Bronzework 3-card grid container */
   margin: 0 auto;
 }
 body[data-page="contact"] .lw2-contact-hero {
@@ -7162,7 +7162,7 @@ body[data-page="contact"] .lw2-contact-heading {
   color: #000;
 }
 body[data-page="contact"] .lw2-contact-form {
-  max-width: 320px;     /* matches a single .lw2-card on the Bronzework page */
+  max-width: 1080px;     /* full 3-card grid width from the Bronzework page */
   margin: 0 auto;
 }
 body[data-page="contact"] .lw2-contact-field {
@@ -7260,7 +7260,7 @@ body[data-page="contact"] .lw2-contact-divider {
   border: 0;
   border-top: 1px solid #DDD;
   margin: 32px auto;
-  max-width: 320px;
+  max-width: 1080px;
 }
 body[data-page="contact"] .lw2-contact-address {
   font-style: normal;
