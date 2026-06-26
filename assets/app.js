@@ -941,6 +941,7 @@
     initCraftMarkerVariants();
     initHardwareGallery();
     initHardwareBgVariants();
+    initHardwareLayoutVariants();
     initInsituScrollIndicator();
     renderShopGrid();
     renderCrossSell();
@@ -978,6 +979,20 @@
       img.addEventListener('load', update, { once: true });
     });
     update();
+  }
+
+  // FA hardware-content layout variants for client review:
+  //   /foundry-art/?layout=shadow  — center + text-shadow on copy
+  //   /foundry-art/?layout=radial  — center + radial center darken
+  //   /foundry-art/?layout=dense   — center + uniform denser scrim
+  //   /foundry-art/?layout=panel   — center + floating dark panel behind text
+  // Default (no query) keeps the current left-aligned layout.
+  function initHardwareLayoutVariants() {
+    const content = document.querySelector('[data-hardware-content]');
+    if (!content) return;
+    const key = (new URLSearchParams(window.location.search).get('layout') || '').toLowerCase();
+    const variants = ['shadow', 'radial', 'dense', 'panel'];
+    if (variants.includes(key)) content.classList.add('hw-layout-' + key);
   }
 
   // FA hardware section background variants for client review:

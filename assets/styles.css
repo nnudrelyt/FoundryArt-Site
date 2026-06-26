@@ -832,6 +832,71 @@ body.drawer-open { overflow: hidden; }
 }
 .product-cta:hover { color: var(--charcoal); border-color: var(--charcoal); }
 
+
+/* Centered-layout variants for client review — toggleable via
+   /foundry-art/?layout=<key>. Default (no query) keeps the
+   current left-aligned layout. Each variant centers the content
+   AND applies a different legibility treatment for text against
+   the B&W hand-toning bg. */
+.hardware-content[class*="hw-layout-"] {
+  align-items: center;
+  text-align: center;
+}
+.hardware-content[class*="hw-layout-"] .section-body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* A — text-shadow only: bg unchanged, text gets a soft drop-shadow
+   so it reads against the photo detail. Quietest treatment. */
+.hardware-content.hw-layout-shadow .section-eyebrow,
+.hardware-content.hw-layout-shadow .section-headline,
+.hardware-content.hw-layout-shadow .section-body {
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.78), 0 0 6px rgba(0, 0, 0, 0.55);
+}
+
+/* B — radial center darken: extra scrim that's darker in the
+   middle (where text sits) and fades toward the edges, so the
+   photo still breathes on the periphery. */
+.hardware-content.hw-layout-radial {
+  background-image:
+    radial-gradient(ellipse at center,
+      rgba(20, 37, 40, 0.82) 0%,
+      rgba(20, 37, 40, 0.62) 50%,
+      rgba(20, 37, 40, 0.35) 100%),
+    url('/assets/images/process/hand-toning-bw.jpg');
+}
+
+/* C — denser uniform scrim: simply darkens the whole panel more
+   so text reads cleanly without any positional tricks. */
+.hardware-content.hw-layout-dense {
+  background-image:
+    linear-gradient(rgba(20, 37, 40, 0.85), rgba(20, 37, 40, 0.85)),
+    url('/assets/images/process/hand-toning-bw.jpg');
+}
+
+/* D — floating frosted panel behind the text block. Photo and
+   grid stay fully visible; only the text block sits on a soft
+   dark card. */
+.hardware-content.hw-layout-panel {
+  position: relative;
+}
+.hardware-content.hw-layout-panel::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 220px;                              /* roughly above the headline */
+  transform: translateX(-50%);
+  width: min(540px, calc(100% - 40px));
+  height: 290px;
+  background: rgba(20, 37, 40, 0.55);
+  border-radius: 6px;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  z-index: 1;
+}
+.hardware-content.hw-layout-panel > * { position: relative; z-index: 2; }
+
 /* ══════════════════════════════════════ DESIGN IDEAS (homepage) ══════════════════════════════════════ */
 .design-ideas {
   padding: 80px 40px;
