@@ -1022,64 +1022,14 @@ body.drawer-open { overflow: hidden; }
 .hardware-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 12px;
   margin-top: 28px;
-  padding: 16px;
-  max-width: 520px;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.16);
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 4px;
-}
-
-/* Frame treatment variants — toggleable for client review via
-   /foundry-art/?frame=<key>. Default (no query) is the current
-   frosted-glass treatment above. */
-.hardware-grid.hw-frame-hairline {
-  background: transparent;
-  border: 1px solid rgba(183, 153, 126, 0.55);
-  border-radius: 0;
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-  padding: 18px;
-}
-.hardware-grid.hw-frame-plinth {
-  background: rgba(238, 237, 232, 0.95);    /* warm cream, like page bg */
-  border: 1px solid rgba(238, 237, 232, 0.2);
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-  padding: 22px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
-}
-.hardware-grid.hw-frame-plinth ~ .hardware-grid p,
-.hardware-content .hw-frame-plinth .hardware-item p {
-  color: var(--charcoal);
-}
-.hardware-grid.hw-frame-rules {
-  background: transparent;
-  border: 0;
-  border-top: 1px solid rgba(183, 153, 126, 0.45);
-  border-bottom: 1px solid rgba(183, 153, 126, 0.45);
-  border-radius: 0;
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-  padding: 22px 0;
-}
-.hardware-grid.hw-frame-panel {
-  background: rgba(20, 37, 40, 0.55);       /* slightly lighter charcoal */
-  border: 1px solid rgba(183, 153, 126, 0.18);
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-  padding: 18px;
-}
-.hardware-grid.hw-frame-none {
-  background: transparent;
-  border: 0;
-  border-radius: 0;
-  -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-  padding: 0;
 }
 .hardware-item .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 8px; position: relative; overflow: hidden; }
 .hardware-item p { font-size: 10px; text-align: center; }
@@ -2500,7 +2450,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
 
   /* Hardware */
   .hardware-content { padding: 130px 80px; }
-  .hardware-grid { gap: 14px; margin-top: 48px; padding: 22px; max-width: 600px; }
+  .hardware-grid { gap: 20px; margin-top: 40px; padding: 28px; }
   .hardware-item p { font-size: 12px; }
 
   /* Guidance */
