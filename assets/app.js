@@ -938,6 +938,7 @@
     initMediaCarousels();
     initWtbMap();
     initTaglineVariants();
+    initCraftMarkerVariants();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();
@@ -946,6 +947,21 @@
   // FA hero tagline A/B toggle for client review:
   // /foundry-art/?tagline=<key> swaps the .hero-headline copy on load.
   // Keys map to copy variants Stacia listed; "current" leaves the markup.
+  // FA craft bullet-marker variants for client review:
+  //   /foundry-art/?marker=dot       — filled bronze circle
+  //   /foundry-art/?marker=ring      — hollow bronze circle
+  //   /foundry-art/?marker=rule      — short bronze hairline rule
+  //   /foundry-art/?marker=numeral   — italic Cormorant 1/2/3 in bronze
+  // Default (no query) is the existing rotated bronze diamond.
+  function initCraftMarkerVariants() {
+    const craft = document.querySelector('[data-craft]');
+    if (!craft) return;
+    const params = new URLSearchParams(window.location.search);
+    const variant = (params.get('marker') || '').toLowerCase();
+    const variants = ['dot', 'ring', 'rule', 'numeral'];
+    if (variants.includes(variant)) craft.classList.add('craft--marker-' + variant);
+  }
+
   function initTaglineVariants() {
     const el = document.querySelector('.hero-headline[data-tagline]');
     if (!el) return;

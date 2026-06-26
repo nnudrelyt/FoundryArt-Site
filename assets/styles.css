@@ -651,10 +651,12 @@ body.drawer-open { overflow: hidden; }
    .craft-images always sits left; .craft-content always sits right. */
 /* Capped narrower than the full-bleed inspiration grid below so the
    section reads as a more intimate "studio team" moment, not as
-   wide as the gallery. */
-.craft { display: grid; grid-template-columns: 1fr 1fr; max-width: 1200px; margin: 0 auto; }
+   wide as the gallery. Photo gets 5fr, content 7fr — the team
+   photo is supporting, not dominant, and the headline gets room
+   to breathe on one line. */
+.craft { display: grid; grid-template-columns: 5fr 7fr; max-width: 1200px; margin: 0 auto; }
 .craft-images { grid-column: 1; }
-.craft-content { grid-column: 2; padding: 64px 40px 64px 48px; display: flex; flex-direction: column; justify-content: center; }
+.craft-content { grid-column: 2; padding: 56px 32px 56px 56px; display: flex; flex-direction: column; justify-content: center; }
 .craft-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
 .craft-step { display: flex; gap: 16px; align-items: flex-start; }
 /* Hide the literal numeral character and render a small bronze diamond
@@ -689,7 +691,58 @@ body.drawer-open { overflow: hidden; }
 /* Single team-photo block on the left. min-height matches the content
    column so the section reads as a balanced two-up. */
 .craft-images { display: block; }
-.craft-images .wire-img { min-height: 540px; width: 100%; height: 100%; }
+.craft-images .wire-img { min-height: 480px; max-height: 640px; width: 100%; height: 100%; }
+.craft-images .wire-img > img { object-position: center 30%; }   /* keep faces visible when the row gets tall */
+
+/* ====== BULLET MARKER VARIANTS (toggleable via ?marker= query) ======
+   Four alternates to the default bronze diamond — wired for client
+   review. Default presentation (no query) keeps the diamond. */
+
+/* marker=dot — filled bronze circle */
+.craft--marker-dot .craft-step-num::before {
+  inset: 3px;
+  border-radius: 50%;
+  transform: none;
+}
+
+/* marker=ring — hollow bronze circle */
+.craft--marker-ring .craft-step-num::before {
+  inset: 2px;
+  background: transparent;
+  border: 1.5px solid var(--bronze);
+  border-radius: 50%;
+  transform: none;
+}
+
+/* marker=rule — short bronze hairline rule */
+.craft--marker-rule .craft-step-num {
+  width: 24px;
+  min-width: 24px;
+  height: 14px;
+}
+.craft--marker-rule .craft-step-num::before {
+  inset: 6px 0;
+  background: var(--bronze);
+  transform: none;
+}
+
+/* marker=numeral — italic Cormorant 1 / 2 / 3 in bronze */
+.craft--marker-numeral .craft-step-num {
+  font-size: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--bronze);
+  width: 26px;
+  min-width: 26px;
+  height: auto;
+  margin-top: -2px;          /* tune baseline against the strong label */
+  line-height: 1;
+  text-align: center;
+}
+.craft--marker-numeral .craft-step-num::before {
+  display: none;             /* hide the rotated-square ::before */
+}
 
 /* ══════════════════════════════════════ PRODUCT GRID (shared shop + homepage) ══════════════════════════════════════ */
 .products { padding: 80px 40px; background: var(--white); }
@@ -2034,10 +2087,10 @@ body[data-page="home"] .footer p { border: 0 !important; }
       rgba(45,46,47,0) 100%);
   }
 
-  .craft { grid-template-columns: 1fr; }
+  .craft { grid-template-columns: 1fr; max-width: 100%; }
+  .craft-images, .craft-content { grid-column: auto; }   /* clear the desktop column placements so items stack in the 1-col grid */
   .craft-content { padding: 56px 24px; }
-  .craft-images { grid-template-rows: unset; grid-template-columns: 1fr 1fr; }
-  .craft-images .wire-img { min-height: 200px; }
+  .craft-images .wire-img { min-height: 240px; max-height: 380px; }
 
   .products { padding: 56px 24px; }
   .products-header { flex-direction: column; align-items: flex-start; }
