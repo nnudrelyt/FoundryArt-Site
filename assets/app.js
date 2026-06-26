@@ -939,6 +939,7 @@
     initWtbMap();
     initTaglineVariants();
     initCraftMarkerVariants();
+    initHardwareGallery();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();
@@ -947,6 +948,30 @@
   // FA hero tagline A/B toggle for client review:
   // /foundry-art/?tagline=<key> swaps the .hero-headline copy on load.
   // Keys map to copy variants Stacia listed; "current" leaves the markup.
+  // FA hardware section gallery — hover/focus a thumbnail to swap the
+  // large image at left; clicking takes the user to that product's PDP.
+  // Thumbnail's large-image source comes from data-large; alt text from
+  // data-large-alt. Items without data-large leave the large image as-is
+  // on hover (e.g. Wall Hook, which has no photography yet).
+  function initHardwareGallery() {
+    const grid = document.querySelector('[data-hardware-grid]');
+    if (!grid) return;
+    const largeImg = document.querySelector('[data-hardware-large] > img');
+    if (!largeImg) return;
+    grid.querySelectorAll('.hardware-item').forEach(item => {
+      const src = item.dataset.large;
+      if (!src) return;
+      const alt = item.dataset.largeAlt || '';
+      const swap = () => {
+        if (largeImg.src.endsWith(src)) return;
+        largeImg.src = src;
+        if (alt) largeImg.alt = alt;
+      };
+      item.addEventListener('mouseenter', swap);
+      item.addEventListener('focus', swap);
+    });
+  }
+
   // FA craft bullet-marker variants for client review:
   //   /foundry-art/?marker=dot       — filled bronze circle
   //   /foundry-art/?marker=ring      — hollow bronze circle
