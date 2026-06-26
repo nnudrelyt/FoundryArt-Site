@@ -962,7 +962,28 @@ body.drawer-open { overflow: hidden; }
 .hardware { display: grid; grid-template-columns: 1fr 1fr; }
 .hardware-image { position: relative; }
 .hardware-image .wire-img { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hardware-content { background: var(--bronze-bg); padding: 72px 56px; display: flex; flex-direction: column; justify-content: center; }
+.hardware-content {
+  /* B&W grinding-edges shot + dark scrim — matches the hero's
+     full-bleed-image + scrim + light-text pattern. Scrim uses the
+     same charcoal family as the hero (rgba 45,46,47) at uniform
+     opacity so the image reads through clearly without losing
+     text legibility. */
+  background-color: var(--charcoal);
+  background-image:
+    linear-gradient(rgba(45, 46, 47, 0.66), rgba(45, 46, 47, 0.66)),
+    url('/assets/images/process/grinding-edges.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 72px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hardware-content .section-eyebrow { color: var(--bronze-l); }
+.hardware-content .section-headline { color: #FFFFFF; }
+.hardware-content .section-body { color: rgba(255, 255, 255, 0.78); }
+.hardware-content .hardware-item p { color: rgba(255, 255, 255, 0.78); }
 .hardware-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
 .hardware-item .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 8px; }
 .hardware-item p { font-size: 10px; color: var(--slate); text-align: center; }
