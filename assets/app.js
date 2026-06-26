@@ -941,7 +941,6 @@
     initCraftMarkerVariants();
     initHardwareGallery();
     initHardwareBgVariants();
-    initHardwareFrameVariants();
     initInsituScrollIndicator();
     renderShopGrid();
     renderCrossSell();
@@ -979,26 +978,6 @@
       img.addEventListener('load', update, { once: true });
     });
     update();
-  }
-
-  // FA hardware-grid frame treatment variants for client review:
-  //   /foundry-art/?frame=hairline  — thin bronze hairline border
-  //   /foundry-art/?frame=plinth    — warm cream plinth + drop shadow
-  //   /foundry-art/?frame=rules     — bronze hairlines top + bottom only
-  //   /foundry-art/?frame=panel     — slightly lighter charcoal panel + bronze edge
-  //   /foundry-art/?frame=none      — no container at all
-  // Default (no query) keeps the frosted-glass treatment.
-  function initHardwareFrameVariants() {
-    const grid = document.querySelector('[data-hardware-grid]');
-    if (!grid) return;
-    const key = (new URLSearchParams(window.location.search).get('frame') || '').toLowerCase();
-    const variants = ['hairline', 'plinth', 'rules', 'panel', 'none'];
-    if (variants.includes(key)) {
-      grid.classList.add('hw-frame-' + key);
-      if (key === 'plinth') {
-        grid.querySelectorAll('.hardware-item p').forEach(p => { p.style.color = ''; p.classList.add('hw-label-dark'); });
-      }
-    }
   }
 
   // FA hardware section background variants for client review:

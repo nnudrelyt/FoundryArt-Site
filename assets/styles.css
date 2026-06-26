@@ -1052,8 +1052,8 @@ body.drawer-open { overflow: hidden; }
   padding: 22px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
 }
-.hardware-grid.hw-frame-plinth .hardware-item p,
-.hardware-grid.hw-frame-plinth .hardware-item p.hw-label-dark {
+.hardware-grid.hw-frame-plinth ~ .hardware-grid p,
+.hardware-content .hw-frame-plinth .hardware-item p {
   color: var(--charcoal);
 }
 .hardware-grid.hw-frame-rules {
