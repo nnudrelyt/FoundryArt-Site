@@ -941,6 +941,7 @@
     initCraftMarkerVariants();
     initHardwareGallery();
     initHardwareBgVariants();
+    initInsituScrollIndicator();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();
@@ -949,6 +950,36 @@
   // FA hero tagline A/B toggle for client review:
   // /foundry-art/?tagline=<key> swaps the .hero-headline copy on load.
   // Keys map to copy variants Stacia listed; "current" leaves the markup.
+  // Custom always-visible scroll indicator for the FA inspiration
+  // strip. macOS auto-hides native scrollbars based on system pref;
+  // this overlays a bronze thumb-and-track below the grid that's
+  // always present and mirrors scroll progress.
+  function initInsituScrollIndicator() {
+    const grid = document.querySelector('.insitu-grid');
+    const indicator = document.querySelector('[data-insitu-indicator]');
+    if (!grid || !indicator) return;
+    const thumb = indicator.querySelector('.insitu-scroll-thumb');
+    const update = () => {
+      const sw = grid.scrollWidth;
+      const cw = grid.clientWidth;
+      const scrollMax = sw - cw;
+      if (scrollMax <= 0) { indicator.style.display = 'none'; return; }
+      indicator.style.display = '';
+      const visibleRatio = cw / sw;
+      const scrollRatio = grid.scrollLeft / scrollMax;
+      thumb.style.width = (visibleRatio * 100) + '%';
+      thumb.style.left = (scrollRatio * (1 - visibleRatio) * 100) + '%';
+    };
+    grid.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    // Image loads can shift scrollWidth — re-measure after images decode.
+    grid.querySelectorAll('img').forEach(img => {
+      if (img.complete) return;
+      img.addEventListener('load', update, { once: true });
+    });
+    update();
+  }
+
   // FA hardware section background variants for client review:
   //   /foundry-art/?bg=sketches    — design-phase drawings
   //   /foundry-art/?bg=toning      — hand applying patina (close-up)

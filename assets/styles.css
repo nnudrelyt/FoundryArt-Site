@@ -2447,11 +2447,11 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .product-cta { font-size: 10px; }
 
   /* Design Ideas */
-  .design-ideas { padding: 130px 80px; }
-  .design-ideas-header { margin-bottom: 72px; }
-  .insitu-grid { gap: 6px; max-width: 1680px; margin: 0 auto; }
+  .design-ideas { padding: 130px 0 130px 80px; }                  /* keep bleed */
+  .design-ideas-header { margin: 0 80px 72px 0; }
+  .insitu-scroll-indicator { margin: 22px 80px 0 0; }
+  .insitu-grid { gap: 6px; }
   .insitu-grid > .insitu-tile { flex: 0 0 460px; height: 580px; }
-  .insitu-caption { font-size: 14px; margin-top: 36px; }
 
   /* Hardware */
   .hardware-content { padding: 130px 80px; }
