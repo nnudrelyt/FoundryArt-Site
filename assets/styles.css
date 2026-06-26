@@ -695,21 +695,11 @@ body.drawer-open { overflow: hidden; }
 /* Single team-photo block on the left. min-height matches the content
    column so the section reads as a balanced two-up. */
 .craft-images { display: block; }
-.craft-images .wire-img {
-  background: transparent;       /* page cream shows through any letterbox space */
-  min-height: 480px;
-  width: 100%;
-  height: 100%;
-}
-/* Show the entire team photo — contain (not cover) so no one in the
-   group portrait gets cropped out at the column edges. The row may
-   leave cream letterbox space above/below depending on content
-   height vs photo aspect; that reads as intentional editorial
-   framing rather than a clip. */
-.craft-images .wire-img > img {
-  object-fit: contain;
-  object-position: center center;
-}
+.craft-images .wire-img { min-height: 480px; width: 100%; height: 100%; }
+/* Cover the column — photo crops at the left/right edges of its
+   container to fill the full row height. object-position: center 30%
+   keeps the team's faces in frame when the row is tall. */
+.craft-images .wire-img > img { object-position: center 30%; }
 
 /* ====== BULLET MARKER VARIANTS (toggleable via ?marker= query) ======
    Four alternates to the default bronze diamond — wired for client
