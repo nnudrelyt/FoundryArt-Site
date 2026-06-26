@@ -649,13 +649,11 @@ body.drawer-open { overflow: hidden; }
 /* Craft section — image LEFT, content RIGHT (image is the team photo).
    The explicit grid-column placements ensure source order doesn't matter:
    .craft-images always sits left; .craft-content always sits right. */
-/* Full-bleed: photo pins flush to the left edge of the browser,
-   content sits in the wider right column. Photo gets 5fr, content
-   7fr — the team photo is supporting, not dominant. Section reads
-   narrower than the inspiration grid below because the content
-   inside the right column is itself capped (see .craft-content
-   max-width below). */
-.craft { display: grid; grid-template-columns: 5fr 7fr; }
+/* Full-bleed: photo pins flush to the left edge of the browser at
+   exactly 50% of viewport. Section reads narrower than the
+   inspiration grid below because the content inside the right
+   column is capped (see .craft-content max-width below). */
+.craft { display: grid; grid-template-columns: 1fr 1fr; }
 .craft-images { grid-column: 1; }
 .craft-content {
   grid-column: 2;
@@ -697,8 +695,21 @@ body.drawer-open { overflow: hidden; }
 /* Single team-photo block on the left. min-height matches the content
    column so the section reads as a balanced two-up. */
 .craft-images { display: block; }
-.craft-images .wire-img { min-height: 480px; width: 100%; height: 100%; }   /* fills the grid row — height tracks the content column */
-.craft-images .wire-img > img { object-position: center 30%; }   /* keep faces visible when the row gets tall */
+.craft-images .wire-img {
+  background: transparent;       /* page cream shows through any letterbox space */
+  min-height: 480px;
+  width: 100%;
+  height: 100%;
+}
+/* Show the entire team photo — contain (not cover) so no one in the
+   group portrait gets cropped out at the column edges. The row may
+   leave cream letterbox space above/below depending on content
+   height vs photo aspect; that reads as intentional editorial
+   framing rather than a clip. */
+.craft-images .wire-img > img {
+  object-fit: contain;
+  object-position: center center;
+}
 
 /* ====== BULLET MARKER VARIANTS (toggleable via ?marker= query) ======
    Four alternates to the default bronze diamond — wired for client
