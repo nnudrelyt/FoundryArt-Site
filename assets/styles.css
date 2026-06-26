@@ -8637,10 +8637,10 @@ body[data-page="precision"] .lw2-coll-profiles .lw2-card-img { aspect-ratio: 1 /
 body[data-page="precision"] .lw2-coll-profiles .lw2-card h3 {
   font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
   font-weight: 400;
-  font-size: 27px;            /* live: 27.2px / 40.8 */
-  line-height: 40.8px;
+  font-size: 27px !important;   /* live: 27.2px / 40.8 — beats shared .lw2-card h3 !important */
+  line-height: 40.8px !important;
   color: var(--lw-text-primary, #000);
-  margin: 22px 0 11px;
+  margin: 22px 0 11px !important;
 }
 body[data-page="precision"] .lw2-coll-profiles .lw2-card-body {
   font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
