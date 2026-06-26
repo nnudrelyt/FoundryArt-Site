@@ -858,6 +858,7 @@ body.drawer-open { overflow: hidden; }
 .insitu-overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;                /* above the .wire-img > img (z-index: 1) — otherwise the img would cover the overlay even at opacity 1 on hover */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
