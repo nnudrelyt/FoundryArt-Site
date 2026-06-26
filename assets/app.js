@@ -940,6 +940,7 @@
     initTaglineVariants();
     initCraftMarkerVariants();
     initHardwareGallery();
+    initHardwareBgVariants();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();
@@ -948,6 +949,20 @@
   // FA hero tagline A/B toggle for client review:
   // /foundry-art/?tagline=<key> swaps the .hero-headline copy on load.
   // Keys map to copy variants Stacia listed; "current" leaves the markup.
+  // FA hardware section background variants for client review:
+  //   /foundry-art/?bg=sketches    — design-phase drawings
+  //   /foundry-art/?bg=toning      — hand applying patina (close-up)
+  //   /foundry-art/?bg=lotus       — finished Lotus tile macro
+  //   /foundry-art/?bg=finishing   — editorial finishes arrangement
+  // Default (no query) keeps the current grinding-edges shot.
+  function initHardwareBgVariants() {
+    const content = document.querySelector('[data-hardware] .hardware-content');
+    if (!content) return;
+    const key = (new URLSearchParams(window.location.search).get('bg') || '').toLowerCase();
+    const variants = ['sketches', 'toning', 'lotus', 'finishing'];
+    if (variants.includes(key)) content.classList.add('hw-bg-' + key);
+  }
+
   // FA hardware section gallery — hover/focus a thumbnail to swap the
   // large image at left; clicking takes the user to that product's PDP.
   // Thumbnail's large-image source comes from data-large; alt text from
