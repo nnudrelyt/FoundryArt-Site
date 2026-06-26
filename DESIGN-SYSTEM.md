@@ -296,3 +296,28 @@ Brand assets we already have:
 3. Render local + lindenworkshops.com side-by-side at 1440 + 375 before pushing (existing `/tmp/lw-audit/sxsN.jpg` workflow).
 4. Cache buster on `styles.css` + `tokens.css` bumped at every release.
 5. Single commit per page or template propagation batch.
+
+---
+
+## 8. Collection-detail template (Precision reference)
+
+The per-collection landing template, scoped to `body[data-page="autograph|precision|classic|instinct"]` under `data-section="linden"`. **`/precision/` is the canonical, finished reference** — rebuilt 1:1 against `lindenworkshops.com/precision/` and matched to its *computed* values (read live via the browser inspector at the reviewer's actual viewport width, ~2251px). Built by assembling existing LW components, not bespoke CSS. CSS lives in `styles.css` under the "PRECISION page — assembled from existing LW components" block + the matching `@media` block; most rules are currently scoped `body[data-page="precision"]` (see Cloning below).
+
+Sections, in document order, with the component each reuses:
+
+1. **Masthead** (white) — `.lw2-coll-masthead`: `.lw2-section-mark` dominant Bronzework wordmark (`height:46px`) → `.lw2-coll-title` (Fanwood 28px, subordinate) → derived `.lw2-coll-subnav` (Open Sans 13px caps, top/bottom hairline rules; links inherit the LW link-red — see §below). Anchors `#profiles`/`#design-ideas`/`#further-information`.
+2. **Hero** — full-bleed `.lw2-coll-hero` wrapping `.lw2-media-carousel` (cross-fade, wired by `initMediaCarousels()`), stage overridden to 16:9. `.lw2-coll-hero-overlay` = a centered semi-transparent white scrim (`rgba(255,255,255,0.66)`) holding `.lw2-coll-hero-tagline` (Fanwood 32px) + `.lw2-coll-hero-sub` (Fanwood 24px). Autoplays forward via a small inline script (pauses on hover/focus/reduced-motion/hidden tab).
+3. **Intro** — `.lw2-coll-intro` (`max-width:1200`) → one Fanwood **40px** statement.
+4. **Profiles** (side-by-side) — `.lw2-collection-grid--two` + two `.lw2-card`. **Uncapped** container (`max-width:none`, padding `2.5%`, gap `3.2%`) so each array image is ~**45.9% of viewport** like live (1034px @2251). Images shown at natural 3:2 (no square crop). Heading Fanwood 27px, body Open Sans 16px/28 #000.
+5. **Finish band** — `.lw2-coll-finish` (`max-width:1390`, centered): Fanwood **40px/60** heading, `.lw2-coll-finish-image` capped at **1166px** (live render width), `.lw2-coll-finish-note` Fanwood 24px/36.
+6. **Design Ideas** — `.lw2-coll-gallery`: **4-column CSS masonry** (`column-count:4`, `column-gap:34px`), uncapped with ~32px (1.4%) side padding; thumbs ~521px @2251. Each `.lw2-coll-gtile` is a `<button>` (image + `.lw2-coll-gcaption`, Open Sans 13px/#000 left). Opens a self-contained `.lw2-lightbox` (keyboard nav, scroll-lock). Tablet 3-col / mobile 2-col.
+7. **Further Information** — `.lw2-coll-info` panel **`#E0E0E0`** (`--lw-bg-panel-bronzework`); 4 PDF cards, plain black labels (no arrow); centered `.lw2-coll-showroom-btn` (thin black border, `rgba(255,255,255,0.5)` bg, black text → red text on hover, **no fill**) → `/where-to-buy/`. Card gap 72px.
+8. **Also available from** — `.lw2-coll-also` panel **`#E0DED5`** (`--lw-bg-team-row`); heading = `.lw2-coll-also-eyebrow` ("Also available from") + `.lw2-coll-also-wordmark` (Bronzework PNG, 40px). Two `.lw2-coll-also-card`, uncapped/~46% like profiles, 3:2 images, `.lw2-coll-also-caption` strip **`#EDECEC`** (Fanwood 28px title + Open Sans 16px desc).
+
+**Imagery:** WebP via `<picture>` + JPEG/PNG fallback throughout (`body[data-page="precision"] picture { display:contents }`); `loading="lazy"` on gallery tiles. Page image payload ~3.8 MB (−70% vs source).
+
+**Known divergence:** the sub-nav + "Classic Collection" links render in `--lw-accent-red` because of the global `body[data-section="linden"] a:not(...)` rule (line ~3379, ~15 `:not()` classes → very high specificity). Override needs `!important` or adding the class to that `:not()` chain (how the showroom button forces black).
+
+**Cloning to autograph / classic / instinct (next step):**
+- The precision rules are mostly scoped `body[data-page="precision"]`. To propagate, **generalise those selectors to the shared `autograph|precision|classic|instinct` list** (or duplicate per page), then per page swap: parent wordmark, collection title, sub-nav anchors, carousel slides + tagline, the two profile cards (image + finish copy), the finish band, the Design Ideas image set + captions, the Further-Information PDFs, and the two "Also available" sibling collections.
+- Match each against its live page with the same inspector-at-reviewer-width method before shipping.
