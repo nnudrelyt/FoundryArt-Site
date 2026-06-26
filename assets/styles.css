@@ -963,12 +963,15 @@ body.drawer-open { overflow: hidden; }
 .hardware-image { position: relative; }
 .hardware-image .wire-img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hardware-content {
+  /* Locked: hand-toning shot pushed in tighter on the tile.
+     background-size: 145% scales the image past cover so the
+     tile-in-hand fills more of the frame; the scrim sits on top. */
   background-color: var(--charcoal);
   background-image:
     linear-gradient(rgba(45, 46, 47, 0.66), rgba(45, 46, 47, 0.66)),
-    url('/assets/images/process/grinding-edges.jpg');
-  background-size: cover;
-  background-position: center;
+    url('/assets/images/process/hand-toning-bw.jpg');
+  background-size: cover, 145%;
+  background-position: center, center;
   background-repeat: no-repeat;
   padding: 72px 56px;
   display: flex;
