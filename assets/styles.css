@@ -8812,13 +8812,13 @@ body[data-page="classic"] .lw2-coll-swatches {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 80px;
-  margin: 56px 0 44px;
+  gap: 120px;                /* more space between tiles */
+  margin: 56px 0 36px;
 }
 body[data-page="classic"] .lw2-coll-swatches figure { margin: 0; text-align: center; }
 body[data-page="classic"] .lw2-coll-swatches img {
   display: block;
-  width: 230px;
+  width: 207px;              /* scaled down 10% from 230 */
   height: auto;
   margin: 0 auto 18px;
 }
@@ -8828,13 +8828,13 @@ body[data-page="classic"] .lw2-coll-swatches figcaption {
   color: var(--lw-text-primary, #000);
   white-space: nowrap;
 }
-body[data-page="classic"] .lw2-coll-intro-tagline {
+body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
   font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
   font-style: italic;
-  font-size: 22px;
+  font-size: 24px;           /* up from 22; beats the generalized .lw2-coll-intro p (40px) */
   line-height: 1.4;
   color: var(--lw-text-primary, #000);
-  margin: 28px auto 30px;
+  margin: 56px auto 44px;    /* more room above + below */
 }
 @media (max-width: 768px) {
   body[data-page="classic"] .lw2-coll-swatches { gap: 24px; }
