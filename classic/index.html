@@ -40,189 +40,268 @@
 
   <main class="lw2-collection">
 
-    <!-- MASTHEAD -->
+    <!-- MASTHEAD — Bronzework wordmark + collection title + section sub-nav -->
     <section class="lw2-coll-masthead">
-      <div class="lw2-coll-brand">
-        <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio" class="lw2-coll-parent-wordmark">
+      <div class="lw2-section-mark">
+        <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
       </div>
       <h1 class="lw2-coll-title">Classic Collection</h1>
-      <p class="lw2-coll-eyebrow">POETIC MATERIALS • TIMELESS DESIGNS</p>
-      <figure class="lw2-coll-banner">
-        <img src="/assets/images/linden/classic/Zinc-array-v2-1900x1106.jpg" alt="Bronzework Studio Classic hand-carved metal tiles array in zinc">
+      <nav class="lw2-coll-subnav" aria-label="On this page">
+        <a href="#design-ideas">Design Ideas</a>
+        <a href="#patterns">Patterns</a>
+        <a href="#further-information">Further Information</a>
+      </nav>
+    </section>
+
+    <!-- HERO — full-bleed carousel with tagline on a white scrim -->
+    <section class="lw2-coll-hero">
+      <figure class="lw2-media-carousel" tabindex="0" aria-label="Bronzework Studio Classic installations">
+        <div class="lw2-media-stage">
+          <img class="lw2-media-slide" data-active="true" src="/assets/images/linden/classic/traditional-bronze-tile-accent-white-french-kitchen.jpg" alt="Traditional Bronze accent tiles in a white French kitchen">
+          <img class="lw2-media-slide" src="/assets/images/linden/classic/white-bronze-tile-accent-marble-glass-bathroom.jpg" alt="White Bronze accent tiles with marble and glass in a bathroom">
+          <img class="lw2-media-slide" src="/assets/images/linden/classic/traditional-bronze-tile-accent-white-marble-calacatta-contemporary.jpg" alt="Traditional Bronze accent tiles with white Calacatta marble">
+          <button class="lw2-media-arrow lw2-media-prev" type="button" aria-label="Previous image">‹</button>
+          <button class="lw2-media-arrow lw2-media-next" type="button" aria-label="Next image">›</button>
+          <div class="lw2-coll-hero-overlay">
+            <div>
+              <p class="lw2-coll-hero-tagline">Discover the world’s finest metal tiles.</p>
+              <p class="lw2-coll-hero-sub">Poetic materials. Timeless designs.</p>
+            </div>
+          </div>
+        </div>
       </figure>
     </section>
 
-    <!-- INTRO — quote + lede -->
+    <!-- INTRO statement -->
     <section class="lw2-coll-intro">
-      <blockquote class="lw2-coll-quote">
-        <p>“Discover the world’s finest metal tiles.”</p>
-        <cite>— Bronzework Studio</cite>
-      </blockquote>
-      <p class="lw2-coll-lede">Treat yourself to the luxury of self-expression. Hand-carved, solid bronze and zinc tiles make your home unique. Bronzework Studio tiles elevate your home from beautiful to extraordinary.</p>
+      <p>Treat yourself to the luxury of self-expression. Hand-carved, solid bronze and zinc tiles make your home unique.</p>
     </section>
 
-    <!-- TWO LIFESTYLE PHOTOS -->
-    <section class="lw2-coll-lifestyle">
-      <figure>
-        <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-petroglyph-black-bathroom.jpg" alt="Bronzework Studio Classic Petroglyph in Traditional Bronze, black bathroom">
-        <figcaption>Petroglyph in <em>Traditional Bronze</em>.</figcaption>
-      </figure>
-      <figure>
-        <img src="/assets/images/linden/classic/white-bronze-tile-accent-marble-glass-bathroom.jpg" alt="Bronzework Studio Classic Petroglyph and Flowing Liner in White Bronze, marble bathroom">
-        <figcaption>Petroglyph and Flowing Liner in <em>White Bronze</em>.</figcaption>
-      </figure>
+    <!-- DESIGN IDEAS — full-bleed masonry of install photography + lightbox -->
+    <section class="lw2-coll-gallery-sec" id="design-ideas">
+      <div class="lw2-coll-gallery" role="list">
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-accent-white-french-kitchen.jpg" data-caption="Traditional Bronze — white French kitchen">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-white-french-kitchen.jpg" alt="Traditional Bronze accent tiles in a white French kitchen" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze — white French kitchen</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-accent-liner-mosaic-kitchen.jpg" data-caption="Traditional Bronze accent & liner — mosaic kitchen">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-liner-mosaic-kitchen.jpg" alt="Traditional Bronze accent tile and liner mosaic in a kitchen" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze accent & liner — mosaic kitchen</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-liner-cream-limestone-contemporary.jpg" data-caption="Traditional Bronze liner — cream limestone">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-liner-cream-limestone-contemporary.jpg" alt="Traditional Bronze liner with cream limestone" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze liner — cream limestone</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-accent-marble-mosaic-bathroom.jpg" data-caption="Traditional Bronze — marble mosaic bath">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-marble-mosaic-bathroom.jpg" alt="Traditional Bronze accent tiles with marble mosaic in a bathroom" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze — marble mosaic bath</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-accent-transitional-limestone-wall.jpg" data-caption="Traditional Bronze — limestone wall">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-transitional-limestone-wall.jpg" alt="Traditional Bronze accent tiles on a transitional limestone wall" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze — limestone wall</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-accent-liner-black-bathroom.jpg" data-caption="Traditional Bronze accent & liner — black bath">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-liner-black-bathroom.jpg" alt="Traditional Bronze accent tile and liner in a black bathroom" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze accent & liner — black bath</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/white-bronze-liner-transitional-venatino-marble.jpg" data-caption="White Bronze liner — Venatino marble">
+          <img src="/assets/images/linden/classic/white-bronze-liner-transitional-venatino-marble.jpg" alt="White Bronze liner with Venatino marble" loading="lazy">
+          <span class="lw2-coll-gcaption">White Bronze liner — Venatino marble</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/zinc-liner-accent-tile-black-stone-bathroom-mcqueen.jpg" data-caption="Zinc liner & accent — black stone bath">
+          <img src="/assets/images/linden/classic/zinc-liner-accent-tile-black-stone-bathroom-mcqueen.jpg" alt="Zinc liner and accent tile in a black stone bathroom" loading="lazy">
+          <span class="lw2-coll-gcaption">Zinc liner & accent — black stone bath</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/white-bronze-tile-accent-marble-glass-bathroom.jpg" data-caption="White Bronze — marble & glass bath">
+          <img src="/assets/images/linden/classic/white-bronze-tile-accent-marble-glass-bathroom.jpg" alt="White Bronze accent tiles with marble and glass in a bathroom" loading="lazy">
+          <span class="lw2-coll-gcaption">White Bronze — marble & glass bath</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/white-bronze-tile-accent-wainscot-marble.jpg" data-caption="White Bronze — marble wainscot">
+          <img src="/assets/images/linden/classic/white-bronze-tile-accent-wainscot-marble.jpg" alt="White Bronze accent tiles on a marble wainscot" loading="lazy">
+          <span class="lw2-coll-gcaption">White Bronze — marble wainscot</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/white-bronze-tile-accent-transitional-calacatta-marble.jpg" data-caption="White Bronze — Calacatta marble">
+          <img src="/assets/images/linden/classic/white-bronze-tile-accent-transitional-calacatta-marble.jpg" alt="White Bronze accent tiles with Calacatta marble" loading="lazy">
+          <span class="lw2-coll-gcaption">White Bronze — Calacatta marble</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-liner-accent-black-stone-floor-mcqueen.jpg" data-caption="Traditional Bronze liner — black stone floor">
+          <img src="/assets/images/linden/classic/traditional-bronze-liner-accent-black-stone-floor-mcqueen.jpg" alt="Traditional Bronze liner and accent on a black stone floor" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze liner — black stone floor</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-accent-calacatta-marble-cream-pattern.jpg" data-caption="Traditional Bronze — Calacatta, cream pattern">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-calacatta-marble-cream-pattern.jpg" alt="Traditional Bronze accent tiles with Calacatta marble and a cream pattern" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze — Calacatta, cream pattern</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-accent-petroglyph-black-bathroom.jpg" data-caption="Petroglyph, Traditional Bronze — black bath">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-petroglyph-black-bathroom.jpg" alt="Petroglyph in Traditional Bronze in a black bathroom" loading="lazy">
+          <span class="lw2-coll-gcaption">Petroglyph, Traditional Bronze — black bath</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/traditional-bronze-tile-accent-white-marble-calacatta-contemporary.jpg" data-caption="Traditional Bronze — white Calacatta">
+          <img src="/assets/images/linden/classic/traditional-bronze-tile-accent-white-marble-calacatta-contemporary.jpg" alt="Traditional Bronze accent tiles with white Calacatta marble" loading="lazy">
+          <span class="lw2-coll-gcaption">Traditional Bronze — white Calacatta</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/Traditional-Bronze-metal-accent-tile-Flowing-Liner-slate.jpg" data-caption="Flowing Liner, Traditional Bronze — slate">
+          <img src="/assets/images/linden/classic/Traditional-Bronze-metal-accent-tile-Flowing-Liner-slate.jpg" alt="Flowing Liner in Traditional Bronze on slate" loading="lazy">
+          <span class="lw2-coll-gcaption">Flowing Liner, Traditional Bronze — slate</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/white-bronze-tile-accent-limestone-mosaic.jpg" data-caption="White Bronze — limestone mosaic">
+          <img src="/assets/images/linden/classic/white-bronze-tile-accent-limestone-mosaic.jpg" alt="White Bronze accent tiles in a limestone mosaic" loading="lazy">
+          <span class="lw2-coll-gcaption">White Bronze — limestone mosaic</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/white-bronze-tile-accent-wood-porcelain-floor.jpg" data-caption="White Bronze — wood-look porcelain floor">
+          <img src="/assets/images/linden/classic/white-bronze-tile-accent-wood-porcelain-floor.jpg" alt="White Bronze accent tiles on a wood-look porcelain floor" loading="lazy">
+          <span class="lw2-coll-gcaption">White Bronze — wood-look porcelain floor</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/white-bronze-tile-accent-neutral-transitional.jpg" data-caption="White Bronze — neutral transitional">
+          <img src="/assets/images/linden/classic/white-bronze-tile-accent-neutral-transitional.jpg" alt="White Bronze accent tiles in a neutral transitional setting" loading="lazy">
+          <span class="lw2-coll-gcaption">White Bronze — neutral transitional</span>
+        </button>
+        <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/classic/white-bronze-liner-accent-tile-marble-wall-danby-vermont.jpg" data-caption="White Bronze liner — Danby Vermont marble">
+          <img src="/assets/images/linden/classic/white-bronze-liner-accent-tile-marble-wall-danby-vermont.jpg" alt="White Bronze liner and accent tile on a Danby Vermont marble wall" loading="lazy">
+          <span class="lw2-coll-gcaption">White Bronze liner — Danby Vermont marble</span>
+        </button>
+      </div>
     </section>
 
-    <!-- PATTERN PORTRAITS — 5 hand-carved tile patterns -->
-    <section class="lw2-coll-portraits">
-      <h2 class="lw2-coll-section-title">Hand-carved patterns.</h2>
+    <!-- PATTERNS CATALOG — hand-carved tiles -->
+    <section class="lw2-coll-portraits" id="patterns">
+      <h2 class="lw2-coll-section-title">Hand-carved patterns</h2>
       <p class="lw2-coll-section-sub">Available in Traditional Bronze, White Bronze, and Zinc.</p>
       <div class="lw2-coll-portrait-grid">
         <figure>
-          <img src="/assets/images/linden/classic/BWS-BloomingLeaf-Lg-Traditional-Bronze.jpg" alt="Blooming Leaf 2.5×2.5 inch tile in Traditional Bronze">
+          <img src="/assets/images/linden/classic/BWS-BloomingLeaf-Lg-Traditional-Bronze.jpg" alt="Blooming Leaf 2.5-inch tile in Traditional Bronze" loading="lazy">
           <figcaption>Blooming Leaf — 2½″ <em>Traditional Bronze</em></figcaption>
         </figure>
         <figure>
-          <img src="/assets/images/linden/classic/BWS-Mantra-Lg-Traditional-Bronze.jpg" alt="Mantra 2.5×2.5 inch tile in Traditional Bronze">
+          <img src="/assets/images/linden/classic/BWS-Mantra-Lg-Traditional-Bronze.jpg" alt="Mantra 2.5-inch tile in Traditional Bronze" loading="lazy">
           <figcaption>Mantra — 2½″ <em>Traditional Bronze</em></figcaption>
         </figure>
         <figure>
-          <img src="/assets/images/linden/classic/BWS-Petroglyph-Lg-Traditional-Bronze.jpg" alt="Petroglyph 2.5×2.5 inch tile in Traditional Bronze">
+          <img src="/assets/images/linden/classic/BWS-Petroglyph-Lg-Traditional-Bronze.jpg" alt="Petroglyph 2.5-inch tile in Traditional Bronze" loading="lazy">
           <figcaption>Petroglyph — 2½″ <em>Traditional Bronze</em></figcaption>
         </figure>
         <figure>
-          <img src="/assets/images/linden/classic/BWS-Sunrise-Med-Traditional-Bronze.jpg" alt="Sunrise 1.25×1.25 inch tile in Traditional Bronze">
+          <img src="/assets/images/linden/classic/BWS-Sunrise-Med-Traditional-Bronze.jpg" alt="Sunrise 1.25-inch tile in Traditional Bronze" loading="lazy">
           <figcaption>Sunrise — 1¼″ <em>Traditional Bronze</em></figcaption>
         </figure>
         <figure>
-          <img src="/assets/images/linden/classic/BWS-Terrace-Lg-Traditional-Bronze.jpg" alt="Terrace 2.5×2.5 inch tile in Traditional Bronze">
+          <img src="/assets/images/linden/classic/BWS-Terrace-Lg-Traditional-Bronze.jpg" alt="Terrace 2.5-inch tile in Traditional Bronze" loading="lazy">
           <figcaption>Terrace — 2½″ <em>Traditional Bronze</em></figcaption>
         </figure>
       </div>
     </section>
 
-    <!-- LINERS — 1×12" full-bleed strips -->
+    <!-- ACCENT LINERS — full-bleed strips -->
     <section class="lw2-coll-liners">
       <h2 class="lw2-coll-section-title">Accent liners</h2>
       <p class="lw2-coll-section-sub">12-inch lengths for borders, edges, and decorative bands.</p>
       <ul class="lw2-coll-liner-list">
-        <li>
-          <figure>
-            <img src="/assets/images/linden/classic/Origin-Edit-2-1-1900x254.jpg" alt="Origin Liner 1×12 inch in Traditional Bronze">
-            <figcaption>Origin Liner — 1×12″ <em>Traditional Bronze</em></figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure>
-            <img src="/assets/images/linden/classic/BWS-Flowing-Lnr-Traditional-Bronze-1900x262.jpg" alt="Flowing Liner 0.38×12 inch in Traditional Bronze">
-            <figcaption>Flowing Liner — ⅜″×12″ <em>Traditional Bronze</em></figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure>
-            <img src="/assets/images/linden/classic/BWS-Roman-Lnr-Traditional-Bronze-1900x262.jpg" alt="Roman Liner 0.38×12 inch in Traditional Bronze">
-            <figcaption>Roman Liner — ⅜″×12″ <em>Traditional Bronze</em></figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure>
-            <img src="/assets/images/linden/classic/BWS-Mosaic-Lnr-Traditional-Bronze-1900x262.jpg" alt="Mosaic Liner 0.63×12 inch in Traditional Bronze">
-            <figcaption>Mosaic Liner — ⅝″×12″ <em>Traditional Bronze</em></figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure>
-            <img src="/assets/images/linden/classic/BWS-BeachGrass-Lnr-Traditional-Bronze-1900x262.jpg" alt="Beach Grass Liner 0.75×12 inch in Traditional Bronze">
-            <figcaption>Beach Grass Liner — ¾″×12″ <em>Traditional Bronze</em></figcaption>
-          </figure>
-        </li>
+        <li><figure>
+          <img src="/assets/images/linden/classic/Origin-Edit-2-1-1900x254.jpg" alt="Origin Liner 1×12 inch in Traditional Bronze" loading="lazy">
+          <figcaption>Origin Liner — 1×12″ <em>Traditional Bronze</em></figcaption>
+        </figure></li>
+        <li><figure>
+          <img src="/assets/images/linden/classic/BWS-Flowing-Lnr-Traditional-Bronze-1900x262.jpg" alt="Flowing Liner in Traditional Bronze" loading="lazy">
+          <figcaption>Flowing Liner — ⅜″×12″ <em>Traditional Bronze</em></figcaption>
+        </figure></li>
+        <li><figure>
+          <img src="/assets/images/linden/classic/BWS-Roman-Lnr-Traditional-Bronze-1900x262.jpg" alt="Roman Liner in Traditional Bronze" loading="lazy">
+          <figcaption>Roman Liner — ⅜″×12″ <em>Traditional Bronze</em></figcaption>
+        </figure></li>
+        <li><figure>
+          <img src="/assets/images/linden/classic/BWS-Mosaic-Lnr-Traditional-Bronze-1900x262.jpg" alt="Mosaic Liner in Traditional Bronze" loading="lazy">
+          <figcaption>Mosaic Liner — ⅝″×12″ <em>Traditional Bronze</em></figcaption>
+        </figure></li>
+        <li><figure>
+          <img src="/assets/images/linden/classic/BWS-BeachGrass-Lnr-Traditional-Bronze-1900x262.jpg" alt="Beach Grass Liner in Traditional Bronze" loading="lazy">
+          <figcaption>Beach Grass Liner — ¾″×12″ <em>Traditional Bronze</em></figcaption>
+        </figure></li>
       </ul>
     </section>
 
-    <!-- INSET TILES — small squares -->
-    <section class="lw2-coll-insets">
-      <h2 class="lw2-coll-section-title">Inset tiles</h2>
-      <div class="lw2-coll-inset-grid">
-        <figure>
-          <img src="/assets/images/linden/classic/BWS-Water-Song-Inset-Traditional.jpg" alt="Water Song inset tile 0.75×0.75 inch in Traditional Bronze">
-          <figcaption>Water Song — ¾″ inset, <em>Traditional Bronze</em></figcaption>
-        </figure>
-        <figure>
-          <img src="/assets/images/linden/classic/BWS-Beach-Grass-Inset-Traditional1.jpg" alt="Beach Grass inset tile 0.75×0.75 inch in Traditional Bronze">
-          <figcaption>Beach Grass — ¾″ inset, <em>Traditional Bronze</em></figcaption>
-        </figure>
-        <figure>
-          <img src="/assets/images/linden/autograph/Square-600-1-325x225.jpg" alt="Square inset 1×1 inch in Traditional Bronze">
-          <figcaption>Square — 1″ inset, <em>Traditional Bronze</em></figcaption>
-        </figure>
-        <figure>
-          <img src="/assets/images/linden/autograph/Dhalia_full-325x225.jpg" alt="Dahlia 2.5 inch inset in Traditional Bronze">
-          <figcaption>Dahlia — 2½″ inset, <em>Traditional Bronze</em></figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <!-- BLOOMING LEAF FAMILY — wide showcase -->
-    <section class="lw2-coll-banner-strip">
-      <figure>
-        <img src="/assets/images/linden/classic/BWS_BLL_Cello_Full_03-05.jpg" alt="Blooming Leaf in three sizes across multiple finishes">
-        <figcaption>Blooming Leaf — three sizes across Traditional Bronze, White Bronze, and Zinc.</figcaption>
+    <!-- ZINC NOTE -->
+    <section class="lw2-coll-finish">
+      <h2>All of our hand-carved patterns are also cast in Zinc.</h2>
+      <figure class="lw2-coll-finish-image">
+        <img src="/assets/images/linden/classic/Zinc-array-v2-1900x1106.jpg" alt="Bronzework Studio Classic hand-carved patterns array cast in Zinc">
+        <figcaption>In addition to Traditional and White Bronze, every pattern is available in Zinc.</figcaption>
       </figure>
     </section>
 
     <!-- FURTHER INFORMATION -->
-    <section class="lw2-coll-info">
+    <section class="lw2-coll-info" id="further-information">
       <h2 class="lw2-coll-section-title">Further Information</h2>
       <div class="lw2-coll-info-grid">
-        <a href="#" class="lw2-coll-info-card" aria-label="Classic tear sheet (PDF)">
+        <a href="https://lindenworkshops.com/wp-content/uploads/BWS-tear-sheet-Classic-4-pages-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Classic tear sheet (PDF)">
           <div class="lw2-coll-info-img">
             <img src="/assets/images/linden/classic/BWS-tear-sheet-Classic-4-pages-2024-08-08_Page_1-230x300.jpg" alt="Classic tear sheet PDF preview">
           </div>
-          <h3>Tear Sheet <span class="lw2-coll-arrow">»</span></h3>
+          <h3>Tear Sheet</h3>
         </a>
-        <a href="#" class="lw2-coll-info-card" aria-label="How We Make Our Tiles (PDF)">
+        <a href="https://lindenworkshops.com/wp-content/uploads/Bronzework-Studio-How-We-Make-Our-Tiles-2023-11-14.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="How We Make Our Tiles (PDF)">
           <div class="lw2-coll-info-img">
             <img src="/assets/images/linden/autograph/BWS-2024-How-We-Make-Our-Tiles-230x300.jpg" alt="How We Make Our Tiles PDF preview">
           </div>
-          <h3>How We Make Our Tiles <span class="lw2-coll-arrow">»</span></h3>
+          <h3>How We Make Our Tiles</h3>
         </a>
-        <a href="#" class="lw2-coll-info-card" aria-label="Recycled Content (PDF)">
+        <a href="https://lindenworkshops.com/wp-content/uploads/BWS-2024-Recycled-Content.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Recycled Content (PDF)">
           <div class="lw2-coll-info-img">
             <img src="/assets/images/linden/autograph/BWS-2024-Recycled-Content-230x300.jpg" alt="Recycled Content sustainability PDF preview">
           </div>
-          <h3>Recycled Content <span class="lw2-coll-arrow">»</span></h3>
+          <h3>Recycled Content</h3>
         </a>
-        <a href="#" class="lw2-coll-info-card" aria-label="Installation and Cleaning (PDF)">
+        <a href="https://lindenworkshops.com/wp-content/uploads/BWS-Installation-and-Cleaning-BRONZE-and-ZINC-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Installation and Cleaning (PDF)">
           <div class="lw2-coll-info-img">
             <img src="/assets/images/linden/autograph/BWS-Installation-and-Cleaning-BRONZE-and-ZINC-2024-08-08-230x300.jpg" alt="Installation and Cleaning PDF preview">
           </div>
-          <h3>Installation and Cleaning <span class="lw2-coll-arrow">»</span></h3>
+          <h3>Installation and Cleaning</h3>
         </a>
+      </div>
+      <div class="lw2-coll-info-cta">
+        <a href="/where-to-buy/" class="lw2-coll-showroom-btn">Find a Bronzework Studio Classic showroom</a>
       </div>
     </section>
 
     <!-- ALSO AVAILABLE FROM -->
     <section class="lw2-coll-also">
-      <h2 class="lw2-coll-section-title">Also available from Bronzework Studio</h2>
+      <div class="lw2-coll-also-head">
+        <p class="lw2-coll-also-eyebrow">Also available from</p>
+        <img class="lw2-coll-also-wordmark" src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
+      </div>
       <div class="lw2-coll-also-grid">
         <a href="/precision/" class="lw2-coll-also-card">
           <div class="lw2-coll-also-img">
             <img src="/assets/images/linden/autograph/Bronzework-Studio-Precision-Square-Brass-herringbone-floor.jpg" alt="Bronzework Studio Precision Square Liner in Hepburn Brass on a herringbone floor">
           </div>
-          <h3>Precision Collection</h3>
-          <p>Extra long metal liners and trim for wall and floor.</p>
+          <div class="lw2-coll-also-caption">
+            <h3>Precision Liner Collection</h3>
+            <p>Luxury metal liners up to 98″ for decorative edges and transitions »</p>
+          </div>
         </a>
         <a href="/autograph/" class="lw2-coll-also-card">
           <div class="lw2-coll-also-img">
             <img src="/assets/images/linden/autograph/Autograph-Bebop-mirrors-e1494948609232-1900x1068-750x450.jpg" alt="Bronzework Studio Autograph Bebop and Squares with white marble">
           </div>
-          <h3>Autograph Collection</h3>
-          <p>Graphic bronze borders and insets cast in solid bronze.</p>
+          <div class="lw2-coll-also-caption">
+            <h3>Autograph Collection</h3>
+            <p>Graphic metal borders in Traditional and White Bronze »</p>
+          </div>
         </a>
       </div>
     </section>
 
   </main>
+
+  <!-- LIGHTBOX (Design Ideas gallery) -->
+  <div class="lw2-lightbox" id="precision-lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="Design idea image viewer">
+    <button type="button" class="lw2-lightbox-close" aria-label="Close">×</button>
+    <button type="button" class="lw2-lightbox-nav lw2-lightbox-prev" aria-label="Previous image">‹</button>
+    <figure class="lw2-lightbox-stage">
+      <img src="" alt="">
+      <figcaption></figcaption>
+    </figure>
+    <button type="button" class="lw2-lightbox-nav lw2-lightbox-next" aria-label="Next image">›</button>
+  </div>
 
   <footer class="footer">
     <div class="lw2-footer-row">
@@ -282,5 +361,48 @@
   </footer>
 
   <script src="/assets/app.js?v=20260603-109"></script>
+  <script>
+  /* Design Ideas gallery → lightbox */
+  (function () {
+    var box = document.getElementById('precision-lightbox');
+    if (!box) return;
+    var tiles = Array.prototype.slice.call(document.querySelectorAll('.lw2-coll-gallery .lw2-coll-gtile'));
+    if (!tiles.length) return;
+    var img = box.querySelector('img');
+    var cap = box.querySelector('figcaption');
+    var idx = 0;
+    function show(i) {
+      idx = (i + tiles.length) % tiles.length;
+      var t = tiles[idx];
+      img.src = t.getAttribute('data-full');
+      var thumb = t.querySelector('img');
+      img.alt = thumb ? thumb.alt : '';
+      cap.textContent = t.getAttribute('data-caption') || '';
+    }
+    function open(i) { show(i); box.hidden = false; box.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; box.querySelector('.lw2-lightbox-close').focus(); }
+    function close() { box.hidden = true; box.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; img.src = ''; }
+    tiles.forEach(function (t, i) { t.addEventListener('click', function () { open(i); }); });
+    box.querySelector('.lw2-lightbox-close').addEventListener('click', close);
+    box.querySelector('.lw2-lightbox-prev').addEventListener('click', function () { show(idx - 1); });
+    box.querySelector('.lw2-lightbox-next').addEventListener('click', function () { show(idx + 1); });
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
+    document.addEventListener('keydown', function (e) { if (box.hidden) return; if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') show(idx - 1); else if (e.key === 'ArrowRight') show(idx + 1); });
+  })();
+  /* Hero carousel autoplay (forward; pauses on hover/focus/hidden/reduced-motion) */
+  (function () {
+    var hero = document.querySelector('.lw2-coll-hero .lw2-media-carousel');
+    if (!hero) return;
+    var next = hero.querySelector('.lw2-media-next');
+    if (!next || hero.querySelectorAll('.lw2-media-slide').length < 2) return;
+    var timer = null;
+    function tick() { if (!document.hidden) next.click(); }
+    function start() { if (!timer) timer = setInterval(tick, 5000); }
+    function stop() { clearInterval(timer); timer = null; }
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) start();
+    hero.addEventListener('mouseenter', stop); hero.addEventListener('mouseleave', start);
+    hero.addEventListener('focusin', stop); hero.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  })();
+  </script>
 </body>
 </html>
