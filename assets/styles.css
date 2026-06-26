@@ -8693,37 +8693,42 @@ body[data-page="precision"] .lw2-coll-finish-note {
   margin: 30px 0 0;
 }
 
-/* -- DESIGN IDEAS: full-bleed natural-ratio masonry -- */
+/* -- DESIGN IDEAS: 4-col masonry with captions (matches live) -- */
 body[data-page="precision"] .lw2-coll-gallery-sec {
   background: #FFFFFF;
-  padding: 56px 16px 72px;
+  padding: 56px 32px 72px;        /* live side margin ≈ 1.4% (32px @2251) */
 }
 body[data-page="precision"] .lw2-coll-gallery {
-  column-count: 3;
-  column-gap: 14px;
-  max-width: 1640px;
-  margin: 0 auto;
+  column-count: 4;                /* live: 4 columns */
+  column-gap: 34px;               /* live gutter ≈ 34px */
+  max-width: none;
+  margin: 0;
 }
 body[data-page="precision"] .lw2-coll-gtile {
   display: block;
   width: 100%;
   padding: 0;
-  margin: 0 0 14px;
+  margin: 0 0 34px;               /* vertical rhythm matches gutter */
   border: 0;
   background: none;
   cursor: zoom-in;
-  overflow: hidden;
-  line-height: 0;
+  text-align: left;
   break-inside: avoid;
 }
 body[data-page="precision"] .lw2-coll-gtile img {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.45s ease;
 }
-body[data-page="precision"] .lw2-coll-gtile:hover img,
-body[data-page="precision"] .lw2-coll-gtile:focus-visible img { transform: scale(1.04); }
+body[data-page="precision"] .lw2-coll-gcaption {
+  display: block;
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 13px;                /* live: 12.8px */
+  line-height: 19px;
+  color: var(--lw-text-primary, #000);
+  text-align: left;
+  margin-top: 8px;
+}
 body[data-page="precision"] .lw2-coll-gtile:focus-visible { outline: 2px solid var(--lw-accent-red, #A31414); outline-offset: 2px; }
 
 /* -- WebP <picture> wrappers must not break flow/grid layout -- */
@@ -8759,7 +8764,8 @@ body[data-page="precision"] picture { display: contents; }
 
 /* -- PRECISION responsive -- */
 @media (max-width: 1024px) and (min-width: 769px) {
-  body[data-page="precision"] .lw2-coll-gallery { column-count: 3; }
+  body[data-page="precision"] .lw2-coll-gallery { column-count: 3; column-gap: 24px; }
+  body[data-page="precision"] .lw2-coll-gtile { margin-bottom: 24px; }
 }
 @media (max-width: 768px) {
   body[data-page="precision"] .lw2-coll-masthead { padding: 40px 18px 22px; }
@@ -8777,9 +8783,10 @@ body[data-page="precision"] picture { display: contents; }
   body[data-page="precision"] .lw2-coll-finish { padding: 40px 20px; }
   body[data-page="precision"] .lw2-coll-finish h2 { font-size: 28px; }
   body[data-page="precision"] .lw2-coll-finish-note { font-size: 18px; }
-  body[data-page="precision"] .lw2-coll-gallery-sec { padding: 40px 12px 52px; }
-  body[data-page="precision"] .lw2-coll-gallery { column-count: 2; column-gap: 10px; }
-  body[data-page="precision"] .lw2-coll-gtile { margin-bottom: 10px; }
+  body[data-page="precision"] .lw2-coll-gallery-sec { padding: 40px 16px 52px; }
+  body[data-page="precision"] .lw2-coll-gallery { column-count: 2; column-gap: 16px; }
+  body[data-page="precision"] .lw2-coll-gtile { margin-bottom: 16px; }
+  body[data-page="precision"] .lw2-coll-gcaption { font-size: 12px; }
   .lw2-lightbox-nav { font-size: 34px; padding: 0 8px; }
   .lw2-lightbox-close { top: 10px; right: 16px; }
 }
