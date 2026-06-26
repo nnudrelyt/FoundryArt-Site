@@ -8483,3 +8483,224 @@ body[data-page="feature-drury"] .lw2-article-thanks-frame p {
   }
 }
 
+/* ============================================================
+   PRECISION — literal-clone of lindenworkshops.com/precision/
+   Precision-ONLY rules (do not affect autograph/classic/instinct).
+   Adds: masthead sub-headline, 3-up hero band, intro emphasis,
+   detailed two-profile blocks, finish length note, the full
+   Design Ideas install gallery, and its lightbox.
+   ============================================================ */
+
+/* -- Masthead sub-headline ("Luxury metal liners up to 98″") -- */
+body[data-page="precision"] .lw2-coll-subtitle {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.3;
+  color: #1a1a1a;
+  margin: 2px 0 18px;
+}
+
+/* -- 3-up hero band ----------------------------------------- */
+body[data-page="precision"] .lw2-coll-heroband {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
+body[data-page="precision"] .lw2-coll-heroband figure { margin: 0; }
+body[data-page="precision"] .lw2-coll-heroband-primary img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="precision"] .lw2-coll-heroband-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+body[data-page="precision"] .lw2-coll-heroband-pair img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* -- Intro emphasis line ------------------------------------ */
+body[data-page="precision"] .lw2-coll-lede-em {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.45;
+  color: #000;
+  margin: 0 0 16px;
+}
+
+/* -- Two profiles (array + heading + finish copy) ----------- */
+body[data-page="precision"] .lw2-coll-profiles {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 8px 24px 24px;
+}
+body[data-page="precision"] .lw2-coll-profile {
+  text-align: center;
+  margin: 0 0 64px;
+}
+body[data-page="precision"] .lw2-coll-profile:last-child { margin-bottom: 0; }
+body[data-page="precision"] .lw2-coll-profile figure { margin: 0 0 20px; }
+body[data-page="precision"] .lw2-coll-profile img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="precision"] .lw2-coll-profile-title {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.25;
+  color: #000;
+  margin: 0 0 10px;
+}
+body[data-page="precision"] .lw2-coll-profile p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* -- Finish length note ------------------------------------- */
+body[data-page="precision"] .lw2-coll-finish-note {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 20px;
+  color: #000;
+  text-align: center;
+  max-width: 700px;
+  margin: 26px auto 0;
+}
+
+/* -- Design Ideas gallery ----------------------------------- */
+body[data-page="precision"] .lw2-coll-gallery-sec {
+  background: #FFFFFF;
+  padding: 72px 24px 88px;
+}
+body[data-page="precision"] .lw2-coll-gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  max-width: 1280px;
+  margin: 40px auto 0;
+}
+body[data-page="precision"] .lw2-coll-gtile {
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  line-height: 0;
+}
+body[data-page="precision"] .lw2-coll-gtile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+body[data-page="precision"] .lw2-coll-gtile:hover img,
+body[data-page="precision"] .lw2-coll-gtile:focus-visible img {
+  transform: scale(1.05);
+}
+body[data-page="precision"] .lw2-coll-gtile:focus-visible {
+  outline: 2px solid #A31414;
+  outline-offset: 2px;
+}
+
+/* -- Lightbox ----------------------------------------------- */
+.lw2-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.92);
+}
+.lw2-lightbox[hidden] { display: none; }
+.lw2-lightbox-stage {
+  margin: 0;
+  max-width: min(1100px, 92vw);
+  text-align: center;
+}
+.lw2-lightbox-stage img {
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+.lw2-lightbox-stage figcaption {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #ededed;
+  margin-top: 14px;
+}
+.lw2-lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  font-size: 34px;
+  line-height: 1;
+  color: #fff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.lw2-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 48px;
+  line-height: 1;
+  color: #fff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0 18px;
+  opacity: 0.8;
+}
+.lw2-lightbox-nav:hover { opacity: 1; }
+.lw2-lightbox-prev { left: 6px; }
+.lw2-lightbox-next { right: 6px; }
+
+/* -- Precision responsive: tablet --------------------------- */
+@media (max-width: 1024px) and (min-width: 769px) {
+  body[data-page="precision"] .lw2-coll-gallery { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* -- Precision responsive: mobile --------------------------- */
+@media (max-width: 768px) {
+  body[data-page="precision"] .lw2-coll-subtitle { font-size: 22px; }
+  body[data-page="precision"] .lw2-coll-heroband { padding: 0 18px 40px; }
+  body[data-page="precision"] .lw2-coll-heroband-pair { grid-template-columns: 1fr; gap: 14px; }
+  body[data-page="precision"] .lw2-coll-lede-em { font-size: 20px; }
+  body[data-page="precision"] .lw2-coll-profiles { padding: 8px 18px 16px; }
+  body[data-page="precision"] .lw2-coll-profile { margin-bottom: 48px; }
+  body[data-page="precision"] .lw2-coll-profile-title { font-size: 24px; }
+  body[data-page="precision"] .lw2-coll-finish-note { font-size: 18px; }
+  body[data-page="precision"] .lw2-coll-gallery-sec { padding: 48px 18px 60px; }
+  body[data-page="precision"] .lw2-coll-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .lw2-lightbox-nav { font-size: 34px; padding: 0 8px; }
+  .lw2-lightbox-close { top: 10px; right: 16px; }
+}
+

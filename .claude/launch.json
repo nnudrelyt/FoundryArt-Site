@@ -6,6 +6,12 @@
       "runtimeExecutable": "/bin/sh",
       "runtimeArgs": ["-c", "cd \"/Users/tylerdunn/Library/CloudStorage/Dropbox/Public/Linden Workshops/Foundry Art/Site Update/Wireframes/foundry-art-responsive\" && exec python3 -m http.server 8765"],
       "port": 8765
+    },
+    {
+      "name": "foundry-art-precision",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "cd \"/Users/tylerdunn/Library/CloudStorage/Dropbox/Public/Linden Workshops/Foundry Art/Site Update/Wireframes/foundry-art-responsive\" && exec python3 -m http.server 8766"],
+      "port": 8766
     }
   ]
 }
