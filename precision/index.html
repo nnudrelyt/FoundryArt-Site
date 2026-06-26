@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260603-100">
-<link rel="stylesheet" href="/assets/styles.css?v=20260603-100">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260603-102">
+<link rel="stylesheet" href="/assets/styles.css?v=20260603-102">
 </head>
 <body data-page="precision" data-section="linden">
 
@@ -40,58 +40,66 @@
 
   <main class="lw2-collection">
 
-    <!-- MASTHEAD — Bronzework parent wordmark + collection title + sub-headline + eyebrow -->
+    <!-- MASTHEAD — large Bronzework wordmark + collection title + section sub-nav -->
     <section class="lw2-coll-masthead">
-      <div class="lw2-coll-brand">
-        <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio" class="lw2-coll-parent-wordmark">
+      <div class="lw2-section-mark">
+        <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
       </div>
       <h1 class="lw2-coll-title">Precision Liner Collection</h1>
-      <p class="lw2-coll-subtitle">Luxury metal liners up to 98″</p>
-      <p class="lw2-coll-eyebrow">DECORATIVE EDGES, TRANSITIONS,&amp; PATTERNS</p>
+      <nav class="lw2-coll-subnav" aria-label="On this page">
+        <a href="#profiles">Profiles</a>
+        <a href="#design-ideas">Design Ideas</a>
+        <a href="#further-information">Further Information</a>
+      </nav>
     </section>
 
-    <!-- HERO BAND — wide overview + two lifestyle photos -->
-    <section class="lw2-coll-heroband">
-      <figure class="lw2-coll-heroband-primary">
-        <picture><source type="image/webp" srcset="/assets/images/linden/precision/Primary-Bath-overview-2048x1152-1.webp"><img src="/assets/images/linden/precision/Primary-Bath-overview-2048x1152-1.png" alt="Bronzework Studio Precision Liners in a bathroom floor"></picture>
+    <!-- HERO — full-bleed carousel (reuses .lw2-media-carousel) with tagline on a white scrim -->
+    <section class="lw2-coll-hero">
+      <figure class="lw2-media-carousel" tabindex="0" aria-label="Precision Liner installations">
+        <div class="lw2-media-stage">
+          <img class="lw2-media-slide" data-active="true" src="/assets/images/linden/precision/Primary-Bath-overview-2048x1152-1.webp" alt="Bronzework Studio Precision Liners in a bathroom floor">
+          <img class="lw2-media-slide" src="/assets/images/linden/precision/Bronzework-Studio-Precision-Liner-Living-Brass-Herringbone-Floor-1280x720.webp" alt="Bronzework Studio Precision Square Liner Hepburn Brass on a white marble herringbone floor">
+          <img class="lw2-media-slide" src="/assets/images/linden/precision/Bronzework-Studio-Precision-Dome-Liner-Danish-Tea-2560x1440-1.webp" alt="Bronzework Studio Precision Dome Liner Polished Nickel with white marble">
+          <button class="lw2-media-arrow lw2-media-prev" type="button" aria-label="Previous image">‹</button>
+          <button class="lw2-media-arrow lw2-media-next" type="button" aria-label="Next image">›</button>
+          <div class="lw2-coll-hero-overlay">
+            <div>
+              <p class="lw2-coll-hero-tagline">Luxury metal liners up to 98″</p>
+              <p class="lw2-coll-hero-sub">The designer’s choice for elegant transitions, decorative edges, and unique patterns.</p>
+            </div>
+          </div>
+        </div>
       </figure>
-      <div class="lw2-coll-heroband-pair">
-        <figure>
-          <picture><source type="image/webp" srcset="/assets/images/linden/precision/Bronzework-Studio-Precision-Liner-Living-Brass-Herringbone-Floor-1280x720.webp"><img src="/assets/images/linden/precision/Bronzework-Studio-Precision-Liner-Living-Brass-Herringbone-Floor-1280x720.jpg" alt="Bronzework Studio Precision Square Liner Hepburn Brass on a white marble herringbone floor"></picture>
-        </figure>
-        <figure>
-          <picture><source type="image/webp" srcset="/assets/images/linden/precision/Bronzework-Studio-Precision-Dome-Liner-Danish-Tea-2560x1440-1.webp"><img src="/assets/images/linden/precision/Bronzework-Studio-Precision-Dome-Liner-Danish-Tea-2560x1440-1.jpg" alt="Bronzework Studio Precision Dome Liner Polished Nickel with white marble"></picture>
-        </figure>
+    </section>
+
+    <!-- INTRO statement -->
+    <section class="lw2-coll-intro">
+      <p>Add an exquisite finishing touch to your walls and floors. The longest solid metal edge-protection available.</p>
+    </section>
+
+    <!-- TWO PROFILES — side-by-side (reuses .lw2-collection-grid--two + .lw2-card) -->
+    <section class="lw2-coll-profiles" id="profiles">
+      <div class="lw2-collection-grid lw2-collection-grid--two">
+        <div class="lw2-card">
+          <div class="lw2-card-img">
+            <picture><source type="image/webp" srcset="/assets/images/linden/precision/Precision-Square-Array-2025-web.webp"><img src="/assets/images/linden/precision/Precision-Square-Array-2025-web.jpg" alt="Precision Square Profile array across all finishes"></picture>
+          </div>
+          <h3>Precision Square Profile</h3>
+          <p class="lw2-card-body">Architectural Bronze, Brass, and Stainless Steel hand-finished to perfection: Hepburn (low-luster) and Empire (high-luster). Matte Black finished with a dramatic flat powder coat.</p>
+        </div>
+        <div class="lw2-card">
+          <div class="lw2-card-img">
+            <picture><source type="image/webp" srcset="/assets/images/linden/precision/Precision-Dome-Array.webp"><img src="/assets/images/linden/precision/Precision-Dome-Array.jpg" alt="Precision Dome Profile array across all finishes"></picture>
+          </div>
+          <h3>Precision Dome Profile</h3>
+          <p class="lw2-card-body">Anodized aluminum extruded in our custom profile: Satin Nickel, Polished Nickel, and Polished Chrome. Crisp, clean, sleek.</p>
+        </div>
       </div>
     </section>
 
-    <!-- INTRO — sub-headline + lede -->
-    <section class="lw2-coll-intro">
-      <p class="lw2-coll-lede-em">The designer’s choice for elegant transitions, decorative edges, and unique patterns.</p>
-      <p class="lw2-coll-lede">Add an exquisite finishing touch to your walls and floors. The longest solid metal edge-protection available.</p>
-    </section>
-
-    <!-- TWO PROFILES — Square + Dome arrays with finish copy -->
-    <section class="lw2-coll-profiles">
-      <article class="lw2-coll-profile">
-        <figure>
-          <picture><source type="image/webp" srcset="/assets/images/linden/precision/Precision-Square-Array-2025-web.webp"><img src="/assets/images/linden/precision/Precision-Square-Array-2025-web.jpg" alt="Precision Square Profile array across all finishes"></picture>
-        </figure>
-        <h2 class="lw2-coll-profile-title">Precision Square Profile</h2>
-        <p>Architectural Bronze, Brass, and Stainless Steel hand-finished to perfection: Hepburn (low-luster) and Empire (high-luster). Matte Black finished with a dramatic flat powder coat.</p>
-      </article>
-      <article class="lw2-coll-profile">
-        <figure>
-          <picture><source type="image/webp" srcset="/assets/images/linden/precision/Precision-Dome-Array.webp"><img src="/assets/images/linden/precision/Precision-Dome-Array.jpg" alt="Precision Dome Profile array across all finishes"></picture>
-        </figure>
-        <h2 class="lw2-coll-profile-title">Precision Dome Profile</h2>
-        <p>Anodized aluminum extruded in our custom profile: Satin Nickel, Polished Nickel, and Polished Chrome. Crisp, clean, sleek.</p>
-      </article>
-    </section>
-
-    <!-- EMPIRE / HEPBURN FINISH -->
+    <!-- EMPIRE / HEPBURN FINISH — contained -->
     <section class="lw2-coll-finish">
-      <h2 class="lw2-coll-section-title">Now available in Empire high-luster finish</h2>
+      <h2>Now available in Empire high-luster finish</h2>
       <figure class="lw2-coll-finish-image">
         <picture><source type="image/webp" srcset="/assets/images/linden/precision/Empire-and-Hepburn-13-v2-scaled.webp"><img src="/assets/images/linden/precision/Empire-and-Hepburn-13-v2-scaled.jpg" alt="Empire (high-luster) left. Hepburn (low-luster) right."></picture>
         <figcaption>Empire (high-luster) on the left. Hepburn (low-luster) on the right.</figcaption>
@@ -99,7 +107,7 @@
       <p class="lw2-coll-finish-note">Available in 24, 70, and 98 inch continuous lengths.</p>
     </section>
 
-    <!-- DESIGN IDEAS — full install gallery with lightbox -->
+    <!-- DESIGN IDEAS — full-bleed natural-ratio masonry + lightbox -->
     <section class="lw2-coll-gallery-sec" id="design-ideas">
       <div class="lw2-coll-gallery" role="list">
         <button type="button" class="lw2-coll-gtile" role="listitem" data-full="/assets/images/linden/precision/Precision-bathroom-floor-Stay-Bungalow-Austin-crop-1.webp" data-caption="Precision Square Liner — Hepburn Brass">
@@ -165,8 +173,8 @@
       </div>
     </section>
 
-    <!-- FURTHER INFORMATION -->
-    <section class="lw2-coll-info">
+    <!-- FURTHER INFORMATION (reuses shared .lw2-coll-info) -->
+    <section class="lw2-coll-info" id="further-information">
       <h2 class="lw2-coll-section-title">Further Information</h2>
       <div class="lw2-coll-info-grid">
         <a href="https://lindenworkshops.com/wp-content/uploads/BWS-tear-sheet-Precision-Square-2-25-25.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Precision Square tear sheet (PDF)">
@@ -196,9 +204,9 @@
       </div>
     </section>
 
-    <!-- ALSO AVAILABLE FROM -->
+    <!-- ALSO AVAILABLE FROM (reuses shared .lw2-coll-also) -->
     <section class="lw2-coll-also">
-      <h2 class="lw2-coll-section-title">Also available from</h2>
+      <h2 class="lw2-coll-section-title">Also available from Bronzework Studio</h2>
       <div class="lw2-coll-also-grid">
         <a href="/classic/" class="lw2-coll-also-card">
           <div class="lw2-coll-also-img">
@@ -287,7 +295,7 @@
     </div>
   </footer>
 
-  <script src="/assets/app.js?v=20260603-100"></script>
+  <script src="/assets/app.js?v=20260603-102"></script>
   <script>
   /* Design Ideas gallery → lightbox (precision page only) */
   (function () {
@@ -303,7 +311,8 @@
       idx = (i + tiles.length) % tiles.length;
       var t = tiles[idx];
       img.src = t.getAttribute('data-full');
-      img.alt = t.querySelector('img') ? t.querySelector('img').alt : '';
+      var thumb = t.querySelector('img');
+      img.alt = thumb ? thumb.alt : '';
       cap.textContent = t.getAttribute('data-caption') || '';
     }
     function open(i) {
