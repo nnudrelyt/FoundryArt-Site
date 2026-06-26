@@ -8807,6 +8807,40 @@ body[data-page="classic"] .lw2-coll-hero-sub {
   text-shadow: 0 1px 16px rgba(0, 0, 0, 0.40);
 }
 
+/* -- CLASSIC intro: material swatches + italic line + showroom CTA -- */
+body[data-page="classic"] .lw2-coll-swatches {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 72px;
+  margin: 44px 0 32px;
+}
+body[data-page="classic"] .lw2-coll-swatches figure { margin: 0; text-align: center; max-width: 220px; }
+body[data-page="classic"] .lw2-coll-swatches img {
+  display: block;
+  width: 150px;
+  height: auto;
+  margin: 0 auto 14px;
+}
+body[data-page="classic"] .lw2-coll-swatches figcaption {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 13px;
+  color: var(--lw-text-primary, #000);
+}
+body[data-page="classic"] .lw2-coll-intro-tagline {
+  font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--lw-text-primary, #000);
+  margin: 8px auto 28px;
+}
+@media (max-width: 768px) {
+  body[data-page="classic"] .lw2-coll-swatches { gap: 28px; }
+  body[data-page="classic"] .lw2-coll-swatches img { width: 110px; }
+  body[data-page="classic"] .lw2-coll-intro-tagline { font-size: 19px; }
+}
+
 /* -- FURTHER INFORMATION: live gray panel + plain labels + showroom button -- */
 :is(body[data-page="precision"],body[data-page="classic"]) .lw2-coll-info { background: #E0E0E0; }   /* live: rgb(224,224,224) */
 :is(body[data-page="precision"],body[data-page="classic"]) .lw2-coll-info-card h3 { color: #000; }
