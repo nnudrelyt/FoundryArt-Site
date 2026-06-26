@@ -8769,19 +8769,20 @@ body[data-page="precision"] picture { display: contents; }
 /* -- FURTHER INFORMATION: live gray panel + plain labels + showroom button -- */
 body[data-page="precision"] .lw2-coll-info { background: #E0E0E0; }   /* live: rgb(224,224,224) */
 body[data-page="precision"] .lw2-coll-info-card h3 { color: #000; }
-body[data-page="precision"] .lw2-coll-info-cta { text-align: center; margin-top: 48px; }
+body[data-page="precision"] .lw2-coll-info-grid { max-width: 1320px; gap: 72px; }  /* more space between thumbnails */
+body[data-page="precision"] .lw2-coll-info-cta { text-align: center; margin-top: 56px; }
 body[data-page="precision"] .lw2-coll-showroom-btn {
   display: inline-block;
   font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
   font-size: 16px;
-  color: var(--lw-text-primary, #000);
+  color: #000 !important;            /* black text (beats the linden link-red rule) */
   background: rgba(255, 255, 255, 0.5);
-  border: 1px solid var(--lw-text-primary, #000);
+  border: 1px solid #000;
   padding: 10px 20px;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: color 0.2s ease;
 }
-body[data-page="precision"] .lw2-coll-showroom-btn:hover { background: #000; color: #fff; }
+body[data-page="precision"] .lw2-coll-showroom-btn:hover { color: #A31414 !important; }  /* red text on rollover, no fill */
 
 /* -- ALSO AVAILABLE FROM: live tan panel + wordmark heading + large 3:2 images -- */
 body[data-page="precision"] .lw2-coll-also { background: #E0DED5; }   /* live: rgb(224,222,213) */
