@@ -970,7 +970,7 @@ body.drawer-open { overflow: hidden; }
   background-image:
     linear-gradient(rgba(45, 46, 47, 0.66), rgba(45, 46, 47, 0.66)),
     url('/assets/images/process/hand-toning-bw.jpg');
-  background-size: cover, 145%;
+  background-size: cover, 118%;
   background-position: center, center;
   background-repeat: no-repeat;
   padding: 72px 56px;
@@ -1006,8 +1006,67 @@ body.drawer-open { overflow: hidden; }
     url('/assets/images/process/finishing-stages-bw.jpg');
 }
 .hardware-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
-.hardware-item .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 8px; }
+.hardware-item .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 8px; position: relative; overflow: hidden; }
 .hardware-item p { font-size: 10px; color: var(--slate); text-align: center; }
+
+/* Hardware thumbnail hover overlay — price + Shop Now CTA fade up
+   over a translucent dark scrim. Mirrors the insitu pattern but
+   sized for the smaller hardware thumbnails. */
+.hardware-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;                /* above .wire-img > img (z-index: 1) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 37, 40, 0.55) 0%,
+    rgba(20, 37, 40, 0.82) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.hardware-item:hover .hardware-overlay,
+.hardware-item:focus-visible .hardware-overlay { opacity: 1; }
+.hardware-overlay-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1;
+}
+.hardware-overlay-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.hardware-overlay-cta > span[aria-hidden="true"] {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+.hardware-item:hover .hardware-overlay-cta {
+  background: var(--bronze);
+  border-color: var(--bronze);
+}
+.hardware-item:hover .hardware-overlay-cta > span[aria-hidden="true"] {
+  transform: translateX(4px);
+}
 /* Subtle intro animation when the large image swaps. JS toggles
    `.is-swapping` on the <img> after each src change to re-fire it. */
 .hardware-image .wire-img > img.is-swapping {
