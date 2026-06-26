@@ -8671,15 +8671,15 @@ body[data-page="precision"] .lw2-coll-intro p {
   margin: 0;
 }
 
-/* -- PROFILES side-by-side: large uncropped landscape arrays (matches live) -- */
+/* -- PROFILES side-by-side: scales like live — no max-width cap, ~46% images -- */
 body[data-page="precision"] .lw2-coll-profiles {
-  max-width: 1390px;          /* live: images nearly fill width, ~47% each */
-  margin: 0 auto;
-  padding: 48px 25px 8px;
+  max-width: none;            /* live has NO cap; image ≈ 45.9% of viewport */
+  margin: 0;
+  padding: 48px 2.5% 8px;     /* live side margin ≈ 2.5% (57px @2251) */
 }
 body[data-page="precision"] .lw2-coll-profiles .lw2-collection-grid {
-  max-width: 1390px;
-  gap: 40px;                  /* live gutter between the two arrays */
+  max-width: none;
+  gap: 3.2%;                  /* live gutter ≈ 69px @2251 */
 }
 body[data-page="precision"] .lw2-coll-profiles .lw2-card { text-align: center; }
 /* show the full array at its natural ratio — no square crop */
