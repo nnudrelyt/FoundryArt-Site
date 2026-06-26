@@ -8837,6 +8837,27 @@ body[data-page="feature-drury"] .lw2-article-thanks-frame p {
 .lw2-lightbox-prev { left: 6px; }
 .lw2-lightbox-next { right: 6px; }
 
+/* -- CLASSIC hero: single full-bleed banner, white overlay text (no scrim) -- */
+body[data-page="classic"] .lw2-coll-hero--single { position: relative; width: 100%; margin: 0; }
+body[data-page="classic"] .lw2-coll-hero-banner { position: relative; margin: 0; }
+body[data-page="classic"] .lw2-coll-hero-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  object-fit: cover;
+}
+body[data-page="classic"] .lw2-coll-hero-overlay > div {
+  background: none;          /* no white scrim on classic */
+  padding: 0;
+  max-width: 640px;
+}
+body[data-page="classic"] .lw2-coll-hero-tagline,
+body[data-page="classic"] .lw2-coll-hero-sub {
+  color: #fff;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.40);
+}
+
 /* -- FURTHER INFORMATION: live gray panel + plain labels + showroom button -- */
 :is(body[data-page="precision"],body[data-page="classic"]) .lw2-coll-info { background: #E0E0E0; }   /* live: rgb(224,224,224) */
 :is(body[data-page="precision"],body[data-page="classic"]) .lw2-coll-info-card h3 { color: #000; }
