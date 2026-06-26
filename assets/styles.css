@@ -649,14 +649,22 @@ body.drawer-open { overflow: hidden; }
 /* Craft section — image LEFT, content RIGHT (image is the team photo).
    The explicit grid-column placements ensure source order doesn't matter:
    .craft-images always sits left; .craft-content always sits right. */
-/* Capped narrower than the full-bleed inspiration grid below so the
-   section reads as a more intimate "studio team" moment, not as
-   wide as the gallery. Photo gets 5fr, content 7fr — the team
-   photo is supporting, not dominant, and the headline gets room
-   to breathe on one line. */
-.craft { display: grid; grid-template-columns: 5fr 7fr; max-width: 1200px; margin: 0 auto; }
+/* Full-bleed: photo pins flush to the left edge of the browser,
+   content sits in the wider right column. Photo gets 5fr, content
+   7fr — the team photo is supporting, not dominant. Section reads
+   narrower than the inspiration grid below because the content
+   inside the right column is itself capped (see .craft-content
+   max-width below). */
+.craft { display: grid; grid-template-columns: 5fr 7fr; }
 .craft-images { grid-column: 1; }
-.craft-content { grid-column: 2; padding: 56px 32px 56px 56px; display: flex; flex-direction: column; justify-content: center; }
+.craft-content {
+  grid-column: 2;
+  padding: 56px 40px 56px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 680px;   /* visual scope cap — keeps the body text from sprawling on wide monitors */
+}
 .craft-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
 .craft-step { display: flex; gap: 16px; align-items: flex-start; }
 /* Hide the literal numeral character and render a small bronze diamond
