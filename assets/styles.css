@@ -8731,3 +8731,100 @@ body[data-page="precision"] .lw2-coll-gtile:focus-visible {
   .lw2-lightbox-close { top: 10px; right: 16px; }
 }
 
+/* ============================================================
+   PRECISION — exact type match to lindenworkshops.com/precision/
+   Computed values read from the live Themify page (2026-06-26).
+   Live uses Fanwood Text across headings at lighter, smaller
+   sizes than the lw2 default. (Fanwood has no 300 weight, so the
+   live "w300" renders as regular — sizes/family are the deltas.)
+   This block is LAST so it wins over the lw2 collection template.
+   ============================================================ */
+
+/* Masthead title: live 32px / lh48 (lw2 default was 56px) */
+body[data-page="precision"] .lw2-coll-title {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: normal;
+  margin: 30px 0 13px;
+}
+/* Sub-headline "Luxury metal liners up to 98″": live 32px upright */
+body[data-page="precision"] .lw2-coll-subtitle {
+  font-style: normal;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 48px;
+  color: #000;
+  margin: 0 0 13px;
+}
+/* Eyebrow "DECORATIVE EDGES…": live is Fanwood 24px, not uppercase sans */
+body[data-page="precision"] .lw2-coll-eyebrow {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 1.2px;
+  text-transform: none;
+  line-height: 36px;
+  color: #000;
+  margin: 0 0 10px;
+}
+/* Intro emphasis "The designer's choice…": live Fanwood 24px upright */
+body[data-page="precision"] .lw2-coll-lede-em {
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  color: #000;
+  margin: 0 0 12px;
+}
+/* Intro statement "Add an exquisite…": live Fanwood 40px / lh60 */
+body[data-page="precision"] .lw2-coll-lede {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 60px;
+  color: #000;
+  margin: 0;
+}
+/* Profile heading "Precision Square Profile": live 27px / lh40 */
+body[data-page="precision"] .lw2-coll-profile-title {
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 40px;
+  margin: 0 0 11px;
+}
+/* Profile body: live Open Sans 16px / lh28 / pure black */
+body[data-page="precision"] .lw2-coll-profile p {
+  color: #000;
+  line-height: 28px;
+}
+/* Finish heading "Now available in Empire…": live Fanwood 40px / lh60 */
+body[data-page="precision"] .lw2-coll-finish .lw2-coll-section-title {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 60px;
+}
+/* Length note "Available in 24, 70, and 98…": live Fanwood 24px upright */
+body[data-page="precision"] .lw2-coll-finish-note {
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  color: #000;
+}
+
+@media (max-width: 768px) {
+  body[data-page="precision"] .lw2-coll-title { font-size: 28px; line-height: 38px; margin-top: 8px; }
+  body[data-page="precision"] .lw2-coll-subtitle { font-size: 26px; line-height: 36px; }
+  body[data-page="precision"] .lw2-coll-eyebrow { font-size: 18px; line-height: 26px; }
+  body[data-page="precision"] .lw2-coll-lede-em { font-size: 20px; line-height: 30px; }
+  body[data-page="precision"] .lw2-coll-lede { font-size: 28px; line-height: 40px; }
+  body[data-page="precision"] .lw2-coll-finish .lw2-coll-section-title { font-size: 28px; line-height: 40px; }
+  body[data-page="precision"] .lw2-coll-finish-note { font-size: 20px; line-height: 30px; }
+  body[data-page="precision"] .lw2-coll-profile-title { font-size: 23px; line-height: 32px; }
+}
+
+
+/* WebP <picture> wrappers must not break grid/flex layout (precision img perf pass) */
+body[data-page="precision"] picture { display: contents; }
