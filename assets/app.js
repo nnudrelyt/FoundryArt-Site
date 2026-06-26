@@ -958,6 +958,13 @@
     if (!grid) return;
     const largeImg = document.querySelector('[data-hardware-large] > img');
     if (!largeImg) return;
+    // Preload alt large views so the first hover swap is instant
+    // (without this, the first hover would show the old image while
+    // the new file is fetched).
+    grid.querySelectorAll('.hardware-item[data-large]').forEach(item => {
+      const pre = new Image();
+      pre.src = item.dataset.large;
+    });
     grid.querySelectorAll('.hardware-item').forEach(item => {
       const src = item.dataset.large;
       if (!src) return;
@@ -966,6 +973,11 @@
         if (largeImg.src.endsWith(src)) return;
         largeImg.src = src;
         if (alt) largeImg.alt = alt;
+        // Re-trigger the swap-in animation by removing the class,
+        // forcing reflow, then re-adding. CSS handles the fade.
+        largeImg.classList.remove('is-swapping');
+        void largeImg.offsetWidth;
+        largeImg.classList.add('is-swapping');
       };
       item.addEventListener('mouseenter', swap);
       item.addEventListener('focus', swap);

@@ -934,6 +934,18 @@ body.drawer-open { overflow: hidden; }
 .hardware-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
 .hardware-item .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 8px; }
 .hardware-item p { font-size: 10px; color: var(--slate); text-align: center; }
+/* Subtle intro animation when the large image swaps. JS toggles
+   `.is-swapping` on the <img> after each src change to re-fire it. */
+.hardware-image .wire-img > img.is-swapping {
+  animation: fa-hw-swap 520ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes fa-hw-swap {
+  from { opacity: 0; transform: scale(1.025); filter: blur(4px); }
+  to   { opacity: 1; transform: scale(1);     filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hardware-image .wire-img > img.is-swapping { animation: none; }
+}
 
 /* ══════════════════════════════════════ EXPERT GUIDANCE (homepage) ══════════════════════════════════════ */
 .guidance {
