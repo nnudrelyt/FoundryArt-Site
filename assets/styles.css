@@ -983,10 +983,10 @@ body.drawer-open { overflow: hidden; }
      copy a safety net against the busier photo regions. */
   background-color: var(--charcoal);
   background-image:
-    linear-gradient(rgba(20, 37, 40, 0.55), rgba(20, 37, 40, 0.55)),
+    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
     url('/assets/images/process/hand-toning-bw.jpg');
   background-size: cover, 118%;
-  background-position: center, center;
+  background-position: center, center 25%;
   background-repeat: no-repeat;
   background-blend-mode: multiply, normal;
   padding: 100px 56px;
