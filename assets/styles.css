@@ -1013,6 +1013,30 @@ body.drawer-open { overflow: hidden; }
 }
 .hardware-content .hardware-item p { color: rgba(255, 255, 255, 0.78); }
 
+/* B&W "space" variants for hardware-content bg — toggle via
+   /foundry-art/?bg=<key>. Same scrim + blend + position spec as
+   the default hand-toning shot; only the image swaps. */
+.hardware-content.hw-bg-foyer-lotus {
+  background-image:
+    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
+    url('/assets/images/process/space-foyer-lotus-bw.jpg');
+}
+.hardware-content.hw-bg-bath-lotus {
+  background-image:
+    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
+    url('/assets/images/process/space-bath-lotus-bw.jpg');
+}
+.hardware-content.hw-bg-bath-aspen {
+  background-image:
+    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
+    url('/assets/images/process/space-bath-aspen-bw.jpg');
+}
+.hardware-content.hw-bg-bath-cabochon {
+  background-image:
+    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
+    url('/assets/images/process/space-bath-cabochon-bw.jpg');
+}
+
 /* B&W background-image variants for client review — toggle via
    /foundry-art/?bg=<key>. Same scrim, only the image swaps. */
 .hardware-content.hw-bg-sketches {
