@@ -984,7 +984,7 @@ body.drawer-open { overflow: hidden; }
   background-color: var(--charcoal);
   background-image:
     linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-    url('/assets/images/process/hand-toning-bw.jpg');
+    url('/assets/images/process/space-foyer-lotus-bw.jpg');
   background-size: cover, 118%;
   background-position: center, center 25%;
   background-repeat: no-repeat;
@@ -1013,52 +1013,7 @@ body.drawer-open { overflow: hidden; }
 }
 .hardware-content .hardware-item p { color: rgba(255, 255, 255, 0.78); }
 
-/* B&W "space" variants for hardware-content bg — toggle via
-   /foundry-art/?bg=<key>. Same scrim + blend + position spec as
-   the default hand-toning shot; only the image swaps. */
-.hardware-content.hw-bg-foyer-lotus {
-  background-image:
-    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-    url('/assets/images/process/space-foyer-lotus-bw.jpg');
-}
-.hardware-content.hw-bg-bath-lotus {
-  background-image:
-    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-    url('/assets/images/process/space-bath-lotus-bw.jpg');
-}
-.hardware-content.hw-bg-bath-aspen {
-  background-image:
-    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-    url('/assets/images/process/space-bath-aspen-bw.jpg');
-}
-.hardware-content.hw-bg-bath-cabochon {
-  background-image:
-    linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-    url('/assets/images/process/space-bath-cabochon-bw.jpg');
-}
 
-/* B&W background-image variants for client review — toggle via
-   /foundry-art/?bg=<key>. Same scrim, only the image swaps. */
-.hardware-content.hw-bg-sketches {
-  background-image:
-    linear-gradient(rgba(45, 46, 47, 0.66), rgba(45, 46, 47, 0.66)),
-    url('/assets/images/process/sketches-bw.jpg');
-}
-.hardware-content.hw-bg-toning {
-  background-image:
-    linear-gradient(rgba(45, 46, 47, 0.66), rgba(45, 46, 47, 0.66)),
-    url('/assets/images/process/hand-toning-bw.jpg');
-}
-.hardware-content.hw-bg-lotus {
-  background-image:
-    linear-gradient(rgba(45, 46, 47, 0.66), rgba(45, 46, 47, 0.66)),
-    url('/assets/images/process/lotus-closeup-bw.jpg');
-}
-.hardware-content.hw-bg-finishing {
-  background-image:
-    linear-gradient(rgba(45, 46, 47, 0.66), rgba(45, 46, 47, 0.66)),
-    url('/assets/images/process/finishing-stages-bw.jpg');
-}
 /* Single translucent white container around the 3-product group —
    references the inspiration-page carousel-frame treatment. Per-item
    cards removed; thumbs share the same frame. */

@@ -940,7 +940,6 @@
     initTaglineVariants();
     initCraftMarkerVariants();
     initHardwareGallery();
-    initHardwareBgVariants();
     initInsituScrollIndicator();
     renderShopGrid();
     renderCrossSell();
@@ -980,26 +979,6 @@
     update();
   }
 
-
-  // FA hardware section background variants for client review:
-  // Original process-shot set:
-  //   /foundry-art/?bg=sketches      — design-phase drawings
-  //   /foundry-art/?bg=toning        — hand applying patina (close-up)
-  //   /foundry-art/?bg=lotus         — finished Lotus tile macro
-  //   /foundry-art/?bg=finishing     — editorial finishes arrangement
-  // FA-in-space set (rooms with installed tile, B&W):
-  //   /foundry-art/?bg=foyer-lotus   — limestone foyer w/ Lotus insets
-  //   /foundry-art/?bg=bath-lotus    — ceramic bath w/ Lotus border
-  //   /foundry-art/?bg=bath-aspen    — stone-mosaic bath w/ Aspen Leaf
-  //   /foundry-art/?bg=bath-cabochon — glass-mosaic shower w/ Cabochon
-  // Default (no query) keeps the current hand-toning shot.
-  function initHardwareBgVariants() {
-    const content = document.querySelector('[data-hardware] .hardware-content');
-    if (!content) return;
-    const key = (new URLSearchParams(window.location.search).get('bg') || '').toLowerCase();
-    const variants = ['sketches', 'toning', 'lotus', 'finishing', 'foyer-lotus', 'bath-lotus', 'bath-aspen', 'bath-cabochon'];
-    if (variants.includes(key)) content.classList.add('hw-bg-' + key);
-  }
 
   // FA hardware section gallery — hover/focus a thumbnail to swap the
   // large image at left; clicking takes the user to that product's PDP.
