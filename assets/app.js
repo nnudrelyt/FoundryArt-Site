@@ -940,6 +940,7 @@
     initTaglineVariants();
     initCraftMarkerVariants();
     initHardwareGallery();
+    initHeroVideoLoop();
     initInsituScrollIndicator();
     renderShopGrid();
     renderCrossSell();
@@ -985,6 +986,25 @@
   // Thumbnail's large-image source comes from data-large; alt text from
   // data-large-alt. Items without data-large leave the large image as-is
   // on hover (e.g. Wall Hook, which has no photography yet).
+  // Hero video: fade out in the last ~0.4s of each loop and back in
+  // as currentTime wraps. Masks the jump from end-frame to first-frame
+  // with a brief opacity dip against the dark hero background.
+  function initHeroVideoLoop() {
+    const video = document.querySelector('.hero-video');
+    if (!video) return;
+    const FADE_LEAD = 0.42;
+    let lastT = 0;
+    video.addEventListener('timeupdate', () => {
+      const d = video.duration;
+      const t = video.currentTime;
+      if (!d || isNaN(d)) return;
+      // Loop wrap detected — currentTime jumped backward
+      if (t < lastT) video.classList.remove('is-looping');
+      else if (t > d - FADE_LEAD) video.classList.add('is-looping');
+      lastT = t;
+    });
+  }
+
   function initHardwareGallery() {
     const grid = document.querySelector('[data-hardware-grid]');
     if (!grid) return;

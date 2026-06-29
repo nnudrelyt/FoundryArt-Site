@@ -418,7 +418,10 @@ body.drawer-open { overflow: hidden; }
   object-fit: cover;
   z-index: 1;
   display: block;
+  transition: opacity 400ms ease-out;
 }
+.hero-image .wire-img > .hero-video.is-looping { opacity: 0; }
+
 .hero-image .wire-img > .hero-video > img {
   /* Inner img is the fallback for browsers without <video> support
      — let the global wire-img > img rule position/clip it. */
@@ -8930,4 +8933,18 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
   :is(body[data-page="precision"],body[data-page="classic"]) .lw2-coll-gcaption { font-size: 12px; }
   .lw2-lightbox-nav { font-size: 34px; padding: 0 8px; }
   .lw2-lightbox-close { top: 10px; right: 16px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Wide-monitor (1920+) hero — give the carving-wax loop more room
+   above the fold on Tyler's studio display. Capped at 88vh so the
+   next section still peeks on shorter 1080p monitors.
+   ────────────────────────────────────────────────────────────── */
+@media (min-width: 1920px) {
+  .hero { min-height: min(920px, 88vh); }
+  .hero-content {
+    padding: 140px 96px 140px 112px;
+  }
+  .hero-headline { font-size: 84px; line-height: 1.02; }
+  .hero-sub { font-size: 18px; max-width: 540px; }
 }
