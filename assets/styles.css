@@ -563,7 +563,7 @@ body.drawer-open { overflow: hidden; }
 /* ══════════════════════════════════════ BRAND BAND ══════════════════════════════════════ */
 .brand-band {
   background: var(--charcoal);
-  padding: 200px 40px;       /* reclaims the visual mass the portrait had been occupying */
+  padding: 240px 40px;       /* +20% breathing room around the bronze quote */
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -1230,7 +1230,31 @@ body.drawer-open { overflow: hidden; }
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 60px;
+  position: relative;
+  overflow: hidden;
 }
+/* Ravenswood map overlay — subtle bronze-tinted texture across the
+   right half of the homepage closer. Mirrored horizontally so the
+   denser geometry sits inboard near the type, fading outward. */
+body[data-page="home"] .footer-cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  background-image: url("/assets/images/decorative/ravenswood-map.svg");
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  transform: scaleX(-1);
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: 0;
+  filter: brightness(1.35) sepia(0.5) hue-rotate(-12deg);  /* push the cream paths toward bronze */
+}
+.footer-cta-text,
+.footer-cta-actions { position: relative; z-index: 1; }
 .footer-cta-text .section-eyebrow { color: #D9C0A3; margin-bottom: 14px; }   /* match hero eyebrow tone for consistency */
 .footer-cta-text h2 {
   font-family: 'Cormorant Garamond', serif;
@@ -2429,7 +2453,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .nav-right { gap: 22px; }
 
   /* HERO — taller, larger type, more breathing room */
-  .hero { min-height: 800px; }
+  .hero { min-height: 960px; }
   .hero-content {
     width: 54%;
     padding: 120px 80px 120px 96px;
@@ -2444,7 +2468,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .badge-item strong { font-size: 15px; }
 
   /* Brand band */
-  .brand-band { padding: 290px 40px; }      /* full cinematic gravity */
+  .brand-band { padding: 348px 40px; }      /* +20% — full cinematic gravity */
   .brand-band p { font-size: 72px; max-width: 1280px; line-height: 1.2; letter-spacing: 0.8px; }
   .brand-band cite { font-size: 13px; margin-top: 40px; letter-spacing: 3.5px; }
 
@@ -8947,7 +8971,7 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
    next section still peeks on shorter 1080p monitors.
    ────────────────────────────────────────────────────────────── */
 @media (min-width: 1920px) {
-  .hero { min-height: min(920px, 88vh); }
+  .hero { min-height: min(1104px, 88vh); }
   .hero-content {
     padding: 140px 96px 140px 112px;
   }

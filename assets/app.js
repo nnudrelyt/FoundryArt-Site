@@ -1028,7 +1028,7 @@
     if (!grid) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const SPEED = 0.6;       // px per frame at 60fps ≈ 36px/s
+    const SPEED = 1.5;       // px per frame at 60fps ≈ 90px/s
     const PAUSE_AFTER_INTERACT_MS = 2500;
     let dir = 1;
     let paused = true;       // start paused until section enters viewport
@@ -1065,12 +1065,12 @@
         if (e.isIntersecting && !started) {
           started = true;
           // Wait for tile reveal cascade to finish (~1s) before drifting
-          setTimeout(() => { paused = false; }, 1100);
+          setTimeout(() => { paused = false; }, 500);
           tick();
           startObs.disconnect();
         }
       });
-    }, { threshold: 0.4 });
+    }, { threshold: 0.2 });
     startObs.observe(section);
   }
 
