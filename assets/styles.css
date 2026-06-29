@@ -430,6 +430,7 @@ body.drawer-open { overflow: hidden; }
   width: 100%;
   height: 100%;
   padding: 0;
+  background: #000;  /* dark base — shows through during hero-video loop fade */
   color: rgba(255,255,255,0.45);  /* fallback label tint */
 }
 .hero-image .wire-img > span {
