@@ -8950,204 +8950,107 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
 }
 
 /* ──────────────────────────────────────────────────────────────────
-   Intro animation variants — three DISTINCT motion vocabularies:
-     ?anim=editorial   "Curtain"          magazine-reveal opener
-     ?anim=settle      "Coffee table"     pure opacity, slow, serene
-     ?anim=forge       "Material weight"  warm-from-dark, weighted
-
-   No query = current (no animation).
-   Reduced-motion safe — see opt-out at bottom.
+   Intro animations (FORGE — material-weight motion vocabulary)
+   Applied always on the homepage; reduced-motion opts out fully.
+   Other pages get only the prefers-reduced-motion safety, since
+   their entry animations live elsewhere.
    ────────────────────────────────────────────────────────── */
 
-/* ═══════════ 1. EDITORIAL — curtain reveal ═══════════ */
-body.anim-editorial .hero {
-  position: relative;
-  overflow: hidden;
-}
-body.anim-editorial .hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--cream, #EEE9E0);
-  z-index: 20;
-  animation: fa-curtain 1.05s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-  pointer-events: none;
-}
-@keyframes fa-curtain {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-101%); }
-}
-/* Hero headline "settles" weight from 600 to 500 after the curtain clears */
-body.anim-editorial .hero-headline {
-  font-weight: 600;
-  animation: fa-weight-settle 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.15s forwards;
-}
-@keyframes fa-weight-settle {
-  to { font-weight: 500; }
-}
-/* Subtle ken-burns on video */
-body.anim-editorial .hero-video {
-  animation: fa-kenburns-subtle 18s ease-in-out infinite alternate;
-}
-@keyframes fa-kenburns-subtle {
-  from { transform: scale(1) translate(0, 0); }
-  to   { transform: scale(1.025) translate(-0.5%, 0.25%); }
-}
-/* Section eyebrows: bronze hairline draws beside them on reveal */
-body.anim-editorial .section-eyebrow {
-  position: relative;
-  display: inline-block;
-}
-body.anim-editorial .section-eyebrow::before {
-  content: "";
-  position: absolute;
-  left: -44px;
-  top: 50%;
-  width: 0;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.5;
-  transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
-}
-body.anim-editorial .is-revealed .section-eyebrow::before,
-body.anim-editorial .is-revealed.design-ideas-header .section-eyebrow::before { width: 32px; }
-body.anim-editorial .design-ideas .section-eyebrow::before { background: var(--bronze-l); }
-
-/* ═══════════ 2. SETTLE — pure opacity, slow ═══════════ */
-body.anim-settle .hero-video {
-  opacity: 0;
-  animation:
-    fa-opacity-in 1.5s ease-out forwards,
-    fa-kenburns-slow 24s 1.5s ease-in-out infinite alternate;
-}
-@keyframes fa-kenburns-slow {
-  from { transform: scale(1); }
-  to   { transform: scale(1.02); }
-}
-body.anim-settle .hero-eyebrow,
-body.anim-settle .hero-headline,
-body.anim-settle .hero-sub,
-body.anim-settle .hero-ctas {
-  opacity: 0;
-  animation: fa-opacity-in 0.85s ease-out forwards;
-}
-body.anim-settle .hero-eyebrow  { animation-delay: 0.45s; }
-body.anim-settle .hero-headline { animation-delay: 0.70s; }
-body.anim-settle .hero-sub      { animation-delay: 0.95s; }
-body.anim-settle .hero-ctas     { animation-delay: 1.20s; }
-@keyframes fa-opacity-in { to { opacity: 1; } }
-/* Scroll reveals: opacity only, long */
-body.anim-settle .craft-content,
-body.anim-settle .craft-images,
-body.anim-settle .products-header,
-body.anim-settle .shop-grid > *,
-body.anim-settle .design-ideas-header,
-body.anim-settle .insitu-grid > .insitu-tile,
-body.anim-settle .hardware-content,
-body.anim-settle .guidance-grid > * {
-  opacity: 0;
-  transition: opacity 1.05s ease-out;
-}
-body.anim-settle .is-revealed { opacity: 1; }
-/* Inspiration tiles stagger by index */
-body.anim-settle .insitu-grid > .insitu-tile:nth-child(1).is-revealed { transition-delay: 0.00s; }
-body.anim-settle .insitu-grid > .insitu-tile:nth-child(2).is-revealed { transition-delay: 0.10s; }
-body.anim-settle .insitu-grid > .insitu-tile:nth-child(3).is-revealed { transition-delay: 0.20s; }
-body.anim-settle .insitu-grid > .insitu-tile:nth-child(4).is-revealed { transition-delay: 0.30s; }
-body.anim-settle .insitu-grid > .insitu-tile:nth-child(5).is-revealed { transition-delay: 0.40s; }
-body.anim-settle .insitu-grid > .insitu-tile:nth-child(6).is-revealed { transition-delay: 0.50s; }
-body.anim-settle .insitu-grid > .insitu-tile:nth-child(7).is-revealed { transition-delay: 0.60s; }
-
-/* ═══════════ 3. FORGE — material weight, warm-from-dark ═══════════ */
-body.anim-forge .hero-video {
+/* Hero video — warm from dark/sepia to normal (kiln-cooling) */
+body[data-page="home"] .hero-video {
   filter: brightness(0.45) sepia(0.4) contrast(1.1);
   animation: fa-forge-warm 1.5s cubic-bezier(0.33, 0.66, 0.34, 1) forwards;
 }
 @keyframes fa-forge-warm {
   to { filter: brightness(1) sepia(0) contrast(1); }
 }
-body.anim-forge .hero-eyebrow,
-body.anim-forge .hero-headline,
-body.anim-forge .hero-sub,
-body.anim-forge .hero-ctas {
+
+/* Hero type — cascading lift with weighted easing */
+body[data-page="home"] .hero-eyebrow,
+body[data-page="home"] .hero-headline,
+body[data-page="home"] .hero-sub,
+body[data-page="home"] .hero-ctas {
   opacity: 0;
   transform: translateY(16px);
   animation: fa-forge-settle 0.75s cubic-bezier(0.34, 1.08, 0.64, 1) forwards;
 }
-body.anim-forge .hero-eyebrow  { animation-delay: 0.50s; }
-body.anim-forge .hero-headline { animation-delay: 0.65s; }
-body.anim-forge .hero-sub      { animation-delay: 0.80s; }
-body.anim-forge .hero-ctas     { animation-delay: 0.95s; }
+body[data-page="home"] .hero-eyebrow  { animation-delay: 0.50s; }
+body[data-page="home"] .hero-headline { animation-delay: 0.65s; }
+body[data-page="home"] .hero-sub      { animation-delay: 0.80s; }
+body[data-page="home"] .hero-ctas     { animation-delay: 0.95s; }
 @keyframes fa-forge-settle {
   to { opacity: 1; transform: none; }
 }
-/* Scroll reveals: weight-settle on sections */
-body.anim-forge .craft-content,
-body.anim-forge .craft-images,
-body.anim-forge .products-header,
-body.anim-forge .design-ideas-header,
-body.anim-forge .hardware-content,
-body.anim-forge .guidance-grid > * {
+
+/* Scroll reveals on major sections */
+body[data-page="home"] .craft-content,
+body[data-page="home"] .craft-images,
+body[data-page="home"] .products-header,
+body[data-page="home"] .design-ideas-header,
+body[data-page="home"] .hardware-content,
+body[data-page="home"] .guidance-grid > * {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.6s cubic-bezier(0.34, 1.08, 0.64, 1),
               transform 0.6s cubic-bezier(0.34, 1.08, 0.64, 1);
 }
-body.anim-forge .is-revealed { opacity: 1; transform: none; }
-/* Hardware tiles "click" in — rotation + scale + opacity */
-body.anim-forge .hardware-item { opacity: 0; }
-body.anim-forge .hardware-content.is-revealed .hardware-item {
+body[data-page="home"] .is-revealed { opacity: 1; transform: none; }
+
+/* Hardware tiles "click" into place */
+body[data-page="home"] .hardware-item { opacity: 0; }
+body[data-page="home"] .hardware-content.is-revealed .hardware-item {
   animation: fa-forge-click 0.65s cubic-bezier(0.34, 1.08, 0.64, 1) both;
 }
-body.anim-forge .hardware-content.is-revealed .hardware-item:nth-child(2) { animation-delay: 0.13s; }
-body.anim-forge .hardware-content.is-revealed .hardware-item:nth-child(3) { animation-delay: 0.26s; }
+body[data-page="home"] .hardware-content.is-revealed .hardware-item:nth-child(2) { animation-delay: 0.13s; }
+body[data-page="home"] .hardware-content.is-revealed .hardware-item:nth-child(3) { animation-delay: 0.26s; }
 @keyframes fa-forge-click {
   from { opacity: 0; transform: rotate(-2deg) scale(0.94); }
   to   { opacity: 1; transform: rotate(0)    scale(1);    }
 }
-/* Inspiration tiles: same micro-rotation cascade */
-body.anim-forge .insitu-grid > .insitu-tile { opacity: 0; }
-body.anim-forge .insitu-grid > .insitu-tile.is-revealed {
+
+/* Inspiration tiles: same click cascade on reveal */
+body[data-page="home"] .insitu-grid > .insitu-tile { opacity: 0; }
+body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed {
   animation: fa-forge-click 0.65s cubic-bezier(0.34, 1.08, 0.64, 1) both;
 }
-body.anim-forge .insitu-grid > .insitu-tile.is-revealed:nth-child(2) { animation-delay: 0.10s; }
-body.anim-forge .insitu-grid > .insitu-tile.is-revealed:nth-child(3) { animation-delay: 0.20s; }
-body.anim-forge .insitu-grid > .insitu-tile.is-revealed:nth-child(4) { animation-delay: 0.30s; }
-body.anim-forge .insitu-grid > .insitu-tile.is-revealed:nth-child(5) { animation-delay: 0.40s; }
-body.anim-forge .insitu-grid > .insitu-tile.is-revealed:nth-child(6) { animation-delay: 0.50s; }
-body.anim-forge .insitu-grid > .insitu-tile.is-revealed:nth-child(7) { animation-delay: 0.60s; }
-/* Scroll progress: thin bronze line at top fills L→R as you scroll */
-body.anim-forge::before {
+body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(2) { animation-delay: 0.10s; }
+body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(3) { animation-delay: 0.20s; }
+body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(4) { animation-delay: 0.30s; }
+body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(5) { animation-delay: 0.40s; }
+body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(6) { animation-delay: 0.50s; }
+body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(7) { animation-delay: 0.60s; }
+
+/* Scroll progress — thin bronze line at top of viewport */
+body[data-page="home"]::before {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
   height: 2px;
-  width: 0;
+  width: var(--scroll-progress, 0%);
   background: var(--bronze);
   z-index: 200;
   transition: width 0.12s ease-out;
+  pointer-events: none;
 }
 
-/* ═══════════ Reduced-motion opt-out ═══════════ */
+/* Reduced-motion opt-out */
 @media (prefers-reduced-motion: reduce) {
-  body[class*="anim-"] .hero::after,
-  body[class*="anim-"] .hero-eyebrow,
-  body[class*="anim-"] .hero-headline,
-  body[class*="anim-"] .hero-sub,
-  body[class*="anim-"] .hero-ctas,
-  body[class*="anim-"] .hero-video,
-  body[class*="anim-"] .craft-content,
-  body[class*="anim-"] .craft-images,
-  body[class*="anim-"] .products-header,
-  body[class*="anim-"] .shop-grid > *,
-  body[class*="anim-"] .design-ideas-header,
-  body[class*="anim-"] .insitu-grid > .insitu-tile,
-  body[class*="anim-"] .hardware-content,
-  body[class*="anim-"] .hardware-item,
-  body[class*="anim-"] .guidance-grid > *,
-  body[class*="anim-"] .section-eyebrow::before,
-  body[class*="anim-"]::before {
+  body[data-page="home"] .hero-eyebrow,
+  body[data-page="home"] .hero-headline,
+  body[data-page="home"] .hero-sub,
+  body[data-page="home"] .hero-ctas,
+  body[data-page="home"] .hero-video,
+  body[data-page="home"] .craft-content,
+  body[data-page="home"] .craft-images,
+  body[data-page="home"] .products-header,
+  body[data-page="home"] .shop-grid > *,
+  body[data-page="home"] .design-ideas-header,
+  body[data-page="home"] .insitu-grid > .insitu-tile,
+  body[data-page="home"] .hardware-content,
+  body[data-page="home"] .hardware-item,
+  body[data-page="home"] .guidance-grid > *,
+  body[data-page="home"]::before {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;

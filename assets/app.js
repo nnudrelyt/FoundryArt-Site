@@ -942,6 +942,7 @@
     initHardwareGallery();
     initHeroVideoLoop();
     initIntroAnimations();
+    initInsituAutoscroll();
     initInsituScrollIndicator();
     renderShopGrid();
     renderCrossSell();
@@ -987,24 +988,15 @@
   // Thumbnail's large-image source comes from data-large; alt text from
   // data-large-alt. Items without data-large leave the large image as-is
   // on hover (e.g. Wall Hook, which has no photography yet).
-  // Hero video: fade out in the last ~0.4s of each loop and back in
-  // as currentTime wraps. Masks the jump from end-frame to first-frame
-  // with a brief opacity dip against the dark hero background.
-  // FA intro animation variants — three distinct motion vocabularies:
-  //   /foundry-art/?anim=editorial   curtain reveal + bronze hairline accents
-  //   /foundry-art/?anim=settle      pure opacity fades, slow + serene
-  //   /foundry-art/?anim=forge       warm-from-dark + weighted "click" reveals
-  // No query = no animation (current default).
+  // FA homepage intro motion (FORGE vocabulary, locked in default).
+  // Runs on body[data-page="home"] only. Reduced-motion users skip
+  // automatically because the CSS itself opts out.
   function initIntroAnimations() {
-    const params = new URLSearchParams(window.location.search);
-    const v = (params.get('anim') || '').toLowerCase();
-    const VALID = ['editorial', 'settle', 'forge'];
-    if (!VALID.includes(v)) return;
-    document.body.classList.add('anim-' + v);
+    if (document.body.dataset.page !== 'home') return;
 
-    // All three use the scroll-reveal observer for below-fold content
+    // Scroll-reveal observer for major sections
     const targets = document.querySelectorAll(
-      '.craft-content, .craft-images, .products-header, .shop-grid > *, .design-ideas-header, .insitu-grid > .insitu-tile, .hardware-content, .guidance-grid > *'
+      '.craft-content, .craft-images, .products-header, .design-ideas-header, .insitu-grid > .insitu-tile, .hardware-content, .guidance-grid > *'
     );
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1016,33 +1008,75 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(t => io.observe(t));
 
-    // Forge: scroll-progress bronze line at top of viewport
-    if (v === 'forge') {
-      const updateProgress = () => {
-        const doc = document.documentElement;
-        const total = doc.scrollHeight - doc.clientHeight;
-        const pct = total > 0 ? (doc.scrollTop / total) * 100 : 0;
-        document.body.style.setProperty('--scroll-progress', pct + '%');
-        // Apply width via direct CSS — the ::before reads it through style
-        const sheet = document.styleSheets[document.styleSheets.length - 1];
-      };
-      // Easier: set width on a real element instead of pseudo. Use body::before's width via inline style.
-      const styleEl = document.createElement('style');
-      document.head.appendChild(styleEl);
-      const setProgress = (pct) => {
-        styleEl.textContent = `body.anim-forge::before { width: ${pct}% !important; }`;
-      };
-      const onScroll = () => {
-        const doc = document.documentElement;
-        const total = doc.scrollHeight - doc.clientHeight;
-        const pct = total > 0 ? (doc.scrollTop / total) * 100 : 0;
-        setProgress(pct);
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-    }
+    // Bronze scroll-progress line at top of viewport
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const total = doc.scrollHeight - doc.clientHeight;
+      const pct = total > 0 ? (doc.scrollTop / total) * 100 : 0;
+      document.body.style.setProperty('--scroll-progress', pct + '%');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
+  // Inspiration carousel autoscroll — slow drift, pauses on hover
+  // or user interaction, reverses at the edges. Starts only after
+  // the section enters viewport so initial reveal animations finish
+  // before motion begins.
+  function initInsituAutoscroll() {
+    const grid = document.querySelector('.insitu-grid');
+    if (!grid) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const SPEED = 0.6;       // px per frame at 60fps ≈ 36px/s
+    const PAUSE_AFTER_INTERACT_MS = 2500;
+    let dir = 1;
+    let paused = true;       // start paused until section enters viewport
+    let interactionTimer = null;
+    let started = false;
+
+    const interactPause = () => {
+      paused = true;
+      clearTimeout(interactionTimer);
+      interactionTimer = setTimeout(() => { paused = false; }, PAUSE_AFTER_INTERACT_MS);
+    };
+    grid.addEventListener('mouseenter', () => { paused = true; });
+    grid.addEventListener('mouseleave', () => {
+      if (!interactionTimer) paused = false;
+    });
+    ['wheel', 'touchstart', 'pointerdown'].forEach(ev =>
+      grid.addEventListener(ev, interactPause, { passive: true })
+    );
+
+    function tick() {
+      if (!paused) {
+        grid.scrollLeft += SPEED * dir;
+        const max = grid.scrollWidth - grid.clientWidth;
+        if (grid.scrollLeft >= max - 1) dir = -1;
+        else if (grid.scrollLeft <= 1) dir = 1;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const section = document.querySelector('.design-ideas');
+    if (!section) return;
+    const startObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !started) {
+          started = true;
+          // Wait for tile reveal cascade to finish (~1s) before drifting
+          setTimeout(() => { paused = false; }, 1100);
+          tick();
+          startObs.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    startObs.observe(section);
+  }
+
+  // Hero video: fade out in the last ~0.4s of each loop and back in
+  // as currentTime wraps. Masks the jump from end-frame to first-frame
+  // with a brief opacity dip against the dark hero background.
   function initHeroVideoLoop() {
     const video = document.querySelector('.hero-video');
     if (!video) return;
