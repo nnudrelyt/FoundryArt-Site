@@ -131,6 +131,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   display: flex;
   gap: 28px;
   font-size: 10px;
+  font-weight: 500;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--mid);
@@ -471,6 +472,7 @@ body.drawer-open { overflow: hidden; }
 }
 .hero-eyebrow {
   font-size: 11px;
+  font-weight: 500;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #D9C0A3;     /* lighter bronze, reads against the scrim + photo */
@@ -646,6 +648,7 @@ body.drawer-open { overflow: hidden; }
 /* ══════════════════════════════════════ SHARED SECTION TEXT ══════════════════════════════════════ */
 .section-eyebrow {
   font-size: 11px;
+  font-weight: 500;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #5A3A22;     /* deeper walnut — hits ≥4.5:1 on cream and white */
@@ -693,9 +696,9 @@ body.drawer-open { overflow: hidden; }
 .craft-step-num {
   position: relative;
   font-size: 0;
-  width: 8px;
-  min-width: 8px;
-  height: 8px;
+  width: 7px;
+  min-width: 7px;
+  height: 7px;
   flex-shrink: 0;
 }
 .craft-step-num::before {
@@ -924,9 +927,9 @@ body.drawer-open { overflow: hidden; }
   padding: 28px 28px 26px;
   background: linear-gradient(
     180deg,
-    rgba(20, 37, 40, 0) 40%,
-    rgba(20, 37, 40, 0.55) 75%,
-    rgba(20, 37, 40, 0.85) 100%
+    rgba(58, 39, 24, 0) 40%,
+    rgba(58, 39, 24, 0.55) 75%,
+    rgba(58, 39, 24, 0.85) 100%
   );
   opacity: 0;
   transition: opacity 0.35s ease;
@@ -1056,13 +1059,13 @@ body.drawer-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;  /* content sits in bottom third */
   gap: 14px;
-  padding: 14px;
+  padding: 14px 14px 26px;
   background: linear-gradient(
     180deg,
-    rgba(20, 37, 40, 0.6) 0%,
-    rgba(20, 37, 40, 0.88) 100%
+    rgba(58, 39, 24, 0.45) 0%,
+    rgba(58, 39, 24, 0.85) 100%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
