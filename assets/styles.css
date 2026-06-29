@@ -822,27 +822,28 @@ body.drawer-open { overflow: hidden; }
 .product-card:hover .wire-img { opacity: 0.85; }
 .product-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 400;
   color: var(--charcoal);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   line-height: 1.15;
 }
-.product-meta { font-size: 14px; color: #4A4640; margin-bottom: 10px; }
-.product-price { font-size: 16px; color: var(--charcoal); font-weight: 500; }
+.product-meta { font-size: 19px; color: #4A4640; margin-bottom: 14px; line-height: 1.5; }
+.product-price { font-size: 22px; color: var(--charcoal); font-weight: 500; }
 .product-price .was { text-decoration: line-through; color: var(--mid); font-weight: 400; margin-right: 6px; }
 .product-price .sale { color: var(--sale); }
 .product-badge {
   display: inline-block;
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   background: var(--sale);
   color: var(--white);
-  font-size: 8px;
+  font-size: 11px;
+  font-weight: 500;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  padding: 4px 8px;
+  padding: 6px 11px;
   z-index: 1;
 }
 .product-card .img-wrap { position: relative; }
@@ -887,7 +888,6 @@ body.drawer-open { overflow: hidden; }
   overflow-x: scroll;              /* `scroll` keeps scrollbar visible at rest */
   overflow-y: hidden;
   padding-bottom: 22px;
-  scroll-snap-type: x proximity;
   position: relative;
   z-index: 2;                      /* under the right-edge fade ::after */
   /* Firefox — auto = thicker default scrollbar, more visible at rest */
@@ -897,7 +897,6 @@ body.drawer-open { overflow: hidden; }
 .insitu-grid > .insitu-tile {
   flex: 0 0 460px;
   height: 580px;
-  scroll-snap-align: start;
 }
 /* WebKit / Blink custom scrollbar — thicker + brighter so the strip
    reads as scrollable at rest. */
@@ -1230,31 +1229,7 @@ body.drawer-open { overflow: hidden; }
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 60px;
-  position: relative;
-  overflow: hidden;
 }
-/* Ravenswood map overlay — subtle bronze-tinted texture across the
-   right half of the homepage closer. Mirrored horizontally so the
-   denser geometry sits inboard near the type, fading outward. */
-body[data-page="home"] .footer-cta::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 55%;
-  height: 100%;
-  background-image: url("/assets/images/decorative/ravenswood-map.svg");
-  background-size: cover;
-  background-position: left center;
-  background-repeat: no-repeat;
-  transform: scaleX(-1);
-  opacity: 0.14;
-  pointer-events: none;
-  z-index: 0;
-  filter: brightness(1.35) sepia(0.5) hue-rotate(-12deg);  /* push the cream paths toward bronze */
-}
-.footer-cta-text,
-.footer-cta-actions { position: relative; z-index: 1; }
 .footer-cta-text .section-eyebrow { color: #D9C0A3; margin-bottom: 14px; }   /* match hero eyebrow tone for consistency */
 .footer-cta-text h2 {
   font-family: 'Cormorant Garamond', serif;
