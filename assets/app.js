@@ -1008,15 +1008,6 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(t => io.observe(t));
 
-    // Bronze scroll-progress line at top of viewport
-    const onScroll = () => {
-      const doc = document.documentElement;
-      const total = doc.scrollHeight - doc.clientHeight;
-      const pct = total > 0 ? (doc.scrollTop / total) * 100 : 0;
-      document.body.style.setProperty('--scroll-progress', pct + '%');
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
   }
 
   // Inspiration carousel autoscroll — slow drift, pauses on hover

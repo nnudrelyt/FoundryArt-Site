@@ -9025,20 +9025,6 @@ body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(5) { an
 body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(6) { animation-delay: 0.50s; }
 body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(7) { animation-delay: 0.60s; }
 
-/* Scroll progress — thin bronze line at top of viewport */
-body[data-page="home"]::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  width: var(--scroll-progress, 0%);
-  background: var(--bronze);
-  z-index: 200;
-  transition: width 0.12s ease-out;
-  pointer-events: none;
-}
-
 /* Reduced-motion opt-out */
 @media (prefers-reduced-motion: reduce) {
   body[data-page="home"] .hero-eyebrow,
@@ -9055,12 +9041,4 @@ body[data-page="home"]::before {
   body[data-page="home"] .hardware-content,
   body[data-page="home"] .hardware-item,
   body[data-page="home"] .guidance-grid > *,
-  body[data-page="home"]::before {
-    animation: none !important;
-    transition: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-    width: 0 !important;
-  }
 }
