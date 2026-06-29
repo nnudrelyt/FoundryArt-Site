@@ -610,9 +610,12 @@ body.drawer-open { overflow: hidden; }
   opacity: 0;
   transform: translateY(24px);
   filter: blur(6px);
+  /* animation fires on scroll-reveal — see .brand-band.is-revealed p */
+}
+.brand-band.is-revealed p {
   animation:
-    brandSettle    2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards,
-    bronzeShimmer  9s ease-in-out 2.5s infinite alternate;
+    brandSettle    2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.20s forwards,
+    bronzeShimmer  9s ease-in-out 2.4s infinite alternate;
 }
 @keyframes bronzeShimmer {
   from { background-position: 100% 50%; }
@@ -629,7 +632,10 @@ body.drawer-open { overflow: hidden; }
   font-style: normal;
   opacity: 0;
   transform: translateY(12px);
-  animation: brandSettle 2.0s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;
+  /* animation fires on scroll-reveal — see .brand-band.is-revealed cite */
+}
+.brand-band.is-revealed cite {
+  animation: brandSettle 2.0s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
 }
 @keyframes brandSettle {
   to { opacity: 1; transform: translateY(0); filter: blur(0); }

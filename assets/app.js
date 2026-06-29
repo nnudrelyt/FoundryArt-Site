@@ -996,7 +996,7 @@
 
     // Scroll-reveal observer for major sections
     const targets = document.querySelectorAll(
-      '.craft-content, .craft-images, .products-header, .design-ideas-header, .insitu-grid > .insitu-tile, .hardware-content, .guidance-grid > *'
+      '.brand-band, .craft-content, .craft-images, .products-header, .design-ideas-header, .insitu-grid > .insitu-tile, .hardware-content, .guidance-grid > *'
     );
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
