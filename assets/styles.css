@@ -124,7 +124,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
    one-for-one. */
 .nav-logo img {
   display: block;
-  height: 18px;
+  height: 16px;
   width: auto;
 }
 .nav-links {
@@ -257,7 +257,7 @@ body.drawer-open { overflow: hidden; }
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 8px;
 }
 .studios-toggle {
   display: inline-flex;
@@ -2417,8 +2417,8 @@ body[data-page="home"] .footer p { border: 0 !important; }
 
   /* Nav breathes a bit more */
   .nav { padding: 24px 64px; }
-  .nav-logo { font-size: 19px; }
-  .nav-logo img { height: 20px; }
+  .nav-logo { font-size: 17px; }
+  .nav-logo img { height: 18px; }
   .nav-links { gap: 38px; font-size: 12px; }
   .nav-cta, .nav-cart { font-size: 12px; padding: 10px 22px; }
   .nav-right { gap: 22px; }
