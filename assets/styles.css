@@ -9,7 +9,7 @@
   --bronze:         #8C6249;   /* tobacco brown — primary accent */
   --bronze-l:       #B7997E;   /* warm taupe — lighter accent */
   --oxblood:        #4F2A26;   /* deep burgundy — emphasis / sale */
-  --sale:           #4F2A26;   /* now derived from oxblood */
+  --sale:           #A31414;   /* brand red — matches --lw-accent-red */
 
   /* Backgrounds + supporting neutrals */
   --white:          #FFFFFF;
@@ -2431,7 +2431,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   }
   .hero-eyebrow { font-size: 13px; margin-bottom: 26px; letter-spacing: 3.5px; }
   .hero-headline { font-size: 96px; line-height: 1.02; margin-bottom: 32px; letter-spacing: -1.2px; }
-  .hero-sub { font-size: 17px; max-width: 500px; margin-bottom: 48px; line-height: 1.7; }
+  .hero-sub { font-size: 20px; max-width: 560px; margin-bottom: 52px; line-height: 1.65; }
   .hero .btn-primary, .hero .btn-secondary { padding: 18px 40px; font-size: 12px; letter-spacing: 2.2px; }
   .hero-badge { gap: 52px; margin-top: 60px; padding-top: 34px; }
   .badge-item { font-size: 13px; }
@@ -8946,5 +8946,5 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
     padding: 140px 96px 140px 112px;
   }
   .hero-headline { font-size: 112px; line-height: 1.01; letter-spacing: -1.5px; }
-  .hero-sub { font-size: 18px; max-width: 540px; }
+  .hero-sub { font-size: 22px; max-width: 600px; line-height: 1.6; }
 }
