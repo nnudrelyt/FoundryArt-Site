@@ -266,7 +266,7 @@ body.drawer-open { overflow: hidden; }
   padding: 6px;
   cursor: pointer;
   background: transparent;
-  color: var(--mid);
+  color: var(--bronze);
   transition: color 0.2s ease;
 }
 .studios-toggle:hover { color: var(--bronze); }
@@ -961,7 +961,7 @@ body.drawer-open { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  align-self: flex-start;
+  align-self: center;
   font-family: 'Jost', sans-serif;
   font-size: 11px;
   font-weight: 500;
@@ -1057,7 +1057,7 @@ body.drawer-open { overflow: hidden; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 14px;
   padding: 14px;
   background: linear-gradient(
     180deg,
@@ -1068,9 +1068,9 @@ body.drawer-open { overflow: hidden; }
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
-.hardware-overlay-name {
+.hardware-item .hardware-overlay-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 500;
   color: #FFFFFF;
   margin: 0;
@@ -1080,20 +1080,14 @@ body.drawer-open { overflow: hidden; }
 .hardware-item:hover .hardware-overlay,
 .hardware-item:focus-visible .hardware-overlay { opacity: 1; }
 .hardware-overlay-price {
-  font-family: 'Jost', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.78);
-  margin: 0 0 8px;
-  line-height: 1;
+  display: none;
 }
 .hardware-overlay-cta {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-family: 'Jost', sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
