@@ -8948,3 +8948,173 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
   .hero-headline { font-size: 112px; line-height: 1.01; letter-spacing: -1.5px; }
   .hero-sub { font-size: 22px; max-width: 600px; line-height: 1.6; }
 }
+
+/* ──────────────────────────────────────────────────────────────────
+   Intro animation variants for client review — toggle via
+   /foundry-art/?anim=a|b|c. No query = current (no animation).
+
+   A — "Settle in"        hero-only fade/lift + ken-burns video
+   B — "Whisper everywhere"  A + scroll-reveal on major sections
+   C — "Material moments"    B + object-level micro-motion
+
+   Easing: cubic-bezier(0.16, 1, 0.3, 1)  — soft "expo out"
+   Reduced-motion safe — see media query at bottom.
+   ────────────────────────────────────────────────────────── */
+
+/* ── A: hero load (shared base for all three variants) ── */
+body.anim-a .hero-eyebrow,
+body.anim-a .hero-headline,
+body.anim-a .hero-sub,
+body.anim-a .hero-ctas,
+body.anim-b .hero-eyebrow,
+body.anim-b .hero-headline,
+body.anim-b .hero-sub,
+body.anim-b .hero-ctas,
+body.anim-c .hero-eyebrow,
+body.anim-c .hero-headline,
+body.anim-c .hero-sub,
+body.anim-c .hero-ctas {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fa-hero-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+body[class*="anim-"] .hero-eyebrow  { animation-delay: 0.15s; }
+body[class*="anim-"] .hero-headline { animation-delay: 0.30s; }
+body[class*="anim-"] .hero-sub      { animation-delay: 0.55s; }
+body[class*="anim-"] .hero-ctas     { animation-delay: 0.80s; }
+
+@keyframes fa-hero-in {
+  to { opacity: 1; transform: none; }
+}
+
+/* Ken-burns drift on the hero video — slow, ambient, alternates */
+body[class*="anim-"] .hero-video {
+  animation: fa-kenburns 14s ease-in-out infinite alternate;
+}
+@keyframes fa-kenburns {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.045) translate(-1%, 0.5%); }
+}
+
+/* ── B + C: scroll-reveal on major sections ── */
+body.anim-b .craft-content,
+body.anim-b .craft-images,
+body.anim-b .products-header,
+body.anim-b .shop-grid > *,
+body.anim-b .design-ideas-header,
+body.anim-b .insitu-grid > .insitu-tile,
+body.anim-b .hardware-content,
+body.anim-b .guidance-grid > *,
+body.anim-c .craft-content,
+body.anim-c .craft-images,
+body.anim-c .products-header,
+body.anim-c .shop-grid > *,
+body.anim-c .design-ideas-header,
+body.anim-c .insitu-grid > .insitu-tile,
+body.anim-c .hardware-content,
+body.anim-c .guidance-grid > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+body.anim-b .is-revealed,
+body.anim-c .is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Inspiration tiles cascade left-to-right when their section reveals */
+body.anim-b .insitu-grid > .insitu-tile:nth-child(1).is-revealed,
+body.anim-c .insitu-grid > .insitu-tile:nth-child(1).is-revealed { transition-delay: 0.00s; }
+body.anim-b .insitu-grid > .insitu-tile:nth-child(2).is-revealed,
+body.anim-c .insitu-grid > .insitu-tile:nth-child(2).is-revealed { transition-delay: 0.08s; }
+body.anim-b .insitu-grid > .insitu-tile:nth-child(3).is-revealed,
+body.anim-c .insitu-grid > .insitu-tile:nth-child(3).is-revealed { transition-delay: 0.16s; }
+body.anim-b .insitu-grid > .insitu-tile:nth-child(4).is-revealed,
+body.anim-c .insitu-grid > .insitu-tile:nth-child(4).is-revealed { transition-delay: 0.24s; }
+body.anim-b .insitu-grid > .insitu-tile:nth-child(5).is-revealed,
+body.anim-c .insitu-grid > .insitu-tile:nth-child(5).is-revealed { transition-delay: 0.32s; }
+body.anim-b .insitu-grid > .insitu-tile:nth-child(6).is-revealed,
+body.anim-c .insitu-grid > .insitu-tile:nth-child(6).is-revealed { transition-delay: 0.40s; }
+body.anim-b .insitu-grid > .insitu-tile:nth-child(7).is-revealed,
+body.anim-c .insitu-grid > .insitu-tile:nth-child(7).is-revealed { transition-delay: 0.48s; }
+
+/* Shop grid cards stagger when the section reveals */
+body.anim-b .shop-grid > *:nth-child(n).is-revealed,
+body.anim-c .shop-grid > *:nth-child(n).is-revealed { transition-delay: calc(0.06s * var(--reveal-i, 0)); }
+
+/* ── C only: object-level micro-motion ── */
+/* Craft step bullets bloom in after the eyebrow + body settle */
+body.anim-c .craft-content.is-revealed .craft-step-num {
+  animation: fa-bullet-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.45s;
+}
+body.anim-c .craft-content.is-revealed .craft-step:nth-child(2) .craft-step-num { animation-delay: 0.6s; }
+body.anim-c .craft-content.is-revealed .craft-step:nth-child(3) .craft-step-num { animation-delay: 0.75s; }
+@keyframes fa-bullet-in {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+body.anim-c .craft-step-num { opacity: 0; }
+
+/* Hardware thumbs: brief warmth boost as they reveal */
+body.anim-c .hardware-content.is-revealed .hardware-item {
+  animation: fa-hw-warm 0.9s ease-out both;
+}
+body.anim-c .hardware-content.is-revealed .hardware-item:nth-child(2) { animation-delay: 0.1s; }
+body.anim-c .hardware-content.is-revealed .hardware-item:nth-child(3) { animation-delay: 0.2s; }
+@keyframes fa-hw-warm {
+  from { filter: brightness(0.85) saturate(0.85); }
+  to   { filter: brightness(1) saturate(1); }
+}
+
+/* Eyebrow underline draw-in on section reveals */
+body.anim-c .design-ideas-header.is-revealed .section-eyebrow::after,
+body.anim-c .hardware-content.is-revealed .section-eyebrow::after {
+  animation: fa-rule-draw 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+body.anim-c .design-ideas-header .section-eyebrow,
+body.anim-c .hardware-content .section-eyebrow { position: relative; display: inline-block; }
+body.anim-c .design-ideas-header .section-eyebrow::after,
+body.anim-c .hardware-content .section-eyebrow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
+  transform: translateX(-50%);
+}
+@keyframes fa-rule-draw {
+  from { width: 0; }
+  to   { width: 28px; }
+}
+
+/* ── Respect users who prefer reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  body[class*="anim-"] .hero-eyebrow,
+  body[class*="anim-"] .hero-headline,
+  body[class*="anim-"] .hero-sub,
+  body[class*="anim-"] .hero-ctas,
+  body[class*="anim-"] .hero-video,
+  body[class*="anim-"] .craft-content,
+  body[class*="anim-"] .craft-images,
+  body[class*="anim-"] .products-header,
+  body[class*="anim-"] .shop-grid > *,
+  body[class*="anim-"] .design-ideas-header,
+  body[class*="anim-"] .insitu-grid > .insitu-tile,
+  body[class*="anim-"] .hardware-content,
+  body[class*="anim-"] .guidance-grid > *,
+  body[class*="anim-"] .craft-step-num,
+  body[class*="anim-"] .hardware-item {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

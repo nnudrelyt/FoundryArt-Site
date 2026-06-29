@@ -941,6 +941,7 @@
     initCraftMarkerVariants();
     initHardwareGallery();
     initHeroVideoLoop();
+    initIntroAnimations();
     initInsituScrollIndicator();
     renderShopGrid();
     renderCrossSell();
@@ -989,6 +990,38 @@
   // Hero video: fade out in the last ~0.4s of each loop and back in
   // as currentTime wraps. Masks the jump from end-frame to first-frame
   // with a brief opacity dip against the dark hero background.
+  // FA intro animation variants for client review:
+  //   /foundry-art/?anim=a   — "Settle in" (hero only + ken-burns)
+  //   /foundry-art/?anim=b   — "Whisper everywhere" (A + scroll reveals)
+  //   /foundry-art/?anim=c   — "Material moments" (B + object micro-motion)
+  // No query = no animation (current default).
+  function initIntroAnimations() {
+    const params = new URLSearchParams(window.location.search);
+    const v = (params.get('anim') || '').toLowerCase();
+    if (!['a', 'b', 'c'].includes(v)) return;
+    document.body.classList.add('anim-' + v);
+
+    // B + C: reveal major sections on scroll
+    if (v === 'b' || v === 'c') {
+      const targets = document.querySelectorAll(
+        '.craft-content, .craft-images, .products-header, .shop-grid > *, .design-ideas-header, .insitu-grid > .insitu-tile, .hardware-content, .guidance-grid > *'
+      );
+      // Stagger shop-grid + guidance-grid cards by index
+      document.querySelectorAll('.shop-grid > *, .guidance-grid > *').forEach((el, i) => {
+        el.style.setProperty('--reveal-i', i);
+      });
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-revealed');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+      targets.forEach(t => io.observe(t));
+    }
+  }
+
   function initHeroVideoLoop() {
     const video = document.querySelector('.hero-video');
     if (!video) return;
