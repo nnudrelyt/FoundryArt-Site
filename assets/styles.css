@@ -8946,11 +8946,11 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
    next section still peeks on shorter 1080p monitors.
    ────────────────────────────────────────────────────────────── */
 @media (min-width: 1920px) {
-  .hero { min-height: min(1104px, 88vh); }
+  .hero { min-height: min(960px, 80vh); }
   .hero-content {
     padding: 140px 96px 140px 112px;
   }
-  .hero-headline { font-size: 112px; line-height: 1.01; letter-spacing: -1.5px; }
+  .hero-headline { font-size: 96px; line-height: 1.02; letter-spacing: -1.2px; }
   .hero-sub { font-size: 22px; max-width: 600px; line-height: 1.6; }
 }
 
