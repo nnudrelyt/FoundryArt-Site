@@ -2492,10 +2492,10 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .products-header .section-headline { font-size: 42px !important; }
   .product-grid { gap: 48px 36px; }
   .product-card .wire-img { margin-bottom: 20px; }
-  .product-name { font-size: 28px; }
-  .product-meta { font-size: 14px; margin-bottom: 14px; }
-  .product-price { font-size: 16px; }
-  .product-cta { font-size: 10px; }
+  .product-name { font-size: 42px; margin-bottom: 12px; }
+  .product-meta { font-size: 24px; margin-bottom: 18px; }
+  .product-price { font-size: 30px; }
+  .product-cta { font-size: 12px; }
 
   /* Design Ideas */
   .design-ideas { padding: 130px 0 130px 80px; }                  /* keep bleed */
