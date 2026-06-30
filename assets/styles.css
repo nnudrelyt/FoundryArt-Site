@@ -1001,9 +1001,9 @@ body[data-page="home"] .product-card-cta:hover {
   padding: 28px 28px 26px;
   background: linear-gradient(
     180deg,
-    rgba(61, 36, 15, 0) 40%,
-    rgba(61, 36, 15, 0.55) 75%,
-    rgba(61, 36, 15, 0.85) 100%
+    rgba(42, 26, 15, 0) 40%,
+    rgba(42, 26, 15, 0.55) 75%,
+    rgba(42, 26, 15, 0.85) 100%
   );
   opacity: 0;
   transition: opacity 0.35s ease;
@@ -1139,8 +1139,8 @@ body[data-page="home"] .product-card-cta:hover {
   padding: 26px 14px 22px 38px;  /* +25px left padding = aligns with tile-in-photo */
   background: linear-gradient(
     180deg,
-    rgba(61, 36, 15, 0.45) 0%,
-    rgba(61, 36, 15, 0.85) 100%
+    rgba(42, 26, 15, 0.45) 0%,
+    rgba(42, 26, 15, 0.85) 100%
   );
   opacity: 0;
   transition: opacity 0.3s ease;
