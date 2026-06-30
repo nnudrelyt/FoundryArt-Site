@@ -830,29 +830,35 @@ body.drawer-open { overflow: hidden; }
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
-.product-card {
-  cursor: pointer;
-  display: block;
-  padding: 10px 8px 64px;        /* generous bottom — mirrors the perceived L/R negative space around the photo */
+/* ── Product card baseline (shop / cart / PDP) ── */
+.product-card { cursor: pointer; transition: transform 0.25s ease; display: block; }
+.product-card:hover { transform: translateY(-3px); }
+.product-card .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 14px; transition: opacity 0.25s ease; }
+.product-card:hover .wire-img { opacity: 0.85; }
+/* CTA is rendered into every product card but only revealed in
+   the homepage scope below — hide it everywhere else. */
+.product-card-cta { display: none; }
+
+/* ── Homepage shop-grid only — subtle card design + reveal CTA ── */
+body[data-page="home"] .product-card {
+  padding: 10px 8px 64px;
   margin: -10px -8px 0;
   border: 1px solid transparent;
-  border-radius: 6px;            /* subtle round */
+  border-radius: 6px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.3s ease;
 }
-.product-card:hover {
+body[data-page="home"] .product-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 18px 38px -16px rgba(20, 37, 40, 0.18),
               0 4px 12px -6px rgba(20, 37, 40, 0.10);
   border-color: rgba(140, 98, 73, 0.18);
 }
-.product-card .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 14px; }
-
-/* Ghost Shop Now button — fades in on hover below the price.
-   Reserves its own space (max-height transition) so the card
-   doesn't shift other rows on hover. */
-.product-card-cta {
+/* Image stays full opacity on the homepage cards (overrides the
+   baseline 0.85 dim above) */
+body[data-page="home"] .product-card:hover .wire-img { opacity: 1; }
+body[data-page="home"] .product-card-cta {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -866,19 +872,18 @@ body.drawer-open { overflow: hidden; }
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--white);
-  background: var(--bronze);    /* filled bronze, matches hero CTA */
+  background: var(--bronze);
   border: 1px solid var(--bronze);
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.28s ease, transform 0.28s ease, background 0.2s ease;
 }
-.product-card:hover .product-card-cta {
+body[data-page="home"] .product-card:hover .product-card-cta {
   opacity: 1;
   transform: translateY(0);
 }
-.product-card .product-card-cta:hover,
-.product-card:hover .product-card-cta:hover {
-  background: var(--bronze-l);   /* lighter bronze on hover-of-hover */
+body[data-page="home"] .product-card-cta:hover {
+  background: var(--bronze-l);
 }
 .product-name {
   font-family: 'Cormorant Garamond', serif;
