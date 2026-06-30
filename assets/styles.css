@@ -833,7 +833,7 @@ body.drawer-open { overflow: hidden; }
 .product-card {
   cursor: pointer;
   display: block;
-  padding: 10px 8px 40px;        /* 40px bottom breathing below the CTA */
+  padding: 10px 8px 64px;        /* generous bottom — mirrors the perceived L/R negative space around the photo */
   margin: -10px -8px 0;
   border: 1px solid transparent;
   border-radius: 6px;            /* subtle round */
