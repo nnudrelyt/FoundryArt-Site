@@ -841,9 +841,10 @@ body.drawer-open { overflow: hidden; }
   color: var(--charcoal);
   margin-bottom: 10px;
   line-height: 1.15;
+  text-align: center;
 }
-.product-meta { font-size: 22px; color: #4A4640; margin-bottom: 16px; line-height: 1.5; }
-.product-price { font-size: 26px; color: var(--charcoal); font-weight: 500; }
+.product-meta { font-size: 22px; color: #4A4640; margin-bottom: 16px; line-height: 1.5; text-align: center; }
+.product-price { font-size: 26px; color: var(--charcoal); font-weight: 500; text-align: center; }
 .product-price .was { text-decoration: line-through; color: var(--mid); font-weight: 400; margin-right: 6px; }
 .product-price .sale { color: var(--sale); }
 .product-badge {
@@ -1429,11 +1430,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   transform: scale(0.85);
   transform-origin: center;
 }
-.product-card[href*="-3x3"] .product-name,
-.product-card[href*="-3x3"] .product-meta,
-.product-card[href*="-3x3"] .product-price {
-  padding-left: 7.5%;
-}
+/* 3×3 cards: text is centered globally — no padding-left override needed */
 
 .pagination {
   display: flex;
