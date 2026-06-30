@@ -830,10 +830,56 @@ body.drawer-open { overflow: hidden; }
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
-.product-card { cursor: pointer; transition: transform 0.25s ease; display: block; }
-.product-card:hover { transform: translateY(-3px); }
-.product-card .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 14px; transition: opacity 0.25s ease; }
-.product-card:hover .wire-img { opacity: 0.85; }
+.product-card {
+  cursor: pointer;
+  display: block;
+  padding: 14px 14px 22px;
+  margin: -14px -14px 0;
+  border: 1px solid transparent;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px -16px rgba(20, 37, 40, 0.18),
+              0 4px 12px -6px rgba(20, 37, 40, 0.10);
+  border-color: rgba(140, 98, 73, 0.18);  /* subtle bronze hairline */
+}
+.product-card .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 14px; }
+
+/* Ghost Shop Now button — fades in on hover below the price.
+   Reserves its own space (max-height transition) so the card
+   doesn't shift other rows on hover. */
+.product-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px auto 0;
+  padding: 10px 22px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--bronze);
+  border: 1px solid var(--bronze);
+  background: transparent;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.28s ease, transform 0.28s ease, background 0.2s ease, color 0.2s ease;
+  align-self: center;
+}
+.product-card .product-card-cta { display: flex; justify-content: center; width: fit-content; margin-left: auto; margin-right: auto; }
+.product-card:hover .product-card-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-card .product-card-cta:hover,
+.product-card:hover .product-card-cta:hover {
+  background: var(--bronze);
+  color: var(--white);
+}
 .product-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 38px;

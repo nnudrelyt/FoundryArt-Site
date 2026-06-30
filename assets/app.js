@@ -641,6 +641,7 @@
         <div class="product-name">${p.name}</div>
         <div class="product-meta">${p.sizeLabel} · ${p.finishes.length} finish${p.finishes.length === 1 ? '' : 'es'}</div>
         ${priceBlock}
+        <span class="product-card-cta">Shop Now <span aria-hidden="true">&rarr;</span></span>
       </a>
     `;
   }
