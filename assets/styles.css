@@ -195,9 +195,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .nav-hamburger {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   cursor: pointer;
-  padding: 4px;
+  padding: 14px 12px;
+  min-width: 44px;
+  min-height: 44px;
   background: transparent;
 }
 .nav-hamburger span {
@@ -278,7 +282,9 @@ body.drawer-open { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
+  padding: 12px;
+  min-width: 44px;
+  min-height: 44px;
   cursor: pointer;
   background: transparent;
   color: var(--bronze);
@@ -514,9 +520,10 @@ body.drawer-open { overflow: hidden; }
 .hero .btn-primary {
   background: var(--bronze);
   color: var(--white);
-  padding: 14px 28px;
+  padding: 16px 32px;
   font-size: 11px;
   letter-spacing: 2px;
+  min-height: 44px;
 }
 .hero .btn-primary:hover {
   background: var(--bronze-l);
@@ -527,9 +534,10 @@ body.drawer-open { overflow: hidden; }
   background: transparent;
   color: var(--white);
   border: 1px solid rgba(255,255,255,0.55);
-  padding: 14px 28px;
+  padding: 16px 32px;
   font-size: 13px;
   letter-spacing: 2.4px;
+  min-height: 44px;
 }
 .hero .btn-secondary:hover {
   background: var(--white);
@@ -2425,7 +2433,6 @@ body[data-page="home"] .footer p { border: 0 !important; }
 
   .craft-content { padding: 40px 16px; }
   .section-headline { font-size: 28px; }
-  .craft-images { grid-template-columns: 1fr; }
 
   .products { padding: 40px 16px; }
   .product-grid { grid-template-columns: 1fr; }
@@ -2690,6 +2697,54 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .review-title { font-size: 20px; }
   .review-body { font-size: 14px; line-height: 1.75; }
   .review-meta { font-size: 12px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE — Small mobile polish (≤ 480px)
+   iPhone SE / narrow phones. Slight tightening of the 560px
+   defaults so the layout stays intentional at 320–480 rather
+   than reading as a stretched-out 560 layout.
+   ────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .nav-logo img { height: 14px; }
+  .nav { padding: 12px 14px; }
+
+  .hero-content { padding: 40px 16px; }
+  .hero-headline { font-size: 30px; }
+  .hero-eyebrow { letter-spacing: 2.4px; }
+
+  .brand-band { padding: 88px 14px; }
+  .brand-band p { font-size: 26px; }
+
+  .craft-content,
+  .products,
+  .design-ideas,
+  .hardware-content,
+  .guidance,
+  .social-proof,
+  .footer-cta { padding-left: 14px; padding-right: 14px; }
+
+  .section-headline { font-size: 26px; }
+  .footer-cta-text h2 { font-size: 32px; }
+
+  .insitu-grid > .insitu-tile { flex: 0 0 280px; height: 360px; }
+  .hardware-grid { gap: 10px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   TOUCH DEVICES — no hover, coarse pointer
+   Hover-only overlays hide primary content from iOS Safari
+   and Android Chrome users. Show them permanently on touch so
+   product names, settings, and Shop Now CTAs are always
+   readable + reachable. Desktop hover behavior is unchanged.
+   ────────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  .insitu-overlay { opacity: 1; }
+  .hardware-overlay { opacity: 1; }
+  body[data-page="home"] .product-card-cta {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════
