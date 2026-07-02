@@ -186,7 +186,7 @@
     return `
       <footer class="footer">
         <p>© 2026 Linden Workshops · Luxury designer metal accent tile since 1990</p>
-        <p><a href="tel:7737842628">773 784-2628</a> &nbsp;·&nbsp; <a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">Houzz</a></p>
+        <p><a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">Houzz</a></p>
       </footer>
     `;
   }
