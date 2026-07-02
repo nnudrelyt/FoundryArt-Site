@@ -2167,43 +2167,6 @@ body[data-page="home"] .footer p { border: 0 !important; }
 .active-chip .x { font-size: 12px; line-height: 1; color: var(--mid); }
 .active-chip:hover .x { color: var(--sale); }
 .clear-filters { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); cursor: pointer; border-bottom: 1px solid var(--bronze-l); }
-
-/* Coverage calculator (Track B PDP) */
-.coverage-calc {
-  margin: 24px 0;
-  padding: 18px 20px;
-  background: var(--cream);
-  border: 1px solid var(--rule);
-}
-.coverage-calc h5 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 17px;
-  font-weight: 400;
-  margin-bottom: 6px;
-}
-.coverage-calc .calc-sub { font-size: 11px; color: var(--mid); margin-bottom: 14px; }
-.coverage-calc .calc-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.coverage-calc .calc-row input {
-  width: 80px;
-  padding: 8px 10px;
-  border: 1px solid var(--rule);
-  background: var(--white);
-  font: inherit;
-  font-size: 13px;
-}
-.coverage-calc .calc-row label { font-size: 12px; color: var(--slate); }
-.coverage-calc .calc-result {
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--rule);
-  display: flex;
-  gap: 24px;
-  font-size: 13px;
-  flex-wrap: wrap;
-}
-.coverage-calc .calc-result strong { color: var(--charcoal); font-weight: 500; }
-.coverage-calc .calc-result .label { color: var(--mid); font-size: 11px; display: block; }
-
 /* In-room visualizer slot (Track B PDP) — interactive room swap */
 .visualizer-slot {
   position: relative;
@@ -2680,14 +2643,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .swatch { padding: 11px 20px 11px 12px; }
   .swatch-chip { width: 28px; height: 28px; }
   .swatch-label { font-size: 14px; }
-  .swatch-label small { font-size: 12px; }
-  .coverage-calc { padding: 24px 28px; }
-  .coverage-calc h5 { font-size: 22px; margin-bottom: 8px; }
-  .coverage-calc .calc-sub { font-size: 13px; margin-bottom: 16px; }
-  .coverage-calc .calc-row input { width: 90px; padding: 9px 12px; font-size: 14px; }
-  .coverage-calc .calc-row label { font-size: 13px; }
-  .coverage-calc .calc-result { font-size: 14px; }
-  .visualizer-slot { min-height: 420px; }
+  .swatch-label small { font-size: 12px; }  .visualizer-slot { min-height: 420px; }
   .visualizer-overlay { padding: 290px 26px 24px; min-height: 420px; }
   .visualizer-overlay strong { font-size: 24px; }
   .visualizer-overlay > span { font-size: 13px; }

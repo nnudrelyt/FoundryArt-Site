@@ -464,29 +464,6 @@
     });
   }
 
-  // ────────────────────────────────────────────────────────
-  // Coverage calculator (Track B PDP)
-  // ────────────────────────────────────────────────────────
-  function initCoverageCalc() {
-    const calc = document.querySelector('.coverage-calc');
-    if (!calc) return;
-    const sqftInput = calc.querySelector('[data-sqft]');
-    const densityInput = calc.querySelector('[data-density]');
-    const tileCountOut = calc.querySelector('[data-tile-count]');
-    const costOut = calc.querySelector('[data-cost]');
-    const price = parseFloat(calc.dataset.price || '0');
-
-    function recompute() {
-      const sqft = parseFloat(sqftInput.value) || 0;
-      const density = parseFloat(densityInput.value) || 1;
-      const count = Math.ceil(sqft * density);
-      tileCountOut.textContent = count.toString();
-      costOut.textContent = '$' + (count * price).toFixed(2).replace(/\.00$/, '');
-    }
-    sqftInput.addEventListener('input', recompute);
-    densityInput.addEventListener('change', recompute);
-    recompute();
-  }
 
   // ────────────────────────────────────────────────────────
   // Track B in-room visualizer (tab → swap photo)
@@ -929,7 +906,6 @@
     initTabs();
     initGallery();
     initSwatches();
-    initCoverageCalc();
     initVisualizer();
     initFacets();
     initOptionRows();
