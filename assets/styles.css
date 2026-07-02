@@ -1404,7 +1404,7 @@ body[data-page="home"] .product-card-cta:hover {
 /* Inline variant — FAQ nested inside the guidance section, sharing
    its background/padding. Drop the standalone panel styling. */
 .fa-faq--inline {
-  grid-column: 1 / -1;                              /* span all cols of parent grid */
+  grid-column: 2 / -1;                              /* align to same column as .guidance-cards */
   padding: 64px 0 0;
   margin-top: 64px;
   background: transparent;
