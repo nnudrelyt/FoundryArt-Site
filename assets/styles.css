@@ -9315,3 +9315,114 @@ body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed:nth-child(7) { an
   body[data-page="home"] .hardware-item,
   body[data-page="home"] .guidance-grid > *,
 }
+
+/* ══════════════════════════════════════════════════════════
+   PDP polish — white bg, larger type, centered component,
+   cross-sell hover pickup from homepage landing card.
+   Scope: body[data-product-slug] fires on every /product/[slug]/
+   PDP (each PDP sets this attribute), leaving the shop grid at
+   its cream-tone default.
+   ────────────────────────────────────────────────────────── */
+body[data-product-slug] {
+  background: var(--white);
+}
+body[data-product-slug] .breadcrumb {
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 20px 40px;
+}
+body[data-product-slug] .page {
+  max-width: 1240px;
+}
+body[data-product-slug] .pdp-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3.5px;
+  margin-bottom: 16px;
+}
+body[data-product-slug] .pdp-title {
+  font-size: 48px;
+  margin-bottom: 18px;
+  letter-spacing: -0.3px;
+}
+body[data-product-slug] .pdp-price {
+  font-size: 30px;
+  margin-bottom: 24px;
+}
+body[data-product-slug] .pdp-price .was { font-size: 20px; margin-right: 12px; }
+body[data-product-slug] .pdp-desc {
+  font-size: 19px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  padding-bottom: 28px;
+}
+body[data-product-slug] .form-group label {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  margin-bottom: 14px;
+}
+body[data-product-slug] .swatch-chip { width: 32px; height: 32px; }
+body[data-product-slug] .swatch-label { font-size: 15px; line-height: 1.25; }
+body[data-product-slug] .swatch-label small { font-size: 12px; margin-top: 3px; }
+body[data-product-slug] .swatch { padding: 12px 18px 12px 12px; gap: 12px; }
+body[data-product-slug] .pdp-ships {
+  font-size: 14px;
+  color: var(--mid);
+  letter-spacing: 0.2px;
+}
+body[data-product-slug] .qty-row { gap: 20px; margin-bottom: 26px; }
+
+/* Cross-sell cards on the PDP pick up the homepage luxury-catalog
+   hover treatment — lift, soft shadow, bronze hairline border,
+   Shop Now CTA reveal. Mirrors body[data-page="home"] scope. */
+body[data-product-slug] .cross-sell {
+  margin-top: 96px;
+}
+body[data-product-slug] .cross-sell h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin-bottom: 32px;
+  text-align: center;
+}
+body[data-product-slug] .cross-sell-grid { gap: 28px; }
+body[data-product-slug] .cross-sell .product-card {
+  padding: 10px 8px 40px;
+  margin: -10px -8px 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+body[data-product-slug] .cross-sell .product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px -16px rgba(20, 37, 40, 0.18),
+              0 4px 12px -6px rgba(20, 37, 40, 0.10);
+  border-color: rgba(140, 98, 73, 0.18);
+}
+body[data-product-slug] .cross-sell .product-card:hover .wire-img { opacity: 1; }
+
+/* Bring the .footer-cta styles into scope on the PDP — same
+   selectors as homepage since footer-cta CSS is unscoped. */
+
+/* Responsive */
+@media (min-width: 1440px) {
+  body[data-product-slug] .pdp-title { font-size: 60px; margin-bottom: 24px; }
+  body[data-product-slug] .pdp-price { font-size: 34px; }
+  body[data-product-slug] .pdp-desc { font-size: 20px; }
+  body[data-product-slug] .breadcrumb { font-size: 13px; padding: 24px 80px; }
+  body[data-product-slug] .cross-sell h3 { font-size: 38px; margin-bottom: 40px; }
+  body[data-product-slug] .swatch-chip { width: 36px; height: 36px; }
+  body[data-product-slug] .swatch-label { font-size: 16px; }
+}
+@media (max-width: 560px) {
+  body[data-product-slug] .pdp-title { font-size: 32px; }
+  body[data-product-slug] .pdp-price { font-size: 22px; }
+  body[data-product-slug] .pdp-desc { font-size: 16px; }
+  body[data-product-slug] .breadcrumb { font-size: 11px; padding: 14px 16px; }
+  body[data-product-slug] .cross-sell h3 { font-size: 24px; }
+  body[data-product-slug] .cross-sell { margin-top: 56px; }
+  body[data-product-slug] .swatch { padding: 10px 14px 10px 10px; }
+  body[data-product-slug] .swatch-chip { width: 28px; height: 28px; }
+}
