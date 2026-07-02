@@ -1406,7 +1406,7 @@ body[data-page="home"] .product-card-cta:hover {
 .fa-faq--inline {
   grid-column: 2 / -1;                              /* align to same column as .guidance-cards */
   padding: 64px 0 0;
-  margin-top: 64px;
+  margin-top: 32px;
   background: transparent;
   border-top: 1px solid rgba(20, 37, 40, 0.14);   /* subtle hairline bridge */
 }
@@ -1427,12 +1427,12 @@ body[data-page="home"] .product-card-cta:hover {
   margin: 0;
 }
 @media (min-width: 1440px) {
-  .fa-faq--inline { margin-top: 88px; padding-top: 88px; }
+  .fa-faq--inline { margin-top: 44px; padding-top: 88px; }
   .fa-faq--inline .fa-faq-header { margin-bottom: 48px; }
   .fa-faq-title { font-size: 40px; }
 }
 @media (max-width: 560px) {
-  .fa-faq--inline { margin-top: 40px; padding-top: 40px; }
+  .fa-faq--inline { margin-top: 20px; padding-top: 40px; }
   .fa-faq--inline .fa-faq-header { margin-bottom: 24px; }
   .fa-faq-title { font-size: 24px; }
 }
