@@ -9426,3 +9426,78 @@ body[data-product-slug] .cross-sell .product-card:hover .wire-img { opacity: 1; 
   body[data-product-slug] .swatch { padding: 10px 14px 10px 10px; }
   body[data-product-slug] .swatch-chip { width: 28px; height: 28px; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   SHOP GRID PAGE polish — white bg, larger filter type,
+   luxury-catalog card hover (mirrors homepage treatment),
+   FA footer-cta already ships via the HTML addition.
+   Scope: body[data-page="shop"]:not([data-product-slug])
+   fires on the shop grid but not on PDPs (both share
+   data-page="shop"; PDPs also carry data-product-slug).
+   ────────────────────────────────────────────────────────── */
+body[data-page="shop"]:not([data-product-slug]) {
+  background: var(--white);
+}
+
+/* Larger page header type */
+body[data-page="shop"]:not([data-product-slug]) .page-title { font-size: 44px; }
+body[data-page="shop"]:not([data-product-slug]) .page-sub { font-size: 17px; line-height: 1.55; margin-top: 6px; }
+
+/* Larger breadcrumb */
+body[data-page="shop"]:not([data-product-slug]) .breadcrumb { font-size: 12px; letter-spacing: 2px; padding: 20px 40px; }
+
+/* Filter sidebar — bigger group titles, labels, counts */
+body[data-page="shop"]:not([data-product-slug]) .facet-group h5 {
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  margin-bottom: 16px;
+}
+body[data-page="shop"]:not([data-product-slug]) .facet-list li { font-size: 15px; padding: 8px 0; }
+body[data-page="shop"]:not([data-product-slug]) .facet-list li .count { font-size: 13px; }
+body[data-page="shop"]:not([data-product-slug]) .facet-swatch { font-size: 12px; }
+body[data-page="shop"]:not([data-product-slug]) .facet-swatch .swatch-chip { width: 32px; height: 32px; }
+body[data-page="shop"]:not([data-product-slug]) .facet-price-range input { font-size: 14px; padding: 8px 10px; }
+body[data-page="shop"]:not([data-product-slug]) .facet-price-range + p { font-size: 13px !important; margin-top: 12px !important; }
+body[data-page="shop"]:not([data-product-slug]) .shop-sidebar { width: 240px; }
+body[data-page="shop"]:not([data-product-slug]) .shop-layout { grid-template-columns: 240px 1fr; gap: 56px; }
+
+/* Toolbar — Showing / Sort */
+body[data-page="shop"]:not([data-product-slug]) .shop-result-count { font-size: 14px; }
+body[data-page="shop"]:not([data-product-slug]) .shop-sort label { font-size: 13px; }
+body[data-page="shop"]:not([data-product-slug]) .shop-sort select { font-size: 14px; padding: 8px 32px 8px 14px; }
+
+/* Luxury-catalog hover on shop-grid product cards — mirrors the
+   homepage .product-card treatment. Image stays full opacity;
+   card lifts 6px with soft shadow + bronze hairline. */
+body[data-page="shop"]:not([data-product-slug]) .shop-grid .product-card {
+  padding: 10px 8px 40px;
+  margin: -10px -8px 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+body[data-page="shop"]:not([data-product-slug]) .shop-grid .product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 38px -16px rgba(20, 37, 40, 0.18),
+              0 4px 12px -6px rgba(20, 37, 40, 0.10);
+  border-color: rgba(140, 98, 73, 0.18);
+}
+body[data-page="shop"]:not([data-product-slug]) .shop-grid .product-card:hover .wire-img { opacity: 1; }
+
+/* Responsive */
+@media (min-width: 1440px) {
+  body[data-page="shop"]:not([data-product-slug]) .page-title { font-size: 54px; }
+  body[data-page="shop"]:not([data-product-slug]) .page-sub { font-size: 19px; }
+  body[data-page="shop"]:not([data-product-slug]) .breadcrumb { font-size: 13px; padding: 24px 80px; }
+  body[data-page="shop"]:not([data-product-slug]) .facet-group h5 { font-size: 14px; }
+  body[data-page="shop"]:not([data-product-slug]) .facet-list li { font-size: 16px; }
+  body[data-page="shop"]:not([data-product-slug]) .facet-list li .count { font-size: 14px; }
+}
+@media (max-width: 560px) {
+  body[data-page="shop"]:not([data-product-slug]) .page-title { font-size: 32px; }
+  body[data-page="shop"]:not([data-product-slug]) .page-sub { font-size: 15px; }
+  body[data-page="shop"]:not([data-product-slug]) .facet-group h5 { font-size: 12px; }
+  body[data-page="shop"]:not([data-product-slug]) .facet-list li { font-size: 14px; }
+}
