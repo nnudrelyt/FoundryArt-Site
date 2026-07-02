@@ -1258,12 +1258,20 @@ body[data-page="home"] .product-card-cta:hover {
 }
 .guidance-card h4 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 500;
   color: var(--charcoal);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  line-height: 1.15;
 }
-.guidance-card p { font-size: 15px; color: var(--mid); line-height: 1.6; }
+.guidance-card p { font-size: 17px; color: var(--mid); line-height: 1.6; }
+.guidance-card-cta-arrow {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.guidance-card:hover .guidance-card-cta-arrow {
+  transform: translateX(5px);
+}
 .guidance-card-cta {
   display: inline-block;
   margin-top: 14px;
@@ -1276,6 +1284,122 @@ body[data-page="home"] .product-card-cta:hover {
   transition: color 0.2s ease;
 }
 .guidance-card:hover .guidance-card-cta { color: var(--charcoal); }
+
+/* ══════════════════════════════════════ FA FAQ ACCORDION ══════════════════════════════════════ */
+.fa-faq {
+  padding: 90px 40px 110px;
+  background: var(--cream);
+}
+.fa-faq-header {
+  max-width: 780px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.fa-faq-header .section-eyebrow { color: var(--bronze); margin-bottom: 14px; }
+.fa-faq-header .section-headline { font-size: 34px; margin-bottom: 0; }
+.fa-faq-list {
+  max-width: 900px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(20, 37, 40, 0.12);
+}
+.fa-faq-item {
+  border-bottom: 1px solid rgba(20, 37, 40, 0.12);
+}
+.fa-faq-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 24px 4px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+.fa-faq-trigger:hover { color: var(--bronze); }
+.fa-faq-question {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.fa-faq-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--bronze);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fa-faq-icon::before,
+.fa-faq-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: currentColor;
+}
+.fa-faq-icon::before {
+  width: 14px;
+  height: 1.5px;
+  transform: translate(-50%, -50%);
+}
+.fa-faq-icon::after {
+  width: 1.5px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fa-faq-item.is-open .fa-faq-icon::after {
+  transform: translate(-50%, -50%) scaleY(0);
+}
+.fa-faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.fa-faq-item.is-open .fa-faq-body {
+  grid-template-rows: 1fr;
+}
+.fa-faq-answer {
+  min-height: 0;
+  overflow: hidden;
+}
+.fa-faq-answer p {
+  padding: 0 4px 28px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--slate);
+  margin: 0;
+  max-width: 760px;
+}
+
+/* 1440+ scale */
+@media (min-width: 1440px) {
+  .fa-faq { padding: 130px 80px 150px; }
+  .fa-faq-header { margin-bottom: 64px; }
+  .fa-faq-header .section-headline { font-size: 46px; }
+  .fa-faq-list { max-width: 1080px; }
+  .fa-faq-trigger { padding: 32px 4px; gap: 32px; }
+  .fa-faq-question { font-size: 28px; }
+  .fa-faq-icon { width: 24px; height: 24px; }
+  .fa-faq-icon::before { width: 18px; }
+  .fa-faq-icon::after { height: 18px; }
+  .fa-faq-answer p { font-size: 19px; padding-bottom: 36px; }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .fa-faq { padding: 56px 16px 72px; }
+  .fa-faq-header { margin-bottom: 32px; }
+  .fa-faq-header .section-headline { font-size: 28px; }
+  .fa-faq-trigger { padding: 20px 0; gap: 16px; }
+  .fa-faq-question { font-size: 19px; }
+  .fa-faq-answer p { font-size: 15px; padding-bottom: 20px; padding-left: 0; padding-right: 0; }
+}
 
 /* ══════════════════════════════════════ SOCIAL PROOF (homepage) ══════════════════════════════════════ */
 .social-proof { padding: 80px 40px; background: var(--white); }
@@ -2532,9 +2656,9 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .guidance-cards { gap: 26px; }
   .guidance-card { padding: 36px; }
   .guidance-card-icon { width: 36px; height: 36px; margin-bottom: 20px; font-size: 10px; }
-  .guidance-card h4 { font-size: 22px; margin-bottom: 12px; }
-  .guidance-card p { font-size: 13px; line-height: 1.7; }
-  .guidance-card-cta { font-size: 11px; margin-top: 20px; }
+  .guidance-card h4 { font-size: 32px; margin-bottom: 14px; }
+  .guidance-card p { font-size: 18px; line-height: 1.65; }
+  .guidance-card-cta { font-size: 12px; margin-top: 24px; letter-spacing: 2px; }
 
   /* Social proof / testimonials */
   .social-proof { padding: 130px 80px; }

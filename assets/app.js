@@ -921,6 +921,7 @@
     initIntroAnimations();
     initInsituAutoscroll();
     initInsituScrollIndicator();
+    initFaqAccordion();
     renderShopGrid();
     renderCrossSell();
     renderShopSidebar();
@@ -985,6 +986,20 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     targets.forEach(t => io.observe(t));
 
+  }
+
+  // FAQ accordion — click to toggle, multiple can be open simultaneously.
+  // Uses grid-template-rows 0fr → 1fr for smooth height animation without
+  // needing to measure element height in JS.
+  function initFaqAccordion() {
+    document.querySelectorAll('.fa-faq-item').forEach(item => {
+      const trigger = item.querySelector('.fa-faq-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', () => {
+        const open = item.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
   }
 
   // Inspiration carousel autoscroll — slow drift, pauses on hover
