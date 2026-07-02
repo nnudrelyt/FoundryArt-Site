@@ -1407,10 +1407,10 @@ body[data-page="home"] .product-card-cta:hover {
   padding: 64px 0 0;
   margin-top: 64px;
   background: transparent;
-  max-width: 1080px;
-  margin-left: auto;
-  margin-right: auto;
   border-top: 1px solid rgba(20, 37, 40, 0.14);   /* subtle hairline bridge */
+}
+.fa-faq--inline .fa-faq-list {
+  max-width: none;   /* fill the guidance-section container width */
 }
 .fa-faq--inline .fa-faq-header {
   margin: 0 0 32px;
