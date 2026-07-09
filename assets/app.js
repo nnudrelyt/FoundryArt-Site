@@ -348,12 +348,205 @@
     });
   }
 
+  // ════════════════════════════════════════════════════════
+  // Client-side cart store (localStorage) — the shared state
+  // behind browsing → cart → checkout → confirmation, standing
+  // in for the WooCommerce cart on the live site.
+  // ════════════════════════════════════════════════════════
+  const Cart = (function () {
+    const KEY = 'fa_cart_v1';
+    // Seed the demo cart on the FIRST ever visit (missing key) so the
+    // prototype opens populated like the live-site screenshots. A user-
+    // emptied cart persists as [] and is never re-seeded.
+    const SEED = [
+      { slug: 'cabochon-3x3', name: 'Cabochon', sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 2, sku: 'FA-CAB-3-TB', weight: 0.8 },
+      { slug: 'lotus-3x3',    name: 'Lotus',    sizeLabel: '3×3 inch', finish: 'White Bronze',       price: 92.50, qty: 1, sku: 'FA-LOT-3-WB', weight: 0.8 },
+    ];
+    function read() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
+    function write(items) { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} document.dispatchEvent(new CustomEvent('fa-cart-change')); }
+    try { if (localStorage.getItem(KEY) === null) localStorage.setItem(KEY, JSON.stringify(SEED)); } catch (e) {}
+    const sameLine = (a, b) => a.slug === b.slug && a.finish === b.finish;
+    return {
+      items: read,
+      count() { return read().reduce((n, i) => n + i.qty, 0); },
+      add(item) {
+        const items = read();
+        const ex = items.find(i => sameLine(i, item));
+        if (ex) ex.qty += item.qty; else items.push(item);
+        write(items);
+      },
+      setQty(slug, finish, qty) {
+        const items = read();
+        const it = items.find(i => i.slug === slug && i.finish === finish);
+        if (it) { it.qty = Math.max(1, (qty | 0) || 1); write(items); }
+      },
+      remove(slug, finish) { write(read().filter(i => !(i.slug === slug && i.finish === finish))); },
+      clear() { write([]); },
+    };
+  })();
+  window.FA = window.FA || {}; window.FA.Cart = Cart;
+
+  const fmtMoney = n => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const chipClass = f => /white/i.test(f) ? 'white' : 'traditional';
+  const finishShort = f => f.replace(/\s*Bronze$/i, '');
+  const thumbFor = slug => '/assets/images/products/' + slug + '/main.jpg';
+  const weightForSize = s => /1×1/.test(s) ? 0.1 : (/2×2/.test(s) ? 0.4 : 0.8);
+  const skuForFinish = (p, f) => /white/i.test(f) ? p.sku.replace(/-TB$/, '-WB') : p.sku.replace(/-WB$/, '-TB');
+  const setText = (sel, t) => { const el = document.querySelector(sel); if (el) el.textContent = t; };
+
+  // Nav cart badge(s) reflect the store on every page.
+  function updateNavCount() {
+    const n = Cart.count();
+    document.querySelectorAll('[data-cart-count]').forEach(el => { el.textContent = n; });
+  }
+
+  // PDP → Add to cart
+  function initAddToCart() {
+    const slug = document.body.getAttribute('data-product-slug');
+    if (!slug) return;
+    const product = (window.FA_PRODUCTS || []).find(p => p.slug === slug);
+    const btn = document.querySelector('.pdp-actions .btn-primary');
+    if (!product || !btn) return;
+    const label = btn.textContent;
+    btn.addEventListener('click', () => {
+      const sel = document.querySelector('[data-finish-target] .swatch.selected .swatch-label');
+      const finish = sel ? sel.childNodes[0].textContent.trim() : product.finishes[0];
+      const qtyInput = document.querySelector('.qty-row .qty-stepper input');
+      const qty = Math.max(1, parseInt(qtyInput && qtyInput.value, 10) || 1);
+      Cart.add({ slug, name: product.name, sizeLabel: product.sizeLabel, finish, price: product.price,
+                 qty, sku: skuForFinish(product, finish), weight: weightForSize(product.size) });
+      updateNavCount();
+      btn.textContent = 'Added to cart ✓'; btn.disabled = true;
+      setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 1600);
+    });
+  }
+
+  // Cart page — render line items from the store
+  function renderCartRows() {
+    const tbody = document.querySelector('body[data-page="cart"] .cart-table tbody');
+    if (!tbody) return;
+    tbody.innerHTML = Cart.items().map(i => `
+            <tr data-cart-row data-slug="${i.slug}" data-finish="${i.finish}" data-weight="${i.weight}">
+              <td class="cart-item-cell" data-label="Product">
+                <div class="cart-item">
+                  <div class="cart-thumb"><img src="${thumbFor(i.slug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
+                  <div class="cart-item-info"><strong>${i.name}</strong><span>${i.sizeLabel} · SKU: ${i.sku}</span></div>
+                </div>
+              </td>
+              <td data-label="Material">
+                <span class="swatch" style="padding:6px 12px 6px 8px;display:inline-flex;">
+                  <span class="swatch-chip ${chipClass(i.finish)}" style="width:18px;height:18px;"></span>
+                  <span class="swatch-label" style="font-size:13px;">${finishShort(i.finish)}</span>
+                </span>
+              </td>
+              <td class="num" data-label="Price" data-unit-price="${i.price}">${fmtMoney(i.price)}</td>
+              <td data-label="Qty">
+                <div class="qty-stepper" aria-label="Quantity">
+                  <button type="button" data-qty="-" aria-label="Decrease">−</button>
+                  <input type="number" value="${i.qty}" min="1" max="99">
+                  <button type="button" data-qty="+" aria-label="Increase">+</button>
+                </div>
+              </td>
+              <td class="num" data-label="Subtotal" data-line-subtotal>${fmtMoney(i.price * i.qty)}</td>
+              <td data-label="Remove"><button type="button" class="cart-remove" aria-label="Remove">Remove</button></td>
+            </tr>`).join('');
+  }
+
+  // Checkout — render the "Your order" summary from the store + live totals
+  function renderCheckoutSummary() {
+    const wrap = document.querySelector('[data-order-items]');
+    if (!wrap) return;
+    wrap.innerHTML = Cart.items().map(i => `
+        <div class="summary-item">
+          <div class="summary-item-thumb"><img src="${thumbFor(i.slug)}" alt="${i.name}" loading="lazy"></div>
+          <div class="summary-item-info"><strong>${i.name} × ${i.qty}</strong><span>${i.sizeLabel.replace(' inch', '')} · ${i.finish}</span></div>
+          <div class="summary-item-price">${fmtMoney(i.price * i.qty)}</div>
+        </div>`).join('');
+    updateCheckoutTotals();
+  }
+  function selectedShipping() {
+    const r = document.querySelector('input[name="shipping"]:checked');
+    if (!r) return { label: 'UPS Ground', cost: 12 };
+    const row = r.closest('.option-row');
+    const priceEl = row.querySelector('.opt-main > span');
+    const cost = priceEl ? (parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')) || 0) : 0;
+    return { label: row.querySelector('strong').textContent, cost };
+  }
+  function tradeActive() {
+    const t = document.querySelector('[data-trade-toggle]');
+    const id = document.querySelector('[data-trade-id]');
+    return !!(t && t.checked && id && id.value.trim() !== '');
+  }
+  function updateCheckoutTotals() {
+    if (!document.querySelector('[data-order-items]')) return;
+    const items = Cart.items();
+    const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+    const discount = tradeActive() ? subtotal * 0.20 : 0;
+    const ship = selectedShipping();
+    const tax = 0;
+    const total = subtotal - discount + ship.cost + tax;
+    setText('[data-co-subtotal]', fmtMoney(subtotal));
+    const dl = document.querySelector('.trade-discount-line'); if (dl) dl.textContent = '−' + fmtMoney(discount);
+    setText('[data-co-shipping-label]', 'Shipping (' + ship.label + ')');
+    setText('[data-co-shipping]', fmtMoney(ship.cost));
+    setText('[data-co-tax]', fmtMoney(tax));
+    setText('[data-co-total]', fmtMoney(total));
+    const btn = document.querySelector('[data-place-order]'); if (btn) btn.textContent = 'Place Order — ' + fmtMoney(total);
+  }
+  function initCheckout() {
+    if (!document.querySelector('[data-order-items]')) return;
+    renderCheckoutSummary();
+    document.querySelectorAll('input[name="shipping"]').forEach(r => r.addEventListener('change', updateCheckoutTotals));
+    const tt = document.querySelector('[data-trade-toggle]'); if (tt) tt.addEventListener('change', updateCheckoutTotals);
+    const tid = document.querySelector('[data-trade-id]');
+    if (tid) { tid.addEventListener('input', updateCheckoutTotals); tid.addEventListener('blur', updateCheckoutTotals); }
+    // On place-order: snapshot the order, then clear the cart (the inline
+    // onsubmit handles the redirect to the confirmation page).
+    const form = document.querySelector('.checkout-layout');
+    if (form) form.addEventListener('submit', () => {
+      const items = Cart.items();
+      const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+      const discount = tradeActive() ? subtotal * 0.20 : 0;
+      const ship = selectedShipping();
+      const total = subtotal - discount + ship.cost;
+      try {
+        localStorage.setItem('fa_last_order', JSON.stringify({ items, subtotal, discount, shipping: ship, tax: 0, total }));
+      } catch (e) {}
+      Cart.clear();
+    });
+  }
+
+  // Order-received — reflect the placed order if we have a snapshot
+  function initOrderReceived() {
+    if (document.body.getAttribute('data-page') !== 'order-received') return;
+    let order; try { order = JSON.parse(localStorage.getItem('fa_last_order')); } catch (e) {}
+    if (!order || !order.items || !order.items.length) return;
+    const body = document.querySelector('[data-order-details]');
+    if (body) {
+      body.innerHTML = order.items.map(i => `
+          <tr>
+            <td>
+              <div class="cart-item">
+                <div class="cart-thumb"><img src="${thumbFor(i.slug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
+                <div class="cart-item-info"><strong>${i.name} × ${i.qty}</strong><span>${i.sizeLabel.replace(' inch', '')} · ${i.finish} · SKU: ${i.sku}</span></div>
+              </div>
+            </td>
+            <td class="num">${fmtMoney(i.price * i.qty)}</td>
+          </tr>
+          `).join('') +
+        `<tr><td><strong>Subtotal</strong></td><td class="num">${fmtMoney(order.subtotal)}</td></tr>` +
+        (order.discount ? `<tr><td><strong>Trade discount (20%)</strong></td><td class="num">−${fmtMoney(order.discount)}</td></tr>` : '') +
+        `<tr><td><strong>Shipping</strong></td><td class="num">${order.shipping.label} — ${fmtMoney(order.shipping.cost)}</td></tr>` +
+        `<tr><td><strong>Total</strong></td><td class="num" style="font-weight:500;font-size:15px;">${fmtMoney(order.total)}</td></tr>`;
+    }
+    setText('[data-or-total]', fmtMoney(order.total));
+  }
+
   // ────────────────────────────────────────────────────────
   // Cart — live line subtotals + order totals
-  // Reacts to the 'change'/'input' events initQtySteppers fires,
-  // plus Remove. Unit price comes from data-unit-price on the
-  // Price cell; everything recomputes from the DOM (prototype —
-  // no persistence).
+  // Reads the rendered rows (renderCartRows) and reacts to the
+  // 'change'/'input' events initQtySteppers fires, plus Remove;
+  // syncs qty/remove back to the Cart store.
   // ────────────────────────────────────────────────────────
   function initCart() {
     if (!document.body.matches('[data-page="cart"]')) return;
@@ -448,13 +641,21 @@
       table.replaceWith(msg);
     }
 
-    tbody.addEventListener('change', e => { if (e.target.matches('.qty-stepper input')) recompute(); });
-    tbody.addEventListener('input',  e => { if (e.target.matches('.qty-stepper input')) recompute(); });
+    function syncQty(input) {
+      const row = input.closest('[data-cart-row]');
+      if (row && row.dataset.slug) Cart.setQty(row.dataset.slug, row.dataset.finish, parseInt(input.value, 10) || 1);
+    }
+    tbody.addEventListener('change', e => { if (e.target.matches('.qty-stepper input')) { syncQty(e.target); recompute(); } });
+    tbody.addEventListener('input',  e => { if (e.target.matches('.qty-stepper input')) { syncQty(e.target); recompute(); } });
     tbody.addEventListener('click', e => {
       const btn = e.target.closest('.cart-remove');
       if (!btn) return;
       const row = btn.closest('[data-cart-row]');
-      if (row) row.remove();
+      if (row) {
+        if (row.dataset.slug) Cart.remove(row.dataset.slug, row.dataset.finish);
+        row.remove();
+      }
+      updateNavCount();
       recompute();
     });
 
@@ -1041,11 +1242,16 @@
 
   ready(() => {
     initLayout();
+    updateNavCount();
     initDrawer();
     initStudiosDrawer();
     initFilterTabs();
+    renderCartRows();      // build cart line items from the store BEFORE steppers bind
     initQtySteppers();
     initCart();
+    initAddToCart();
+    initCheckout();
+    initOrderReceived();
     initTabs();
     initGallery();
     initSwatches();
