@@ -1439,11 +1439,14 @@ body[data-page="home"] .product-card-cta:hover {
 }
 
 /* Prominent studio-direct phone in the footer-cta */
-.footer-cta-phone {
+/* .footer-cta-text .footer-cta-phone (0,2,0) — must out-specify
+   the `.footer-cta-text p { margin: 0 }` reset (0,1,1) above, or
+   the top margin never lands. */
+.footer-cta-text .footer-cta-phone {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-top: 26px;
+  margin-top: 40px;
   margin-bottom: 0;
 }
 .footer-cta-phone-label {
@@ -1466,12 +1469,12 @@ body[data-page="home"] .product-card-cta:hover {
 }
 .footer-cta-phone a:hover { color: var(--bronze-l); }
 @media (min-width: 1440px) {
-  .footer-cta-phone { margin-top: 32px; gap: 8px; }
+  .footer-cta-text .footer-cta-phone { margin-top: 52px; gap: 8px; }
   .footer-cta-phone a { font-size: 42px; }
   .footer-cta-phone-label { font-size: 12px; letter-spacing: 3px; }
 }
 @media (max-width: 560px) {
-  .footer-cta-phone { margin-top: 20px; }
+  .footer-cta-text .footer-cta-phone { margin-top: 30px; }
   .footer-cta-phone a { font-size: 28px; }
 }
 
@@ -9643,4 +9646,19 @@ body[data-page="order-received"] .cart-thumb { width: 80px; height: 80px; }
 @media (max-width: 560px) {
   :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-title { font-size: 32px; }
   :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-sub { font-size: 15px; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   FA HOMEPAGE HERO — center the (left-aligned) copy vertically
+   The ≥1440 tier hugs the copy to the hero bottom
+   (justify-content: flex-end); this recenters it vertically.
+   Left alignment + the left-weighted scrim are kept as-is.
+   Below 1440 the base .hero-content already centers vertically.
+   ────────────────────────────────────────────────────────── */
+@media (min-width: 1440px) {
+  body[data-page="home"] .hero-content {
+    justify-content: center;
+    padding-top: clamp(56px, 4vw, 96px);
+    padding-bottom: clamp(56px, 4vw, 96px);
+  }
 }
