@@ -9677,3 +9677,15 @@ body[data-page="cart"] .summary-note { font-size: 13px; }
   body[data-page="cart"] .summary-note { font-size: 14px; }
   .summary-note .card-mark { width: 44px; }
 }
+
+/* PDP tabs — center the whole block (tab bar + panels) in the page
+   while keeping its content left-aligned. Capped at the tab-panel's
+   reading width so the tab bar and panels stay the same width. */
+body[data-product-slug] .pdp-tabs {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 1440px) {
+  body[data-product-slug] .pdp-tabs { max-width: 960px; }
+}
