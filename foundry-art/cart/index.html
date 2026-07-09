@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260603-186">
-<link rel="stylesheet" href="/assets/styles.css?v=20260603-186">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260603-187">
+<link rel="stylesheet" href="/assets/styles.css?v=20260603-187">
 </head>
 <body data-page="cart">
 
@@ -55,7 +55,7 @@
           </thead>
           <tbody>
 
-            <tr data-cart-row>
+            <tr data-cart-row data-weight="0.8">
               <td class="cart-item-cell" data-label="Product">
                 <div class="cart-item">
                   <div class="cart-thumb"><img src="/assets/images/products/cabochon-3x3/main.jpg" alt="Cabochon 3×3" loading="lazy"></div>
@@ -83,7 +83,7 @@
               <td data-label="Remove"><button type="button" class="cart-remove" aria-label="Remove">Remove</button></td>
             </tr>
 
-            <tr data-cart-row>
+            <tr data-cart-row data-weight="0.8">
               <td class="cart-item-cell" data-label="Product">
                 <div class="cart-item">
                   <div class="cart-thumb"><img src="/assets/images/products/lotus-3x3/main.jpg" alt="Lotus 3×3" loading="lazy"></div>
@@ -127,16 +127,17 @@
       <aside class="summary-card" aria-label="Order totals">
         <h3>Order Summary</h3>
         <div class="summary-row"><span>Subtotal (<span data-summary-count>3</span> items)</span><span data-summary-subtotal>$277.50</span></div>
-        <div class="summary-row"><span>Shipping</span><span>Calculated at checkout</span></div>
+        <div class="summary-row"><span>Shipping</span><span data-cart-shipping>Calculated at checkout</span></div>
         <div class="summary-row"><span>Tax</span><span>Calculated at checkout</span></div>
 
         <details class="shipping-stub">
           <summary>Estimate shipping</summary>
           <div class="stub-form">
             <select aria-label="Country"><option>United States (US)</option><option>Canada</option></select>
-            <select aria-label="State"><option>Illinois</option><option>California</option><option>New York</option></select>
-            <input type="text" placeholder="ZIP / Postcode">
-            <button type="button" class="btn-secondary" style="margin-top:4px;">Update</button>
+            <select aria-label="State" data-ship-state><option>Illinois</option><option>California</option><option>New York</option></select>
+            <input type="text" placeholder="ZIP / Postcode" data-ship-zip>
+            <button type="button" class="btn-secondary" style="margin-top:4px;" data-ship-update>Update</button>
+            <p class="ship-estimate-result" data-ship-result hidden></p>
           </div>
         </details>
 
@@ -174,7 +175,7 @@
 
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260603-186"></script>
-  <script src="/assets/app.js?v=20260603-186"></script>
+  <script src="/assets/products.js?v=20260603-187"></script>
+  <script src="/assets/app.js?v=20260603-187"></script>
 </body>
 </html>

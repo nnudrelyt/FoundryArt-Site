@@ -369,7 +369,40 @@
       count:    document.querySelector('[data-summary-count]'),
       lines:    document.querySelector('[data-cart-lines]'),
       nav:      document.querySelector('[data-cart-count]'),
+      shipping: document.querySelector('[data-cart-shipping]'),
     };
+
+    // ── Shipping estimator (weight + UPS zone) ──
+    // Approximate UPS Ground estimate from the ship-to state (zone off
+    // the Chicago studio, 606xx) + total billable weight (per-tile
+    // data-weight + ~1 lb packaging). Live, authenticated rating happens
+    // in the WooCommerce UPS plugin — this is a believable stand-in.
+    const shipState  = document.querySelector('[data-ship-state]');
+    const shipUpdate = document.querySelector('[data-ship-update]');
+    const shipResult = document.querySelector('[data-ship-result]');
+    const UPS_ZONE = { 'Illinois': 2, 'New York': 5, 'California': 7 };
+    let shipEstimate = null; // dollars, or null until estimated
+
+    function billableWeight() {
+      let w = 0;
+      tbody.querySelectorAll('[data-cart-row]').forEach(row => {
+        const unit = parseFloat(row.getAttribute('data-weight')) || 0;
+        const qty = Math.max(1, parseInt(row.querySelector('.qty-stepper input').value, 10) || 1);
+        w += unit * qty;
+      });
+      return w + 1; // + ~1 lb packaging
+    }
+    function estimateShipping() {
+      const zone = UPS_ZONE[shipState && shipState.value] || 5;
+      const est = 9.5 + (zone - 2) * 1.75 + billableWeight() * 1.2;
+      return Math.round(est * 100) / 100;
+    }
+    function showShipResult() {
+      if (!shipResult) return;
+      shipResult.textContent = 'UPS Ground to ' + (shipState ? shipState.value : '') +
+        ' — ' + money(shipEstimate) + ' · 5–7 business days · estimate';
+      shipResult.hidden = false;
+    }
 
     function recompute() {
       const rows = Array.from(tbody.querySelectorAll('[data-cart-row]'));
@@ -386,10 +419,12 @@
         subtotal += line;
         qtyTotal += qty;
       });
-      // Shipping + tax are "calculated at checkout", so the estimated
-      // total on the cart equals the subtotal.
+      // Once an estimate exists, keep it in sync with qty changes and
+      // fold it into the total; otherwise shipping is "calculated at checkout".
+      if (shipEstimate != null) { shipEstimate = estimateShipping(); showShipResult(); }
+      if (els.shipping) els.shipping.textContent = shipEstimate != null ? money(shipEstimate) : 'Calculated at checkout';
       if (els.subtotal) els.subtotal.textContent = money(subtotal);
-      if (els.total)    els.total.textContent = money(subtotal);
+      if (els.total)    els.total.textContent = money(subtotal + (shipEstimate || 0));
       if (els.count)    els.count.textContent = qtyTotal;
       if (els.lines)    els.lines.textContent = rows.length;
       if (els.nav)      els.nav.textContent = qtyTotal;
@@ -413,6 +448,12 @@
       if (!btn) return;
       const row = btn.closest('[data-cart-row]');
       if (row) row.remove();
+      recompute();
+    });
+
+    if (shipUpdate) shipUpdate.addEventListener('click', () => {
+      shipEstimate = estimateShipping();
+      showShipResult();
       recompute();
     });
 
