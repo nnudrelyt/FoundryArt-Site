@@ -8,7 +8,8 @@ Client: Foundry Art (Linden Workshops family). Static HTML site, one directory p
 - Site-level specs: `DESIGN-SYSTEM.md` (root) and `AUDIT.md`.
 
 ## Deploys
-- Working/preview deploy: foundry-art-responsive.vercel.app · prod-track deploy: foundry-art-site.vercel.app (the `/precision/` rebuild is live there). Confirm which target before pushing.
+- **Canonical target: foundry-art-site.vercel.app.** Deploy by pushing to the `foundryart-site` remote's `updates` branch (Vercel git-connected, production = `updates`): `git push foundryart-site HEAD:updates`. Work happens on the local `precision-mirror` branch, kept in sync with `updates`. Bump the shared `?v=` cache-buster across all pages whenever `assets/styles.css` changes.
+- **Deprecated:** the `origin` remote (`Foundry-Art-Responsive` → foundry-art-responsive.vercel.app) is old/archived as of 2026-07-09 — do NOT push there.
 
 ## Collection-detail template
 - `/precision/` was rebuilt 1:1 against live lindenworkshops.com/precision using LW components — it is the **canonical collection-detail template** (see DESIGN-SYSTEM §8).

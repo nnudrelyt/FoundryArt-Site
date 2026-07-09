@@ -9510,3 +9510,134 @@ body[data-page="shop"]:not([data-product-slug]) .shop-grid .product-card:hover .
 /* Remove breadcrumb from FA shop grid + PDPs — Tyler wants the
    page to open directly at the hero without the nav trail. */
 body[data-page="shop"] .breadcrumb { display: none; }
+
+/* ══════════════════════════════════════════════════════════
+   CART · CHECKOUT · ORDER-RECEIVED — consistency pass
+   Brings the funnel up to the shopping-experience treatment
+   that shipped on the shop grid + PDPs:
+     • white background (was cream)
+     • shop-grid page-header scale
+     • base-tier type bumps on tables / summaries / forms /
+       option rows (the ≥1440 tier already scaled these — this
+       closes the gap on laptop widths)
+     • breadcrumb hidden to match shop/PDP + keep the funnel
+       focused (global nav still handles wayfinding)
+     • soft resting shadow on the white-on-white cards so they
+       keep separation now the page is white
+     • bronze focus feedback + option-row lift, mirroring the
+       shopping-card hover language
+   The scoped @1440 block at the end re-asserts the existing
+   wide-tier values so these base bumps don't leak upward.
+   ────────────────────────────────────────────────────────── */
+
+/* White page + hidden breadcrumb */
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) { background: var(--white); }
+body[data-page="cart"] .breadcrumb,
+body[data-page="checkout"] .breadcrumb { display: none; }
+
+/* Page header — shop-grid scale */
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-title { font-size: 44px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-sub { font-size: 17px; line-height: 1.55; margin-top: 6px; }
+
+/* ── Cart line-items table ── */
+body[data-page="cart"] .cart-table th { font-size: 11px; }
+body[data-page="cart"] .cart-table td { font-size: 15px; }
+body[data-page="cart"] .cart-thumb { width: 80px; height: 80px; }
+body[data-page="cart"] .cart-item-info strong { font-size: 18px; }
+body[data-page="cart"] .cart-item-info span { font-size: 12px; }
+body[data-page="cart"] .cart-remove { font-size: 12px; }
+body[data-page="cart"] .trade-row,
+body[data-page="checkout"] .trade-row { font-size: 15px; }
+
+/* Cart qty stepper — larger tap target, matches the PDP stepper */
+body[data-page="cart"] .qty-stepper button { width: 40px; height: 42px; font-size: 17px; }
+body[data-page="cart"] .qty-stepper input { width: 48px; height: 42px; font-size: 15px; }
+
+/* ── Order-summary panels (cart + checkout) ── */
+:is(body[data-page="cart"], body[data-page="checkout"]) .summary-card {
+  padding: 32px;
+  box-shadow: 0 14px 34px -22px rgba(20, 37, 40, 0.15);
+}
+:is(body[data-page="cart"], body[data-page="checkout"]) .summary-card h3 { font-size: 26px; margin-bottom: 20px; padding-bottom: 20px; }
+:is(body[data-page="cart"], body[data-page="checkout"]) .summary-row { font-size: 15px; }
+:is(body[data-page="cart"], body[data-page="checkout"]) .summary-row.total { font-size: 18px; }
+:is(body[data-page="cart"], body[data-page="checkout"]) .summary-note { font-size: 11px; }
+:is(body[data-page="cart"], body[data-page="checkout"]) .summary-card .btn-primary { font-size: 12px; }
+
+/* ── Checkout form + option rows ── */
+body[data-page="checkout"] .checkout-section h2 { font-size: 26px; margin-bottom: 24px; }
+body[data-page="checkout"] .field-grid { gap: 16px 20px; }
+body[data-page="checkout"] .checkbox-row { font-size: 14px; }
+body[data-page="checkout"] .option-row {
+  padding: 16px 20px;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+body[data-page="checkout"] .option-row:hover { box-shadow: 0 8px 20px -14px rgba(20, 37, 40, 0.18); }
+body[data-page="checkout"] .option-row .opt-main { font-size: 15px; }
+body[data-page="checkout"] .option-row .opt-sub { font-size: 13px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item { font-size: 13px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-thumb { width: 56px; height: 56px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info strong { font-size: 16px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info span { font-size: 12px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-price { font-size: 13px; }
+
+/* Funnel form fields — larger type, roomier padding, bronze focus */
+:is(body[data-page="cart"], body[data-page="checkout"]) .form-group label { font-size: 11px; }
+:is(body[data-page="cart"], body[data-page="checkout"]) .form-group select,
+:is(body[data-page="cart"], body[data-page="checkout"]) .form-group input,
+:is(body[data-page="cart"], body[data-page="checkout"]) .form-group textarea,
+body[data-page="cart"] .coupon-form input {
+  font-size: 15px;
+  padding: 12px 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+:is(body[data-page="cart"], body[data-page="checkout"]) .form-group select:focus,
+:is(body[data-page="cart"], body[data-page="checkout"]) .form-group input:focus,
+:is(body[data-page="cart"], body[data-page="checkout"]) .form-group textarea:focus,
+body[data-page="cart"] .coupon-form input:focus {
+  border-color: var(--bronze);
+  box-shadow: 0 0 0 3px rgba(140, 98, 73, 0.12);
+}
+
+/* ── Order-received ── */
+body[data-page="order-received"] .confirm-card { box-shadow: 0 14px 34px -22px rgba(20, 37, 40, 0.15); }
+body[data-page="order-received"] .confirm-headline { font-size: 40px; }
+body[data-page="order-received"] .confirm-sub { font-size: 15px; }
+body[data-page="order-received"] .confirm-meta-item h5 { font-size: 10px; }
+body[data-page="order-received"] .confirm-meta-item p { font-size: 15px; }
+body[data-page="order-received"] .confirm-addresses h5 { font-size: 10px; }
+body[data-page="order-received"] .confirm-addresses p { font-size: 15px; }
+body[data-page="order-received"] .project-panel h4 { font-size: 24px; }
+body[data-page="order-received"] .project-panel p { font-size: 15px; }
+body[data-page="order-received"] .cart-table td { font-size: 15px; }
+body[data-page="order-received"] .cart-item-info strong { font-size: 18px; }
+body[data-page="order-received"] .cart-thumb { width: 80px; height: 80px; }
+
+/* Re-assert the ≥1440 tier so the base bumps above don't leak
+   upward and shrink the wide-viewport sizes */
+@media (min-width: 1440px) {
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-title { font-size: 54px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-sub { font-size: 19px; }
+  body[data-page="cart"] .cart-table td { font-size: 15px; }
+  body[data-page="cart"] .cart-thumb { width: 96px; height: 96px; }
+  body[data-page="cart"] .cart-item-info strong { font-size: 19px; }
+  body[data-page="cart"] .qty-stepper button { width: 42px; height: 44px; font-size: 18px; }
+  body[data-page="cart"] .qty-stepper input { width: 52px; height: 44px; font-size: 15px; }
+  :is(body[data-page="cart"], body[data-page="checkout"]) .summary-card { padding: 36px; }
+  :is(body[data-page="cart"], body[data-page="checkout"]) .summary-card h3 { font-size: 28px; margin-bottom: 22px; padding-bottom: 22px; }
+  :is(body[data-page="cart"], body[data-page="checkout"]) .summary-row.total { font-size: 19px; }
+  body[data-page="checkout"] .checkout-section h2 { font-size: 28px; margin-bottom: 26px; }
+  body[data-page="checkout"] .field-grid { gap: 18px 24px; }
+  body[data-page="checkout"] .option-row { padding: 18px 22px; }
+  :is(body[data-page="cart"], body[data-page="checkout"]) .form-group select,
+  :is(body[data-page="cart"], body[data-page="checkout"]) .form-group input,
+  :is(body[data-page="cart"], body[data-page="checkout"]) .form-group textarea,
+  body[data-page="cart"] .coupon-form input { padding: 13px 16px; }
+  body[data-page="order-received"] .confirm-headline { font-size: 44px; }
+  body[data-page="order-received"] .cart-item-info strong { font-size: 19px; }
+  body[data-page="order-received"] .cart-thumb { width: 96px; height: 96px; }
+}
+@media (max-width: 560px) {
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-title { font-size: 32px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-sub { font-size: 15px; }
+}
