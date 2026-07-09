@@ -349,6 +349,81 @@
   }
 
   // ────────────────────────────────────────────────────────
+  // Cart — live line subtotals + order totals
+  // Reacts to the 'change'/'input' events initQtySteppers fires,
+  // plus Remove. Unit price comes from data-unit-price on the
+  // Price cell; everything recomputes from the DOM (prototype —
+  // no persistence).
+  // ────────────────────────────────────────────────────────
+  function initCart() {
+    if (!document.body.matches('[data-page="cart"]')) return;
+    const tbody = document.querySelector('.cart-table tbody');
+    if (!tbody) return;
+
+    const money = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const parseMoney = s => parseFloat(String(s).replace(/[^0-9.]/g, '')) || 0;
+
+    const els = {
+      subtotal: document.querySelector('[data-summary-subtotal]'),
+      total:    document.querySelector('[data-summary-total]'),
+      count:    document.querySelector('[data-summary-count]'),
+      lines:    document.querySelector('[data-cart-lines]'),
+      nav:      document.querySelector('[data-cart-count]'),
+    };
+
+    function recompute() {
+      const rows = Array.from(tbody.querySelectorAll('[data-cart-row]'));
+      let subtotal = 0, qtyTotal = 0;
+      rows.forEach(row => {
+        const priceCell = row.querySelector('[data-unit-price]');
+        const input = row.querySelector('.qty-stepper input');
+        if (!priceCell || !input) return;
+        const unit = parseFloat(priceCell.getAttribute('data-unit-price')) || parseMoney(priceCell.textContent);
+        const qty = Math.max(1, parseInt(input.value, 10) || 1);
+        const line = unit * qty;
+        const lineCell = row.querySelector('[data-line-subtotal]');
+        if (lineCell) lineCell.textContent = money(line);
+        subtotal += line;
+        qtyTotal += qty;
+      });
+      // Shipping + tax are "calculated at checkout", so the estimated
+      // total on the cart equals the subtotal.
+      if (els.subtotal) els.subtotal.textContent = money(subtotal);
+      if (els.total)    els.total.textContent = money(subtotal);
+      if (els.count)    els.count.textContent = qtyTotal;
+      if (els.lines)    els.lines.textContent = rows.length;
+      if (els.nav)      els.nav.textContent = qtyTotal;
+      if (!rows.length) showEmpty();
+    }
+
+    function showEmpty() {
+      if (document.querySelector('.empty-cart-message')) return;
+      const table = document.querySelector('.cart-table');
+      if (!table) return;
+      const msg = document.createElement('p');
+      msg.className = 'empty-cart-message';
+      msg.innerHTML = 'Your cart is empty. <a href="/foundry-art/shop/" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">Continue shopping →</a>';
+      table.replaceWith(msg);
+    }
+
+    tbody.addEventListener('change', e => { if (e.target.matches('.qty-stepper input')) recompute(); });
+    tbody.addEventListener('input',  e => { if (e.target.matches('.qty-stepper input')) recompute(); });
+    tbody.addEventListener('click', e => {
+      const btn = e.target.closest('.cart-remove');
+      if (!btn) return;
+      const row = btn.closest('[data-cart-row]');
+      if (row) row.remove();
+      recompute();
+    });
+
+    const updateBtn = Array.from(document.querySelectorAll('.cart-actions .btn-secondary'))
+      .find(b => /update/i.test(b.textContent));
+    if (updateBtn) updateBtn.addEventListener('click', recompute);
+
+    recompute();
+  }
+
+  // ────────────────────────────────────────────────────────
   // PDP tab switcher
   // ────────────────────────────────────────────────────────
   function initTabs() {
@@ -903,6 +978,7 @@
     initStudiosDrawer();
     initFilterTabs();
     initQtySteppers();
+    initCart();
     initTabs();
     initGallery();
     initSwatches();

@@ -9530,10 +9530,12 @@ body[data-page="shop"] .breadcrumb { display: none; }
    wide-tier values so these base bumps don't leak upward.
    ────────────────────────────────────────────────────────── */
 
-/* White page + hidden breadcrumb */
+/* White page */
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) { background: var(--white); }
-body[data-page="cart"] .breadcrumb,
-body[data-page="checkout"] .breadcrumb { display: none; }
+/* Cart hides its breadcrumb (it has a "← Continue shopping" link);
+   checkout keeps one for funnel wayfinding back to Shop / Cart. */
+body[data-page="cart"] .breadcrumb { display: none; }
+body[data-page="checkout"] .breadcrumb { font-size: 12px; letter-spacing: 2px; }
 
 /* Page header — shop-grid scale */
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-title { font-size: 44px; }
@@ -9543,8 +9545,8 @@ body[data-page="checkout"] .breadcrumb { display: none; }
 body[data-page="cart"] .cart-table th { font-size: 11px; }
 body[data-page="cart"] .cart-table td { font-size: 15px; }
 body[data-page="cart"] .cart-thumb { width: 80px; height: 80px; }
-body[data-page="cart"] .cart-item-info strong { font-size: 18px; }
-body[data-page="cart"] .cart-item-info span { font-size: 12px; }
+body[data-page="cart"] .cart-item-info strong { font-size: 21px; }
+body[data-page="cart"] .cart-item-info span { font-size: 13px; }
 body[data-page="cart"] .cart-remove { font-size: 12px; }
 body[data-page="cart"] .trade-row,
 body[data-page="checkout"] .trade-row { font-size: 15px; }
@@ -9620,7 +9622,8 @@ body[data-page="order-received"] .cart-thumb { width: 80px; height: 80px; }
   :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-sub { font-size: 19px; }
   body[data-page="cart"] .cart-table td { font-size: 15px; }
   body[data-page="cart"] .cart-thumb { width: 96px; height: 96px; }
-  body[data-page="cart"] .cart-item-info strong { font-size: 19px; }
+  body[data-page="cart"] .cart-item-info strong { font-size: 22px; }
+  body[data-page="checkout"] .breadcrumb { font-size: 13px; }
   body[data-page="cart"] .qty-stepper button { width: 42px; height: 44px; font-size: 18px; }
   body[data-page="cart"] .qty-stepper input { width: 52px; height: 44px; font-size: 15px; }
   :is(body[data-page="cart"], body[data-page="checkout"]) .summary-card { padding: 36px; }

@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260603-175">
-<link rel="stylesheet" href="/assets/styles.css?v=20260603-175">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260603-176">
+<link rel="stylesheet" href="/assets/styles.css?v=20260603-176">
 </head>
 <body data-page="cart">
 
@@ -21,7 +21,7 @@
   <main class="page">
     <header class="page-header">
       <h1 class="page-title">Your Cart</h1>
-      <p class="page-sub">2 items · ready to ship from Chicago</p>
+      <p class="page-sub"><span data-cart-lines>2</span> items · ready to ship from Chicago</p>
     </header>
 
     <!-- Sample-order toggle (Plus differentiator) -->
@@ -37,7 +37,7 @@
         <div class="form-group" style="margin-bottom:24px">
           <label for="project">Project name (optional)</label>
           <input id="project" type="text" placeholder="e.g. Lincoln Park kitchen — backsplash">
-          <p style="font-size:10px;color:var(--mid);margin-top:6px;">Save this cart as a named project to revisit later. <a href="#" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">Save as project →</a></p>
+          <p style="font-size:13px;color:var(--mid);margin-top:8px;line-height:1.5;">Save this cart as a named project to revisit later. <a href="#" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">Save as project →</a></p>
         </div>
 
         <table class="cart-table">
@@ -53,7 +53,7 @@
           </thead>
           <tbody>
 
-            <tr>
+            <tr data-cart-row>
               <td class="cart-item-cell" data-label="Product">
                 <div class="cart-item">
                   <div class="cart-thumb"><img src="/assets/images/products/cabochon-3x3/main.jpg" alt="Cabochon 3×3" loading="lazy"></div>
@@ -64,12 +64,12 @@
                 </div>
               </td>
               <td data-label="Material">
-                <span class="swatch" style="padding:4px 8px 4px 6px;display:inline-flex;">
-                  <span class="swatch-chip traditional" style="width:14px;height:14px;"></span>
-                  <span class="swatch-label" style="font-size:11px;">Traditional</span>
+                <span class="swatch" style="padding:6px 12px 6px 8px;display:inline-flex;">
+                  <span class="swatch-chip traditional" style="width:18px;height:18px;"></span>
+                  <span class="swatch-label" style="font-size:13px;">Traditional</span>
                 </span>
               </td>
-              <td class="num" data-label="Price">$92.50</td>
+              <td class="num" data-label="Price" data-unit-price="92.50">$92.50</td>
               <td data-label="Qty">
                 <div class="qty-stepper" aria-label="Quantity">
                   <button type="button" data-qty="-" aria-label="Decrease">−</button>
@@ -77,11 +77,11 @@
                   <button type="button" data-qty="+" aria-label="Increase">+</button>
                 </div>
               </td>
-              <td class="num" data-label="Subtotal">$185.00</td>
+              <td class="num" data-label="Subtotal" data-line-subtotal>$185.00</td>
               <td data-label="Remove"><button type="button" class="cart-remove" aria-label="Remove">Remove</button></td>
             </tr>
 
-            <tr>
+            <tr data-cart-row>
               <td class="cart-item-cell" data-label="Product">
                 <div class="cart-item">
                   <div class="cart-thumb"><img src="/assets/images/products/lotus-3x3/main.jpg" alt="Lotus 3×3" loading="lazy"></div>
@@ -92,12 +92,12 @@
                 </div>
               </td>
               <td data-label="Material">
-                <span class="swatch" style="padding:4px 8px 4px 6px;display:inline-flex;">
-                  <span class="swatch-chip white" style="width:14px;height:14px;"></span>
-                  <span class="swatch-label" style="font-size:11px;">White</span>
+                <span class="swatch" style="padding:6px 12px 6px 8px;display:inline-flex;">
+                  <span class="swatch-chip white" style="width:18px;height:18px;"></span>
+                  <span class="swatch-label" style="font-size:13px;">White</span>
                 </span>
               </td>
-              <td class="num" data-label="Price">$92.50</td>
+              <td class="num" data-label="Price" data-unit-price="92.50">$92.50</td>
               <td data-label="Qty">
                 <div class="qty-stepper" aria-label="Quantity">
                   <button type="button" data-qty="-" aria-label="Decrease">−</button>
@@ -105,7 +105,7 @@
                   <button type="button" data-qty="+" aria-label="Increase">+</button>
                 </div>
               </td>
-              <td class="num" data-label="Subtotal">$92.50</td>
+              <td class="num" data-label="Subtotal" data-line-subtotal>$92.50</td>
               <td data-label="Remove"><button type="button" class="cart-remove" aria-label="Remove">Remove</button></td>
             </tr>
 
@@ -125,7 +125,7 @@
 
       <aside class="summary-card" aria-label="Order totals">
         <h3>Order Summary</h3>
-        <div class="summary-row"><span>Subtotal (3 items)</span><span>$277.50</span></div>
+        <div class="summary-row"><span>Subtotal (<span data-summary-count>3</span> items)</span><span data-summary-subtotal>$277.50</span></div>
         <div class="summary-row"><span>Shipping</span><span>Calculated at checkout</span></div>
         <div class="summary-row"><span>Tax</span><span>Calculated at checkout</span></div>
 
@@ -139,7 +139,7 @@
           </div>
         </details>
 
-        <div class="summary-row total"><span>Estimated total</span><span>$277.50</span></div>
+        <div class="summary-row total"><span>Estimated total</span><span data-summary-total>$277.50</span></div>
 
         <a href="/foundry-art/checkout/" class="btn-primary">Proceed to Checkout</a>
         <p class="summary-note">Secure checkout · Major cards accepted · Made in Chicago</p>
@@ -149,7 +149,7 @@
 
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260603-175"></script>
-  <script src="/assets/app.js?v=20260603-175"></script>
+  <script src="/assets/products.js?v=20260603-176"></script>
+  <script src="/assets/app.js?v=20260603-176"></script>
 </body>
 </html>
