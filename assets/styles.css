@@ -9661,3 +9661,18 @@ body[data-page="order-received"] .cart-thumb { width: 80px; height: 80px; }
     padding-bottom: clamp(56px, 4vw, 96px);
   }
 }
+
+/* Cart trust line — larger text + card-acceptance marks */
+body[data-page="cart"] .summary-note { font-size: 13px; }
+.summary-note .card-marks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.summary-note .card-mark { width: 40px; height: auto; display: block; }
+@media (min-width: 1440px) {
+  body[data-page="cart"] .summary-note { font-size: 14px; }
+  .summary-note .card-mark { width: 44px; }
+}
