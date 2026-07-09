@@ -9703,6 +9703,9 @@ body[data-page="cart"] .trade-row { border: none; }
 /* Shipping-estimator result line */
 .ship-estimate-result { font-size: 12px; color: var(--slate); margin: 8px 0 0; line-height: 1.45; }
 .ship-estimate-result[hidden] { display: none; }
+/* Coupon field in the checkout order summary — fit the narrow card */
+.checkout-summary .checkout-coupon { margin: 16px 0; }
+.checkout-summary .checkout-coupon input { min-width: 0; flex: 1; }
 /* With the "Project" meta tile hidden, keep the order-confirmation
    meta row a clean 3-up (revert to repeat(4,1fr) when Projects returns). */
 body[data-page="order-received"] .confirm-meta { grid-template-columns: repeat(3, 1fr); }
