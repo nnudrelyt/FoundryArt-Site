@@ -710,6 +710,20 @@
     const grid = document.querySelector('[data-shop-grid]');
     if (!grid || !window.FA_PRODUCTS) return;
     grid.innerHTML = window.FA_PRODUCTS.map(p => productCardHTML(p)).join('');
+    updateShopPagination();
+  }
+
+  // Hide the pagination control when every product fits on page 1 —
+  // i.e. the grid already renders all available items, so there is no
+  // page 2. If real paging is added later (grid renders a slice),
+  // rendered < total and the control reappears automatically.
+  function updateShopPagination() {
+    const pager = document.querySelector('.pagination');
+    const grid = document.querySelector('[data-shop-grid]');
+    if (!pager || !grid) return;
+    const rendered = grid.querySelectorAll('.product-card').length;
+    const total = (window.FA_PRODUCTS || []).length;
+    pager.style.display = rendered >= total ? 'none' : '';
   }
 
   function renderCrossSell() {
