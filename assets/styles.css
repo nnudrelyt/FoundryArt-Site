@@ -23,6 +23,22 @@
   --mid:            #6F6760;   /* secondary text */
   --label:          #9A8F7E;
   --rule:           #D6CFC5;
+
+  /* ── Type floor (design-system rule) ──────────────────────
+     Readable minimums for the Foundry Art funnel. Components may
+     size UP from these, never below them:
+       --fs-control : interactive controls (inputs/selects/buttons)
+                      — also ≥16px-equivalent intent to avoid iOS
+                      focus-zoom feel.
+       --fs-body    : default running/support text.
+       --fs-fine    : the smallest allowed — helper text, captions.
+       --fs-eyebrow : uppercase tracked labels (kept compact, but
+                      no smaller than this).
+     Reach for these instead of hardcoding sub-13px sizes. */
+  --fs-control:     15px;
+  --fs-body:        15px;
+  --fs-fine:        13px;
+  --fs-eyebrow:     12px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2072,24 +2088,24 @@ body[data-page="home"] .footer p { border: 0 !important; }
 .summary-note { font-size: 10px; color: var(--mid); margin-top: 12px; text-align: center; line-height: 1.5; }
 
 .shipping-stub {
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
   border-top: 1px dashed var(--rule);
 }
 .shipping-stub summary {
-  font-size: 11px;
-  letter-spacing: 1.5px;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 1.8px;
   text-transform: uppercase;
   color: var(--bronze);
   cursor: pointer;
-  padding: 4px 0;
+  padding: 6px 0;
 }
-.shipping-stub details[open] summary { margin-bottom: 12px; }
-.shipping-stub .stub-form { display: grid; gap: 8px; }
+.shipping-stub details[open] summary { margin-bottom: 16px; }
+.shipping-stub .stub-form { display: grid; gap: 12px; }
 .shipping-stub input, .shipping-stub select {
   font: inherit;
-  font-size: 12px;
-  padding: 8px 10px;
+  font-size: var(--fs-control);
+  padding: 11px 13px;
   border: 1px solid var(--rule);
 }
 
@@ -9701,7 +9717,7 @@ body[data-product-slug] .pdp-tabs {
    checkout trade-row keeps its border. */
 body[data-page="cart"] .trade-row { border: none; }
 /* Shipping-estimator result line */
-.ship-estimate-result { font-size: 12px; color: var(--slate); margin: 8px 0 0; line-height: 1.45; }
+.ship-estimate-result { font-size: var(--fs-fine); color: var(--slate); margin: 10px 0 0; line-height: 1.5; }
 .ship-estimate-result[hidden] { display: none; }
 /* Coupon field in the checkout order summary — fit the narrow card */
 .checkout-summary .checkout-coupon { margin: 16px 0; }

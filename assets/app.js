@@ -380,6 +380,7 @@
     const shipState  = document.querySelector('[data-ship-state]');
     const shipUpdate = document.querySelector('[data-ship-update]');
     const shipResult = document.querySelector('[data-ship-result]');
+    const sampleToggle = document.querySelector('#sample-toggle'); // free shipping when a sample order
     const UPS_ZONE = { 'Illinois': 2, 'New York': 5, 'California': 7 };
     let shipEstimate = null; // dollars, or null until estimated
 
@@ -419,12 +420,18 @@
         subtotal += line;
         qtyTotal += qty;
       });
-      // Once an estimate exists, keep it in sync with qty changes and
-      // fold it into the total; otherwise shipping is "calculated at checkout".
+      // Once an estimate exists, keep it in sync with qty changes.
       if (shipEstimate != null) { shipEstimate = estimateShipping(); showShipResult(); }
-      if (els.shipping) els.shipping.textContent = shipEstimate != null ? money(shipEstimate) : 'Calculated at checkout';
+      // Shipping: a sample order ships free; otherwise use the estimate
+      // if one was run, else "calculated at checkout".
+      const sample = sampleToggle && sampleToggle.checked;
+      let shipCost = 0, shipText;
+      if (sample)                  { shipText = 'Free'; shipCost = 0; }
+      else if (shipEstimate != null) { shipText = money(shipEstimate); shipCost = shipEstimate; }
+      else                         { shipText = 'Calculated at checkout'; shipCost = 0; }
+      if (els.shipping) els.shipping.textContent = shipText;
       if (els.subtotal) els.subtotal.textContent = money(subtotal);
-      if (els.total)    els.total.textContent = money(subtotal + (shipEstimate || 0));
+      if (els.total)    els.total.textContent = money(subtotal + shipCost);
       if (els.count)    els.count.textContent = qtyTotal;
       if (els.lines)    els.lines.textContent = rows.length;
       if (els.nav)      els.nav.textContent = qtyTotal;
@@ -456,6 +463,7 @@
       showShipResult();
       recompute();
     });
+    if (sampleToggle) sampleToggle.addEventListener('change', recompute);
 
     recompute();
   }
