@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260603-182">
-<link rel="stylesheet" href="/assets/styles.css?v=20260603-182">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260603-183">
+<link rel="stylesheet" href="/assets/styles.css?v=20260603-183">
 </head>
 <body data-page="checkout">
 
@@ -27,19 +27,19 @@
       <p class="page-sub">Returning customer? <a href="#" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">Click to log in</a></p>
     </header>
 
-    <!-- Trade-pro toggle (Plus differentiator) -->
+    <!-- Trade-pro toggle — self-identify, then enter website/trade ID to unlock trade pricing (discount not advertised) -->
     <div class="trade-row">
       <input type="checkbox" id="trade-toggle" data-trade-toggle>
-      <label for="trade-toggle"><strong>I'm a trade professional</strong> — designer, architect, or contractor. Apply 20% trade discount.</label>
-      <input type="text" class="trade-id-input" data-trade-id placeholder="Trade ID #">
+      <label for="trade-toggle"><strong>I'm a trade professional</strong> — designer, architect, or contractor.</label>
+      <input type="text" class="trade-id-input" data-trade-id placeholder="Professional website or trade ID">
     </div>
 
     <form class="checkout-layout" onsubmit="event.preventDefault(); window.location.href='/checkout/order-received/';">
 
       <section aria-label="Checkout form">
 
-        <!-- Project name field (Plus differentiator) -->
-        <div class="checkout-section">
+        <!-- Project name field — Projects wishlist deferred to post-launch (hidden via [data-feature="projects"]) -->
+        <div class="checkout-section" data-feature="projects">
           <h2>Project</h2>
           <div class="field-grid">
             <div class="form-group full">
@@ -98,24 +98,25 @@
         <div class="checkout-section">
           <h2>Shipping method</h2>
           <div class="shipping-options option-group">
+            <!-- UPS options; rates are placeholders pending the live UPS-plugin calc (Tyler↔Eric) -->
             <label class="option-row">
-              <input type="radio" name="shipping" value="ground" checked>
+              <input type="radio" name="shipping" value="ups-ground" checked>
               <div class="opt-main">
-                <div><strong>Ground</strong><span class="opt-sub">5–7 business days</span></div>
+                <div><strong>UPS Ground</strong><span class="opt-sub">5–7 business days</span></div>
                 <span>$12.00</span>
               </div>
             </label>
             <label class="option-row">
-              <input type="radio" name="shipping" value="express">
+              <input type="radio" name="shipping" value="ups-2day">
               <div class="opt-main">
-                <div><strong>Express</strong><span class="opt-sub">2–3 business days</span></div>
+                <div><strong>UPS 2nd Day Air</strong><span class="opt-sub">2 business days</span></div>
                 <span>$28.00</span>
               </div>
             </label>
             <label class="option-row">
-              <input type="radio" name="shipping" value="white-glove">
+              <input type="radio" name="shipping" value="ups-nextday">
               <div class="opt-main">
-                <div><strong>White-glove (designer)</strong><span class="opt-sub">Coordinated delivery to your designer or jobsite</span></div>
+                <div><strong>UPS Next Day Air</strong><span class="opt-sub">Next business day</span></div>
                 <span>$45.00</span>
               </div>
             </label>
@@ -136,12 +137,6 @@
               <input type="radio" name="payment" value="paypal">
               <div class="opt-main">
                 <div><strong>PayPal</strong><span class="opt-sub">You'll be redirected to PayPal to complete payment</span></div>
-              </div>
-            </label>
-            <label class="option-row">
-              <input type="radio" name="payment" value="invoice">
-              <div class="opt-main">
-                <div><strong>Trade invoice (Net 30)</strong><span class="opt-sub">Trade accounts only — verified at order review</span></div>
               </div>
             </label>
           </div>
@@ -207,7 +202,7 @@
 
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260603-182"></script>
-  <script src="/assets/app.js?v=20260603-182"></script>
+  <script src="/assets/products.js?v=20260603-183"></script>
+  <script src="/assets/app.js?v=20260603-183"></script>
 </body>
 </html>

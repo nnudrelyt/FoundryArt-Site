@@ -9689,3 +9689,10 @@ body[data-product-slug] .pdp-tabs {
 @media (min-width: 1440px) {
   body[data-product-slug] .pdp-tabs { max-width: 960px; }
 }
+
+/* Projects wishlist — deferred to post-launch (Stacza 2026-07-09).
+   Delete this rule to re-enable; the markup is intact underneath. */
+[data-feature="projects"] { display: none !important; }
+/* With the "Project" meta tile hidden, keep the order-confirmation
+   meta row a clean 3-up (revert to repeat(4,1fr) when Projects returns). */
+body[data-page="order-received"] .confirm-meta { grid-template-columns: repeat(3, 1fr); }

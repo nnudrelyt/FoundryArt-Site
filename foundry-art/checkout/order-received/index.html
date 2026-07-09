@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260603-182">
-<link rel="stylesheet" href="/assets/styles.css?v=20260603-182">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260603-183">
+<link rel="stylesheet" href="/assets/styles.css?v=20260603-183">
 </head>
 <body data-page="order-received">
 
@@ -25,7 +25,7 @@
           <h5>Order number</h5>
           <p>#FA-2026-04827</p>
         </div>
-        <div class="confirm-meta-item">
+        <div class="confirm-meta-item" data-feature="projects">
           <h5>Project</h5>
           <p>Lincoln Park kitchen</p>
         </div>
@@ -90,8 +90,8 @@
         </div>
       </div>
 
-      <!-- Project tracking panel (Plus differentiator) -->
-      <aside class="project-panel" aria-label="Project tracking">
+      <!-- Project tracking panel — Projects wishlist deferred to post-launch (hidden via [data-feature="projects"]) -->
+      <aside class="project-panel" aria-label="Project tracking" data-feature="projects">
         <h4>Track your project</h4>
         <p>We've saved this order to your "Lincoln Park kitchen" project. Add notes, attach inspiration photos, or share the order details with your contractor.</p>
         <div class="panel-actions">
@@ -126,7 +126,7 @@
 
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260603-182"></script>
-  <script src="/assets/app.js?v=20260603-182"></script>
+  <script src="/assets/products.js?v=20260603-183"></script>
+  <script src="/assets/app.js?v=20260603-183"></script>
 </body>
 </html>

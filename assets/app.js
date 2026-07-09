@@ -663,10 +663,18 @@
     if (!toggle) return;
     function sync() {
       const on = toggle.checked;
+      // Checking the box only reveals the input. Trade pricing unlocks
+      // once they enter a professional website or trade ID (honor system) —
+      // the discount is never advertised up front.
       if (idInput) idInput.style.display = on ? '' : 'none';
-      if (discountLine) discountLine.style.display = on ? '' : 'none';
+      const unlocked = on && idInput && idInput.value.trim() !== '';
+      if (discountLine) discountLine.style.display = unlocked ? '' : 'none';
     }
     toggle.addEventListener('change', sync);
+    if (idInput) {
+      idInput.addEventListener('input', sync);
+      idInput.addEventListener('blur', sync);
+    }
     sync();
   }
 
