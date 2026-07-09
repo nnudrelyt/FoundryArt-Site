@@ -416,10 +416,6 @@
       recompute();
     });
 
-    const updateBtn = Array.from(document.querySelectorAll('.cart-actions .btn-secondary'))
-      .find(b => /update/i.test(b.textContent));
-    if (updateBtn) updateBtn.addEventListener('click', recompute);
-
     recompute();
   }
 

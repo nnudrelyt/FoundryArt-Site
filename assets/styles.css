@@ -9693,6 +9693,9 @@ body[data-product-slug] .pdp-tabs {
 /* Projects wishlist — deferred to post-launch (Stacza 2026-07-09).
    Delete this rule to re-enable; the markup is intact underneath. */
 [data-feature="projects"] { display: none !important; }
+/* Cart sample-order callout — borderless (keeps the cream fill). The
+   checkout trade-row keeps its border. */
+body[data-page="cart"] .trade-row { border: none; }
 /* With the "Project" meta tile hidden, keep the order-confirmation
    meta row a clean 3-up (revert to repeat(4,1fr) when Projects returns). */
 body[data-page="order-received"] .confirm-meta { grid-template-columns: repeat(3, 1fr); }
