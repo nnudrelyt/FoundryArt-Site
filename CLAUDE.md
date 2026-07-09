@@ -8,8 +8,10 @@ Client: Foundry Art (Linden Workshops family). Static HTML site, one directory p
 - Site-level specs: `DESIGN-SYSTEM.md` (root) and `AUDIT.md`.
 
 ## Deploys
-- **Canonical target: foundry-art-site.vercel.app.** Deploy by pushing to the `foundryart-site` remote's `updates` branch (Vercel git-connected, production = `updates`): `git push foundryart-site HEAD:updates`. Work happens on the local `precision-mirror` branch, kept in sync with `updates`. Bump the shared `?v=` cache-buster across all pages whenever `assets/styles.css` changes.
-- **Deprecated:** the `origin` remote (`Foundry-Art-Responsive` → foundry-art-responsive.vercel.app) is old/archived as of 2026-07-09 — do NOT push there.
+- **Canonical target: foundry-art-site.vercel.app** (Vercel project `foundry-art-site`, team `the-main-sequence`; this dir is linked via `.vercel/`).
+- **Production deploy = `vercel --prod --yes`** from this dir. Git pushes to the `foundryart-site` remote only produce **Preview** builds — production is promoted via the CLI, not a branch.
+- Workflow: commit on local `precision-mirror` → `git push foundryart-site precision-mirror` (history/preview) → `vercel --prod --yes` (go live). Bump the shared `?v=` cache-buster across all pages whenever `assets/styles.css` changes.
+- **Deprecated (2026-07-09):** the old `origin` remote (`Foundry-Art-Responsive` → foundry-art-responsive.vercel.app) is archived — removed locally so it can't be pushed to. Archive the GitHub repo + its Vercel project from the dashboards.
 
 ## Collection-detail template
 - `/precision/` was rebuilt 1:1 against live lindenworkshops.com/precision using LW components — it is the **canonical collection-detail template** (see DESIGN-SYSTEM §8).
