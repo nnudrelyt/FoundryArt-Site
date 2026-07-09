@@ -9510,9 +9510,10 @@ body[data-page="shop"]:not([data-product-slug]) .shop-grid .product-card:hover .
   body[data-page="shop"]:not([data-product-slug]) .facet-list li { font-size: 14px; }
 }
 
-/* Remove breadcrumb from FA shop grid + PDPs — Tyler wants the
-   page to open directly at the hero without the nav trail. */
-body[data-page="shop"] .breadcrumb { display: none; }
+/* Hide the breadcrumb on the FA shop grid only (opens straight at
+   the hero). PDPs (data-product-slug) keep theirs for wayfinding —
+   already styled by the body[data-product-slug] .breadcrumb rules. */
+body[data-page="shop"]:not([data-product-slug]) .breadcrumb { display: none; }
 
 /* ══════════════════════════════════════════════════════════
    CART · CHECKOUT · ORDER-RECEIVED — consistency pass
