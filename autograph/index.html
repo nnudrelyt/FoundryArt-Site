@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260603-190">
-<link rel="stylesheet" href="/assets/styles.css?v=20260603-190">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260716-191">
+<link rel="stylesheet" href="/assets/styles.css?v=20260716-191">
 </head>
 <body data-page="autograph" data-section="linden">
 
@@ -40,24 +40,31 @@
 
   <main class="lw2-collection">
 
-    <!-- COLLECTION MASTHEAD — BWS wordmark + Autograph title + tagline + 1x12 liner photo -->
+    <!-- MASTHEAD — dominant Bronzework wordmark + collection title + section sub-nav (DS §8.1) -->
     <section class="lw2-coll-masthead">
-      <div class="lw2-coll-brand">
-        <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio" class="lw2-coll-parent-wordmark">
+      <div class="lw2-section-mark">
+        <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
       </div>
       <h1 class="lw2-coll-title">Autograph Collection</h1>
-      <p class="lw2-coll-eyebrow">THE HEIGHT OF MODERN ELEGANCE</p>
-      <figure class="lw2-coll-banner">
-        <img src="/assets/images/linden/autograph/Beebop_full-1900x178.jpg" alt="Bebop 1×12 inch accent liner — Traditional Bronze">
-      </figure>
+      <nav class="lw2-coll-subnav" aria-label="On this page">
+        <a href="#design-ideas">Design Ideas</a>
+        <a href="#tiles">Tiles</a>
+        <a href="#further-information">Further Information</a>
+      </nav>
     </section>
 
-    <!-- INTRO — pull-quote (Fitzgerald) over the section lead-in -->
+    <!-- SIGNATURE — the collection's namesake device (live row 3) -->
+    <section class="lw2-coll-signature">
+      <picture><source type="image/webp" srcset="/assets/images/linden/autograph/F_Scott_Fitzgerald_Signature.webp"><img src="/assets/images/linden/autograph/F_Scott_Fitzgerald_Signature.png" alt="F. Scott Fitzgerald's signature"></picture>
+    </section>
+
+    <!-- INTRO — Fitzgerald pull-quote as the template's statement, then the eyebrow + lede -->
     <section class="lw2-coll-intro">
       <blockquote class="lw2-coll-quote">
         <p>“Something new—something extraordinary and beautiful and simple and intricately patterned.”</p>
         <cite>— F. Scott Fitzgerald</cite>
       </blockquote>
+      <p class="lw2-coll-eyebrow">THE HEIGHT OF MODERN ELEGANCE</p>
       <p class="lw2-coll-lede">Put your signature on every room. Crisp, graphic bronze borders and insets provide a superior level of detail.</p>
     </section>
 
@@ -74,7 +81,7 @@
     </section>
 
     <!-- FEATURED TILES — 5-up portrait gallery of character-named installs -->
-    <section class="lw2-coll-portraits">
+    <section class="lw2-coll-portraits" id="design-ideas">
       <h2 class="lw2-coll-section-title">Let your walls and floors reflect your deeply personal taste.</h2>
       <div class="lw2-coll-portrait-grid">
         <figure>
@@ -101,7 +108,7 @@
     </section>
 
     <!-- LINERS — 1x12" accent liners, stacked full-bleed strips -->
-    <section class="lw2-coll-liners">
+    <section class="lw2-coll-liners" id="tiles">
       <h2 class="lw2-coll-section-title">1 × 12 inch accent liners</h2>
       <p class="lw2-coll-section-sub">Available in Traditional Bronze and White Bronze.</p>
       <ul class="lw2-coll-liner-list">
@@ -161,54 +168,64 @@
       </div>
     </section>
 
-    <!-- FURTHER INFORMATION — 4 tear-sheet PDFs as cards -->
-    <section class="lw2-coll-info">
+    <!-- FURTHER INFORMATION — gray panel, plain labels, showroom button (DS §8.7) -->
+    <section class="lw2-coll-info" id="further-information">
       <h2 class="lw2-coll-section-title">Further Information</h2>
       <div class="lw2-coll-info-grid">
-        <a href="#" class="lw2-coll-info-card" aria-label="Download Autograph tear sheet (PDF)">
+        <a href="https://lindenworkshops.com/wp-content/uploads/BWS-tear-sheet-Autograph-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Autograph tear sheet (PDF)">
           <div class="lw2-coll-info-img">
             <img src="/assets/images/linden/autograph/BWS-tear-sheet-Autograph-2024-08-08_Page_1-230x300.jpg" alt="Autograph tear sheet PDF preview">
           </div>
-          <h3>Tear Sheet <span class="lw2-coll-arrow">»</span></h3>
+          <h3>Tear Sheet</h3>
         </a>
-        <a href="#" class="lw2-coll-info-card" aria-label="How We Make Our Tiles (PDF)">
+        <a href="https://lindenworkshops.com/wp-content/uploads/BWS-2024-How-We-Make-Our-Tiles.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="How We Make Our Tiles (PDF)">
           <div class="lw2-coll-info-img">
-            <img src="/assets/images/linden/autograph/BWS-2024-How-We-Make-Our-Tiles-230x300.jpg" alt="How We Make Our Tiles PDF preview">
+            <picture><source type="image/webp" srcset="/assets/images/linden/autograph/BWS-2024-How-We-Make-Our-Tiles-230x300.webp"><img src="/assets/images/linden/autograph/BWS-2024-How-We-Make-Our-Tiles-230x300.jpg" alt="How We Make Our Tiles PDF preview"></picture>
           </div>
-          <h3>How We Make Our Tiles <span class="lw2-coll-arrow">»</span></h3>
+          <h3>How We Make Our Tiles</h3>
         </a>
-        <a href="#" class="lw2-coll-info-card" aria-label="Recycled Content (PDF)">
+        <a href="https://lindenworkshops.com/wp-content/uploads/BWS-2024-Recycled-Content.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Recycled Content (PDF)">
           <div class="lw2-coll-info-img">
             <img src="/assets/images/linden/autograph/BWS-2024-Recycled-Content-230x300.jpg" alt="Recycled Content sustainability PDF preview">
           </div>
-          <h3>Recycled Content <span class="lw2-coll-arrow">»</span></h3>
+          <h3>Recycled Content</h3>
         </a>
-        <a href="#" class="lw2-coll-info-card" aria-label="Installation and Cleaning (PDF)">
+        <a href="https://lindenworkshops.com/wp-content/uploads/BWS-Installation-and-Cleaning-BRONZE-and-ZINC-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Installation and Cleaning (PDF)">
           <div class="lw2-coll-info-img">
             <img src="/assets/images/linden/autograph/BWS-Installation-and-Cleaning-BRONZE-and-ZINC-2024-08-08-230x300.jpg" alt="Installation and Cleaning PDF preview">
           </div>
-          <h3>Installation and Cleaning <span class="lw2-coll-arrow">»</span></h3>
+          <h3>Installation and Cleaning</h3>
         </a>
+      </div>
+      <div class="lw2-coll-info-cta">
+        <a href="/where-to-buy/" class="lw2-coll-showroom-btn">Find a Bronzework Studio Autograph showroom</a>
       </div>
     </section>
 
-    <!-- ALSO AVAILABLE FROM — cross-link to sibling Bronzework collections -->
+    <!-- ALSO AVAILABLE FROM — tan panel, eyebrow + wordmark head, caption strips (DS §8.8) -->
     <section class="lw2-coll-also">
-      <h2 class="lw2-coll-section-title">Also available from Bronzework Studio</h2>
+      <div class="lw2-coll-also-head">
+        <p class="lw2-coll-also-eyebrow">Also available from</p>
+        <img class="lw2-coll-also-wordmark" src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
+      </div>
       <div class="lw2-coll-also-grid">
         <a href="/precision/" class="lw2-coll-also-card">
           <div class="lw2-coll-also-img">
             <img src="/assets/images/linden/autograph/Bronzework-Studio-Precision-Square-Brass-herringbone-floor.jpg" alt="Bronzework Studio Precision Square Liner in Hepburn Brass on a herringbone floor">
           </div>
-          <h3>Precision Collection</h3>
-          <p>Extra long metal liners and trim for wall and floor.</p>
+          <div class="lw2-coll-also-caption">
+            <h3>Precision Collection</h3>
+            <p>Extra-long Brass, Stainless Steel, and Matte Black liners »</p>
+          </div>
         </a>
         <a href="/classic/" class="lw2-coll-also-card">
           <div class="lw2-coll-also-img">
-            <img src="/assets/images/linden/autograph/Bronzework-Studio-Beach-Grass-Liner-Zinc-black-stone-floor.jpg" alt="Bronzework Studio Classic Beach Grass metal accent liner in Zinc on a black stone floor">
+            <picture><source type="image/webp" srcset="/assets/images/linden/autograph/Bronzework-Studio-Beach-Grass-Liner-Zinc-black-stone-floor.webp"><img src="/assets/images/linden/autograph/Bronzework-Studio-Beach-Grass-Liner-Zinc-black-stone-floor.jpg" alt="Bronzework Studio Classic Beach Grass metal accent liner in Zinc on a black stone floor"></picture>
           </div>
-          <h3>Classic Collection</h3>
-          <p>Hand-carved metal tiles and liners for floor and wall.</p>
+          <div class="lw2-coll-also-caption">
+            <h3>Classic Collection</h3>
+            <p>Hand-carved metal tiles in Traditional &amp; White Bronze, Zinc »</p>
+          </div>
         </a>
       </div>
     </section>
@@ -273,6 +290,6 @@
     </div>
   </footer>
 
-  <script src="/assets/app.js?v=20260603-190"></script>
+  <script src="/assets/app.js?v=20260716-191"></script>
 </body>
 </html>

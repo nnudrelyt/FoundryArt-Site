@@ -318,6 +318,30 @@ Sections, in document order, with the component each reuses:
 
 **Known divergence:** the sub-nav + "Classic Collection" links render in `--lw-accent-red` because of the global `body[data-section="linden"] a:not(...)` rule (line ~3379, ~15 `:not()` classes → very high specificity). Override needs `!important` or adding the class to that `:not()` chain (how the showroom button forces black).
 
-**Cloning to autograph / classic / instinct (next step):**
+**Cloned to autograph (2026-07-16).** `autograph/` now takes the template via the shared
+`:is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"])` selector lists
+(76 of them). Its ~101 legacy `body[data-page="autograph"]` base rules are still in the earlier
+collection-detail block and remain the *base layer* — the precision block overrides them later in the
+cascade, exactly as it does for classic. Decisions taken:
+- **Masthead hierarchy flipped** to DS §8.1 — the 56px title / 24px wordmark inversion is gone; now a
+  dominant 46px Bronzework wordmark over a subordinate 28px title. Markup moved from `.lw2-coll-brand`
+  to `.lw2-section-mark` (the template hook).
+- **Sub-nav added** — Design Ideas / Tiles / Further Information, anchored to `#design-ideas`
+  (portraits), `#tiles` (liners), `#further-information` (info panel). Mirrors live.
+- **Signature section added** (`.lw2-coll-signature`) — the Fitzgerald signature is live row 3 and was
+  missing from the mirror entirely. 79px tall, matching live's 224×79 render.
+- **Intro reconciled** — autograph's intro carries two elements (pull-quote + lede) where precision
+  carries one 40px statement. The quote takes the 40px statement role; the lede steps down to the
+  template's established 24px secondary (= hero-sub / finish-note). See the AUTOGRAPH reconciliation
+  block at the tail of the precision CSS.
+- **Info panel** — was `#F2F0E9` (drifted in from the *Inspiration* article template, a different
+  component family); now the template's `#E0E0E0`. Arrows dropped from labels per §8.7; real 2024 PDFs
+  wired (were `href="#"`).
+- **Also block** — eyebrow + 40px wordmark head and `#EDECEC` caption strips per §8.8; panel `#E0DED5`.
+- **`instinct/` needs no clone.** Live `/instinct/` is genuinely minimal (one logotype, 3 headings,
+  267 chars — no hero/gallery/info). The existing mirror already matches it 1:1; applying this template
+  would invent a page the client doesn't have. Its small size is correct, not debt.
+
+**Cloning to classic (remaining):**
 - The precision rules are mostly scoped `body[data-page="precision"]`. To propagate, **generalise those selectors to the shared `autograph|precision|classic|instinct` list** (or duplicate per page), then per page swap: parent wordmark, collection title, sub-nav anchors, carousel slides + tagline, the two profile cards (image + finish copy), the finish band, the Design Ideas image set + captions, the Further-Information PDFs, and the two "Also available" sibling collections.
 - Match each against its live page with the same inspector-at-reviewer-width method before shipping.
