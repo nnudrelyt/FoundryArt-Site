@@ -9425,16 +9425,17 @@ body[data-page="autograph"] .lw2-coll-liner-list figcaption {
 }
 /* -- GRAY FOOTER — same pattern as /talisman/, /our-team/, /where-to-buy/:
    #F7F7F7 on the .footer wrapper + the row, and suppress the legacy
-   `.footer p { border-top: 1px solid #eee }` above the copyright. -- */
-body[data-page="autograph"] .footer {
+   `.footer p { border-top: 1px solid #eee }` above the copyright.
+   Shared across the collection-detail pages (was autograph-only). -- */
+:is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .footer {
   background: #F7F7F7;
   border-top: none !important;
 }
-body[data-page="autograph"] .lw2-footer-row {
+:is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-footer-row {
   background: #F7F7F7 !important;
   padding-top: 80px !important;
 }
-body[data-page="autograph"] .footer p { border-top: none !important; }
+:is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .footer p { border-top: none !important; }
 
 @media (max-width: 768px) {
   body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) { aspect-ratio: 4 / 3; max-height: none; }
