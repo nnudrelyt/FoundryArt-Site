@@ -9331,6 +9331,65 @@ body[data-page="autograph"] .lw2-coll-intro p.lw2-coll-intro-sub {
 }
 body[data-page="autograph"] .lw2-coll-intro .lw2-coll-info-cta { margin-top: 28px; }
 
+/* -- DESIGN IDEAS 5-up (live row 6) ------------------------------------
+   Full-width, uncapped — live renders each portrait at 16.93% of viewport
+   (381px @2251) with 3.11% gaps and 1.42% side padding, summing to 100%.
+   The 1.4% side padding matches the DS gallery convention (§8.6). These
+   later-in-file rules override the capped ones in the base block above. */
+body[data-page="autograph"] .lw2-coll-portraits { padding-left: 0; padding-right: 0; }
+body[data-page="autograph"] .lw2-coll-portrait-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3.11%;
+  max-width: none;           /* was capped at 1280px */
+  padding: 0 1.42%;
+  margin: 0;
+}
+body[data-page="autograph"] .lw2-coll-portrait-grid figure { margin: 0; }
+body[data-page="autograph"] .lw2-coll-portrait-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 220 / 345;   /* = the source's native portrait ratio */
+  object-fit: cover;
+}
+
+/* -- IN-CONTEXT INSTALLS 2-up (live row 7) -----------------------------
+   Full-width on the template's uncapped 2-up (DS §8.4): 2.5% side padding,
+   3.2% gap, ~45.9% images.
+   DELIBERATE DIVERGENCE FROM LIVE: live drops a 750px image into a ~1094px
+   cell, so its two shots sit left-aligned with a dead 15.9% gap on the right.
+   That's an artifact of an undersized asset, not an intent — the source is
+   2560x1707. Built symmetric and full-width instead, per the template. */
+body[data-page="autograph"] .lw2-coll-lifestyle {
+  display: block;            /* base rule makes this a 2-col grid; the inner div is the grid now */
+  max-width: none;           /* was capped at 1440px */
+  padding: 0 2.5% 72px;
+  margin: 0;
+}
+body[data-page="autograph"] .lw2-coll-lifestyle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.2%;
+  align-items: start;
+}
+body[data-page="autograph"] .lw2-coll-lifestyle-grid figure { margin: 0; }
+body[data-page="autograph"] .lw2-coll-lifestyle-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 5 / 3;       /* = live's 750x450 crop, applied to both cells */
+  object-fit: cover;
+}
+body[data-page="autograph"] .lw2-coll-lifestyle-grid figcaption {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--lw-text-primary, #000);
+  text-align: center;
+  margin-top: 18px;
+}
+
 @media (max-width: 768px) {
   body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) { aspect-ratio: 4 / 3; max-height: none; }
   body[data-page="autograph"] .lw2-coll-hero-signature { height: 48px; margin: 14px auto 12px; }
@@ -9339,6 +9398,13 @@ body[data-page="autograph"] .lw2-coll-intro .lw2-coll-info-cta { margin-top: 28p
   body[data-page="autograph"] .lw2-coll-dahlia-grid img { width: 44vw; }
   body[data-page="autograph"] .lw2-coll-dahlia-grid figcaption { font-size: 13px; margin-top: 12px; }
   body[data-page="autograph"] .lw2-coll-intro p.lw2-coll-intro-sub { font-size: 18px; margin-top: 32px; }
+  body[data-page="autograph"] .lw2-coll-portrait-grid { grid-template-columns: repeat(2, 1fr); gap: 4%; padding: 0 4%; }
+  body[data-page="autograph"] .lw2-coll-lifestyle { padding: 0 5% 48px; }
+  body[data-page="autograph"] .lw2-coll-lifestyle-grid { grid-template-columns: 1fr; gap: 32px; }
+  body[data-page="autograph"] .lw2-coll-lifestyle-grid figcaption { font-size: 13px; margin-top: 12px; }
+}
+@media (max-width: 1024px) and (min-width: 769px) {
+  body[data-page="autograph"] .lw2-coll-portrait-grid { grid-template-columns: repeat(3, 1fr); gap: 3%; padding: 0 3%; }
 }
 
 /* ──────────────────────────────────────────────────────────────────
