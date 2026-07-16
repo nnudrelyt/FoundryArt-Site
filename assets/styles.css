@@ -9174,7 +9174,14 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
 :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-showroom-btn:hover { color: #A31414 !important; }  /* red text on rollover, no fill */
 
 /* -- ALSO AVAILABLE FROM: live tan panel + wordmark heading + large 3:2 images -- */
-:is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also { background: #E0DED5; }   /* live: rgb(224,222,213) */
+/* White inner border: the tan panel is inset from the viewport so the white page shows
+   through as a frame — live puts 0 32px 30px padding on a transparent row and backs the
+   inner column tan. Same idiom as the homepage studio panels (.lw2-studio margin:25px). */
+:is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also {
+  background: #E0DED5;        /* live: rgb(224,222,213) */
+  margin: 0 32px 30px;        /* the white frame */
+  padding: 80px 32px 32px;
+}
 :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also-head { text-align: center; margin: 0 auto 40px; }
 :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also-eyebrow {
   font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
@@ -9193,7 +9200,7 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
 :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also-grid {
   max-width: none;
   margin: 0;
-  padding: 0 2.5%;            /* match profiles — images ~46% of viewport */
+  padding: 0;                 /* the tan panel supplies the 32px — images land at live's 1028px */
   gap: 3.2%;
 }
 :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also-card { text-decoration: none; }
@@ -9390,6 +9397,45 @@ body[data-page="autograph"] .lw2-coll-lifestyle-grid figcaption {
   margin-top: 18px;
 }
 
+/* -- INSET TILES -------------------------------------------------------
+   The shared grid is repeat(4, 1fr); autograph now has only two tiles, so
+   they were filling the two LEFT columns rather than centring. Flex instead. */
+body[data-page="autograph"] .lw2-coll-inset-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12%;
+  max-width: 1200px;
+  margin: 40px auto 0;
+}
+body[data-page="autograph"] .lw2-coll-inset-grid figure { flex: 0 0 300px; }
+/* contain, not cover: these are full tiles on seamless white and must not be
+   re-cropped. The old assets were 325x225 WordPress crops that cut the tile off. */
+body[data-page="autograph"] .lw2-coll-inset-grid img {
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: #fff;
+}
+/* -- LINER NAMES -> Open Sans (was Fanwood italic 20px) -- */
+body[data-page="autograph"] .lw2-coll-liner-list figcaption {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+/* -- GRAY FOOTER — same pattern as /talisman/, /our-team/, /where-to-buy/:
+   #F7F7F7 on the .footer wrapper + the row, and suppress the legacy
+   `.footer p { border-top: 1px solid #eee }` above the copyright. -- */
+body[data-page="autograph"] .footer {
+  background: #F7F7F7;
+  border-top: none !important;
+}
+body[data-page="autograph"] .lw2-footer-row {
+  background: #F7F7F7 !important;
+  padding-top: 80px !important;
+}
+body[data-page="autograph"] .footer p { border-top: none !important; }
+
 @media (max-width: 768px) {
   body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) { aspect-ratio: 4 / 3; max-height: none; }
   body[data-page="autograph"] .lw2-coll-hero-signature { height: 48px; margin: 14px auto 12px; }
@@ -9402,6 +9448,10 @@ body[data-page="autograph"] .lw2-coll-lifestyle-grid figcaption {
   body[data-page="autograph"] .lw2-coll-lifestyle { padding: 0 5% 48px; }
   body[data-page="autograph"] .lw2-coll-lifestyle-grid { grid-template-columns: 1fr; gap: 32px; }
   body[data-page="autograph"] .lw2-coll-lifestyle-grid figcaption { font-size: 13px; margin-top: 12px; }
+  body[data-page="autograph"] .lw2-coll-inset-grid { gap: 8%; }
+  body[data-page="autograph"] .lw2-coll-inset-grid figure { flex: 0 0 40vw; }
+  body[data-page="autograph"] .lw2-coll-liner-list figcaption { font-size: 13px; }
+  :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also { margin: 0 16px 16px; padding: 48px 16px 20px; }
 }
 @media (max-width: 1024px) and (min-width: 769px) {
   body[data-page="autograph"] .lw2-coll-portrait-grid { grid-template-columns: repeat(3, 1fr); gap: 3%; padding: 0 3%; }
