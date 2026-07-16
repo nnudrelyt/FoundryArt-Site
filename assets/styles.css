@@ -9179,7 +9179,7 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
    inner column tan. Same idiom as the homepage studio panels (.lw2-studio margin:25px). */
 :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also {
   background: #E0DED5;        /* live: rgb(224,222,213) */
-  margin: 0 32px 30px;        /* the white frame */
+  margin: 32px 32px 30px;     /* the white frame — top edge included */
   padding: 80px 32px 32px;
 }
 :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also-head { text-align: center; margin: 0 auto 40px; }
@@ -9451,7 +9451,7 @@ body[data-page="autograph"] .footer p { border-top: none !important; }
   body[data-page="autograph"] .lw2-coll-inset-grid { gap: 8%; }
   body[data-page="autograph"] .lw2-coll-inset-grid figure { flex: 0 0 40vw; }
   body[data-page="autograph"] .lw2-coll-liner-list figcaption { font-size: 13px; }
-  :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also { margin: 0 16px 16px; padding: 48px 16px 20px; }
+  :is(body[data-page="precision"],body[data-page="classic"],body[data-page="autograph"]) .lw2-coll-also { margin: 16px; padding: 48px 16px 20px; }
 }
 @media (max-width: 1024px) and (min-width: 769px) {
   body[data-page="autograph"] .lw2-coll-portrait-grid { grid-template-columns: repeat(3, 1fr); gap: 3%; padding: 0 3%; }
