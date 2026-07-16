@@ -9287,6 +9287,37 @@ body[data-page="autograph"] .lw2-coll-intro p.lw2-coll-eyebrow {
   line-height: 1.6;
   margin: 30px 0 0;
 }
+/* -- STATIC HERO -------------------------------------------------------
+   Autograph's hero is a single fixed image, not precision's cross-fading
+   carousel — but it takes every other value from the precision hero spec
+   (§8.2): 16/9 stage, 72vh cap, the rgba(255,255,255,0.66) scrim, and the
+   32px tagline / 24px sub. Reuses classic's --single/banner markup pattern;
+   classic's own rules are `body[data-page="classic"]`-scoped, so its
+   no-scrim overlay and white text do NOT leak here. */
+body[data-page="autograph"] .lw2-coll-hero--single { position: relative; width: 100%; margin: 0; }
+body[data-page="autograph"] .lw2-coll-hero-banner { position: relative; margin: 0; }
+/* Direct-child path only — a plain `.lw2-coll-hero-banner img` also matches the
+   signature inside the overlay and stretches it to 16/9. */
+body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;      /* = precision's .lw2-media-stage */
+  max-height: 72vh;          /* = precision's stage cap */
+  object-fit: cover;
+}
+/* Signature sits inside the hero scrim, above the tagline. */
+body[data-page="autograph"] .lw2-coll-hero-signature {
+  display: block;
+  height: 58px;
+  width: auto;
+  margin: 0 auto 18px;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) { aspect-ratio: 4 / 3; max-height: none; }
+  body[data-page="autograph"] .lw2-coll-hero-signature { height: 38px; margin-bottom: 12px; }
+}
+
 /* Fitzgerald signature — the collection's namesake device, sits between
    the masthead and the quote. Sized off the 46px wordmark. */
 body[data-page="autograph"] .lw2-coll-signature {
