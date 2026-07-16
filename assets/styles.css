@@ -9248,56 +9248,33 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
   .lw2-lightbox-close { top: 10px; right: 16px; }
 }
 
-/* -- AUTOGRAPH reconciliation ---------------------------------------
-   Autograph now takes the Precision collection-detail template above.
-   Its intro carries TWO elements (the Fitzgerald pull-quote + a lede)
-   where Precision carries one 40px statement, so the template's
-   `.lw2-coll-intro p { font-size:40px }` would size both alike.
-   The quote takes the 40px statement role; the lede steps down to the
-   template's established 24px secondary (= hero-sub / finish-note).
+/* -- AUTOGRAPH ---------------------------------------------------------
+   Autograph takes the precision collection-detail template above. Two
+   structural differences from precision, both mirroring the live page:
+
+   1. HERO is a single static image, not a cross-fading carousel — but every
+      other value is precision's hero spec (§8.2): 16/9, 72vh cap,
+      rgba(255,255,255,0.66) scrim, 32px tagline. Live's hero row carries
+      Autograph-Dahlia-Whiskey.jpg as a CSS background at cover/center; we use
+      a <picture> instead so the webp + alt text survive.
+      Overlay order matches live: quote -> signature -> eyebrow. The signature
+      IS the attribution, which is why there's no "— F. Scott Fitzgerald"
+      cite line (live has none either).
+      Live sets the quote at Fanwood 32px, which is already precision's
+      hero-tagline size, so live and the template agree here.
+
+   2. INTRO carries live row 5 whole: the 40px statement (again already the
+      template's intro size), the two Dahlia product shots, the "Let your
+      walls..." line, and the showroom button.
+
+   Reuses classic's --single/banner markup pattern; classic's own rules are
+   body[data-page="classic"]-scoped, so its no-scrim overlay and white text
+   don't leak here.
    ------------------------------------------------------------------ */
-body[data-page="autograph"] .lw2-coll-quote p {
-  font-size: 40px;
-  line-height: 1.3;
-  margin: 0;
-}
-body[data-page="autograph"] .lw2-coll-quote cite {
-  display: block;
-  font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
-  font-style: italic;
-  font-size: 20px;
-  color: var(--lw-text-primary, #000);
-  margin: 18px 0 0;
-}
-/* NB: the template's `.lw2-coll-intro p` scores (0,2,2) — these must out-specify it,
-   hence the `p.<class>` qualifier (0,3,2). Without it both the lede and the eyebrow
-   inherit the 40px statement size. */
-body[data-page="autograph"] .lw2-coll-intro p.lw2-coll-lede {
-  font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
-  font-size: 24px;
-  line-height: 1.5;
-  color: var(--lw-text-primary, #000);
-  margin: 34px auto 0;
-  max-width: 900px;
-}
-/* Eyebrow keeps its base Open Sans 13px caps (= sub-nav type), not the 40px statement. */
-body[data-page="autograph"] .lw2-coll-intro p.lw2-coll-eyebrow {
-  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
-  font-size: 13px;
-  line-height: 1.6;
-  margin: 30px 0 0;
-}
-/* -- STATIC HERO -------------------------------------------------------
-   Autograph's hero is a single fixed image, not precision's cross-fading
-   carousel — but it takes every other value from the precision hero spec
-   (§8.2): 16/9 stage, 72vh cap, the rgba(255,255,255,0.66) scrim, and the
-   32px tagline / 24px sub. Reuses classic's --single/banner markup pattern;
-   classic's own rules are `body[data-page="classic"]`-scoped, so its
-   no-scrim overlay and white text do NOT leak here. */
 body[data-page="autograph"] .lw2-coll-hero--single { position: relative; width: 100%; margin: 0; }
 body[data-page="autograph"] .lw2-coll-hero-banner { position: relative; margin: 0; }
 /* Direct-child path only — a plain `.lw2-coll-hero-banner img` also matches the
-   signature inside the overlay and stretches it to 16/9. */
+   signature inside the overlay and stretches it to 16/9 + object-fit:cover. */
 body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) {
   display: block;
   width: 100%;
@@ -9305,39 +9282,63 @@ body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-bann
   max-height: 72vh;          /* = precision's stage cap */
   object-fit: cover;
 }
-/* Signature sits inside the hero scrim, above the tagline. */
+/* Signature sits in the scrim between the quote and the eyebrow, standing in
+   for a cite line. 79px = live's render (224x79 from a 1000x352 source). */
 body[data-page="autograph"] .lw2-coll-hero-signature {
   display: block;
-  height: 58px;
+  height: 79px;
   width: auto;
-  margin: 0 auto 18px;
+  margin: 20px auto 18px;
   object-fit: contain;
 }
+body[data-page="autograph"] .lw2-coll-hero-overlay .lw2-coll-eyebrow { margin: 0; }
+
+/* -- INTRO (live row 5) ------------------------------------------------
+   The bare <p> inherits the template's 40px statement. Everything below it
+   needs a `p.<class>` qualifier to out-specify `.lw2-coll-intro p` (0,2,2). */
+body[data-page="autograph"] .lw2-coll-intro { padding: 64px 24px 72px; }
+body[data-page="autograph"] .lw2-coll-dahlia-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12%;
+  margin: 56px auto 0;
+  max-width: 1200px;
+}
+body[data-page="autograph"] .lw2-coll-dahlia-grid figure { margin: 0; }
+body[data-page="autograph"] .lw2-coll-dahlia-grid img {
+  display: block;
+  width: auto;               /* natural size = live's render (300x300 / 293x293) */
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+body[data-page="autograph"] .lw2-coll-dahlia-grid figcaption {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--lw-text-primary, #000);
+  text-align: center;
+  margin-top: 18px;
+}
+body[data-page="autograph"] .lw2-coll-intro p.lw2-coll-intro-sub {
+  font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
+  font-style: italic;
+  font-size: 24px;           /* = live */
+  line-height: 1.5;
+  color: var(--lw-text-primary, #000);
+  margin: 56px 0 0;
+}
+body[data-page="autograph"] .lw2-coll-intro .lw2-coll-info-cta { margin-top: 28px; }
+
 @media (max-width: 768px) {
   body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) { aspect-ratio: 4 / 3; max-height: none; }
-  body[data-page="autograph"] .lw2-coll-hero-signature { height: 38px; margin-bottom: 12px; }
-}
-
-/* Fitzgerald signature — the collection's namesake device, sits between
-   the masthead and the quote. Sized off the 46px wordmark. */
-body[data-page="autograph"] .lw2-coll-signature {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 44px 24px 0;
-  text-align: center;
-}
-body[data-page="autograph"] .lw2-coll-signature img {
-  height: 79px;            /* matches live render (224x79 from a 1000x352 source) */
-  width: auto;
-  max-width: 78vw;
-  object-fit: contain;
-}
-@media (max-width: 768px) {
-  body[data-page="autograph"] .lw2-coll-quote p { font-size: 27px; }
-  body[data-page="autograph"] .lw2-coll-quote cite { font-size: 16px; margin-top: 12px; }
-  body[data-page="autograph"] .lw2-coll-intro p.lw2-coll-lede { font-size: 18px; margin-top: 24px; }
-  body[data-page="autograph"] .lw2-coll-signature { padding: 28px 20px 0; }
-  body[data-page="autograph"] .lw2-coll-signature img { height: 48px; }
+  body[data-page="autograph"] .lw2-coll-hero-signature { height: 48px; margin: 14px auto 12px; }
+  body[data-page="autograph"] .lw2-coll-intro { padding: 40px 20px 48px; }
+  body[data-page="autograph"] .lw2-coll-dahlia-grid { gap: 8%; margin-top: 32px; }
+  body[data-page="autograph"] .lw2-coll-dahlia-grid img { width: 44vw; }
+  body[data-page="autograph"] .lw2-coll-dahlia-grid figcaption { font-size: 13px; margin-top: 12px; }
+  body[data-page="autograph"] .lw2-coll-intro p.lw2-coll-intro-sub { font-size: 18px; margin-top: 32px; }
 }
 
 /* ──────────────────────────────────────────────────────────────────
