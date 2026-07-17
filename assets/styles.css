@@ -6221,8 +6221,8 @@ body[data-page="bronzework"] .lw2-studio {
   text-align: center;
 }
 body[data-page="bronzework"] .lw2-studio-head {
-  background: #E0E0E0;         /* the gray band, full width, edge to edge incl. top */
-  padding: 76px 24px 68px;
+  background: #EDEDED;         /* light gray band (was #E0E0E0 — too dark), full-bleed incl. top */
+  padding: 72px 24px 64px;
   margin: 0;
 }
 body[data-page="bronzework"] .lw2-collection-grid {
@@ -6230,6 +6230,7 @@ body[data-page="bronzework"] .lw2-collection-grid {
   max-width: 1200px;
   margin: 0 auto;
   padding: 72px 24px 84px;
+  gap: 32px;                   /* tighter columns (was 60px) */
 }
 /* Card captions sit on white — only the wordmark + copy band is gray. Drops the
    #EDECEC caption strip and cream image tint. The strip is set by an ID-scoped
@@ -6241,6 +6242,9 @@ body[data-page="bronzework"] #bronzework-studio .lw2-card h3,
 body[data-page="bronzework"] #bronzework-studio .lw2-card-body {
   background: transparent !important;
 }
+/* Taller/tighter columns + smaller wordmark to match the concept reference. */
+body[data-page="bronzework"] .lw2-card-img { aspect-ratio: 2 / 3; }   /* was 3/4 — taller, = native image ratio */
+body[data-page="bronzework"] #bronzework-studio .lw2-section-mark img { height: 34px; }   /* was 47px */
 @media (max-width: 768px) {
   body[data-page="bronzework"] .lw2-studio-head { padding: 48px 20px 40px; }
   body[data-page="bronzework"] .lw2-collection-grid { padding: 44px 20px 56px; }
