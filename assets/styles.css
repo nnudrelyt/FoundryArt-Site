@@ -9050,23 +9050,10 @@ body[data-page="feature-drury"] .lw2-article-thanks-frame p {
 /* -- CLASSIC hero: single full-bleed banner, white overlay text (no scrim) -- */
 body[data-page="classic"] .lw2-coll-hero--single { position: relative; width: 100%; margin: 0; }
 body[data-page="classic"] .lw2-coll-hero-banner { position: relative; margin: 0; }
-body[data-page="classic"] .lw2-coll-hero-banner img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 80vh;
-  object-fit: cover;
-}
-body[data-page="classic"] .lw2-coll-hero-overlay > div {
-  background: none;          /* no white scrim on classic */
-  padding: 0;
-  max-width: 640px;
-}
-body[data-page="classic"] .lw2-coll-hero-tagline,
-body[data-page="classic"] .lw2-coll-hero-sub {
-  color: #fff;
-  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.40);
-}
+/* Classic hero now matches autograph/precision — static image on the shared
+   spec: 16/9 + 72vh cap (via the generalized hero-banner img rule above), the
+   shared rgba(255,255,255,0.66) scrim box, and shared dark Fanwood text. Its
+   former no-scrim / white-text-on-shadow overrides are removed. */
 
 /* -- CLASSIC intro: material swatches + italic line + showroom CTA -- */
 body[data-page="classic"] .lw2-coll-swatches {
@@ -9231,7 +9218,7 @@ body[data-page="autograph"] .lw2-coll-hero--single { position: relative; width: 
 body[data-page="autograph"] .lw2-coll-hero-banner { position: relative; margin: 0; }
 /* Direct-child path only — a plain `.lw2-coll-hero-banner img` also matches the
    signature inside the overlay and stretches it to 16/9 + object-fit:cover. */
-body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) {
+:is(body[data-page="autograph"],body[data-page="classic"]) :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;      /* = precision's .lw2-media-stage */
@@ -9394,7 +9381,7 @@ body[data-section="linden"] .lw2-footer-row {
 body[data-section="linden"] .footer p { border-top: none !important; }
 
 @media (max-width: 768px) {
-  body[data-page="autograph"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) { aspect-ratio: 4 / 3; max-height: none; }
+  :is(body[data-page="autograph"],body[data-page="classic"]) :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) { aspect-ratio: 4 / 3; max-height: none; }
   body[data-page="autograph"] .lw2-coll-hero-signature { height: 48px; margin: 14px auto 12px; }
   body[data-page="autograph"] .lw2-coll-intro { padding: 40px 20px 48px; }
   body[data-page="autograph"] .lw2-coll-dahlia-grid { gap: 8%; margin-top: 32px; }
