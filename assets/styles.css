@@ -6257,9 +6257,9 @@ body[data-page="bronzework"] .lw2-inspiration-cta {
   background: rgba(255, 255, 255, 0.5) !important;   /* semi-transparent white fill (per live, = showroom btn) */
 }
 body[data-page="bronzework"] .lw2-inspiration-cta:hover {
-  color: #000 !important;
-  border-color: #000;
-  background: rgba(255, 255, 255, 0.5) !important;   /* keep the fill on hover */
+  color: #000 !important;                            /* text darkens */
+  border-color: #c8c8c8;                             /* keep the light border — no black on hover */
+  background: rgba(255, 255, 255, 0.5) !important;   /* keep the fill */
 }
 @media (max-width: 768px) {
   body[data-page="bronzework"] .lw2-studio-head { padding: 48px 20px 40px; }
