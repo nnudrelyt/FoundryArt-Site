@@ -3174,6 +3174,24 @@ body[data-page="home"] .footer p { border: 0 !important; }
 .studios-acc {
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+/* Standalone page links below the studio accordions in the drawer
+   (Inspiration / Our Team / Where to Buy / Contact / Showroom Login).
+   Same dark-drawer type system as the accordion heads, as direct links. */
+.studios-links a,
+.studios-links a:link,
+.studios-links a:visited {
+  display: block;
+  padding: 20px 32px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.2;
+  color: #FFFFFF !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.studios-links a:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+.studios-links a:hover { background: rgba(255,255,255,0.06); color: #FFFFFF !important; }
 .studios-acc-head {
   display: grid;
   grid-template-columns: 1fr auto;

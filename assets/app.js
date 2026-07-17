@@ -178,6 +178,14 @@
             <a href="/talisman/" data-studios-link>White Ceramic Tiles &amp; Borders <small>Legacy reorders</small></a>
           </div>
         </div>
+
+        <nav class="studios-links" aria-label="Pages">
+          <a href="/feature-gail-drury/" data-studios-link>Inspiration</a>
+          <a href="/our-team/" data-studios-link>Our Team</a>
+          <a href="/where-to-buy/" data-studios-link>Where to Buy</a>
+          <a href="/contact/" data-studios-link>Contact</a>
+          <a href="#" data-studios-link>Showroom Login</a>
+        </nav>
       </aside>
     `;
   }
