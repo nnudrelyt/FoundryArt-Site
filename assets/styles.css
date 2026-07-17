@@ -6261,6 +6261,12 @@ body[data-page="bronzework"] .lw2-inspiration-cta:hover {
   border-color: #c8c8c8;                             /* keep the light border — no black on hover */
   background: rgba(255, 255, 255, 0.5) !important;   /* keep the fill */
 }
+/* White border around the whole inspiration section (per live) — same 25px
+   inset as the studio panels; footer's own margin-top gives the bottom gap. */
+body[data-page="bronzework"] .lw2-inspiration { margin: 25px 25px 0; }
+@media (max-width: 768px) {
+  body[data-page="bronzework"] .lw2-inspiration { margin: 16px 16px 0; }
+}
 @media (max-width: 768px) {
   body[data-page="bronzework"] .lw2-studio-head { padding: 48px 20px 40px; }
   body[data-page="bronzework"] .lw2-collection-grid { padding: 44px 20px 56px; }
