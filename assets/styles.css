@@ -6245,6 +6245,22 @@ body[data-page="bronzework"] #bronzework-studio .lw2-card-body {
 /* Taller/tighter columns + smaller wordmark to match the concept reference. */
 body[data-page="bronzework"] .lw2-card-img { aspect-ratio: 2 / 3; }   /* was 3/4 — taller, = native image ratio */
 body[data-page="bronzework"] #bronzework-studio .lw2-section-mark img { height: 34px; }   /* was 47px */
+
+/* -- DESIGN INSPIRATION CTA — match reference: centered, italic heading, and a
+   quiet gray button (thin light border, gray text) instead of the left-aligned,
+   upright, red-link + black-border version. -- */
+body[data-page="bronzework"] .lw2-inspiration-text { text-align: center; }
+body[data-page="bronzework"] .lw2-inspiration-text h2 { font-style: italic !important; }
+body[data-page="bronzework"] .lw2-inspiration-cta {
+  color: #6b6b6b !important;      /* gray (was the link-red #A31414) */
+  border: 1px solid #c8c8c8;      /* thin light-gray border (was 1px #000) */
+  background: transparent;
+}
+body[data-page="bronzework"] .lw2-inspiration-cta:hover {
+  color: #000 !important;
+  border-color: #000;
+  background: transparent;        /* quiet hover — no solid black fill */
+}
 @media (max-width: 768px) {
   body[data-page="bronzework"] .lw2-studio-head { padding: 48px 20px 40px; }
   body[data-page="bronzework"] .lw2-collection-grid { padding: 44px 20px 56px; }
