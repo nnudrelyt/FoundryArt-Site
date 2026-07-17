@@ -9376,6 +9376,56 @@ body[data-page="classic"] .lw2-coll-liner-list figcaption {
   font-size: 13px;
   line-height: 1.45;
 }
+
+/* -- CLASSIC tiles catalog (matches live "Bronzework Studio tiles"): 4-col grid
+   of every pattern x size x finish. Uniform square cells; tiles are photographed
+   at relative scale on white (2.5" large -> 0.63" tiny), so object-fit:contain
+   preserves that. 3-line caption: name / size accent tile / finish. -- */
+body[data-page="classic"] .lw2-coll-tiles {
+  padding: 64px 24px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+body[data-page="classic"] .lw2-coll-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 34px;                 /* = live */
+  max-width: 1064px;         /* = live's centered grid width (cells 240, img 228) */
+  margin: 48px auto 0;
+}
+body[data-page="classic"] .lw2-coll-tile-cell {
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 22px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+body[data-page="classic"] .lw2-coll-tile-cell img {
+  display: block;
+  width: 100%;
+  max-width: 228px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;      /* tile centered on white at its photographed scale — never cropped */
+  margin: 0 auto;
+}
+body[data-page="classic"] .lw2-coll-tile-cell figcaption {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--lw-text-primary, #000);
+  margin-top: 16px;
+}
+@media (max-width: 1024px) and (min-width: 641px) {
+  body[data-page="classic"] .lw2-coll-tile-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  body[data-page="classic"] .lw2-coll-tiles { padding: 40px 18px 52px; }
+  body[data-page="classic"] .lw2-coll-tile-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  body[data-page="classic"] .lw2-coll-tile-cell { padding: 16px 10px 14px; }
+  body[data-page="classic"] .lw2-coll-tile-cell figcaption { font-size: 12px; }
+}
 /* -- GRAY FOOTER — the standard for every Linden-section page (#F7F7F7 on the
    .footer wrapper + row, 80px row top-padding, legacy `.footer p { border-top }`
    suppressed). Promoted from per-page (talisman / our-team / where-to-buy /
