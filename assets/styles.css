@@ -6211,6 +6211,41 @@ body[data-page="bronzework"] .lw2-card-body {
   body[data-page="bronzework"] .lw2-collection-grid { gap: 25px; }
 }
 
+/* -- BRONZEWORK landing layout: the light-gray is a FULL-BLEED band behind only
+   the wordmark + support copy; the cards sit below on white. Overrides the shared
+   studio-panel treatment (gray wraps everything inside a 25px white border). -- */
+body[data-page="bronzework"] .lw2-studio {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center;
+}
+body[data-page="bronzework"] .lw2-studio-head {
+  background: #E0E0E0;         /* the gray band, full width, edge to edge incl. top */
+  padding: 76px 24px 68px;
+  margin: 0;
+}
+body[data-page="bronzework"] .lw2-collection-grid {
+  background: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 24px 84px;
+}
+/* Card captions sit on white — only the wordmark + copy band is gray. Drops the
+   #EDECEC caption strip and cream image tint. The strip is set by an ID-scoped
+   !important rule (#bronzework-studio, shared with the homepage), so match its
+   specificity with the ID here; later source order + !important wins. Homepage
+   (data-page="home"/"linden") keeps its strip. */
+body[data-page="bronzework"] #bronzework-studio .lw2-card-img,
+body[data-page="bronzework"] #bronzework-studio .lw2-card h3,
+body[data-page="bronzework"] #bronzework-studio .lw2-card-body {
+  background: transparent !important;
+}
+@media (max-width: 768px) {
+  body[data-page="bronzework"] .lw2-studio-head { padding: 48px 20px 40px; }
+  body[data-page="bronzework"] .lw2-collection-grid { padding: 44px 20px 56px; }
+}
+
 /* ══════════════════════════════════════════════════════════
    Our Team page — alternating gray/white sections, square portrait
    on the left, bio paragraphs on the right.
