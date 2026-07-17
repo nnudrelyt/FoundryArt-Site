@@ -210,6 +210,17 @@
     if (navMount) navMount.outerHTML = navHTML();
     if (footerMount) footerMount.outerHTML = footerHTML();
 
+    // Mark the current page's link in the studios drawer (bronze active accent)
+    const curPath = (location.pathname.replace(/\/$/, '') || '/');
+    document.querySelectorAll('.studios-acc-body a, .studios-links a').forEach(a => {
+      const href = (a.getAttribute('href') || '').replace(/\/$/, '');
+      if (href && href !== '#' && href === curPath) {
+        a.classList.add('is-current');
+        const acc = a.closest('.studios-acc');          // also mark + expand the parent studio group
+        if (acc) acc.classList.add('active', 'open');
+      }
+    });
+
     // Highlight active nav link based on data-page attribute on body
     const pageKey = document.body.dataset.page;
     if (pageKey) {
