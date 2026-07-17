@@ -6154,21 +6154,8 @@ body[data-section="linden"] .lw2-tal-craft img {
   body[data-section="linden"] .lw2-tal-craft { padding: 24px 18px 56px; }
 }
 
-/* Gray footer treatment for /talisman/ — same pattern as /our-team/
-   and /where-to-buy/: bg #F7F7F7 on the .footer wrapper + the row,
-   suppress the legacy `.footer p { border-top: 1px solid #eee }`
-   rule above the copyright. */
-body[data-page="talisman"] .footer {
-  background: #F7F7F7;
-  border-top: none !important;
-}
-body[data-page="talisman"] .lw2-footer-row {
-  background: #F7F7F7 !important;
-  padding-top: 80px !important;
-}
-body[data-page="talisman"] .footer p {
-  border-top: none !important;
-}
+/* (Gray footer for /talisman/ removed — now covered by the section-level
+   body[data-section="linden"] footer rule.) */
 
 /* ══════════════════════════════════════════════════════════
    Bronzework Studio page-specific overrides (data-page="bronzework")
@@ -6334,30 +6321,9 @@ body[data-page="our-team"] .lw2-team-group-caption, body[data-page="about"] .lw2
   margin: 18px auto 0;
 }
 
-/* Footer: #F7F7F7 bg with 80px top padding (per spec).
-   .footer wrapper bg also set so no white strip shows above the row.
-   Footer titles ("Linden Workshops", "Contact us!") → 24px Fanwood regular.
-   The legacy LW-scope .footer p { border-top: 1px solid #eee } rule
-   added a horizontal rule above the copyright — suppressed here so
-   there's no line between the group caption and the footer bg. */
-body[data-page="our-team"] .footer, body[data-page="about"] .footer, body[data-page="tile-collections"] .footer {
-  background: #F7F7F7;
-  border-top: none !important;
-}
-body[data-page="our-team"] .lw2-footer-row, body[data-page="about"] .lw2-footer-row, body[data-page="tile-collections"] .lw2-footer-row {
-  background: #F7F7F7 !important;
-  padding-top: 80px !important;
-}
-/* Footer h2 titles ("Contact us!", footer-left h2) inherit the global
-   LW footer h2 sizing — do NOT override on this page. (Earlier round
-   mistakenly shrunk them to 24px; reverted.) */
-
-/* Suppress the legacy LW-section .footer p { border-top: 1px solid #eee }
-   rule that draws a thin horizontal line above any <p> in the footer.
-   Only neutralize that border — not the padding-top: 80px on the row. */
-body[data-page="our-team"] .footer p, body[data-page="about"] .footer p, body[data-page="tile-collections"] .footer p {
-  border-top: none !important;
-}
+/* (Gray footer for /our-team/, /about/, /tile-collections/ removed — now
+   covered by the section-level body[data-section="linden"] footer rule.
+   Footer h2 titles still inherit the global LW footer sizing — no override.) */
 
 /* Tablet — narrower portrait */
 @media (max-width: 1024px) and (min-width: 769px) {
@@ -7865,25 +7831,8 @@ body[data-page="where-to-buy"] .lw2-wtb-talisman-cta {
 }
 body[data-page="where-to-buy"] .lw2-wtb-talisman-cta:hover { background: #000; color: #FFF; }
 
-/* Footer treatment for where-to-buy:
-   - Gray bg (#F7F7F7) on the wrapper + the row, matching the our-team
-     pattern, so the footer reads as one unified panel.
-   - Suppress the legacy `.footer p { border-top: 1px solid #eee }` rule
-     that draws a thin horizontal rule above the copyright/credits. */
-body[data-page="where-to-buy"] .footer,
-body[data-page="contact"] .footer {
-  background: #F7F7F7;
-  border-top: none !important;
-}
-body[data-page="where-to-buy"] .lw2-footer-row,
-body[data-page="contact"] .lw2-footer-row {
-  background: #F7F7F7 !important;
-  padding-top: 80px !important;
-}
-body[data-page="where-to-buy"] .footer p,
-body[data-page="contact"] .footer p {
-  border-top: none !important;
-}
+/* (Gray footer for /where-to-buy/ and /contact/ removed — now covered by the
+   section-level body[data-section="linden"] footer rule.) */
 
 /* TAB PANELS — only the active one shows */
 body[data-page="where-to-buy"] .lw2-wtb-panel {
