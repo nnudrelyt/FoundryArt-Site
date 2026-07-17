@@ -9054,6 +9054,10 @@ body[data-page="classic"] .lw2-coll-hero-banner { position: relative; margin: 0;
    spec: 16/9 + 72vh cap (via the generalized hero-banner img rule above), the
    shared rgba(255,255,255,0.66) scrim box, and shared dark Fanwood text. Its
    former no-scrim / white-text-on-shadow overrides are removed. */
+/* Classic's hero uses the live cello-angle shot (a near-square 2296x2560); the
+   subject sits in the upper portion, so pull the cover crop up from center to
+   frame the cello + wall and drop the floor/watermark (live uses ~48% 19%). */
+body[data-page="classic"] :is(.lw2-coll-hero-banner > img, .lw2-coll-hero-banner > picture > img) { object-position: 50% 14%; }
 
 /* -- CLASSIC intro: material swatches + italic line + showroom CTA -- */
 body[data-page="classic"] .lw2-coll-swatches {
