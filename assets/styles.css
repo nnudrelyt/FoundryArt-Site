@@ -6578,6 +6578,10 @@ body[data-page="instinct"] .lw2-coll-portraits {
   background: #F7F6F1;
   padding: 72px 24px 76px;
 }
+/* Classic "Hand-carved patterns" section: no tint. Live Classic has no tinted
+   sections and the sibling design-ideas sections are white — the cream #F7F6F1
+   was a divergence. Padding is kept (still in the shared rule above). */
+body[data-page="classic"] .lw2-coll-portraits { background: transparent; }
 body[data-page="autograph"] .lw2-coll-portrait-grid,
 body[data-page="precision"] .lw2-coll-portrait-grid,
 body[data-page="classic"] .lw2-coll-portrait-grid,
@@ -9362,6 +9366,15 @@ body[data-page="autograph"] .lw2-coll-liner-list figcaption {
   font-style: normal;
   font-size: 16px;
   letter-spacing: 0.02em;
+}
+/* Classic liner captions: match Classic's own pattern captions (Open Sans 13px)
+   rather than the base Fanwood 20px it was inheriting — the two caption types
+   sit on the same page and must read as one style. */
+body[data-page="classic"] .lw2-coll-liner-list figcaption {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.45;
 }
 /* -- GRAY FOOTER — the standard for every Linden-section page (#F7F7F7 on the
    .footer wrapper + row, 80px row top-padding, legacy `.footer p { border-top }`
