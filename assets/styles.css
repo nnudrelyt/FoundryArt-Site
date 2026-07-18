@@ -8227,6 +8227,339 @@ body[data-page="showroom-zone"] .lw2-gate-form button {
 }
 body[data-page="showroom-zone"] .lw2-gate-form button:hover { background: #777; }
 
+/* ── About page ──────────────────────────────────────────────────
+   Brand origin story + the 'working artists' thread that runs across
+   all three studio brands. Team bios themselves live on /our-team/. */
+body[data-page="about"] .lw2-about {
+  background: #FFF;
+}
+body[data-page="about"] .lw2-about > section {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+/* Hero */
+body[data-page="about"] .lw2-about-hero {
+  padding: 88px 24px 56px;
+  text-align: center;
+}
+body[data-page="about"] .lw2-about-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin: 0 0 20px;
+}
+body[data-page="about"] .lw2-about-hero h1 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: clamp(38px, 5vw, 62px);
+  font-weight: 400;
+  line-height: 1.12;
+  color: #000;
+  margin: 0 0 26px;
+  text-wrap: balance;
+}
+body[data-page="about"] .lw2-about-lede {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #2a2a2a;
+  max-width: 62ch;
+  margin: 0 auto;
+  text-wrap: pretty;
+}
+
+/* Build-status notice + inline to-come slots */
+body[data-page="about"] .lw2-about-notice {
+  max-width: 1080px;
+  margin: 0 auto 8px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #F3F1EC;
+  border: 1px solid #DDD8CC;
+  padding: 14px 18px;
+}
+body[data-page="about"] .lw2-tbd {
+  display: inline-block;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a6a52;
+  background: #F4EDE5;
+  border: 1px dashed #C9AE96;
+  padding: 2px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* Origin story — asymmetric text + figure */
+body[data-page="about"] .lw2-about-story {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 64px;
+  align-items: start;
+  padding-top: 72px;
+  padding-bottom: 88px;
+}
+body[data-page="about"] .lw2-about-story h2,
+body[data-page="about"] .lw2-about-studios h2,
+body[data-page="about"] .lw2-about-close h2 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #000;
+  margin: 0 0 24px;
+  text-wrap: balance;
+}
+body[data-page="about"] .lw2-about-story p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #2a2a2a;
+  margin: 0 0 18px;
+  text-wrap: pretty;
+}
+body[data-page="about"] .lw2-about-story-figure { margin: 0; }
+body[data-page="about"] .lw2-about-story-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+body[data-page="about"] .lw2-about-story-figure figcaption {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  margin-top: 14px;
+}
+
+/* The red thread — dark band, the emotional core of the page */
+body[data-page="about"] .lw2-about-thread {
+  max-width: none;
+  background: var(--charcoal);
+  padding: 88px 24px 80px;
+}
+body[data-page="about"] .lw2-about-thread-head {
+  max-width: 1032px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+body[data-page="about"] .lw2-about-thread-head h2 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 400;
+  line-height: 1.18;
+  color: #FFF;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+body[data-page="about"] .lw2-about-thread-head p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.78);
+  max-width: 60ch;
+  margin: 0 auto;
+  text-wrap: pretty;
+}
+body[data-page="about"] .lw2-about-artists {
+  max-width: 1032px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px 32px;
+}
+/* Flex column so the personal-site slots line up across cards
+   regardless of how long each artist note runs. */
+body[data-page="about"] .lw2-artist {
+  display: flex;
+  flex-direction: column;
+}
+body[data-page="about"] .lw2-artist-note { flex: 1; }
+body[data-page="about"] .lw2-artist-site {
+  display: block;
+  margin-bottom: 6px;
+}
+body[data-page="about"] .lw2-artist img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: grayscale(1);
+  margin-bottom: 20px;
+}
+body[data-page="about"] .lw2-artist h3 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #FFF;
+  margin: 0 0 4px;
+}
+body[data-page="about"] .lw2-artist-role {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bronze-l);
+  margin: 0 0 14px;
+}
+body[data-page="about"] .lw2-artist-note {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 14px;
+}
+body[data-page="about"] .lw2-artist-link {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+  line-height: 2;
+}
+body[data-page="about"] .lw2-about-thread-cta {
+  max-width: 1032px;
+  margin: 56px auto 0;
+  text-align: center;
+}
+body[data-page="about"] .lw2-about-thread-cta a {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bronze-l) !important;
+  border-bottom: 1px solid rgba(183,153,126,0.5);
+  padding-bottom: 4px;
+}
+body[data-page="about"] .lw2-about-thread-cta a:hover {
+  color: #FFF !important;
+  border-bottom-color: #FFF;
+}
+
+/* Three studios */
+body[data-page="about"] .lw2-about-studios {
+  padding-top: 88px;
+  padding-bottom: 88px;
+  text-align: center;
+}
+body[data-page="about"] .lw2-about-studios-lede {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  max-width: 56ch;
+  margin: 0 auto 48px;
+}
+body[data-page="about"] .lw2-about-studio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  text-align: left;
+}
+body[data-page="about"] .lw2-about-studio {
+  display: block;
+  border: 1px solid #E2DED4;
+  padding: 32px 28px 28px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+body[data-page="about"] .lw2-about-studio:hover {
+  border-color: var(--bronze);
+  background: #FBF9F5;
+}
+body[data-page="about"] .lw2-about-studio h3 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #000;
+  margin: 0 0 12px;
+}
+body[data-page="about"] .lw2-about-studio p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4a4a4a;
+  margin: 0 0 20px;
+}
+body[data-page="about"] .lw2-about-studio-cta {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+
+/* Closing */
+body[data-page="about"] .lw2-about-close {
+  padding-top: 16px;
+  padding-bottom: 104px;
+  text-align: center;
+}
+body[data-page="about"] .lw2-about-close p {
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #4a4a4a;
+  max-width: 56ch;
+  margin: 0 auto 32px;
+}
+body[data-page="about"] .lw2-about-close-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+body[data-page="about"] .lw2-about-btn {
+  display: inline-block;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  background: var(--charcoal);
+  color: #FFF !important;
+  border: 1px solid var(--charcoal);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+body[data-page="about"] .lw2-about-btn:hover { background: #000; border-color: #000; }
+body[data-page="about"] .lw2-about-btn--ghost {
+  background: transparent;
+  color: var(--charcoal) !important;
+  border-color: #C9C4B8;
+}
+body[data-page="about"] .lw2-about-btn--ghost:hover {
+  background: transparent;
+  border-color: var(--charcoal);
+  color: #000 !important;
+}
+
+@media (max-width: 860px) {
+  body[data-page="about"] .lw2-about-story {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-top: 56px;
+    padding-bottom: 64px;
+  }
+  body[data-page="about"] .lw2-about-hero { padding: 56px 24px 40px; }
+  body[data-page="about"] .lw2-about-thread { padding: 64px 24px 56px; }
+  body[data-page="about"] .lw2-about-studios { padding-top: 64px; padding-bottom: 64px; }
+  body[data-page="about"] .lw2-about-lede { font-size: 16px; }
+}
+
 /* ── Legal pages (privacy policy, terms) ─────────────────────────
    Long-form prose on the lw2 shell. Serif headings, Open Sans body,
    measure capped for readability. */
