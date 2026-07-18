@@ -3163,7 +3163,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
 .studios-drawer .studios-eyebrow-mark {
   display: block;
   width: auto;
-  height: 40px;
+  height: 36px;
   filter: brightness(0) invert(1);
   opacity: 0.92;
   transition: opacity 0.2s ease;
@@ -3371,7 +3371,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
 @media (min-width: 769px) {
   .studios-drawer { width: 400px; padding: 32px 0 40px; }
   .studios-drawer .studios-eyebrow { padding: 4px 40px 28px; }
-  .studios-drawer .studios-eyebrow-mark { height: 44px; }
+  .studios-drawer .studios-eyebrow-mark { height: 40px; }
   .studios-links-heading { padding: 23px 40px; }
   .studios-acc-head { padding: 30px 40px; }
   .studios-acc-name { font-size: 24px; }
@@ -3384,7 +3384,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
 @media (min-width: 1200px) {
   .studios-drawer { width: 480px; padding: 36px 0 44px; }
   .studios-drawer .studios-eyebrow { padding: 4px 48px 32px; }
-  .studios-drawer .studios-eyebrow-mark { height: 48px; }
+  .studios-drawer .studios-eyebrow-mark { height: 43px; }
   .studios-links-heading { padding: 23px 48px; }
   .studios-links a { padding: 23px 48px; }
   .studios-acc-head { padding: 28px 48px; }
@@ -3396,7 +3396,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
 @media (min-width: 1600px) {
   .studios-drawer { width: 560px; }
   .studios-drawer .studios-eyebrow { padding: 4px 56px 36px; }
-  .studios-drawer .studios-eyebrow-mark { height: 52px; }
+  .studios-drawer .studios-eyebrow-mark { height: 47px; }
   .studios-links-heading { padding: 25px 56px; }
   .studios-acc-head { padding: 30px 56px; }
   .studios-acc-name { font-size: 26px; }
