@@ -8241,10 +8241,6 @@ body[data-page="about"] .lw2-about > section {
 }
 
 /* Hero */
-body[data-page="about"] .lw2-about-hero {
-  padding: 88px 24px 56px;
-  text-align: center;
-}
 body[data-page="about"] .lw2-about-eyebrow {
   font-family: 'Jost', sans-serif;
   font-size: 12px;
@@ -8253,15 +8249,6 @@ body[data-page="about"] .lw2-about-eyebrow {
   text-transform: uppercase;
   color: var(--bronze);
   margin: 0 0 20px;
-}
-body[data-page="about"] .lw2-about-hero h1 {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: clamp(38px, 5vw, 62px);
-  font-weight: 400;
-  line-height: 1.12;
-  color: #000;
-  margin: 0 0 26px;
-  text-wrap: balance;
 }
 body[data-page="about"] .lw2-about-lede {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -8279,12 +8266,13 @@ body[data-page="about"] .lw2-about-lede {
 body[data-page="about"] .lw2-about-banner {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 24px 8px;
+  padding: 40px 24px 8px;
 }
 body[data-page="about"] .lw2-about-banner .lw2-coll-hero-banner img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
+  min-height: 560px;
   object-fit: cover;
   object-position: 50% 42%;
 }
@@ -8309,10 +8297,27 @@ body[data-page="about"] .lw2-about-banner .lw2-coll-hero-overlay {
 /* The overlay's white plate is scoped to the collection pages, so About
    needs its own — without it the tagline sits unreadable on the photo. */
 body[data-page="about"] .lw2-about-banner .lw2-coll-hero-overlay > div {
-  background: rgba(255,255,255,0.74);
-  padding: 30px 46px;
-  max-width: 560px;
+  background: rgba(255,255,255,0.82);
+  padding: 44px 52px 48px;
+  max-width: 720px;
   text-align: center;
+}
+/* Headline + lede now live inside the plate */
+body[data-page="about"] .lw2-about-banner h1 {
+  font-family: 'Fanwood Text', Georgia, serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.14;
+  color: #000;
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+body[data-page="about"] .lw2-about-banner .lw2-about-eyebrow { margin: 0 0 18px; }
+body[data-page="about"] .lw2-about-banner .lw2-about-lede {
+  font-size: 17px;
+  line-height: 1.65;
+  max-width: 56ch;
+  margin: 0 auto;
 }
 /* Tagline/sub type is scoped to the collection pages too — match it here. */
 body[data-page="about"] .lw2-about-banner .lw2-coll-hero-tagline {
@@ -8642,10 +8647,12 @@ body[data-page="about"] .lw2-about-btn--ghost:hover {
     padding-top: 56px;
     padding-bottom: 64px;
   }
-  body[data-page="about"] .lw2-about-hero { padding: 56px 24px 40px; }
   body[data-page="about"] .lw2-about-thread { padding: 64px 24px 56px; }
   body[data-page="about"] .lw2-about-studios { padding-top: 64px; padding-bottom: 64px; }
   body[data-page="about"] .lw2-about-lede { font-size: 16px; }
+  body[data-page="about"] .lw2-about-banner { padding: 20px 16px 8px; }
+  body[data-page="about"] .lw2-about-banner .lw2-coll-hero-banner img { min-height: 460px; }
+  body[data-page="about"] .lw2-about-banner .lw2-coll-hero-overlay > div { padding: 28px 24px 30px; }
 }
 
 /* ── Legal pages (privacy policy, terms) ─────────────────────────
