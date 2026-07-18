@@ -8263,15 +8263,18 @@ body[data-page="about"] .lw2-about-lede {
 /* Hero banner — collections hero component. Constrained to the content
    measure rather than full-bleed: the studio craft photo is 1059px wide,
    so this renders it at ~native size instead of upscaling it. */
-body[data-page="about"] .lw2-about-banner {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 40px 24px 8px;
+/* Full-bleed, matching the collection-page heroes. */
+body[data-page="about"] .lw2-about > section.lw2-about-banner {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 body[data-page="about"] .lw2-about-banner .lw2-coll-hero-banner img {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
+  max-height: 72vh;
   min-height: 560px;
   object-fit: cover;
   object-position: 50% 42%;
@@ -8650,7 +8653,6 @@ body[data-page="about"] .lw2-about-btn--ghost:hover {
   body[data-page="about"] .lw2-about-thread { padding: 64px 24px 56px; }
   body[data-page="about"] .lw2-about-studios { padding-top: 64px; padding-bottom: 64px; }
   body[data-page="about"] .lw2-about-lede { font-size: 16px; }
-  body[data-page="about"] .lw2-about-banner { padding: 20px 16px 8px; }
   body[data-page="about"] .lw2-about-banner .lw2-coll-hero-banner img { min-height: 460px; }
   body[data-page="about"] .lw2-about-banner .lw2-coll-hero-overlay > div { padding: 28px 24px 30px; }
 }
