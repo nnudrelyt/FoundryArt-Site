@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tile Collections — Linden Workshops</title>
-<meta name="description" content="All Linden Workshops tile collections: Bronzework Studio (Classic, Precision, Autograph), Foundry Art, Talisman.">
+<title>Showroom Login — Linden Workshops</title>
+<meta name="description" content="Password-protected showroom zone for Linden Workshops trade partners.">
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/tokens.css?v=20260717-212">
 <link rel="stylesheet" href="/assets/styles.css?v=20260717-212">
 </head>
-<body data-page="tile-collections" data-section="linden">
+<body data-page="showroom-zone" data-section="linden">
 
   <div data-nav></div>
 
@@ -34,59 +34,22 @@
       <a href="/our-team/">Our Team</a>
       <a href="/where-to-buy/">Where to buy</a>
       <a href="/contact/">Contact</a>
-      <a href="/showroom-zone/" class="lw2-login">Showroom Login</a>
+      <a href="/showroom-zone/" class="lw2-login" aria-current="page">Showroom Login</a>
     </nav>
   </header>
 
-  <main class="lw2-tc-page">
+  <main class="lw2-gate-page">
 
-    <section class="lw2-tc-hero">
-      <h1>Tile Collections</h1>
-      <p class="lw2-tc-intro">Three distinctive lines of artisan tile, made in our Chicago studio.</p>
-    </section>
-
-    <!-- 3-COLUMN BRAND ROW — Bronzework Studio / Foundry Art / Talisman -->
-    <section class="lw2-tc-brand-row" aria-label="Tile collections by brand">
-
-      <article class="lw2-brand-card lw2-brand-card--bws">
-        <h2 class="lw2-brand-card-wordmark">
-          <img src="/assets/images/linden/wordmarks/bronzework-studio.png" alt="Bronzework Studio">
-        </h2>
-        <a href="/bronzework-studio/" class="lw2-brand-card-photo" aria-label="View Bronzework Studio collection">
-          <img src="/assets/images/linden/tile-collections/Intro-Bronzework-Studio-tiles.jpg" alt="Bronzework Studio decorative metal tiles inset in white field" loading="lazy">
-        </a>
-        <div class="lw2-brand-card-body">
-          <p>Handcarved patterns cast in solid bronze and zinc, and our sleek 70-inch long Precision Liners. An ideal complement to stone and porcelain.</p>
-          <a href="/bronzework-studio/" class="lw2-brand-card-cta">Discover Bronzework Studio</a>
-        </div>
-      </article>
-
-      <article class="lw2-brand-card lw2-brand-card--fa">
-        <h2 class="lw2-brand-card-wordmark">
-          <img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art">
-        </h2>
-        <a href="/foundry-art/" class="lw2-brand-card-photo" aria-label="View Foundry Art collection">
-          <img src="/assets/images/linden/tile-collections/Intro-Foundry-Art-tiles.jpg" alt="Foundry Art bronze accent tile and cabinet hardware" loading="lazy">
-        </a>
-        <div class="lw2-brand-card-body">
-          <p>Handcarved bronze tiles and cabinet knobs. Exclusively at Claremonttile.com, Fired Earth and Meito Shokai.</p>
-          <a href="/foundry-art/" class="lw2-brand-card-cta">Discover Foundry Art</a>
-        </div>
-      </article>
-
-      <article class="lw2-brand-card lw2-brand-card--tal">
-        <h2 class="lw2-brand-card-wordmark">
-          <img src="/assets/images/linden/wordmarks/talisman.png" alt="Talisman">
-        </h2>
-        <a href="/talisman/" class="lw2-brand-card-photo" aria-label="View Talisman collection">
-          <img src="/assets/images/linden/tile-collections/Talisman-Tiles-Syncopation-6x6-white-field-pattern.jpg" alt="Talisman hand-sculpted ceramic Syncopation pattern in white glaze" loading="lazy">
-        </a>
-        <div class="lw2-brand-card-body">
-          <p>Hand-sculpted ceramic tiles with stony white glazes. Fresh interpretations of time-honored motifs. A contemporary classic.</p>
-          <a href="/talisman/" class="lw2-brand-card-cta">Discover Talisman</a>
-        </div>
-      </article>
-
+    <!-- Password gate — mirrors the WordPress password-protected screen on
+         the live /showroom-zone/ page. Non-functional in the prototype;
+         real auth wires up at launch. -->
+    <section class="lw2-gate">
+      <p class="lw2-gate-intro">This content is password-protected. To view it, please enter the password below.</p>
+      <form class="lw2-gate-form" onsubmit="event.preventDefault();" aria-label="Enter password to view protected content">
+        <label for="gate-pw">Password:</label>
+        <input id="gate-pw" type="password" autocomplete="current-password" spellcheck="false">
+        <button type="submit">Enter</button>
+      </form>
     </section>
 
   </main>
@@ -129,16 +92,16 @@
         <p class="lw2-contact-phone"><strong>Phone:</strong> <a href="tel:7737842628">773 784-2628</a></p>
         <form class="lw2-form" onsubmit="event.preventDefault();" aria-label="Contact form">
           <div>
-            <label for="cname">Name <span class="req">(Required)</span></label>
-            <input id="cname" type="text" required>
+            <label for="fname">Name <span class="req">(Required)</span></label>
+            <input id="fname" type="text" required>
           </div>
           <div>
-            <label for="cemail">Email <span class="req">(Required)</span></label>
-            <input id="cemail" type="email" required>
+            <label for="femail">Email <span class="req">(Required)</span></label>
+            <input id="femail" type="email" required>
           </div>
           <div>
-            <label for="cmessage">Message <span class="req">(Required)</span></label>
-            <textarea id="cmessage" rows="6" required></textarea>
+            <label for="fmessage">Message <span class="req">(Required)</span></label>
+            <textarea id="fmessage" rows="6" required></textarea>
           </div>
           <button type="submit">Submit</button>
         </form>

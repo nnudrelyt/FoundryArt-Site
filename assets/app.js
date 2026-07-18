@@ -65,7 +65,7 @@
             <span></span><span></span><span></span>
           </button>
           <div class="nav-right">
-            <a href="#" class="nav-cart" aria-label="Showroom Login">Showroom</a>
+            <a href="/showroom-zone/" class="nav-cart" aria-label="Showroom Login">Showroom</a>
             <a href="#" class="nav-cta">Contact</a>
           </div>`;
       mobileDrawer = `
@@ -73,7 +73,7 @@
         <a href="/feature-gail-drury/" data-drawer-link>Inspiration</a>
         <a href="#" data-drawer-link>Our Team</a>
         <a href="#" data-drawer-link>Where to Buy</a>
-        <a href="#" data-drawer-link>Showroom Login</a>
+        <a href="/showroom-zone/" data-drawer-link>Showroom Login</a>
         <a href="#" class="mobile-cta" data-drawer-link>Contact</a>`;
     } else if (section === 'bronzework-studio') {
       navInner = `
@@ -143,6 +143,10 @@
           <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops" class="studios-eyebrow-mark">
         </a>
 
+        <nav class="studios-links" aria-label="Menu">
+        <p class="studios-links-heading">Collections</p>
+        <div class="studios-subnav">
+
         <div class="studios-acc${expanded('bronzework-studio')}${active('bronzework-studio')}" data-studios-acc>
           <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('bronzework-studio')}">
             <span class="studios-acc-name">Bronzework Studio</span>
@@ -178,13 +182,13 @@
             <a href="/talisman/" data-studios-link>White Ceramic Tiles &amp; Borders <small>Legacy reorders</small></a>
           </div>
         </div>
+        </div>
 
-        <nav class="studios-links" aria-label="Pages">
           <a href="/feature-gail-drury/" data-studios-link>Inspiration</a>
           <a href="/our-team/" data-studios-link>Our Team</a>
           <a href="/where-to-buy/" data-studios-link>Where to Buy</a>
           <a href="/contact/" data-studios-link>Contact</a>
-          <a href="#" data-studios-link>Showroom Login</a>
+          <a href="/showroom-zone/" data-studios-link>Showroom Login</a>
         </nav>
       </aside>
     `;
