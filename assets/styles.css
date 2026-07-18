@@ -8233,8 +8233,13 @@ body[data-page="showroom-zone"] .lw2-gate-form button:hover { background: #777; 
 body[data-page="about"] .lw2-about {
   background: #FFF;
 }
+/* Content measure follows the Linden ladder used by .lw2-footer-row and
+   .lw2-tc-* : 1200 base, 1480 from 1440px, 1680 from 1920px. */
+body[data-page="about"] .lw2-about { --about-measure: 1200px; }
+@media (min-width: 1440px) { body[data-page="about"] .lw2-about { --about-measure: 1480px; } }
+@media (min-width: 1920px) { body[data-page="about"] .lw2-about { --about-measure: 1680px; } }
 body[data-page="about"] .lw2-about > section {
-  max-width: 1080px;
+  max-width: var(--about-measure);
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
@@ -8353,14 +8358,17 @@ body[data-page="about"] .lw2-about > section.lw2-about-close {
 }
 
 /* Origin story — asymmetric text + figure */
+/* Text column capped so the wider page measure doesn't push prose past a
+   readable line length; the photograph absorbs the remaining width. */
 body[data-page="about"] .lw2-about-story {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 64px;
+  grid-template-columns: minmax(0, 640px) 1fr;
+  gap: 72px;
   align-items: start;
   padding-top: 72px;
   padding-bottom: 88px;
 }
+body[data-page="about"] .lw2-about-story-text p { max-width: 68ch; }
 body[data-page="about"] .lw2-about-story h2,
 body[data-page="about"] .lw2-about-studios h2,
 body[data-page="about"] .lw2-about-close h2 {
@@ -8402,7 +8410,7 @@ body[data-page="about"] .lw2-about-thread {
   padding: 88px 24px 80px;
 }
 body[data-page="about"] .lw2-about-thread-head {
-  max-width: 1032px;
+  max-width: calc(var(--about-measure) - 48px);
   margin: 0 auto 56px;
   text-align: center;
 }
@@ -8425,7 +8433,7 @@ body[data-page="about"] .lw2-about-thread-head p {
   text-wrap: pretty;
 }
 body[data-page="about"] .lw2-about-artists {
-  max-width: 1032px;
+  max-width: calc(var(--about-measure) - 48px);
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -8482,7 +8490,7 @@ body[data-page="about"] .lw2-artist-link {
   line-height: 2;
 }
 body[data-page="about"] .lw2-about-thread-cta {
-  max-width: 1032px;
+  max-width: calc(var(--about-measure) - 48px);
   margin: 56px auto 0;
   text-align: center;
 }
@@ -8504,8 +8512,14 @@ body[data-page="about"] .lw2-about-thread-cta a:hover {
 /* Three studios */
 body[data-page="about"] .lw2-about-studios {
   padding-top: 88px;
-  padding-bottom: 96px;
+  padding-bottom: 24px;
   text-align: center;
+}
+/* Shared brand-card row supplies its own measure + bottom rhythm. */
+body[data-page="about"] .lw2-tc-brand-row {
+  padding-top: 8px;
+  padding-bottom: 88px;
+  text-align: left;
 }
 body[data-page="about"] .lw2-about-studios-lede {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -8521,71 +8535,6 @@ body[data-page="about"] .lw2-about-studio-grid {
   gap: 24px;
   text-align: left;
 }
-/* Image-led studio cards — the photograph carries the card, text sits
-   below on a warm ground so the three studios read by material at a glance. */
-body[data-page="about"] .lw2-about-studio {
-  display: flex;
-  flex-direction: column;
-  background: #FBF9F5;
-  border: 1px solid #E8E3D9;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-}
-body[data-page="about"] .lw2-about-studio:hover {
-  border-color: var(--bronze);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(20,37,40,0.10);
-}
-body[data-page="about"] .lw2-about-studio-img {
-  overflow: hidden;
-  background: #EDEAE3;
-}
-body[data-page="about"] .lw2-about-studio-img img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.22,0.61,0.36,1);
-}
-body[data-page="about"] .lw2-about-studio:hover .lw2-about-studio-img img {
-  transform: scale(1.045);
-}
-body[data-page="about"] .lw2-about-studio-body {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 26px 26px 24px;
-}
-body[data-page="about"] .lw2-about-studio h3 {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 24px;
-  font-weight: 400;
-  color: #000;
-  margin: 0 0 12px;
-}
-body[data-page="about"] .lw2-about-studio p {
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #4a4a4a;
-  margin: 0 0 22px;
-  flex: 1;
-}
-body[data-page="about"] .lw2-about-studio-cta {
-  font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--bronze);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body[data-page="about"] .lw2-about-studio,
-  body[data-page="about"] .lw2-about-studio-img img { transition: none; }
-  body[data-page="about"] .lw2-about-studio:hover { transform: none; }
-  body[data-page="about"] .lw2-about-studio:hover .lw2-about-studio-img img { transform: none; }
-}
-
 /* Closing — full-bleed warm linen band (the brand header tone) so the page
    lands on color rather than trailing off into the white footer. */
 body[data-page="about"] .lw2-about-close {
@@ -8602,7 +8551,7 @@ body[data-page="about"] .lw2-about-close {
   align-items: center;
 }
 body[data-page="about"] .lw2-about-close > * {
-  max-width: 1032px;
+  max-width: calc(var(--about-measure) - 48px);
 }
 body[data-page="about"] .lw2-about-close p {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -8853,7 +8802,7 @@ body[data-page="tile-collections"] .lw2-tc-intro {
   margin: 0 auto;
   max-width: 640px;
 }
-body[data-page="tile-collections"] .lw2-tc-brand-row {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-tc-brand-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
@@ -8863,18 +8812,18 @@ body[data-page="tile-collections"] .lw2-tc-brand-row {
 }
 
 /* Brand card — wordmark + framed photo + cream content panel + outlined CTA */
-body[data-page="tile-collections"] .lw2-brand-card {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card {
   display: flex;
   flex-direction: column;
   background: #FFFFFF;
 }
-body[data-page="tile-collections"] .lw2-brand-card-wordmark {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-wordmark {
   text-align: center;
   margin: 0;
   padding: 36px 8px 24px;     /* horizontal padding tightened so wide BWS/FA wordmarks render at their target height without max-width clamping */
   background: #FFFFFF;
 }
-body[data-page="tile-collections"] .lw2-brand-card-wordmark img {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-wordmark img {
   display: inline-block;
   height: auto;
   width: auto;
@@ -8884,14 +8833,14 @@ body[data-page="tile-collections"] .lw2-brand-card-wordmark img {
 /* Per-brand wordmark heights equalize cap-heights across the three
    PNGs (different ink-to-canvas ratios: BWS 87.5%, FA 89.3%, TAL 96.3%).
    Scale: bumped +18% from 22/22/20 to 26/26/24 for stronger presence. */
-body[data-page="tile-collections"] .lw2-brand-card--bws .lw2-brand-card-wordmark img { max-height: 26px; }
-body[data-page="tile-collections"] .lw2-brand-card--fa .lw2-brand-card-wordmark img { max-height: 26px; }
-body[data-page="tile-collections"] .lw2-brand-card--tal .lw2-brand-card-wordmark img { max-height: 24px; }
-body[data-page="tile-collections"] .lw2-brand-card-photo {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card--bws .lw2-brand-card-wordmark img { max-height: 26px; }
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card--fa .lw2-brand-card-wordmark img { max-height: 26px; }
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card--tal .lw2-brand-card-wordmark img { max-height: 24px; }
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-photo {
   display: block;
   background: #FFFFFF;
 }
-body[data-page="tile-collections"] .lw2-brand-card-photo img {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-photo img {
   display: block;
   width: 100%;
   height: auto;
@@ -8899,10 +8848,10 @@ body[data-page="tile-collections"] .lw2-brand-card-photo img {
   object-fit: cover;
   transition: opacity 0.25s ease;
 }
-body[data-page="tile-collections"] .lw2-brand-card-photo:hover img {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-photo:hover img {
   opacity: 0.92;
 }
-body[data-page="tile-collections"] .lw2-brand-card-body {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-body {
   background: #F7F7F7;
   flex: 1;
   padding: 36px 28px 40px;
@@ -8915,7 +8864,7 @@ body[data-page="tile-collections"] .lw2-brand-card-body {
   border: 1px solid rgba(0, 0, 0, 0.10);
   border-top: none;
 }
-body[data-page="tile-collections"] .lw2-brand-card-body p {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-body p {
   font-family: var(--lw-font-sans);
   font-size: 16px;
   line-height: 1.6;
@@ -8923,7 +8872,7 @@ body[data-page="tile-collections"] .lw2-brand-card-body p {
   margin: 0;
   max-width: 34ch;
 }
-body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-body a.lw2-brand-card-cta {
   display: inline-block;
   padding: 14px 32px;
   background: transparent;
@@ -8936,13 +8885,13 @@ body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta {
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta:hover,
-body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta:focus-visible {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-body a.lw2-brand-card-cta:hover,
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-body a.lw2-brand-card-cta:focus-visible {
   background: var(--lw-accent-red);
   color: #FFFFFF;
   border-color: var(--lw-accent-red);
 }
-body[data-page="tile-collections"] .lw2-brand-card-body a.lw2-brand-card-cta:active {
+:is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-body a.lw2-brand-card-cta:active {
   background: var(--lw-accent-red-hover);
   border-color: var(--lw-accent-red-hover);
 }
@@ -9343,7 +9292,7 @@ body[data-page="feature-drury"] .lw2-article-thanks-frame p {
   /* Canvas now uses aspect-ratio for height; explicit height removed
      so width fits viewport correctly. */
 
-  body[data-page="tile-collections"] .lw2-tc-brand-row { gap: 24px; padding: 32px 18px 64px; }
+  :is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-tc-brand-row { gap: 24px; padding: 32px 18px 64px; }
   body[data-page="tile-collections"] .lw2-tc-hero h1 { font-size: 40px; }
 
   body[data-page="feature-drury"] .lw2-article-hero { min-height: var(--lw-article-hero-min-h-t); }
@@ -9417,19 +9366,19 @@ body[data-page="feature-drury"] .lw2-article-thanks-frame p {
   }
   body[data-page="tile-collections"] .lw2-tc-hero h1 { font-size: 34px; }
   body[data-page="tile-collections"] .lw2-tc-intro { font-size: 16px; }
-  body[data-page="tile-collections"] .lw2-tc-brand-row {
+  :is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-tc-brand-row {
     grid-template-columns: 1fr;
     gap: 24px;
     padding: 32px 18px 64px;
   }
-  body[data-page="tile-collections"] .lw2-brand-card-wordmark {
+  :is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-wordmark {
     padding: 28px 20px 18px;
   }
-  body[data-page="tile-collections"] .lw2-brand-card-wordmark img {
+  :is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-wordmark img {
     max-width: 220px;
     max-height: 26px;
   }
-  body[data-page="tile-collections"] .lw2-brand-card-body {
+  :is(body[data-page="tile-collections"],body[data-page="about"]) .lw2-brand-card-body {
     padding: 24px 22px 30px;
   }
   body[data-page="where-to-buy"] .lw2-wtb-region-title {
