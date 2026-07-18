@@ -8526,8 +8526,7 @@ body[data-page="about"] .lw2-about-studios-lede {
   font-size: 16px;
   line-height: 1.7;
   color: #555;
-  max-width: 56ch;
-  margin: 0 auto 48px;
+  margin: 0 auto 48px;   /* no ch cap — sits on one line; wraps naturally on mobile */
 }
 body[data-page="about"] .lw2-about-studio-grid {
   display: grid;
