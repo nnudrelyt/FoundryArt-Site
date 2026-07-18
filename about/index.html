@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@300;400;500&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260717-215">
-<link rel="stylesheet" href="/assets/styles.css?v=20260717-215">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260717-216">
+<link rel="stylesheet" href="/assets/styles.css?v=20260717-216">
 </head>
 <body data-page="about" data-section="linden">
 
@@ -47,7 +47,19 @@
       <p class="lw2-about-lede">Linden Workshops is four people making metal accent tile by hand on the north side of Chicago. Every piece that leaves the studio was carved, cast, and finished here — by artists who keep their own practices going after hours.</p>
     </section>
 
-    <p class="lw2-about-notice"><strong>Layout in progress.</strong> Structure and section order are set; final copy and the personal-site URLs are coming from Stacza. Anything marked <span class="lw2-tbd">to come</span> is a slot, not finished text.</p>
+
+    <!-- HERO BANNER — collections hero component, studio craft image -->
+    <section class="lw2-coll-hero lw2-coll-hero--single lw2-about-banner">
+      <figure class="lw2-coll-hero-banner">
+        <img src="/assets/images/linden/talisman/TAL-hands-in-clay-widescreen-4-platinum.jpg" alt="A pair of hands carving the clay original for a relief tile in the Linden Workshops studio">
+        <div class="lw2-coll-hero-overlay">
+          <div>
+            <p class="lw2-coll-hero-tagline">Every tile starts as a carving.</p>
+            <p class="lw2-coll-hero-sub">Drawn, carved, cast, and finished in Chicago.</p>
+          </div>
+        </div>
+      </figure>
+    </section>
 
     <!-- ORIGIN STORY ----------------------------------------------------- -->
     <section class="lw2-about-story">
@@ -77,7 +89,6 @@
           <h3>Stacza Lipinski</h3>
           <p class="lw2-artist-role">President</p>
           <p class="lw2-artist-note">Holds an MFA from the Ohio State University and keeps her art practice going in a home studio when time allows.</p>
-          <p class="lw2-artist-link"><span class="lw2-tbd">personal site to come</span></p>
         </article>
 
         <article class="lw2-artist">
@@ -86,8 +97,8 @@
           <p class="lw2-artist-role">Director of Studio Production</p>
           <p class="lw2-artist-note">MFA from the University of Illinois at Chicago. His work grows out of geography and sense of place; beginning in 2016 he walked every pedestrian street in Minneapolis.</p>
           <p class="lw2-artist-link">
-            <span class="lw2-artist-site">Long Trace of Minneapolis <span class="lw2-tbd">url to come</span></span>
-            <span class="lw2-artist-site">larsenhusby.com <span class="lw2-tbd">url to come</span></span>
+            <a class="lw2-artist-site" href="#">Long Trace of Minneapolis</a>
+            <a class="lw2-artist-site" href="#">larsenhusby.com</a>
           </p>
         </article>
 
@@ -96,7 +107,6 @@
           <h3>Marideth Groves</h3>
           <p class="lw2-artist-role">Accounting Director</p>
           <p class="lw2-artist-note">A CPA with a BFA in Interior Design who spent years designing kitchens and baths. Outside the studio she serves on her district's elected school board.</p>
-          <p class="lw2-artist-link"><span class="lw2-tbd">personal site to come</span></p>
         </article>
 
         <article class="lw2-artist">
@@ -104,7 +114,6 @@
           <h3>Ted Lowitz</h3>
           <p class="lw2-artist-role">Founder, Designer</p>
           <p class="lw2-artist-note">Now a mentor to Stacza, Larsen, and Marideth. His own work aims to celebrate and enrich the ordinary moments of daily life.</p>
-          <p class="lw2-artist-link"><span class="lw2-tbd">personal site to come</span></p>
         </article>
 
       </div>
@@ -118,19 +127,28 @@
       <p class="lw2-about-studios-lede">Different catalogs, different customers — all made by the same hands, in the same room.</p>
       <div class="lw2-about-studio-grid">
         <a href="/bronzework-studio/" class="lw2-about-studio">
+          <div class="lw2-about-studio-img"><img src="/assets/images/linden/tile-collections/Intro-Bronzework-Studio-tiles.jpg" alt="A pewter-toned Bronzework Studio floral inset framed by beaded liners on white marble" loading="lazy"></div>
+          <div class="lw2-about-studio-body">
           <h3>Bronzework Studio</h3>
           <p>Hand-carved bronze and zinc accent tile — Classic, Autograph, and Precision.</p>
           <span class="lw2-about-studio-cta">Visit the studio &rarr;</span>
+          </div>
         </a>
         <a href="/foundry-art/" class="lw2-about-studio">
+          <div class="lw2-about-studio-img"><img src="/assets/images/linden/tile-collections/Intro-Foundry-Art-tiles.jpg" alt="A warm bronze Foundry Art lotus inset set into a stone floor" loading="lazy"></div>
+          <div class="lw2-about-studio-body">
           <h3>Foundry Art</h3>
           <p>Bronze inset tiles, liners, and cabinet hardware, sold direct.</p>
           <span class="lw2-about-studio-cta">Visit the studio &rarr;</span>
+          </div>
         </a>
         <a href="/talisman/" class="lw2-about-studio">
+          <div class="lw2-about-studio-img"><img src="/assets/images/linden/tile-collections/Talisman-Tiles-Syncopation-6x6-white-field-pattern.jpg" alt="Four white ceramic Talisman Syncopation tiles forming a raised geometric pattern" loading="lazy"></div>
+          <div class="lw2-about-studio-body">
           <h3>Talisman</h3>
           <p>White ceramic tiles and borders, kept available for legacy reorders.</p>
           <span class="lw2-about-studio-cta">Visit the studio &rarr;</span>
+          </div>
         </a>
       </div>
     </section>
@@ -204,6 +222,6 @@
     </div>
   </footer>
 
-  <script src="/assets/app.js?v=20260717-215"></script>
+  <script src="/assets/app.js?v=20260717-216"></script>
 </body>
 </html>

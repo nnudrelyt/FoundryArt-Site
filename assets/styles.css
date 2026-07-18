@@ -8273,31 +8273,75 @@ body[data-page="about"] .lw2-about-lede {
   text-wrap: pretty;
 }
 
-/* Build-status notice + inline to-come slots */
-body[data-page="about"] .lw2-about-notice {
+/* Hero banner — collections hero component. Constrained to the content
+   measure rather than full-bleed: the studio craft photo is 1059px wide,
+   so this renders it at ~native size instead of upscaling it. */
+body[data-page="about"] .lw2-about-banner {
   max-width: 1080px;
-  margin: 0 auto 8px;
-  font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #1a1a1a;
-  background: #F3F1EC;
-  border: 1px solid #DDD8CC;
-  padding: 14px 18px;
+  margin: 0 auto;
+  padding: 0 24px 8px;
 }
-body[data-page="about"] .lw2-tbd {
-  display: inline-block;
-  font-family: 'Jost', sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #8a6a52;
-  background: #F4EDE5;
-  border: 1px dashed #C9AE96;
-  padding: 2px 8px;
-  border-radius: 2px;
-  white-space: nowrap;
+body[data-page="about"] .lw2-about-banner .lw2-coll-hero-banner img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: 50% 42%;
+}
+
+/* The whole overlay treatment (positioning included) is scoped to the
+   collection pages, so About re-declares it or the tagline stacks below
+   the photograph instead of sitting on it. */
+body[data-page="about"] .lw2-about-banner .lw2-coll-hero-banner {
+  position: relative;
+  margin: 0;
+}
+body[data-page="about"] .lw2-about-banner .lw2-coll-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  padding: 24px;
+}
+/* The overlay's white plate is scoped to the collection pages, so About
+   needs its own — without it the tagline sits unreadable on the photo. */
+body[data-page="about"] .lw2-about-banner .lw2-coll-hero-overlay > div {
+  background: rgba(255,255,255,0.74);
+  padding: 30px 46px;
+  max-width: 560px;
+  text-align: center;
+}
+/* Tagline/sub type is scoped to the collection pages too — match it here. */
+body[data-page="about"] .lw2-about-banner .lw2-coll-hero-tagline {
+  font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
+  font-size: 32px;
+  line-height: 1.3;
+  color: #000;
+  margin: 0 0 12px;
+}
+body[data-page="about"] .lw2-about-banner .lw2-coll-hero-sub {
+  font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
+  font-size: 22px;
+  line-height: 1.45;
+  color: #000;
+  margin: 0;
+}
+@media (max-width: 640px) {
+  body[data-page="about"] .lw2-about-banner .lw2-coll-hero-overlay > div { padding: 20px 24px; }
+  body[data-page="about"] .lw2-about-banner .lw2-coll-hero-tagline { font-size: 22px; }
+  body[data-page="about"] .lw2-about-banner .lw2-coll-hero-sub { font-size: 16px; }
+}
+
+/* Full-bleed colour bands. The `.lw2-about > section` measure rule is more
+   specific than a plain class, so these re-assert with `section` attached. */
+body[data-page="about"] .lw2-about > section.lw2-about-thread,
+body[data-page="about"] .lw2-about > section.lw2-about-close {
+  max-width: none;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 /* Origin story — asymmetric text + figure */
@@ -8452,7 +8496,7 @@ body[data-page="about"] .lw2-about-thread-cta a:hover {
 /* Three studios */
 body[data-page="about"] .lw2-about-studios {
   padding-top: 88px;
-  padding-bottom: 88px;
+  padding-bottom: 96px;
   text-align: center;
 }
 body[data-page="about"] .lw2-about-studios-lede {
@@ -8469,15 +8513,39 @@ body[data-page="about"] .lw2-about-studio-grid {
   gap: 24px;
   text-align: left;
 }
+/* Image-led studio cards — the photograph carries the card, text sits
+   below on a warm ground so the three studios read by material at a glance. */
 body[data-page="about"] .lw2-about-studio {
-  display: block;
-  border: 1px solid #E2DED4;
-  padding: 32px 28px 28px;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  background: #FBF9F5;
+  border: 1px solid #E8E3D9;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 body[data-page="about"] .lw2-about-studio:hover {
   border-color: var(--bronze);
-  background: #FBF9F5;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(20,37,40,0.10);
+}
+body[data-page="about"] .lw2-about-studio-img {
+  overflow: hidden;
+  background: #EDEAE3;
+}
+body[data-page="about"] .lw2-about-studio-img img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.22,0.61,0.36,1);
+}
+body[data-page="about"] .lw2-about-studio:hover .lw2-about-studio-img img {
+  transform: scale(1.045);
+}
+body[data-page="about"] .lw2-about-studio-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 26px 26px 24px;
 }
 body[data-page="about"] .lw2-about-studio h3 {
   font-family: 'Fanwood Text', Georgia, serif;
@@ -8491,7 +8559,8 @@ body[data-page="about"] .lw2-about-studio p {
   font-size: 15px;
   line-height: 1.7;
   color: #4a4a4a;
-  margin: 0 0 20px;
+  margin: 0 0 22px;
+  flex: 1;
 }
 body[data-page="about"] .lw2-about-studio-cta {
   font-family: 'Jost', sans-serif;
@@ -8502,11 +8571,30 @@ body[data-page="about"] .lw2-about-studio-cta {
   color: var(--bronze);
 }
 
-/* Closing */
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="about"] .lw2-about-studio,
+  body[data-page="about"] .lw2-about-studio-img img { transition: none; }
+  body[data-page="about"] .lw2-about-studio:hover { transform: none; }
+  body[data-page="about"] .lw2-about-studio:hover .lw2-about-studio-img img { transform: none; }
+}
+
+/* Closing — full-bleed warm linen band (the brand header tone) so the page
+   lands on color rather than trailing off into the white footer. */
 body[data-page="about"] .lw2-about-close {
-  padding-top: 16px;
-  padding-bottom: 104px;
+  max-width: none;
+  background: var(--lw-bg-header, #E6E4DD);
+  padding: 88px 24px 96px;
   text-align: center;
+}
+/* Flex-centred: the grouped h2 rule sets `margin: 0 0 24px`, which would
+   beat margin-inline:auto and strand the heading left in the full-bleed band. */
+body[data-page="about"] .lw2-about-close {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+body[data-page="about"] .lw2-about-close > * {
+  max-width: 1032px;
 }
 body[data-page="about"] .lw2-about-close p {
   font-family: 'Open Sans', Helvetica, sans-serif;
