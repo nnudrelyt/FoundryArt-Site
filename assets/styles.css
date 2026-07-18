@@ -8515,9 +8515,12 @@ body[data-page="about"] .lw2-about-studios {
   padding-bottom: 24px;
   text-align: center;
 }
-/* Shared brand-card row supplies its own measure + bottom rhythm. */
-body[data-page="about"] .lw2-tc-brand-row {
-  padding-top: 8px;
+/* Shared brand-card row supplies its own measure. The :is(tile-collections,
+   about) rule matches this specificity and sits later in the file, so scope
+   through .lw2-about-studios to win — otherwise its 48px top padding stacks
+   on the lede's margin and opens a 96px hole. */
+body[data-page="about"] .lw2-about-studios .lw2-tc-brand-row {
+  padding-top: 0;
   padding-bottom: 88px;
   text-align: left;
 }
@@ -8526,7 +8529,7 @@ body[data-page="about"] .lw2-about-studios-lede {
   font-size: 16px;
   line-height: 1.7;
   color: #555;
-  margin: 0 auto 48px;   /* no ch cap — sits on one line; wraps naturally on mobile */
+  margin: 0 auto 24px;   /* no ch cap — sits on one line; wraps naturally on mobile */
 }
 body[data-page="about"] .lw2-about-studio-grid {
   display: grid;
