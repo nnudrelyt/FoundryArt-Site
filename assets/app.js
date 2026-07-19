@@ -1075,6 +1075,29 @@
         location.href = next;
       });
     });
+
+    // Sign-in / register are one panel swapped in place; the heading follows.
+    const title = document.querySelector('[data-auth-title]');
+    const sub = document.querySelector('[data-auth-sub]');
+    const COPY = {
+      signin:   { title: 'Sign in', sub: 'Access your orders, addresses and trade pricing.' },
+      register: { title: 'Create an account', sub: 'Save your details, track orders, and apply for trade pricing.' },
+    };
+    function showView(v) {
+      document.querySelectorAll('[data-auth-view]').forEach(p =>
+        p.hidden = p.getAttribute('data-auth-view') !== v);
+      if (title && COPY[v]) title.textContent = COPY[v].title;
+      if (sub && COPY[v]) sub.textContent = COPY[v].sub;
+      // Keep the view in the URL (and preserve ?next) so a refresh or a shared
+      // link lands on the same panel.
+      const params = new URLSearchParams(location.search);
+      if (v === 'register') params.set('view', 'register'); else params.delete('view');
+      history.replaceState(null, '', location.pathname + (params.toString() ? '?' + params : ''));
+      if (v === 'register') { const f = document.querySelector('#rg-first'); if (f) f.focus(); }
+    }
+    document.querySelectorAll('[data-auth-to]').forEach(btn =>
+      btn.addEventListener('click', () => showView(btn.getAttribute('data-auth-to'))));
+    if (new URLSearchParams(location.search).get('view') === 'register') showView('register');
   }
 
   function renderAccountDashboard() {

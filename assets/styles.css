@@ -10698,12 +10698,32 @@ body[data-account] .trade-status-card p {
 body[data-account] .summary-card .btn-secondary { margin-top: 18px; }
 
 /* Sign-in / register, side by side like WooCommerce's default template */
-body[data-page="account-sign-in"] .account-signin-layout {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 40px;
-  align-items: start;
+/* Sign-in page — white ground, single focused column that leads with sign-in;
+   registration swaps into the same panel. */
+body[data-page="account-sign-in"] { background: #fff; }
+body[data-page="account-sign-in"] .account-auth { max-width: 460px; }
+body[data-page="account-sign-in"] .auth-panel[hidden] { display: none; }
+
+/* Register view is a touch wider so First/Last sit side by side comfortably. */
+body[data-page="account-sign-in"] .account-auth:has([data-auth-view="register"]:not([hidden])) { max-width: 620px; }
+
+body[data-page="account-sign-in"] .auth-forgot { margin: -6px 0 20px; font-size: 13px; }
+body[data-page="account-sign-in"] .auth-forgot a { color: var(--bronze); border-bottom: 1px solid var(--bronze-l); }
+body[data-page="account-sign-in"] .auth-submit { display: block; width: 100%; }
+
+/* Switch link under each form. */
+body[data-page="account-sign-in"] .auth-switch {
+  margin-top: 28px; padding-top: 22px;
+  border-top: 1px solid var(--rule);
+  font-size: 14px; color: var(--mid);
 }
+body[data-page="account-sign-in"] .auth-link {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font: inherit; color: var(--bronze);
+  border-bottom: 1px solid var(--bronze-l);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+body[data-page="account-sign-in"] .auth-link:hover { color: var(--charcoal); border-bottom-color: var(--charcoal); }
 .form-hint {
   font-size: 12px;
   line-height: 1.6;
