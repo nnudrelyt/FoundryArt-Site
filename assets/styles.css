@@ -11536,8 +11536,22 @@ body[data-page="checkout"] .form-group select {
 body[data-page="checkout"] input[type="checkbox"],
 body[data-page="checkout"] input[type="radio"] { accent-color: var(--bronze); }
 
-/* ── Trade callout: rounded to match the summary card and badges. ── */
-body[data-page="checkout"] .trade-row { border-radius: 4px; }
+/* ── Trade callout: styled as a selectable tile, like the shipping/payment
+   rows. White ground, slate-l hover, and a bronze inset ring once the box is
+   checked — the checked state pairs with the ID field the toggle reveals, so
+   the callout reads selected exactly the way a shipping option does. Uses
+   :has() so no JS class is needed. ── */
+body[data-page="checkout"] .trade-row {
+  border-radius: 4px;
+  background: var(--white);
+  padding: 14px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+body[data-page="checkout"] .trade-row:hover { border-color: var(--slate-l); }
+body[data-page="checkout"] .trade-row:has([data-trade-toggle]:checked) {
+  border-color: var(--bronze);
+  box-shadow: inset 0 0 0 1px var(--bronze);
+}
 
 /* ── Shipping / payment tiles. Rounded, and the selected state is now a
    bronze ring on white rather than a charcoal border on cream — the same
