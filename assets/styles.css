@@ -11146,9 +11146,39 @@ body[data-product-slug] .pdp-meta-row { font-size: 14px; color: var(--slate-l); 
    of the column up a step, which left this reading as the loudest thing in
    the panel; it's a picker, not the headline. Box padding and chip come down
    with the type so the proportions hold. */
-body[data-product-slug] .swatch { padding: 10px 14px; gap: 10px; }
-body[data-product-slug] .swatch-chip { width: 20px; height: 20px; }
+/* The badge itself carries the colour now, so the chip goes. Scoped to the
+   PDP — the cart's material column still renders .swatch-chip. */
+body[data-product-slug] .pdp-info .swatch-chip { display: none; }
+
+body[data-product-slug] .swatch {
+  padding: 15px 18px;      /* taller */
+  justify-content: center; /* no chip to sit beside, so centre the label */
+}
 body[data-product-slug] .swatch-label { font-size: 15px; }
+
+/* Selected = filled with its own finish.
+   The gradient stops are pulled in from the chip's range on purpose: the
+   chip's light end (#9C8470) only manages 3.53:1 against white text, which
+   fails at 15px. #846556 -> #6B5645 keeps the cast-metal read and clears AA
+   across the whole sweep (5.28:1 at the lightest point). Same on the pewter
+   side, measured against charcoal rather than white. */
+body[data-product-slug] .swatch.selected:has(.swatch-chip.traditional) {
+  background: linear-gradient(135deg, #846556 0%, #6B5645 100%);
+  border-color: #5E4B3C;
+  box-shadow: none;
+}
+body[data-product-slug] .swatch.selected:has(.swatch-chip.traditional) .swatch-label {
+  color: #FFFFFF;
+}
+
+body[data-product-slug] .swatch.selected:has(.swatch-chip.white) {
+  background: linear-gradient(135deg, #CCCAC0 0%, #A9A79B 100%);
+  border-color: #8F8B7E;
+  box-shadow: none;
+}
+body[data-product-slug] .swatch.selected:has(.swatch-chip.white) .swatch-label {
+  color: var(--charcoal);
+}
 
 /* Heavier stroke on the sample button — it carries the secondary action and
    a hairline bronze rule was losing to the solid charcoal block above it.
