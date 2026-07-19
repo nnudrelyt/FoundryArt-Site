@@ -10274,7 +10274,7 @@ body[data-product-slug] .breadcrumb {
   padding: 20px 40px;
 }
 body[data-product-slug] .page {
-  max-width: 1240px;
+  max-width: 1240px;   /* raised at >=1440 / >=1920 — see the wide tiers below */
 }
 body[data-product-slug] .pdp-eyebrow {
   font-size: 11px;
@@ -10881,3 +10881,58 @@ body[data-page="account-sign-in"] .account-signin-layout {
 .trade-row[hidden],
 .shop-empty[hidden],
 .pdp-sample-alt[hidden] { display: none !important; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   Foundry Art — wide-screen tiers
+   ══════════════════════════════════════════════════════════════════════
+   Until now the FA section's widest tier was 1440px, so a 1440 laptop and a
+   2560 display rendered identically — 22% of the viewport unused on shop,
+   38% on a PDP. This brings FA onto the same ladder the Linden side uses
+   (1200 / 1480 / 1680) and lifts the PDP, which was capped 320px tighter
+   than the shop because body[data-product-slug] .page out-specifies .page.
+
+   The grid deliberately stays at 3 columns: these are texture products, so
+   wider cards show more bronze, and a 4th column would leave a 4/4/4/1
+   orphan row at the current catalog size. */
+
+@media (min-width: 1440px) {
+  /* PDP joins the shop's measure instead of sitting 320px narrower. */
+  body[data-product-slug] .page { max-width: 1560px; }
+}
+
+@media (min-width: 1920px) {
+  .page { padding: 104px 96px 128px; max-width: 1780px; }
+  .breadcrumb { padding: 26px 96px; }
+
+  /* The shop polish tier (body[data-page="shop"]:not([data-product-slug]))
+     pins the layout to 240px/56px and the sidebar to 240px, and out-specifies
+     a bare .shop-layout — so these have to match its specificity to land. */
+  body[data-page="shop"]:not([data-product-slug]) .shop-layout {
+    grid-template-columns: 300px 1fr;
+    gap: 96px;
+  }
+  body[data-page="shop"]:not([data-product-slug]) .shop-sidebar { width: 300px; }
+  .shop-grid { gap: 64px 40px; }
+
+  body[data-product-slug] .page { max-width: 1720px; }
+  /* Keep the base 1.2fr ratio. Product photography is 800px, and a wider
+     image column (1.45fr) renders the hero at ~862px — deliberately
+     upscaling a texture product. At 1.2fr it lands at native size. */
+  body[data-product-slug] .pdp { gap: 72px; }
+}
+
+/* Pre-existing bug: the shop polish tier sets .shop-layout to `240px 1fr` at
+   top level, which out-specifies the `max-width: 1024px` collapse rule — so
+   the filter sidebar never stacked on mobile. At 546px that left a 240px
+   sidebar beside a 226px product grid. Re-assert the collapse at matching
+   specificity. */
+@media (max-width: 1024px) {
+  body[data-page="shop"]:not([data-product-slug]) .shop-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  body[data-page="shop"]:not([data-product-slug]) .shop-sidebar {
+    width: 100%;
+    position: static;
+  }
+}
