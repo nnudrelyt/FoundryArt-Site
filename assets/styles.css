@@ -692,11 +692,7 @@ body.drawer-open { overflow: hidden; }
 
 
 /* ══════════════════════════════════════ SHARED SECTION TEXT ══════════════════════════════════════ */
-/* .pdp-eyebrow shares this rule outright rather than approximating it — the
-   two were diverging (9px/bronze vs 11px/500/walnut) with no intent behind
-   the difference. */
-.section-eyebrow,
-.pdp-eyebrow {
+.section-eyebrow {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 3px;
@@ -2649,8 +2645,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .brand-band cite { font-size: 13px; margin-top: 40px; letter-spacing: 3.5px; }
 
   /* Section text scale */
-  .section-eyebrow,
-  .pdp-eyebrow { font-size: 13px; margin-bottom: 22px; letter-spacing: 3.5px; }
+  .section-eyebrow { font-size: 13px; margin-bottom: 22px; letter-spacing: 3.5px; }
   .section-headline { font-size: 52px; line-height: 1.12; margin-bottom: 32px; letter-spacing: -0.4px; }
   .section-body { font-size: 19px; line-height: 1.65; max-width: 680px; }
 
