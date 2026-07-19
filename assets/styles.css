@@ -1571,7 +1571,10 @@ body[data-page="home"] .footer p { border: 0 !important; }
 
 /* ══════════════════════════════════════ FOOTER ══════════════════════════════════════ */
 .footer {
-  background: var(--charcoal);
+  /* Warm brown, not the brand teal-navy. Rolled back from f1f4d46, which
+     matched it to .footer-cta above — the seamless join made the two read as
+     one oversized dark band instead of a condensed copyright strip. */
+  background: var(--charcoal-warm);
   padding: 32px 40px;
   display: flex;
   justify-content: space-between;
@@ -2750,7 +2753,9 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .footer-cta-text p { font-size: 19px; line-height: 1.55; }
   .btn-primary-lg, .btn-ghost { padding: 20px 48px; font-size: 12px; letter-spacing: 2.2px; }
 
-  .footer { padding: 40px 64px; }
+  /* Condensed: vertical padding back to the base 32px. Horizontal tracks the
+     80px page rail. Type stays at 12px — legibility isn't what "condensed" meant. */
+  .footer { padding: 32px 80px; }
   .footer p { font-size: 12px; }
 
   /* Shopping pages — air them out too */
@@ -10926,3 +10931,92 @@ body[data-product-slug] .pdp-actions { max-width: 620px; }
     position: static;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SHOP CONTROLS — LOW-VISION LEGIBILITY
+   Stacza's brief: the filters have to work for customers with older eyes.
+   Native checkboxes render ~13px and can't be resized, so they're rebuilt
+   with appearance:none. Scoped to the shop sidebar — the checkout and cart
+   checkboxes are deliberately untouched so this stays reviewable.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.facet-list li input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border: 1.5px solid var(--slate);
+  background: var(--white);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.facet-list li input[type="checkbox"]:hover { border-color: var(--charcoal); }
+
+/* Checkmark drawn as a rotated L so it scales with the box and needs no asset. */
+.facet-list li input[type="checkbox"]:checked {
+  background: var(--bronze);
+  border-color: var(--bronze);
+}
+.facet-list li input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--white);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+/* Keyboard focus must stay visible — the custom control has no native ring. */
+.facet-list li input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 2px;
+}
+
+/* Labels: bigger type and a taller row, so the whole line is an easy target.
+   Scoped to match the existing shop tier — a bare `.facet-list li` loses to
+   `body[data-page="shop"]:not([data-product-slug])` and silently does nothing. */
+body[data-page="shop"]:not([data-product-slug]) .facet-list li {
+  gap: 12px;
+  font-size: 16px;
+  padding: 9px 0;
+  color: var(--charcoal);
+}
+body[data-page="shop"]:not([data-product-slug]) .facet-list li .count { font-size: 14px; }
+body[data-page="shop"]:not([data-product-slug]) .facet-group h5 { font-size: 13px; }
+
+/* Active filter tags — matched up to the larger sidebar type. */
+.active-chip {
+  font-size: 13px;
+  letter-spacing: 1.2px;
+  padding: 8px 12px 8px 14px;
+  gap: 8px;
+}
+.active-chip .x { font-size: 15px; }
+.clear-filters { font-size: 13px; letter-spacing: 1.5px; }
+.active-filter-chips { gap: 10px; margin-bottom: 26px; }
+
+/* Sort control: the native arrow sits hard against the right edge and can't be
+   inset, so it's replaced with a chevron that has real breathing room. */
+body[data-page="shop"]:not([data-product-slug]) .shop-sort label { font-size: 13px; }
+body[data-page="shop"]:not([data-product-slug]) .shop-sort select {
+  appearance: none;
+  -webkit-appearance: none;
+  font-size: 15px;
+  padding: 11px 46px 11px 16px;
+  background-color: var(--white);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23555' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+}
+body[data-page="shop"]:not([data-product-slug]) .shop-sort select:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+
+/* Zero-count facets stay visible (Liners is a coming-soon category) but must
+   not read as available. Re-stated here to outrank the size bump above. */
+.facet-list label.is-empty,
+.facet-list li:has(input:disabled) { opacity: 0.4; }

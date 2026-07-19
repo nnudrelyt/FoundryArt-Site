@@ -461,7 +461,14 @@
   // samples render broken images in cart, checkout AND order-received.
   // (NB: 'swatch' elsewhere in this file means the finish-picker chip — a
   // different thing from the physical sample a customer orders.)
-  const thumbFor = (slug, parentSlug) => '/assets/images/products/' + (parentSlug || slug) + '/main.jpg';
+  // Samples pass parentSlug so they borrow the parent's photo. Hardware sets an
+  // explicit `image` in the catalog because it's shot mounted, outside the
+  // /products/<slug>/ convention.
+  const thumbFor = (slug, parentSlug) => {
+    const key = parentSlug || slug;
+    const prod = (window.FA_PRODUCT_BY_SLUG || {})[key];
+    return (prod && prod.image) || '/assets/images/products/' + key + '/main.jpg';
+  };
   const weightForSize = s => /1×1/.test(s) ? 0.1 : (/2×2/.test(s) ? 0.4 : 0.8);
   const skuForFinish = (p, f) => /white/i.test(f) ? p.sku.replace(/-TB$/, '-WB') : p.sku.replace(/-WB$/, '-TB');
   const setText = (sel, t) => { const el = document.querySelector(sel); if (el) el.textContent = t; };
@@ -1589,7 +1596,8 @@
       ? `<div class="product-price"><span class="was">${window.FA_FMT.price(p.wasPrice)}</span><span class="sale">${window.FA_FMT.price(p.salePrice)}</span></div>`
       : `<div class="product-price">${window.FA_FMT.price(p.price)}</div>`;
     const badge = onSale ? `<span class="product-badge">Sale</span>` : '';
-    const imgSrc = `/assets/images/products/${p.slug}/main.jpg`;
+    // Most products live at /products/<slug>/main.jpg; hardware overrides it.
+    const imgSrc = p.image || `/assets/images/products/${p.slug}/main.jpg`;
     const imgAlt = `${p.name} ${p.sizeLabel} ${p.pattern} accent tile`;
     return `
       <a href="/foundry-art/product/${p.slug}/" class="product-card">

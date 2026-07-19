@@ -196,6 +196,9 @@ window.FA_PRODUCTS = [
   {
     slug: 'bar-pull',
     name: 'Cabochon Bar Pull',
+    // Hardware is shot mounted, not on the tile sweep — so it lives outside
+    // /products/<slug>/ and needs an explicit path.
+    image: '/assets/images/hardware/pull-5in-mounted.jpg',
     size: '5in',
     sizeLabel: '5 inch',
     pattern: 'Cabochon',
@@ -213,6 +216,7 @@ window.FA_PRODUCTS = [
   {
     slug: 'lotus-knob',
     name: 'Lotus Knob',
+    image: '/assets/images/hardware/lotus-knob-mounted.jpg',
     size: '1×1',
     sizeLabel: '1×1 inch',
     pattern: 'Lotus',
