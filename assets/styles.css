@@ -10246,6 +10246,25 @@ body[data-product-slug] .qty-row { gap: 20px; margin-bottom: 26px; }
    Shop Now CTA reveal. Mirrors body[data-page="home"] scope. */
 body[data-product-slug] .cross-sell {
   margin-top: 96px;
+  /* The rule ran the full section width while the details block above it is
+     capped and centred, so the two didn't line up. It can't be fixed by
+     capping .cross-sell — that would shrink the product grid with it (which
+     is deliberately wider, up to 1500px). Painted as a centred pseudo-element
+     instead: same position, matched to the tabs' measure, grid untouched. */
+  border-top: none;
+  position: relative;
+}
+body[data-product-slug] .cross-sell::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 760px);
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 1440px) {
+  body[data-product-slug] .cross-sell::before { width: min(100%, 960px); }
 }
 body[data-product-slug] .cross-sell h3 {
   font-family: 'Cormorant Garamond', serif;
