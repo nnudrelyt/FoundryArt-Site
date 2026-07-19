@@ -11475,14 +11475,16 @@ body[data-page="cart"] .cart-remove:focus-visible {
   body[data-page="shop"]:not([data-product-slug]) .page { padding-top: 44px; }
 }
 
-/* Cart: close the breadcrumb-to-title gap, matching the PDP treatment.
-   The earlier pass left cart at 96px on the reasoning that a .page-header
-   between the trail and the content justified the air; in practice the
-   title and the trail read as one block and the gap separated them. */
-@media (min-width: 1440px) { body[data-page="cart"] .page { padding-top: 48px; } }
-@media (min-width: 901px) and (max-width: 1439px) { body[data-page="cart"] .page { padding-top: 28px; } }
-@media (max-width: 900px) { body[data-page="cart"] .page { padding-top: 20px; } }
-@media (max-width: 560px) { body[data-page="cart"] .page { padding-top: 16px; } }
+/* Cart + checkout: close the breadcrumb-to-title gap, matching the PDP
+   treatment. The earlier pass left these at 96px on the reasoning that a
+   .page-header between the trail and the content justified the air; in
+   practice the title and the trail read as one block and the gap separated
+   them. Checkout shares cart's exact header composition, so it takes the
+   same tiering — otherwise Cart → Checkout jumps the title down 48px. */
+@media (min-width: 1440px) { :is(body[data-page="cart"], body[data-page="checkout"]) .page { padding-top: 48px; } }
+@media (min-width: 901px) and (max-width: 1439px) { :is(body[data-page="cart"], body[data-page="checkout"]) .page { padding-top: 28px; } }
+@media (max-width: 900px) { :is(body[data-page="cart"], body[data-page="checkout"]) .page { padding-top: 20px; } }
+@media (max-width: 560px) { :is(body[data-page="cart"], body[data-page="checkout"]) .page { padding-top: 16px; } }
 
 /* Samples are one per product/finish, so their row shows a fixed quantity
    rather than a stepper — a control that can't change anything is worse
