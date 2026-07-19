@@ -10940,6 +10940,18 @@ body[data-product-slug] .pdp-actions { max-width: 620px; }
    checkboxes are deliberately untouched so this stays reviewable.
    ══════════════════════════════════════════════════════════════════════════ */
 
+/* The <label> wraps the input AND the text, so it — not the <li> — has to be
+   the flex container. With the gap on the li (one child) nothing separated the
+   box from its text but a literal space, and the input baseline-aligned instead
+   of centering. */
+body[data-page="shop"]:not([data-product-slug]) .facet-list li label {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  cursor: pointer;
+}
+
 .facet-list li input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
@@ -10948,6 +10960,7 @@ body[data-product-slug] .pdp-actions { max-width: 620px; }
   height: 22px;
   margin: 0;
   border: 1.5px solid var(--slate);
+  border-radius: 3px;
   background: var(--white);
   cursor: pointer;
   position: relative;
@@ -10982,7 +10995,6 @@ body[data-product-slug] .pdp-actions { max-width: 620px; }
    Scoped to match the existing shop tier — a bare `.facet-list li` loses to
    `body[data-page="shop"]:not([data-product-slug])` and silently does nothing. */
 body[data-page="shop"]:not([data-product-slug]) .facet-list li {
-  gap: 12px;
   font-size: 16px;
   padding: 9px 0;
   color: var(--charcoal);
