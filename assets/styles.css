@@ -11089,10 +11089,14 @@ body[data-page="shop"]:not([data-product-slug]) .shop-sort select:focus-visible 
 }
 
 @media (max-width: 560px) {
-  /* Collapse to "Home / <current>". Hides every child from the third onward
-     except the last, which works for a 2-, 3- or 4-crumb trail alike and
-     leaves exactly one separator — no orphaned slashes. */
-  .breadcrumb > *:nth-child(n+3):not(:last-child) { display: none; }
+  /* Collapse to "<shop-link> / <current>" — the root link is the Shop crumb,
+     not Home. The Shop crumb is always the 3rd child (2nd link); Home and its
+     separator (children 1-2) are dropped, and so is everything from the 5th
+     child up to the current page. Leaves exactly children 3, 4 and the last:
+     the shop link, one separator, the current page. Works for a 3- or
+     4-crumb trail alike, no orphaned slashes. */
+  .breadcrumb > *:nth-child(-n+2) { display: none; }
+  .breadcrumb > *:nth-child(n+5):not(:last-child) { display: none; }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
