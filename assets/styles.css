@@ -2334,7 +2334,6 @@ body[data-page="home"] .footer p { border: 0 !important; }
   line-height: 1.3;
   color: var(--charcoal);
 }
-.swatch-label small { display: block; color: var(--slate-l); font-size: 11px; margin-top: 3px; }
 
 /* Faceted filter sidebar (Track B shop) */
 .facet-group {
@@ -2796,7 +2795,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .swatch { padding: 11px 20px 11px 12px; }
   .swatch-chip { width: 28px; height: 28px; }
   .swatch-label { font-size: 14px; }
-  .swatch-label small { font-size: 12px; }  .facet-group h5 { font-size: 11px; }
+  .facet-group h5 { font-size: 11px; }
   .facet-list li { font-size: 13px; padding: 6px 0; }
   .review-title { font-size: 20px; }
   .review-body { font-size: 14px; line-height: 1.75; }
@@ -10225,7 +10224,6 @@ body[data-product-slug] .form-group label {
 }
 body[data-product-slug] .swatch-chip { width: 32px; height: 32px; }
 body[data-product-slug] .swatch-label { font-size: 15px; line-height: 1.25; }
-body[data-product-slug] .swatch-label small { font-size: 12px; margin-top: 3px; }
 body[data-product-slug] .swatch { padding: 12px 18px 12px 12px; gap: 12px; }
 body[data-product-slug] .pdp-ships {
   font-size: 14px;
@@ -11150,8 +11148,7 @@ body[data-product-slug] .pdp-meta-row { font-size: 14px; color: var(--slate-l); 
    with the type so the proportions hold. */
 body[data-product-slug] .swatch { padding: 10px 14px; gap: 10px; }
 body[data-product-slug] .swatch-chip { width: 20px; height: 20px; }
-body[data-product-slug] .swatch-label { font-size: 14px; }
-body[data-product-slug] .swatch-label small { font-size: 12px; margin-top: 2px; }
+body[data-product-slug] .swatch-label { font-size: 15px; }
 
 /* Heavier stroke on the sample button — it carries the secondary action and
    a hairline bronze rule was losing to the solid charcoal block above it.
