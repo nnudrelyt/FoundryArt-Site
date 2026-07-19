@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260719-281">
-<link rel="stylesheet" href="/assets/styles.css?v=20260719-281">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260719-282">
+<link rel="stylesheet" href="/assets/styles.css?v=20260719-282">
 </head>
 <body data-page="checkout">
 
@@ -154,6 +154,32 @@
             </label>
           </div>
 
+          <!-- Card details reveal on "Credit / debit card". Demo placeholders —
+               non-functional and not required, so the prototype's place-order
+               flow still works. At launch these are replaced by the payment
+               provider's hosted (PCI-scoped) fields. -->
+          <div class="card-fields" data-card-fields>
+            <div class="field-grid">
+              <div class="form-group full">
+                <label for="cc-num">Card number</label>
+                <input id="cc-num" type="text" inputmode="numeric" autocomplete="off" placeholder="1234 5678 9012 3456">
+              </div>
+              <div class="form-group">
+                <label for="cc-exp">Expiry (MM / YY)</label>
+                <input id="cc-exp" type="text" inputmode="numeric" autocomplete="off" placeholder="MM / YY">
+              </div>
+              <div class="form-group">
+                <label for="cc-cvc">CVC</label>
+                <input id="cc-cvc" type="text" inputmode="numeric" autocomplete="off" placeholder="123">
+              </div>
+              <div class="form-group full">
+                <label for="cc-name">Name on card</label>
+                <input id="cc-name" type="text" autocomplete="off" placeholder="As printed on the card">
+              </div>
+            </div>
+            <p class="card-fields-note">Secure demo field &mdash; no card is processed. At launch this becomes the payment provider&rsquo;s hosted field.</p>
+          </div>
+
           <label class="checkbox-row" style="margin-top:18px;">
             <input type="checkbox" required>
             <span>I have read and agree to the <a href="/terms/" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">website terms and conditions</a> *</span>
@@ -207,8 +233,8 @@
 
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260719-281"></script>
-  <script src="/assets/account-data.js?v=20260719-281"></script>
-  <script src="/assets/app.js?v=20260719-281"></script>
+  <script src="/assets/products.js?v=20260719-282"></script>
+  <script src="/assets/account-data.js?v=20260719-282"></script>
+  <script src="/assets/app.js?v=20260719-282"></script>
 </body>
 </html>

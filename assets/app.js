@@ -1645,6 +1645,23 @@
   }
 
   // ────────────────────────────────────────────────────────
+  // Card-details reveal (checkout) — show the card fields only when
+  // "Credit / debit card" is the selected payment method.
+  // ────────────────────────────────────────────────────────
+  function initCardFields() {
+    const panel = document.querySelector('[data-card-fields]');
+    if (!panel) return;
+    const cardRadio = document.querySelector('input[name="payment"][value="card"]');
+    function sync() { panel.style.display = (cardRadio && cardRadio.checked) ? '' : 'none'; }
+    // The option rows flip radio.checked on click without firing `change`, so
+    // sync on the click (after that handler) as well as on real change events.
+    document.querySelectorAll('.payment-options .option-row').forEach(row =>
+      row.addEventListener('click', () => Promise.resolve().then(sync)));
+    document.querySelectorAll('input[name="payment"]').forEach(r => r.addEventListener('change', sync));
+    sync();
+  }
+
+  // ────────────────────────────────────────────────────────
   // Track B: trade-pro toggle (checkout)
   // ────────────────────────────────────────────────────────
   function initTradeToggle() {
@@ -2000,6 +2017,7 @@
     initFacets();
     initOptionRows();
     initShipToggle();
+    initCardFields();
     initTradeToggle();
     initWtbTabs();
     initMediaCarousels();
