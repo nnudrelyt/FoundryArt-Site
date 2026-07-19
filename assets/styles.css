@@ -10535,6 +10535,13 @@ body[data-product-slug] .pdp-tabs {
   max-width: 760px;
   margin-left: auto;
   margin-right: auto;
+  /* Third instance of the same thing: the padding-top existed to hold the
+     tab bar off the border-top that's now gone, so it was stacking 60px of
+     dead space on a 110px margin — 170px between the product and the tabs.
+     Margin alone, at a size that reads as a section break rather than a
+     gap. */
+  margin-top: 72px;
+  padding-top: 0;
 }
 @media (min-width: 1440px) {
   body[data-product-slug] .pdp-tabs { max-width: 960px; }
