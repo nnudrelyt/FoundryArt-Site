@@ -11158,7 +11158,7 @@ body[data-product-slug] .swatch-label small { font-size: 12px; margin-top: 2px; 
    Set on both states so selecting/adding doesn't shift the button. */
 body[data-product-slug] .pdp-actions .btn-sample,
 body[data-product-slug] .pdp-actions .btn-sample.is-added:disabled {
-  border-width: 2px;
+  border-width: 1.5px;
 }
 
 /* Field labels above the selector ("MATERIAL") and the ships-in note */
