@@ -11677,9 +11677,13 @@ body[data-page="checkout"] .pay-marks {
 }
 body[data-page="checkout"] .pay-marks .card-mark { width: 34px; height: auto; display: block; }
 @media (max-width: 560px) {
-  /* On a phone the four-chip row crowds the label — drop to the two most
-     common marks plus PayPal; the sub text still lists them all. */
-  body[data-page="checkout"] .payment-options .opt-main { gap: 10px; }
-  body[data-page="checkout"] .pay-marks .card-mark { width: 30px; }
-  body[data-page="checkout"] .pay-marks .card-mark:nth-child(n+3) { display: none; }
+  /* On a phone all four chips stay, but the row wraps them onto their own
+     line below the label instead of crowding it inline. */
+  body[data-page="checkout"] .payment-options .opt-main { flex-wrap: wrap; gap: 4px 10px; }
+  body[data-page="checkout"] .payment-options .pay-marks {
+    flex-basis: 100%;
+    justify-content: flex-start;
+    margin-top: 8px;
+  }
+  body[data-page="checkout"] .pay-marks .card-mark { width: 32px; }
 }
