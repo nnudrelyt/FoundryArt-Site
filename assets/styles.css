@@ -1519,7 +1519,13 @@ body[data-page="home"] .product-card-cta:hover {
 
 /* ══════════════════════════════════════ FOOTER CTA (homepage) ══════════════════════════════════════ */
 .footer-cta {
-  background: var(--charcoal);
+  /* Warm, matching the copyright bar below it, so the two read as one
+     continuous dark block. This went teal when the client-approved palette
+     redefined --charcoal from #1A1814 (warm near-black) to #142528
+     (teal-navy) — the CTA never changed, the token under it did. Reverting
+     the token would repaint the whole site, so the footer names the warm
+     value directly instead. */
+  background: var(--charcoal-warm);
   padding: 80px 40px;
   display: grid;
   grid-template-columns: 1fr auto;
