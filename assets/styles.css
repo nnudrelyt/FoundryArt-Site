@@ -10900,26 +10900,50 @@ body[data-page="account-sign-in"] .account-signin-layout {
   body[data-product-slug] .page { max-width: 1560px; }
 }
 
-@media (min-width: 1920px) {
-  .page { padding: 104px 96px 128px; max-width: 1780px; }
-  .breadcrumb { padding: 26px 96px; }
+/* Inner pages share the homepage rail.
+   The FA homepage is fully fluid — no max-width, just a gutter (40px base,
+   80px from 1440). Inner pages used the same gutters but were also capped
+   and centred, so the two aligned below the cap and drifted above it: at
+   2000px homepage content began at x=80 while the shop began at x=110, and
+   by 2560px that was 80 vs 390. Dropping the caps puts every FA page on one
+   vertical rail at every width. Text measures are capped individually below,
+   since prose is the only thing that shouldn't run the full width. */
+:is(body[data-page="shop"], body[data-page="cart"], body[data-page="checkout"],
+    body[data-page="order-received"], body[data-account]) .page,
+body[data-product-slug] .page {
+  max-width: none;
+}
 
-  /* The shop polish tier (body[data-page="shop"]:not([data-product-slug]))
-     pins the layout to 240px/56px and the sidebar to 240px, and out-specifies
-     a bare .shop-layout — so these have to match its specificity to land. */
+@media (min-width: 1920px) {
   body[data-page="shop"]:not([data-product-slug]) .shop-layout {
     grid-template-columns: 300px 1fr;
     gap: 96px;
   }
   body[data-page="shop"]:not([data-product-slug]) .shop-sidebar { width: 300px; }
   .shop-grid { gap: 64px 40px; }
-
-  body[data-product-slug] .page { max-width: 1720px; }
-  /* Keep the base 1.2fr ratio. Product photography is 800px, and a wider
-     image column (1.45fr) renders the hero at ~862px — deliberately
-     upscaling a texture product. At 1.2fr it lands at native size. */
   body[data-product-slug] .pdp { gap: 72px; }
 }
+
+/* The PDP grid fills the rail like every other page, but the photograph
+   itself is capped: product shots are 800px, and an uncapped image column
+   renders the hero at ~1293px on a 2560 display — 62% upscaling on a
+   texture product. Capping the grid instead would strand dead space on one
+   side, which reads as a bug; capping the image keeps the layout symmetric
+   and the extra room becomes breathing room around the tile.
+   Raise this cap when higher-res product shots land. */
+body[data-product-slug] .main-image {
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+/* Prose measure guards — the rail is now full-width, so these stop the
+   reading columns stretching with it. */
+/* px, not ch: `ch` measures the "0" glyph, which in this serif is much
+   narrower than the average letter — 62ch rendered as ~79 characters. */
+body[data-product-slug] .pdp-desc { max-width: 660px; }
+body[data-product-slug] .pdp-info .form-group,
+body[data-product-slug] .pdp-actions { max-width: 620px; }
+.page-sub { max-width: 76ch; }
 
 /* Pre-existing bug: the shop polish tier sets .shop-layout to `240px 1fr` at
    top level, which out-specifies the `max-width: 1024px` collapse rule — so
