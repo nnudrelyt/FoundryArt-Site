@@ -11516,8 +11516,36 @@ body[data-page="cart"] .qty-fixed {
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group input,
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea,
 body[data-page="cart"] .coupon-form input,
+/* Trade-ID input: it revealed at 180px, clipping "…trade ID", at 12px. Now a
+   full-width field on its own line below the label (the row wraps), 14px, so
+   the whole prompt shows and there's room for the state affordances. */
+body[data-page="checkout"] .trade-row { flex-wrap: wrap; }
 body[data-page="checkout"] .trade-row .trade-id-input {
+  flex: 1 0 100%;
+  width: auto;
+  margin-left: 0;
+  margin-top: 10px;
+  font-size: 14px;
+  padding: 11px 14px;
   border-radius: 3px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+/* Active — same bronze focus ring as the billing fields. */
+body[data-page="checkout"] .trade-row .trade-id-input:focus {
+  outline: none;
+  border-color: var(--bronze);
+  box-shadow: 0 0 0 3px rgba(140, 98, 73, 0.12);
+}
+/* Successful entry — any non-empty value unlocks trade pricing (honor
+   system, per the toggle logic), so a filled field is a confirmed one:
+   bronze border and a bronze check on the right. :not(:placeholder-shown)
+   is exactly "has a value". */
+body[data-page="checkout"] .trade-row .trade-id-input:not(:placeholder-shown) {
+  border-color: var(--bronze);
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.5 5.5 11 12 3.5' fill='none' stroke='%238C6249' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
 }
 
 /* ── Select chevron. The native arrow can't be positioned and sits jammed in
