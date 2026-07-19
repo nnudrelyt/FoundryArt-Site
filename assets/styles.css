@@ -11066,3 +11066,27 @@ body[data-page="shop"]:not([data-product-slug]) .shop-sort select:focus-visible 
      leaves exactly one separator — no orphaned slashes. */
   .breadcrumb > *:nth-child(n+3):not(:last-child) { display: none; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PDP — ALIGN THE TITLE TO THE TILE, NOT THE PHOTO FRAME
+   The two columns already start on the same line; the apparent misalignment
+   is whitespace *inside* the product shot. Measured across the catalogue the
+   tile's top edge sits a consistent 6.6–7.0% down its frame, so the info
+   column is nudged by that fraction of the RENDERED IMAGE height.
+
+   Expressed as a % of the info column, scaled by the grid ratio (the image
+   column is 1.2x the info column, 1.25x above 1440), then min()'d against
+   54px — 6.8% of the 800px cap. Below the cap it tracks proportionally;
+   once the image stops growing, so does the nudge. A flat percentage would
+   overshoot by ~30px on a 2560 display.
+
+   The +4px covers Cormorant's ascender overshooting its line box, so it's
+   the visible cap-height that lands on the tile edge rather than the box.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (min-width: 901px) {
+  body[data-product-slug] .pdp-info { padding-top: calc(min(8.16%, 54px) + 4px); }
+}
+@media (min-width: 1440px) {
+  body[data-product-slug] .pdp-info { padding-top: calc(min(8.5%, 54px) + 4px); }
+}
