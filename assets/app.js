@@ -584,7 +584,7 @@
               <td data-label="Material">
                 <span class="swatch" style="padding:6px 12px 6px 8px;display:inline-flex;">
                   <span class="swatch-chip ${chipClass(i.finish)}" style="width:18px;height:18px;"></span>
-                  <span class="swatch-label" style="font-size:13px;">${finishShort(i.finish)}</span>
+                  <span class="swatch-label">${finishShort(i.finish)}</span>
                 </span>
               </td>
               <td class="num" data-label="Price" data-unit-price="${i.price}">${fmtMoney(i.price)}</td>
@@ -819,7 +819,7 @@
         `<tr><td><strong>Subtotal</strong></td><td class="num">${fmtMoney(order.subtotal)}</td></tr>` +
         (order.discount ? `<tr><td><strong>Trade discount (20%)</strong></td><td class="num">−${fmtMoney(order.discount)}</td></tr>` : '') +
         `<tr><td><strong>Shipping</strong></td><td class="num">${order.shipping.label} — ${fmtMoney(order.shipping.cost)}</td></tr>` +
-        `<tr><td><strong>Total</strong></td><td class="num" style="font-weight:500;font-size:15px;">${fmtMoney(order.total)}</td></tr>`;
+        `<tr><td><strong>Total</strong></td><td class="num confirm-emphasis">${fmtMoney(order.total)}</td></tr>`;
     }
     setText('[data-or-total]', fmtMoney(order.total));
   }

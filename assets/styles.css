@@ -11267,3 +11267,79 @@ body[data-product-slug] .pdp-ships { font-size: 15px; color: var(--slate-l); }
    synthesised into a faux bold. */
 .breadcrumb { font-weight: 500; }
 body[data-product-slug] .tab-btn { font-weight: 500; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FOUNDRY ART — SHOPPING-FLOW SANS TYPE SCALE
+   Scope: shop, PDP, cart, checkout, order-received. Account and Linden are
+   deliberately outside it.
+
+   An audit found the same roles rendering differently per page — most
+   visibly the primary CTA, which shrank from 14px on the PDP to 12px in the
+   cart to 11px at checkout, getting quieter as the customer got closer to
+   paying. These rules give each role one definition.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── No synthetic bold ──────────────────────────────────────────────────
+   The Jost link loads 300/400/500. <strong>, <b> and <th> default to 700,
+   which the browser then fakes by smearing the 400 outline — visibly muddy
+   at small sizes and worst on exactly the small tracked caps this UI uses.
+   500 is the heaviest real weight available. */
+:is(body[data-page="shop"], body[data-page="cart"], body[data-page="checkout"],
+    body[data-page="order-received"]) :is(strong, b, th) {
+  font-weight: 500;
+}
+
+/* ── Primary action ─────────────────────────────────────────────────────
+   One size the whole way through. Was 14 / 12 / 11 across PDP / cart /
+   checkout. */
+:is(body[data-page="shop"], body[data-page="cart"], body[data-page="checkout"],
+    body[data-page="order-received"]) .btn-primary,
+body[data-product-slug] .pdp-actions .btn-primary,
+/* The cart/checkout CTA also carries an existing `.summary-card .btn-primary`
+   rule at 0-3-1, which outranks the plain selector above no matter how late
+   it appears. Matched here rather than reached for !important. */
+:is(body[data-page="cart"], body[data-page="checkout"],
+    body[data-page="order-received"]) .summary-card .btn-primary {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2.6px;
+}
+
+/* ── Secondary action ───────────────────────────────────────────────────
+   One step down from primary, same construction. */
+:is(body[data-page="shop"], body[data-page="cart"], body[data-page="checkout"],
+    body[data-page="order-received"]) .btn-secondary {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2.4px;
+}
+
+/* ── Field labels ───────────────────────────────────────────────────────
+   Was 13/2.2 on the PDP and 11/1.5 in cart + checkout, for the same role. */
+:is(body[data-page="cart"], body[data-page="checkout"]) .form-group > label {
+  font-size: 13px;
+  letter-spacing: 2.2px;
+}
+
+/* ── Table headers ──────────────────────────────────────────────────────
+   Cart's column heads were 11px against the PDP spec table's 15px. 14px
+   sits between them and matches the field-label tier. */
+:is(body[data-page="cart"], body[data-page="checkout"]) .cart-table th {
+  font-size: 14px;
+  letter-spacing: 1.8px;
+}
+
+/* ── Fine print ─────────────────────────────────────────────────────────
+   .summary-note read 14px in the cart and 11px at checkout — same component,
+   same job. */
+:is(body[data-page="cart"], body[data-page="checkout"],
+    body[data-page="order-received"]) .summary-note {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── Cart line details ──────────────────────────────────────────────────
+   Replaces the inline font-size that used to sit on these. */
+body[data-page="cart"] .swatch-label { font-size: 14px; }
+.cart-continue { margin-top: 24px; font-size: 14px; color: var(--mid); }
+.confirm-emphasis { font-weight: 500; font-size: 15px; }
