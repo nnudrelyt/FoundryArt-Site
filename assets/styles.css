@@ -1764,12 +1764,17 @@ body[data-page="home"] .footer p { border: 0 !important; }
 }
 .pdp-gallery .thumbs {
   /* Fixed-size thumbs rather than 3 stretched columns: at full width those
-     rendered ~260px each, competing with the hero they're meant to index. */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 84px);
+     rendered ~260px each, competing with the hero they're meant to index.
+     Flex rather than an auto-fill grid so the row centres on the actual
+     thumbs — auto-fill would keep empty tracks in the flow and throw the
+     centring off by half a cell. */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 .pdp-gallery .thumb {
+  flex: 0 0 100px;
   aspect-ratio: 1;
   background: var(--wire-fill);
   display: flex;
