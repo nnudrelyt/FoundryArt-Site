@@ -1382,8 +1382,6 @@
     'size-2':     p => p.size === '2×2',
     'size-1':     p => p.size === '1×1',
     'size-5':     p => p.size === '5in',
-    'fin-trad':   p => p.finishes.includes('Traditional Bronze'),
-    'fin-wht':    p => p.finishes.includes('White Bronze'),
     'pat-cab':    p => p.pattern === 'Cabochon',
     'pat-lot':    p => p.pattern === 'Lotus',
     'pat-mb':     p => p.pattern === 'Moon Blossom',
@@ -1396,7 +1394,7 @@
   // discounted pieces sort by their struck-through number.
   const effectivePrice = p => (p.salePrice != null ? p.salePrice : p.price);
 
-  const shopState = { min: null, max: null, sort: 'best' };
+  const shopState = { sort: 'best' };
 
   function allFacetInputs() {
     return Array.from(document.querySelectorAll('.facet-group input[type="checkbox"]'));
@@ -1418,9 +1416,6 @@
       for (const preds of byGroup.values()) {
         if (!preds.some(fn => fn(p))) return false;
       }
-      const eff = effectivePrice(p);
-      if (shopState.min != null && eff < shopState.min) return false;
-      if (shopState.max != null && eff > shopState.max) return false;
       return true;
     });
   }
@@ -1454,14 +1449,6 @@
     });
   }
 
-  function updatePriceCaption() {
-    const cap = document.querySelector('[data-price-caption]');
-    const all = window.FA_PRODUCTS || [];
-    if (!cap || !all.length) return;
-    const prices = all.map(effectivePrice);
-    cap.textContent = `${window.FA_FMT.price(Math.min(...prices))} – ${window.FA_FMT.price(Math.max(...prices))}`;
-  }
-
   function updateResultCount(shown, total) {
     const el = document.querySelector('[data-result-count]');
     if (!el) return;
@@ -1485,13 +1472,6 @@
 
   function clearAllFacets() {
     allFacetInputs().forEach(i => { i.checked = false; });
-    // The original Clear-all reset the checkboxes but left .facet-swatch lit.
-    document.querySelectorAll('.facet-swatch.selected').forEach(s => s.classList.remove('selected'));
-    shopState.min = shopState.max = null;
-    const min = document.getElementById('price-min');
-    const max = document.getElementById('price-max');
-    if (min) min.value = '';
-    if (max) max.value = '';
     applyShop();
   }
 
@@ -1499,17 +1479,11 @@
     const chipBar = document.querySelector('.active-filter-chips');
     if (!chipBar) return;
     const active = allFacetInputs().filter(i => i.checked);
-    const priceOn = shopState.min != null || shopState.max != null;
 
     let html = active.map(i =>
       `<span class="active-chip" data-target="${i.id}">${i.dataset.label || i.value} <span class="x">×</span></span>`
     ).join('');
-    if (priceOn) {
-      const lo = shopState.min != null ? window.FA_FMT.price(shopState.min) : 'Any';
-      const hi = shopState.max != null ? window.FA_FMT.price(shopState.max) : 'Any';
-      html += `<span class="active-chip" data-clear-price>${lo} – ${hi} <span class="x">×</span></span>`;
-    }
-    if (active.length || priceOn) html += `<span class="clear-filters" data-clear>Clear all</span>`;
+    if (active.length) html += `<span class="clear-filters" data-clear>Clear all</span>`;
     chipBar.innerHTML = html;
 
     chipBar.querySelectorAll('.active-chip[data-target]').forEach(chip => {
@@ -1517,19 +1491,8 @@
         const target = document.getElementById(chip.dataset.target);
         if (!target) return;
         target.checked = false;
-        const sw = target.closest('.facet-swatch');
-        if (sw) sw.classList.remove('selected');
         applyShop();
       });
-    });
-    const priceChip = chipBar.querySelector('[data-clear-price]');
-    if (priceChip) priceChip.addEventListener('click', () => {
-      shopState.min = shopState.max = null;
-      const min = document.getElementById('price-min');
-      const max = document.getElementById('price-max');
-      if (min) min.value = '';
-      if (max) max.value = '';
-      applyShop();
     });
     const clear = chipBar.querySelector('[data-clear]');
     if (clear) clear.addEventListener('click', clearAllFacets);
@@ -1540,21 +1503,8 @@
     if (!grid) return;
 
     computeFacetCounts();
-    updatePriceCaption();
 
     allFacetInputs().forEach(i => i.addEventListener('change', applyShop));
-
-    // Swatch facets behave like checkboxes
-    document.querySelectorAll('.facet-swatch').forEach(s => {
-      s.addEventListener('click', () => {
-        s.classList.toggle('selected');
-        const hidden = s.querySelector('input');
-        if (hidden) {
-          hidden.checked = s.classList.contains('selected');
-          applyShop();
-        }
-      });
-    });
 
     const sort = document.getElementById('sort');
     if (sort) {
@@ -1564,21 +1514,6 @@
         applyShop();
       });
     }
-
-    const min = document.getElementById('price-min');
-    const max = document.getElementById('price-max');
-    const go  = document.querySelector('[data-price-go]');
-    const readPrice = () => {
-      const toNum = v => (v === '' || v == null || isNaN(parseFloat(v))) ? null : parseFloat(v);
-      shopState.min = toNum(min && min.value);
-      shopState.max = toNum(max && max.value);
-      applyShop();
-    };
-    if (go) go.addEventListener('click', readPrice);
-    // Apply on Go/Enter only — applying on input would thrash the grid mid-type.
-    [min, max].forEach(el => el && el.addEventListener('keydown', e => {
-      if (e.key === 'Enter') { e.preventDefault(); readPrice(); }
-    }));
 
     const emptyClear = document.querySelector('[data-shop-clear]');
     if (emptyClear) emptyClear.addEventListener('click', clearAllFacets);
