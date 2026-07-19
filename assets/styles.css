@@ -692,7 +692,11 @@ body.drawer-open { overflow: hidden; }
 
 
 /* ══════════════════════════════════════ SHARED SECTION TEXT ══════════════════════════════════════ */
-.section-eyebrow {
+/* .pdp-eyebrow shares this rule outright rather than approximating it — the
+   two were diverging (9px/bronze vs 11px/500/walnut) with no intent behind
+   the difference. */
+.section-eyebrow,
+.pdp-eyebrow {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 3px;
@@ -1786,13 +1790,6 @@ body[data-page="home"] .footer p { border: 0 !important; }
   position: sticky;
   top: 100px;
 }
-.pdp-eyebrow {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--bronze);
-  margin-bottom: 12px;
-}
 .pdp-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 36px;
@@ -1849,6 +1846,8 @@ body[data-page="home"] .footer p { border: 0 !important; }
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;   /* clips the square inner buttons to the rounded shell */
 }
 .qty-stepper button {
   width: 36px;
@@ -2645,7 +2644,8 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .brand-band cite { font-size: 13px; margin-top: 40px; letter-spacing: 3.5px; }
 
   /* Section text scale */
-  .section-eyebrow { font-size: 13px; margin-bottom: 22px; letter-spacing: 3.5px; }
+  .section-eyebrow,
+  .pdp-eyebrow { font-size: 13px; margin-bottom: 22px; letter-spacing: 3.5px; }
   .section-headline { font-size: 52px; line-height: 1.12; margin-bottom: 32px; letter-spacing: -0.4px; }
   .section-body { font-size: 19px; line-height: 1.65; max-width: 680px; }
 
@@ -2734,7 +2734,6 @@ body[data-page="home"] .footer p { border: 0 !important; }
   /* PDP */
   .pdp { grid-template-columns: 1.25fr 1fr; gap: 88px; }
   .pdp-gallery .thumbs { gap: 12px; }
-  .pdp-eyebrow { font-size: 11px; margin-bottom: 16px; letter-spacing: 3.5px; }
   .pdp-title { font-size: 52px; margin-bottom: 16px; line-height: 1.08; }
   .pdp-price { font-size: 30px; margin-bottom: 26px; }
   .pdp-price .was { font-size: 19px; }
@@ -10203,11 +10202,6 @@ body[data-product-slug] .breadcrumb {
 body[data-product-slug] .page {
   max-width: 1240px;   /* raised at >=1440 / >=1920 — see the wide tiers below */
 }
-body[data-product-slug] .pdp-eyebrow {
-  font-size: 11px;
-  letter-spacing: 3.5px;
-  margin-bottom: 16px;
-}
 body[data-product-slug] .pdp-title {
   font-size: 48px;
   margin-bottom: 18px;
@@ -10594,6 +10588,18 @@ body[data-page="order-received"] .confirm-meta { grid-template-columns: repeat(3
   cursor: default;
 }
 .btn-sample:disabled:hover { background: transparent; color: var(--bronze); }
+
+/* The samples-added confirmation persists until reload, so it must not wear
+   the 55% disabled fade — a permanently greyed button reads as broken rather
+   than done. Filled bronze tint at full opacity instead. */
+.btn-sample.is-added:disabled,
+.btn-sample.is-added:disabled:hover {
+  opacity: 1;
+  background: var(--bronze-bg);
+  border-color: var(--bronze);
+  color: #5A3A22;
+  cursor: default;
+}
 
 /* Swatch / trade line marker */
 .line-tag {

@@ -536,13 +536,6 @@
     return true;
   }
 
-  function flashButton(btn, msg) {
-    const label = btn.textContent;
-    btn.textContent = msg;
-    btn.disabled = true;
-    setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 1600);
-  }
-
   function selectedFinish(product) {
     const sel = document.querySelector('[data-finish-target] .swatch.selected .swatch-label');
     return sel ? sel.childNodes[0].textContent.trim() : product.finishes[0];
@@ -558,6 +551,9 @@
     // Samples exist to compare finishes, so every finish goes in by default —
     // the customer removes what they don't want from the cart rather than
     // having to guess up front. Single-finish products just add the one.
+    // The confirmation persists rather than flashing back: the samples really
+    // are in the cart, so reverting to "Order a sample" would misreport state
+    // and invite a second click. A page load resets it.
     const btn = document.querySelector('.pdp-actions .btn-sample');
     if (btn) btn.addEventListener('click', () => {
       const added = product.finishes.reduce((n, f) => n + (addSample(product, f) ? 1 : 0), 0);
@@ -565,7 +561,9 @@
       const msg = added === 0 ? 'Already in cart'
                 : added === 1 ? 'Sample added ✓'
                 : `${added} samples added ✓`;
-      flashButton(btn, msg);
+      btn.textContent = msg;
+      btn.disabled = true;
+      btn.classList.add('is-added');
     });
   }
 
