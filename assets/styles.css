@@ -11552,9 +11552,9 @@ body[data-page="checkout"] .option-row.selected {
 }
 
 /* ── Summary card: larger product identity and prices. ── */
-body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info strong { font-size: 18px; }
-body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info span { font-size: 13px; }
-body[data-page="checkout"] .summary-card.checkout-summary .summary-item-price { font-size: 16px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info strong { font-size: 21px; line-height: 1.2; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info span { font-size: 14px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-price { font-size: 17px; }
 body[data-page="checkout"] .summary-card.checkout-summary .summary-row { font-size: 15px; }
 
 /* ── Tighter vertical rhythm on phones so the tall form scrolls less. ── */
@@ -11566,4 +11566,17 @@ body[data-page="checkout"] .summary-card.checkout-summary .summary-row { font-si
      with Street Address in the desktop two-column grid. Stacked on a phone
      that spacer is just dead height between two inputs, so hide it. */
   body[data-page="checkout"] .form-group label:has(span[aria-hidden="true"]) { display: none; }
+}
+
+/* Field labels darkened from --mid (5.55:1) to --slate (11.73:1) — they were
+   reading as placeholder-faint against the white form. */
+body[data-page="checkout"] .form-group label { color: var(--slate); }
+
+/* Tighter vertical rhythm on desktop too — the earlier pass only touched the
+   phone. Row gap and label-to-input both come in; column gap stays 24 so the
+   First/Last pair keeps its breathing room. */
+@media (min-width: 561px) {
+  body[data-page="checkout"] .field-grid { gap: 14px 24px; }
+  body[data-page="checkout"] .form-group label { margin-bottom: 7px; }
+  body[data-page="checkout"] .form-group { margin-bottom: 16px; }
 }
