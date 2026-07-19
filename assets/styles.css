@@ -1618,7 +1618,10 @@ body[data-page="home"] .footer p { border: 0 !important; }
   max-width: 1320px;
   margin: 0 auto;
 }
-.page-header { margin-bottom: 40px; }
+/* 40 -> 20: the header-to-content gap read as a break rather than a lead-in.
+   .page-header is Foundry Art only (shop / cart / checkout / account), so this
+   is consistent across the section and can't touch Linden. */
+.page-header { margin-bottom: 20px; }
 .page-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 38px;
