@@ -11502,3 +11502,68 @@ body[data-page="cart"] .qty-fixed {
   font-size: 15px;
   color: var(--slate);
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CHECKOUT — FORM & SUMMARY REFINEMENTS
+   Brings checkout in line with the cart/PDP control language: rounded
+   corners, a real select chevron, bronze accents, and larger summary type.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Rounded corners on every funnel field (matches the 3px on the other
+   controls). Same selector group as the existing funnel-field rule so it
+   wins on order. ── */
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group select,
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group input,
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea,
+body[data-page="cart"] .coupon-form input,
+body[data-page="checkout"] .trade-row .trade-id-input {
+  border-radius: 3px;
+}
+
+/* ── Select chevron. The native arrow can't be positioned and sits jammed in
+   the corner; replaced with an inset SVG, same as the shop sort control. ── */
+body[data-page="checkout"] .form-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23555' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+/* ── Native checkboxes and radios tinted on-brand — kills the default blue
+   radio and matches the bronze used everywhere else. ── */
+body[data-page="checkout"] input[type="checkbox"],
+body[data-page="checkout"] input[type="radio"] { accent-color: var(--bronze); }
+
+/* ── Trade callout: rounded to match the summary card and badges. ── */
+body[data-page="checkout"] .trade-row { border-radius: 4px; }
+
+/* ── Shipping / payment tiles. Rounded, and the selected state is now a
+   bronze ring on white rather than a charcoal border on cream — the same
+   treatment as the PDP material selector. The ring is an inset shadow so
+   selecting doesn't shift the tile by a pixel. ── */
+body[data-page="checkout"] .option-row { border-radius: 4px; }
+body[data-page="checkout"] .option-row:hover { border-color: var(--slate-l); }
+body[data-page="checkout"] .option-row.selected {
+  border-color: var(--bronze);
+  box-shadow: inset 0 0 0 1px var(--bronze);
+  background: var(--white);
+}
+
+/* ── Summary card: larger product identity and prices. ── */
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info strong { font-size: 18px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info span { font-size: 13px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-price { font-size: 16px; }
+body[data-page="checkout"] .summary-card.checkout-summary .summary-row { font-size: 15px; }
+
+/* ── Tighter vertical rhythm on phones so the tall form scrolls less. ── */
+@media (max-width: 560px) {
+  body[data-page="checkout"] .form-group { margin-bottom: 16px; }
+  body[data-page="checkout"] .field-grid { gap: 14px 16px; }
+  body[data-page="checkout"] .form-group label { margin-bottom: 6px; }
+  /* The apartment field carries an empty spacer label (&nbsp;) to line up
+     with Street Address in the desktop two-column grid. Stacked on a phone
+     that spacer is just dead height between two inputs, so hide it. */
+  body[data-page="checkout"] .form-group label:has(span[aria-hidden="true"]) { display: none; }
+}
