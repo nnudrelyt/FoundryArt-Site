@@ -586,11 +586,11 @@
               </td>
               <td class="num" data-label="Price" data-unit-price="${i.price}">${fmtMoney(i.price)}</td>
               <td data-label="Qty">
-                <div class="qty-stepper" aria-label="Quantity">
+                ${i.type === 'sample' ? '<span class="qty-fixed">1</span>' : `<div class="qty-stepper" aria-label="Quantity">
                   <button type="button" data-qty="-" aria-label="Decrease">−</button>
                   <input type="number" value="${i.qty}" min="1" max="99">
                   <button type="button" data-qty="+" aria-label="Increase">+</button>
-                </div>
+                </div>`}
               </td>
               <td class="num" data-label="Subtotal" data-line-subtotal>${fmtMoney(i.price * i.qty)}</td>
               <td data-label="Remove"><button type="button" class="cart-remove" aria-label="Remove ${i.name}"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 3.5 12.5 12.5M12.5 3.5 3.5 12.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></td>
@@ -856,7 +856,6 @@
     // asserted by a manual toggle, so the shipping note can never contradict
     // the cart. `!== 'sample'` (not `=== 'product'`) because legacy carts have
     // no type attribute at all.
-    const sampleRow = document.querySelector('[data-sample-note]');
     function isSampleOrder() {
       const rows = tbody.querySelectorAll('[data-cart-row]');
       return rows.length > 0 &&
@@ -869,7 +868,8 @@
       let w = 0;
       tbody.querySelectorAll('[data-cart-row]').forEach(row => {
         const unit = parseFloat(row.getAttribute('data-weight')) || 0;
-        const qty = Math.max(1, parseInt(row.querySelector('.qty-stepper input').value, 10) || 1);
+        const input = row.querySelector('.qty-stepper input');
+        const qty = input ? Math.max(1, parseInt(input.value, 10) || 1) : 1;
         w += unit * qty;
       });
       return w + 1; // + ~1 lb packaging
@@ -891,10 +891,13 @@
       let subtotal = 0, qtyTotal = 0;
       rows.forEach(row => {
         const priceCell = row.querySelector('[data-unit-price]');
+        if (!priceCell) return;
+        // Samples render a fixed "1" with no stepper, so a missing input
+        // means quantity 1 — not a row to skip. Skipping it would drop the
+        // line from the item count.
         const input = row.querySelector('.qty-stepper input');
-        if (!priceCell || !input) return;
         const unit = parseFloat(priceCell.getAttribute('data-unit-price')) || parseMoney(priceCell.textContent);
-        const qty = Math.max(1, parseInt(input.value, 10) || 1);
+        const qty = input ? Math.max(1, parseInt(input.value, 10) || 1) : 1;
         const line = unit * qty;
         const lineCell = row.querySelector('[data-line-subtotal]');
         if (lineCell) lineCell.textContent = money(line);
@@ -906,7 +909,6 @@
       // Shipping: a swatch-only order ships free; otherwise use the estimate
       // if one was run, else "calculated at checkout".
       const sample = isSampleOrder();
-      if (sampleRow) sampleRow.hidden = !sample;
       let shipCost = 0, shipText;
       if (sample)                  { shipText = 'Free'; shipCost = 0; }
       else if (shipEstimate != null) { shipText = money(shipEstimate); shipCost = shipEstimate; }

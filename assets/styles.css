@@ -11483,3 +11483,16 @@ body[data-page="cart"] .cart-remove:focus-visible {
 @media (min-width: 901px) and (max-width: 1439px) { body[data-page="cart"] .page { padding-top: 28px; } }
 @media (max-width: 900px) { body[data-page="cart"] .page { padding-top: 20px; } }
 @media (max-width: 560px) { body[data-page="cart"] .page { padding-top: 16px; } }
+
+/* Samples are one per product/finish, so their row shows a fixed quantity
+   rather than a stepper — a control that can't change anything is worse
+   than no control. Sized to the stepper's height so rows stay even. */
+body[data-page="cart"] .qty-fixed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  height: 42px;
+  font-size: 15px;
+  color: var(--slate);
+}
