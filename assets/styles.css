@@ -10467,7 +10467,7 @@ body[data-page="cart"] .coupon-form input {
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea:focus,
 body[data-page="cart"] .coupon-form input:focus {
   border-color: var(--bronze);
-  box-shadow: 0 0 0 3px rgba(140, 98, 73, 0.12);
+  box-shadow: 0 0 0 1px var(--bronze);
 }
 
 /* ── Order-received ── */
@@ -10778,7 +10778,7 @@ body[data-page="account-sign-in"] .account-signin-layout {
 .form-group.has-error select:focus,
 .form-group.has-error textarea:focus {
   border-color: var(--bronze);
-  box-shadow: 0 0 0 3px rgba(140, 98, 73, 0.12);
+  box-shadow: 0 0 0 1px var(--bronze);
 }
 .form-group.has-error label { color: #A3231B; }
 
@@ -11515,7 +11515,10 @@ body[data-page="cart"] .qty-fixed {
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group select,
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group input,
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea,
-body[data-page="cart"] .coupon-form input,
+body[data-page="cart"] .coupon-form input {
+  border-radius: 4px;
+}
+
 /* Trade-ID input: it revealed at 180px, clipping "…trade ID", at 12px. Now a
    full-width field on its own line below the label (the row wraps), 14px, so
    the whole prompt shows and there's room for the state affordances. */
@@ -11527,14 +11530,14 @@ body[data-page="checkout"] .trade-row .trade-id-input {
   margin-top: 10px;
   font-size: 14px;
   padding: 11px 14px;
-  border-radius: 3px;
+  border-radius: 4px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 /* Active — same bronze focus ring as the billing fields. */
 body[data-page="checkout"] .trade-row .trade-id-input:focus {
   outline: none;
   border-color: var(--bronze);
-  box-shadow: 0 0 0 3px rgba(140, 98, 73, 0.12);
+  box-shadow: 0 0 0 1px var(--bronze);
 }
 /* Successful entry — any non-empty value unlocks trade pricing (honor
    system, per the toggle logic), so a filled field is a confirmed one:
@@ -11644,7 +11647,7 @@ body[data-page="checkout"] .option-row .opt-sub { font-size: 14px; }
 body[data-page="checkout"] .checkout-coupon input {
   font-size: 15px;
   padding: 12px 14px;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 body[data-page="checkout"] .checkout-coupon .btn-secondary { border-radius: 3px; }
 
