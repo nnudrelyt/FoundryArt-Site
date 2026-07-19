@@ -11090,3 +11090,18 @@ body[data-page="shop"]:not([data-product-slug]) .shop-sort select:focus-visible 
 @media (min-width: 1440px) {
   body[data-product-slug] .pdp-info { padding-top: calc(min(8.5%, 54px) + 4px); }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PDP — TIGHTEN THE BREADCRUMB-TO-PRODUCT GAP
+   The trail and the product are the same thought; 96px of air between them
+   read as a missing element. Halved at every tier.
+
+   Scoped to the PDP deliberately: shop hides its breadcrumb entirely, and
+   cart/checkout put a .page-header between the trail and their content, so
+   the gap is doing real work there.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (min-width: 901px)  { body[data-product-slug] .page { padding-top: 28px; } }
+@media (min-width: 1440px) { body[data-product-slug] .page { padding-top: 48px; } }
+@media (max-width: 900px)  { body[data-product-slug] .page { padding-top: 20px; } }
+@media (max-width: 560px)  { body[data-product-slug] .page { padding-top: 16px; } }
