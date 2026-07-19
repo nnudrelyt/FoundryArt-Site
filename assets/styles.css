@@ -11402,3 +11402,21 @@ body[data-page="cart"] .cart-remove:focus-visible {
   outline: 2px solid var(--bronze);
   outline-offset: 2px;
 }
+
+/* ── Cart column alignment ──────────────────────────────────────────────
+   Both scoped above the stacked breakpoint: below 900px the table becomes
+   blocks with generated labels and there are no column headers to align to,
+   so these would be meaningless there. */
+@media (min-width: 901px) {
+  /* Qty — centre the header AND the stepper in the cell rather than trying
+     to centre the label over a control whose width CSS can't know. Aligning
+     both to the same axis holds whatever the stepper measures. */
+  body[data-page="cart"] .cart-table th:nth-child(4),
+  body[data-page="cart"] .cart-table td:nth-child(4) { text-align: center; }
+
+  /* Subtotal — header and amounts now share a left edge. They were
+     right-aligned together, which is the usual choice for figures, but the
+     long header and short values made the relationship hard to read. */
+  body[data-page="cart"] .cart-table th:nth-child(5),
+  body[data-page="cart"] .cart-table td:nth-child(5) { text-align: left; }
+}
