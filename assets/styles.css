@@ -11629,3 +11629,36 @@ body[data-page="checkout"] .form-group label { color: var(--slate); }
 body[data-page="checkout"] .form-group input,
 body[data-page="checkout"] .form-group select,
 body[data-page="checkout"] .form-group textarea { padding-top: 10px; padding-bottom: 10px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CHECKOUT — SUMMARY & SECTION CLEANUP
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Larger order-summary product titles. */
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info strong { font-size: 24px; }
+
+/* Shipping descriptions matched to the order product descriptions (14px). */
+body[data-page="checkout"] .option-row .opt-sub { font-size: 14px; }
+
+/* Coupon input + Apply button rounded and brought up to the funnel field size. */
+body[data-page="checkout"] .checkout-coupon input {
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 3px;
+}
+body[data-page="checkout"] .checkout-coupon .btn-secondary { border-radius: 3px; }
+
+/* Collapse the summary's vertical rhythm. */
+body[data-page="checkout"] .summary-card.checkout-summary .summary-item { padding: 9px 0; }
+body[data-page="checkout"] .checkout-summary .summary-row { padding: 6px 0; }
+body[data-page="checkout"] .checkout-summary .checkout-coupon { margin: 12px 0; }
+
+/* Remove the dividers between billing / shipping / payment. Whitespace alone
+   separates the sections now; padding-bottom goes with the rule so no gap is
+   left behind. (Payment is already the last section, so payment -> button was
+   only ever whitespace — nothing to remove there, confirmed.) */
+body[data-page="checkout"] .checkout-section {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 34px;
+}
