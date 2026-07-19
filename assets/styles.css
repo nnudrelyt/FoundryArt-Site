@@ -10469,14 +10469,14 @@ body[data-page="shop"]:not([data-product-slug]) .breadcrumb { display: none; }
    ────────────────────────────────────────────────────────── */
 
 /* White page */
-:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) { background: var(--white); }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"], body[data-account]) { background: var(--white); }
 /* Cart + checkout keep a breadcrumb for funnel wayfinding
    (Home / Shop / Cart[ / Checkout]). */
-:is(body[data-page="cart"], body[data-page="checkout"]) .breadcrumb { font-size: 12px; letter-spacing: 2px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .breadcrumb { font-size: 12px; letter-spacing: 2px; }
 
 /* Page header — shop-grid scale */
-:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-title { font-size: 44px; }
-:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-sub { font-size: 17px; line-height: 1.55; margin-top: 6px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"], body[data-account]) .page-title { font-size: 44px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"], body[data-account]) .page-sub { font-size: 17px; line-height: 1.55; margin-top: 6px; }
 
 /* ── Cart line-items table ── */
 body[data-page="cart"] .cart-table th { font-size: 11px; }
@@ -10493,15 +10493,15 @@ body[data-page="cart"] .qty-stepper button { width: 40px; height: 42px; font-siz
 body[data-page="cart"] .qty-stepper input { width: 48px; height: 42px; font-size: 15px; }
 
 /* ── Order-summary panels (cart + checkout) ── */
-:is(body[data-page="cart"], body[data-page="checkout"]) .summary-card {
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-card {
   padding: 32px;
   box-shadow: 0 14px 34px -22px rgba(20, 37, 40, 0.15);
 }
-:is(body[data-page="cart"], body[data-page="checkout"]) .summary-card h3 { font-size: 26px; margin-bottom: 20px; padding-bottom: 20px; }
-:is(body[data-page="cart"], body[data-page="checkout"]) .summary-row { font-size: 15px; }
-:is(body[data-page="cart"], body[data-page="checkout"]) .summary-row.total { font-size: 18px; }
-:is(body[data-page="cart"], body[data-page="checkout"]) .summary-note { font-size: 11px; }
-:is(body[data-page="cart"], body[data-page="checkout"]) .summary-card .btn-primary { font-size: 12px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-card h3 { font-size: 26px; margin-bottom: 20px; padding-bottom: 20px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-row { font-size: 15px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-row.total { font-size: 18px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-note { font-size: 11px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-card .btn-primary { font-size: 12px; }
 
 /* ── Checkout form + option rows ── */
 body[data-page="checkout"] .checkout-section h2 { font-size: 26px; margin-bottom: 24px; }
@@ -10521,18 +10521,18 @@ body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info spa
 body[data-page="checkout"] .summary-card.checkout-summary .summary-item-price { font-size: 13px; }
 
 /* Funnel form fields — larger type, roomier padding, bronze focus */
-:is(body[data-page="cart"], body[data-page="checkout"]) .form-group label { font-size: 11px; }
-:is(body[data-page="cart"], body[data-page="checkout"]) .form-group select,
-:is(body[data-page="cart"], body[data-page="checkout"]) .form-group input,
-:is(body[data-page="cart"], body[data-page="checkout"]) .form-group textarea,
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group label { font-size: 11px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group select,
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group input,
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea,
 body[data-page="cart"] .coupon-form input {
   font-size: 15px;
   padding: 12px 14px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-:is(body[data-page="cart"], body[data-page="checkout"]) .form-group select:focus,
-:is(body[data-page="cart"], body[data-page="checkout"]) .form-group input:focus,
-:is(body[data-page="cart"], body[data-page="checkout"]) .form-group textarea:focus,
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group select:focus,
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group input:focus,
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea:focus,
 body[data-page="cart"] .coupon-form input:focus {
   border-color: var(--bronze);
   box-shadow: 0 0 0 3px rgba(140, 98, 73, 0.12);
@@ -10555,31 +10555,31 @@ body[data-page="order-received"] .cart-thumb { width: 80px; height: 80px; }
 /* Re-assert the ≥1440 tier so the base bumps above don't leak
    upward and shrink the wide-viewport sizes */
 @media (min-width: 1440px) {
-  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-title { font-size: 54px; }
-  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-sub { font-size: 19px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"], body[data-account]) .page-title { font-size: 54px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"], body[data-account]) .page-sub { font-size: 19px; }
   body[data-page="cart"] .cart-table td { font-size: 15px; }
   body[data-page="cart"] .cart-thumb { width: 96px; height: 96px; }
   body[data-page="cart"] .cart-item-info strong { font-size: 22px; }
-  :is(body[data-page="cart"], body[data-page="checkout"]) .breadcrumb { font-size: 13px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .breadcrumb { font-size: 13px; }
   body[data-page="cart"] .qty-stepper button { width: 42px; height: 44px; font-size: 18px; }
   body[data-page="cart"] .qty-stepper input { width: 52px; height: 44px; font-size: 15px; }
-  :is(body[data-page="cart"], body[data-page="checkout"]) .summary-card { padding: 36px; }
-  :is(body[data-page="cart"], body[data-page="checkout"]) .summary-card h3 { font-size: 28px; margin-bottom: 22px; padding-bottom: 22px; }
-  :is(body[data-page="cart"], body[data-page="checkout"]) .summary-row.total { font-size: 19px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-card { padding: 36px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-card h3 { font-size: 28px; margin-bottom: 22px; padding-bottom: 22px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .summary-row.total { font-size: 19px; }
   body[data-page="checkout"] .checkout-section h2 { font-size: 28px; margin-bottom: 26px; }
   body[data-page="checkout"] .field-grid { gap: 18px 24px; }
   body[data-page="checkout"] .option-row { padding: 18px 22px; }
-  :is(body[data-page="cart"], body[data-page="checkout"]) .form-group select,
-  :is(body[data-page="cart"], body[data-page="checkout"]) .form-group input,
-  :is(body[data-page="cart"], body[data-page="checkout"]) .form-group textarea,
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group select,
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group input,
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea,
   body[data-page="cart"] .coupon-form input { padding: 13px 16px; }
   body[data-page="order-received"] .confirm-headline { font-size: 44px; }
   body[data-page="order-received"] .cart-item-info strong { font-size: 19px; }
   body[data-page="order-received"] .cart-thumb { width: 96px; height: 96px; }
 }
 @media (max-width: 560px) {
-  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-title { font-size: 32px; }
-  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"]) .page-sub { font-size: 15px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"], body[data-account]) .page-title { font-size: 32px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"], body[data-account]) .page-sub { font-size: 15px; }
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -10639,3 +10639,167 @@ body[data-page="cart"] .trade-row { border: none; }
 /* With the "Project" meta tile hidden, keep the order-confirmation
    meta row a clean 3-up (revert to repeat(4,1fr) when Projects returns). */
 body[data-page="order-received"] .confirm-meta { grid-template-columns: repeat(3, 1fr); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   Foundry Art — shop empty state, swatch lines, account area, print
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* Shop: no-match empty state (sibling of .shop-grid, never a child) */
+.shop-empty {
+  padding: 64px 24px;
+  text-align: center;
+  border: 1px solid var(--rule);
+  background: #FBFAF8;
+}
+.shop-empty p {
+  font-size: 15px;
+  color: var(--mid);
+  margin: 0 0 20px;
+}
+.shop-empty[hidden] { display: none; }
+
+/* Facets that can never return a result — visible but not a trap */
+.facet-list label.is-empty {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* .btn-sample had no disabled state; the add-confirmation depends on one */
+.btn-sample:disabled,
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.btn-sample:disabled:hover { background: transparent; color: var(--bronze); }
+
+/* Swatch / trade line marker */
+.line-tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 7px;
+  font-family: 'Jost', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--bronze);
+  background: var(--bronze-bg);
+  vertical-align: middle;
+}
+
+/* ── Account area ──────────────────────────────────────────────────── */
+body[data-account] .account-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+body[data-account] .account-nav {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
+}
+body[data-account] .account-nav a {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--mid);
+  transition: color 0.2s ease;
+}
+body[data-account] .account-nav a:hover,
+body[data-account] .account-nav a.active { color: var(--bronze); }
+
+body[data-account] .account-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+body[data-account] .account-cards .summary-card h3,
+body[data-account] .trade-status-card h4 {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin: 0 0 16px;
+}
+body[data-account] .account-cards address {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+body[data-account] .trade-status-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+body[data-account] .summary-card .btn-secondary { margin-top: 18px; }
+
+/* Sign-in / register, side by side like WooCommerce's default template */
+body[data-page="account-sign-in"] .account-signin-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+.form-hint {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--mid);
+  margin: 14px 0 0;
+}
+
+/* Order status */
+.status-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+.status-delivered  { color: #2f7a4d; }
+.status-shipped    { color: var(--bronze); }
+.status-processing { color: #8a6a1f; }
+.status-approved   { color: #2f7a4d; }
+
+@media (max-width: 860px) {
+  body[data-account] .account-layout { grid-template-columns: 1fr; gap: 28px; }
+  body[data-account] .account-nav { flex-flow: row wrap; border-top: 0; gap: 0 18px; }
+  body[data-account] .account-nav a { border-bottom: 0; padding: 8px 0; }
+}
+
+/* Nav gains a third item; hide it in the band where .nav-links is still
+   visible but space is tight — the mobile drawer carries it there. */
+@media (max-width: 1100px) {
+  .nav-account { display: none; }
+}
+
+/* ── Print — receipts ──────────────────────────────────────────────────
+   There was no @media print anywhere in this stylesheet, so this block is
+   purely additive and cannot regress an existing rule. */
+@media print {
+  header, .nav, .breadcrumb, .footer, .footer-cta,
+  .account-nav, .studios-drawer, .studios-scrim,
+  .btn-primary, .btn-secondary, .btn-ghost, .btn-sample, .btn-primary-lg {
+    display: none !important;
+  }
+  body { background: #FFF !important; color: #000 !important; }
+  .page { padding: 0 !important; max-width: none !important; }
+  .summary-card, .confirm-card {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .cart-table tr { break-inside: avoid; }
+  a[href]::after { content: ''; }   /* no URL expansion on a receipt */
+}

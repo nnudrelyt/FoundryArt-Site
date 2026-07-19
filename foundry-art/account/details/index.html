@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account details — Foundry Art</title>
+<meta name="description" content="Your Foundry Art account details and trade status.">
+<meta name="theme-color" content="#142528">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260717-219">
+<link rel="stylesheet" href="/assets/styles.css?v=20260717-219">
+</head>
+<body data-page="account-details" data-account>
+
+  <div data-nav></div>
+
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">Account details</h1>
+      <p class="page-sub">Your contact information and trade status.</p>
+    </header>
+
+    <div class="account-layout">
+      <nav class="account-nav" aria-label="Account">
+        <a href="/foundry-art/account/">Overview</a>
+        <a href="/foundry-art/account/orders/">Orders</a>
+        <a href="/foundry-art/account/addresses/">Addresses</a>
+        <a href="/foundry-art/account/details/" class="active">Details</a>
+        <a href="#" data-sign-out>Sign out</a>
+      </nav>
+
+      <section class="account-main">
+        <div class="checkout-section">
+          <h2>Contact</h2>
+          <div class="field-grid">
+            <div class="form-group"><label for="acc-first">First name *</label><input id="acc-first" type="text"></div>
+            <div class="form-group"><label for="acc-last">Last name *</label><input id="acc-last" type="text"></div>
+            <div class="form-group full"><label for="acc-email">Email address *</label><input id="acc-email" type="email"></div>
+            <div class="form-group full"><label for="acc-phone">Phone</label><input id="acc-phone" type="tel"></div>
+          </div>
+          <button type="button" class="btn-primary">Save changes</button>
+        </div>
+
+        <div class="checkout-section">
+          <h2>Trade status</h2>
+          <div data-trade-panel></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div data-footer></div>
+
+  <script src="/assets/products.js?v=20260717-219"></script>
+  <script src="/assets/account-data.js?v=20260717-219"></script>
+  <script src="/assets/app.js?v=20260717-219"></script>
+</body>
+</html>

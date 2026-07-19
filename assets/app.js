@@ -40,6 +40,7 @@
             <span></span><span></span><span></span>
           </button>
           <div class="nav-right">
+            <a href="/foundry-art/account/sign-in/" class="nav-account" data-account-link>Sign in</a>
             <a href="/foundry-art/cart/" class="nav-cart" aria-label="Cart">Cart<span class="nav-cart-count" data-cart-count>2</span></a>
             <a href="/foundry-art/shop/" class="nav-cta">Shop Now</a>
           </div>`;
@@ -49,6 +50,7 @@
         <a href="/foundry-art/#story" data-drawer-link>Our Story</a>
         <a href="/foundry-art/#guidance" data-drawer-link>How to Buy</a>
         <a href="/foundry-art/cart/" data-drawer-link>Cart</a>
+        <a href="/foundry-art/account/sign-in/" data-drawer-link data-account-link>Sign in</a>
         <a href="/foundry-art/shop/" class="mobile-cta" data-drawer-link>Shop Now</a>`;
     } else if (section === 'linden') {
       navInner = `
@@ -409,6 +411,48 @@
   })();
   window.FA = window.FA || {}; window.FA.Cart = Cart;
 
+  // ────────────────────────────────────────────────────────
+  // Account (prototype) — session flag only.
+  //
+  // Deliberately mirrors Cart's shape. The customer record and order history
+  // are immutable and live in assets/account-data.js; the ONLY thing stored
+  // here is whether someone is signed in. No passwords, no real auth — this
+  // exists so the client can click through the returning-customer journey.
+  // ────────────────────────────────────────────────────────
+  const Account = (function () {
+    const KEY = 'fa_account_v1';
+    const LAST_ORDER_KEY = 'fa_last_order';
+    function read() { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } }
+    function write(state) {
+      try { state ? localStorage.setItem(KEY, JSON.stringify(state)) : localStorage.removeItem(KEY); } catch (e) {}
+      document.dispatchEvent(new CustomEvent('fa-account-change'));
+    }
+    const data = () => window.FA_ACCOUNT || null;
+    return {
+      state: read,
+      isSignedIn() { const s = read(); return !!(s && s.signedIn); },
+      signIn(email) {
+        const d = data();
+        write({ signedIn: true, email: email || (d && d.customer.email) || 'demo@example.com', signedInAt: Date.now() });
+      },
+      signOut() { write(null); },
+      customer() { const d = data(); return d ? d.customer : null; },
+      trade() { const c = this.customer(); return c ? c.trade : null; },
+      // The order the client just placed in the prototype is promoted to the
+      // top of history, so checkout → "View order in account" lands on it.
+      orders() {
+        const d = data();
+        const base = d ? d.orders.slice() : [];
+        let last = null;
+        try { last = JSON.parse(localStorage.getItem(LAST_ORDER_KEY)); } catch (e) {}
+        if (last && last.id && !base.some(o => o.id === last.id)) base.unshift(last);
+        return base;
+      },
+      orderById(id) { return this.orders().find(o => o.id === id) || null; },
+    };
+  })();
+  window.FA.Account = Account;
+
   const fmtMoney = n => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const chipClass = f => /white/i.test(f) ? 'white' : 'traditional';
   const finishShort = f => f.replace(/\s*Bronze$/i, '');
@@ -579,10 +623,20 @@
       const items = Cart.items();
       const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
       const discount = tradeActive() ? subtotal * 0.20 : 0;
-      const ship = selectedShipping();
+      const ship = isSwatchOnlyCart() ? { label: 'Free (swatch order)', cost: 0 } : selectedShipping();
       const total = subtotal - discount + ship.cost;
+      // id/date/status are stamped here so this order can be promoted to the
+      // top of the account order history (see Account.orders()).
+      const now = new Date();
+      const id = 'FA-' + now.getFullYear() + '-' + String(Math.floor(now.getTime() / 1000) % 100000).padStart(5, '0');
+      const date = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
       try {
-        localStorage.setItem('fa_last_order', JSON.stringify({ items, subtotal, discount, shipping: ship, tax: 0, total }));
+        localStorage.setItem('fa_last_order', JSON.stringify({
+          id, date, status: 'Processing', items, subtotal, discount,
+          shipping: ship, tax: 0, total,
+          payment: (document.querySelector('input[name="payment"]:checked') ? 'Card' : 'Card'),
+          tracking: null,
+        }));
       } catch (e) {}
       Cart.clear();
     });
@@ -749,6 +803,258 @@
     // (No sample-toggle listener — swatch state is derived in recompute().)
 
     recompute();
+  }
+
+  // ────────────────────────────────────────────────────────
+  // Account (prototype)
+  // ────────────────────────────────────────────────────────
+
+  // Shared order line renderer — one template for order-received AND the
+  // account order detail page, since both read the same line shape.
+  function orderRowsHTML(order) {
+    return (order.items || []).map(i => `
+          <tr>
+            <td>
+              <div class="cart-item">
+                <div class="cart-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
+                <div class="cart-item-info"><strong>${i.name} × ${i.qty}</strong><span>${String(i.sizeLabel).replace(' inch', '')} · ${i.finish} · SKU: ${i.sku}</span></div>
+              </div>
+            </td>
+            <td class="num">${fmtMoney(i.price * i.qty)}</td>
+          </tr>`).join('');
+  }
+
+  const statusPill = s => `<span class="status-pill status-${String(s).toLowerCase()}">${s}</span>`;
+
+  // ?signin=1 / ?signout=1 on any FA page, plus the signed-out redirect guard.
+  // Runs before the nav paints so the header never flashes the wrong state.
+  function initAccountGate() {
+    const params = new URLSearchParams(location.search);
+    let changed = false;
+    if (params.get('signin') === '1')  { Account.signIn(); params.delete('signin');  changed = true; }
+    if (params.get('signout') === '1') { Account.signOut(); params.delete('signout'); changed = true; }
+    if (changed) {
+      const qs = params.toString();
+      history.replaceState({}, '', location.pathname + (qs ? '?' + qs : ''));
+    }
+    // Guard the account pages — never render a blank signed-out shell.
+    const page = document.body.getAttribute('data-page') || '';
+    const isAccountPage = document.body.hasAttribute('data-account') && page !== 'account-sign-in';
+    if (isAccountPage && !Account.isSignedIn()) {
+      location.replace('/foundry-art/account/sign-in/?next=' + encodeURIComponent(location.pathname));
+    }
+  }
+
+  function initAccountNav() {
+    function paint() {
+      document.querySelectorAll('[data-account-link]').forEach(a => {
+        if (Account.isSignedIn()) {
+          const c = Account.customer();
+          a.textContent = c ? c.firstName : 'Account';
+          a.setAttribute('href', '/foundry-art/account/');
+        } else {
+          a.textContent = 'Sign in';
+          a.setAttribute('href', '/foundry-art/account/sign-in/');
+        }
+      });
+      document.querySelectorAll('[data-sign-out]').forEach(b => {
+        b.addEventListener('click', e => { e.preventDefault(); Account.signOut(); location.href = '/foundry-art/'; });
+      });
+    }
+    paint();
+    document.addEventListener('fa-account-change', paint);
+  }
+
+  function initSignIn() {
+    if (document.body.getAttribute('data-page') !== 'account-sign-in') return;
+    const next = new URLSearchParams(location.search).get('next') || '/foundry-art/account/';
+    document.querySelectorAll('[data-signin-form]').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const email = form.querySelector('input[type="email"]');
+        Account.signIn(email && email.value ? email.value.trim() : null);
+        location.href = next;
+      });
+    });
+  }
+
+  function renderAccountDashboard() {
+    if (document.body.getAttribute('data-page') !== 'account-dashboard') return;
+    const c = Account.customer(); if (!c) return;
+    setText('[data-account-hello]', 'Hello, ' + c.firstName);
+    setText('[data-account-email]', c.email);
+
+    const orders = Account.orders();
+    const latest = orders[0];
+    const wrap = document.querySelector('[data-latest-order]');
+    if (wrap && latest) {
+      wrap.innerHTML = `
+        <div class="summary-row"><span>Order</span><strong>${latest.id}</strong></div>
+        <div class="summary-row"><span>Placed</span><span>${latest.date}</span></div>
+        <div class="summary-row"><span>Status</span>${statusPill(latest.status)}</div>
+        <div class="summary-row total"><span>Total</span><span>${fmtMoney(latest.total)}</span></div>
+        <a class="btn-secondary" href="/foundry-art/account/orders/detail/?order=${encodeURIComponent(latest.id)}">View order</a>`;
+    }
+
+    const t = c.trade;
+    const tw = document.querySelector('[data-trade-status]');
+    if (tw && t) {
+      if (t.status === 'approved') {
+        tw.innerHTML = `<h4>Trade account</h4>
+          <p><strong>${Math.round(t.discount * 100)}% trade pricing</strong> is applied automatically at checkout.</p>
+          <div class="summary-row"><span>Trade ID</span><strong>${t.tradeId}</strong></div>
+          <div class="summary-row"><span>Firm</span><span>${t.firm}</span></div>
+          <div class="summary-row"><span>Verified</span><span>${t.verifiedOn}</span></div>`;
+      } else if (t.status === 'pending') {
+        tw.innerHTML = `<h4>Trade account</h4><p>Your application is under review. We verify each firm by hand, usually within two business days.</p>`;
+      } else {
+        tw.innerHTML = `<h4>Trade account</h4><p>Designers, architects and contractors can apply for trade pricing.</p>
+          <a class="btn-secondary" href="/foundry-art/account/details/">Apply</a>`;
+      }
+    }
+
+    const ad = document.querySelector('[data-address-summary]');
+    if (ad) ad.innerHTML = `<p>${c.billing.line1}${c.billing.line2 ? ', ' + c.billing.line2 : ''}<br>${c.billing.city}, ${c.billing.state} ${c.billing.zip}</p>`;
+  }
+
+  function renderAccountOrders() {
+    if (document.body.getAttribute('data-page') !== 'account-orders') return;
+    const tbody = document.querySelector('[data-orders-list]');
+    if (!tbody) return;
+    const orders = Account.orders();
+    tbody.innerHTML = orders.map(o => `
+          <tr>
+            <td data-label="Order"><a href="/foundry-art/account/orders/detail/?order=${encodeURIComponent(o.id)}"><strong>${o.id}</strong></a>
+              ${o.discount > 0 ? '<span class="line-tag">Trade</span>' : ''}</td>
+            <td data-label="Date">${o.date}</td>
+            <td data-label="Status">${statusPill(o.status)}</td>
+            <td data-label="Items">${o.items.reduce((n, i) => n + i.qty, 0)}</td>
+            <td class="num" data-label="Total">${fmtMoney(o.total)}</td>
+          </tr>`).join('');
+  }
+
+  function renderAccountOrderDetail() {
+    if (document.body.getAttribute('data-page') !== 'account-order') return;
+    const id = new URLSearchParams(location.search).get('order');
+    const order = id ? Account.orderById(id) : Account.orders()[0];
+    const root = document.querySelector('[data-order-detail]');
+    if (!root) return;
+    if (!order) {
+      root.innerHTML = '<p>That order could not be found. <a href="/foundry-art/account/orders/">Back to order history</a></p>';
+      return;
+    }
+    setText('[data-order-id]', order.id);
+    setText('[data-order-date]', order.date);
+    const st = document.querySelector('[data-order-status]');
+    if (st) st.innerHTML = statusPill(order.status);
+    const rows = document.querySelector('[data-order-rows]');
+    if (rows) rows.innerHTML = orderRowsHTML(order);
+    setText('[data-order-subtotal]', fmtMoney(order.subtotal));
+    setText('[data-order-shipping]', fmtMoney(order.shipping.cost));
+    setText('[data-order-shipping-label]', order.shipping.cost === 0 ? 'Shipping' : 'Shipping (' + order.shipping.label + ')');
+    setText('[data-order-total]', fmtMoney(order.total));
+    setText('[data-order-payment]', order.payment || '—');
+    const disc = document.querySelector('[data-order-discount-row]');
+    if (disc) {
+      disc.hidden = !(order.discount > 0);
+      setText('[data-order-discount]', '−' + fmtMoney(order.discount));
+    }
+    const track = document.querySelector('[data-order-tracking]');
+    if (track) {
+      track.hidden = !order.tracking;
+      setText('[data-order-tracking-no]', order.tracking || '');
+    }
+  }
+
+  function initAccountDetails() {
+    if (document.body.getAttribute('data-page') !== 'account-details') return;
+    const c = Account.customer(); if (!c) return;
+    const set = (sel, v) => { const el = document.querySelector(sel); if (el) el.value = v; };
+    set('#acc-first', c.firstName); set('#acc-last', c.lastName);
+    set('#acc-email', c.email);     set('#acc-phone', c.phone);
+
+    const t = c.trade;
+    const panel = document.querySelector('[data-trade-panel]');
+    if (panel && t) {
+      panel.innerHTML = t.status === 'approved'
+        ? `<div class="summary-row"><span>Status</span>${statusPill('Approved')}</div>
+           <div class="summary-row"><span>Trade ID</span><strong>${t.tradeId}</strong></div>
+           <div class="summary-row"><span>Firm</span><span>${t.firm}</span></div>
+           <div class="summary-row"><span>Website</span><span>${t.website}</span></div>
+           <div class="summary-row"><span>Verified</span><span>${t.verifiedOn}</span></div>
+           <p class="form-hint">${Math.round(t.discount * 100)}% is applied automatically at checkout. To update your firm details, contact the studio.</p>`
+        : `<div class="field-grid">
+             <div class="form-group"><label for="trade-firm">Firm name *</label><input id="trade-firm" type="text"></div>
+             <div class="form-group"><label for="trade-site">Professional website *</label><input id="trade-site" type="text"></div>
+           </div>
+           <button type="button" class="btn-primary" data-trade-apply>Apply for trade pricing</button>
+           <p class="form-hint">We verify each firm by hand, usually within two business days.</p>`;
+      const apply = panel.querySelector('[data-trade-apply]');
+      if (apply) apply.addEventListener('click', () => {
+        const label = apply.textContent;
+        apply.textContent = 'Application sent ✓'; apply.disabled = true;
+        setTimeout(() => { apply.textContent = label; apply.disabled = false; }, 1600);
+      });
+    }
+  }
+
+  function renderAccountAddresses() {
+    if (document.body.getAttribute('data-page') !== 'account-addresses') return;
+    const c = Account.customer(); if (!c) return;
+    const fmt = a => `${c.firstName} ${c.lastName}<br>${c.company ? c.company + '<br>' : ''}${a.line1}<br>${a.line2 ? a.line2 + '<br>' : ''}${a.city}, ${a.state} ${a.zip}<br>${a.country}`;
+    const b = document.querySelector('[data-address-billing]');
+    const s = document.querySelector('[data-address-shipping]');
+    if (b) b.innerHTML = fmt(c.billing);
+    if (s) s.innerHTML = fmt(c.shipping);
+  }
+
+  // Checkout reflects signed-in state. MUST run after initCheckout() and
+  // initTradeToggle() — both bind the same trade elements, so this dispatches
+  // synthetic events rather than calling their internals.
+  function initCheckoutAccount() {
+    if (document.body.getAttribute('data-page') !== 'checkout') return;
+    const link = document.querySelector('[data-signin-link]');
+    if (link) link.setAttribute('href', '/foundry-art/account/sign-in/?next=' + encodeURIComponent('/foundry-art/checkout/'));
+    if (!Account.isSignedIn()) return;
+
+    const c = Account.customer(); if (!c) return;
+    const sub = document.querySelector('.page-sub');
+    if (sub) sub.innerHTML = `Signed in as <strong>${c.email}</strong> · <a href="#" data-sign-out style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">Sign out</a>`;
+    document.querySelectorAll('[data-sign-out]').forEach(b => {
+      b.addEventListener('click', e => { e.preventDefault(); Account.signOut(); location.reload(); });
+    });
+
+    const fill = (sel, v) => { const el = document.querySelector(sel); if (el && !el.value) el.value = v; };
+    fill('#bf', c.firstName); fill('#bl', c.lastName); fill('#be', c.email); fill('#bp', c.phone);
+    fill('#ba', c.billing.line1); fill('#bc', c.billing.city); fill('#bz', c.billing.zip);
+
+    const t = c.trade;
+    if (t && t.status === 'approved') {
+      const toggle = document.querySelector('[data-trade-toggle]');
+      const idField = document.querySelector('[data-trade-id]');
+      if (toggle && !toggle.checked) { toggle.checked = true; toggle.dispatchEvent(new Event('change')); }
+      if (idField && !idField.value) { idField.value = t.tradeId; idField.dispatchEvent(new Event('input')); }
+    }
+  }
+
+  // Deep-link "View order in account" to the order just placed.
+  function initViewOrderLink() {
+    const link = document.querySelector('[data-view-order]');
+    if (!link) return;
+    let last = null;
+    try { last = JSON.parse(localStorage.getItem('fa_last_order')); } catch (e) {}
+    if (last && last.id) {
+      link.setAttribute('href', '/foundry-art/account/orders/detail/?order=' + encodeURIComponent(last.id));
+    }
+    if (!Account.isSignedIn()) {
+      link.setAttribute('href', '/foundry-art/account/sign-in/?next=' + encodeURIComponent(link.getAttribute('href')));
+    }
+  }
+
+  function initPrintReceipt() {
+    document.querySelectorAll('[data-print-receipt]').forEach(b => {
+      b.addEventListener('click', e => { e.preventDefault(); window.print(); });
+    });
   }
 
   // ────────────────────────────────────────────────────────
@@ -1487,6 +1793,9 @@
   }
 
   ready(() => {
+    // Resolve session state (and any ?signin=/?signout= flag) before the nav
+    // paints, so the header never flashes the wrong state.
+    initAccountGate();
     initLayout();
     updateNavCount();
     initDrawer();
@@ -1523,6 +1832,19 @@
     // pass would ignore the active filters.
     renderCrossSell();
     renderShopSidebar();
+
+    // Account. initCheckoutAccount() must come after initCheckout() and
+    // initTradeToggle() above — all three touch the same trade fields.
+    initAccountNav();
+    initSignIn();
+    renderAccountDashboard();
+    renderAccountOrders();
+    renderAccountOrderDetail();
+    initAccountDetails();
+    renderAccountAddresses();
+    initCheckoutAccount();
+    initViewOrderLink();
+    initPrintReceipt();
   });
 
   // FA hero tagline A/B toggle for client review:

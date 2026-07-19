@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — Foundry Art</title>
+<meta name="description" content="Sign in to your Foundry Art account.">
+<meta name="theme-color" content="#142528">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260717-219">
+<link rel="stylesheet" href="/assets/styles.css?v=20260717-219">
+</head>
+<body data-page="account-sign-in">
+
+  <div data-nav></div>
+
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">Sign in</h1>
+      <p class="page-sub">Access your orders, addresses and trade pricing.</p>
+    </header>
+
+    <div class="account-signin-layout">
+      <section class="checkout-section" aria-label="Sign in">
+        <h2>Returning customer</h2>
+        <form data-signin-form>
+          <div class="field-grid">
+            <div class="form-group full"><label for="si-email">Email address *</label>
+              <input id="si-email" type="email" value="avery@studioyarrow.com" required></div>
+            <div class="form-group full"><label for="si-pass">Password *</label>
+              <input id="si-pass" type="password" value="prototype" required></div>
+          </div>
+          <button type="submit" class="btn-primary">Sign in</button>
+          <p class="form-hint">Prototype — any email and password signs you in.</p>
+        </form>
+      </section>
+
+      <section class="checkout-section" aria-label="Create an account">
+        <h2>New customer</h2>
+        <form data-signin-form>
+          <div class="field-grid">
+            <div class="form-group"><label for="rg-first">First name *</label><input id="rg-first" type="text"></div>
+            <div class="form-group"><label for="rg-last">Last name *</label><input id="rg-last" type="text"></div>
+            <div class="form-group full"><label for="rg-email">Email address *</label><input id="rg-email" type="email"></div>
+            <div class="form-group full"><label for="rg-pass">Password *</label><input id="rg-pass" type="password"></div>
+          </div>
+          <button type="submit" class="btn-secondary">Create account</button>
+          <p class="form-hint">Designers, architects and contractors can apply for trade pricing once signed in.</p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <div data-footer></div>
+
+  <script src="/assets/products.js?v=20260717-219"></script>
+  <script src="/assets/account-data.js?v=20260717-219"></script>
+  <script src="/assets/app.js?v=20260717-219"></script>
+</body>
+</html>
