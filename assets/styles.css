@@ -11375,3 +11375,30 @@ body[data-page="cart"] .swatch-label { font-size: 14px; }
 
 /* Sample tag picks up the same 3px the other controls use. */
 .line-tag { border-radius: 3px; }
+
+/* ── Cart line: larger product identity, icon remove ────────────────────── */
+body[data-page="cart"] .cart-item-info strong { font-size: 26px; line-height: 1.15; margin-bottom: 5px; }
+body[data-page="cart"] .cart-item-info span { font-size: 15px; }
+
+/* Remove is now an ×. The glyph is 16px but the button carries a 40px hit
+   area — shrinking the visual shouldn't shrink the target, and this one sits
+   next to a price the customer is reading carefully. */
+body[data-page="cart"] .cart-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  color: var(--mid);
+  background: transparent;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+body[data-page="cart"] .cart-remove svg { width: 16px; height: 16px; display: block; }
+body[data-page="cart"] .cart-remove:hover { color: var(--sale); background: var(--cream); }
+body[data-page="cart"] .cart-remove:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 2px;
+}
