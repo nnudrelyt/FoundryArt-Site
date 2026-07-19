@@ -2201,11 +2201,12 @@ body[data-page="home"] .footer p { border: 0 !important; }
   border-bottom: 1px solid var(--rule);
   font-size: 12px;
 }
-/* Drop the last line-item's rule so it doesn't double up with the
-   Subtotal row's border-top. (:last-of-type fails here — the summary
-   rows are also <div> siblings, so no .summary-item is ever the last
-   div of its type.) The last item is the one followed by a .summary-row. */
-.summary-card.checkout-summary .summary-item:has(+ .summary-row) { border-bottom: none; }
+/* Drop the last line-item's rule. (:last-of-type fails here — the summary
+   rows are also <div> siblings, so no .summary-item is ever the last div of
+   its type.) Defined as "an item not followed by another item", which holds
+   whatever comes next — the coupon form, a summary row, anything. The older
+   ":has(+ .summary-row)" form missed it once the coupon sat in between. */
+.summary-card.checkout-summary .summary-item:not(:has(+ .summary-item)) { border-bottom: none; }
 .summary-card.checkout-summary .summary-item-thumb {
   width: 48px;
   height: 48px;
