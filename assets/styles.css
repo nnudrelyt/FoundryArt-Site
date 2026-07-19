@@ -11012,21 +11012,21 @@ body[data-page="shop"]:not([data-product-slug]) .shop-sort select:focus-visible 
     margin-top: 14px;
   }
   .gallery-dot {
-    width: 7px;
-    height: 7px;
+    width: 5px;
+    height: 5px;
     padding: 0;
     border: 0;
     border-radius: 50%;
     background: var(--rule);
     cursor: pointer;
     transition: background 0.2s ease, transform 0.2s ease;
-    /* 7px is the visual size; the tap target is padded out to ~28px below. */
+    /* 5px is the visual size; the tap target is padded out below. */
     position: relative;
   }
   .gallery-dot::after {
     content: "";
     position: absolute;
-    inset: -11px;   /* 7 + 22 = 29px touch target, clears the 24px minimum */
+    inset: -12px;   /* 5 + 24 = 29px touch target, clears the 24px minimum */
   }
   .gallery-dot.active {
     background: var(--bronze);
@@ -11038,4 +11038,36 @@ body[data-page="shop"]:not([data-product-slug]) .shop-sort select:focus-visible 
 @media (max-width: 560px) and (prefers-reduced-motion: reduce) {
   .pdp-gallery .thumbs { scroll-behavior: auto; }
   .gallery-dot { transition: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   BREADCRUMB — SINGLE LINE
+   The PDP trail (Home / Accent Tiles / 3×3 inch / Lotus 3×3 inch) wrapped to
+   two lines on a phone, pushing the product below the fold for no navigational
+   gain. Now it stays on one line everywhere, and collapses to first + current
+   on small screens.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.breadcrumb .sep { flex: 0 0 auto; }
+.breadcrumb a { flex: 0 0 auto; }
+/* The current page is the one crumb allowed to shrink — it's the longest and
+   the one the heading immediately repeats, so an ellipsis costs nothing. */
+.breadcrumb .current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 560px) {
+  /* Collapse to "Home / <current>". Hides every child from the third onward
+     except the last, which works for a 2-, 3- or 4-crumb trail alike and
+     leaves exactly one separator — no orphaned slashes. */
+  .breadcrumb > *:nth-child(n+3):not(:last-child) { display: none; }
 }

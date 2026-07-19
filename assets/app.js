@@ -1255,8 +1255,11 @@
     if (slides.length < 2) return;
 
     const mq = window.matchMedia('(max-width: 560px)');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     let dots = null;
     let firstBuild = true;
+    let timer = null;
+    let userTook = false;   // once they swipe or tap, autoplay is done for good
 
     // Rect math, not offsetLeft: .thumb is position:relative while .thumbs is
     // not, so offsetLeft resolves against a further ancestor and wouldn't be
@@ -1301,19 +1304,48 @@
         // dot would step forward by one. Snap-stop is kept because it's what
         // stops a fast swipe from flinging past three photos; a direct jump
         // is the right behaviour for a "take me to photo 5" control anyway.
-        b.addEventListener('click', () => { track.scrollLeft += deltaFor(i); });
+        b.addEventListener('click', () => { surrender(); track.scrollLeft += deltaFor(i); });
         dots.appendChild(b);
       });
       track.insertAdjacentElement('afterend', dots);
       sync();
+      play();
     }
 
     function destroy() {
       if (!dots) return;
+      pause();
       dots.remove();
       dots = null;
       track.scrollLeft = 0;   // leave the row at its start for the grid layout
     }
+
+    // Autoplay. Three guards, all of them load-bearing:
+    //   · never starts under prefers-reduced-motion
+    //   · stops permanently at the first swipe or dot tap — auto-advancing
+    //     under someone who is actively browsing is the thing everyone hates
+    //   · pauses on a hidden tab rather than animating into the void
+    const DWELL = 4000;
+    function advance() {
+      const i = currentIndex();
+      const next = (i + 1) % slides.length;
+      // Wrapping back to the start is a multi-slide move, which smooth
+      // scrolling can't do here — `scroll-snap-stop: always` would stop it at
+      // the next snap point. Instant for the wrap, smooth for single steps.
+      if (next === 0) track.scrollLeft = 0;
+      else track.scrollBy({ left: deltaFor(next), behavior: 'smooth' });
+    }
+    function play() {
+      if (timer || userTook || reduced.matches || !mq.matches) return;
+      timer = setInterval(advance, DWELL);
+    }
+    function pause() { clearInterval(timer); timer = null; }
+    function surrender() { userTook = true; pause(); }
+
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(evt =>
+      track.addEventListener(evt, surrender, { passive: true }));
+    document.addEventListener('visibilitychange', () => document.hidden ? pause() : play());
+    reduced.addEventListener('change', () => reduced.matches ? pause() : play());
 
     let ticking = false;
     track.addEventListener('scroll', () => {
