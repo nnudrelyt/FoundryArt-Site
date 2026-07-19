@@ -11133,11 +11133,33 @@ body[data-product-slug] .tab-btn.active { font-weight: 500; }
    --slate-l takes them to 6.45:1 while staying clearly secondary to the
    values beside them. */
 body[data-product-slug] .specs-table th {
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: 1.8px;
   color: var(--slate-l);
+  padding: 20px 26px 20px 0;
+  vertical-align: top;
 }
-body[data-product-slug] .specs-table td { font-size: 16px; }
+body[data-product-slug] .specs-table td {
+  font-size: 17px;
+  padding: 20px 0;
+  line-height: 1.5;
+}
+/* On a phone the label column was claiming 200px of a 343px table, leaving
+   the values 143px to wrap in. Pulling the labels down a step and tightening
+   the gutter gives the values back ~50px. */
+@media (max-width: 560px) {
+  body[data-product-slug] .specs-table th {
+    font-size: 13px;
+    letter-spacing: 1.4px;
+    padding: 16px 14px 16px 0;
+    /* The base rule hard-sets width:200px, so shrinking the type alone moved
+       nothing — the column has to come down with it. 158px is the smallest
+       that keeps "Finish variation" (134px at this size) on one line with
+       headroom; the values still gain ~45px over the 200px original. */
+    width: 158px;
+  }
+  body[data-product-slug] .specs-table td { font-size: 16px; padding: 16px 0; }
+}
 
 /* SKU / Category / Made in */
 body[data-product-slug] .pdp-meta-row { font-size: 14px; color: var(--slate-l); }
