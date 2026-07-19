@@ -10468,6 +10468,9 @@ body[data-page="cart"] .coupon-form input {
 body[data-page="cart"] .coupon-form input:focus {
   border-color: var(--bronze);
   box-shadow: 0 0 0 1px var(--bronze);
+  /* Suppress the site-wide :focus-visible outline (line ~61) here — its
+     offset ring plus this flush ring were the "double". One indicator. */
+  outline: none;
 }
 
 /* ── Order-received ── */
@@ -11538,6 +11541,7 @@ body[data-page="checkout"] .trade-row .trade-id-input:focus {
   outline: none;
   border-color: var(--bronze);
   box-shadow: 0 0 0 1px var(--bronze);
+  /* (outline:none already set above — kept single, flush ring)*/
 }
 /* Successful entry — any non-empty value unlocks trade pricing (honor
    system, per the toggle logic), so a filled field is a confirmed one:
@@ -11648,6 +11652,12 @@ body[data-page="checkout"] .checkout-coupon input {
   font-size: 15px;
   padding: 12px 14px;
   border-radius: 4px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+body[data-page="checkout"] .checkout-coupon input:focus {
+  border-color: var(--bronze);
+  box-shadow: 0 0 0 1px var(--bronze);
+  outline: none;
 }
 body[data-page="checkout"] .checkout-coupon .btn-secondary { border-radius: 3px; }
 
