@@ -10842,3 +10842,42 @@ body[data-page="account-sign-in"] .account-signin-layout {
   border: 1px solid #E6C4C1;
 }
 .checkout-errors[hidden] { display: none; }
+
+/* ── PDP: secondary "compare both finishes" path ───────────────────────
+   A quiet text action under the swatch button, not a third button — the
+   two existing buttons already carry the primary and secondary weight. */
+.pdp-sample-alt {
+  margin: 10px 0 0;
+  text-align: center;
+}
+.pdp-sample-alt[hidden] { display: none; }
+
+.link-button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--mid);
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.link-button:hover {
+  color: var(--bronze);
+  border-bottom-color: var(--bronze-l);
+}
+.link-button:disabled {
+  opacity: 0.55;
+  cursor: default;
+  color: var(--bronze);
+}
+
+/* The `hidden` attribute only sets display:none via the UA stylesheet, so any
+   author rule with an explicit display (.trade-row is flex) silently defeats
+   it. This kept the "sample order — ships free" banner visible on mixed carts
+   that do not ship free. */
+.trade-row[hidden],
+.shop-empty[hidden],
+.pdp-sample-alt[hidden] { display: none !important; }

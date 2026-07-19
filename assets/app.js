@@ -456,9 +456,11 @@
   const fmtMoney = n => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const chipClass = f => /white/i.test(f) ? 'white' : 'traditional';
   const finishShort = f => f.replace(/\s*Bronze$/i, '');
-  // Swatch lines use a synthetic slug ('swatch-<parent>') that has no image
+  // Sample lines use a synthetic slug ('sample-<parent>') that has no image
   // directory, so fall back to the parent product's thumbnail. Without this,
-  // swatches render broken images in cart, checkout AND order-received.
+  // samples render broken images in cart, checkout AND order-received.
+  // (NB: 'swatch' elsewhere in this file means the finish-picker chip — a
+  // different thing from the physical sample a customer orders.)
   const thumbFor = (slug, parentSlug) => '/assets/images/products/' + (parentSlug || slug) + '/main.jpg';
   const weightForSize = s => /1×1/.test(s) ? 0.1 : (/2×2/.test(s) ? 0.4 : 0.8);
   const skuForFinish = (p, f) => /white/i.test(f) ? p.sku.replace(/-TB$/, '-WB') : p.sku.replace(/-WB$/, '-TB');
@@ -491,39 +493,76 @@
     });
   }
 
-  // PDP → order a swatch of the currently-selected finish.
+  // PDP → order samples.
   //
-  // The swatch is synthesized from FA_SAMPLE + the parent product rather than
-  // being a catalog entry, so FA_PRODUCTS stays at 13 and the shop grid, facet
-  // counts and cross-sell are untouched. The 'swatch-<parent>' slug is also what
-  // keeps it a distinct cart line under Cart's existing slug+finish identity —
-  // no change to sameLine/setQty/remove needed.
+  // Samples are synthesized from FA_SAMPLE + the parent product rather than
+  // being catalog entries, so FA_PRODUCTS stays at 13 and the shop grid, facet
+  // counts and cross-sell are untouched. The 'swatch-<parent>' slug is what
+  // keeps a sample a distinct cart line under Cart's existing slug+finish
+  // identity — no change to sameLine/setQty/remove needed.
+  function sampleLine(product, finish) {
+    const spec = window.FA_SAMPLE;
+    return {
+      slug: 'sample-' + product.slug,
+      parentSlug: product.slug,
+      type: 'sample',
+      // Just the product name — the .line-tag marks it as a sample in the
+      // cart, and sizeLabel ('Sample · 1×1 inch') does so in checkout and on
+      // the receipt. Appending 'sample' here renders "Sun sample [Sample]".
+      name: product.name,
+      sizeLabel: spec.sizeLabel,
+      finish,
+      price: spec.price,
+      qty: 1,
+      sku: spec.skuPrefix + '-' + skuForFinish(product, finish).replace(/^FA-/, ''),
+      weight: spec.weight,          // never weightForSize() — that returns 0.8
+    };
+  }
+
+  // Two of the same sample is never useful, so adding one already in the cart
+  // is a no-op rather than a quantity bump.
+  function addSample(product, finish) {
+    const line = sampleLine(product, finish);
+    const already = Cart.items().some(i => i.slug === line.slug && i.finish === line.finish);
+    if (already) return false;
+    Cart.add(line);
+    return true;
+  }
+
+  function flashButton(btn, msg) {
+    const label = btn.textContent;
+    btn.textContent = msg;
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 1600);
+  }
+
+  function selectedFinish(product) {
+    const sel = document.querySelector('[data-finish-target] .swatch.selected .swatch-label');
+    return sel ? sel.childNodes[0].textContent.trim() : product.finishes[0];
+  }
+
   function initSampleOrder() {
     const slug = document.body.getAttribute('data-product-slug');
     if (!slug) return;
     const product = (window.FA_PRODUCTS || []).find(p => p.slug === slug);
-    const btn = document.querySelector('.pdp-actions .btn-sample');
     const spec = window.FA_SAMPLE;
-    if (!product || !btn || !spec) return;
-    const label = btn.textContent;
-    btn.addEventListener('click', () => {
-      const sel = document.querySelector('[data-finish-target] .swatch.selected .swatch-label');
-      const finish = sel ? sel.childNodes[0].textContent.trim() : product.finishes[0];
-      Cart.add({
-        slug: 'swatch-' + slug,
-        parentSlug: slug,
-        type: 'sample',
-        name: product.name + ' swatch',
-        sizeLabel: spec.sizeLabel,
-        finish,
-        price: spec.price,
-        qty: 1,
-        sku: spec.skuPrefix + '-' + skuForFinish(product, finish).replace(/^FA-/, ''),
-        weight: spec.weight,          // never weightForSize() — that returns 0.8
-      });
+    if (!product || !spec) return;
+
+    const btn = document.querySelector('.pdp-actions .btn-sample');
+    if (btn) btn.addEventListener('click', () => {
+      const added = addSample(product, selectedFinish(product));
       updateNavCount();
-      btn.textContent = 'Swatch added ✓'; btn.disabled = true;
-      setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 1600);
+      flashButton(btn, added ? 'Sample added ✓' : 'Already in cart');
+    });
+
+    // Compare path — respects the primary button's meaning by not touching it.
+    const bothWrap = document.querySelector('[data-sample-both-wrap]');
+    const both = document.querySelector('[data-sample-both]');
+    if (bothWrap && product.finishes.length < 2) { bothWrap.hidden = true; return; }
+    if (both) both.addEventListener('click', () => {
+      const added = product.finishes.reduce((n, f) => n + (addSample(product, f) ? 1 : 0), 0);
+      updateNavCount();
+      flashButton(both, added ? 'Both samples added ✓' : 'Already in cart');
     });
   }
 
@@ -538,7 +577,7 @@
               <td class="cart-item-cell" data-label="Product">
                 <div class="cart-item">
                   <div class="cart-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
-                  <div class="cart-item-info"><strong>${i.name}${i.type === 'sample' ? ' <span class="line-tag">Swatch</span>' : ''}</strong><span>${i.sizeLabel} · SKU: ${i.sku}</span></div>
+                  <div class="cart-item-info"><strong>${i.name}${i.type === 'sample' ? ' <span class="line-tag">Sample</span>' : ''}</strong><span>${i.sizeLabel} · SKU: ${i.sku}</span></div>
                 </div>
               </td>
               <td data-label="Material">
@@ -587,7 +626,7 @@
   }
   // A cart of nothing but swatches ships free — must match the cart page, or a
   // "ships free" cart silently becomes a $12 UPS Ground order one screen later.
-  function isSwatchOnlyCart() {
+  function isSampleOnlyCart() {
     const items = Cart.items();
     return items.length > 0 && items.every(i => i.type === 'sample');
   }
@@ -596,14 +635,14 @@
     const items = Cart.items();
     const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
     const discount = tradeActive() ? subtotal * 0.20 : 0;
-    const ship = isSwatchOnlyCart()
-      ? { label: 'Free (swatch order)', cost: 0 }
+    const ship = isSampleOnlyCart()
+      ? { label: 'Free (sample order)', cost: 0 }
       : selectedShipping();
     const tax = 0;
     const total = subtotal - discount + ship.cost + tax;
     setText('[data-co-subtotal]', fmtMoney(subtotal));
     const dl = document.querySelector('.trade-discount-line'); if (dl) dl.textContent = '−' + fmtMoney(discount);
-    setText('[data-co-shipping-label]', ship.cost === 0 && isSwatchOnlyCart() ? 'Shipping' : 'Shipping (' + ship.label + ')');
+    setText('[data-co-shipping-label]', ship.cost === 0 && isSampleOnlyCart() ? 'Shipping' : 'Shipping (' + ship.label + ')');
     setText('[data-co-shipping]', fmtMoney(ship.cost));
     setText('[data-co-tax]', fmtMoney(tax));
     setText('[data-co-total]', fmtMoney(total));
@@ -738,7 +777,7 @@
       const items = Cart.items();
       const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
       const discount = tradeActive() ? subtotal * 0.20 : 0;
-      const ship = isSwatchOnlyCart() ? { label: 'Free (swatch order)', cost: 0 } : selectedShipping();
+      const ship = isSampleOnlyCart() ? { label: 'Free (sample order)', cost: 0 } : selectedShipping();
       const total = subtotal - discount + ship.cost;
       // id/date/status are stamped here so this order can be promoted to the
       // top of the account order history (see Account.orders()).
@@ -815,12 +854,12 @@
     const shipState  = document.querySelector('[data-ship-state]');
     const shipUpdate = document.querySelector('[data-ship-update]');
     const shipResult = document.querySelector('[data-ship-result]');
-    // "Is this a swatch order" is derived from the lines themselves rather than
+    // "Is this a sample order" is derived from the lines themselves rather than
     // asserted by a manual toggle, so the shipping note can never contradict
     // the cart. `!== 'sample'` (not `=== 'product'`) because legacy carts have
     // no type attribute at all.
     const sampleRow = document.querySelector('[data-sample-note]');
-    function isSwatchOrder() {
+    function isSampleOrder() {
       const rows = tbody.querySelectorAll('[data-cart-row]');
       return rows.length > 0 &&
         Array.from(rows).every(r => r.getAttribute('data-line-type') === 'sample');
@@ -868,7 +907,7 @@
       if (shipEstimate != null) { shipEstimate = estimateShipping(); showShipResult(); }
       // Shipping: a swatch-only order ships free; otherwise use the estimate
       // if one was run, else "calculated at checkout".
-      const sample = isSwatchOrder();
+      const sample = isSampleOrder();
       if (sampleRow) sampleRow.hidden = !sample;
       let shipCost = 0, shipText;
       if (sample)                  { shipText = 'Free'; shipCost = 0; }
@@ -916,7 +955,7 @@
       showShipResult();
       recompute();
     });
-    // (No sample-toggle listener — swatch state is derived in recompute().)
+    // (No sample-toggle listener — sample state is derived in recompute().)
 
     recompute();
   }

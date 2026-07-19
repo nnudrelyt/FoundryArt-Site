@@ -229,15 +229,15 @@ window.FA_PRODUCTS = [
   },
 ];
 
-// Swatch / sample spec — samples are NOT catalog products (see FA_SAMPLE usage
+// Sample spec — samples are NOT catalog products (see FA_SAMPLE usage
 // in app.js). Keeping them out of FA_PRODUCTS means the shop grid, facet counts,
 // cross-sell and FA_PRODUCT_BY_SLUG are all untouched by the sample feature.
 // price is free for now; flip this one constant if that changes.
 window.FA_SAMPLE = {
   price: 0,
   weight: 0.05,          // lb — never derive this via weightForSize()
-  skuPrefix: 'FA-SWATCH',
-  sizeLabel: 'Swatch · 1×1 inch',
+  skuPrefix: 'FA-SAMPLE',
+  sizeLabel: 'Sample · 1×1 inch',
   leadTime: '3–5 business days',
 };
 
