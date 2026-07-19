@@ -20,6 +20,7 @@
 
   /* Text neutrals */
   --slate:          #2E3A3E;   /* body text dark, harmonizes with teal-navy */
+  --slate-l:        #54606A;   /* quieted slate — secondary UI labels; 6.45:1 on white, clears AA */
   --mid:            #6F6760;   /* secondary text */
   --label:          #9A8F7E;
   --rule:           #D6CFC5;
@@ -10997,7 +10998,11 @@ body[data-page="shop"]:not([data-product-slug]) .facet-list li label {
 body[data-page="shop"]:not([data-product-slug]) .facet-list li {
   font-size: 16px;
   padding: 9px 0;
-  color: var(--charcoal);
+  /* Quieted so the sidebar recedes behind the product grid. Stays in the
+     teal-gray family (not the warm --mid) so it doesn't muddy against the
+     slate checkbox borders. 6.45:1 on white — still clears WCAG AA for body
+     text, which the low-vision brief needs. */
+  color: var(--slate-l);
 }
 body[data-page="shop"]:not([data-product-slug]) .facet-list li .count { font-size: 14px; }
 body[data-page="shop"]:not([data-product-slug]) .facet-group h5 { font-size: 13px; }
