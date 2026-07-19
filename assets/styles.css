@@ -10836,7 +10836,13 @@ body[data-product-slug] .main-image {
    reading columns stretching with it. */
 /* px, not ch: `ch` measures the "0" glyph, which in this serif is much
    narrower than the average letter — 62ch rendered as ~79 characters. */
-body[data-product-slug] .pdp-desc { max-width: 660px; }
+body[data-product-slug] .pdp-desc {
+  max-width: 660px;
+  /* The padding existed only to hold the description off the rule that used
+     to sit under it. With the rule gone it was 28px of dead space stacked on
+     top of the margin — 60px total between the copy and MATERIAL. */
+  padding-bottom: 0;
+}
 body[data-product-slug] .pdp-info .form-group,
 body[data-product-slug] .pdp-actions { max-width: 620px; }
 .page-sub { max-width: 76ch; }
