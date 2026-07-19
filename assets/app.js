@@ -513,8 +513,8 @@
       slug: 'sample-' + product.slug,
       parentSlug: product.slug,
       type: 'sample',
-      // Just the product name — the .line-tag marks it as a sample in the
-      // cart, and sizeLabel ('Sample · 1×1 inch') does so in checkout and on
+      // Just the product name — sizeLabel below already reads "Sample · 1×1
+      // inch", so a separate tag repeated it.
       // the receipt. Appending 'sample' here renders "Sun sample [Sample]".
       name: product.name,
       sizeLabel: spec.sizeLabel,
@@ -578,7 +578,7 @@
               <td class="cart-item-cell" data-label="Product">
                 <div class="cart-item">
                   <div class="cart-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
-                  <div class="cart-item-info"><strong>${i.name}${i.type === 'sample' ? ' <span class="line-tag">Sample</span>' : ''}</strong><span>${i.sizeLabel} · SKU: ${i.sku}</span></div>
+                  <div class="cart-item-info"><strong>${i.name}</strong><span>${i.sizeLabel} · SKU: ${i.sku}</span></div>
                 </div>
               </td>
               <td data-label="Material">

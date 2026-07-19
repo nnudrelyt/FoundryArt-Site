@@ -2013,7 +2013,10 @@ body[data-page="home"] .footer p { border: 0 !important; }
 .cart-table td {
   padding: 24px 12px 24px 0;
   border-bottom: 1px solid var(--rule);
-  vertical-align: top;
+  /* Middle, not top: the product cell is much taller than the price, qty and
+     subtotal cells beside it, so top-aligning left those hanging at the top
+     of the row instead of reading as one line item. */
+  vertical-align: middle;
   font-size: 13px;
 }
 .cart-item {
