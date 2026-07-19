@@ -11665,3 +11665,21 @@ body[data-page="checkout"] .checkout-section {
   padding-bottom: 0;
   margin-bottom: 34px;
 }
+
+/* Payment-method brand marks — reuse the cart's card-mark chips, sit them on
+   the right of each option row (opt-main is space-between). */
+body[data-page="checkout"] .payment-options .opt-main { align-items: center; gap: 16px; }
+body[data-page="checkout"] .pay-marks {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+body[data-page="checkout"] .pay-marks .card-mark { width: 34px; height: auto; display: block; }
+@media (max-width: 560px) {
+  /* On a phone the four-chip row crowds the label — drop to the two most
+     common marks plus PayPal; the sub text still lists them all. */
+  body[data-page="checkout"] .payment-options .opt-main { gap: 10px; }
+  body[data-page="checkout"] .pay-marks .card-mark { width: 30px; }
+  body[data-page="checkout"] .pay-marks .card-mark:nth-child(n+3) { display: none; }
+}
