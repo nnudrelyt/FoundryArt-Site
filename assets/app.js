@@ -1238,6 +1238,95 @@
   }
 
   // ────────────────────────────────────────────────────────
+  // Mobile gallery carousel
+  //
+  // Below 560px the thumb grid becomes a swipeable scroll-snap track and the
+  // main image is hidden. No slides are cloned — the thumb buttons already
+  // hold the full-size images, so the same markup serves both layouts and
+  // there is no second copy to keep in sync.
+  //
+  // Position dots are built here rather than in markup because they only
+  // exist in the mobile layout; they're torn down above the breakpoint so a
+  // desktop DOM stays clean.
+  function initGalleryCarousel() {
+    const track = document.querySelector('.pdp-gallery .thumbs');
+    if (!track) return;
+    const slides = Array.from(track.querySelectorAll('.thumb'));
+    if (slides.length < 2) return;
+
+    const mq = window.matchMedia('(max-width: 560px)');
+    let dots = null;
+    let firstBuild = true;
+
+    // Rect math, not offsetLeft: .thumb is position:relative while .thumbs is
+    // not, so offsetLeft resolves against a further ancestor and wouldn't be
+    // comparable to the track's own scrollLeft.
+    const deltaFor = i => slides[i].getBoundingClientRect().left - track.getBoundingClientRect().left;
+    const currentIndex = () => {
+      let best = 0, bestD = Infinity;
+      slides.forEach((s, i) => {
+        const d = Math.abs(deltaFor(i));
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      return best;
+    };
+
+    function sync() {
+      if (!dots) return;
+      const i = currentIndex();
+      Array.from(dots.children).forEach((d, n) => {
+        const on = n === i;
+        d.classList.toggle('active', on);
+        d.setAttribute('aria-current', on ? 'true' : 'false');
+      });
+    }
+
+    function build() {
+      if (dots) return;
+      // Browsers restore a scroll container's offset across loads, which would
+      // otherwise drop a returning visitor onto whichever photo they left on.
+      // Only on first build — a rotation that crosses the breakpoint shouldn't
+      // yank them back to the start.
+      if (firstBuild) { track.scrollLeft = 0; firstBuild = false; }
+      dots = document.createElement('div');
+      dots.className = 'gallery-dots';
+      slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'gallery-dot';
+        b.setAttribute('aria-label', 'Show image ' + (i + 1) + ' of ' + slides.length);
+        // Instant, not smooth: `scroll-snap-stop: always` makes the track halt
+        // at every snap point, so a smooth programmatic scroll advances only
+        // one slide no matter how far you asked it to go — tapping the last
+        // dot would step forward by one. Snap-stop is kept because it's what
+        // stops a fast swipe from flinging past three photos; a direct jump
+        // is the right behaviour for a "take me to photo 5" control anyway.
+        b.addEventListener('click', () => { track.scrollLeft += deltaFor(i); });
+        dots.appendChild(b);
+      });
+      track.insertAdjacentElement('afterend', dots);
+      sync();
+    }
+
+    function destroy() {
+      if (!dots) return;
+      dots.remove();
+      dots = null;
+      track.scrollLeft = 0;   // leave the row at its start for the grid layout
+    }
+
+    let ticking = false;
+    track.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { sync(); ticking = false; });
+    }, { passive: true });
+
+    const apply = () => (mq.matches ? build() : destroy());
+    apply();
+    mq.addEventListener('change', apply);
+  }
+
   // PDP image gallery (thumb → main swap)
   // ────────────────────────────────────────────────────────
   function initGallery() {
@@ -1875,6 +1964,7 @@
     initOrderReceived();
     initTabs();
     initGallery();
+    initGalleryCarousel();
     initSwatches();
     initFacets();
     initOptionRows();

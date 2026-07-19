@@ -10969,3 +10969,73 @@ body[data-page="shop"]:not([data-product-slug]) .shop-sort select:focus-visible 
    not read as available. Re-stated here to outrank the size bump above. */
 .facet-list label.is-empty,
 .facet-list li:has(input:disabled) { opacity: 0.4; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PDP GALLERY — MOBILE CAROUSEL
+   Below 560px the thumb row becomes a swipeable scroll-snap track and the
+   main image is hidden. The thumb buttons already hold the full-size images,
+   so no slides are cloned and there is no second markup path to maintain.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 560px) {
+  .pdp-gallery .main-image { display: none; }
+
+  .pdp-gallery .thumbs {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;   /* don't hand the swipe to page history */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .pdp-gallery .thumbs::-webkit-scrollbar { display: none; }
+
+  .pdp-gallery .thumb {
+    flex: 0 0 100%;          /* overrides the 100px desktop track */
+    scroll-snap-align: start;
+    scroll-snap-stop: always; /* one photo per swipe, no skipping past three */
+    border: 0;
+    border-radius: 4px;
+    cursor: grab;
+  }
+  /* The active outline is a grid affordance; in the carousel the visible
+     slide IS the selection, so the border would just read as a stray frame. */
+  .pdp-gallery .thumb:hover,
+  .pdp-gallery .thumb.active { border: 0; }
+
+  .gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .gallery-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--rule);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    /* 7px is the visual size; the tap target is padded out to ~28px below. */
+    position: relative;
+  }
+  .gallery-dot::after {
+    content: "";
+    position: absolute;
+    inset: -11px;   /* 7 + 22 = 29px touch target, clears the 24px minimum */
+  }
+  .gallery-dot.active {
+    background: var(--bronze);
+    transform: scale(1.25);
+  }
+  .gallery-dot:focus-visible { outline: 2px solid var(--bronze); outline-offset: 3px; }
+}
+
+@media (max-width: 560px) and (prefers-reduced-motion: reduce) {
+  .pdp-gallery .thumbs { scroll-behavior: auto; }
+  .gallery-dot { transition: none; }
+}
