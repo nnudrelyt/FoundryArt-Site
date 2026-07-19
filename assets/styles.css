@@ -11144,9 +11144,22 @@ body[data-product-slug] .specs-table td { font-size: 16px; }
 /* SKU / Category / Made in */
 body[data-product-slug] .pdp-meta-row { font-size: 14px; color: var(--slate-l); }
 
-/* Material selector */
-body[data-product-slug] .swatch-label { font-size: 16px; }
-body[data-product-slug] .swatch-label small { font-size: 13px; }
+/* Material selector — pulled back down. The legibility pass pushed the rest
+   of the column up a step, which left this reading as the loudest thing in
+   the panel; it's a picker, not the headline. Box padding and chip come down
+   with the type so the proportions hold. */
+body[data-product-slug] .swatch { padding: 10px 14px; gap: 10px; }
+body[data-product-slug] .swatch-chip { width: 20px; height: 20px; }
+body[data-product-slug] .swatch-label { font-size: 14px; }
+body[data-product-slug] .swatch-label small { font-size: 12px; margin-top: 2px; }
+
+/* Heavier stroke on the sample button — it carries the secondary action and
+   a hairline bronze rule was losing to the solid charcoal block above it.
+   Set on both states so selecting/adding doesn't shift the button. */
+body[data-product-slug] .pdp-actions .btn-sample,
+body[data-product-slug] .pdp-actions .btn-sample.is-added:disabled {
+  border-width: 2px;
+}
 
 /* Field labels above the selector ("MATERIAL") and the ships-in note */
 body[data-product-slug] .pdp-info .form-group > label {
