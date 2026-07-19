@@ -10803,3 +10803,42 @@ body[data-page="account-sign-in"] .account-signin-layout {
   .cart-table tr { break-inside: avoid; }
   a[href]::after { content: ''; }   /* no URL expansion on a receipt */
 }
+
+/* ── Form validation — checkout ────────────────────────────────────────
+   Errors are inline and persistent. The red is reserved for genuine
+   validation failure; it is not used decoratively anywhere else in the
+   funnel, so it reads unambiguously. */
+.field-error {
+  margin: 6px 0 0;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: #A3231B;
+}
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {
+  border-color: #A3231B;
+}
+/* Focus ring wins over the error border so the active field is always the
+   most prominent thing on screen. */
+.form-group.has-error input:focus,
+.form-group.has-error select:focus,
+.form-group.has-error textarea:focus {
+  border-color: var(--bronze);
+  box-shadow: 0 0 0 3px rgba(140, 98, 73, 0.12);
+}
+.form-group.has-error label { color: #A3231B; }
+
+.checkout-errors {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #A3231B;
+  background: #FCF3F2;
+  border: 1px solid #E6C4C1;
+}
+.checkout-errors[hidden] { display: none; }

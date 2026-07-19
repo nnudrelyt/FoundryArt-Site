@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260717-219">
-<link rel="stylesheet" href="/assets/styles.css?v=20260717-219">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260717-220">
+<link rel="stylesheet" href="/assets/styles.css?v=20260717-220">
 </head>
 <body data-page="checkout">
 
@@ -34,7 +34,10 @@
       <input type="text" class="trade-id-input" data-trade-id placeholder="Professional website or trade ID">
     </div>
 
-    <form class="checkout-layout" onsubmit="event.preventDefault(); window.location.href='/foundry-art/checkout/order-received/';">
+    <!-- Submission is handled in app.js (initCheckoutValidation) so the form
+         can be validated first. novalidate suppresses the browser's own
+         bubbles in favour of inline, persistent messages. -->
+    <form class="checkout-layout" data-checkout-form novalidate>
 
       <section aria-label="Checkout form">
 
@@ -79,13 +82,16 @@
             <span>Ship to a different address?</span>
           </label>
 
+          <!-- Required only while visible; validateCheckout() skips fields
+               whose offsetParent is null, so these are ignored when the
+               ship-to toggle is off. -->
           <div class="field-grid" data-shipping-fields style="margin-top:18px;">
-            <div class="form-group"><label>Recipient first name *</label><input type="text"></div>
-            <div class="form-group"><label>Recipient last name *</label><input type="text"></div>
-            <div class="form-group full"><label>Address *</label><input type="text"></div>
-            <div class="form-group"><label>City *</label><input type="text"></div>
-            <div class="form-group"><label>State *</label><select><option>Illinois</option><option>California</option></select></div>
-            <div class="form-group"><label>ZIP *</label><input type="text"></div>
+            <div class="form-group"><label for="sf">Recipient first name *</label><input id="sf" type="text" required></div>
+            <div class="form-group"><label for="sl">Recipient last name *</label><input id="sl" type="text" required></div>
+            <div class="form-group full"><label for="sa1">Address *</label><input id="sa1" type="text" required></div>
+            <div class="form-group"><label for="sci">City *</label><input id="sci" type="text" required></div>
+            <div class="form-group"><label for="sst">State *</label><select id="sst"><option>Illinois</option><option>California</option></select></div>
+            <div class="form-group"><label for="sz">ZIP *</label><input id="sz" type="text" required></div>
           </div>
 
           <div class="form-group" style="margin-top:18px">
@@ -147,6 +153,8 @@
           </label>
         </div>
 
+        <p class="checkout-errors" data-checkout-errors role="alert" aria-live="polite" hidden></p>
+
         <button type="submit" class="btn-primary" style="padding:16px 36px; font-size:11px; letter-spacing:2px;" data-place-order>Place Order — $289.50</button>
 
       </section>
@@ -192,8 +200,8 @@
 
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260717-219"></script>
-  <script src="/assets/account-data.js?v=20260717-219"></script>
-  <script src="/assets/app.js?v=20260717-219"></script>
+  <script src="/assets/products.js?v=20260717-220"></script>
+  <script src="/assets/account-data.js?v=20260717-220"></script>
+  <script src="/assets/app.js?v=20260717-220"></script>
 </body>
 </html>

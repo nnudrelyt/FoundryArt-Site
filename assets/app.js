@@ -609,6 +609,116 @@
     setText('[data-co-total]', fmtMoney(total));
     const btn = document.querySelector('[data-place-order]'); if (btn) btn.textContent = 'Place Order — ' + fmtMoney(total);
   }
+  // ────────────────────────────────────────────────────────
+  // Checkout validation
+  //
+  // The form is `novalidate` so we own the messaging: native bubbles show one
+  // error at a time, vanish on blur, and can't be styled. These are inline,
+  // persistent, and announced.
+  // ────────────────────────────────────────────────────────
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const ZIP_RE   = /^\d{5}(-\d{4})?$/;
+  // Deliberately loose: 10+ digits after stripping punctuation. Strict phone
+  // patterns reject valid international and extension formats.
+  const digitsOf = s => (s || '').replace(/\D/g, '');
+
+  function fieldError(field) {
+    const label = field.closest('.form-group')
+      ? (field.closest('.form-group').querySelector('label') || {}).textContent || 'This field'
+      : 'This field';
+    const name = label.replace(/\*/g, '').replace(/\(optional\)/i, '').trim() || 'This field';
+    const val = (field.value || '').trim();
+
+    if (!val) return name + ' is required.';
+    if (field.type === 'email' && !EMAIL_RE.test(val)) return 'Enter a valid email address, e.g. name@studio.com.';
+    if (/^(bz|sz)$/.test(field.id) && !ZIP_RE.test(val)) return 'Enter a 5-digit ZIP, e.g. 60622.';
+    if (field.type === 'tel' && digitsOf(val).length < 10) return 'Enter a phone number including area code.';
+    return null;
+  }
+
+  function showFieldError(field, msg) {
+    const group = field.closest('.form-group');
+    if (!group) return;
+    group.classList.add('has-error');
+    field.setAttribute('aria-invalid', 'true');
+    let err = group.querySelector('.field-error');
+    if (!err) {
+      err = document.createElement('p');
+      err.className = 'field-error';
+      if (!field.id) field.id = 'fld-' + Math.random().toString(36).slice(2, 8);
+      err.id = field.id + '-error';
+      err.setAttribute('role', 'alert');
+      group.appendChild(err);
+    }
+    err.textContent = msg;
+    field.setAttribute('aria-describedby', err.id);
+  }
+
+  function clearFieldError(field) {
+    const group = field.closest('.form-group');
+    if (!group) return;
+    group.classList.remove('has-error');
+    field.removeAttribute('aria-invalid');
+    field.removeAttribute('aria-describedby');
+    const err = group.querySelector('.field-error');
+    if (err) err.remove();
+  }
+
+  function validateCheckout(form) {
+    const fields = Array.from(form.querySelectorAll('input[required], textarea[required], select[required]'))
+      // Never validate a field the user can't see (e.g. the hidden Projects
+      // block, or ship-to fields while the toggle is off).
+      .filter(f => f.offsetParent !== null);
+
+    let firstBad = null;
+    fields.forEach(f => {
+      const msg = fieldError(f);
+      if (msg) { showFieldError(f, msg); if (!firstBad) firstBad = f; }
+      else clearFieldError(f);
+    });
+
+    const summary = document.querySelector('[data-checkout-errors]');
+    if (summary) {
+      const n = form.querySelectorAll('.form-group.has-error').length;
+      if (n) {
+        summary.textContent = n === 1
+          ? 'One field needs your attention before we can place the order.'
+          : n + ' fields need your attention before we can place the order.';
+        summary.hidden = false;
+      } else {
+        summary.hidden = true;
+      }
+    }
+
+    if (firstBad) {
+      firstBad.focus();
+      firstBad.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      return false;
+    }
+    return true;
+  }
+
+  // Clear a field's error as soon as it becomes valid — errors that linger
+  // after the user has fixed them read as broken.
+  function initCheckoutValidation() {
+    const form = document.querySelector('[data-checkout-form]');
+    if (!form) return;
+    form.addEventListener('input', e => {
+      const f = e.target;
+      if (!f.matches('input, textarea, select')) return;
+      if (f.closest('.form-group.has-error') && !fieldError(f)) clearFieldError(f);
+    });
+    // Validate on blur only once the field has been touched and left empty/bad,
+    // so we don't scold someone mid-typing on their first pass.
+    form.addEventListener('blur', e => {
+      const f = e.target;
+      if (!f.matches('input[required], textarea[required], select[required]')) return;
+      if (!(f.value || '').trim()) return;          // empty-on-first-visit is not an error yet
+      const msg = fieldError(f);
+      if (msg) showFieldError(f, msg); else clearFieldError(f);
+    }, true);
+  }
+
   function initCheckout() {
     if (!document.querySelector('[data-order-items]')) return;
     renderCheckoutSummary();
@@ -616,10 +726,15 @@
     const tt = document.querySelector('[data-trade-toggle]'); if (tt) tt.addEventListener('change', updateCheckoutTotals);
     const tid = document.querySelector('[data-trade-id]');
     if (tid) { tid.addEventListener('input', updateCheckoutTotals); tid.addEventListener('blur', updateCheckoutTotals); }
-    // On place-order: snapshot the order, then clear the cart (the inline
-    // onsubmit handles the redirect to the confirmation page).
-    const form = document.querySelector('.checkout-layout');
-    if (form) form.addEventListener('submit', () => {
+    // Single submit owner: validate first, and only snapshot + redirect when
+    // the form is clean. A second listener wouldn't work — listeners fire in
+    // registration order, so this one would clear the cart before validation
+    // ever ran.
+    const form = document.querySelector('[data-checkout-form]');
+    if (form) form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!validateCheckout(form)) return;
+
       const items = Cart.items();
       const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
       const discount = tradeActive() ? subtotal * 0.20 : 0;
@@ -639,6 +754,7 @@
         }));
       } catch (e) {}
       Cart.clear();
+      window.location.href = '/foundry-art/checkout/order-received/';
     });
   }
 
@@ -1025,8 +1141,12 @@
     });
 
     const fill = (sel, v) => { const el = document.querySelector(sel); if (el && !el.value) el.value = v; };
-    fill('#bf', c.firstName); fill('#bl', c.lastName); fill('#be', c.email); fill('#bp', c.phone);
-    fill('#ba', c.billing.line1); fill('#bc', c.billing.city); fill('#bz', c.billing.zip);
+    fill('#bf', c.firstName);  fill('#bl', c.lastName);
+    fill('#be', c.email);      fill('#bp', c.phone);
+    fill('#bc', c.company);                        // bc is Company — NOT city
+    fill('#ba1', c.billing.line1); fill('#ba2', c.billing.line2);
+    fill('#bci', c.billing.city);                  // bci is Town / City
+    fill('#bz', c.billing.zip);
 
     const t = c.trade;
     if (t && t.status === 'approved') {
@@ -1807,6 +1927,7 @@
     initAddToCart();
     initSampleOrder();
     initCheckout();
+    initCheckoutValidation();
     initOrderReceived();
     initTabs();
     initGallery();
