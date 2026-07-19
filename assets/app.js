@@ -1645,6 +1645,64 @@
   }
 
   // ────────────────────────────────────────────────────────
+  // Two-step checkout accordion
+  //
+  // Step 1 (Billing) is open first; Continue validates it and collapses it to
+  // a one-line summary, then opens Step 2 (Shipping & payment). Because
+  // validateCheckout() skips fields whose offsetParent is null, validating
+  // while Step 2 is collapsed naturally checks only Step 1 — no scoping needed.
+  // ────────────────────────────────────────────────────────
+  function initCheckoutSteps() {
+    const steps = Array.from(document.querySelectorAll('.checkout-step'));
+    if (steps.length < 2) return;
+    const form = document.querySelector('[data-checkout-form]');
+
+    function open(n) {
+      steps.forEach(step => {
+        const isN = step.getAttribute('data-step') === String(n);
+        step.classList.toggle('is-open', isN);
+        // A step is "complete" once we've moved past it (its summary is filled).
+        const done = !isN && step.querySelector('[data-step-summary]') &&
+                     step.querySelector('[data-step-summary]').textContent.trim() !== '';
+        step.classList.toggle('is-complete', !!done);
+        step.classList.toggle('is-locked', !isN && !done);
+        const head = step.querySelector('.step-head');
+        if (head) head.setAttribute('aria-expanded', String(isN));
+      });
+    }
+
+    function billingSummary() {
+      const v = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+      const name = [v('bf'), v('bl')].filter(Boolean).join(' ');
+      const where = [v('ba1'), v('bci'), [v('bst'), v('bz')].filter(Boolean).join(' ')]
+        .filter(Boolean).join(', ');
+      return [name, where].filter(Boolean).join(' · ');
+    }
+
+    const continueBtn = document.querySelector('[data-step-continue]');
+    if (continueBtn) continueBtn.addEventListener('click', () => {
+      // Step 2 is still collapsed here, so this validates Step 1 only.
+      if (form && !validateCheckout(form)) return;
+      const summary = document.querySelector('[data-step-summary]');
+      if (summary) summary.textContent = billingSummary();
+      open(2);
+      const s2 = document.querySelector('.checkout-step[data-step="2"]');
+      if (s2) s2.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    });
+
+    // A completed step head reopens that step for editing.
+    steps.forEach(step => {
+      const head = step.querySelector('.step-head');
+      const n = step.getAttribute('data-step');
+      if (head) head.addEventListener('click', () => {
+        if (step.classList.contains('is-complete') || step.classList.contains('is-open')) open(n);
+      });
+    });
+
+    open(1);
+  }
+
+  // ────────────────────────────────────────────────────────
   // Card-details reveal (checkout) — show the card fields only when
   // "Credit / debit card" is the selected payment method.
   // ────────────────────────────────────────────────────────
@@ -2018,6 +2076,7 @@
     initOptionRows();
     initShipToggle();
     initCardFields();
+    initCheckoutSteps();
     initTradeToggle();
     initWtbTabs();
     initMediaCarousels();

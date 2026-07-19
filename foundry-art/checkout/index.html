@@ -7,8 +7,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260719-282">
-<link rel="stylesheet" href="/assets/styles.css?v=20260719-282">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260719-283">
+<link rel="stylesheet" href="/assets/styles.css?v=20260719-283">
 </head>
 <body data-page="checkout">
 
@@ -40,156 +40,173 @@
     <form class="checkout-layout" data-checkout-form novalidate>
 
       <section aria-label="Checkout form">
-
-        <!-- Project name field — Projects wishlist deferred to post-launch (hidden via [data-feature="projects"]) -->
-        <div class="checkout-section" data-feature="projects">
-          <h2>Project</h2>
-          <div class="field-grid">
-            <div class="form-group full">
-              <label for="project">Project name (optional)</label>
-              <input id="project" type="text" placeholder="e.g. Lincoln Park kitchen — backsplash">
-            </div>
-            <div class="form-group full">
-              <label for="designer">Designer / contractor (optional)</label>
-              <input id="designer" type="text" placeholder="Name + email of designer for delivery coordination">
-            </div>
-          </div>
-        </div>
-
-        <!-- BILLING -->
-        <div class="checkout-section">
-          <h2>Billing details</h2>
-          <div class="field-grid">
-            <div class="form-group"><label for="bf">First name *</label><input id="bf" type="text" required></div>
-            <div class="form-group"><label for="bl">Last name *</label><input id="bl" type="text" required></div>
-            <div class="form-group full"><label for="bc">Company (optional)</label><input id="bc" type="text"></div>
-            <div class="form-group full"><label for="bco">Country / Region *</label>
-              <select id="bco"><option>United States (US)</option><option>Canada</option></select>
-            </div>
-            <div class="form-group full"><label for="ba1">Street address *</label><input id="ba1" type="text" placeholder="House number and street name" required></div>
-            <div class="form-group full"><label for="ba2"><span aria-hidden="true">&nbsp;</span></label><input id="ba2" type="text" placeholder="Apartment, suite, unit, etc. (optional)"></div>
-            <div class="form-group"><label for="bci">Town / City *</label><input id="bci" type="text" required></div>
-            <div class="form-group"><label for="bst">State *</label>
-              <select id="bst"><option>Illinois</option><option>California</option><option>New York</option></select>
-            </div>
-            <div class="form-group"><label for="bz">ZIP *</label><input id="bz" type="text" required></div>
-            <div class="form-group"><label for="bp">Phone *</label><input id="bp" type="tel" required></div>
-            <div class="form-group full"><label for="be">Email address *</label><input id="be" type="email" required></div>
-          </div>
-
-          <label class="checkbox-row">
-            <input type="checkbox" data-ship-toggle>
-            <span>Ship to a different address?</span>
-          </label>
-
-          <!-- Required only while visible; validateCheckout() skips fields
-               whose offsetParent is null, so these are ignored when the
-               ship-to toggle is off. -->
-          <div class="field-grid" data-shipping-fields style="margin-top:18px;">
-            <div class="form-group"><label for="sf">Recipient first name *</label><input id="sf" type="text" required></div>
-            <div class="form-group"><label for="sl">Recipient last name *</label><input id="sl" type="text" required></div>
-            <div class="form-group full"><label for="sa1">Address *</label><input id="sa1" type="text" required></div>
-            <div class="form-group"><label for="sci">City *</label><input id="sci" type="text" required></div>
-            <div class="form-group"><label for="sst">State *</label><select id="sst"><option>Illinois</option><option>California</option></select></div>
-            <div class="form-group"><label for="sz">ZIP *</label><input id="sz" type="text" required></div>
-          </div>
-
-          <div class="form-group" style="margin-top:18px">
-            <label for="notes">Order notes (optional)</label>
-            <textarea id="notes" rows="3" placeholder="Notes about your order, e.g. special delivery instructions"></textarea>
-          </div>
-        </div>
-
-        <!-- SHIPPING METHOD -->
-        <div class="checkout-section">
-          <h2>Shipping method</h2>
-          <div class="shipping-options option-group">
-            <!-- UPS options; rates are placeholders pending the live UPS-plugin calc (Tyler↔Eric) -->
-            <label class="option-row">
-              <input type="radio" name="shipping" value="ups-ground" checked>
-              <div class="opt-main">
-                <div><strong>UPS Ground</strong><span class="opt-sub">5–7 business days</span></div>
-                <span>$12.00</span>
-              </div>
-            </label>
-            <label class="option-row">
-              <input type="radio" name="shipping" value="ups-2day">
-              <div class="opt-main">
-                <div><strong>UPS 2nd Day Air</strong><span class="opt-sub">2 business days</span></div>
-                <span>$28.00</span>
-              </div>
-            </label>
-            <label class="option-row">
-              <input type="radio" name="shipping" value="ups-nextday">
-              <div class="opt-main">
-                <div><strong>UPS Next Day Air</strong><span class="opt-sub">Next business day</span></div>
-                <span>$45.00</span>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- PAYMENT -->
-        <div class="checkout-section">
-          <h2>Payment method</h2>
-          <div class="payment-options option-group">
-            <label class="option-row">
-              <input type="radio" name="payment" value="card" checked>
-              <div class="opt-main">
-                <div><strong>Credit / debit card</strong><span class="opt-sub">Visa · Mastercard · Amex · Discover</span></div>
-                <span class="pay-marks" role="img" aria-label="Visa, Mastercard, American Express, Discover accepted">
-                  <svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#1A1F71"/><text x="20" y="17.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" font-style="italic" fill="#fff" letter-spacing="0.4">VISA</text></svg>
-                  <svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#fff" stroke="#E3DED5"/><circle cx="16.5" cy="13" r="6.5" fill="#EB001B"/><circle cx="23.5" cy="13" r="6.5" fill="#F79E1B"/><path d="M20 8.3a6.5 6.5 0 0 0 0 9.4 6.5 6.5 0 0 0 0-9.4z" fill="#FF5F00"/></svg>
-                  <svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#1F72CD"/><text x="20" y="16.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" fill="#fff" letter-spacing="0.3">AMEX</text></svg>
-                  <svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#fff" stroke="#E3DED5"/><text x="3" y="16.2" font-family="Arial,Helvetica,sans-serif" font-size="5" font-weight="700" fill="#151515" letter-spacing="0.1">DISCOVER</text><circle cx="34.5" cy="13" r="4.5" fill="#F76B1C"/></svg>
-                </span>
-              </div>
-            </label>
-            <label class="option-row">
-              <input type="radio" name="payment" value="paypal">
-              <div class="opt-main">
-                <div><strong>PayPal</strong><span class="opt-sub">You'll be redirected to PayPal to complete payment</span></div>
-                <span class="pay-marks" role="img" aria-label="PayPal"><svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#fff" stroke="#E3DED5"/><text x="20" y="17" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="700" font-style="italic"><tspan fill="#003087">Pay</tspan><tspan fill="#009cde">Pal</tspan></text></svg></span>
-              </div>
-            </label>
-          </div>
-
-          <!-- Card details reveal on "Credit / debit card". Demo placeholders —
-               non-functional and not required, so the prototype's place-order
-               flow still works. At launch these are replaced by the payment
-               provider's hosted (PCI-scoped) fields. -->
-          <div class="card-fields" data-card-fields>
+        <div class="checkout-step is-open" data-step="1">
+          <button type="button" class="step-head" data-step-head="1" aria-expanded="true">
+            <span class="step-num">1</span>
+            <span class="step-title">Billing details</span>
+            <span class="step-summary" data-step-summary></span>
+            <span class="step-edit" aria-hidden="true">Edit</span>
+          </button>
+          <div class="step-body">
+          <!-- Project name field — Projects wishlist deferred to post-launch (hidden via [data-feature="projects"]) -->
+          <div class="checkout-section" data-feature="projects">
+            <h2>Project</h2>
             <div class="field-grid">
               <div class="form-group full">
-                <label for="cc-num">Card number</label>
-                <input id="cc-num" type="text" inputmode="numeric" autocomplete="off" placeholder="1234 5678 9012 3456">
-              </div>
-              <div class="form-group">
-                <label for="cc-exp">Expiry (MM / YY)</label>
-                <input id="cc-exp" type="text" inputmode="numeric" autocomplete="off" placeholder="MM / YY">
-              </div>
-              <div class="form-group">
-                <label for="cc-cvc">CVC</label>
-                <input id="cc-cvc" type="text" inputmode="numeric" autocomplete="off" placeholder="123">
+                <label for="project">Project name (optional)</label>
+                <input id="project" type="text" placeholder="e.g. Lincoln Park kitchen — backsplash">
               </div>
               <div class="form-group full">
-                <label for="cc-name">Name on card</label>
-                <input id="cc-name" type="text" autocomplete="off" placeholder="As printed on the card">
+                <label for="designer">Designer / contractor (optional)</label>
+                <input id="designer" type="text" placeholder="Name + email of designer for delivery coordination">
               </div>
             </div>
-            <p class="card-fields-note">Secure demo field &mdash; no card is processed. At launch this becomes the payment provider&rsquo;s hosted field.</p>
           </div>
 
-          <label class="checkbox-row" style="margin-top:18px;">
-            <input type="checkbox" required>
-            <span>I have read and agree to the <a href="/terms/" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">website terms and conditions</a> *</span>
-          </label>
+          <!-- BILLING -->
+          <div class="checkout-section">
+            <div class="field-grid">
+              <div class="form-group"><label for="bf">First name *</label><input id="bf" type="text" required></div>
+              <div class="form-group"><label for="bl">Last name *</label><input id="bl" type="text" required></div>
+              <div class="form-group full"><label for="bc">Company (optional)</label><input id="bc" type="text"></div>
+              <div class="form-group full"><label for="bco">Country / Region *</label>
+                <select id="bco"><option>United States (US)</option><option>Canada</option></select>
+              </div>
+              <div class="form-group full"><label for="ba1">Street address *</label><input id="ba1" type="text" placeholder="House number and street name" required></div>
+              <div class="form-group full"><label for="ba2"><span aria-hidden="true">&nbsp;</span></label><input id="ba2" type="text" placeholder="Apartment, suite, unit, etc. (optional)"></div>
+              <div class="form-group"><label for="bci">Town / City *</label><input id="bci" type="text" required></div>
+              <div class="form-group"><label for="bst">State *</label>
+                <select id="bst"><option>Illinois</option><option>California</option><option>New York</option></select>
+              </div>
+              <div class="form-group"><label for="bz">ZIP *</label><input id="bz" type="text" required></div>
+              <div class="form-group"><label for="bp">Phone *</label><input id="bp" type="tel" required></div>
+              <div class="form-group full"><label for="be">Email address *</label><input id="be" type="email" required></div>
+            </div>
+
+            <label class="checkbox-row">
+              <input type="checkbox" data-ship-toggle>
+              <span>Ship to a different address?</span>
+            </label>
+
+            <!-- Required only while visible; validateCheckout() skips fields
+                 whose offsetParent is null, so these are ignored when the
+                 ship-to toggle is off. -->
+            <div class="field-grid" data-shipping-fields style="margin-top:18px;">
+              <div class="form-group"><label for="sf">Recipient first name *</label><input id="sf" type="text" required></div>
+              <div class="form-group"><label for="sl">Recipient last name *</label><input id="sl" type="text" required></div>
+              <div class="form-group full"><label for="sa1">Address *</label><input id="sa1" type="text" required></div>
+              <div class="form-group"><label for="sci">City *</label><input id="sci" type="text" required></div>
+              <div class="form-group"><label for="sst">State *</label><select id="sst"><option>Illinois</option><option>California</option></select></div>
+              <div class="form-group"><label for="sz">ZIP *</label><input id="sz" type="text" required></div>
+            </div>
+
+            <div class="form-group" style="margin-top:18px">
+              <label for="notes">Order notes (optional)</label>
+              <textarea id="notes" rows="3" placeholder="Notes about your order, e.g. special delivery instructions"></textarea>
+            </div>
+          </div>
+
+          <!-- SHIPPING METHOD -->
+          <button type="button" class="btn-primary step-continue" data-step-continue style="padding:16px 36px;">Continue to shipping &amp; payment</button>
+          </div>
         </div>
 
-        <p class="checkout-errors" data-checkout-errors role="alert" aria-live="polite" hidden></p>
+        <div class="checkout-step is-locked" data-step="2">
+          <button type="button" class="step-head" data-step-head="2" aria-expanded="false">
+            <span class="step-num">2</span>
+            <span class="step-title">Shipping &amp; payment</span>
+          </button>
+          <div class="step-body">
+          <div class="checkout-section">
+            <h2>Shipping method</h2>
+            <div class="shipping-options option-group">
+              <!-- UPS options; rates are placeholders pending the live UPS-plugin calc (Tyler↔Eric) -->
+              <label class="option-row">
+                <input type="radio" name="shipping" value="ups-ground" checked>
+                <div class="opt-main">
+                  <div><strong>UPS Ground</strong><span class="opt-sub">5–7 business days</span></div>
+                  <span>$12.00</span>
+                </div>
+              </label>
+              <label class="option-row">
+                <input type="radio" name="shipping" value="ups-2day">
+                <div class="opt-main">
+                  <div><strong>UPS 2nd Day Air</strong><span class="opt-sub">2 business days</span></div>
+                  <span>$28.00</span>
+                </div>
+              </label>
+              <label class="option-row">
+                <input type="radio" name="shipping" value="ups-nextday">
+                <div class="opt-main">
+                  <div><strong>UPS Next Day Air</strong><span class="opt-sub">Next business day</span></div>
+                  <span>$45.00</span>
+                </div>
+              </label>
+            </div>
+          </div>
 
-        <button type="submit" class="btn-primary" style="padding:16px 36px;" data-place-order>Place Order — $289.50</button>
+          <!-- PAYMENT -->
+          <div class="checkout-section">
+            <h2>Payment method</h2>
+            <div class="payment-options option-group">
+              <label class="option-row">
+                <input type="radio" name="payment" value="card" checked>
+                <div class="opt-main">
+                  <div><strong>Credit / debit card</strong><span class="opt-sub">Visa · Mastercard · Amex · Discover</span></div>
+                  <span class="pay-marks" role="img" aria-label="Visa, Mastercard, American Express, Discover accepted">
+                    <svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#1A1F71"/><text x="20" y="17.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" font-style="italic" fill="#fff" letter-spacing="0.4">VISA</text></svg>
+                    <svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#fff" stroke="#E3DED5"/><circle cx="16.5" cy="13" r="6.5" fill="#EB001B"/><circle cx="23.5" cy="13" r="6.5" fill="#F79E1B"/><path d="M20 8.3a6.5 6.5 0 0 0 0 9.4 6.5 6.5 0 0 0 0-9.4z" fill="#FF5F00"/></svg>
+                    <svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#1F72CD"/><text x="20" y="16.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" fill="#fff" letter-spacing="0.3">AMEX</text></svg>
+                    <svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#fff" stroke="#E3DED5"/><text x="3" y="16.2" font-family="Arial,Helvetica,sans-serif" font-size="5" font-weight="700" fill="#151515" letter-spacing="0.1">DISCOVER</text><circle cx="34.5" cy="13" r="4.5" fill="#F76B1C"/></svg>
+                  </span>
+                </div>
+              </label>
+              <label class="option-row">
+                <input type="radio" name="payment" value="paypal">
+                <div class="opt-main">
+                  <div><strong>PayPal</strong><span class="opt-sub">You'll be redirected to PayPal to complete payment</span></div>
+                  <span class="pay-marks" role="img" aria-label="PayPal"><svg class="card-mark" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="26" rx="3" fill="#fff" stroke="#E3DED5"/><text x="20" y="17" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="700" font-style="italic"><tspan fill="#003087">Pay</tspan><tspan fill="#009cde">Pal</tspan></text></svg></span>
+                </div>
+              </label>
+            </div>
 
+            <!-- Card details reveal on "Credit / debit card". Demo placeholders —
+                 non-functional and not required, so the prototype's place-order
+                 flow still works. At launch these are replaced by the payment
+                 provider's hosted (PCI-scoped) fields. -->
+            <div class="card-fields" data-card-fields>
+              <div class="field-grid">
+                <div class="form-group full">
+                  <label for="cc-num">Card number</label>
+                  <input id="cc-num" type="text" inputmode="numeric" autocomplete="off" placeholder="1234 5678 9012 3456">
+                </div>
+                <div class="form-group">
+                  <label for="cc-exp">Expiry (MM / YY)</label>
+                  <input id="cc-exp" type="text" inputmode="numeric" autocomplete="off" placeholder="MM / YY">
+                </div>
+                <div class="form-group">
+                  <label for="cc-cvc">CVC</label>
+                  <input id="cc-cvc" type="text" inputmode="numeric" autocomplete="off" placeholder="123">
+                </div>
+                <div class="form-group full">
+                  <label for="cc-name">Name on card</label>
+                  <input id="cc-name" type="text" autocomplete="off" placeholder="As printed on the card">
+                </div>
+              </div>
+              <p class="card-fields-note">Secure demo field &mdash; no card is processed. At launch this becomes the payment provider&rsquo;s hosted field.</p>
+            </div>
+
+            <label class="checkbox-row" style="margin-top:18px;">
+              <input type="checkbox" required>
+              <span>I have read and agree to the <a href="/terms/" style="color:var(--bronze);border-bottom:1px solid var(--bronze-l)">website terms and conditions</a> *</span>
+            </label>
+          </div>
+
+          <p class="checkout-errors" data-checkout-errors role="alert" aria-live="polite" hidden></p>
+
+          <button type="submit" class="btn-primary" style="padding:16px 36px;" data-place-order>Place Order — $289.50</button>
+          </div>
+        </div>
       </section>
 
       <!-- ORDER SUMMARY -->
@@ -233,8 +250,8 @@
 
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260719-282"></script>
-  <script src="/assets/account-data.js?v=20260719-282"></script>
-  <script src="/assets/app.js?v=20260719-282"></script>
+  <script src="/assets/products.js?v=20260719-283"></script>
+  <script src="/assets/account-data.js?v=20260719-283"></script>
+  <script src="/assets/app.js?v=20260719-283"></script>
 </body>
 </html>

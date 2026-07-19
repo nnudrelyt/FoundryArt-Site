@@ -11705,3 +11705,81 @@ body[data-page="checkout"] .card-fields-note {
   color: var(--mid);
   margin-top: 6px;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CHECKOUT — TWO-STEP ACCORDION
+   ══════════════════════════════════════════════════════════════════════════ */
+body[data-page="checkout"] .checkout-step { margin-bottom: 20px; }
+
+/* Step header — number badge + title, with a summary + Edit affordance once
+   the step is complete. */
+body[data-page="checkout"] .step-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 0 0 20px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  cursor: default;
+}
+body[data-page="checkout"] .checkout-step.is-complete .step-head { cursor: pointer; }
+
+body[data-page="checkout"] .step-num {
+  flex: 0 0 auto;
+  width: 30px; height: 30px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule);
+  font-size: 14px; font-weight: 500; color: var(--slate-l);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+body[data-page="checkout"] .checkout-step.is-open .step-num {
+  border-color: var(--bronze); color: var(--bronze);
+}
+body[data-page="checkout"] .checkout-step.is-complete .step-num {
+  background: var(--bronze); border-color: var(--bronze); color: #fff;
+  font-size: 0;                       /* hide the number, show a check */
+}
+body[data-page="checkout"] .checkout-step.is-complete .step-num::after {
+  content: ""; width: 6px; height: 11px;
+  border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg);
+  margin-top: -2px;
+}
+
+body[data-page="checkout"] .step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 300; color: var(--charcoal);
+}
+/* Completed step: title shrinks, the billing summary shows beside it. */
+body[data-page="checkout"] .step-summary {
+  flex: 1; min-width: 0;
+  font-size: 14px; color: var(--mid);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  display: none;
+}
+body[data-page="checkout"] .step-edit {
+  margin-left: auto; flex: 0 0 auto;
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--bronze); border-bottom: 1px solid var(--bronze-l);
+  display: none;
+}
+body[data-page="checkout"] .checkout-step.is-complete .step-title { font-size: 20px; }
+body[data-page="checkout"] .checkout-step.is-complete .step-summary { display: block; }
+body[data-page="checkout"] .checkout-step.is-complete .step-edit { display: inline; }
+
+/* Body: shown only when the step is open. */
+body[data-page="checkout"] .step-body { display: none; padding-top: 28px; }
+body[data-page="checkout"] .checkout-step.is-open .step-body { display: block; }
+
+/* Locked (not yet reached) step reads muted and non-interactive. */
+body[data-page="checkout"] .checkout-step.is-locked .step-head { opacity: 0.5; }
+
+/* Continue button matches Place Order (full width of the form column). */
+body[data-page="checkout"] .step-continue { display: block; width: 100%; margin-top: 8px; }
+
+/* The two inner sections in step 2 (Shipping / Payment) keep their own
+   subheads, so their first-child top margin is trimmed under the step head. */
+body[data-page="checkout"] .step-body > .checkout-section:first-child { margin-top: 0; }
