@@ -26,10 +26,10 @@
       <p class="page-sub"><span data-cart-lines>2</span> items · ready to ship from Chicago</p>
     </header>
 
-    <!-- Sample-order toggle (Plus differentiator) -->
-    <div class="trade-row">
-      <input type="checkbox" id="sample-toggle">
-      <label for="sample-toggle"><strong>This is a sample order</strong> — free shipping on your first 2 tiles, applies on checkout.</label>
+    <!-- Swatch-order status. Derived from the cart lines in recompute(), not a
+         manual toggle — so it can never contradict what's actually in the cart. -->
+    <div class="trade-row" data-sample-note hidden>
+      <label><strong>Swatch order</strong> — ships free. Swatches are no charge; order as many finishes as you need.</label>
     </div>
 
     <div class="cart-layout">

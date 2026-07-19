@@ -28,12 +28,23 @@
     <div class="shop-layout">
       <aside class="shop-sidebar" aria-label="Filters and categories">
 
+        <!-- Counts below are overwritten at runtime by computeFacetCounts().
+             They stay in the markup so a JS failure degrades to plausible
+             numbers rather than blanks. -->
         <div class="facet-group">
           <h5>Category</h5>
           <ul class="facet-list">
             <li><label><input type="checkbox" id="cat-insets" data-label="Insets"> Insets <span class="count">10</span></label></li>
             <li><label><input type="checkbox" id="cat-liners" data-label="Liners"> Liners <span class="count">0</span></label></li>
-            <li><label><input type="checkbox" id="cat-knobs" data-label="Knobs &amp; Pulls"> Knobs &amp; Pulls <span class="count">1</span></label></li>
+            <li><label><input type="checkbox" id="cat-knobs" data-label="Knobs &amp; Pulls"> Knobs &amp; Pulls <span class="count">3</span></label></li>
+          </ul>
+        </div>
+
+        <!-- "On Sale" is a flag, not a category — it lives in its own group so
+             it AND-combines instead of unioning into the category list. -->
+        <div class="facet-group">
+          <h5>Offers</h5>
+          <ul class="facet-list">
             <li><label><input type="checkbox" id="cat-sale" data-label="On Sale"> On Sale <span class="count">4</span></label></li>
           </ul>
         </div>
@@ -43,7 +54,8 @@
           <ul class="facet-list">
             <li><label><input type="checkbox" id="size-3" data-label="3×3 inch"> 3×3 inch <span class="count">7</span></label></li>
             <li><label><input type="checkbox" id="size-2" data-label="2×2 inch"> 2×2 inch <span class="count">2</span></label></li>
-            <li><label><input type="checkbox" id="size-1" data-label="1×1 inch"> 1×1 inch <span class="count">2</span></label></li>
+            <li><label><input type="checkbox" id="size-1" data-label="1×1 inch"> 1×1 inch <span class="count">3</span></label></li>
+            <li><label><input type="checkbox" id="size-5" data-label="5 inch"> 5 inch <span class="count">1</span></label></li>
           </ul>
         </div>
 
@@ -66,12 +78,12 @@
         <div class="facet-group">
           <h5>Price</h5>
           <div class="facet-price-range">
-            <input type="number" placeholder="Min" min="0">
+            <input type="number" id="price-min" placeholder="Min" min="0" aria-label="Minimum price">
             <span>—</span>
-            <input type="number" placeholder="Max" min="0">
-            <button type="button" class="btn-secondary" style="padding:6px 12px;font-size:9px;">Go</button>
+            <input type="number" id="price-max" placeholder="Max" min="0" aria-label="Maximum price">
+            <button type="button" class="btn-secondary" data-price-go style="padding:6px 12px;font-size:9px;">Go</button>
           </div>
-          <p style="font-size:10px;color:var(--mid);margin-top:8px;">$42 – $92.50</p>
+          <p style="font-size:10px;color:var(--mid);margin-top:8px;" data-price-caption>$42 – $92.50</p>
         </div>
 
         <div class="facet-group">
@@ -90,15 +102,15 @@
 
       <div class="shop-main">
         <div class="shop-toolbar">
-          <span class="shop-result-count">Showing <strong>11</strong> of 11 results</span>
+          <span class="shop-result-count" data-result-count>Showing all <strong>13</strong> pieces</span>
           <div class="shop-sort">
             <label for="sort">Sort</label>
             <select id="sort">
-              <option>Best match</option>
-              <option>Popularity</option>
-              <option>Newest</option>
-              <option>Price: low to high</option>
-              <option>Price: high to low</option>
+              <option value="best">Best match</option>
+              <option value="popularity">Popularity</option>
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
             </select>
           </div>
         </div>
@@ -111,11 +123,12 @@
           <!-- rendered by app.js -->
         </div>
 
-        <nav class="pagination" aria-label="Pagination">
-          <span class="current">1</span>
-          <a href="#">2</a>
-          <a href="#">Next →</a>
-        </nav>
+        <!-- Sibling of the grid, never a child — inside a display:grid parent
+             this would lay out as a cell and sit in the first column. -->
+        <div class="shop-empty" data-shop-empty hidden>
+          <p>No pieces match these filters.</p>
+          <button type="button" class="btn-secondary" data-shop-clear>Clear all filters</button>
+        </div>
       </div>
     </div>
   </main>

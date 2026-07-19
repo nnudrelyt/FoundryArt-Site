@@ -412,7 +412,10 @@
   const fmtMoney = n => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const chipClass = f => /white/i.test(f) ? 'white' : 'traditional';
   const finishShort = f => f.replace(/\s*Bronze$/i, '');
-  const thumbFor = slug => '/assets/images/products/' + slug + '/main.jpg';
+  // Swatch lines use a synthetic slug ('swatch-<parent>') that has no image
+  // directory, so fall back to the parent product's thumbnail. Without this,
+  // swatches render broken images in cart, checkout AND order-received.
+  const thumbFor = (slug, parentSlug) => '/assets/images/products/' + (parentSlug || slug) + '/main.jpg';
   const weightForSize = s => /1×1/.test(s) ? 0.1 : (/2×2/.test(s) ? 0.4 : 0.8);
   const skuForFinish = (p, f) => /white/i.test(f) ? p.sku.replace(/-TB$/, '-WB') : p.sku.replace(/-WB$/, '-TB');
   const setText = (sel, t) => { const el = document.querySelector(sel); if (el) el.textContent = t; };
@@ -444,16 +447,54 @@
     });
   }
 
+  // PDP → order a swatch of the currently-selected finish.
+  //
+  // The swatch is synthesized from FA_SAMPLE + the parent product rather than
+  // being a catalog entry, so FA_PRODUCTS stays at 13 and the shop grid, facet
+  // counts and cross-sell are untouched. The 'swatch-<parent>' slug is also what
+  // keeps it a distinct cart line under Cart's existing slug+finish identity —
+  // no change to sameLine/setQty/remove needed.
+  function initSampleOrder() {
+    const slug = document.body.getAttribute('data-product-slug');
+    if (!slug) return;
+    const product = (window.FA_PRODUCTS || []).find(p => p.slug === slug);
+    const btn = document.querySelector('.pdp-actions .btn-sample');
+    const spec = window.FA_SAMPLE;
+    if (!product || !btn || !spec) return;
+    const label = btn.textContent;
+    btn.addEventListener('click', () => {
+      const sel = document.querySelector('[data-finish-target] .swatch.selected .swatch-label');
+      const finish = sel ? sel.childNodes[0].textContent.trim() : product.finishes[0];
+      Cart.add({
+        slug: 'swatch-' + slug,
+        parentSlug: slug,
+        type: 'sample',
+        name: product.name + ' swatch',
+        sizeLabel: spec.sizeLabel,
+        finish,
+        price: spec.price,
+        qty: 1,
+        sku: spec.skuPrefix + '-' + skuForFinish(product, finish).replace(/^FA-/, ''),
+        weight: spec.weight,          // never weightForSize() — that returns 0.8
+      });
+      updateNavCount();
+      btn.textContent = 'Swatch added ✓'; btn.disabled = true;
+      setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 1600);
+    });
+  }
+
   // Cart page — render line items from the store
   function renderCartRows() {
     const tbody = document.querySelector('body[data-page="cart"] .cart-table tbody');
     if (!tbody) return;
+    // `i.type || 'product'` matters: the SEED array and any cart saved before
+    // swatches existed have no type. Absence must always mean product.
     tbody.innerHTML = Cart.items().map(i => `
-            <tr data-cart-row data-slug="${i.slug}" data-finish="${i.finish}" data-weight="${i.weight}">
+            <tr data-cart-row data-slug="${i.slug}" data-finish="${i.finish}" data-weight="${i.weight}" data-line-type="${i.type || 'product'}">
               <td class="cart-item-cell" data-label="Product">
                 <div class="cart-item">
-                  <div class="cart-thumb"><img src="${thumbFor(i.slug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
-                  <div class="cart-item-info"><strong>${i.name}</strong><span>${i.sizeLabel} · SKU: ${i.sku}</span></div>
+                  <div class="cart-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
+                  <div class="cart-item-info"><strong>${i.name}${i.type === 'sample' ? ' <span class="line-tag">Swatch</span>' : ''}</strong><span>${i.sizeLabel} · SKU: ${i.sku}</span></div>
                 </div>
               </td>
               <td data-label="Material">
@@ -481,7 +522,7 @@
     if (!wrap) return;
     wrap.innerHTML = Cart.items().map(i => `
         <div class="summary-item">
-          <div class="summary-item-thumb"><img src="${thumbFor(i.slug)}" alt="${i.name}" loading="lazy"></div>
+          <div class="summary-item-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name}" loading="lazy"></div>
           <div class="summary-item-info"><strong>${i.name} × ${i.qty}</strong><span>${i.sizeLabel.replace(' inch', '')} · ${i.finish}</span></div>
           <div class="summary-item-price">${fmtMoney(i.price * i.qty)}</div>
         </div>`).join('');
@@ -500,17 +541,25 @@
     const id = document.querySelector('[data-trade-id]');
     return !!(t && t.checked && id && id.value.trim() !== '');
   }
+  // A cart of nothing but swatches ships free — must match the cart page, or a
+  // "ships free" cart silently becomes a $12 UPS Ground order one screen later.
+  function isSwatchOnlyCart() {
+    const items = Cart.items();
+    return items.length > 0 && items.every(i => i.type === 'sample');
+  }
   function updateCheckoutTotals() {
     if (!document.querySelector('[data-order-items]')) return;
     const items = Cart.items();
     const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
     const discount = tradeActive() ? subtotal * 0.20 : 0;
-    const ship = selectedShipping();
+    const ship = isSwatchOnlyCart()
+      ? { label: 'Free (swatch order)', cost: 0 }
+      : selectedShipping();
     const tax = 0;
     const total = subtotal - discount + ship.cost + tax;
     setText('[data-co-subtotal]', fmtMoney(subtotal));
     const dl = document.querySelector('.trade-discount-line'); if (dl) dl.textContent = '−' + fmtMoney(discount);
-    setText('[data-co-shipping-label]', 'Shipping (' + ship.label + ')');
+    setText('[data-co-shipping-label]', ship.cost === 0 && isSwatchOnlyCart() ? 'Shipping' : 'Shipping (' + ship.label + ')');
     setText('[data-co-shipping]', fmtMoney(ship.cost));
     setText('[data-co-tax]', fmtMoney(tax));
     setText('[data-co-total]', fmtMoney(total));
@@ -550,7 +599,7 @@
           <tr>
             <td>
               <div class="cart-item">
-                <div class="cart-thumb"><img src="${thumbFor(i.slug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
+                <div class="cart-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
                 <div class="cart-item-info"><strong>${i.name} × ${i.qty}</strong><span>${i.sizeLabel.replace(' inch', '')} · ${i.finish} · SKU: ${i.sku}</span></div>
               </div>
             </td>
@@ -596,7 +645,16 @@
     const shipState  = document.querySelector('[data-ship-state]');
     const shipUpdate = document.querySelector('[data-ship-update]');
     const shipResult = document.querySelector('[data-ship-result]');
-    const sampleToggle = document.querySelector('#sample-toggle'); // free shipping when a sample order
+    // "Is this a swatch order" is derived from the lines themselves rather than
+    // asserted by a manual toggle, so the shipping note can never contradict
+    // the cart. `!== 'sample'` (not `=== 'product'`) because legacy carts have
+    // no type attribute at all.
+    const sampleRow = document.querySelector('[data-sample-note]');
+    function isSwatchOrder() {
+      const rows = tbody.querySelectorAll('[data-cart-row]');
+      return rows.length > 0 &&
+        Array.from(rows).every(r => r.getAttribute('data-line-type') === 'sample');
+    }
     const UPS_ZONE = { 'Illinois': 2, 'New York': 5, 'California': 7 };
     let shipEstimate = null; // dollars, or null until estimated
 
@@ -638,9 +696,10 @@
       });
       // Once an estimate exists, keep it in sync with qty changes.
       if (shipEstimate != null) { shipEstimate = estimateShipping(); showShipResult(); }
-      // Shipping: a sample order ships free; otherwise use the estimate
+      // Shipping: a swatch-only order ships free; otherwise use the estimate
       // if one was run, else "calculated at checkout".
-      const sample = sampleToggle && sampleToggle.checked;
+      const sample = isSwatchOrder();
+      if (sampleRow) sampleRow.hidden = !sample;
       let shipCost = 0, shipText;
       if (sample)                  { shipText = 'Free'; shipCost = 0; }
       else if (shipEstimate != null) { shipText = money(shipEstimate); shipCost = shipEstimate; }
@@ -687,7 +746,7 @@
       showShipResult();
       recompute();
     });
-    if (sampleToggle) sampleToggle.addEventListener('change', recompute);
+    // (No sample-toggle listener — swatch state is derived in recompute().)
 
     recompute();
   }
@@ -843,37 +902,182 @@
   }
 
   // ────────────────────────────────────────────────────────
-  // Track B faceted filters (visual toggle)
+  // Shop faceted filtering, sorting and counts
+  //
+  // One predicate per checkbox id. Facet GROUPS are read from the DOM
+  // (input.closest('.facet-group')), never a table here — so adding a facet is
+  // one <li> plus one entry below, and nothing else.
   // ────────────────────────────────────────────────────────
-  function initFacets() {
-    const facetInputs = document.querySelectorAll('.facet-list input[type="checkbox"]');
-    if (!facetInputs.length) return;
+  const FACET_DEFS = {
+    'cat-insets': p => p.subcategory === 'insets',
+    'cat-liners': p => p.subcategory === 'liners',
+    'cat-knobs':  p => p.category === 'Knobs & Pulls',
+    'cat-sale':   p => !!p.salePrice,
+    'size-3':     p => p.size === '3×3',
+    'size-2':     p => p.size === '2×2',
+    'size-1':     p => p.size === '1×1',
+    'size-5':     p => p.size === '5in',
+    'fin-trad':   p => p.finishes.includes('Traditional Bronze'),
+    'fin-wht':    p => p.finishes.includes('White Bronze'),
+    'pat-cab':    p => p.pattern === 'Cabochon',
+    'pat-lot':    p => p.pattern === 'Lotus',
+    'pat-mb':     p => p.pattern === 'Moon Blossom',
+    'pat-sun':    p => p.pattern === 'Sun',
+    'pat-grd':    p => p.pattern === 'Grid',
+    'pat-pin':    p => p.pattern === 'Pinwheel',
+  };
 
-    const chipBar = document.querySelector('.active-filter-chips');
-    function refreshChips() {
-      if (!chipBar) return;
-      const active = Array.from(facetInputs).filter(i => i.checked);
-      chipBar.innerHTML = active.map(i =>
-        `<span class="active-chip" data-target="${i.id}">${i.dataset.label || i.value} <span class="x">×</span></span>`
-      ).join('') + (active.length ? `<span class="clear-filters" data-clear>Clear all</span>` : '');
+  // Sale items must sort by what the customer actually pays, or the four
+  // discounted pieces sort by their struck-through number.
+  const effectivePrice = p => (p.salePrice != null ? p.salePrice : p.price);
 
-      chipBar.querySelectorAll('.active-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-          const target = document.getElementById(chip.dataset.target);
-          if (target) {
-            target.checked = false;
-            target.dispatchEvent(new Event('change'));
-          }
-        });
-      });
-      const clear = chipBar.querySelector('[data-clear]');
-      if (clear) clear.addEventListener('click', () => {
-        facetInputs.forEach(i => { i.checked = false; });
-        refreshChips();
-      });
+  const shopState = { min: null, max: null, sort: 'best' };
+
+  function allFacetInputs() {
+    return Array.from(document.querySelectorAll('.facet-group input[type="checkbox"]'));
+  }
+
+  function filteredProducts() {
+    const all = window.FA_PRODUCTS || [];
+    const checked = allFacetInputs().filter(i => i.checked && FACET_DEFS[i.id]);
+
+    // OR within a group, AND across groups.
+    const byGroup = new Map();
+    checked.forEach(i => {
+      const g = i.closest('.facet-group') || document.body;
+      if (!byGroup.has(g)) byGroup.set(g, []);
+      byGroup.get(g).push(FACET_DEFS[i.id]);
+    });
+
+    return all.filter(p => {
+      for (const preds of byGroup.values()) {
+        if (!preds.some(fn => fn(p))) return false;
+      }
+      const eff = effectivePrice(p);
+      if (shopState.min != null && eff < shopState.min) return false;
+      if (shopState.max != null && eff > shopState.max) return false;
+      return true;
+    });
+  }
+
+  function sortProducts(list) {
+    const out = list.slice();
+    switch (shopState.sort) {
+      // "Best match" with no search query is the merchandised catalog order.
+      case 'popularity': return out.sort((a, b) => a.popularity - b.popularity);
+      case 'newest':     return out.sort((a, b) => b.released - a.released);
+      case 'price-asc':  return out.sort((a, b) => effectivePrice(a) - effectivePrice(b));
+      case 'price-desc': return out.sort((a, b) => effectivePrice(b) - effectivePrice(a));
+      default:           return out;
     }
-    facetInputs.forEach(i => i.addEventListener('change', refreshChips));
-    refreshChips();
+  }
+
+  // Counts are computed against the FULL catalog, not "given other active
+  // filters" — dynamic counts jitter under the cursor and buy nothing at this
+  // catalog size.
+  function computeFacetCounts() {
+    const all = window.FA_PRODUCTS || [];
+    allFacetInputs().forEach(input => {
+      const fn = FACET_DEFS[input.id];
+      if (!fn) return;
+      const n = all.filter(fn).length;
+      const label = input.closest('label');
+      const span = label && label.querySelector('.count');
+      if (span) span.textContent = n;
+      // A checkbox that guarantees an empty grid is a trap.
+      if (label) label.classList.toggle('is-empty', n === 0);
+    });
+  }
+
+  function updatePriceCaption() {
+    const cap = document.querySelector('[data-price-caption]');
+    const all = window.FA_PRODUCTS || [];
+    if (!cap || !all.length) return;
+    const prices = all.map(effectivePrice);
+    cap.textContent = `${window.FA_FMT.price(Math.min(...prices))} – ${window.FA_FMT.price(Math.max(...prices))}`;
+  }
+
+  function updateResultCount(shown, total) {
+    const el = document.querySelector('[data-result-count]');
+    if (!el) return;
+    el.innerHTML = shown === total
+      ? `Showing all <strong>${total}</strong> pieces`
+      : `Showing <strong>${shown}</strong> of ${total} pieces`;
+  }
+
+  // Single entry point: filter → sort → render → count → empty state → chips.
+  function applyShop() {
+    const grid = document.querySelector('[data-shop-grid]');
+    if (!grid) return;
+    const list = sortProducts(filteredProducts());
+    const total = (window.FA_PRODUCTS || []).length;
+    renderShopGrid(list);
+    updateResultCount(list.length, total);
+    const empty = document.querySelector('[data-shop-empty]');
+    if (empty) empty.hidden = list.length !== 0;
+    refreshShopChips();
+  }
+
+  function clearAllFacets() {
+    allFacetInputs().forEach(i => { i.checked = false; });
+    // The original Clear-all reset the checkboxes but left .facet-swatch lit.
+    document.querySelectorAll('.facet-swatch.selected').forEach(s => s.classList.remove('selected'));
+    shopState.min = shopState.max = null;
+    const min = document.getElementById('price-min');
+    const max = document.getElementById('price-max');
+    if (min) min.value = '';
+    if (max) max.value = '';
+    applyShop();
+  }
+
+  function refreshShopChips() {
+    const chipBar = document.querySelector('.active-filter-chips');
+    if (!chipBar) return;
+    const active = allFacetInputs().filter(i => i.checked);
+    const priceOn = shopState.min != null || shopState.max != null;
+
+    let html = active.map(i =>
+      `<span class="active-chip" data-target="${i.id}">${i.dataset.label || i.value} <span class="x">×</span></span>`
+    ).join('');
+    if (priceOn) {
+      const lo = shopState.min != null ? window.FA_FMT.price(shopState.min) : 'Any';
+      const hi = shopState.max != null ? window.FA_FMT.price(shopState.max) : 'Any';
+      html += `<span class="active-chip" data-clear-price>${lo} – ${hi} <span class="x">×</span></span>`;
+    }
+    if (active.length || priceOn) html += `<span class="clear-filters" data-clear>Clear all</span>`;
+    chipBar.innerHTML = html;
+
+    chipBar.querySelectorAll('.active-chip[data-target]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const target = document.getElementById(chip.dataset.target);
+        if (!target) return;
+        target.checked = false;
+        const sw = target.closest('.facet-swatch');
+        if (sw) sw.classList.remove('selected');
+        applyShop();
+      });
+    });
+    const priceChip = chipBar.querySelector('[data-clear-price]');
+    if (priceChip) priceChip.addEventListener('click', () => {
+      shopState.min = shopState.max = null;
+      const min = document.getElementById('price-min');
+      const max = document.getElementById('price-max');
+      if (min) min.value = '';
+      if (max) max.value = '';
+      applyShop();
+    });
+    const clear = chipBar.querySelector('[data-clear]');
+    if (clear) clear.addEventListener('click', clearAllFacets);
+  }
+
+  function initFacets() {
+    const grid = document.querySelector('[data-shop-grid]');
+    if (!grid) return;
+
+    computeFacetCounts();
+    updatePriceCaption();
+
+    allFacetInputs().forEach(i => i.addEventListener('change', applyShop));
 
     // Swatch facets behave like checkboxes
     document.querySelectorAll('.facet-swatch').forEach(s => {
@@ -882,10 +1086,39 @@
         const hidden = s.querySelector('input');
         if (hidden) {
           hidden.checked = s.classList.contains('selected');
-          hidden.dispatchEvent(new Event('change'));
+          applyShop();
         }
       });
     });
+
+    const sort = document.getElementById('sort');
+    if (sort) {
+      shopState.sort = sort.value || 'best';   // honour a browser-restored value
+      sort.addEventListener('change', () => {
+        shopState.sort = sort.value;
+        applyShop();
+      });
+    }
+
+    const min = document.getElementById('price-min');
+    const max = document.getElementById('price-max');
+    const go  = document.querySelector('[data-price-go]');
+    const readPrice = () => {
+      const toNum = v => (v === '' || v == null || isNaN(parseFloat(v))) ? null : parseFloat(v);
+      shopState.min = toNum(min && min.value);
+      shopState.max = toNum(max && max.value);
+      applyShop();
+    };
+    if (go) go.addEventListener('click', readPrice);
+    // Apply on Go/Enter only — applying on input would thrash the grid mid-type.
+    [min, max].forEach(el => el && el.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); readPrice(); }
+    }));
+
+    const emptyClear = document.querySelector('[data-shop-clear]');
+    if (emptyClear) emptyClear.addEventListener('click', clearAllFacets);
+
+    applyShop();   // first render happens here, not via a standalone call
   }
 
   // ────────────────────────────────────────────────────────
@@ -975,24 +1208,14 @@
     `;
   }
 
-  function renderShopGrid() {
+  // Takes an optional pre-filtered/sorted list; defaults to the whole catalog.
+  // productCardHTML is deliberately untouched so renderCrossSell() and
+  // renderShopSidebar() cannot regress.
+  function renderShopGrid(list) {
     const grid = document.querySelector('[data-shop-grid]');
     if (!grid || !window.FA_PRODUCTS) return;
-    grid.innerHTML = window.FA_PRODUCTS.map(p => productCardHTML(p)).join('');
-    updateShopPagination();
-  }
-
-  // Hide the pagination control when every product fits on page 1 —
-  // i.e. the grid already renders all available items, so there is no
-  // page 2. If real paging is added later (grid renders a slice),
-  // rendered < total and the control reappears automatically.
-  function updateShopPagination() {
-    const pager = document.querySelector('.pagination');
-    const grid = document.querySelector('[data-shop-grid]');
-    if (!pager || !grid) return;
-    const rendered = grid.querySelectorAll('.product-card').length;
-    const total = (window.FA_PRODUCTS || []).length;
-    pager.style.display = rendered >= total ? 'none' : '';
+    const items = list || window.FA_PRODUCTS;
+    grid.innerHTML = items.map(p => productCardHTML(p)).join('');
   }
 
   function renderCrossSell() {
@@ -1273,6 +1496,7 @@
     initQtySteppers();
     initCart();
     initAddToCart();
+    initSampleOrder();
     initCheckout();
     initOrderReceived();
     initTabs();
@@ -1294,7 +1518,9 @@
     initInsituAutoscroll();
     initInsituScrollIndicator();
     initFaqAccordion();
-    renderShopGrid();
+    // No standalone renderShopGrid() — initFacets() performs the first render
+    // via applyShop(). Calling it here too would double-render, and the second
+    // pass would ignore the active filters.
     renderCrossSell();
     renderShopSidebar();
   });

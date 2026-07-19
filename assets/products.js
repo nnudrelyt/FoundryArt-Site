@@ -15,6 +15,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-LOT-3-TB',
     description: 'A stylized lotus blossom motif — one of our oldest patterns, originally carved in 1991. Used singly as a focal inset or repeated in a band.',
+    popularity: 2,
+    released: 1,
     inStock: true,
   },
   {
@@ -30,6 +32,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-CAB-3-TB',
     description: 'A raised dome center against a flat field — the most ordered piece in our catalog. Works as a single accent or repeated for a grid effect.',
+    popularity: 1,
+    released: 2,
     inStock: true,
   },
   {
@@ -45,6 +49,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-MBL-3-TB',
     description: 'A botanical motif with a soft crescent at its base — pairs naturally with limestone and travertine fields.',
+    popularity: 5,
+    released: 5,
     inStock: true,
   },
   {
@@ -60,6 +66,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-SUN-3-TB',
     description: 'Radiant sunburst rays from a central boss. A statement piece — works well as a singular focal point.',
+    popularity: 6,
+    released: 6,
     inStock: true,
   },
   {
@@ -75,6 +83,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-WAT-3-TB',
     description: 'Flowing horizontal lines suggesting calm water. Subtle enough to repeat in a continuous band.',
+    popularity: 8,
+    released: 7,
     inStock: true,
   },
   {
@@ -91,6 +101,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-GRD-3-TB',
     description: 'A clean nine-square grid pattern. Modernist and geometric — pairs with crisp porcelain fields.',
+    popularity: 9,
+    released: 9,
     inStock: true,
   },
   {
@@ -107,6 +119,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-PIN-3-TB',
     description: 'Rotational geometric motif. Reads as movement when repeated in a row of three or more.',
+    popularity: 10,
+    released: 8,
     inStock: true,
   },
   {
@@ -122,6 +136,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-CAB-2-TB',
     description: 'The Cabochon motif at 2×2 inch — drops perfectly into a 2×2 tumbled stone field.',
+    popularity: 4,
+    released: 3,
     inStock: true,
   },
   {
@@ -138,6 +154,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-CSQ-2-TB',
     description: 'A small raised square centered in a flat field. Restrained and architectural.',
+    popularity: 11,
+    released: 10,
     inStock: true,
   },
   {
@@ -153,6 +171,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-CAB-1-TB',
     description: 'The smallest format Cabochon — used as a punctuation between larger field tiles.',
+    popularity: 3,
+    released: 4,
     inStock: true,
   },
   {
@@ -169,6 +189,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-CAB-KNB',
     description: 'Our Cabochon motif as a cabinet knob. Same hand-cast bronze as our tiles — perfect carry-through detail.',
+    popularity: 7,
+    released: 11,
     inStock: true,
   },
   {
@@ -184,6 +206,8 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-CAB-PUL',
     description: 'The Cabochon motif drawn out into a five-inch bar pull. Cast in the same solid bronze as our tiles, so drawer and door hardware carries the detail through from the backsplash.',
+    popularity: 12,
+    released: 13,
     inStock: true,
   },
   {
@@ -199,9 +223,23 @@ window.FA_PRODUCTS = [
     finishes: ['Traditional Bronze', 'White Bronze'],
     sku: 'FA-LOT-KNB',
     description: 'Our 1991 Lotus blossom brought down to knob scale. The floral relief still reads clearly at the hand — a quiet carry-through from a Lotus tile inset.',
+    popularity: 13,
+    released: 12,
     inStock: true,
   },
 ];
+
+// Swatch / sample spec — samples are NOT catalog products (see FA_SAMPLE usage
+// in app.js). Keeping them out of FA_PRODUCTS means the shop grid, facet counts,
+// cross-sell and FA_PRODUCT_BY_SLUG are all untouched by the sample feature.
+// price is free for now; flip this one constant if that changes.
+window.FA_SAMPLE = {
+  price: 0,
+  weight: 0.05,          // lb — never derive this via weightForSize()
+  skuPrefix: 'FA-SWATCH',
+  sizeLabel: 'Swatch · 1×1 inch',
+  leadTime: '3–5 business days',
+};
 
 // Convenience lookup
 window.FA_PRODUCT_BY_SLUG = Object.fromEntries(window.FA_PRODUCTS.map(p => [p.slug, p]));
