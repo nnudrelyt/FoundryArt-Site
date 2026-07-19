@@ -10823,7 +10823,8 @@ body[data-page="account-sign-in"] .auth-link:hover { color: var(--charcoal); bor
    it. This kept the "sample order — ships free" banner visible on mixed carts
    that do not ship free. */
 .trade-row[hidden],
-.shop-empty[hidden] { display: none !important; }
+.shop-empty[hidden],
+.summary-row[hidden] { display: none !important; }
 
 /* ══════════════════════════════════════════════════════════════════════
    Foundry Art — wide-screen tiers
@@ -11755,11 +11756,11 @@ body[data-page="checkout"] .step-num {
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 50%;
   border: 1.5px solid var(--rule);
-  font-size: 14px; font-weight: 500; color: var(--slate-l);
+  font-size: 14px; font-weight: 500; color: var(--slate);
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 body[data-page="checkout"] .checkout-step.is-open .step-num {
-  border-color: var(--bronze); color: var(--bronze);
+  border-color: var(--bronze); color: var(--slate);
 }
 body[data-page="checkout"] .checkout-step.is-complete .step-num {
   background: var(--bronze); border-color: var(--bronze); color: #fff;
