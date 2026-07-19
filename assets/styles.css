@@ -11105,3 +11105,53 @@ body[data-page="shop"]:not([data-product-slug]) .shop-sort select:focus-visible 
 @media (min-width: 1440px) { body[data-product-slug] .page { padding-top: 48px; } }
 @media (max-width: 900px)  { body[data-product-slug] .page { padding-top: 20px; } }
 @media (max-width: 560px)  { body[data-product-slug] .page { padding-top: 16px; } }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PDP — LEGIBILITY REFINEMENTS
+   Same brief as the shop filters: this has to read for customers with older
+   eyes. Sizes up one step, button labels to 500, and the two --mid greys in
+   the detail info lifted to --slate-l.
+
+   Tracking is widened only on the uppercase runs (buttons, tabs, spec
+   labels). Letter-spacing helps set-caps, where the letterforms are uniform
+   and word-shape doesn't exist; on lowercase prose it breaks up the word
+   shapes readers actually navigate by, so .pdp-desc and the panel copy are
+   deliberately left alone.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Buttons — heavier label, wider set */
+body[data-product-slug] .pdp-actions .btn-primary,
+body[data-product-slug] .pdp-actions .btn-sample {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2.6px;
+}
+
+/* Tabs */
+body[data-product-slug] .tab-btn { font-size: 14px; letter-spacing: 2.6px; }
+body[data-product-slug] .tab-btn.active { font-weight: 500; }
+
+/* Spec table — the "product detail info". Labels were --mid at 5.55:1;
+   --slate-l takes them to 6.45:1 while staying clearly secondary to the
+   values beside them. */
+body[data-product-slug] .specs-table th {
+  font-size: 14px;
+  letter-spacing: 1.8px;
+  color: var(--slate-l);
+}
+body[data-product-slug] .specs-table td { font-size: 16px; }
+
+/* SKU / Category / Made in */
+body[data-product-slug] .pdp-meta-row { font-size: 14px; color: var(--slate-l); }
+
+/* Material selector */
+body[data-product-slug] .swatch-label { font-size: 16px; }
+body[data-product-slug] .swatch-label small { font-size: 13px; }
+
+/* Field labels above the selector ("MATERIAL") and the ships-in note */
+body[data-product-slug] .pdp-info .form-group > label {
+  font-size: 13px;
+  letter-spacing: 2.2px;
+  color: var(--slate-l);
+}
+body[data-product-slug] .pdp-ships { font-size: 15px; color: var(--slate-l); }
