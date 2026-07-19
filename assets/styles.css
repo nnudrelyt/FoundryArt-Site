@@ -10453,7 +10453,7 @@ body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info spa
 body[data-page="checkout"] .summary-card.checkout-summary .summary-item-price { font-size: 13px; }
 
 /* Funnel form fields — larger type, roomier padding, bronze focus */
-:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group label { font-size: 11px; }
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group label { font-size: 11px; font-weight: 500; }
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group select,
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group input,
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea,
@@ -11635,19 +11635,20 @@ body[data-page="checkout"] .form-group label:has(span[aria-hidden="true"]) { dis
 @media (max-width: 560px) {
   body[data-page="checkout"] .form-group { margin-bottom: 13px; }
   body[data-page="checkout"] .field-grid { gap: 11px 16px; }
-  body[data-page="checkout"] .form-group label { margin-bottom: 5px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group label { margin-bottom: 5px; }
 }
 
 /* Field labels darkened from --mid (5.55:1) to --slate (11.73:1) — they were
-   reading as placeholder-faint against the white form. */
-body[data-page="checkout"] .form-group label { color: var(--slate); }
+   reading as placeholder-faint against the white form. Funnel-wide so cart,
+   checkout and the account pages (incl. sign-in) all match. */
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group label { color: var(--slate); }
 
 /* Tighter vertical rhythm on desktop too — the earlier pass only touched the
    phone. Row gap and label-to-input both come in; column gap stays 24 so the
    First/Last pair keeps its breathing room. */
 @media (min-width: 561px) {
   body[data-page="checkout"] .field-grid { gap: 11px 24px; }
-  body[data-page="checkout"] .form-group label { margin-bottom: 6px; }
+  :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group label { margin-bottom: 6px; }
   body[data-page="checkout"] .form-group { margin-bottom: 13px; }
 }
 
@@ -11814,3 +11815,6 @@ body[data-page="checkout"] .coupon-msg.is-error { color: #A3231B; }
    sits ~50% closer to Order notes. (Only the last section in step 1; the
    between-section spacing elsewhere is unchanged.) */
 body[data-page="checkout"] .checkout-step[data-step="1"] .step-body > .checkout-section:last-of-type { margin-bottom: 14px; }
+
+/* Form hints lifted off --mid for the same legibility reason as the labels. */
+:is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-hint { color: var(--slate-l); font-size: 13px; }
