@@ -11788,3 +11788,9 @@ body[data-page="checkout"] .step-body > .checkout-section:first-child { margin-t
 body[data-page="checkout"] .coupon-msg { font-size: 12px; margin: 8px 0 0; }
 body[data-page="checkout"] .coupon-msg.is-ok { color: #5A7961; }
 body[data-page="checkout"] .coupon-msg.is-error { color: #A3231B; }
+
+/* Step 1: the billing section is the last block before the Continue button,
+   so its 34px section margin was setting the gap. Trim it there — the button
+   sits ~50% closer to Order notes. (Only the last section in step 1; the
+   between-section spacing elsewhere is unchanged.) */
+body[data-page="checkout"] .checkout-step[data-step="1"] .step-body > .checkout-section:last-of-type { margin-bottom: 14px; }
