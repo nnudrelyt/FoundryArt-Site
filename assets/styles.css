@@ -1813,7 +1813,6 @@ body[data-page="home"] .footer p { border: 0 !important; }
   color: var(--slate);
   margin-bottom: 28px;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--rule);
 }
 
 .form-group { margin-bottom: 22px; }
@@ -1905,7 +1904,6 @@ body[data-page="home"] .footer p { border: 0 !important; }
 /* Tabs */
 .pdp-tabs {
   margin-top: 80px;
-  border-top: 1px solid var(--rule);
   padding-top: 40px;
 }
 .tab-list {
@@ -1949,6 +1947,9 @@ body[data-page="home"] .footer p { border: 0 !important; }
   margin-top: 8px;
 }
 .specs-table tr { border-bottom: 1px solid var(--rule); }
+/* The dividers separate rows; after the last one there is nothing to
+   separate, so it reads as a box that never closes. */
+.specs-table tr:last-child { border-bottom: none; }
 .specs-table th {
   text-align: left;
   font-weight: 500;
@@ -11224,3 +11225,10 @@ body[data-product-slug] .pdp-info .form-group > label {
   color: var(--slate-l);
 }
 body[data-product-slug] .pdp-ships { font-size: 15px; color: var(--slate-l); }
+
+/* Breadcrumb and tab labels carry more weight — both are small tracked caps,
+   where 400 goes thin and the tracking thins it further. Jost is loaded at
+   300/400/500 only, so 500 is the ceiling; anything heavier would be
+   synthesised into a faux bold. */
+.breadcrumb { font-weight: 500; }
+body[data-product-slug] .tab-btn { font-weight: 500; }
