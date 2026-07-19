@@ -11463,3 +11463,14 @@ body[data-page="cart"] .cart-remove:focus-visible {
   body[data-page="cart"] .cart-table th:nth-child(6),
   body[data-page="cart"] .cart-table td:nth-child(6) { text-align: right; }
 }
+
+/* Shop header: the eyebrow above the title is gone, and this page hides its
+   breadcrumb, so the page padding is the only separation from the nav. 96px
+   was sized for a header that opened with a small tracked line; without it
+   the title was left floating. */
+@media (min-width: 1440px) {
+  body[data-page="shop"]:not([data-product-slug]) .page { padding-top: 64px; }
+}
+@media (min-width: 901px) and (max-width: 1439px) {
+  body[data-page="shop"]:not([data-product-slug]) .page { padding-top: 44px; }
+}
