@@ -11355,6 +11355,11 @@ body[data-page="cart"] .swatch-label { font-size: 14px; }
    hover or focus treatment. */
 .cart-finish {
   display: inline-block;
+  /* One width for both finishes: "Traditional" is 25px wider than "White",
+     which left the badges ragged down the column and made the gap after
+     Material vary row to row. */
+  min-width: 118px;
+  text-align: center;
   padding: 8px 14px;
   border-radius: 4px;
   border: 1px solid transparent;
@@ -11419,4 +11424,42 @@ body[data-page="cart"] .cart-remove:focus-visible {
      long header and short values made the relationship hard to read. */
   body[data-page="cart"] .cart-table th:nth-child(5),
   body[data-page="cart"] .cart-table td:nth-child(5) { text-align: left; }
+}
+
+/* ── Cart column widths ─────────────────────────────────────────────────
+   Auto layout gave the product cell every spare pixel and sized the rest to
+   their content, so gaps between columns ran 16 / 93 / 51 / 51 / 90px.
+
+   These widths are solved for a uniform 70px gap rather than picked by eye.
+   Mixed alignment makes that non-obvious: a left-aligned column contributes
+   all its slack after the content, while a centred one (Qty, per its header)
+   splits the slack evenly on both sides. So each width is content + the
+   slack that column needs to contribute:
+
+     Material  118 badge + 70 trailing        = 188
+     Price      62 text  +  0 (Qty leads)     =  62
+     Qty       138 step  + 70 each side       = 278
+     Subtotal   70 text  + 70 trailing        = 140
+     Remove     40 icon  +  0 (right-aligned) =  40
+
+   Right padding is zeroed on these so width alone controls the rhythm;
+   otherwise padding stacks on top of the solved slack. */
+@media (min-width: 901px) {
+  body[data-page="cart"] .cart-table { table-layout: fixed; }
+  body[data-page="cart"] .cart-table th:nth-child(1) { width: auto; }
+  body[data-page="cart"] .cart-table th:nth-child(2) { width: 188px; }
+  body[data-page="cart"] .cart-table th:nth-child(3) { width: 62px;  }
+  body[data-page="cart"] .cart-table th:nth-child(4) { width: 278px; }
+  body[data-page="cart"] .cart-table th:nth-child(5) { width: 140px; }
+  body[data-page="cart"] .cart-table th:nth-child(6) { width: 40px;  }
+
+  body[data-page="cart"] .cart-table :is(th, td):nth-child(n+2) { padding-right: 0; }
+
+  /* Price joins Subtotal on the left. It was the one money column still
+     pulling right, which is what opened the widest hole in the row. */
+  body[data-page="cart"] .cart-table th:nth-child(3),
+  body[data-page="cart"] .cart-table td:nth-child(3) { text-align: left; }
+
+  body[data-page="cart"] .cart-table th:nth-child(6),
+  body[data-page="cart"] .cart-table td:nth-child(6) { text-align: right; }
 }
