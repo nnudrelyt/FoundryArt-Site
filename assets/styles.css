@@ -11341,5 +11341,34 @@ body[data-product-slug] .pdp-actions .btn-primary,
 /* ── Cart line details ──────────────────────────────────────────────────
    Replaces the inline font-size that used to sit on these. */
 body[data-page="cart"] .swatch-label { font-size: 14px; }
-.cart-continue { margin-top: 24px; font-size: 14px; color: var(--mid); }
 .confirm-emphasis { font-weight: 500; font-size: 15px; }
+
+/* ── Cart: material reads as the PDP's filled badge ─────────────────────
+   Same visual language as the PDP selector — the finish colour IS the
+   badge, so the separate circle is redundant. Gradient stops and text
+   colours are the PDP's, chosen so both finishes clear AA (the pewter side
+   takes charcoal, the bronze side white; they sit at opposite lightnesses
+   and can't share one). Informational here, not a control — hence no
+   hover or focus treatment. */
+.cart-finish {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.cart-finish[data-finish="traditional"] {
+  background: linear-gradient(135deg, #846556 0%, #6B5645 100%);
+  border-color: #5E4B3C;
+  color: #FFFFFF;
+}
+.cart-finish[data-finish="white"] {
+  background: linear-gradient(135deg, #CCCAC0 0%, #A9A79B 100%);
+  border-color: #8F8B7E;
+  color: var(--charcoal);
+}
+
+/* Sample tag picks up the same 3px the other controls use. */
+.line-tag { border-radius: 3px; }

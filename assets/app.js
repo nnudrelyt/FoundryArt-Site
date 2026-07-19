@@ -582,10 +582,7 @@
                 </div>
               </td>
               <td data-label="Material">
-                <span class="swatch" style="padding:6px 12px 6px 8px;display:inline-flex;">
-                  <span class="swatch-chip ${chipClass(i.finish)}" style="width:18px;height:18px;"></span>
-                  <span class="swatch-label">${finishShort(i.finish)}</span>
-                </span>
+                <span class="cart-finish" data-finish="${chipClass(i.finish)}">${finishShort(i.finish)}</span>
               </td>
               <td class="num" data-label="Price" data-unit-price="${i.price}">${fmtMoney(i.price)}</td>
               <td data-label="Qty">
