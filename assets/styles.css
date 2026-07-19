@@ -11783,3 +11783,8 @@ body[data-page="checkout"] .step-continue { display: block; width: 100%; margin-
 /* The two inner sections in step 2 (Shipping / Payment) keep their own
    subheads, so their first-child top margin is trimmed under the step head. */
 body[data-page="checkout"] .step-body > .checkout-section:first-child { margin-top: 0; }
+
+/* Coupon feedback line under the Apply row. */
+body[data-page="checkout"] .coupon-msg { font-size: 12px; margin: 8px 0 0; }
+body[data-page="checkout"] .coupon-msg.is-ok { color: #5A7961; }
+body[data-page="checkout"] .coupon-msg.is-error { color: #A3231B; }

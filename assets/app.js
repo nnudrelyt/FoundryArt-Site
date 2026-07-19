@@ -628,18 +628,34 @@
     const items = Cart.items();
     return items.length > 0 && items.every(i => i.type === 'sample');
   }
+  // Demo coupon codes (prototype). A real store validates server-side.
+  const COUPONS = {
+    'WELCOME10': { label: 'Coupon (WELCOME10)', rate: 0.10 },
+    'FOUNDRY15': { label: 'Coupon (FOUNDRY15)', rate: 0.15 },
+  };
+  let appliedCoupon = null;   // { label, rate } once a valid code is applied
+
   function updateCheckoutTotals() {
     if (!document.querySelector('[data-order-items]')) return;
     const items = Cart.items();
     const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
     const discount = tradeActive() ? subtotal * 0.20 : 0;
+    const couponAmt = appliedCoupon ? subtotal * appliedCoupon.rate : 0;
     const ship = isSampleOnlyCart()
       ? { label: 'Free (sample order)', cost: 0 }
       : selectedShipping();
     const tax = 0;
-    const total = subtotal - discount + ship.cost + tax;
+    const total = subtotal - discount - couponAmt + ship.cost + tax;
     setText('[data-co-subtotal]', fmtMoney(subtotal));
     const dl = document.querySelector('.trade-discount-line'); if (dl) dl.textContent = '−' + fmtMoney(discount);
+    const couponRow = document.querySelector('[data-coupon-row]');
+    if (couponRow) {
+      couponRow.hidden = !appliedCoupon;
+      if (appliedCoupon) {
+        setText('[data-coupon-label]', appliedCoupon.label);
+        setText('[data-coupon-amount]', '−' + fmtMoney(couponAmt));
+      }
+    }
     setText('[data-co-shipping-label]', ship.cost === 0 && isSampleOnlyCart() ? 'Shipping' : 'Shipping (' + ship.label + ')');
     setText('[data-co-shipping]', fmtMoney(ship.cost));
     setText('[data-co-tax]', fmtMoney(tax));
@@ -763,6 +779,33 @@
     const tt = document.querySelector('[data-trade-toggle]'); if (tt) tt.addEventListener('change', updateCheckoutTotals);
     const tid = document.querySelector('[data-trade-id]');
     if (tid) { tid.addEventListener('input', updateCheckoutTotals); tid.addEventListener('blur', updateCheckoutTotals); }
+
+    // Coupon apply (demo codes)
+    const couponBtn = document.querySelector('[data-coupon-apply]');
+    const couponInput = document.querySelector('[data-coupon-input]');
+    const couponMsg = document.querySelector('[data-coupon-msg]');
+    function showCouponMsg(text, ok) {
+      if (!couponMsg) return;
+      couponMsg.textContent = text;
+      couponMsg.classList.toggle('is-ok', !!ok);
+      couponMsg.classList.toggle('is-error', !ok);
+      couponMsg.hidden = !text;
+    }
+    function applyCoupon() {
+      const code = (couponInput && couponInput.value.trim().toUpperCase()) || '';
+      if (!code) { showCouponMsg('Enter a code first.', false); return; }
+      const match = COUPONS[code];
+      if (match) {
+        appliedCoupon = match;
+        showCouponMsg(Math.round(match.rate * 100) + '% off applied.', true);
+      } else {
+        appliedCoupon = null;
+        showCouponMsg('That code isn\u2019t valid.', false);
+      }
+      updateCheckoutTotals();
+    }
+    if (couponBtn) couponBtn.addEventListener('click', applyCoupon);
+    if (couponInput) couponInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); applyCoupon(); } });
     // Single submit owner: validate first, and only snapshot + redirect when
     // the form is clean. A second listener wouldn't work — listeners fire in
     // registration order, so this one would clear the cart before validation
@@ -775,8 +818,9 @@
       const items = Cart.items();
       const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
       const discount = tradeActive() ? subtotal * 0.20 : 0;
+      const couponAmt = appliedCoupon ? subtotal * appliedCoupon.rate : 0;
       const ship = isSampleOnlyCart() ? { label: 'Free (sample order)', cost: 0 } : selectedShipping();
-      const total = subtotal - discount + ship.cost;
+      const total = subtotal - discount - couponAmt + ship.cost;
       // id/date/status are stamped here so this order can be promoted to the
       // top of the account order history (see Account.orders()).
       const now = new Date();
