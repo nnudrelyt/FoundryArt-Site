@@ -11169,7 +11169,16 @@ body[data-product-slug] .specs-table td {
 }
 
 /* SKU / Category / Made in */
-body[data-product-slug] .pdp-meta-row { font-size: 14px; color: var(--slate-l); }
+body[data-product-slug] .pdp-meta-row {
+  font-size: 14px;
+  color: var(--slate-l);
+  /* Rule removed to match the other three, and the padding that held the row
+     off it goes with it — otherwise the gap survives the line that justified
+     it. The .pdp-actions margin below the buttons now carries the separation
+     on its own: 46px -> 28px. */
+  border-top: none;
+  padding-top: 0;
+}
 
 /* Material selector — pulled back down. The legibility pass pushed the rest
    of the column up a step, which left this reading as the loudest thing in
