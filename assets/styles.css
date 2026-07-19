@@ -11013,6 +11013,7 @@ body[data-page="shop"]:not([data-product-slug]) .facet-group h5 { font-size: 13p
   letter-spacing: 1.2px;
   padding: 8px 12px 8px 14px;
   gap: 8px;
+  border-radius: 3px;   /* matches the checkboxes and sort select */
 }
 .active-chip .x { font-size: 15px; }
 .clear-filters { font-size: 13px; letter-spacing: 1.5px; }
