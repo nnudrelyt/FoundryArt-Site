@@ -11557,15 +11557,16 @@ body[data-page="checkout"] .summary-card.checkout-summary .summary-item-info spa
 body[data-page="checkout"] .summary-card.checkout-summary .summary-item-price { font-size: 17px; }
 body[data-page="checkout"] .summary-card.checkout-summary .summary-row { font-size: 15px; }
 
+/* The apartment field carries an empty spacer label (&nbsp;) that only lined
+   up two adjacent fields in an older two-column layout; both here are full
+   width, so on every screen it's just dead height between Street and Apt. */
+body[data-page="checkout"] .form-group label:has(span[aria-hidden="true"]) { display: none; }
+
 /* ── Tighter vertical rhythm on phones so the tall form scrolls less. ── */
 @media (max-width: 560px) {
-  body[data-page="checkout"] .form-group { margin-bottom: 16px; }
-  body[data-page="checkout"] .field-grid { gap: 14px 16px; }
-  body[data-page="checkout"] .form-group label { margin-bottom: 6px; }
-  /* The apartment field carries an empty spacer label (&nbsp;) to line up
-     with Street Address in the desktop two-column grid. Stacked on a phone
-     that spacer is just dead height between two inputs, so hide it. */
-  body[data-page="checkout"] .form-group label:has(span[aria-hidden="true"]) { display: none; }
+  body[data-page="checkout"] .form-group { margin-bottom: 13px; }
+  body[data-page="checkout"] .field-grid { gap: 11px 16px; }
+  body[data-page="checkout"] .form-group label { margin-bottom: 5px; }
 }
 
 /* Field labels darkened from --mid (5.55:1) to --slate (11.73:1) — they were
@@ -11576,7 +11577,13 @@ body[data-page="checkout"] .form-group label { color: var(--slate); }
    phone. Row gap and label-to-input both come in; column gap stays 24 so the
    First/Last pair keeps its breathing room. */
 @media (min-width: 561px) {
-  body[data-page="checkout"] .field-grid { gap: 14px 24px; }
-  body[data-page="checkout"] .form-group label { margin-bottom: 7px; }
-  body[data-page="checkout"] .form-group { margin-bottom: 16px; }
+  body[data-page="checkout"] .field-grid { gap: 11px 24px; }
+  body[data-page="checkout"] .form-group label { margin-bottom: 6px; }
+  body[data-page="checkout"] .form-group { margin-bottom: 13px; }
 }
+
+/* Field height comes in with the gaps — 12px -> 10px vertical padding, so the
+   inputs read a touch more compact without cramping the 15px text. */
+body[data-page="checkout"] .form-group input,
+body[data-page="checkout"] .form-group select,
+body[data-page="checkout"] .form-group textarea { padding-top: 10px; padding-bottom: 10px; }
