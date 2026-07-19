@@ -1759,9 +1759,11 @@ body[data-page="home"] .footer p { border: 0 !important; }
   text-transform: uppercase;
 }
 .pdp-gallery .thumbs {
+  /* Fixed-size thumbs rather than 3 stretched columns: at full width those
+     rendered ~260px each, competing with the hero they're meant to index. */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  grid-template-columns: repeat(auto-fill, 84px);
+  gap: 10px;
 }
 .pdp-gallery .thumb {
   aspect-ratio: 1;
@@ -1777,7 +1779,8 @@ body[data-page="home"] .footer p { border: 0 !important; }
   border: 2px solid transparent;
   transition: border-color 0.2s ease;
 }
-.pdp-gallery .thumb:hover, .pdp-gallery .thumb.active { border-color: var(--charcoal); }
+.pdp-gallery .thumb { border-radius: 3px; }
+.pdp-gallery .thumb:hover, .pdp-gallery .thumb.active { border-color: var(--bronze); }
 
 .pdp-info {
   position: sticky;
@@ -2283,24 +2286,42 @@ body[data-page="home"] .footer p { border: 0 !important; }
    ────────────────────────────────────────────────────────── */
 
 /* Swatch chips */
-.swatch-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+.swatch-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
 .swatch {
+  /* Equal widths — the two finishes are peers, so a ragged row (Traditional
+     wider than White purely because its name is longer) reads accidental. */
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 14px 8px 8px;
+  gap: 12px;
+  padding: 12px 16px;
   border: 1px solid var(--rule);
+  border-radius: 4px;
   cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--white);
+  text-align: left;
+}
+.swatch:hover { border-color: var(--slate-l); }
+/* Selected reads as a bronze ring on white rather than a filled cream block —
+   quieter, and it keeps the finish chips on a neutral ground so they stay
+   comparable. The ring is an inset shadow, not a wider border, so selecting
+   doesn't shift the row by a pixel. */
+.swatch.selected {
+  border-color: var(--bronze);
+  box-shadow: inset 0 0 0 1px var(--bronze);
   background: var(--white);
 }
-.swatch:hover { border-color: var(--charcoal); }
-.swatch.selected { border-color: var(--charcoal); background: var(--cream); }
+.swatch:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
 .swatch-chip {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.12);
+  /* Slight top highlight / bottom shade so the chip reads as cast metal
+     rather than a flat colour dot. */
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.30), inset 0 -1px 2px rgba(0,0,0,0.18);
 }
 /* Bronze finish chips — sampled from real Foundry Art tile photography
    (warm pewter for Traditional, cool muted pewter for White Bronze).
@@ -2309,10 +2330,11 @@ body[data-page="home"] .footer p { border: 0 !important; }
 .swatch-chip.traditional { background: linear-gradient(135deg, #9C8470 0%, #6B5645 100%); }
 .swatch-chip.white { background: linear-gradient(135deg, #CCCAC0 0%, #8F8B7E 100%); }
 .swatch-label {
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 1.3;
   color: var(--charcoal);
 }
-.swatch-label small { display: block; color: var(--mid); font-size: 10px; margin-top: 1px; }
+.swatch-label small { display: block; color: var(--slate-l); font-size: 11px; margin-top: 3px; }
 
 /* Faceted filter sidebar (Track B shop) */
 .facet-group {
@@ -2362,72 +2384,6 @@ body[data-page="home"] .footer p { border: 0 !important; }
 .active-chip .x { font-size: 12px; line-height: 1; color: var(--mid); }
 .active-chip:hover .x { color: var(--sale); }
 .clear-filters { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); cursor: pointer; border-bottom: 1px solid var(--bronze-l); }
-/* In-room visualizer slot (Track B PDP) — interactive room swap */
-.visualizer-slot {
-  position: relative;
-  margin: 24px 0;
-  background: var(--wire-fill);
-  border: 1px solid var(--rule);
-  overflow: hidden;
-  min-height: 320px;
-  padding: 0;
-}
-.visualizer-image {
-  position: absolute;
-  inset: 0;
-}
-.visualizer-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: opacity 0.25s ease;
-}
-.visualizer-overlay {
-  position: relative;
-  z-index: 1;
-  padding: 220px 20px 18px;
-  background: linear-gradient(to top,
-    rgba(20,37,40,0.85) 0%,
-    rgba(20,37,40,0.6) 35%,
-    rgba(20,37,40,0) 75%);
-  color: var(--white);
-  min-height: 320px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-.visualizer-overlay strong {
-  display: block;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 4px;
-  color: var(--white);
-}
-.visualizer-overlay > span { font-size: 11px; color: rgba(255,255,255,0.78); }
-.visualizer-tabs {
-  display: inline-flex;
-  gap: 8px;
-  margin-top: 14px;
-}
-.visualizer-tabs button {
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 7px 14px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.25);
-  color: var(--white);
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
-}
-.visualizer-tabs button:hover { background: rgba(255,255,255,0.18); }
-.visualizer-tabs button.active {
-  background: var(--bronze);
-  border-color: var(--bronze);
-}
-
 /* Sample request CTA (Track B PDP) */
 .btn-sample {
   font-size: 11px;
@@ -2841,12 +2797,7 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .swatch { padding: 11px 20px 11px 12px; }
   .swatch-chip { width: 28px; height: 28px; }
   .swatch-label { font-size: 14px; }
-  .swatch-label small { font-size: 12px; }  .visualizer-slot { min-height: 420px; }
-  .visualizer-overlay { padding: 290px 26px 24px; min-height: 420px; }
-  .visualizer-overlay strong { font-size: 24px; }
-  .visualizer-overlay > span { font-size: 13px; }
-  .visualizer-tabs button { padding: 9px 18px; font-size: 12px; letter-spacing: 2px; }
-  .facet-group h5 { font-size: 11px; }
+  .swatch-label small { font-size: 12px; }  .facet-group h5 { font-size: 11px; }
   .facet-list li { font-size: 13px; padding: 6px 0; }
   .review-title { font-size: 20px; }
   .review-body { font-size: 14px; line-height: 1.75; }
@@ -10815,44 +10766,12 @@ body[data-page="account-sign-in"] .account-signin-layout {
 }
 .checkout-errors[hidden] { display: none; }
 
-/* ── PDP: secondary "compare both finishes" path ───────────────────────
-   A quiet text action under the swatch button, not a third button — the
-   two existing buttons already carry the primary and secondary weight. */
-.pdp-sample-alt {
-  margin: 10px 0 0;
-  text-align: center;
-}
-.pdp-sample-alt[hidden] { display: none; }
-
-.link-button {
-  background: none;
-  border: 0;
-  padding: 0;
-  font-family: 'Jost', sans-serif;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  color: var(--mid);
-  border-bottom: 1px solid var(--rule);
-  cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.link-button:hover {
-  color: var(--bronze);
-  border-bottom-color: var(--bronze-l);
-}
-.link-button:disabled {
-  opacity: 0.55;
-  cursor: default;
-  color: var(--bronze);
-}
-
 /* The `hidden` attribute only sets display:none via the UA stylesheet, so any
    author rule with an explicit display (.trade-row is flex) silently defeats
    it. This kept the "sample order — ships free" banner visible on mixed carts
    that do not ship free. */
 .trade-row[hidden],
-.shop-empty[hidden],
-.pdp-sample-alt[hidden] { display: none !important; }
+.shop-empty[hidden] { display: none !important; }
 
 /* ══════════════════════════════════════════════════════════════════════
    Foundry Art — wide-screen tiers

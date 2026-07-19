@@ -555,21 +555,17 @@
     const spec = window.FA_SAMPLE;
     if (!product || !spec) return;
 
+    // Samples exist to compare finishes, so every finish goes in by default —
+    // the customer removes what they don't want from the cart rather than
+    // having to guess up front. Single-finish products just add the one.
     const btn = document.querySelector('.pdp-actions .btn-sample');
     if (btn) btn.addEventListener('click', () => {
-      const added = addSample(product, selectedFinish(product));
-      updateNavCount();
-      flashButton(btn, added ? 'Sample added ✓' : 'Already in cart');
-    });
-
-    // Compare path — respects the primary button's meaning by not touching it.
-    const bothWrap = document.querySelector('[data-sample-both-wrap]');
-    const both = document.querySelector('[data-sample-both]');
-    if (bothWrap && product.finishes.length < 2) { bothWrap.hidden = true; return; }
-    if (both) both.addEventListener('click', () => {
       const added = product.finishes.reduce((n, f) => n + (addSample(product, f) ? 1 : 0), 0);
       updateNavCount();
-      flashButton(both, added ? 'Both samples added ✓' : 'Already in cart');
+      const msg = added === 0 ? 'Already in cart'
+                : added === 1 ? 'Sample added ✓'
+                : `${added} samples added ✓`;
+      flashButton(btn, msg);
     });
   }
 
@@ -1340,38 +1336,6 @@
   }
 
 
-  // ────────────────────────────────────────────────────────
-  // Track B in-room visualizer (tab → swap photo)
-  // ────────────────────────────────────────────────────────
-  function initVisualizer() {
-    const slot = document.querySelector('[data-visualizer]');
-    if (!slot) return;
-    const img = slot.querySelector('.visualizer-image img');
-    const buttons = slot.querySelectorAll('.visualizer-tabs button[data-vis]');
-    if (!img || !buttons.length) return;
-
-    const SCENES = {
-      bath:      { src: '/assets/images/lifestyle/bath-cabochon-glass-mosaic.jpg', label: 'in a bath' },
-      kitchen:   { src: '/assets/images/lifestyle/kitchen-moon-blossom-beige.jpg', label: 'in a kitchen' },
-      fireplace: { src: '/assets/images/lifestyle/fireplace-sun-travertine.jpg',   label: 'in a fireplace surround' },
-    };
-
-    buttons.forEach(b => {
-      b.addEventListener('click', () => {
-        const key = b.dataset.vis;
-        const scene = SCENES[key];
-        if (!scene) return;
-        buttons.forEach(x => x.classList.remove('active'));
-        b.classList.add('active');
-        img.style.opacity = '0';
-        setTimeout(() => {
-          img.src = scene.src;
-          img.alt = `See the tile ${scene.label}`;
-          img.style.opacity = '';
-        }, 140);
-      });
-    });
-  }
 
   // ────────────────────────────────────────────────────────
   // Shop faceted filtering, sorting and counts
@@ -1914,7 +1878,6 @@
     initTabs();
     initGallery();
     initSwatches();
-    initVisualizer();
     initFacets();
     initOptionRows();
     initShipToggle();
