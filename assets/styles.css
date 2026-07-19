@@ -11156,9 +11156,16 @@ body[data-product-slug] .swatch-label small { font-size: 12px; margin-top: 2px; 
 /* Heavier stroke on the sample button — it carries the secondary action and
    a hairline bronze rule was losing to the solid charcoal block above it.
    Set on both states so selecting/adding doesn't shift the button. */
+/* 1.25px, painted as an inset ring rather than a border. Chrome snaps
+   border-width to device pixels — at 2x DPR only .5 steps survive, so
+   `border-width: 1.25px` silently collapses to 1px and you get the original
+   hairline back. An inset box-shadow antialiases instead, so the quarter
+   pixel actually renders. The 1px transparent border is kept purely to
+   reserve the same layout box the solid border occupied. */
 body[data-product-slug] .pdp-actions .btn-sample,
 body[data-product-slug] .pdp-actions .btn-sample.is-added:disabled {
-  border-width: 1.5px;
+  border-color: transparent;
+  box-shadow: inset 0 0 0 1.25px var(--bronze);
 }
 
 /* Field labels above the selector ("MATERIAL") and the ships-in note */
