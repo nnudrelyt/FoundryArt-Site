@@ -1688,7 +1688,14 @@
           rows.forEach(r => r.classList.remove('selected'));
           row.classList.add('selected');
           const input = row.querySelector('input[type="radio"]');
-          if (input) input.checked = true;
+          // Setting .checked here pre-empts the label's native activation, so
+          // the browser never fires `change` — which is what the checkout
+          // totals listen on. Dispatch it ourselves. (Clicking the radio
+          // directly still worked, which is what hid this.)
+          if (input && !input.checked) {
+            input.checked = true;
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+          }
         });
       });
       // initialize selected

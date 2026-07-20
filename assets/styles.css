@@ -11759,7 +11759,11 @@ body[data-page="checkout"] .step-num {
   display: inline-flex; align-items: center; justify-content: center;
   border-radius: 50%;
   border: 1.5px solid var(--rule);
-  font-size: 14px; font-weight: 500; color: var(--slate);
+  font-size: 13px; font-weight: 500; color: var(--slate);
+  /* Optical centring: the period hangs off the right of "1."/"2.", so a
+     centred string leaves the numeral itself sitting left of centre. Nudge
+     the text right by roughly half the period's advance. */
+  text-indent: 2px;
   transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 body[data-page="checkout"] .checkout-step.is-open .step-num {
