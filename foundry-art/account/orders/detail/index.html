@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260719-314">
-<link rel="stylesheet" href="/assets/styles.css?v=20260719-314">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260719-336">
+<link rel="stylesheet" href="/assets/styles.css?v=20260719-336">
 </head>
 <body data-page="account-order" data-account>
 
@@ -27,15 +27,18 @@
         <a href="/foundry-art/account/orders/" class="active">Orders</a>
         <a href="/foundry-art/account/addresses/">Addresses</a>
         <a href="/foundry-art/account/details/">Details</a>
-        <a href="#" data-sign-out>Sign out</a>
+        <button type="button" class="account-signout" data-sign-out>Sign out</button>
       </nav>
 
       <section class="account-main">
-        <div data-order-detail>
-          <table class="cart-table">
-            <thead><tr><th>Item</th><th class="num">Total</th></tr></thead>
-            <tbody data-order-rows></tbody>
-          </table>
+        <div data-order-detail class="account-stack">
+          <article class="summary-card">
+            <h3>Items</h3>
+            <table class="cart-table">
+              <thead><tr><th>Item</th><th class="num">Total</th></tr></thead>
+              <tbody data-order-rows></tbody>
+            </table>
+          </article>
 
           <aside class="summary-card" aria-label="Order totals">
             <h3>Order summary</h3>
@@ -52,10 +55,26 @@
     </div>
   </main>
 
+  <section class="footer-cta" aria-label="Call to action">
+    <div class="footer-cta-text">
+      <p class="section-eyebrow">Ready to start?</p>
+      <h2>The detail your<br>room is missing.</h2>
+      <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+      <p class="footer-cta-phone">
+        <span class="footer-cta-phone-label">Studio direct</span>
+        <a href="tel:7737842628">(773) 784-2628</a>
+      </p>
+    </div>
+    <div class="footer-cta-actions">
+      <a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a>
+      <a href="/contact/" class="btn-ghost">Contact the Studio</a>
+    </div>
+  </section>
+
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260719-314"></script>
-  <script src="/assets/account-data.js?v=20260719-314"></script>
-  <script src="/assets/app.js?v=20260719-314"></script>
+  <script src="/assets/products.js?v=20260719-336"></script>
+  <script src="/assets/account-data.js?v=20260719-336"></script>
+  <script src="/assets/app.js?v=20260719-336"></script>
 </body>
 </html>

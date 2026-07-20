@@ -43,7 +43,12 @@
             ${link('/foundry-art/shop/', 'Tiles', 'shop')}
             ${link('/foundry-art/#design-ideas', 'Design Ideas', 'design')}
             ${link('/foundry-art/#story', 'Our Story', 'story')}
-            ${link('/foundry-art/#guidance', 'How to Buy', 'guide')}
+            ${/* "How to Buy" promised a purchasing walkthrough and delivered a
+                  PDF library plus an FAQ. The section already calls itself
+                  "Expert Guidance" and its anchor is #guidance — the nav label
+                  was the only thing on the site describing it as a checkout
+                  path. */''}
+            ${link('/foundry-art/#guidance', 'Guidance', 'guide')}
           </div>
           <!-- No .nav-hamburger in the Foundry Art nav. Three of the four links
                above are homepage anchors and are fine to drop on small screens;
@@ -446,6 +451,23 @@
   // here is whether someone is signed in. No passwords, no real auth — this
   // exists so the client can click through the returning-customer journey.
   // ────────────────────────────────────────────────────────
+  // Order dates are authored as display strings ("2 June 2026"). Parse them
+  // explicitly rather than trusting Date.parse with a non-ISO format, which is
+  // implementation-defined; fall back to Date.parse, then to 0 so an
+  // unparseable date sorts last instead of throwing off the whole list.
+  const MONTHS = { january:0, february:1, march:2, april:3, may:4, june:5,
+                   july:6, august:7, september:8, october:9, november:10, december:11 };
+  function orderTime(o) {
+    const raw = String((o && o.date) || '').trim();
+    const m = /^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/.exec(raw);
+    if (m) {
+      const mon = MONTHS[m[2].toLowerCase()];
+      if (mon !== undefined) return new Date(+m[3], mon, +m[1]).getTime();
+    }
+    const t = Date.parse(raw);
+    return isNaN(t) ? 0 : t;
+  }
+
   const Account = (function () {
     const KEY = 'fa_account_v1';
     const LAST_ORDER_KEY = 'fa_last_order';
@@ -473,7 +495,12 @@
         let last = null;
         try { last = JSON.parse(localStorage.getItem(LAST_ORDER_KEY)); } catch (e) {}
         if (last && last.id && !base.some(o => o.id === last.id)) base.unshift(last);
-        return base;
+        // Newest first. The seed orders are authored in no particular order and
+        // the promoted order was only unshifted, so history rendered scrambled
+        // (19 July, 2 June, 28 June, 14 July, 11 April). Sorting here rather
+        // than in the renderer keeps orderById and the dashboard's "latest
+        // order" card agreeing with the list.
+        return base.sort((a, b) => orderTime(b) - orderTime(a));
       },
       orderById(id) { return this.orders().find(o => o.id === id) || null; },
     };
@@ -1183,6 +1210,19 @@
     const tbody = document.querySelector('[data-orders-list]');
     if (!tbody) return;
     const orders = Account.orders();
+    // A signed-in customer with no history got a header row over blank space.
+    // Say so, and point at the one action that resolves it.
+    const empty = document.querySelector('[data-orders-empty]');
+    // The card, not the table — the table is wrapped now, and hiding only the
+    // table would leave an empty bordered card above the empty state.
+    const shell = document.querySelector('[data-orders-card]') || tbody.closest('table');
+    if (!orders.length) {
+      if (shell) shell.hidden = true;
+      if (empty) empty.hidden = false;
+      return;
+    }
+    if (shell) shell.hidden = false;
+    if (empty) empty.hidden = true;
     tbody.innerHTML = orders.map(o => `
           <tr>
             <td data-label="Order"><a href="/foundry-art/account/orders/detail/?order=${encodeURIComponent(o.id)}"><strong>${o.id}</strong></a>
@@ -1262,11 +1302,74 @@
   function renderAccountAddresses() {
     if (document.body.getAttribute('data-page') !== 'account-addresses') return;
     const c = Account.customer(); if (!c) return;
+    const esc = v => String(v == null ? '' : v).replace(/[&<>"]/g, ch =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
     const fmt = a => `${c.firstName} ${c.lastName}<br>${c.company ? c.company + '<br>' : ''}${a.line1}<br>${a.line2 ? a.line2 + '<br>' : ''}${a.city}, ${a.state} ${a.zip}<br>${a.country}`;
-    const b = document.querySelector('[data-address-billing]');
-    const s = document.querySelector('[data-address-shipping]');
-    if (b) b.innerHTML = fmt(c.billing);
-    if (s) s.innerHTML = fmt(c.shipping);
+
+    // The dashboard's "Manage addresses" button pointed here, and here was two
+    // blocks of read-only text — the CTA promised an action the page couldn't
+    // perform. Each card now carries an inline edit form (progressive
+    // disclosure rather than a modal, per the funnel's existing form vocabulary).
+    const FIELDS = [
+      { key: 'line1',   label: 'Street address',  half: false },
+      { key: 'line2',   label: 'Apt, suite, unit', half: false },
+      { key: 'city',    label: 'Town / City',     half: true  },
+      { key: 'state',   label: 'State',           half: true  },
+      { key: 'zip',     label: 'ZIP Code',        half: true  },
+      { key: 'country', label: 'Country',         half: true  },
+    ];
+
+    ['billing', 'shipping'].forEach(kind => {
+      const view = document.querySelector('[data-address-' + kind + ']');
+      const card = view && view.closest('[data-address-card]');
+      if (!view || !card) return;
+      view.innerHTML = fmt(c[kind]);
+
+      const form = card.querySelector('[data-address-form]');
+      const editBtn = card.querySelector('[data-address-edit]');
+      if (!form || !editBtn) return;
+
+      form.innerHTML = `<div class="field-grid">` + FIELDS.map(f =>
+        `<div class="form-group${f.half ? '' : ' full'}">
+           <label for="${kind}-${f.key}">${f.label}</label>
+           <input id="${kind}-${f.key}" name="${f.key}" type="text" value="${esc(c[kind][f.key])}">
+         </div>`).join('') + `</div>
+        <div class="address-actions">
+          <button type="submit" class="btn-primary">Save address</button>
+          <button type="button" class="btn-secondary" data-address-cancel>Cancel</button>
+        </div>`;
+
+      const open = on => {
+        form.hidden = !on;
+        view.hidden = on;
+        editBtn.hidden = on;
+        editBtn.setAttribute('aria-expanded', String(on));
+        if (on) { const first = form.querySelector('input'); if (first) first.focus(); }
+        else editBtn.focus();
+      };
+      editBtn.setAttribute('aria-expanded', 'false');
+      editBtn.addEventListener('click', () => open(true));
+      form.querySelector('[data-address-cancel]').addEventListener('click', () => {
+        form.reset();
+        open(false);
+      });
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        // Prototype: the customer record is a static file, so this updates the
+        // in-memory copy and repaints. A refresh restores the seed data, which
+        // is the documented behaviour of the whole account area.
+        FIELDS.forEach(f => {
+          const input = form.querySelector('#' + kind + '-' + f.key);
+          if (input) c[kind][f.key] = input.value.trim();
+        });
+        view.innerHTML = fmt(c[kind]);
+        open(false);
+        const label = editBtn.textContent;
+        editBtn.textContent = 'Saved ✓';
+        editBtn.disabled = true;
+        setTimeout(() => { editBtn.textContent = label; editBtn.disabled = false; }, 1600);
+      });
+    });
   }
 
   // Checkout reflects signed-in state. MUST run after initCheckout() and
@@ -1662,35 +1765,12 @@
     updateResultCount(list.length, total);
     const empty = document.querySelector('[data-shop-empty]');
     if (empty) empty.hidden = list.length !== 0;
-    refreshShopChips();
   }
 
+  // Still used by the empty state's "Clear all filters" recovery button.
   function clearAllFacets() {
     allFacetInputs().forEach(i => { i.checked = false; });
     applyShop();
-  }
-
-  function refreshShopChips() {
-    const chipBar = document.querySelector('.active-filter-chips');
-    if (!chipBar) return;
-    const active = allFacetInputs().filter(i => i.checked);
-
-    let html = active.map(i =>
-      `<span class="active-chip" data-target="${i.id}">${i.dataset.label || i.value} <span class="x">×</span></span>`
-    ).join('');
-    if (active.length) html += `<span class="clear-filters" data-clear>Clear all</span>`;
-    chipBar.innerHTML = html;
-
-    chipBar.querySelectorAll('.active-chip[data-target]').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const target = document.getElementById(chip.dataset.target);
-        if (!target) return;
-        target.checked = false;
-        applyShop();
-      });
-    });
-    const clear = chipBar.querySelector('[data-clear]');
-    if (clear) clear.addEventListener('click', clearAllFacets);
   }
 
   function initFacets() {

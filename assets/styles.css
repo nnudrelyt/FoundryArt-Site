@@ -11,6 +11,7 @@
   --oxblood:        #4F2A26;   /* deep burgundy — emphasis / sale */
   --sale:           #A31414;   /* brand red — matches --lw-accent-red */
   --green:          #3A6B4F;   /* deep forest — order confirmed / success */
+  --amber:          #8A6A1F;   /* in-progress / awaiting — order status only */
 
   /* Backgrounds + supporting neutrals */
   --white:          #FFFFFF;
@@ -1031,7 +1032,9 @@ body[data-page="home"] .product-card-cta:hover {
   text-transform: uppercase;
   padding: 7px 13px;
   z-index: 5;                  /* defeat any sibling overlap */
-  border-radius: 0;            /* explicit — guard against inherited radius */
+  border-radius: 3px;          /* matches .status-pill and .line-tag. Was an
+                                  explicit 0 guarding against inherited radius;
+                                  still explicit, just no longer square. */
   clip-path: none;             /* explicit — guard against inherited mask */
   line-height: 1;
 }
@@ -2501,28 +2504,8 @@ body[data-page="home"] .footer p { border: 0 !important; }
 }
 .facet-list li input { cursor: pointer; }
 .facet-list li .count { margin-left: auto; color: var(--mid); font-size: 10px; }
-.active-filter-chips {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-.active-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--cream);
-  border: 1px solid var(--rule);
-  padding: 4px 8px 4px 10px;
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--slate);
-  cursor: pointer;
-}
-.active-chip .x { font-size: 12px; line-height: 1; color: var(--mid); }
-.active-chip:hover .x { color: var(--sale); }
-.clear-filters { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bronze); cursor: pointer; border-bottom: 1px solid var(--bronze-l); }
+/* .active-filter-chips / .active-chip / .clear-filters removed with the chip
+   row — the left rail's checkboxes are the single control for filter state. */
 /* Sample request CTA (Track B PDP) */
 .btn-sample {
   font-size: 11px;
@@ -10801,11 +10784,15 @@ body[data-account] .account-nav {
   flex-direction: column;
   border-top: 1px solid var(--rule);
 }
+/* 13px, not 11: with card titles and field labels now at 15px the sidebar read
+   as a footnote beside the content. 13 lifts it back into the same conversation
+   while staying a step below the content it navigates to — and it keeps 500,
+   so weight rather than size marks it as chrome. */
 body[data-account] .account-nav a {
   padding: 13px 0;
   border-bottom: 1px solid var(--rule);
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   letter-spacing: 1.6px;
   text-transform: uppercase;
@@ -10815,63 +10802,321 @@ body[data-account] .account-nav a {
 body[data-account] .account-nav a:hover,
 body[data-account] .account-nav a.active { color: var(--bronze); }
 
+/* Account pages are short — Addresses left 221px of white below the footer on a
+   1000px viewport. Push the footer down without touching the global body rules
+   that every other page depends on. */
+body[data-account] {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* width:100% is load-bearing. .page centres itself with `margin: 0 auto`, and
+   auto cross-axis margins suppress a flex item's stretch — without this the
+   main column shrank to fit-content (812px of 1440) and the dashboard's three
+   cards collapsed into one. */
+body[data-account] > main.page { flex: 1 0 auto; width: 100%; }
+
 body[data-account] .account-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
   align-items: start;
 }
-body[data-account] .account-cards .summary-card h3,
+/* Dashboard only. Its three cards ended at 689 / 603 / 542 — a 147px rag that
+   read as unfinished — so they stretch and each card pins its action to its own
+   bottom edge. Addresses keeps `start`: one card there expands into an edit
+   form, and stretching its neighbour to match would strand that card's Edit
+   button under a column of empty space. */
+body[data-page="account-dashboard"] .account-cards { align-items: stretch; }
+body[data-page="account-dashboard"] .account-cards .summary-card {
+  display: flex;
+  flex-direction: column;
+}
+/* One card heading for the whole section. Was scoped to .account-cards, so the
+   Details page (Cormorant h2 in a .checkout-section) and the order-detail
+   summary card each had their own heading treatment. */
+/* Card titles and field labels share one spec: 15px Jost regular, caps, tracked.
+   Tracking stays at its absolute value rather than scaling with the size —
+   1.6px was 0.145em at 11px and is 0.107em at 15px, and larger caps need
+   proportionally less tracking, so holding the pixel value is the correct
+   optical move rather than a shortcut. */
+body[data-account] .summary-card h3,
 body[data-account] .trade-status-card h4 {
   font-family: 'Jost', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 400;
   letter-spacing: 1.6px;
   text-transform: uppercase;
   color: var(--mid);
   margin: 0 0 16px;
 }
+/* Matches the card titles above. Overrides the shared funnel label rule, which
+   sits earlier in the sheet at equal specificity, so cart and checkout keep
+   their 11px/500 labels. */
+body[data-account] .form-group label {
+  font-size: 15px;
+  font-weight: 400;
+}
+/* Status pills sit in rows whose label is now 15px; 10px left them looking
+   like a different system. 12px keeps them clearly a tag, not body text. */
+body[data-account] .status-pill {
+  font-size: 12px;
+  padding: 4px 11px;
+}
+/* The base .summary-card h3 carries a bottom rule and 18px of padding, which
+   the type override above left in place. It earns its keep over prose or a
+   totals list, but above a form it lands immediately over the first field label
+   and reads as a second divider. Drop it when fields follow directly. */
+body[data-account] .summary-card h3:has(+ .field-grid),
+body[data-account] .summary-card h3:has(+ form),
+body[data-account] .summary-card h3:has(+ .form-group),
+/* Trade panel renders its application fields inside a wrapper div, so the grid
+   isn't an adjacent sibling — but visually it's still a label under the rule. */
+body[data-account] .summary-card h3:has(+ * > .field-grid),
+/* Address cards while editing: the read view is still the adjacent sibling but
+   it's hidden, so the form is what actually sits under the heading. */
+body[data-account] .summary-card h3:has(+ address[hidden]) {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+/* Cards ─ one construction across the section, rounded to match the 3px used
+   on chips, facet checkboxes, the sort select and the nav CTA. Scoped to the
+   account area: cart and checkout ship square and aren't in this brief. */
+body[data-account] .summary-card {
+  border-radius: 3px;
+}
+
+/* Buttons take the same 3px. .auth-submit already set it individually; this
+   covers Save changes, Edit, Save address, Cancel, Print receipt and the
+   empty-state CTA so nothing in the section is left square. */
+body[data-account] :is(.btn-primary, .btn-secondary) {
+  border-radius: 3px;
+}
+
+/* Tighter field rhythm. 22px was the funnel default; the account forms are
+   short and read better closed up. Applies to Details, the address editors and
+   both auth views, so the section keeps one rhythm.
+
+   The row-gap reset is what makes that single number hold: fields laid out in a
+   .field-grid (so First/Last can share a row) otherwise add the grid's 18px row
+   gap on top of this margin, which is why those forms ran ~30px while the
+   plain-stacked ones ran 16. The 24px column gap survives to split the pair. */
+body[data-account] .form-group { margin-bottom: 16px; }
+body[data-account] .field-grid { row-gap: 0; }
 body[data-account] .account-cards address {
   font-style: normal;
   font-size: 14px;
   line-height: 1.7;
-  color: var(--ink);
+  color: var(--slate);
 }
 body[data-account] .trade-status-card p {
   font-size: 14px;
   line-height: 1.65;
-  color: var(--ink);
+  color: var(--slate);
   margin: 0 0 14px;
 }
-body[data-account] .summary-card .btn-secondary { margin-top: 18px; }
+/* auto, not 18px: the card is a flex column now, so this pins the action to the
+   card's bottom edge and the row's buttons line up across unequal content. */
+body[data-account] .summary-card .btn-secondary {
+  margin-top: 20px;
+  align-self: flex-start;
+  padding: 11px 20px;
+}
+/* Only the dashboard's cards are flex columns, and only there does auto pin the
+   action to the card's bottom edge. Elsewhere auto computes to 0 and would sit
+   the button flush against the content above it. */
+body[data-page="account-dashboard"] .account-cards .summary-card .btn-secondary {
+  margin-top: auto;
+}
+
+/* Vertically stacked cards — Details, Orders, Order detail. Matches the 24px
+   the .account-cards grid uses between columns. */
+body[data-account] .account-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+body[data-account] .account-stack > [hidden] { display: none; }
+
+/* .summary-card .btn-primary is width:100% for the cart/checkout CTA. Inside an
+   account card that would stretch "Save changes" across the panel. */
+body[data-account] .summary-card .account-save {
+  width: auto;
+  margin-top: 20px;
+  padding: 14px 26px;
+}
+
+/* A table is the card's whole content, so it shouldn't add its own top rule
+   under the card's heading, and its last row shouldn't double the card border. */
+body[data-account] .summary-card .cart-table { margin: 0; }
+body[data-account] .summary-card .cart-table tr:last-child td { border-bottom: 0; }
+/* margin-top:auto collapses to 0 once a card's content fills its height, which
+   would butt the action against the text. The gap lives on the content instead,
+   where it holds in both cases. */
+body[data-account] .account-cards .summary-card > address,
+body[data-account] .account-cards .summary-card > [data-latest-order],
+body[data-account] .account-cards .summary-card > [data-address-summary] { margin-bottom: 20px; }
+
+/* ── Sign out ───────────────────────────────────────────────────────────
+   An action, not a fifth destination. It was an <a href="#"> carrying the
+   same rule and tracking as the four real links, so it read as somewhere to
+   go and did nothing on middle-click. Now a button, set apart by a gap and
+   left un-ruled so the nav list visibly ends above it. */
+body[data-account] .account-signout {
+  margin-top: 20px;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;              /* tracks .account-nav a */
+  font-weight: 500;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--mid);
+  transition: color 0.2s ease;
+}
+body[data-account] .account-signout:hover { color: var(--sale); }
+
+/* ── Address editing ────────────────────────────────────────────────────
+   Inline form per card; the read view and the form swap in place. */
+body[data-account] .address-form[hidden] { display: none; }
+body[data-account] .address-form { margin-top: 4px; }
+body[data-account] .address-form .field-grid { margin-bottom: 18px; }
+body[data-account] .address-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+/* .summary-card .btn-primary is width:100% for the cart/checkout CTA, which
+   made Save fill the row and wrap Cancel onto its own line. */
+body[data-account] .address-actions .btn-primary,
+body[data-account] .address-actions .btn-secondary {
+  width: auto;
+  margin-top: 0;
+  padding: 11px 20px;
+}
+body[data-account] .summary-card address[hidden] { display: none; }
+body[data-account] .btn-secondary[hidden] { display: none; }
+
+/* ── Empty state ────────────────────────────────────────────────────────
+   Teaches what the screen will hold rather than showing a bare header row. */
+body[data-account] .account-empty[hidden] { display: none; }
+body[data-account] .account-empty {
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 44px 36px;
+  text-align: center;
+}
+body[data-account] .account-empty-lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--charcoal);
+  margin: 0 0 8px;
+}
+body[data-account] .account-empty p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--mid);
+  margin: 0 auto;
+  max-width: 44ch;
+}
+body[data-account] .account-empty .btn-primary { margin-top: 24px; }
 
 /* Sign-in / register, side by side like WooCommerce's default template */
 /* Sign-in page — white ground, single focused column that leads with sign-in;
    registration swaps into the same panel. */
 body[data-page="account-sign-in"] { background: #fff; }
-body[data-page="account-sign-in"] .account-auth { max-width: 460px; }
+/* main.page.account-auth, not .account-auth: the funnel's
+   `:is(…, body[data-account]) .page { max-width: none }` matches this element at
+   the same 0-2-1 specificity and sits later in the sheet, so the plain selector
+   lost and the sign-in form ran full-bleed rather than as the focused column it
+   was written to be. Matching the element name outranks it.
+
+   One width for both views. The register support copy — "Save your details,
+   track orders, and apply for trade pricing." — measures 476px, and .page
+   spends 160px on horizontal padding at ≥1440, so the old 620px left only
+   460px of content and broke it across two lines. 680 clears it at every tier
+   (520px of content at the tightest) and keeps sign-in and register identical. */
+body[data-page="account-sign-in"] main.page.account-auth { max-width: 680px; }
 body[data-page="account-sign-in"] .auth-panel[hidden] { display: none; }
 
-/* Register view is a touch wider so First/Last sit side by side comfortably. */
-body[data-page="account-sign-in"] .account-auth:has([data-auth-view="register"]:not([hidden])) { max-width: 620px; }
+/* No per-view width override — both views share the single spec above, so the
+   column doesn't resize as the customer swaps between sign-in and register. */
 
 body[data-page="account-sign-in"] .auth-forgot { margin: -6px 0 20px; font-size: 13px; }
 body[data-page="account-sign-in"] .auth-forgot a { color: var(--bronze); border-bottom: 1px solid var(--bronze-l); }
-body[data-page="account-sign-in"] .auth-submit { display: block; width: 100%; }
 
-/* Switch link under each form. */
+/* Same spec as the nav's Shop Now: 12px / 500 / 1.5px tracking, 3px radius,
+   bronze on hover.
+
+   Height comes from the form, not the nav. The nav CTA is 42px because it sits
+   in a dense bar; here the button is full width directly beneath 50px inputs,
+   so 42 read as clipped against the stack. 16px of vertical padding puts it on
+   the fields' 50px (12px Jost renders an 18px line box, not the ~14px the font
+   size suggests), and every full-width control in the form now shares one
+   height. */
+body[data-page="account-sign-in"] .auth-submit {
+  display: block;
+  width: 100%;
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  padding: 16px 24px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+body[data-page="account-sign-in"] .auth-submit:hover { background: var(--bronze); }
+
+/* Switch line under each form. The rule and its 22px of padding are gone — the
+   form already ends on a full-width button, so a divider two lines later was
+   separating nothing from nothing. */
 body[data-page="account-sign-in"] .auth-switch {
-  margin-top: 28px; padding-top: 22px;
-  border-top: 1px solid var(--rule);
-  font-size: 14px; color: var(--mid);
+  margin-top: 18px;
+  padding-top: 0;
+  border-top: 0;
+  font-size: 14px;
+  color: var(--mid);
 }
+/* Same treatment as .nav-account — sentence case, untracked, near-black, 500 —
+   because both name a person's destination rather than a UI label. Sized a step
+   below it (14px vs the nav's 16px): the nav item is a top-level destination,
+   this one sits inside a sentence and shouldn't outweigh the copy around it. */
 body[data-page="account-sign-in"] .auth-link {
-  background: none; border: 0; padding: 0; cursor: pointer;
-  font: inherit; color: var(--bronze);
-  border-bottom: 1px solid var(--bronze-l);
-  transition: color 0.2s ease, border-color 0.2s ease;
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  cursor: pointer;
+  position: relative;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--charcoal);
+  margin-left: 2px;
+  transition: color 0.2s ease;
 }
-body[data-page="account-sign-in"] .auth-link:hover { color: var(--charcoal); border-bottom-color: var(--charcoal); }
+body[data-page="account-sign-in"] .auth-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--bronze);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+body[data-page="account-sign-in"] .auth-link:hover { color: var(--bronze); }
+body[data-page="account-sign-in"] .auth-link:hover::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="account-sign-in"] .auth-link::after { transition: none; }
+}
 .form-hint {
   font-size: 12px;
   line-height: 1.6;
@@ -10889,11 +11134,14 @@ body[data-page="account-sign-in"] .auth-link:hover { color: var(--charcoal); bor
   letter-spacing: 1.2px;
   text-transform: uppercase;
   border: 1px solid currentColor;
+  border-radius: 3px;
 }
-.status-delivered  { color: #2f7a4d; }
+/* Tokens, not one-off hex. Delivered/Approved were #2f7a4d, a near-duplicate
+   of the --green added for the order confirmation; one green, one meaning. */
+.status-delivered  { color: var(--green); }
 .status-shipped    { color: var(--bronze); }
-.status-processing { color: #8a6a1f; }
-.status-approved   { color: #2f7a4d; }
+.status-processing { color: var(--amber); }
+.status-approved   { color: var(--green); }
 
 @media (max-width: 860px) {
   body[data-account] .account-layout { grid-template-columns: 1fr; gap: 28px; }
@@ -11132,17 +11380,7 @@ body[data-page="shop"]:not([data-product-slug]) .facet-list li {
 body[data-page="shop"]:not([data-product-slug]) .facet-list li .count { font-size: 14px; }
 body[data-page="shop"]:not([data-product-slug]) .facet-group h5 { font-size: 13px; }
 
-/* Active filter tags — matched up to the larger sidebar type. */
-.active-chip {
-  font-size: 13px;
-  letter-spacing: 1.2px;
-  padding: 8px 12px 8px 14px;
-  gap: 8px;
-  border-radius: 3px;   /* matches the checkboxes and sort select */
-}
-.active-chip .x { font-size: 15px; }
-.clear-filters { font-size: 13px; letter-spacing: 1.5px; }
-.active-filter-chips { gap: 10px; margin-bottom: 26px; }
+/* (Active-filter chip overrides removed with the component.) */
 
 /* Sort control: the native arrow sits hard against the right edge and can't be
    inset, so it's replaced with a chevron that has real breathing room. */
@@ -11464,7 +11702,7 @@ body[data-product-slug] .tab-btn { font-weight: 500; }
    at small sizes and worst on exactly the small tracked caps this UI uses.
    500 is the heaviest real weight available. */
 :is(body[data-page="shop"], body[data-page="cart"], body[data-page="checkout"],
-    body[data-page="order-received"]) :is(strong, b, th) {
+    body[data-page="order-received"], body[data-account]) :is(strong, b, th) {
   font-weight: 500;
 }
 
@@ -11644,11 +11882,15 @@ body[data-page="cart"] .cart-remove:focus-visible {
    breadcrumb, so the page padding is the only separation from the nav. 96px
    was sized for a header that opened with a small tracked line; without it
    the title was left floating. */
+/* Account pages are in the same position — no breadcrumb either — so they take
+   the same top padding and their titles start on the shop's line. */
 @media (min-width: 1440px) {
-  body[data-page="shop"]:not([data-product-slug]) .page { padding-top: 64px; }
+  body[data-page="shop"]:not([data-product-slug]) .page,
+  body[data-account] .page { padding-top: 64px; }
 }
 @media (min-width: 901px) and (max-width: 1439px) {
-  body[data-page="shop"]:not([data-product-slug]) .page { padding-top: 44px; }
+  body[data-page="shop"]:not([data-product-slug]) .page,
+  body[data-account] .page { padding-top: 44px; }
 }
 
 /* Cart + checkout: close the breadcrumb-to-title gap, matching the PDP
