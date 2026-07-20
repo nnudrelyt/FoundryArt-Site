@@ -10887,12 +10887,8 @@ body[data-account] .summary-card {
   border-radius: 3px;
 }
 
-/* Buttons take the same 3px. .auth-submit already set it individually; this
-   covers Save changes, Edit, Save address, Cancel, Print receipt and the
-   empty-state CTA so nothing in the section is left square. */
-body[data-account] :is(.btn-primary, .btn-secondary) {
-  border-radius: 3px;
-}
+/* (Account button radius folded into the section-wide rule near the end of
+   this file — see "Foundry Art button radius".) */
 
 /* Tighter field rhythm. 22px was the funnel default; the account forms are
    short and read better closed up. Applies to Details, the address editors and
@@ -11696,11 +11692,16 @@ body[data-product-slug] .tab-btn { font-weight: 500; }
    paying. These rules give each role one definition.
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── No synthetic bold ──────────────────────────────────────────────────
-   The Jost link loads 300/400/500. <strong>, <b> and <th> default to 700,
-   which the browser then fakes by smearing the 400 outline — visibly muddy
-   at small sizes and worst on exactly the small tracked caps this UI uses.
-   500 is the heaviest real weight available. */
+/* ── Emphasis weight ────────────────────────────────────────────────────
+   Was a workaround: Jost loaded only 300/400/500, so <strong>/<b>/<th> at
+   their default 700 got faked by smearing the 400 outline. The font now loads
+   as a variable face across 100–900, so a real 700 is available and this rule
+   is no longer compensating for anything.
+
+   It stays as a deliberate choice. 700 Jost is heavy in the small tracked caps
+   this UI leans on, and 500 is the emphasis weight the funnel was tuned
+   against. Raise it here if the section should shout; don't remove it and let
+   the browser default decide. */
 :is(body[data-page="shop"], body[data-page="cart"], body[data-page="checkout"],
     body[data-page="order-received"], body[data-account]) :is(strong, b, th) {
   font-weight: 500;
@@ -12371,4 +12372,30 @@ body[data-page="order-received"] .confirm-total-final td {
     min-width: 0;
   }
   body[data-page="order-received"] [data-order-details] tr:not(.confirm-total) > td.num { flex-shrink: 0; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   FOUNDRY ART BUTTON RADIUS
+   One value for every button in the Foundry Art shell. The section had picked
+   up 3px piecemeal — nav CTA, account buttons, the sign-in submit, the
+   checkout coupon button — leaving the PDP, cart, checkout and order-received
+   buttons square, so the same component rounded or not depending on the page.
+
+   3px is the small-control radius already used by the facet checkboxes, the
+   sort select, chips, status pills and the SALE badge.
+
+   Scoped to body[data-section="foundry-art"], which is now a static attribute
+   on all 24 Foundry Art pages rather than one JS writes at runtime — styling
+   static buttons through a runtime attribute would paint them square and then
+   snap them round once app.js ran. Linden and the showroom shells keep their
+   square buttons.
+   ══════════════════════════════════════════════════════════════════════════ */
+body[data-section="foundry-art"] :is(
+  .btn-primary,
+  .btn-secondary,
+  .btn-primary-lg,
+  .btn-ghost,
+  .btn-sample
+) {
+  border-radius: 3px;
 }

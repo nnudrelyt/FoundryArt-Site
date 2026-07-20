@@ -10,7 +10,7 @@ This is what every other LW page should look like — `/bronzework-studio/`, `/t
 
 The LW design system is active wherever `<body data-section="linden|bronzework-studio|talisman">` is set. The selectors in `/assets/styles.css` are explicitly namespaced by this attribute (lines 2790–5007).
 
-The Foundry Art shop (`/foundry-art/**`) sets `data-page` instead and inherits a different visual system. **Don't apply LW tokens to Foundry Art pages.**
+The Foundry Art shop (`/foundry-art/**`) sets `data-section="foundry-art"` and inherits a different visual system. **Don't apply LW tokens to Foundry Art pages** — and don't apply Foundry Art conventions to LW pages. The Foundry Art shell has its own rules; see §9.
 
 ---
 
@@ -345,3 +345,77 @@ cascade, exactly as it does for classic. Decisions taken:
 **Cloning to classic (remaining):**
 - The precision rules are mostly scoped `body[data-page="precision"]`. To propagate, **generalise those selectors to the shared `autograph|precision|classic|instinct` list** (or duplicate per page), then per page swap: parent wordmark, collection title, sub-nav anchors, carousel slides + tagline, the two profile cards (image + finish copy), the finish band, the Design Ideas image set + captions, the Further-Information PDFs, and the two "Also available" sibling collections.
 - Match each against its live page with the same inspector-at-reviewer-width method before shipping.
+
+---
+
+## 9. Foundry Art shell
+
+Not part of the LW system. Documented here so the two aren't confused and so the
+Foundry Art conventions have one place to live.
+
+**Scope hook:** `<body data-section="foundry-art">`, set statically in the markup
+of all 24 `/foundry-art/**` pages. `navHTML()` also normalises it at runtime, but
+the attribute is written into the HTML deliberately — CSS that styles static
+content through a JS-applied attribute paints unstyled first and then snaps.
+
+### 9.1 Typography
+
+| Role | Family |
+|---|---|
+| Display — page titles, card headlines | `'Cormorant Garamond', serif` (300/400/500/600) |
+| Everything else — UI, body, labels, data | `'Jost', sans-serif` |
+
+**Jost loads as a variable face across 100–900** (`family=Jost:wght@100..900`).
+Google serves the whole variable font regardless of the sub-range requested, so
+the full range costs the same 26.6 KB as any narrower slice — and ~53 KB less
+than the three static weights this previously loaded. Any weight 100–900 is
+available, including fractional values.
+
+**Emphasis is 500, not 700.** `<strong>`, `<b>` and `<th>` are pinned to 500
+across the shop, cart, checkout, order-received and account pages. This began as
+a workaround (700 wasn't loaded, so browsers faked it by smearing the 400
+outline) and is now a deliberate choice: 700 Jost is heavy in the small tracked
+caps this UI leans on. Raise the value in that rule if a surface should shout;
+don't delete the rule and let the browser default decide.
+
+**Type floor** — reach for these instead of hard-coding sub-13px sizes:
+
+| Token | Value | Use |
+|---|---|---|
+| `--fs-control` | 15px | Inputs, selects, buttons |
+| `--fs-body` | 15px | Running and support text |
+| `--fs-fine` | 13px | Helper text, captions — the smallest allowed |
+| `--fs-eyebrow` | 12px | Uppercase tracked labels |
+
+### 9.2 Corner radius
+
+Two values. Anything else is drift.
+
+| Radius | Applies to |
+|---|---|
+| **3px** | Buttons, chips, status pills, the SALE badge, facet checkboxes, the sort select, account cards |
+| **4px** | Form fields — inputs, selects, textareas |
+
+### 9.3 Buttons
+
+All five variants carry the 3px radius, set once for the whole shell:
+
+```css
+body[data-section="foundry-art"] :is(
+  .btn-primary, .btn-secondary, .btn-primary-lg, .btn-ghost, .btn-sample
+) { border-radius: 3px; }
+```
+
+| Class | Role |
+|---|---|
+| `.btn-primary` | Primary action — charcoal fill, white label |
+| `.btn-secondary` | Secondary — charcoal outline, transparent fill |
+| `.btn-primary-lg` | Large primary, footer CTA band |
+| `.btn-ghost` | Tertiary on dark grounds |
+| `.btn-sample` | PDP sample request — bronze outline |
+
+Role sizing is unified separately (one definition per role rather than per
+page); see the "Type & control scale" block near the end of `styles.css`.
+
+**LW buttons stay square.** The rule is namespaced to the Foundry Art section
+precisely so `.lw2-studio-shop-btn` and the LW nav CTA are unaffected.
