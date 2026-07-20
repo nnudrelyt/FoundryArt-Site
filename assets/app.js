@@ -10,7 +10,16 @@
   // ────────────────────────────────────────────────────────
   function navHTML() {
     const section = document.body.dataset.section || 'foundry-art';
+    // Foundry Art pages carry no data-section — it's the implicit default. Write
+    // the resolved value back so CSS has a positive hook for it, rather than
+    // styling the default via :not([data-section]) and hoping no page ever
+    // sets it explicitly. Nothing currently keys off the attribute's absence.
+    document.body.dataset.section = section;
 
+    // Three bars, per client direction. Note this is the same silhouette as
+    // .nav-hamburger, which appears at ≤900px — below that width the studios
+    // switcher and the mobile menu are visually identical controls. They are
+    // told apart only by colour (bronze vs charcoal) and position.
     const dotGrid = `
               <button class="studios-toggle" aria-label="Open Linden Workshops studios" aria-controls="studios-drawer" aria-expanded="false">
                 <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
@@ -36,22 +45,40 @@
             ${link('/foundry-art/#story', 'Our Story', 'story')}
             ${link('/foundry-art/#guidance', 'How to Buy', 'guide')}
           </div>
-          <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">
-            <span></span><span></span><span></span>
-          </button>
+          <!-- No .nav-hamburger in the Foundry Art nav. Three of the four links
+               above are homepage anchors and are fine to drop on small screens;
+               the two real destinations the drawer used to carry (the shop and
+               sign-in) are covered by .nav-cta and the account gate instead.
+               Removing it also clears the two-identical-menu-icons collision
+               with .studios-toggle below 900px. Other shells keep theirs. -->
           <div class="nav-right">
             <a href="/foundry-art/account/sign-in/" class="nav-account" data-account-link>Sign in</a>
-            <a href="/foundry-art/cart/" class="nav-cart" aria-label="Cart">Cart<span class="nav-cart-count" data-cart-count>2</span></a>
+            <!-- .nav-cart-icon is a Foundry Art modifier: the bare .nav-cart
+                 class is reused by the showroom-zone nav for a text "Showroom"
+                 link, so the icon treatment must not ride on it. No aria-label
+                 here — one would override the inner text and hide the count
+                 from screen readers; the visually-hidden label plus the badge
+                 give the link the accessible name "Cart, 2 items". -->
+            <a href="/foundry-art/cart/" class="nav-cart nav-cart-icon">
+              <span class="sr-only">Cart,</span>
+              <!-- 22px, stroke 1.8: the cart's art is inset within its 24 viewBox
+                   while the studios dot grid nearly fills its 20, so matching the
+                   nominal sizes left the cart reading lighter than its neighbour. -->
+              <svg class="nav-cart-glyph" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <path d="M2.5 3.5h2.7l2.3 10.8h10.6"/>
+                <path d="M6 6.8h15.5l-1.9 5.9H7.3"/>
+                <circle cx="9.6" cy="18.6" r="1.35" fill="currentColor" stroke="none"/>
+                <circle cx="17.4" cy="18.6" r="1.35" fill="currentColor" stroke="none"/>
+              </svg>
+              <span class="nav-cart-count" data-cart-count>2</span>
+              <span class="sr-only" data-cart-count-label>items</span>
+            </a>
             <a href="/foundry-art/shop/" class="nav-cta">Shop Now</a>
           </div>`;
-      mobileDrawer = `
-        <a href="/foundry-art/shop/" data-drawer-link>Tiles</a>
-        <a href="/foundry-art/#design-ideas" data-drawer-link>Design Ideas</a>
-        <a href="/foundry-art/#story" data-drawer-link>Our Story</a>
-        <a href="/foundry-art/#guidance" data-drawer-link>How to Buy</a>
-        <a href="/foundry-art/cart/" data-drawer-link>Cart</a>
-        <a href="/foundry-art/account/sign-in/" data-drawer-link data-account-link>Sign in</a>
-        <a href="/foundry-art/shop/" class="mobile-cta" data-drawer-link>Shop Now</a>`;
+      // Intentionally empty — with no hamburger to open it, drawer markup would
+      // render as unreachable DOM. initDrawer() early-returns when the trigger
+      // is absent, so nothing else needs changing.
+      mobileDrawer = '';
     } else if (section === 'linden') {
       navInner = `
           <div class="nav-left">${dotGrid}
@@ -476,7 +503,16 @@
   // Nav cart badge(s) reflect the store on every page.
   function updateNavCount() {
     const n = Cart.count();
-    document.querySelectorAll('[data-cart-count]').forEach(el => { el.textContent = n; });
+    document.querySelectorAll('[data-cart-count]').forEach(el => {
+      el.textContent = n;
+      // An empty cart badge reading "0" is noise on every page before the
+      // customer has added anything. Hide the badge and let the icon stand
+      // alone; the count returns the moment there's something to count.
+      if (el.classList.contains('nav-cart-count')) el.hidden = n === 0;
+    });
+    document.querySelectorAll('[data-cart-count-label]').forEach(el => {
+      el.textContent = n === 0 ? 'empty' : (n === 1 ? 'item' : 'items');
+    });
   }
 
   // PDP → Add to cart
@@ -857,12 +893,15 @@
             <td class="num">${fmtMoney(i.price * i.qty)}</td>
           </tr>
           `).join('') +
-        `<tr><td><strong>Subtotal</strong></td><td class="num">${fmtMoney(order.subtotal)}</td></tr>` +
-        (order.discount ? `<tr><td><strong>Trade discount (20%)</strong></td><td class="num">−${fmtMoney(order.discount)}</td></tr>` : '') +
-        `<tr><td><strong>Shipping</strong></td><td class="num">${order.shipping.label} — ${fmtMoney(order.shipping.cost)}</td></tr>` +
-        `<tr><td><strong>Total</strong></td><td class="num confirm-emphasis">${fmtMoney(order.total)}</td></tr>`;
+        // .confirm-total drops the heavy per-row rule the product rows carry —
+        // the totals read as one quiet block, matching the checkout summary.
+        `<tr class="confirm-total confirm-total-first"><td>Subtotal</td><td class="num">${fmtMoney(order.subtotal)}</td></tr>` +
+        (order.discount ? `<tr class="confirm-total"><td>Trade discount (20%)</td><td class="num">−${fmtMoney(order.discount)}</td></tr>` : '') +
+        `<tr class="confirm-total"><td>${order.shipping.label}</td><td class="num">${fmtMoney(order.shipping.cost)}</td></tr>` +
+        `<tr class="confirm-total confirm-total-final"><td>Total</td><td class="num">${fmtMoney(order.total)}</td></tr>`;
     }
     setText('[data-or-total]', fmtMoney(order.total));
+    if (order.id) setText('[data-or-id]', '#' + order.id);
   }
 
   // ────────────────────────────────────────────────────────
@@ -2131,6 +2170,11 @@
     initAccountGate();
     initLayout();
     updateNavCount();
+    // Cart.write() has always dispatched fa-cart-change, but nothing listened —
+    // the badge only refreshed from the four places that called updateNavCount
+    // by hand, so any other write left it stale. Subscribing once covers every
+    // path, present and future; the call above still does the first paint.
+    document.addEventListener('fa-cart-change', updateNavCount);
     initDrawer();
     initStudiosDrawer();
     initFilterTabs();

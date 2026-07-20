@@ -10,11 +10,13 @@
   --bronze-l:       #B7997E;   /* warm taupe — lighter accent */
   --oxblood:        #4F2A26;   /* deep burgundy — emphasis / sale */
   --sale:           #A31414;   /* brand red — matches --lw-accent-red */
+  --green:          #3A6B4F;   /* deep forest — order confirmed / success */
 
   /* Backgrounds + supporting neutrals */
   --white:          #FFFFFF;
   --cream:          #EEEDE8;   /* off-white — main page background */
   --bronze-bg:      #E5D7C6;   /* warm beige — bronze-family fill */
+  --green-bg:       #E3EDE5;   /* pale green — green-family fill; --green on it is 5.1:1 */
   --wire-fill:      #E5E0D7;
   --wire-stroke:    #BAB1A3;
 
@@ -45,6 +47,21 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
+
+/* Visually hidden but available to screen readers. Needed wherever an icon
+   replaces a text label — a plain aria-label would suppress sibling text
+   (e.g. the cart count) from the accessible name. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 
 body {
   background: var(--cream);
@@ -186,17 +203,59 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   transition: color 0.2s ease;
 }
 .nav-cart:hover { color: var(--charcoal); }
+
+/* Deliberately not the tracked-caps treatment its neighbours use. This slot
+   holds a person's name once signed in ("Avery"), and a name set in tracked
+   caps reads as a UI label rather than as the customer. Sentence case at 16px
+   in near-black makes it the one human element in a nav of chrome — the
+   contrast is the point, not drift. 500 is the heaviest real weight in the
+   Jost link, so no synthetic bold. */
+.nav-account {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--charcoal);
+  cursor: pointer;
+  padding: 6px 2px;
+  transition: color 0.2s ease;
+}
+.nav-account:hover { color: var(--bronze); }
+
+/* Foundry Art only — see the markup note in navHTML(). */
+.nav-cart-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  /* 44×44 to match .studios-toggle and clear the touch-target minimum — the
+     icon is 22px, so the hit area has to come from the box, not the glyph. */
+  min-width: 44px;
+  min-height: 44px;
+}
+.nav-cart-glyph { display: block; }
+.nav-cart-icon .nav-cart-count {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  margin-left: 0;
+}
 .nav-cart-count {
   display: inline-block;
   background: var(--bronze);
   color: var(--white);
-  font-size: 9px;
-  padding: 1px 6px;
+  font-size: 10px;
+  line-height: 1;
+  padding: 2px 5px;
   border-radius: 8px;
   margin-left: 4px;
   letter-spacing: 0;
   font-weight: 500;
 }
+/* .nav-cart-count sets display, which outranks the hidden attribute's UA
+   default — without this the emptied badge stays painted. */
+.nav-cart-count[hidden] { display: none; }
+
 .nav-cta {
   font-size: 10px;
   letter-spacing: 1.5px;
@@ -209,6 +268,41 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   display: inline-block;
 }
 .nav-cta:hover { background: var(--bronze); }
+
+/* ── Foundry Art nav ────────────────────────────────────────────────────
+   Scoped to the Foundry Art shell only. The same .nav-* classes build the
+   Linden, showroom-zone and other navs, and those shells are finished and
+   deployed with square-cornered buttons (.lw2-studio-shop-btn is radius 0) —
+   rounding a shared class would have made the Linden nav CTA the only rounded
+   button on its own pages. */
+
+/* Nav labels are uppercase tracked labels, so --fs-eyebrow (12px) is their
+   documented floor. They sat at 10px and only reached 12px at ≥1440: the nav
+   predates the type floor and was never brought up to it. */
+body[data-section="foundry-art"] :is(.nav-links, .nav-cart, .nav-cta) {
+  font-size: var(--fs-eyebrow);
+}
+/* Below 900 the shared rule hides .nav-links wholesale, which is right for the
+   three homepage anchors but took "Tiles" with it — the one nav item that was a
+   real destination, and with the hamburger gone the only route to the shop from
+   the header. Keep that single link rather than adding a second Shop control:
+   it's existing markup and the site's own word for the shop. */
+@media (max-width: 900px) {
+  body[data-section="foundry-art"] .nav-links { display: flex; }
+  body[data-section="foundry-art"] .nav-links a:not([data-nav-key="shop"]) { display: none; }
+}
+
+body[data-section="foundry-art"] .nav-cta {
+  font-weight: 500;
+  /* Construction matched to the site's buttons: 12px 24px from .btn-primary,
+     3px from the small-control radius used on chips, facet checkboxes and the
+     sort select. */
+  padding: 12px 24px;
+  border-radius: 3px;
+  /* "Shop Now" broke across two lines once the CTA had to share a narrow
+     .nav-right on mobile. A button label should never wrap. */
+  white-space: nowrap;
+}
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -2245,13 +2339,20 @@ body[data-page="home"] .footer p { border: 0 !important; }
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--bronze-bg);
-  color: var(--bronze);
+  background: var(--green-bg);
+  color: var(--green);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
   margin: 0 auto 24px;
+}
+/* Square caps + a mitered elbow — the blunt, drafted mark reads with the
+   Cormorant/Jost pairing where a round-capped tick reads generically UI.
+   Sized here rather than by font-size: the glyph it replaced was text. */
+.confirm-icon svg {
+  width: 26px;
+  height: 26px;
+  display: block;
 }
 .confirm-headline {
   font-family: 'Cormorant Garamond', serif;
@@ -2294,6 +2395,31 @@ body[data-page="home"] .footer p { border: 0 !important; }
   margin-bottom: 10px;
 }
 .confirm-addresses p { font-size: 13px; color: var(--slate); line-height: 1.7; }
+
+/* The two primary exits split the row evenly; Print receipt spans the full
+   row beneath them, matching their combined width. */
+.confirm-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 32px;
+}
+/* Bronze marks it as the aside action — it spans the full row, so the color
+   is what keeps it from outweighing the two exits above. 5.0:1 on white both
+   ways, so the label clears AA at rest and inverted on hover. */
+.confirm-actions > [data-print-receipt] {
+  grid-column: 1 / -1;
+  border-color: var(--bronze);
+  color: var(--bronze);
+}
+.confirm-actions > [data-print-receipt]:hover {
+  background: var(--bronze);
+  border-color: var(--bronze);
+  color: var(--white);
+}
+@media (max-width: 560px) {
+  .confirm-actions { grid-template-columns: 1fr; }
+}
 
 /* ══════════════════════════════════════════════════════════
    TRACK B — Differentiators
@@ -2530,7 +2656,9 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .summary-card.checkout-summary { position: static; }
   .cross-sell-grid { grid-template-columns: repeat(2, 1fr); }
   .confirm-meta { grid-template-columns: repeat(2, 1fr); }
-  .confirm-addresses { grid-template-columns: 1fr; }
+  /* .confirm-addresses stays two-up here — the blocks are short and the card is
+     still ~750px wide at this breakpoint, so stacking them left the shipping
+     address hanging well below billing for no reason. Collapses at 560. */
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -2540,6 +2668,17 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .nav { padding: 14px 16px; }
   .nav-cta { display: none; }
   .nav-cart { display: none; }
+  /* The wordmark is 200px at its base 16px height — 55% of a 360px phone, and
+     the single biggest consumer of nav width. 12px brings it to ~150px, which
+     is what makes room for the Tiles link below. */
+  body[data-section="foundry-art"] .nav-logo img { height: 12px; }
+  /* …but the Foundry Art cart stays. It was hidden here because "CART 2" as a
+     text link couldn't share the row with Shop Now; as a 44px icon it fits,
+     and the cart is the one affordance a store shouldn't drop on mobile. Text
+     .nav-cart variants in the other shells stay hidden. */
+  .nav-cart-icon { display: inline-flex; }
+
+  .confirm-addresses { grid-template-columns: 1fr; gap: 24px; }
 
   .hero { min-height: 600px; }
   .hero-content { width: 100%; padding: 48px 20px; background: transparent; }
@@ -2624,8 +2763,15 @@ body[data-page="home"] .footer p { border: 0 !important; }
   .nav { padding: 24px 64px; }
   .nav-logo { font-size: 17px; }
   .nav-logo img { height: 18px; }
+  /* Foundry Art gets 12px at every width from the type-floor rule above; these
+     lift the other shells to the same size at this tier only, as before. */
   .nav-links { gap: 38px; font-size: 12px; }
   .nav-cta, .nav-cart { font-size: 12px; padding: 10px 22px; }
+  /* Both Foundry Art controls keep their own construction at this tier — the
+     shared rule above would otherwise stretch the 44×44 icon to 66×44 and
+     drag the count badge off the glyph. */
+  body[data-section="foundry-art"] .nav-cta { padding: 12px 24px; }
+  body[data-section="foundry-art"] .nav-cart-icon { padding: 8px; }
   .nav-right { gap: 22px; }
 
   /* HERO — height proportional to viewport width, with a
@@ -10488,8 +10634,8 @@ body[data-page="order-received"] .confirm-addresses p { font-size: 15px; }
 body[data-page="order-received"] .project-panel h4 { font-size: 24px; }
 body[data-page="order-received"] .project-panel p { font-size: 15px; }
 body[data-page="order-received"] .cart-table td { font-size: 15px; }
-body[data-page="order-received"] .cart-item-info strong { font-size: 18px; }
-body[data-page="order-received"] .cart-thumb { width: 80px; height: 80px; }
+/* Name/thumb sizing for this page now lives in the order-received summary
+   block at the end of the file, alongside the totals-row treatment. */
 
 /* Re-assert the ≥1440 tier so the base bumps above don't leak
    upward and shrink the wide-viewport sizes */
@@ -10513,8 +10659,6 @@ body[data-page="order-received"] .cart-thumb { width: 80px; height: 80px; }
   :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-group textarea,
   body[data-page="cart"] .coupon-form input { padding: 13px 16px; }
   body[data-page="order-received"] .confirm-headline { font-size: 44px; }
-  body[data-page="order-received"] .cart-item-info strong { font-size: 19px; }
-  body[data-page="order-received"] .cart-thumb { width: 96px; height: 96px; }
 }
 @media (max-width: 560px) {
   :is(body[data-page="cart"], body[data-page="checkout"], body[data-page="order-received"], body[data-account]) .page-title { font-size: 32px; }
@@ -11887,4 +12031,102 @@ body[data-page="cart"] .summary-note .card-marks { margin: 20px 0 14px; }
 
   body[data-page="cart"] .cart-thumb { width: 84px; height: 84px; }
   body[data-page="cart"] .cart-item-info strong { font-size: 22px; }
+}
+
+/* ── Order-received summary — match the checkout summary system ─────────
+   The confirmation reuses .cart-table, so before this it inherited the raw
+   base component (18px names, 24px row padding) while cart and checkout had
+   both been refined past it. Product rows pick up the checkout summary's
+   type scale; the totals rows drop the per-row rule so they read as one
+   quiet block under a single separator, exactly as they do at checkout. */
+body[data-page="order-received"] .cart-table td { padding: 16px 0; }
+body[data-page="order-received"] .cart-table th { padding: 12px 0; }
+body[data-page="order-received"] .cart-thumb { width: 64px; height: 64px; }
+body[data-page="order-received"] .cart-item { gap: 14px; }
+body[data-page="order-received"] .cart-item-info strong {
+  font-size: 24px;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+body[data-page="order-received"] .cart-item-info span { font-size: 14px; }
+body[data-page="order-received"] .cart-table td.num { font-size: 17px; }
+
+body[data-page="order-received"] .confirm-total td {
+  border-bottom: none;
+  padding: 7px 0;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--slate);
+}
+body[data-page="order-received"] .confirm-total-first td { padding-top: 16px; }
+body[data-page="order-received"] .confirm-total-final td {
+  border-top: 1px solid var(--rule);
+  padding-top: 13px;
+  margin-top: 4px;
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--charcoal);
+}
+
+/* Type scale steps down before the layout does — these are safe at any width
+   because the table is still a table here. */
+@media (max-width: 900px) {
+  body[data-page="order-received"] .cart-table td { padding: 14px 0; }
+  body[data-page="order-received"] .cart-thumb { width: 56px; height: 56px; }
+  body[data-page="order-received"] .cart-item-info strong { font-size: 21px; }
+}
+
+/* Below 560 the base .cart-table treatment turns every tr and td into a block,
+   which stacks each label above its own amount — a two-word totals row became
+   135px tall. Lay both rows back out as label-left / amount-right flex rows,
+   and carry the Total's rule on the tr, since a border on two flex children
+   would read as two segments with a gap between them.
+
+   This MUST match the base block's 560px breakpoint, not a rounder 900px.
+   Above 560 the <thead> is still a live table-header-group, so flexing the
+   body rows leaves the header and the body computing widths independently —
+   the price column visibly stops short of the TOTAL header. */
+@media (max-width: 560px) {
+  /* The base treatment (line ~2596) also sets width:100% on every cell and
+     16px block padding on every tr — both have to come back off, or the flex
+     children each claim the full row and the row pads out twice. */
+  body[data-page="order-received"] tr.confirm-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 0;
+    border-bottom: none;
+  }
+  body[data-page="order-received"] tr.confirm-total > td { padding: 7px 0; width: auto; }
+  body[data-page="order-received"] tr.confirm-total-first > td { padding-top: 16px; }
+  body[data-page="order-received"] tr.confirm-total-final {
+    border-top: 1px solid var(--rule);
+    margin-top: 6px;
+  }
+  body[data-page="order-received"] tr.confirm-total-final > td {
+    border-top: none;
+    padding-top: 13px;
+    font-size: 17px;
+  }
+
+  /* Product rows read as one compact line rather than a three-deep stack. */
+  body[data-page="order-received"] [data-order-details] tr:not(.confirm-total) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  body[data-page="order-received"] [data-order-details] tr:not(.confirm-total) > td {
+    padding: 0;
+    width: auto;
+    border-bottom: none;
+  }
+  body[data-page="order-received"] [data-order-details] tr:not(.confirm-total) > td:first-child {
+    flex: 1;
+    min-width: 0;
+  }
+  body[data-page="order-received"] [data-order-details] tr:not(.confirm-total) > td.num { flex-shrink: 0; }
 }
