@@ -11823,3 +11823,24 @@ body[data-page="checkout"] .checkout-step[data-step="1"] .step-body > .checkout-
 
 /* Form hints lifted off --mid for the same legibility reason as the labels. */
 :is(body[data-page="cart"], body[data-page="checkout"], body[data-account]) .form-hint { color: var(--slate-l); font-size: 13px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   CART — SUMMARY ALIGNMENT, CARD MARKS, DENSER ROWS
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* The summary card and the table already share a top edge; what read as
+   misaligned was the card's 36px top padding against the table header's 18px,
+   pushing "Order Summary" a line lower than "PRODUCT". Match the header's
+   padding so the two columns start on the same line. */
+body[data-page="cart"] .summary-card { padding-top: 18px; }
+
+/* Breathing room above and below the card marks. */
+body[data-page="cart"] .summary-note .card-marks { margin: 20px 0 14px; }
+
+/* Denser rows so a fourth item clears the fold on a ~900px viewport. The row
+   was 60px of padding around a 96px thumb (=157). Now 36 + 80 (=116), which
+   pulls the fourth row's bottom from 1011 to ~850. */
+@media (min-width: 901px) {
+  body[data-page="cart"] .cart-table td { padding-top: 18px; padding-bottom: 18px; }
+  body[data-page="cart"] .cart-thumb { width: 80px; height: 80px; }
+}
