@@ -1534,9 +1534,13 @@ body[data-page="home"] .product-card-cta:hover {
 .fa-faq--inline {
   grid-column: 2 / -1;                              /* align to same column as .guidance-cards */
   /* No rule above the heading and no padding to clear it — the first FAQ row's
-     own hairline is enough separation, and the heading now carries the break. */
+     own hairline is enough separation, and the heading now carries the break.
+
+     The cards-to-heading gap is this margin PLUS the .guidance grid's row-gap
+     (40px here, 64px at 1440+), so the margin is the only half that can move:
+     8px lands the total at 48px, half the 96px it was. */
   padding: 0;
-  margin-top: 56px;
+  margin-top: 8px;
   background: transparent;
 }
 .fa-faq--inline .fa-faq-list {
@@ -1550,11 +1554,13 @@ body[data-page="home"] .product-card-cta:hover {
 /* The heading is a plain .section-headline now (same class as "Not sure where
    to start?" above it), so the old bespoke .fa-faq-title scale is gone. */
 @media (min-width: 1440px) {
-  .fa-faq--inline { margin-top: 80px; }
+  .fa-faq--inline { margin-top: 8px; }   /* + 64px row-gap = 72px, half of 144 */
   .fa-faq--inline .fa-faq-header { margin-bottom: 40px; }
 }
 @media (max-width: 560px) {
-  .fa-faq--inline { margin-top: 36px; }
+  /* The 40px row-gap alone is already about half the old 76px, so there is no
+     margin left to give back here. */
+  .fa-faq--inline { margin-top: 0; }
   .fa-faq--inline .fa-faq-header { margin-bottom: 20px; }
 }
 
