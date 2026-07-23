@@ -49,6 +49,11 @@
                   was the only thing on the site describing it as a checkout
                   path. */''}
             ${link('/foundry-art/#guidance', 'Guidance', 'guide')}
+            ${/* About the umbrella brand (SL 7-23: moved out of the footer). A
+                  real destination, not a homepage anchor. Below 1024 .nav-links
+                  is hidden for Foundry Art, so the studios drawer + injected
+                  footer below carry About on tablet/mobile. */''}
+            ${link('/about/', 'About', 'about')}
           </div>
           <!-- No .nav-hamburger in the Foundry Art nav. Three of the four links
                above are homepage anchors and are fine to drop on small screens;
@@ -178,7 +183,11 @@
         </a>
 
         <nav class="studios-links" aria-label="Menu">
-        <p class="studios-links-heading">Collections</p>
+        ${/* "Collections" → "Our studios" (SL 7-23 light interim): the three items
+              below are the three studios under Linden, not product collections.
+              Naming them as studios makes the master-brand → studio hierarchy
+              legible and answers the Foundry-Art-vs-Bronzework confusion. */''}
+        <p class="studios-links-heading">Our studios</p>
         <div class="studios-subnav">
 
         <div class="studios-acc${expanded('bronzework-studio')}${active('bronzework-studio')}" data-studios-acc>
@@ -218,6 +227,7 @@
         </div>
         </div>
 
+          <a href="/about/" data-studios-link>About</a>
           <a href="/feature-gail-drury/" data-studios-link>Inspiration</a>
           <a href="/our-team/" data-studios-link>Our Team</a>
           <a href="/where-to-buy/" data-studios-link>Where to Buy</a>
@@ -231,6 +241,7 @@
   function footerHTML() {
     return `
       <footer class="footer">
+        <p class="footer-links"><a href="/about/">About</a> &nbsp;·&nbsp; <a href="/where-to-buy/">Where to Buy</a> &nbsp;·&nbsp; <a href="/contact/">Contact</a></p>
         <p>© 2026 Linden Workshops · Luxury designer metal accent tile since 1990</p>
         <p><a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">Houzz</a></p>
       </footer>
@@ -732,9 +743,14 @@
     return { label: row.querySelector('strong').textContent, cost };
   }
   function tradeActive() {
+    // Honor system (SL 7-23): self-identify + either a company name or a
+    // website/trade ID. Must match initTradeToggle()'s reveal condition, or a
+    // company-only trade pro sees the discount line but not the discounted total.
     const t = document.querySelector('[data-trade-toggle]');
+    const company = document.querySelector('[data-trade-company]');
     const id = document.querySelector('[data-trade-id]');
-    return !!(t && t.checked && id && id.value.trim() !== '');
+    const filled = el => !!(el && el.value.trim() !== '');
+    return !!(t && t.checked && (filled(company) || filled(id)));
   }
   // A cart of nothing but swatches ships free — must match the cart page, or a
   // "ships free" cart silently becomes a $12 UPS Ground order one screen later.
@@ -891,8 +907,11 @@
     renderCheckoutSummary();
     document.querySelectorAll('input[name="shipping"]').forEach(r => r.addEventListener('change', updateCheckoutTotals));
     const tt = document.querySelector('[data-trade-toggle]'); if (tt) tt.addEventListener('change', updateCheckoutTotals);
-    const tid = document.querySelector('[data-trade-id]');
-    if (tid) { tid.addEventListener('input', updateCheckoutTotals); tid.addEventListener('blur', updateCheckoutTotals); }
+    // Both trade fields drive the total — either can unlock pricing (SL 7-23).
+    document.querySelectorAll('[data-trade-company], [data-trade-id]').forEach(f => {
+      f.addEventListener('input', updateCheckoutTotals);
+      f.addEventListener('blur', updateCheckoutTotals);
+    });
 
     // Coupon apply (demo codes)
     const couponBtn = document.querySelector('[data-coupon-apply]');
@@ -1245,10 +1264,10 @@
           <div class="summary-row"><span>Firm</span><span>${t.firm}</span></div>
           <div class="summary-row"><span>Verified</span><span>${t.verifiedOn}</span></div>`;
       } else if (t.status === 'pending') {
-        tw.innerHTML = `<h4>Trade account</h4><p>Your application is under review. We verify each firm by hand, usually within two business days.</p>`;
+        tw.innerHTML = `<h4>Trade account</h4><p>Trade pricing is active on your account. Add your company details anytime to keep them on file.</p>`;
       } else {
-        tw.innerHTML = `<h4>Trade account</h4><p>Designers, architects and contractors can apply for trade pricing.</p>
-          <a class="btn-secondary" href="/foundry-art/account/details/">Apply</a>`;
+        tw.innerHTML = `<h4>Trade account</h4><p>Designers, architects and contractors get trade pricing &mdash; tell us who you work with to activate it.</p>
+          <a class="btn-secondary" href="/foundry-art/account/details/">Activate trade pricing</a>`;
       }
     }
 
@@ -1336,11 +1355,11 @@
            <div class="summary-row"><span>Verified</span><span>${t.verifiedOn}</span></div>
            <p class="form-hint">${Math.round(t.discount * 100)}% is applied automatically at checkout. To update your firm details, contact the studio.</p>`
         : `<div class="field-grid">
-             <div class="form-group"><label for="trade-firm">Firm name *</label><input id="trade-firm" type="text"></div>
-             <div class="form-group"><label for="trade-site">Professional website *</label><input id="trade-site" type="text"></div>
+             <div class="form-group"><label for="trade-firm">Company or firm name *</label><input id="trade-firm" type="text"></div>
+             <div class="form-group"><label for="trade-site">Professional website <span class="opt">(optional)</span></label><input id="trade-site" type="text"></div>
            </div>
-           <button type="button" class="btn-primary" data-trade-apply>Apply for trade pricing</button>
-           <p class="form-hint">We verify each firm by hand, usually within two business days.</p>`;
+           <button type="button" class="btn-primary" data-trade-apply>Activate trade pricing</button>
+           <p class="form-hint">Trade pricing applies right away &mdash; tell us who you work with and we&rsquo;ll take it from there. Designers, architects, and contractors welcome.</p>`;
       const apply = panel.querySelector('[data-trade-apply]');
       if (apply) apply.addEventListener('click', () => {
         const label = apply.textContent;
@@ -1450,8 +1469,10 @@
     const t = c.trade;
     if (t && t.status === 'approved') {
       const toggle = document.querySelector('[data-trade-toggle]');
+      const companyField = document.querySelector('[data-trade-company]');
       const idField = document.querySelector('[data-trade-id]');
       if (toggle && !toggle.checked) { toggle.checked = true; toggle.dispatchEvent(new Event('change')); }
+      if (companyField && !companyField.value) { companyField.value = t.firm || c.company || ''; companyField.dispatchEvent(new Event('input')); }
       if (idField && !idField.value) { idField.value = t.tradeId; idField.dispatchEvent(new Event('input')); }
     }
   }
@@ -2097,23 +2118,28 @@
   // ────────────────────────────────────────────────────────
   function initTradeToggle() {
     const toggle = document.querySelector('[data-trade-toggle]');
+    const fields = document.querySelector('[data-trade-fields]');
+    const companyInput = document.querySelector('[data-trade-company]');
     const idInput = document.querySelector('[data-trade-id]');
     const discountLine = document.querySelector('[data-trade-discount]');
     if (!toggle) return;
+    const filled = el => el && el.value.trim() !== '';
     function sync() {
       const on = toggle.checked;
-      // Checking the box only reveals the input. Trade pricing unlocks
-      // once they enter a professional website or trade ID (honor system) —
-      // the discount is never advertised up front.
-      if (idInput) idInput.style.display = on ? '' : 'none';
-      const unlocked = on && idInput && idInput.value.trim() !== '';
+      // Checking the box reveals the capture fields. Trade pricing unlocks on
+      // the honor system once they self-identify — a company name OR a website/
+      // trade ID is enough (SL 7-23: no verification gate). The discount is
+      // never advertised up front; capturing company/website builds the segment.
+      if (fields) fields.style.display = on ? '' : 'none';
+      const unlocked = on && (filled(companyInput) || filled(idInput));
       if (discountLine) discountLine.style.display = unlocked ? '' : 'none';
     }
     toggle.addEventListener('change', sync);
-    if (idInput) {
-      idInput.addEventListener('input', sync);
-      idInput.addEventListener('blur', sync);
-    }
+    [companyInput, idInput].forEach(el => {
+      if (!el) return;
+      el.addEventListener('input', sync);
+      el.addEventListener('blur', sync);
+    });
     sync();
   }
 
