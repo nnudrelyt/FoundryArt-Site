@@ -7,19 +7,21 @@
     "zip": "V6J 1N8",
     "phone": "(604) 739-5966",
     "region": "Canada",
-    "lat": 49.2827,
-    "lng": -123.1207
+    "lat": 49.268252,
+    "lng": -123.144172,
+    "geo": "building"
   },
   {
-    "name": "Adams Tile &amp; Stone",
+    "name": "Adams Tile & Stone",
     "address": "1198 Grand Ave",
     "city": "Marion",
     "state": "IA",
     "zip": "52302",
     "phone": "(319) 377-0231",
     "region": "Central US",
-    "lat": 42.0341,
-    "lng": -91.597
+    "lat": 42.020673,
+    "lng": -91.596908,
+    "geo": "place"
   },
   {
     "name": "Artistic Tile",
@@ -29,8 +31,9 @@
     "zip": "60654",
     "phone": "(312) 670-0612",
     "region": "Central US",
-    "lat": 41.8781,
-    "lng": -87.6298
+    "lat": 41.888498,
+    "lng": -87.634456,
+    "geo": "amenity"
   },
   {
     "name": "Mosaicos",
@@ -40,8 +43,9 @@
     "zip": "60630",
     "phone": "(773) 777-8453",
     "region": "Central US",
-    "lat": 41.8781,
-    "lng": -87.6298
+    "lat": 41.969369,
+    "lng": -87.728172,
+    "geo": "place"
   },
   {
     "name": "Renaissance Tile & Bath",
@@ -51,19 +55,21 @@
     "zip": "60654",
     "phone": "(312) 467-9590",
     "region": "Central US",
-    "lat": 41.8781,
-    "lng": -87.6298
+    "lat": 41.890974,
+    "lng": -87.635671,
+    "geo": "place"
   },
   {
-    "name": "Mona Lisa Tile &amp; Stone, Inc.",
+    "name": "Mona Lisa Tile & Stone, Inc.",
     "address": "406 Green Bay Road",
     "city": "Kenilworth",
     "state": "IL",
     "zip": "60043",
     "phone": "(847) 920-1620",
     "region": "Central US",
-    "lat": 42.0867,
-    "lng": -87.717
+    "lat": 42.086975,
+    "lng": -87.717962,
+    "geo": "place"
   },
   {
     "name": "Chadwick's Surfaces",
@@ -73,8 +79,9 @@
     "zip": "60045",
     "phone": "(847) 680-3222",
     "region": "Central US",
-    "lat": 42.2586,
-    "lng": -87.8406
+    "lat": 42.232292,
+    "lng": -87.847903,
+    "geo": "zip"
   },
   {
     "name": "Lorenstone, Inc.",
@@ -84,8 +91,9 @@
     "zip": "60048",
     "phone": "(847) 362-5283",
     "region": "Central US",
-    "lat": 42.2831,
-    "lng": -87.9534
+    "lat": 42.28321,
+    "lng": -87.955826,
+    "geo": "place"
   },
   {
     "name": "Viking Flooring Solutions",
@@ -95,30 +103,33 @@
     "zip": "60148",
     "phone": "(630) 796-1205",
     "region": "Central US",
-    "lat": 41.88,
-    "lng": -88.0078
+    "lat": 41.839858,
+    "lng": -88.018535,
+    "geo": "place"
   },
   {
-    "name": "Lewis Floor &amp; Home",
+    "name": "Lewis Floor & Home",
     "address": "1840 Skokie Blvd",
     "city": "Northbrook",
     "state": "IL",
     "zip": "60062",
     "phone": "(847) 835-2400",
     "region": "Central US",
-    "lat": 42.1275,
-    "lng": -87.829
+    "lat": 42.152223,
+    "lng": -87.801686,
+    "geo": "road"
   },
   {
-    "name": "Neufeldt&#8217;s Flooring",
+    "name": "Neufeldt\u2019s Flooring",
     "address": "110 W. 2nd",
     "city": "Buhler",
     "state": "KS",
     "zip": "67522",
     "phone": "(620) 543-2274",
     "region": "Central US",
-    "lat": 38.137,
-    "lng": -97.7706
+    "lat": 38.135906,
+    "lng": -97.77075,
+    "geo": "place"
   },
   {
     "name": "International Materials of Design",
@@ -128,19 +139,21 @@
     "zip": "66207",
     "phone": "(913) 383-3383",
     "region": "Central US",
-    "lat": 38.9822,
-    "lng": -94.6708
+    "lat": 38.935833,
+    "lng": -94.639057,
+    "geo": "building"
   },
   {
-    "name": "Palatial Stone &amp; Tile, LLC",
+    "name": "Palatial Stone & Tile, LLC",
     "address": "1526 Religious Street",
     "city": "New Orleans",
     "state": "LA",
     "zip": "70130",
     "phone": "(504) 576-9000",
     "region": "Central US",
-    "lat": 29.9511,
-    "lng": -90.0715
+    "lat": 29.932776,
+    "lng": -90.066545,
+    "geo": "place"
   },
   {
     "name": "Cercan Tile",
@@ -150,8 +163,9 @@
     "zip": "48084",
     "phone": "(248) 643-6520",
     "region": "Central US",
-    "lat": 42.6064,
-    "lng": -83.1498
+    "lat": 42.548938,
+    "lng": -83.178179,
+    "geo": "place"
   },
   {
     "name": "Artisan Tile Studio",
@@ -161,8 +175,9 @@
     "zip": "73116",
     "phone": "(405) 242-2227",
     "region": "Central US",
-    "lat": 35.4676,
-    "lng": -97.5164
+    "lat": 35.551043,
+    "lng": -97.517715,
+    "geo": "place"
   },
   {
     "name": "TileStone Distributors, Inc.",
@@ -172,8 +187,9 @@
     "zip": "74136",
     "phone": "(918) 492-5434",
     "region": "Central US",
-    "lat": 36.1539,
-    "lng": -95.9928
+    "lat": 36.063774,
+    "lng": -95.958833,
+    "geo": "place"
   },
   {
     "name": "Haskell Interiors, LLC",
@@ -183,8 +199,9 @@
     "zip": "37311",
     "phone": "(423) 472-6409",
     "region": "Central US",
-    "lat": 35.1595,
-    "lng": -84.8766
+    "lat": 35.153306,
+    "lng": -84.884385,
+    "geo": "zip"
   },
   {
     "name": "Exact Tile",
@@ -194,8 +211,9 @@
     "zip": "37922",
     "phone": "(865) 357-6434",
     "region": "Central US",
-    "lat": 35.9606,
-    "lng": -83.9207
+    "lat": 35.908709,
+    "lng": -84.102831,
+    "geo": "place"
   },
   {
     "name": "Artistic Tile",
@@ -205,19 +223,21 @@
     "zip": "37203",
     "phone": "(615) 763-5725",
     "region": "Central US",
-    "lat": 36.1627,
-    "lng": -86.7816
+    "lat": 36.14015,
+    "lng": -86.76766,
+    "geo": "building"
   },
   {
-    "name": "Renaissance Tile &amp; Bath",
+    "name": "Renaissance Tile & Bath",
     "address": "1625 Broadway",
     "city": "Nashville",
     "state": "TN",
     "zip": "37203",
     "phone": "(615) 742-0054",
     "region": "Central US",
-    "lat": 36.1627,
-    "lng": -86.7816
+    "lat": 36.153918,
+    "lng": -86.793143,
+    "geo": "place"
   },
   {
     "name": "Embellishments",
@@ -227,8 +247,9 @@
     "zip": "76008",
     "phone": "(817) 475-7372",
     "region": "Central US",
-    "lat": 32.6957,
-    "lng": -97.6028
+    "lat": 32.703591,
+    "lng": -97.603415,
+    "geo": "building"
   },
   {
     "name": "Architerra Studio at Evergreen",
@@ -238,8 +259,9 @@
     "zip": "78704",
     "phone": "(512) 441-5540",
     "region": "Central US",
-    "lat": 30.2672,
-    "lng": -97.7431
+    "lat": 30.250391,
+    "lng": -97.764512,
+    "geo": "building"
   },
   {
     "name": "Architerra Tile Studio",
@@ -249,8 +271,9 @@
     "zip": "78704",
     "phone": "(512) 441-5540",
     "region": "Central US",
-    "lat": 30.2672,
-    "lng": -97.7431
+    "lat": 30.260071,
+    "lng": -97.7479,
+    "geo": "building"
   },
   {
     "name": "Material Bespoke Stone + Tile",
@@ -260,8 +283,9 @@
     "zip": "78746",
     "phone": "(512) 328-7682",
     "region": "Central US",
-    "lat": 30.2672,
-    "lng": -97.7431
+    "lat": 30.299087,
+    "lng": -97.806881,
+    "geo": "zip"
   },
   {
     "name": "Artistic Tile",
@@ -271,8 +295,9 @@
     "zip": "75207",
     "phone": "(214) 760-1753",
     "region": "Central US",
-    "lat": 32.7767,
-    "lng": -96.797
+    "lat": 32.795434,
+    "lng": -96.820574,
+    "geo": "building"
   },
   {
     "name": "Material Bespoke Stone + Tile",
@@ -282,8 +307,9 @@
     "zip": "75207",
     "phone": "(214) 752-4226",
     "region": "Central US",
-    "lat": 32.7767,
-    "lng": -96.797
+    "lat": 32.795811,
+    "lng": -96.8182,
+    "geo": "place"
   },
   {
     "name": "Renaissance Tile & Bath",
@@ -293,8 +319,9 @@
     "zip": "75207",
     "phone": "(214) 571-9867",
     "region": "Central US",
-    "lat": 32.7767,
-    "lng": -96.797
+    "lat": 32.795434,
+    "lng": -96.820574,
+    "geo": "building"
   },
   {
     "name": "R. Gladwin i. Design Tile",
@@ -305,7 +332,8 @@
     "phone": "(831) 629-1111",
     "region": "Central US",
     "lat": 30.2752,
-    "lng": -98.872
+    "lng": -98.872,
+    "geo": "conflict"
   },
   {
     "name": "Material Bespoke Stone + Tile",
@@ -315,8 +343,9 @@
     "zip": "77019",
     "phone": "(713) 960-8601",
     "region": "Central US",
-    "lat": 29.7604,
-    "lng": -95.3698
+    "lat": 29.753173,
+    "lng": -95.396673,
+    "geo": "place"
   },
   {
     "name": "Collected Coverings",
@@ -326,8 +355,9 @@
     "zip": "78028",
     "phone": "(830) 257-6088",
     "region": "Central US",
-    "lat": 30.0474,
-    "lng": -99.1403
+    "lat": 30.049422,
+    "lng": -99.144415,
+    "geo": "place"
   },
   {
     "name": "Material Bespoke Stone + Tile",
@@ -337,30 +367,33 @@
     "zip": "78212",
     "phone": "(210) 731-8453",
     "region": "Central US",
-    "lat": 29.4241,
-    "lng": -98.4936
+    "lat": 29.445656,
+    "lng": -98.482665,
+    "geo": "place"
   },
   {
-    "name": "Bella Tile &amp; Stone",
+    "name": "Bella Tile & Stone",
     "address": "609 Milwaukee Street",
     "city": "Delafield",
     "state": "WI",
     "zip": "53108",
     "phone": "(262) 303-9032",
     "region": "Central US",
-    "lat": 43.0617,
-    "lng": -88.404
+    "lat": 43.061908,
+    "lng": -88.403676,
+    "geo": "place"
   },
   {
-    "name": "HJ Martin &amp; Son, Inc",
+    "name": "HJ Martin & Son, Inc",
     "address": "320 S Military Ave",
     "city": "Green Bay",
     "state": "WI",
     "zip": "54303",
     "phone": "(920) 494-3461",
     "region": "Central US",
-    "lat": 44.5133,
-    "lng": -88.0133
+    "lat": 44.527094,
+    "lng": -88.061836,
+    "geo": "place"
   },
   {
     "name": "Bella Tile & Stone",
@@ -370,8 +403,9 @@
     "zip": "53147",
     "phone": "(262) 348-1600",
     "region": "Central US",
-    "lat": 42.5917,
-    "lng": -88.4334
+    "lat": 42.585627,
+    "lng": -88.453915,
+    "geo": "zip"
   },
   {
     "name": "Karen Berkmeyer Home",
@@ -381,19 +415,21 @@
     "zip": "06880",
     "phone": "(203) 454-0032",
     "region": "Eastern US",
-    "lat": 41.1415,
-    "lng": -73.3579
+    "lat": 41.13599,
+    "lng": -73.36949,
+    "geo": "place"
   },
   {
-    "name": "Renaissance Tile &amp; Bath",
+    "name": "Renaissance Tile & Bath",
     "address": "Washington Design Center, 1099 14th St NW, Ste 460",
     "city": "Washington",
     "state": "DC",
     "zip": "22314",
     "phone": "(703) 549-7806",
     "region": "Eastern US",
-    "lat": 38.9072,
-    "lng": -77.0369
+    "lat": 38.903389,
+    "lng": -77.031234,
+    "geo": "building"
   },
   {
     "name": "Innovative Surfaces",
@@ -403,8 +439,9 @@
     "zip": "33134",
     "phone": "(305) 446-9059",
     "region": "Eastern US",
-    "lat": 25.7215,
-    "lng": -80.2684
+    "lat": 25.742357,
+    "lng": -80.258262,
+    "geo": "place"
   },
   {
     "name": "Ceramic Matrix",
@@ -414,8 +451,9 @@
     "zip": "33444",
     "phone": "(561) 353-1449",
     "region": "Eastern US",
-    "lat": 26.4615,
-    "lng": -80.0728
+    "lat": 26.442944,
+    "lng": -80.085112,
+    "geo": "place"
   },
   {
     "name": "Ceramic Matrix",
@@ -425,8 +463,9 @@
     "zip": "33020",
     "phone": "(954) 990-8605",
     "region": "Eastern US",
-    "lat": 26.0112,
-    "lng": -80.1495
+    "lat": 26.044002,
+    "lng": -80.163493,
+    "geo": "place"
   },
   {
     "name": "Ceramic Matrix",
@@ -436,8 +475,9 @@
     "zip": "33138",
     "phone": "(305) 573-5997",
     "region": "Eastern US",
-    "lat": 25.7617,
-    "lng": -80.1918
+    "lat": 25.848445,
+    "lng": -80.193177,
+    "geo": "place"
   },
   {
     "name": "Ceramic Matrix",
@@ -447,30 +487,33 @@
     "zip": "34109",
     "phone": "(239) 596-7997",
     "region": "Eastern US",
-    "lat": 26.142,
-    "lng": -81.7948
+    "lat": 26.225078,
+    "lng": -81.782207,
+    "geo": "road"
   },
   {
-    "name": "Moza &amp; Company",
+    "name": "Moza & Company",
     "address": "200 East Garden Street",
     "city": "Pensacola",
     "state": "FL",
     "zip": "32502",
     "phone": "(850) 497-6011",
     "region": "Eastern US",
-    "lat": 30.4213,
-    "lng": -87.2169
+    "lat": 30.413599,
+    "lng": -87.21263,
+    "geo": "place"
   },
   {
-    "name": "Beach House Tile &amp; Design",
+    "name": "Beach House Tile & Design",
     "address": "118 Spires Ln, Unit 1A",
     "city": "Santa Rosa Beach",
     "state": "FL",
     "zip": "32459",
     "phone": "(850) 622-1986",
     "region": "Eastern US",
-    "lat": 30.3674,
-    "lng": -86.2511
+    "lat": 30.348656,
+    "lng": -86.231797,
+    "geo": "place"
   },
   {
     "name": "Ceramic Matrix",
@@ -480,8 +523,9 @@
     "zip": "33611",
     "phone": "(813) 284-6959",
     "region": "Eastern US",
-    "lat": 27.9506,
-    "lng": -82.4572
+    "lat": 27.893635,
+    "lng": -82.509022,
+    "geo": "place"
   },
   {
     "name": "Decorum  Tile & Stone",
@@ -491,8 +535,9 @@
     "zip": "33609",
     "phone": "(813) 793-7481",
     "region": "Eastern US",
-    "lat": 27.9506,
-    "lng": -82.4572
+    "lat": 27.94487,
+    "lng": -82.493643,
+    "geo": "place"
   },
   {
     "name": "Priano (Precision Liner Collection only)",
@@ -502,8 +547,9 @@
     "zip": "33607",
     "phone": "(813) 964-3882",
     "region": "Eastern US",
-    "lat": 27.9506,
-    "lng": -82.4572
+    "lat": 27.959769,
+    "lng": -82.500537,
+    "geo": "building"
   },
   {
     "name": "Ceramic Matrix",
@@ -513,8 +559,9 @@
     "zip": "32960",
     "phone": "(772) 778-7784",
     "region": "Eastern US",
-    "lat": 27.6386,
-    "lng": -80.3973
+    "lat": 27.635165,
+    "lng": -80.396131,
+    "geo": "place"
   },
   {
     "name": "Ceramic Matrix",
@@ -524,8 +571,9 @@
     "zip": "33407",
     "phone": "(561) 681-6810",
     "region": "Eastern US",
-    "lat": 26.7153,
-    "lng": -80.0534
+    "lat": 26.745206,
+    "lng": -80.073776,
+    "geo": "zip"
   },
   {
     "name": "Alexander Morgan",
@@ -535,8 +583,9 @@
     "zip": "32789",
     "phone": "(407) 629-2393",
     "region": "Eastern US",
-    "lat": 28.6,
-    "lng": -81.3392
+    "lat": 28.589872,
+    "lng": -81.365101,
+    "geo": "place"
   },
   {
     "name": "Ceramic Matrix",
@@ -546,8 +595,9 @@
     "zip": "32789",
     "phone": "(407) 666-3247",
     "region": "Eastern US",
-    "lat": 28.5999,
-    "lng": -81.3392
+    "lat": 28.600828,
+    "lng": -81.354996,
+    "geo": "place"
   },
   {
     "name": "Material Bespoke Stone + Tile",
@@ -557,41 +607,45 @@
     "zip": "30324",
     "phone": "(404) 478-2770",
     "region": "Eastern US",
-    "lat": 33.749,
-    "lng": -84.388
+    "lat": 33.831722,
+    "lng": -84.362598,
+    "geo": "place"
   },
   {
-    "name": "Renaissance Tile &amp; Bath",
+    "name": "Renaissance Tile & Bath",
     "address": "3955 Oakcliff Industrial Court, #10",
     "city": "Atlanta",
     "state": "GA",
     "zip": "30340",
     "phone": "(404) 231-9203",
     "region": "Eastern US",
-    "lat": 33.749,
-    "lng": -84.388
+    "lat": 33.896301,
+    "lng": -84.253687,
+    "geo": "zip"
   },
   {
-    "name": "Renaissance Tile &amp; Bath-Corporate Office",
+    "name": "Renaissance Tile & Bath-Corporate Office",
     "address": "349 Peachtree Hills Ave",
     "city": "Atlanta",
     "state": "GA",
     "zip": "30305",
     "phone": "(404) 231-5657",
     "region": "Eastern US",
-    "lat": 33.749,
-    "lng": -84.388
+    "lat": 33.818269,
+    "lng": -84.374974,
+    "geo": "place"
   },
   {
-    "name": "Simmer &amp; Soak",
+    "name": "Simmer & Soak",
     "address": "8 Market Street",
     "city": "St. Simons Island",
     "state": "GA",
     "zip": "31522",
     "phone": "(912) 268-4210",
     "region": "Eastern US",
-    "lat": 31.1499,
-    "lng": -81.3729
+    "lat": 31.166835,
+    "lng": -81.385461,
+    "geo": "zip"
   },
   {
     "name": "Discover Tile LLC",
@@ -601,19 +655,21 @@
     "zip": "02210",
     "phone": "(617) 330-7900",
     "region": "Eastern US",
-    "lat": 42.3601,
-    "lng": -71.0589
+    "lat": 42.344286,
+    "lng": -71.03433,
+    "geo": "road"
   },
   {
-    "name": "Nantucket Housefitters &amp; Tile Gallery",
+    "name": "Nantucket Housefitters & Tile Gallery",
     "address": "16A Sparks Avenue",
     "city": "Nantucket",
     "state": "MA",
     "zip": "02554",
     "phone": "(508) 228-2815",
     "region": "Eastern US",
-    "lat": 41.2835,
-    "lng": -70.0995
+    "lat": 41.270744,
+    "lng": -70.089365,
+    "geo": "road"
   },
   {
     "name": "Architectural Ceramics, Inc.",
@@ -623,8 +679,9 @@
     "zip": "20850",
     "phone": "(301) 762-4140",
     "region": "Eastern US",
-    "lat": 39.084,
-    "lng": -77.1528
+    "lat": 39.098223,
+    "lng": -77.13713,
+    "geo": "road"
   },
   {
     "name": "Architessa",
@@ -634,19 +691,21 @@
     "zip": "20850",
     "phone": "(301) 762-4140",
     "region": "Eastern US",
-    "lat": 39.084,
-    "lng": -77.1528
+    "lat": 39.070639,
+    "lng": -77.132008,
+    "geo": "place"
   },
   {
-    "name": "Renaissance Tile &amp; Bath",
+    "name": "Renaissance Tile & Bath",
     "address": "2041 South Blvd., Suite A",
     "city": "Charlotte",
     "state": "NC",
     "zip": "28203",
     "phone": "(704) 372-1575",
     "region": "Eastern US",
-    "lat": 35.2271,
-    "lng": -80.8431
+    "lat": 35.208388,
+    "lng": -80.859858,
+    "geo": "amenity"
   },
   {
     "name": "Studio 321",
@@ -656,19 +715,21 @@
     "zip": "28601",
     "phone": "(828) 304-8258",
     "region": "Eastern US",
-    "lat": 35.7344,
-    "lng": -81.3445
+    "lat": 35.734333,
+    "lng": -81.329544,
+    "geo": "place"
   },
   {
-    "name": "Mediterranean Tile &amp; Marble",
+    "name": "Mediterranean Tile & Marble",
     "address": "7 Olcott Square",
     "city": "Bernardsville",
     "state": "NJ",
     "zip": "07924",
     "phone": "(908) 953-9990",
     "region": "Eastern US",
-    "lat": 40.7185,
-    "lng": -74.5693
+    "lat": 40.718725,
+    "lng": -74.569098,
+    "geo": "road"
   },
   {
     "name": "Mediterranean Tile",
@@ -678,8 +739,9 @@
     "zip": "07004",
     "phone": "(973) 808-1267",
     "region": "Eastern US",
-    "lat": 40.8848,
-    "lng": -74.3007
+    "lat": 40.878234,
+    "lng": -74.294145,
+    "geo": "zip"
   },
   {
     "name": "Artistic Tile",
@@ -689,8 +751,9 @@
     "zip": "07652",
     "phone": "(201) 670-6100",
     "region": "Eastern US",
-    "lat": 40.9445,
-    "lng": -74.0754
+    "lat": 40.942172,
+    "lng": -74.071635,
+    "geo": "road"
   },
   {
     "name": "Monmouth Street Tile",
@@ -700,8 +763,9 @@
     "zip": "07701",
     "phone": "(732) 933-1760",
     "region": "Eastern US",
-    "lat": 40.347,
-    "lng": -74.0643
+    "lat": 40.34959,
+    "lng": -74.067486,
+    "geo": "place"
   },
   {
     "name": "Monmouth Street Tile",
@@ -711,8 +775,9 @@
     "zip": "08750",
     "phone": "(732) 974-0048",
     "region": "Eastern US",
-    "lat": 40.1287,
-    "lng": -74.0335
+    "lat": 40.135045,
+    "lng": -74.043888,
+    "geo": "zip"
   },
   {
     "name": "Artistic Tile",
@@ -722,8 +787,9 @@
     "zip": "07094",
     "phone": "(201) 864-7000",
     "region": "Eastern US",
-    "lat": 40.7895,
-    "lng": -74.0565
+    "lat": 40.774917,
+    "lng": -74.060528,
+    "geo": "place"
   },
   {
     "name": "Artistic Tile",
@@ -733,8 +799,9 @@
     "zip": "07702",
     "phone": "(732) 212-1616",
     "region": "Eastern US",
-    "lat": 40.329,
-    "lng": -74.061
+    "lat": 40.326859,
+    "lng": -74.061829,
+    "geo": "place"
   },
   {
     "name": "W.D. Virtue Tile Co.",
@@ -744,8 +811,9 @@
     "zip": "07901",
     "phone": "(908) 273-6936",
     "region": "Eastern US",
-    "lat": 40.7156,
-    "lng": -74.3649
+    "lat": 40.713034,
+    "lng": -74.34519,
+    "geo": "place"
   },
   {
     "name": "Homestone Gallery",
@@ -755,19 +823,21 @@
     "zip": "14043",
     "phone": "(716) 651-0987",
     "region": "Eastern US",
-    "lat": 42.9039,
-    "lng": -78.6906
+    "lat": 42.909578,
+    "lng": -78.727696,
+    "geo": "place"
   },
   {
-    "name": "Showcase Baths &#8211; Manhasset",
+    "name": "Showcase Baths \u2013 Manhasset",
     "address": "1192 Northern Blvd",
     "city": "Manhasset",
     "state": "NY",
     "zip": "11030",
     "phone": "(516) 869-0300",
     "region": "Eastern US",
-    "lat": 40.7976,
-    "lng": -73.7004
+    "lat": 40.791018,
+    "lng": -73.701463,
+    "geo": "place"
   },
   {
     "name": "Artistic Tile",
@@ -777,8 +847,9 @@
     "zip": "10010",
     "phone": "(212) 727-9331",
     "region": "Eastern US",
-    "lat": 40.7128,
-    "lng": -74.006
+    "lat": 40.740938,
+    "lng": -73.99265,
+    "geo": "building"
   },
   {
     "name": "Artistic Tile",
@@ -788,8 +859,9 @@
     "zip": "10055",
     "phone": "(212) 838-3222",
     "region": "Eastern US",
-    "lat": 40.7128,
-    "lng": -74.006
+    "lat": 40.761167,
+    "lng": -73.968252,
+    "geo": "shop"
   },
   {
     "name": "Complete Tile Collection",
@@ -799,8 +871,9 @@
     "zip": "10011",
     "phone": "(212) 255-4450",
     "region": "Eastern US",
-    "lat": 40.7128,
-    "lng": -74.006
+    "lat": 40.737366,
+    "lng": -73.995254,
+    "geo": "building"
   },
   {
     "name": "Urban Archaeology",
@@ -810,8 +883,9 @@
     "zip": "10013",
     "phone": "(212) 371-4646",
     "region": "Eastern US",
-    "lat": 40.7128,
-    "lng": -74.006
+    "lat": 40.719436,
+    "lng": -74.008102,
+    "geo": "building"
   },
   {
     "name": "Urban Archaeology",
@@ -821,8 +895,9 @@
     "zip": "10022",
     "phone": "(212) 371-4646",
     "region": "Eastern US",
-    "lat": 40.7128,
-    "lng": -74.006
+    "lat": 40.760415,
+    "lng": -73.965284,
+    "geo": "building"
   },
   {
     "name": "Fancy Fixtures Showroom",
@@ -832,8 +907,9 @@
     "zip": "11803",
     "phone": "(516) 349-3003",
     "region": "Eastern US",
-    "lat": 40.7807,
-    "lng": -73.4682
+    "lat": 40.774738,
+    "lng": -73.464845,
+    "geo": "building"
   },
   {
     "name": "Rye Ridge Ceramic Tile",
@@ -843,8 +919,9 @@
     "zip": "10573",
     "phone": "(914) 939-1100",
     "region": "Eastern US",
-    "lat": 41.001,
-    "lng": -73.6651
+    "lat": 41.010925,
+    "lng": -73.656481,
+    "geo": "building"
   },
   {
     "name": "Blackman Plumbing Supply",
@@ -854,8 +931,9 @@
     "zip": "11968",
     "phone": "(631) 283-1500",
     "region": "Eastern US",
-    "lat": 40.8834,
-    "lng": -72.3895
+    "lat": 40.899815,
+    "lng": -72.37632,
+    "geo": "place"
   },
   {
     "name": "Artistic Tile",
@@ -865,19 +943,21 @@
     "zip": "10607",
     "phone": "(914) 422-0041",
     "region": "Eastern US",
-    "lat": 41.034,
-    "lng": -73.7629
+    "lat": 41.037396,
+    "lng": -73.780249,
+    "geo": "place"
   },
   {
-    "name": "Devon Tile &amp; Design Studio",
+    "name": "Devon Tile & Design Studio",
     "address": "111 E. Lancaster Avenue",
     "city": "Devon",
     "state": "PA",
     "zip": "19333",
     "phone": "(610) 687-3368",
     "region": "Eastern US",
-    "lat": 40.0451,
-    "lng": -75.4257
+    "lat": 40.045682,
+    "lng": -75.42412,
+    "geo": "zip"
   },
   {
     "name": "Tileology",
@@ -887,8 +967,9 @@
     "zip": "17603",
     "phone": "(717) 290-7444",
     "region": "Eastern US",
-    "lat": 40.0379,
-    "lng": -76.3055
+    "lat": 40.048714,
+    "lng": -76.392182,
+    "geo": "amenity"
   },
   {
     "name": "Devon Tile",
@@ -898,8 +979,9 @@
     "zip": "19145",
     "phone": "(610) 687-3368",
     "region": "Eastern US",
-    "lat": 39.9526,
-    "lng": -75.1652
+    "lat": 39.89956,
+    "lng": -75.194578,
+    "geo": "building"
   },
   {
     "name": "Joanne Hudson Associates, LTD.",
@@ -909,19 +991,21 @@
     "zip": "19103",
     "phone": "",
     "region": "Eastern US",
-    "lat": 39.9526,
-    "lng": -75.1652
+    "lat": 39.953479,
+    "lng": -75.179347,
+    "geo": "office"
   },
   {
-    "name": "Dzyna Signature Kitchen &amp; Bath",
+    "name": "Dzyna Signature Kitchen & Bath",
     "address": "3001 East Main Road",
     "city": "Portsmouth",
     "state": "RI",
     "zip": "02871",
     "phone": "(401) 293-5855",
     "region": "Eastern US",
-    "lat": 41.6034,
-    "lng": -71.2503
+    "lat": 41.610173,
+    "lng": -71.245617,
+    "geo": "amenity"
   },
   {
     "name": "KPM Flooring",
@@ -931,8 +1015,9 @@
     "zip": "29926",
     "phone": "(843) 342-4955",
     "region": "Eastern US",
-    "lat": 32.2163,
-    "lng": -80.7526
+    "lat": 32.216714,
+    "lng": -80.720204,
+    "geo": "place"
   },
   {
     "name": "Village Tile",
@@ -942,8 +1027,9 @@
     "zip": "05255",
     "phone": "(802) 366-1040",
     "region": "Eastern US",
-    "lat": 43.1759,
-    "lng": -73.0598
+    "lat": 43.17259,
+    "lng": -73.044946,
+    "geo": "place"
   },
   {
     "name": "Best Tile of Vermont",
@@ -953,8 +1039,9 @@
     "zip": "05495",
     "phone": "(802) 863-5800",
     "region": "Eastern US",
-    "lat": 44.4356,
-    "lng": -73.0676
+    "lat": 44.448408,
+    "lng": -73.135572,
+    "geo": "building"
   },
   {
     "name": "Craftstman Court Ceramics, Inc.",
@@ -964,8 +1051,9 @@
     "zip": "85251",
     "phone": "(480) 970-6611",
     "region": "Western US",
-    "lat": 33.4942,
-    "lng": -111.9261
+    "lat": 33.497261,
+    "lng": -111.927564,
+    "geo": "building"
   },
   {
     "name": "Fractured Earth",
@@ -975,19 +1063,21 @@
     "zip": "85705",
     "phone": "(520) 620-6219",
     "region": "Western US",
-    "lat": 32.2226,
-    "lng": -110.9747
+    "lat": 32.264666,
+    "lng": -110.970981,
+    "geo": "place"
   },
   {
-    "name": "Westside Tile &amp; Stone of Beverly Hills",
+    "name": "Westside Tile & Stone of Beverly Hills",
     "address": "331 N Robertson Blvd",
     "city": "Beverly Hills",
     "state": "CA",
     "zip": "90211",
     "phone": "(310) 276-9222",
     "region": "Western US",
-    "lat": 34.0736,
-    "lng": -118.4004
+    "lat": 34.071124,
+    "lng": -118.383859,
+    "geo": "place"
   },
   {
     "name": "All Natural Stone",
@@ -997,8 +1087,9 @@
     "zip": "94010",
     "phone": "(650) 239-5200",
     "region": "Western US",
-    "lat": 37.5841,
-    "lng": -122.3661
+    "lat": 37.599846,
+    "lng": -122.377203,
+    "geo": "place"
   },
   {
     "name": "Westside Tile & Stone",
@@ -1008,19 +1099,21 @@
     "zip": "91304",
     "phone": "(818) 704-9222",
     "region": "Western US",
-    "lat": 34.2011,
-    "lng": -118.5981
+    "lat": 34.208896,
+    "lng": -118.597618,
+    "geo": "place"
   },
   {
-    "name": "M.A. Tile &amp; Stone Design",
+    "name": "M.A. Tile & Stone Design",
     "address": "2120 Las Palmas, Suite H",
     "city": "Carlsbad",
     "state": "CA",
     "zip": "92011",
     "phone": "(760) 268-0811",
     "region": "Western US",
-    "lat": 33.1581,
-    "lng": -117.3506
+    "lat": 33.117647,
+    "lng": -117.274032,
+    "geo": "building"
   },
   {
     "name": "Carmel Stone Imports",
@@ -1030,8 +1123,9 @@
     "zip": "93955",
     "phone": "(831) 250-7435",
     "region": "Western US",
-    "lat": 36.5552,
-    "lng": -121.9233
+    "lat": 36.613855,
+    "lng": -121.839788,
+    "geo": "zip"
   },
   {
     "name": "Concept Studio",
@@ -1041,8 +1135,9 @@
     "zip": "92626",
     "phone": "(949) 759-0606",
     "region": "Western US",
-    "lat": 33.6411,
-    "lng": -117.9187
+    "lat": 33.679021,
+    "lng": -117.910369,
+    "geo": "zip"
   },
   {
     "name": "Material Bespoke Stone + Tile",
@@ -1052,19 +1147,21 @@
     "zip": "92626",
     "phone": "(949) 729-9881",
     "region": "Western US",
-    "lat": 33.6411,
-    "lng": -117.9187
+    "lat": 33.679285,
+    "lng": -117.87788,
+    "geo": "place"
   },
   {
-    "name": "All Natural Stone &#8211; East Bay",
+    "name": "All Natural Stone \u2013 East Bay",
     "address": "6591 Sierra Ln",
     "city": "Dublin",
     "state": "CA",
     "zip": "94568",
     "phone": "(925) 463-6000",
     "region": "Western US",
-    "lat": 37.7022,
-    "lng": -121.9358
+    "lat": 37.706136,
+    "lng": -121.912793,
+    "geo": "building"
   },
   {
     "name": "Design Collaborative USA",
@@ -1074,8 +1171,9 @@
     "zip": "92210",
     "phone": "(760) 774-5970",
     "region": "Western US",
-    "lat": 33.7178,
-    "lng": -116.3411
+    "lat": 33.721797,
+    "lng": -116.338303,
+    "geo": "village"
   },
   {
     "name": "Venetian Stone Gallery",
@@ -1085,8 +1183,9 @@
     "zip": "92614",
     "phone": "(949) 261-0146",
     "region": "Western US",
-    "lat": 33.6846,
-    "lng": -117.8265
+    "lat": 33.700306,
+    "lng": -117.856704,
+    "geo": "building"
   },
   {
     "name": "Surface Concepts",
@@ -1096,8 +1195,9 @@
     "zip": "92653",
     "phone": "(949) 348-1088",
     "region": "Western US",
-    "lat": 33.5963,
-    "lng": -117.6989
+    "lat": 33.575009,
+    "lng": -117.676055,
+    "geo": "building"
   },
   {
     "name": "Creative Surfaces",
@@ -1107,8 +1207,9 @@
     "zip": "90803",
     "phone": "(562) 588-9499",
     "region": "Western US",
-    "lat": 33.7701,
-    "lng": -118.1937
+    "lat": 33.755795,
+    "lng": -118.119779,
+    "geo": "place"
   },
   {
     "name": "Modern Earth Tile",
@@ -1118,8 +1219,9 @@
     "zip": "90892",
     "phone": "(858) 245-7119",
     "region": "Western US",
-    "lat": 33.7701,
-    "lng": -118.1937
+    "lat": 33.771576,
+    "lng": -118.141446,
+    "geo": "place"
   },
   {
     "name": "Filmore Clark",
@@ -1129,8 +1231,9 @@
     "zip": "90069",
     "phone": "(310) 652-6867",
     "region": "Western US",
-    "lat": 34.0522,
-    "lng": -118.2437
+    "lat": 34.088225,
+    "lng": -118.376528,
+    "geo": "place"
   },
   {
     "name": "Carmel Stone Imports",
@@ -1140,8 +1243,9 @@
     "zip": "93955",
     "phone": "(831) 250-7435",
     "region": "Western US",
-    "lat": 37.4419,
-    "lng": -122.143
+    "lat": 37.438406,
+    "lng": -122.113366,
+    "geo": "shop"
   },
   {
     "name": "BDG Design Group",
@@ -1151,19 +1255,21 @@
     "zip": "92110",
     "phone": "(619) 291-3234",
     "region": "Western US",
-    "lat": 32.7157,
-    "lng": -117.1611
+    "lat": 32.758695,
+    "lng": -117.196295,
+    "geo": "place"
   },
   {
-    "name": "International Bath &amp; Tile",
+    "name": "International Bath & Tile",
     "address": "7256 Clairemont Mesa Blvd",
     "city": "San Diego",
     "state": "CA",
     "zip": "92111",
     "phone": "(858) 268-3723",
     "region": "Western US",
-    "lat": 32.7157,
-    "lng": -117.1611
+    "lat": 32.832742,
+    "lng": -117.161415,
+    "geo": "place"
   },
   {
     "name": "Artistic Tile Design Center",
@@ -1173,8 +1279,9 @@
     "zip": "94103",
     "phone": "(415) 690-5173",
     "region": "Western US",
-    "lat": 37.7749,
-    "lng": -122.4194
+    "lat": 37.76906,
+    "lng": -122.404454,
+    "geo": "building"
   },
   {
     "name": "All Natural Stone",
@@ -1184,19 +1291,21 @@
     "zip": "95131",
     "phone": "(408) 544-9600",
     "region": "Western US",
-    "lat": 37.3382,
-    "lng": -121.8863
+    "lat": 37.376897,
+    "lng": -121.937879,
+    "geo": "shop"
   },
   {
-    "name": "Matt Clark Tile &amp; Stone, Inc",
+    "name": "Matt Clark Tile & Stone, Inc",
     "address": "181 Tank Farm Road, Suite 140",
     "city": "San Luis Obispo",
     "state": "CA",
     "zip": "93401",
     "phone": "(805) 543-7600",
     "region": "Western US",
-    "lat": 35.2828,
-    "lng": -120.6596
+    "lat": 35.24672,
+    "lng": -120.669455,
+    "geo": "place"
   },
   {
     "name": "Carmel Stone Imports",
@@ -1206,8 +1315,9 @@
     "zip": "93955",
     "phone": "(831) 583-1011",
     "region": "Western US",
-    "lat": 36.6188,
-    "lng": -121.8458
+    "lat": 36.613248,
+    "lng": -121.852095,
+    "geo": "place"
   },
   {
     "name": "NS Ceramic, Inc.",
@@ -1217,8 +1327,9 @@
     "zip": "93101",
     "phone": "(805) 962-1422",
     "region": "Western US",
-    "lat": 34.4208,
-    "lng": -119.6982
+    "lat": 34.419032,
+    "lng": -119.697781,
+    "geo": "place"
   },
   {
     "name": "Tile Fever",
@@ -1228,8 +1339,9 @@
     "zip": "94965",
     "phone": "(415) 686-0409",
     "region": "Western US",
-    "lat": 37.859,
-    "lng": -122.4853
+    "lat": 37.867565,
+    "lng": -122.501467,
+    "geo": "place"
   },
   {
     "name": "Stone West",
@@ -1239,19 +1351,21 @@
     "zip": "93003",
     "phone": "(805) 658-0007",
     "region": "Western US",
-    "lat": 34.2746,
-    "lng": -119.229
+    "lat": 34.259999,
+    "lng": -119.248498,
+    "geo": "place"
   },
   {
-    "name": "Aspen Tile &amp; Bath Gallery Inc.",
+    "name": "Aspen Tile & Bath Gallery Inc.",
     "address": "601 Rio Grande Pl., Suite 102",
     "city": "Aspen",
     "state": "CO",
     "zip": "81611",
     "phone": "(970) 925-8453",
     "region": "Western US",
-    "lat": 39.1911,
-    "lng": -106.8175
+    "lat": 39.191617,
+    "lng": -106.817114,
+    "geo": "place"
   },
   {
     "name": "Decorative Materials International",
@@ -1261,8 +1375,9 @@
     "zip": "81621",
     "phone": "(970) 927-0700",
     "region": "Western US",
-    "lat": 39.369,
-    "lng": -107.0331
+    "lat": 39.374254,
+    "lng": -107.039269,
+    "geo": "zip"
   },
   {
     "name": "Decorative Materials International Ltd.",
@@ -1272,8 +1387,9 @@
     "zip": "80209",
     "phone": "(303) 722-1333",
     "region": "Western US",
-    "lat": 39.7392,
-    "lng": -104.9903
+    "lat": 39.706722,
+    "lng": -104.990683,
+    "geo": "building"
   },
   {
     "name": "Material Bespoke Stone + Tile",
@@ -1283,8 +1399,9 @@
     "zip": "80209",
     "phone": "(303) 777-6007",
     "region": "Western US",
-    "lat": 39.7392,
-    "lng": -104.9903
+    "lat": 39.705783,
+    "lng": -104.987505,
+    "geo": "road"
   },
   {
     "name": "Decorative Materials International",
@@ -1294,8 +1411,9 @@
     "zip": "81632",
     "phone": "(970) 926-2322",
     "region": "Western US",
-    "lat": 39.6444,
-    "lng": -106.5942
+    "lat": 39.643773,
+    "lng": -106.596173,
+    "geo": "amenity"
   },
   {
     "name": "The Tile House",
@@ -1305,8 +1423,9 @@
     "zip": "83714",
     "phone": "(208) 314-7505",
     "region": "Western US",
-    "lat": 43.6225,
-    "lng": -116.247
+    "lat": 43.621351,
+    "lng": -116.237814,
+    "geo": "place"
   },
   {
     "name": "Truckee River Tile and Stone",
@@ -1316,19 +1435,21 @@
     "zip": "89431",
     "phone": "(775) 826-2551",
     "region": "Western US",
-    "lat": 39.5349,
-    "lng": -119.7527
+    "lat": 39.518149,
+    "lng": -119.737574,
+    "geo": "building"
   },
   {
-    "name": "Pratt &amp; Larson Tile",
+    "name": "Pratt & Larson Tile",
     "address": "1204 SE Water Ave",
     "city": "Portland",
     "state": "OR",
     "zip": "97214",
     "phone": "(503) 231-9464",
     "region": "Western US",
-    "lat": 45.5152,
-    "lng": -122.6784
+    "lat": 45.514248,
+    "lng": -122.665718,
+    "geo": "place"
   },
   {
     "name": "European Marble & Granite",
@@ -1338,19 +1459,21 @@
     "zip": "84115",
     "phone": "(801) 974-0333",
     "region": "Western US",
-    "lat": 40.7608,
-    "lng": -111.891
+    "lat": 40.756158,
+    "lng": -111.906181,
+    "geo": "road"
   },
   {
-    "name": "Venetian Tile &amp; Stone Gallery",
+    "name": "Venetian Tile & Stone Gallery",
     "address": "825 West 2400 South",
     "city": "Salt Lake City",
     "state": "UT",
     "zip": "84119",
     "phone": "(801) 977-8888",
     "region": "Western US",
-    "lat": 40.7608,
-    "lng": -111.891
+    "lat": 40.718613,
+    "lng": -111.972403,
+    "geo": "road"
   },
   {
     "name": "Dwellings",
@@ -1360,29 +1483,32 @@
     "zip": "98005",
     "phone": "(425) 882-0707",
     "region": "Western US",
-    "lat": 47.6101,
-    "lng": -122.2015
+    "lat": 47.630756,
+    "lng": -122.1776,
+    "geo": "shop"
   },
   {
-    "name": "Cupboard &amp; Clay",
+    "name": "Cupboard & Clay",
     "address": "2225 N 30th St.",
     "city": "Tacoma",
     "state": "WA",
     "zip": "98403",
     "phone": "(253) 244-3455",
     "region": "Western US",
-    "lat": 47.2529,
-    "lng": -122.4443
+    "lat": 47.274937,
+    "lng": -122.466675,
+    "geo": "place"
   },
   {
-    "name": "Teton Tile &amp; Design",
+    "name": "Teton Tile & Design",
     "address": "650 Elk Ave, #4",
     "city": "Jackson",
     "state": "WY",
     "zip": "83001",
     "phone": "(307) 733-0003",
     "region": "Western US",
-    "lat": 43.4799,
-    "lng": -110.7624
+    "lat": 43.473723,
+    "lng": -110.785152,
+    "geo": "zip"
   }
 ]
