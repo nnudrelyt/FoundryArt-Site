@@ -299,6 +299,54 @@
   }
 
   // ────────────────────────────────────────────────────────
+  // Nav auto-hide (Foundry Art only)
+  // ────────────────────────────────────────────────────────
+  // The header retracts on scroll down and slides back on scroll up. CSS owns
+  // the motion (body[data-section="foundry-art"] .nav / .nav-hidden); this only
+  // decides when the class is on.
+  function initNavAutoHide() {
+    if (document.body.dataset.section !== 'foundry-art') return;
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+
+    // Distance the page must travel in one direction before the nav reacts.
+    // Without it, trackpad jitter and iOS rubber-banding flip the header on
+    // every frame.
+    const DELTA = 8;
+    // Never hide inside the first screenful — an anchor jump or a short page
+    // shouldn't strip the header before the user has really left the top.
+    const REVEAL_ZONE = 140;
+
+    let lastY = window.scrollY;
+
+    // Browsers already coalesce scroll events to one per frame, and the handler
+    // only toggles a class — no layout reads — so no rAF wrapper is needed.
+    function update() {
+      const y = Math.max(0, window.scrollY);
+      const diff = y - lastY;
+      if (Math.abs(diff) < DELTA) return;
+
+      // A drawer pins the body; hiding the header under an open menu would
+      // strip the control the user needs to close it.
+      if (document.body.classList.contains('drawer-open')) {
+        nav.classList.remove('nav-hidden');
+        lastY = y;
+        return;
+      }
+
+      if (y < REVEAL_ZONE || diff < 0) nav.classList.remove('nav-hidden');
+      else nav.classList.add('nav-hidden');
+      lastY = y;
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+
+    // Keyboard focus moving into the header (skip link, tabbing back up) must
+    // bring it back — a focused-but-offscreen control is a trap.
+    nav.addEventListener('focusin', () => nav.classList.remove('nav-hidden'));
+  }
+
+  // ────────────────────────────────────────────────────────
   // Linden Workshops studios drawer (left side)
   // ────────────────────────────────────────────────────────
   function initStudiosDrawer() {
@@ -2388,6 +2436,7 @@
     // path, present and future; the call above still does the first paint.
     document.addEventListener('fa-cart-change', updateNavCount);
     initDrawer();
+    initNavAutoHide();
     initStudiosDrawer();
     initFilterTabs();
     renderCartRows();      // build cart line items from the store BEFORE steppers bind
