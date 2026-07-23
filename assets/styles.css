@@ -283,15 +283,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 body[data-section="foundry-art"] :is(.nav-links, .nav-cart, .nav-cta) {
   font-size: var(--fs-eyebrow);
 }
-/* Below 900 the shared rule hides .nav-links wholesale, which is right for the
-   three homepage anchors but took "Tiles" with it — the one nav item that was a
-   real destination, and with the hamburger gone the only route to the shop from
-   the header. Keep that single link rather than adding a second Shop control:
-   it's existing markup and the site's own word for the shop. */
-@media (max-width: 900px) {
-  body[data-section="foundry-art"] .nav-links { display: flex; }
-  body[data-section="foundry-art"] .nav-links a:not([data-nav-key="shop"]) { display: none; }
-}
+/* This used to keep a lone "Tiles" link once the other three were hidden, on
+   the reasoning that it was the header's only route to the shop. A single
+   surviving item reads as an incomplete menu rather than a deliberate one —
+   if the nav collapses, it collapses whole. Nothing is lost: the Shop Now
+   button sits in the same header, and the studios drawer carries the shop
+   under Foundry Art. The shared rule below 1024 now applies unopposed. */
 
 body[data-section="foundry-art"] .nav-cta {
   font-weight: 500;
@@ -12600,14 +12597,18 @@ body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover input
 
 /* ── Header nav ────────────────────────────────────────────────────────────
    At tablet the four Foundry Art links wrapped onto two lines beside the
-   wordmark. The hamburger drawer is already present at this width, so hand
-   the whole nav to it — same treatment mobile already gets, just starting at
-   the breakpoint where the shop switches to its filter bar. */
+   wordmark, so the menu collapses here instead.
+
+   All or nothing: the moment one item drops, the whole menu goes. A single
+   surviving link reads as a broken menu rather than an intentional one.
+   Nothing is stranded — Shop Now and the studios drawer are both still in
+   the header, and three of the four links are homepage anchors.
+
+   Scoped to Foundry Art on purpose. The linden, bronzework-studio and
+   talisman shells render .nav-hamburger *alongside* .studios-toggle — two
+   near-identical three-bar silhouettes separated only by colour and
+   position — and that collision is deliberately held at ≤900. Collapsing
+   .nav-links globally here would drag it up into 901–1024 on all three. */
 @media (max-width: 1024px) {
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
-  /* Keep the single "Tiles" destination, exactly as the ≤900 tier does — it
-     is the header's only direct route to the shop. */
-  body[data-section="foundry-art"] .nav-links { display: flex; }
-  body[data-section="foundry-art"] .nav-links a:not([data-nav-key="shop"]) { display: none; }
+  body[data-section="foundry-art"] .nav-links { display: none; }
 }
