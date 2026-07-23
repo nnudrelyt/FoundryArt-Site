@@ -12520,8 +12520,13 @@ body[data-section="foundry-art"] :is(
   body[data-page="shop"]:not([data-product-slug]) .shop-sidebar[data-fa-open] .facet-group:not(.is-open) {
     display: none;
   }
+  /* In the rail this border separated one group from the next. A menu shows a
+     single group, so it renders as an orphan rule across the bottom of the
+     panel with nothing under it. */
   body[data-page="shop"]:not([data-product-slug]) .shop-sidebar[data-fa-open] .facet-group {
-    margin-bottom: 8px;
+    margin-bottom: 0;
+    padding-bottom: 4px;
+    border-bottom: 0;
   }
   body[data-page="shop"]:not([data-product-slug]) .shop-sidebar[data-fa-open] .facet-group h5 {
     margin-top: 0;
@@ -12532,4 +12537,76 @@ body[data-section="foundry-art"] :is(
    the bar must never render. */
 @media (min-width: 1025px) {
   .fa-filterbar { display: none !important; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SHOP FILTER BAR — REVIEW PASS (Tyler, 7-23)
+   Rule lines off the bottom of each band, a real rollover on the facet
+   checkboxes, a finer checkmark, and band rhythm that centres its content.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  /* One rule, above the controls. The filter band and the toolbar each drew
+     their own bottom border, stacking three horizontal lines between the page
+     title and the first product. */
+  .fa-filterbar { border-bottom: 0; }
+  body[data-page="shop"]:not([data-product-slug]) .shop-toolbar { border-bottom: 0; }
+
+  /* The toolbar carried padding-bottom but no padding-top, so its text sat
+     4px under the band above and 16px off its own baseline — visibly high.
+     Symmetrical padding centres the row in the space it occupies. */
+  body[data-page="shop"]:not([data-product-slug]) .shop-toolbar {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+  }
+}
+
+/* ── Facet checkboxes ──────────────────────────────────────────────────────
+   The box stays 22px — Stacza's low-vision brief sets that floor. Only the
+   mark inside it and the hover treatment change. */
+
+/* Rollover. Unchecked gains a warm wash so the whole row reads live under the
+   cursor; checked deepens rather than lightening, so the state never looks
+   like it is switching off. */
+body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover input[type="checkbox"],
+.facet-list li input[type="checkbox"]:hover {
+  border-color: var(--bronze);
+  background-color: var(--bronze-bg, #F3EBE3);
+}
+body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover {
+  color: var(--slate);
+}
+/* No darker bronze token exists, and inventing a hex here is exactly the drift
+   §9.2 warns about — deepen the existing --bronze instead of adding a value. */
+.facet-list li input[type="checkbox"]:checked:hover,
+body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover input[type="checkbox"]:checked {
+  background-color: var(--bronze);
+  border-color: var(--bronze);
+  filter: brightness(0.9);
+}
+
+/* Checkmark. The rotated-L border trick could not be optically centred — it
+   is anchored from its corner, so it hung low and right in the box. An inline
+   SVG stroke centres exactly, and round caps at 1.9px read finer and more
+   considered than a 2.5px square-cut angle. */
+.facet-list li input[type="checkbox"]:checked {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.6 8.4 L6.5 11.2 L12.4 4.9' fill='none' stroke='%23ffffff' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 13px 13px;
+}
+.facet-list li input[type="checkbox"]:checked::after { content: none; }
+
+/* ── Header nav ────────────────────────────────────────────────────────────
+   At tablet the four Foundry Art links wrapped onto two lines beside the
+   wordmark. The hamburger drawer is already present at this width, so hand
+   the whole nav to it — same treatment mobile already gets, just starting at
+   the breakpoint where the shop switches to its filter bar. */
+@media (max-width: 1024px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  /* Keep the single "Tiles" destination, exactly as the ≤900 tier does — it
+     is the header's only direct route to the shop. */
+  body[data-section="foundry-art"] .nav-links { display: flex; }
+  body[data-section="foundry-art"] .nav-links a:not([data-nav-key="shop"]) { display: none; }
 }
