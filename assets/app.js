@@ -2282,7 +2282,6 @@
     initTaglineVariants();
     initCraftMarkerVariants();
     initHardwareGallery();
-    initHeroVideoLoop();
     initIntroAnimations();
     initInsituAutoscroll();
     initInsituScrollIndicator();
@@ -2437,24 +2436,10 @@
     startObs.observe(section);
   }
 
-  // Hero video: fade out in the last ~0.4s of each loop and back in
-  // as currentTime wraps. Masks the jump from end-frame to first-frame
-  // with a brief opacity dip against the dark hero background.
-  function initHeroVideoLoop() {
-    const video = document.querySelector('.hero-video');
-    if (!video) return;
-    const FADE_LEAD = 0.42;
-    let lastT = 0;
-    video.addEventListener('timeupdate', () => {
-      const d = video.duration;
-      const t = video.currentTime;
-      if (!d || isNaN(d)) return;
-      // Loop wrap detected — currentTime jumped backward
-      if (t < lastT) video.classList.remove('is-looping');
-      else if (t > d - FADE_LEAD) video.classList.add('is-looping');
-      lastT = t;
-    });
-  }
+  // Hero video needs no JS loop masking: carving-wax-loop-v3.mp4 has its tail
+  // crossfaded over its head, so the last frame already matches the first
+  // (seam MSE 2868 -> 31). The previous build dipped the video to opacity 0
+  // against the black backdrop, which read as a flash to black — SL 7-22-26.
 
   function initHardwareGallery() {
     const grid = document.querySelector('[data-hardware-grid]');

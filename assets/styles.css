@@ -551,9 +551,7 @@ body.drawer-open { overflow: hidden; }
   object-fit: cover;
   z-index: 1;
   display: block;
-  transition: opacity 400ms ease-out;
 }
-.hero-image .wire-img > .hero-video.is-looping { opacity: 0; }
 
 .hero-image .wire-img > .hero-video > img {
   /* Inner img is the fallback for browsers without <video> support
@@ -6168,7 +6166,9 @@ body[data-section="linden"] .lw2-tal-info-title {
 }
 body[data-section="linden"] .lw2-tal-info-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* auto-fit rather than a hard 3 so the row stays balanced as cards are added
+     or removed (Technical Information came out per SL 7-21-26) */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 64px;
   max-width: 1100px;
   margin: 0 auto 48px;
