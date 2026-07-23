@@ -12565,13 +12565,14 @@ body[data-section="foundry-art"] :is(
    The box stays 22px — Stacza's low-vision brief sets that floor. Only the
    mark inside it and the hover treatment change. */
 
-/* Rollover. Unchecked gains a warm wash so the whole row reads live under the
-   cursor; checked deepens rather than lightening, so the state never looks
-   like it is switching off. */
+/* Rollover. An unchecked box shifts its border to bronze and nothing else —
+   no fill. A wash read as a half-selected state next to genuinely checked
+   boxes, which is the one thing a filter list cannot afford to be ambiguous
+   about. Checked deepens instead of lightening, so hovering an active filter
+   never looks like it is switching off. */
 body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover input[type="checkbox"],
 .facet-list li input[type="checkbox"]:hover {
   border-color: var(--bronze);
-  background-color: var(--bronze-bg, #F3EBE3);
 }
 body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover {
   color: var(--slate);
