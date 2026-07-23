@@ -12541,19 +12541,15 @@ body[data-section="foundry-art"] :is(
 
 /* ══════════════════════════════════════════════════════════════════════════
    SHOP FILTER BAR — REVIEW PASS (Tyler, 7-23)
-   Rule lines off the bottom of each band, a real rollover on the facet
-   checkboxes, a finer checkmark, and band rhythm that centres its content.
+   A real rollover on the facet checkboxes, a finer checkmark, and band rhythm
+   that centres its content. The band rules are back per review: each band
+   closes with its own bottom rule, which reads as structure rather than the
+   controls floating loose above the grid.
    ══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  /* One rule, above the controls. The filter band and the toolbar each drew
-     their own bottom border, stacking three horizontal lines between the page
-     title and the first product. */
-  .fa-filterbar { border-bottom: 0; }
-  body[data-page="shop"]:not([data-product-slug]) .shop-toolbar { border-bottom: 0; }
-
   /* The toolbar carried padding-bottom but no padding-top, so its text sat
      4px under the band above and 16px off its own baseline — visibly high.
-     Symmetrical padding centres the row in the space it occupies. */
+     Symmetrical padding centres the row between its rules. */
   body[data-page="shop"]:not([data-product-slug]) .shop-toolbar {
     padding-top: 14px;
     padding-bottom: 14px;
