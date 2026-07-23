@@ -1796,7 +1796,136 @@
     const emptyClear = document.querySelector('[data-shop-clear]');
     if (emptyClear) emptyClear.addEventListener('click', clearAllFacets);
 
+    initFilterBar();   // must run before the first render so the bar has counts
+
     applyShop();   // first render happens here, not via a standalone call
+  }
+
+  // ────────────────────────────────────────────────────────
+  // Shop filter bar (≤1024px)
+  //
+  // The sidebar rail stacks to 844px below 1024px, pushing the first product
+  // past the fold. Each facet group gets a button; opening one turns the rail
+  // itself into a popover anchored under that button.
+  //
+  // The groups are never moved out of .shop-sidebar. Relocating them made
+  // correctness depend on a matchMedia/resize event actually firing, and a
+  // missed event left the page with no filters at all. Everything below is
+  // driven by CSS state, so any width is correct as soon as it paints and
+  // this function only handles opening, closing and badge counts.
+  // ────────────────────────────────────────────────────────
+  function initFilterBar() {
+    const sidebar = document.querySelector('.shop-sidebar');
+    const shopMain = document.querySelector('.shop-main');
+    const toolbar = document.querySelector('.shop-toolbar');
+    const groups = Array.from(document.querySelectorAll('.facet-group'));
+    if (!sidebar || !shopMain || !toolbar || !groups.length) return;
+
+    const bar = document.createElement('div');
+    bar.className = 'fa-filterbar';
+    shopMain.insertBefore(bar, toolbar);
+
+    const entries = groups.map(group => {
+      const heading = group.querySelector('h5');
+      const label = heading ? heading.textContent.trim() : 'Filter';
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'fa-filter-btn';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML = label +
+        ' <span class="fa-filter-count" hidden>0</span>' +
+        '<span class="fa-filter-caret" aria-hidden="true">▾</span>';
+
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = group.classList.contains('is-open') && sidebar.hasAttribute('data-fa-open');
+        closeAll();
+        if (isOpen) return;
+        open(btn, group);
+      });
+
+      bar.appendChild(btn);
+      return { group, btn };
+    });
+
+    const clear = document.createElement('button');
+    clear.type = 'button';
+    clear.className = 'fa-filter-clear';
+    clear.textContent = 'Clear all';
+    clear.hidden = true;
+    bar.appendChild(clear);
+
+    // Anchor the panel under its button, measured at open time so it stays
+    // right through rotation, zoom and font scaling without a resize handler.
+    function open(btn, group) {
+      const anchor = btn.getBoundingClientRect();
+      // Measure against .shop-layout, the positioned ancestor the panel offsets
+      // from. offsetParent is null while the panel is still display:none, which
+      // silently zeroes the origin and drops the panel a layout-inset away.
+      const layout = sidebar.closest('.shop-layout');
+      const origin = layout ? layout.getBoundingClientRect() : { left: 0, top: 0 };
+      const width = Math.min(262, window.innerWidth * 0.88);
+      // Keep the panel on screen: nudge left if it would overflow the right edge.
+      const left = Math.max(0, Math.min(anchor.left - origin.left,
+                                        window.innerWidth - width - 12));
+
+      sidebar.style.setProperty('--fa-pop-x', left + 'px');
+      sidebar.style.setProperty('--fa-pop-y', (anchor.bottom - origin.top + 8) + 'px');
+      sidebar.setAttribute('data-fa-open', '');
+      group.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeAll() {
+      sidebar.removeAttribute('data-fa-open');
+      entries.forEach(e => {
+        e.group.classList.remove('is-open');
+        e.btn.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    function syncCounts() {
+      let total = 0;
+      entries.forEach(e => {
+        const n = e.group.querySelectorAll('input[type="checkbox"]:checked').length;
+        const badge = e.btn.querySelector('.fa-filter-count');
+        badge.textContent = n;
+        badge.hidden = n === 0;
+        total += n;
+      });
+      clear.hidden = total === 0;
+    }
+
+    clear.addEventListener('click', () => {
+      clearAllFacets();
+      syncCounts();
+      closeAll();
+    });
+
+    // Checkbox changes happen inside the sidebar, which is not a descendant of
+    // the bar — listen on the document so both the rail and the panel report.
+    document.addEventListener('change', e => {
+      if (e.target.closest && e.target.closest('.facet-group')) syncCounts();
+    });
+
+    document.addEventListener('click', e => {
+      if (!sidebar.contains(e.target)) closeAll();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape' || !sidebar.hasAttribute('data-fa-open')) return;
+      const open = entries.find(x => x.group.classList.contains('is-open'));
+      closeAll();
+      if (open) open.btn.focus();   // Esc returns focus to the button that opened it
+    });
+
+    // Tidiness only, never correctness: a panel left open while the viewport
+    // crosses into desktop would reappear as an orphan on the way back. The
+    // layout itself is CSS-driven and stays right whether or not this fires.
+    window.addEventListener('resize', closeAll);
+    window.addEventListener('orientationchange', closeAll);
+
+    syncCounts();
   }
 
   // ────────────────────────────────────────────────────────
@@ -1962,7 +2091,7 @@
           </div>
         </div>
         <div class="product-name">${p.name}</div>
-        <div class="product-meta">${p.sizeLabel} · ${p.finishes.length} finish${p.finishes.length === 1 ? '' : 'es'}</div>
+        <div class="product-meta">${p.sizeLabel} · ${p.finishes.length} color${p.finishes.length === 1 ? '' : 's'}</div>
         ${priceBlock}
         <span class="product-card-cta">Shop Now <span aria-hidden="true">&rarr;</span></span>
       </a>

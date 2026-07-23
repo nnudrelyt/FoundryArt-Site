@@ -12399,3 +12399,137 @@ body[data-section="foundry-art"] :is(
 ) {
   border-radius: 3px;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   SHOP — TABLET/MOBILE FILTER BAR  (≤1024px)
+
+   Below 1024px the sidebar goes full-width and stacks four facet groups
+   (14 controls) above the grid: an 844px rail that pushed the first product
+   to y=1181 on a 768×1024 iPad — a full screen of checkboxes before any
+   bronze. Here the rail becomes a popover panel anchored under a row of
+   filter buttons, so products start at y≈404 instead.
+
+   The facet groups never move in the DOM. An earlier pass relocated them
+   between the rail and per-button popovers, which made correctness depend on
+   a matchMedia/resize event firing — miss one and the shop renders with no
+   filters at all. Instead .shop-sidebar itself becomes the panel and CSS
+   reveals one group at a time, so the layout is correct at any width the
+   moment it is painted, with no JS bookkeeping.
+
+   Above 1024px none of this applies and the rail is untouched.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  body[data-page="shop"]:not([data-product-slug]) .shop-layout { position: relative; }
+
+  .fa-filterbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    /* Rules above and below set the row off as its own band; symmetrical
+       padding keeps the buttons optically centred between them. */
+    padding: 16px 0;
+    margin-bottom: 4px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .fa-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Jost', sans-serif;
+    font-size: var(--fs-control);
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    color: var(--slate);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 4px;              /* form-field radius — design system §9.2 */
+    padding: 12px 18px;
+    min-height: 46px;                /* comfortable tablet target */
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .fa-filter-btn:hover { border-color: var(--mid); }
+  .fa-filter-btn[aria-expanded="true"] {
+    border-color: var(--slate);
+    box-shadow: inset 0 0 0 1px var(--slate);
+  }
+  .fa-filter-caret {
+    font-size: 10px;
+    color: var(--mid);
+    transition: transform 0.18s ease;
+  }
+  .fa-filter-btn[aria-expanded="true"] .fa-filter-caret { transform: rotate(180deg); }
+
+  .fa-filter-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    background: var(--bronze);
+    color: #fff;
+    font-size: var(--fs-fine);
+    font-weight: 600;
+  }
+  .fa-filter-count[hidden] { display: none; }
+
+  .fa-filter-clear {
+    margin-left: auto;
+    background: none;
+    border: 0;
+    font-family: 'Jost', sans-serif;
+    font-size: var(--fs-fine);
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    color: var(--slate-l);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    padding: 12px 4px;
+    min-height: 46px;
+  }
+  .fa-filter-clear:hover { color: var(--slate); }
+  .fa-filter-clear[hidden] { display: none; }
+
+  /* The rail becomes the popover panel. Closed is the default state, so a
+     page painted before any script runs shows no stray filter column. */
+  body[data-page="shop"]:not([data-product-slug]) .shop-sidebar {
+    display: none;
+  }
+  body[data-page="shop"]:not([data-product-slug]) .shop-sidebar[data-fa-open] {
+    display: block;
+    position: absolute;
+    top: var(--fa-pop-y, 0);
+    left: var(--fa-pop-x, 0);
+    z-index: 60;
+    width: min(262px, 88vw);
+    max-height: 60vh;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    box-shadow: 0 12px 32px rgba(20, 37, 40, 0.14);
+    padding: 18px 20px 6px;
+  }
+  /* One group at a time — the open one is flagged by the button that owns it. */
+  body[data-page="shop"]:not([data-product-slug]) .shop-sidebar[data-fa-open] .facet-group:not(.is-open) {
+    display: none;
+  }
+  body[data-page="shop"]:not([data-product-slug]) .shop-sidebar[data-fa-open] .facet-group {
+    margin-bottom: 8px;
+  }
+  body[data-page="shop"]:not([data-product-slug]) .shop-sidebar[data-fa-open] .facet-group h5 {
+    margin-top: 0;
+  }
+}
+
+/* Small-screen affordance only — above the breakpoint the rail is back and
+   the bar must never render. */
+@media (min-width: 1025px) {
+  .fa-filterbar { display: none !important; }
+}
