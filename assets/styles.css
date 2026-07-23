@@ -12429,7 +12429,11 @@ body[data-section="foundry-art"] :is(
     /* Rules above and below set the row off as its own band; symmetrical
        padding keeps the buttons optically centred between them. */
     padding: 16px 0;
-    margin-bottom: 4px;
+    /* No bottom margin: this band's bottom rule is also the top rule of the
+       toolbar band below it. Any margin here lands inside that next band and
+       pushes its content off centre, which no amount of symmetrical padding
+       on the toolbar itself can correct. */
+    margin-bottom: 0;
     border-top: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule);
   }
