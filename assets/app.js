@@ -416,8 +416,8 @@
     // prototype opens populated like the live-site screenshots. A user-
     // emptied cart persists as [] and is never re-seeded.
     const SEED = [
-      { slug: 'cabochon-3x3', name: 'Cabochon', sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 2, sku: 'FA-CAB-3-TB', weight: 0.8 },
-      { slug: 'lotus-3x3',    name: 'Lotus',    sizeLabel: '3×3 inch', finish: 'White Bronze',       price: 92.50, qty: 1, sku: 'FA-LOT-3-WB', weight: 0.8 },
+      { slug: 'cabochon-3x3', name: 'Cabochon', sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 2, sku: 'FA-CAB-3-TB', weight: 0.7 },
+      { slug: 'lotus-3x3',    name: 'Lotus',    sizeLabel: '3×3 inch', finish: 'White Bronze',       price: 92.50, qty: 1, sku: 'FA-LOT-3-WB', weight: 0.7 },
     ];
     function read() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
     function write(items) { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} document.dispatchEvent(new CustomEvent('fa-cart-change')); }
@@ -523,7 +523,10 @@
     const prod = (window.FA_PRODUCT_BY_SLUG || {})[key];
     return (prod && prod.image) || '/assets/images/products/' + key + '/main.jpg';
   };
-  const weightForSize = s => /1×1/.test(s) ? 0.1 : (/2×2/.test(s) ? 0.4 : 0.8);
+  // Per-item shipping weights come from the 2026 retail pricelist and live on
+  // the product; the size heuristic is only a fallback for anything without one.
+  const weightForSize = s => /1×1/.test(s) ? 0.13 : (/2×2/.test(s) ? 0.4 : 0.7);
+  const weightFor = p => (typeof p.weight === 'number' ? p.weight : weightForSize(p.size));
   const skuForFinish = (p, f) => /white/i.test(f) ? p.sku.replace(/-TB$/, '-WB') : p.sku.replace(/-WB$/, '-TB');
   const setText = (sel, t) => { const el = document.querySelector(sel); if (el) el.textContent = t; };
 
@@ -556,7 +559,7 @@
       const qtyInput = document.querySelector('.qty-row .qty-stepper input');
       const qty = Math.max(1, parseInt(qtyInput && qtyInput.value, 10) || 1);
       Cart.add({ slug, name: product.name, sizeLabel: product.sizeLabel, finish, price: product.price,
-                 qty, sku: skuForFinish(product, finish), weight: weightForSize(product.size) });
+                 qty, sku: skuForFinish(product, finish), weight: weightFor(product) });
       updateNavCount();
       btn.textContent = 'Added to cart ✓'; btn.disabled = true;
       setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 1600);
@@ -585,7 +588,7 @@
       price: spec.price,
       qty: 1,
       sku: spec.skuPrefix + '-' + skuForFinish(product, finish).replace(/^FA-/, ''),
-      weight: spec.weight,          // never weightForSize() — that returns 0.8
+      weight: spec.weight,          // a cut swatch, not the full tile's weight
     };
   }
 
