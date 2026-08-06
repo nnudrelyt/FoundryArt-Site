@@ -241,9 +241,10 @@
   function footerHTML() {
     return `
       <footer class="footer">
-        <p class="footer-links"><a href="/about/">About</a> &nbsp;·&nbsp; <a href="/where-to-buy/">Where to Buy</a> &nbsp;·&nbsp; <a href="/contact/">Contact</a></p>
-        <p>© 2026 Linden Workshops · Luxury designer metal accent tile since 1990</p>
-        <p><a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">Houzz</a></p>
+        <div class="footer-inner">
+          <p class="footer-copy">© 2026 Linden Workshops · Luxury designer metal accent tile since 1990</p>
+          <p class="footer-social"><a href="#">Instagram</a> &nbsp;·&nbsp; <a href="#">Houzz</a></p>
+        </div>
       </footer>
     `;
   }
@@ -258,6 +259,24 @@
     const footerMount = document.querySelector('[data-footer]');
     if (navMount) navMount.outerHTML = navHTML();
     if (footerMount) footerMount.outerHTML = footerHTML();
+
+    // Foundry footer: wrap the CTA + copyright strip into one region so the
+    // tile-bowl photo covers the full footer height. Runs once; Linden has no .footer-cta.
+    if (document.body.dataset.section === 'foundry-art' && !document.querySelector('.site-footer')) {
+      const cta = document.querySelector('.footer-cta');
+      const foot = document.querySelector('.footer');
+      if (cta && foot) {
+        const main = cta.closest('main');
+        const wrap = document.createElement('div');
+        wrap.className = 'site-footer';
+        if (main && main.parentNode) main.parentNode.insertBefore(wrap, main.nextSibling);
+        else cta.parentNode.insertBefore(wrap, cta);
+        wrap.insertAdjacentHTML('afterbegin',
+          '<div class="site-footer-bowl" aria-hidden="true"></div>');
+        wrap.appendChild(cta);
+        wrap.appendChild(foot);
+      }
+    }
 
     // Mark the current page's link in the studios drawer (bronze active accent)
     const curPath = (location.pathname.replace(/\/$/, '') || '/');

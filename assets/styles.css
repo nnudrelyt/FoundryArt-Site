@@ -144,19 +144,25 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   gap: 16px;
 }
 
-/* Foundry Art only: the sticky header retracts on scroll down and returns on
-   scroll up (initNavAutoHide in app.js toggles .nav-hidden). Transform rather
-   than `top` so it slides with the sticky box instead of fighting it, and so
-   the animation stays on the compositor. */
-body[data-section="foundry-art"] .nav {
+/* Foundry Art only: the header retracts on scroll down and returns on scroll up
+   (initNavAutoHide in app.js toggles .nav-hidden on the nav).
+   FIX: the nav is wrapped in a <header> that is exactly its own height, so
+   `position: sticky` on the nav had no travel — it scrolled away instead of
+   pinning. Pin the HEADER instead (it sticks against the full-height body, so
+   its own height doesn't trap it) and slide the whole header on the class. */
+body[data-section="foundry-art"] .nav { position: static; }
+body[data-section="foundry-art"] header:has(> .nav) {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
-body[data-section="foundry-art"] .nav.nav-hidden {
+body[data-section="foundry-art"] header:has(> .nav.nav-hidden) {
   transform: translateY(-100%);
 }
 @media (prefers-reduced-motion: reduce) {
-  body[data-section="foundry-art"] .nav { transition: none; }
+  body[data-section="foundry-art"] header:has(> .nav) { transition: none; }
 }
 .nav-logo {
   font-family: 'Cormorant Garamond', serif;
@@ -1701,6 +1707,64 @@ body[data-page="home"] .footer p { border: 0 !important; }
 .footer p { font-size: 10px; color: rgba(255,255,255,0.48); letter-spacing: 1px; }
 .footer a { color: rgba(255,255,255,0.62); transition: color 0.2s ease; }
 .footer a:hover { color: var(--bronze-l); }
+
+/* Foundry footer — full-height tile-bowl region (~705px).
+   app.js wraps the "Ready to start?" CTA + copyright strip in .site-footer so
+   ONE bowl photo covers the whole footer height, fading in from the left.
+   The CTA's oversized vertical padding is trimmed here to keep the region near
+   its natural ~705px (not the 900px+ it balloons to at wide widths).
+   Contact dropped; single wide Shop Now left under the phone; copyright left /
+   social right. Scoped to foundry-art so the Linden lw2-footer is untouched. */
+body[data-section="foundry-art"] .site-footer {
+  position: relative;
+  overflow: hidden;
+  background: var(--charcoal-warm);
+}
+body[data-section="foundry-art"] .site-footer > .footer-cta,
+body[data-section="foundry-art"] .site-footer > .footer {
+  position: relative; z-index: 2; background: transparent;
+}
+body[data-section="foundry-art"] .site-footer > .footer { border-top: 0; }
+body[data-section="foundry-art"] .site-footer-bowl {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('/assets/images/hero/footer-bowl.webp') no-repeat 100% center;
+  background-size: auto 120%;
+}
+/* CTA stacks to one column; padding + gaps trimmed to keep the region compact */
+body[data-section="foundry-art"] .footer-cta {
+  grid-template-columns: 1fr;
+  padding-top: 28px; padding-bottom: 28px;
+  gap: 56px;   /* phone→button spacer (61px → 56px, ~8% tighter) */
+}
+body[data-section="foundry-art"] .footer-cta h2 { margin-bottom: 22px; }
+/* nudge the eyebrow ~10px south so it reads as connected to the headline
+   (margin shifts down but its total footprint stays, so the headline holds).
+   Also pin the size: the eyebrow is a <p>, so `.footer-cta-text p{font-size:16px}`
+   leaked onto it and made it 16px below the 1440px breakpoint. Force 13px everywhere. */
+body[data-section="foundry-art"] .footer-cta .section-eyebrow {
+  margin-top: 10px; margin-bottom: 12px;
+  font-size: 13px; letter-spacing: 3.5px;
+}
+body[data-section="foundry-art"] .footer-cta-actions { margin-top: 0; align-items: flex-start; }
+body[data-section="foundry-art"] .footer-cta-actions .btn-ghost { display: none; }
+body[data-section="foundry-art"] .footer-cta .btn-primary-lg { min-width: 270px; padding: 17px 40px; }
+/* copyright strip: copyright left, social pinned to the right corner */
+body[data-section="foundry-art"] .footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; gap: 20px; flex-wrap: wrap;
+}
+body[data-section="foundry-art"] .footer-inner p { margin: 0; }
+body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
+/* Wide view needs no overlay — the bowl sits fully to the right, text on clean
+   charcoal. But below ~1024px the bowl fills the width and would sit behind the
+   copy, so keep a legibility scrim there only. */
+@media (max-width: 1024px) {
+  body[data-section="foundry-art"] .site-footer::before {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(to right,
+      rgba(20,20,22,0.82) 0%, rgba(20,20,22,0.52) 60%, rgba(20,20,22,0.38) 100%);
+  }
+}
 
 /* ══════════════════════════════════════════════════════════
    SHOPPING FLOW — shared
@@ -12637,11 +12701,11 @@ body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover input
    the rules below only add the page-specific layout (process grid, patina
    split, two-column care block). Foundry Art shell only.
    ══════════════════════════════════════════════════════════════════════════ */
-body[data-page="care"] .tech-section { margin: 0 auto 64px; max-width: 1000px; }
-body[data-page="care"] .tech-lede { max-width: 70ch; margin-bottom: 36px; }
+body[data-tech-page] .tech-section { margin: 0 auto 64px; max-width: 1000px; }
+body[data-tech-page] .tech-lede { max-width: 70ch; margin-bottom: 36px; }
 
 /* How-it's-made: 4-up process figures that reflow to 2-up then 1-up. */
-body[data-page="care"] .tech-process {
+body[data-tech-page] .tech-process {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -12649,19 +12713,19 @@ body[data-page="care"] .tech-process {
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
-body[data-page="care"] .tech-process figure { margin: 0; }
-body[data-page="care"] .tech-process .wire-img {
+body[data-tech-page] .tech-process figure { margin: 0; }
+body[data-tech-page] .tech-process .wire-img {
   aspect-ratio: 4 / 5;
   margin-bottom: 14px;
   overflow: hidden;
 }
-body[data-page="care"] .tech-process .wire-img > img {
+body[data-tech-page] .tech-process .wire-img > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-body[data-page="care"] .tech-process figcaption strong {
+body[data-tech-page] .tech-process figcaption strong {
   display: block;
   font-family: 'Jost', sans-serif;
   font-size: var(--fs-eyebrow);
@@ -12670,7 +12734,7 @@ body[data-page="care"] .tech-process figcaption strong {
   color: var(--bronze);
   margin-bottom: 6px;
 }
-body[data-page="care"] .tech-process figcaption span {
+body[data-tech-page] .tech-process figcaption span {
   display: block;
   font-size: var(--fs-fine);
   line-height: 1.5;
@@ -12678,17 +12742,17 @@ body[data-page="care"] .tech-process figcaption span {
 }
 
 /* Patina: image + copy split, mirroring the craft section's two-up feel. */
-body[data-page="care"] .tech-patina {
+body[data-tech-page] .tech-patina {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: center;
 }
-body[data-page="care"] .tech-patina-media .wire-img {
+body[data-tech-page] .tech-patina-media .wire-img {
   aspect-ratio: 3 / 2;
   overflow: hidden;
 }
-body[data-page="care"] .tech-patina-media .wire-img > img {
+body[data-tech-page] .tech-patina-media .wire-img > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -12696,18 +12760,18 @@ body[data-page="care"] .tech-patina-media .wire-img > img {
 }
 
 /* Care/alloy/samples/shipping: two prose columns. */
-body[data-page="care"] .tech-columns {
+body[data-tech-page] .tech-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
 }
-body[data-page="care"] .tech-col p {
+body[data-tech-page] .tech-col p {
   font-size: var(--fs-body);
   line-height: 1.65;
   color: var(--slate);
   margin: 0 0 20px;
 }
-body[data-page="care"] .tech-h3 {
+body[data-tech-page] .tech-h3 {
   font-family: 'Jost', sans-serif;
   font-size: var(--fs-eyebrow);
   letter-spacing: 1.5px;
@@ -12715,21 +12779,21 @@ body[data-page="care"] .tech-h3 {
   color: var(--bronze);
   margin: 0 0 8px;
 }
-body[data-page="care"] .tech-specs { width: 100%; max-width: 760px; }
-body[data-page="care"] .tech-note {
+body[data-tech-page] .tech-specs { width: 100%; max-width: 760px; }
+body[data-tech-page] .tech-note {
   font-size: var(--fs-fine);
   color: var(--mid);
   margin-top: 12px;
 }
 
-body[data-page="care"] .tech-cta {
+body[data-tech-page] .tech-cta {
   max-width: 1000px;
   margin: 0 auto;
   padding-top: 40px;
   border-top: 1px solid var(--rule);
   text-align: center;
 }
-body[data-page="care"] .tech-cta-actions {
+body[data-tech-page] .tech-cta-actions {
   display: flex;
   gap: 16px;
   justify-content: center;
@@ -12738,12 +12802,12 @@ body[data-page="care"] .tech-cta-actions {
 }
 
 @media (max-width: 900px) {
-  body[data-page="care"] .tech-process { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  body[data-page="care"] .tech-patina { grid-template-columns: 1fr; gap: 28px; }
-  body[data-page="care"] .tech-columns { grid-template-columns: 1fr; gap: 8px; }
+  body[data-tech-page] .tech-process { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  body[data-tech-page] .tech-patina { grid-template-columns: 1fr; gap: 28px; }
+  body[data-tech-page] .tech-columns { grid-template-columns: 1fr; gap: 8px; }
 }
 @media (max-width: 480px) {
-  body[data-page="care"] .tech-process { grid-template-columns: 1fr; }
+  body[data-tech-page] .tech-process { grid-template-columns: 1fr; }
 }
 
 /* PDP care tab → Care & Technical page link. */
@@ -12782,4 +12846,8 @@ body[data-page="checkout"] .trade-row .trade-fields .trade-id-input {
 
 /* Care page images are wrapped in <picture> for WebP delivery; display:contents
    keeps the inner <img> a layout child of .wire-img so its object-fit rules hold. */
-body[data-page="care"] .wire-img > picture { display: contents; }
+/* Size picture-wrapped images the same as direct <img> children. `display:contents`
+   did NOT do this — `.wire-img > img` can't match an img nested inside <picture>,
+   so picture-wrapped shots rendered at natural size and blew the grid out. */
+body[data-tech-page] .wire-img > picture { position: absolute; inset: 0; z-index: 1; display: block; }
+body[data-tech-page] .wire-img > picture > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
