@@ -13521,8 +13521,8 @@ body[data-tech-page] .fa-scrub-labels button {
   letter-spacing: 1.5px; text-transform: uppercase;
   background: none; border: 0; cursor: pointer;
   color: var(--slate-l);
-  padding: 4px 0;
-  border-bottom: 1px solid transparent;
+  padding: 6px 0 4px;
+  border-top: 2px solid transparent;
   transition: color .2s ease, border-color .2s ease;
 }
 body[data-tech-page] .fa-scrub-labels button.active { color: var(--bronze); border-color: var(--bronze-l); }
