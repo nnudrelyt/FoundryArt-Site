@@ -12802,6 +12802,21 @@ body[data-tech-page] .tech-h3 {
   margin: 0 0 8px;
 }
 body[data-tech-page] .tech-specs { width: 100%; max-width: 760px; }
+/* Tighter label column brings the values in close enough to read as one
+   row; taller cells give the content air off the rules. */
+body[data-tech-page] .tech-specs th { width: 150px; padding: 20px 24px 20px 0; }
+body[data-tech-page] .tech-specs td { padding: 20px 0; }
+/* 72ch, not the base 78: measured against these answers, 78 leaves lines
+   ending on danglers (on / the / tone / kitchen); 72 carries them down.
+   Two answers get &nbsp; glue in the markup for the same reason. */
+body[data-tech-page] .fa-faq-answer p { max-width: 72ch; }
+/* Spec table folded into an FAQ answer — align with the answer's 4px
+   text inset, keep a beat before the per-piece note, and reserve the
+   +/− icon column so cell text never runs beneath it. */
+body[data-tech-page] .fa-faq-answer .specs-table {
+  margin: 4px 4px 20px;
+  max-width: min(760px, calc(100% - 64px));
+}
 body[data-tech-page] .tech-note {
   font-size: var(--fs-fine);
   color: var(--mid);
@@ -13226,6 +13241,12 @@ body[data-tech-page] .fa-hero::before {
   background: linear-gradient(180deg,
     rgba(10,18,20,0.38) 0%, rgba(10,18,20,0.56) 55%, rgba(10,18,20,0.42) 100%);
 }
+/* Care's hero photo (the tile array) is busier and brighter than the
+   foundry shot — a ~15% heavier wash keeps the title legible over it. */
+body[data-page="care"] .fa-hero::before {
+  background: linear-gradient(180deg,
+    rgba(10,18,20,0.53) 0%, rgba(10,18,20,0.71) 55%, rgba(10,18,20,0.57) 100%);
+}
 body[data-tech-page] .fa-hero-content {
   position: relative; z-index: 2;
   width: 100%;
@@ -13396,7 +13417,7 @@ body[data-tech-page] .fa-callout::before {
   content: '';
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg,
-    rgba(10,18,20,0.44) 0%, rgba(10,18,20,0.6) 55%, rgba(10,18,20,0.48) 100%);
+    rgba(10,18,20,0.59) 0%, rgba(10,18,20,0.75) 55%, rgba(10,18,20,0.63) 100%);
 }
 body[data-tech-page] .fa-callout-content {
   position: relative; z-index: 2;
@@ -13440,8 +13461,17 @@ body[data-tech-page] .fa-alloy-switch {
 }
 /* Full width of the controls column, so the segmented control spans the
    same line length as the scrubber beneath it. */
-body[data-tech-page] .fa-scrub-controls .fa-alloy-switch { display: flex; width: 100%; margin-bottom: 36px; }
+body[data-tech-page] .fa-scrub-controls .fa-alloy-switch { display: flex; width: 100%; margin-bottom: 36px; container-type: inline-size; }
 body[data-tech-page] .fa-scrub-controls .fa-alloy-switch button { flex: 1; text-align: center; }
+/* Line-break parity: "Traditional Bronze" needs ~420px of control to stay on
+   one line. Below that, BOTH labels break at their marked point — one button
+   wrapping while the other stays single-line reads as a mistake. */
+body[data-tech-page] .fa-alloy-switch button { white-space: nowrap; }
+body[data-tech-page] .fa-alloy-switch .sw-br { display: none; }
+@container (max-width: 420px) {
+  body[data-tech-page] .fa-alloy-switch button { white-space: normal; }
+  body[data-tech-page] .fa-alloy-switch .sw-br { display: inline; }
+}
 body[data-tech-page] .fa-alloy-switch button {
   font-family: 'Jost', sans-serif;
   font-size: 13px; font-weight: 500;
@@ -13469,14 +13499,9 @@ body[data-tech-page] .fa-scrub {
 /* display:grid beats the UA's [hidden] rule — restate it so the alloy
    switch can actually hide the inactive panel. */
 body[data-tech-page] .fa-scrub[hidden] { display: none; }
-/* Mounted print — same mat as the step photos, so the interactive tile
-   reads as part of the same family. */
-body[data-tech-page] .fa-scrub-mat {
-  border: 20px solid #F6F3ED;
-  outline: 1px solid rgba(20,37,40,0.08);
-  box-shadow: 0 18px 40px -18px rgba(20,37,40,0.28);
-  background: #F6F3ED;
-}
+/* Bare cutout — the tile photos carry their own soft product shadows, so
+   the wrapper adds nothing (a rectangular box-shadow under a transparent
+   cutout would betray the frame). */
 body[data-tech-page] .fa-scrub-stage { position: relative; aspect-ratio: 1; overflow: hidden; }
 body[data-tech-page] .fa-scrub-stage img {
   position: absolute; inset: 0;
@@ -13546,7 +13571,10 @@ body[data-tech-page] .fa-scrub-cap strong {
   color: var(--bronze); margin-bottom: 6px;
 }
 @media (max-width: 900px) {
-  body[data-tech-page] .fa-scrub { grid-template-columns: 1fr; gap: 36px; }
+  /* .fa-alloy--patina included: its two-column override outranks the plain
+     .fa-scrub selector, so the collapse must match its specificity. */
+  body[data-tech-page] .fa-scrub,
+  body[data-tech-page] .fa-alloy--patina .fa-scrub { grid-template-columns: 1fr; gap: 36px; }
   body[data-tech-page] .fa-scrub-caption { min-height: 110px; }
 }
 

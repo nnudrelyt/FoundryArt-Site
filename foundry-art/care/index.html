@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#142528">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23142528'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='400' fill='%23B7997E' text-anchor='middle'%3EFA%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260806-391">
-<link rel="stylesheet" href="/assets/styles.css?v=20260806-391">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260806-392">
+<link rel="stylesheet" href="/assets/styles.css?v=20260806-392">
 </head>
 <body data-section="foundry-art" data-page="care" data-tech-page>
 
@@ -24,7 +24,7 @@
     <!-- ══ HERO — full-bleed photo, centred title ══ -->
     <section class="fa-hero" aria-label="Patina and care">
       <div class="fa-hero-media">
-        <img src="/assets/images/patina/sun-floor-patina.jpg" alt="A patinated bronze sun tile set into a tumbled stone floor, mellowed to a deep antique tone" fetchpriority="high" decoding="async">
+        <img src="/assets/images/foundry-art-arrays/inset-tiles-array.jpg" alt="An array of bronze inset tiles and liners in varied patinas, laid out on blue fabric" fetchpriority="high" decoding="async">
       </div>
       <div class="fa-hero-content">
         <h1 class="page-title">Patina &amp; Care</h1>
@@ -36,6 +36,17 @@
     <div class="fa-wrap">
 
       <!-- ══ STEP 1 — A living finish ══ -->
+      <section class="fa-band fa-step" aria-label="What patina is">
+        <div class="fa-band-media">
+          <div class="wire-img"><picture><source type="image/webp" srcset="/assets/images/process/hand-toning.webp"><img src="/assets/images/process/hand-toning.jpg" alt="A finished tile being hand-toned in the studio" loading="lazy" decoding="async"></picture></div>
+        </div>
+        <div class="fa-band-copy">
+          <h2 class="section-headline">Bronze becomes more beautiful with age.</h2>
+          <p class="section-body">We believe the natural patina is the key to the deep beauty of bronze. Technically it is oxidation &mdash; bronze responding to the oxygen in the atmosphere. In practice, it is the surface darkening and mellowing the way a prized antique does, with time, weather and wear each playing a part.</p>
+          <p class="section-body">It is not a flaw to be prevented. It is the material doing what bronze has always done.</p>
+        </div>
+      </section>
+
       <!-- ══ WHAT IT WILL LOOK LIKE — THE PATINA SCRUB ══ -->
       <section class="fa-alloy fa-alloy--patina" aria-label="How each alloy ages">
         <div class="fa-patina-head">
@@ -46,25 +57,25 @@
         <div class="fa-scrub" data-scrub data-alloy-panel="trad">
           <div class="fa-scrub-mat">
             <div class="fa-scrub-stage">
-              <img src="/assets/images/patina/trad-new.jpg" alt="A Traditional Bronze Lotus tile, shown ageing from newly cast through twenty years of patina to a light buffing" loading="lazy" decoding="async">
-              <img src="/assets/images/patina/trad-20yr.jpg" data-scrub-mid alt="" aria-hidden="true" loading="lazy" decoding="async">
-              <img src="/assets/images/patina/trad-20yr-buffed.jpg" data-scrub-end alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <img src="/assets/images/patina/trad-new-cut.png" alt="A Traditional Bronze Lotus tile, shown ageing from newly cast through twenty years of patina to a light buffing" loading="lazy" decoding="async">
+              <img src="/assets/images/patina/trad-20yr-cut.png" data-scrub-mid alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <img src="/assets/images/patina/trad-20yr-buffed-cut.png" data-scrub-end alt="" aria-hidden="true" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="fa-scrub-controls">
             <div class="fa-alloy-switch" data-alloy-switch role="group" aria-label="Choose an alloy">
-              <button type="button" class="active" data-alloy="trad" aria-pressed="true">Traditional Bronze</button>
-              <button type="button" data-alloy="white" aria-pressed="false">White Bronze</button>
+              <button type="button" class="active" data-alloy="trad" aria-pressed="true">Traditional<br class="sw-br"> Bronze</button>
+              <button type="button" data-alloy="white" aria-pressed="false">White<br class="sw-br"> Bronze</button>
             </div>
             <div class="fa-scrub-labels">
               <button type="button" data-jump="0" class="active">New</button>
-              <button type="button" data-jump="100">~20 years</button>
+              <button type="button" data-jump="100">20 years</button>
               <button type="button" data-jump="200">After buffing</button>
             </div>
             <input type="range" class="fa-scrub-range" min="0" max="200" value="0" step="1" aria-label="Age of the Traditional Bronze tile">
             <div class="fa-scrub-caption">
               <div class="fa-scrub-cap active"><strong>New</strong><span>The warm luster of freshly cast and buffed bronze &mdash; the brightest this tile will ever be.</span></div>
-              <div class="fa-scrub-cap"><strong>After ~20 years</strong><span>Rich, mellow, considerably darker and deeper than the day it arrived. Nothing has been done to it.</span></div>
+              <div class="fa-scrub-cap"><strong>After 20 years</strong><span>Rich, mellow, considerably darker and deeper than the day it arrived. Nothing has been done to it.</span></div>
               <div class="fa-scrub-cap"><strong>After a light buffing</strong><span>The same twenty-year-old tile, buffed on the high points only. The recesses stay dark &mdash; which is what makes the pattern read.</span></div>
             </div>
           </div>
@@ -72,40 +83,28 @@
         <div class="fa-scrub" data-scrub data-alloy-panel="white" hidden>
           <div class="fa-scrub-mat">
             <div class="fa-scrub-stage">
-              <img src="/assets/images/patina/white-new.jpg" alt="A White Bronze Square tile, shown ageing from newly cast through fifteen years of patina to a light buffing" loading="lazy" decoding="async">
-              <img src="/assets/images/patina/white-15yr.jpg" data-scrub-mid alt="" aria-hidden="true" loading="lazy" decoding="async">
-              <img src="/assets/images/patina/white-15yr-buffed.jpg" data-scrub-end alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <img src="/assets/images/patina/white-new-cut.png" alt="A White Bronze Square tile, shown ageing from newly cast through fifteen years of patina to a light buffing" loading="lazy" decoding="async">
+              <img src="/assets/images/patina/white-15yr-cut.png" data-scrub-mid alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <img src="/assets/images/patina/white-15yr-buffed-cut.png" data-scrub-end alt="" aria-hidden="true" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="fa-scrub-controls">
             <div class="fa-alloy-switch" data-alloy-switch role="group" aria-label="Choose an alloy">
-              <button type="button" data-alloy="trad" aria-pressed="false">Traditional Bronze</button>
-              <button type="button" class="active" data-alloy="white" aria-pressed="true">White Bronze</button>
+              <button type="button" data-alloy="trad" aria-pressed="false">Traditional<br class="sw-br"> Bronze</button>
+              <button type="button" class="active" data-alloy="white" aria-pressed="true">White<br class="sw-br"> Bronze</button>
             </div>
             <div class="fa-scrub-labels">
               <button type="button" data-jump="0" class="active">New</button>
-              <button type="button" data-jump="100">~15 years</button>
+              <button type="button" data-jump="100">15 years</button>
               <button type="button" data-jump="200">After buffing</button>
             </div>
             <input type="range" class="fa-scrub-range" min="0" max="200" value="0" step="1" aria-label="Age of the White Bronze tile">
             <div class="fa-scrub-caption">
               <div class="fa-scrub-cap active"><strong>New</strong><span>A cooler, paler luster than Traditional &mdash; closer to nickel silver than to gold.</span></div>
-              <div class="fa-scrub-cap"><strong>After ~15 years</strong><span>Far more subdued than Traditional. White Bronze stays close to its original tone over time.</span></div>
+              <div class="fa-scrub-cap"><strong>After 15 years</strong><span>A far gentler change than Traditional&rsquo;s &mdash; White Bronze stays close to its original tone over time.</span></div>
               <div class="fa-scrub-cap"><strong>After a light buffing</strong><span>Back to near-new brightness with very little effort.</span></div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="fa-band fa-step" aria-label="What patina is">
-        <div class="fa-band-media">
-          <div class="wire-img"><picture><source type="image/webp" srcset="/assets/images/process/hand-toning.webp"><img src="/assets/images/process/hand-toning.jpg" alt="A finished tile being hand-toned in the studio" loading="lazy" decoding="async"></picture></div>
-        </div>
-        <div class="fa-band-copy">
-          <p class="fa-step-num" aria-hidden="true">01</p>
-          <h2 class="section-headline">Bronze becomes more beautiful with age.</h2>
-          <p class="section-body">We believe the natural patina is the key to the deep beauty of bronze. Technically it is oxidation &mdash; bronze responding to the oxygen in the atmosphere. In practice, it is the surface darkening and mellowing the way a prized antique does, with time, weather and wear each playing a part.</p>
-          <p class="section-body">It is not a flaw to be prevented. It is the material doing what bronze has always done.</p>
         </div>
       </section>
 
@@ -122,7 +121,6 @@
           <div class="wire-img"><img src="/assets/images/lifestyle/floor-lotus-white-stone.jpg" alt="A Lotus tile set into a limestone floor, seen from above" loading="lazy" decoding="async"></div>
         </div>
         <div class="fa-band-copy">
-          <p class="fa-step-num" aria-hidden="true">02</p>
           <h2 class="section-headline">Footsteps do the polishing.</h2>
           <p class="section-body">When used in a floor, time-worn paths appear as the tiles are gradually polished by footsteps. The high points brighten where people walk while the recesses keep deepening &mdash; the pattern gets more legible, not less.</p>
           <p class="section-body">It is the one kind of wear you cannot buy and cannot fake.</p>
@@ -135,7 +133,6 @@
           <div class="wire-img"><img src="/assets/images/process/space-bath-cabochon-bw.jpg" alt="Bronze accent tiles in a wet installation" loading="lazy" decoding="async"></div>
         </div>
         <div class="fa-band-copy">
-          <p class="fa-step-num" aria-hidden="true">03</p>
           <h2 class="section-headline">Water speeds everything up.</h2>
           <p class="section-body">Constant water exposure drives a very dark patina, and outdoors it will eventually turn the opaque green you know from weathered bronze. If you want to hold the finish closer to new, seal it with lacquer and plan on reapplying periodically.</p>
           <p class="section-body">Neither outcome harms the bronze. Wet or dry, the tile underneath stays solid for generations.</p>
@@ -148,7 +145,6 @@
           <div class="wire-img"><img src="/assets/images/process/polishing-hands.jpg" alt="Hands buffing a finished bronze tile back to brightness" loading="lazy" decoding="async"></div>
         </div>
         <div class="fa-band-copy">
-          <p class="fa-step-num" aria-hidden="true">04</p>
           <h2 class="section-headline">Let it age, slow it down, or keep it bright.</h2>
           <p class="section-body">How far the patina goes is entirely up to you. Bronze asks very little &mdash; a soft cloth for everyday life, and a few minutes of attention if you ever want to steer it.</p>
           <p class="section-body">The questions below cover the rest &mdash; and there is no wrong answer, only the look you want.</p>
@@ -158,11 +154,11 @@
       <!-- ══ FAQ — care + ordering reference ══ -->
       <section class="fa-callout" aria-label="How our tiles are made">
         <div class="fa-callout-media">
-        <img src="/assets/images/process/handpolish.jpg" alt="A hand polishing a full bed of small bronze tiles in the studio" loading="lazy" decoding="async">
+        <img src="/assets/images/process/handpolish-bw.jpg" alt="A hand polishing a full bed of small bronze tiles in the studio" loading="lazy" decoding="async">
         </div>
         <div class="fa-callout-content">
-        <h2 class="section-headline">Every tile starts in fire.</h2>
-        <p class="section-body">Decades before the patina, there is a morning at the crucible &mdash; molten bronze poured by hand into a mould cast from a single original carving, then refined and polished by the people who made it.</p>
+        <h2 class="section-headline">Made by hand. Cared for by hand.</h2>
+        <p class="section-body">Every tile is carved, cast, refined and polished by hand in our Chicago studio before it ever reaches yours. A soft cloth and the occasional buff is all it asks in return.</p>
         <p class="fa-band-link"><a href="/foundry-art/how-its-made/" class="fa-textlink">See how your tiles are made</a></p>
         </div>
       </section>
@@ -188,7 +184,7 @@
             <span class="fa-faq-icon" aria-hidden="true"></span>
           </button>
           <div class="fa-faq-body"><div class="fa-faq-answer">
-            <p>Yes &mdash; use ultra-fine Scotch-Brite or bronze wool. Never steel wool; it rusts. Buff the high points and leave the recesses dark &mdash; that contrast is what accentuates the design.</p>
+            <p>Yes &mdash; polish with a soft abrasive such as Scotch-Brite, and use a copper or brass cleaner on darker tiles. Buff the high points and leave the recesses dark &mdash; that contrast is what makes the pattern read. Maintain with paste wax.</p>
           </div></div>
         </div>
         <div class="fa-faq-item">
@@ -197,7 +193,7 @@
             <span class="fa-faq-icon" aria-hidden="true"></span>
           </button>
           <div class="fa-faq-body"><div class="fa-faq-answer">
-            <p>A light coat of paste wax after installation is all it takes. Renaissance Wax is the museum-grade choice and worth it in a room you care about.</p>
+            <p>A light coat of paste wax after installation is all it takes &mdash; renew it occasionally to hold the tone where you like it.</p>
           </div></div>
         </div>
         <div class="fa-faq-item">
@@ -206,7 +202,7 @@
             <span class="fa-faq-icon" aria-hidden="true"></span>
           </button>
           <div class="fa-faq-body"><div class="fa-faq-answer">
-            <p>To hold the finish where it is, seal with a bronze-compatible lacquer such as Incralac. Best decided before installation. In wet or outdoor settings, plan on reapplying periodically.</p>
+            <p>To stop the process, seal the tiles with a clear epoxy coating &mdash; the same treatment as a kitchen faucet &mdash; or a post-installation lacquer. Best decided before installation.</p>
           </div></div>
         </div>
         <div class="fa-faq-item">
@@ -215,7 +211,7 @@
             <span class="fa-faq-icon" aria-hidden="true"></span>
           </button>
           <div class="fa-faq-body"><div class="fa-faq-answer">
-            <p>Traditional Bronze is deep-coloured and warm, typical of fine sculpture casting. White Bronze has a lighter, cooler tone and is inscribed with a &ldquo;W&rdquo; on the back. Both are among the most durable bronzes available, and both are solid &mdash; our tiles are bronze through and through.<span style="color:#B7997E;">&nbsp;[verify composition]</span></p>
+            <p>Traditional Bronze is deep-colored and warm, typical of fine sculpture casting. White Bronze has&nbsp;a&nbsp;lighter, cooler tone and is inscribed with a &ldquo;W&rdquo; on the back. Both are among the most durable bronzes available, and both are solid &mdash; our tiles are bronze through and through.<span style="color:#B7997E;">&nbsp;[verify composition]</span></p>
           </div></div>
         </div>
         <div class="fa-faq-item">
@@ -224,7 +220,24 @@
             <span class="fa-faq-icon" aria-hidden="true"></span>
           </button>
           <div class="fa-faq-body"><div class="fa-faq-answer">
-            <p>No two of our tiles are exactly alike. Our casting and finishing techniques purposely encourage differences from tile to tile. Rough areas are a feature, not a defect &mdash; reminders of the many hands that make them.</p>
+            <p>No two of our tiles are exactly alike. Our casting and finishing techniques purposely encourage&nbsp;differences from tile to tile. Rough areas are a feature, not a defect &mdash; reminders of the many hands that make them.</p>
+          </div></div>
+        </div>
+        <div class="fa-faq-item" id="specs">
+          <button type="button" class="fa-faq-trigger" aria-expanded="false">
+            <span class="fa-faq-question">What are the tile specifications?</span>
+            <span class="fa-faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="fa-faq-body"><div class="fa-faq-answer">
+            <table class="specs-table tech-specs">
+              <tr><th>Material</th><td>Solid bronze &mdash; choice of Traditional Bronze alloy or White Bronze alloy. Solid through, not a coating or plating.</td></tr>
+              <tr><th>Tile sizes</th><td>1&times;1, 2&times;2, and 3&times;3 inch (nominal). Hardware sized per piece.</td></tr>
+              <tr><th>Thickness</th><td>3/8 inch (nominal)</td></tr>
+              <tr><th>Weight</th><td>~0.13 lb (1&times;1) &middot; ~0.4 lb (2&times;2) &middot; ~0.7 lb (3&times;3), per piece</td></tr>
+              <tr><th>Variation</th><td>No two Foundry Art tiles are exactly alike. Minor irregularities are a reminder of the many hands that make them.</td></tr>
+              <tr><th>Finish</th><td>Hand-ground, buffed, toned, and waxed. The surface continues to develop a patina after install.</td></tr>
+            </table>
+            <p>Per-piece weights and exact sizes are listed on each product page.</p>
           </div></div>
         </div>
         <div class="fa-faq-item">
@@ -233,7 +246,7 @@
             <span class="fa-faq-icon" aria-hidden="true"></span>
           </button>
           <div class="fa-faq-body"><div class="fa-faq-answer">
-            <p>Yes &mdash; and we recommend it. Samples ship separately and affect shipping cost, but screens flatter one alloy and not the other, so order a sample in both before a large installation.</p>
+            <p>Yes &mdash; registered customers can request a complimentary swatch set, or up to two full tiles at full price with free shipping in both directions. Screens flatter one alloy and not the other, so see both in person before a large installation.</p>
           </div></div>
         </div>
         <div class="fa-faq-item">
@@ -271,8 +284,8 @@
 
   <div data-footer></div>
 
-  <script src="/assets/products.js?v=20260806-391"></script>
-  <script src="/assets/account-data.js?v=20260806-391"></script>
-  <script src="/assets/app.js?v=20260806-391"></script>
+  <script src="/assets/products.js?v=20260806-392"></script>
+  <script src="/assets/account-data.js?v=20260806-392"></script>
+  <script src="/assets/app.js?v=20260806-392"></script>
 </body>
 </html>
