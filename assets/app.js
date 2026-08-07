@@ -2514,6 +2514,7 @@
     initFaqAccordion();
     initPatinaScrub();
     initAlloySwitch();
+    initPatinaAutoplay();
     // No standalone renderShopGrid() — initFacets() performs the first render
     // via applyShop(). Calling it here too would double-render, and the second
     // pass would ignore the active filters.
@@ -2608,6 +2609,59 @@
         trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     });
+  }
+
+  // Patina scrub autoplay (care page) — the slider drifts through the
+  // timeline on its own once the section is in view, reversing at the ends
+  // with a short hold, so the component advertises its interactivity.
+  // Mirrors the insitu-carousel conventions: pauses on hover, stops for
+  // good on any real interaction, and skips under prefers-reduced-motion.
+  function initPatinaAutoplay() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const units = Array.from(document.querySelectorAll('[data-scrub]'));
+    if (!units.length) return;
+
+    const DURATION = 11000;   // ms for a full New -> buffed sweep
+    const HOLD = 1600;        // pause at each end of the timeline
+    let stopped = false;      // a real interaction ends autoplay permanently
+    let dir = 1, raf = null, lastT = 0, holdUntil = 0;
+
+    function activeRange() {
+      const unit = units.find(u => !u.hidden);
+      return unit ? unit.querySelector('.fa-scrub-range') : null;
+    }
+    function frame(t) {
+      raf = requestAnimationFrame(frame);
+      if (!lastT) { lastT = t; return; }
+      const dt = Math.min(t - lastT, 100); lastT = t;
+      if (t < holdUntil) return;
+      const range = activeRange();
+      if (!range) return;
+      let v = Number(range.value) + dir * (200 / DURATION) * dt;
+      if (v >= 200) { v = 200; dir = -1; holdUntil = t + HOLD; }
+      else if (v <= 0) { v = 0; dir = 1; holdUntil = t + HOLD; }
+      range.value = v;
+      range.dispatchEvent(new Event('input'));
+    }
+    function start() { if (!raf && !stopped) { lastT = 0; raf = requestAnimationFrame(frame); } }
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+    function kill() { stopped = true; stop(); }
+
+    // Hand control to the user the moment they engage the component.
+    units.forEach(u => {
+      const range = u.querySelector('.fa-scrub-range');
+      ['pointerdown', 'keydown', 'touchstart'].forEach(ev => range.addEventListener(ev, kill, { passive: true }));
+      u.querySelectorAll('.fa-scrub-labels button, [data-alloy-switch] button')
+        .forEach(b => b.addEventListener('click', kill));
+      u.addEventListener('mouseenter', stop);
+      u.addEventListener('mouseleave', start);
+    });
+
+    const target = document.querySelector('.fa-alloy--patina') || units[0];
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) start(); else stop(); });
+    }, { threshold: 0.35 });
+    io.observe(target);
   }
 
   // Alloy switch (care page) — segmented control that swaps which alloy's
