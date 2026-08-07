@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Foundry Art — footer background options</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css?v=rev6">
+<link rel="stylesheet" href="/assets/styles.css?v=rev6">
+<style>
+  /* ─────────────────────────────────────────────────────────────
+     FOOTER BACKGROUND OPTIONS — working review page.
+     Real footers at full size, stacked, each labelled. Serve from a
+     local server rooted at the repo (paths are absolute), e.g.
+       python3 -m http.server 8765
+       http://localhost:8765/docs/footer-options/
+     Tracked in git; excluded from deploys via .vercelignore.
+
+     TO REORDER: move a whole <section class="opt"> block. The
+     number in .opt-n is the only thing to renumber.
+     TO ADD: copy a block, change the .vN class + the CSS rule.
+     ───────────────────────────────────────────────────────────── */
+  body { background: #fff; margin: 0; }
+
+  .opt-label {
+    display: flex; align-items: baseline; gap: 18px;
+    font-family: 'Jost', sans-serif;
+    background: #EEEDE8; padding: 18px 64px;
+  }
+  .opt-n {
+    font-size: 12px; font-weight: 500; letter-spacing: 2.5px;
+    text-transform: uppercase; color: #8C6249;
+  }
+  .opt-name { font-size: 15px; font-weight: 500; color: #142528; }
+  .opt-note { font-size: 14px; color: #6B7472; }
+
+  /* ── shared background mechanics (matches the live footer) ── */
+  body[data-section="foundry-art"] .v .site-footer-bowl { background: none; }
+  body[data-section="foundry-art"] .v .art {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    left: auto; right: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 60%;
+    -webkit-mask-image: linear-gradient(to left, #000 40%, transparent 100%);
+            mask-image: linear-gradient(to left, #000 40%, transparent 100%);
+  }
+
+  /* 1 · GRID FLOOR — the B2 treatment: dark crop + brightness seated */
+  body[data-section="foundry-art"] .v1 .art {
+    background-image: url('/assets/images/lifestyle/floor-grid-white-bronze.jpg');
+    background-position: 100% 31%;
+    filter: brightness(.62) contrast(1.06) saturate(.85);
+  }
+  /* 2 · TILE IN HAND — process shot; already dark around a bright subject */
+  body[data-section="foundry-art"] .v2 .art {
+    background-image: url('/assets/images/process/hand-toning.jpg');
+    background-position: 100% center;
+    filter: brightness(.68) contrast(1.04) saturate(.8);
+  }
+  /* 3 · LIMESTONE FLOOR — y=19% band measures 0.180 against the footer's
+     0.177, so this one needs no filter at all; the crop does everything. */
+  body[data-section="foundry-art"] .v3 .art {
+    background-image: url('/assets/images/lifestyle/floor-square-white-limestone.jpg');
+    background-position: 100% 19%;
+  }
+  /* 5 · FIREPLACE — a living space rather than a bath or kitchen; brightest
+     of the three so it takes the heaviest seating. */
+  body[data-section="foundry-art"] .v5 .art {
+    background-image: url('/assets/images/lifestyle/fireplace-sun-travertine.jpg');
+    background-position: 100% 56%;
+    filter: brightness(.60) contrast(1.06) saturate(.85);
+  }
+  /* 6 · MOON BLOSSOM IN HAND — square source, so a narrower column than the
+     landscape room shots or the tile crops out of frame. */
+  body[data-section="foundry-art"] .v6 .art {
+    width: 48%;
+    background-image: url('/assets/images/products/moon-blossom-3x3/gallery-2.jpg');
+    background-position: 100% 42%;
+    filter: brightness(.52) contrast(1.12);
+  }
+  /* 7 · SUN IN HAND — same treatment; deeper relief takes the light harder */
+  body[data-section="foundry-art"] .v7 .art {
+    width: 48%;
+    background-image: url('/assets/images/products/sun-3x3/gallery-2.jpg');
+    background-position: 100% 42%;
+    filter: brightness(.54) contrast(1.12);
+  }
+  /* 8 · FOYER, MONO — brightest source of the set, so the heaviest correction */
+  body[data-section="foundry-art"] .v8 .art {
+    background-image: url('/assets/images/lifestyle/foyer-lotus-closer-mono.jpg');
+    background-position: 100% 30%;
+    filter: brightness(.50) contrast(1.10);
+  }
+</style>
+</head>
+<body data-section="foundry-art" data-page="how-its-made" data-tech-page>
+
+<!-- ══ CURRENTLY IMPLEMENTED ═══════════════════════════════
+     No .v class here on purpose — this inherits the real
+     .site-footer-bowl rule, so it is the live footer verbatim. -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Currently implemented</span>
+    <span class="opt-name">Bowl of tiles</span>
+    <span class="opt-note">Cut-out with no photo edge, so the object sits in the space rather than over it.</span>
+  </div>
+  <div class="site-footer">
+    <div class="site-footer-bowl" aria-hidden="true"></div>
+    <section class="footer-cta" aria-label="Call to action">
+      <div class="footer-cta-text">
+        <p class="section-eyebrow">Ready to start?</p>
+        <h2>The detail your<br>room is missing.</h2>
+        <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+        <p class="footer-cta-phone"><span class="footer-cta-phone-label">Studio direct</span><a href="tel:7737842628">(773) 784-2628</a></p>
+      </div>
+      <div class="footer-cta-actions"><a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a></div>
+    </section>
+    <footer class="footer"><p>© 2026 Foundry Art</p></footer>
+  </div>
+</section>
+
+<!-- ══ 2 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 2</span>
+    <span class="opt-name">Grid floor, white bronze</span>
+    <span class="opt-note">Raking light across travertine; bronze insets clearly legible.</span>
+  </div>
+  <div class="site-footer v v1">
+    <div class="site-footer-bowl" aria-hidden="true"></div><div class="art" aria-hidden="true"></div>
+    <section class="footer-cta" aria-label="Call to action">
+      <div class="footer-cta-text">
+        <p class="section-eyebrow">Ready to start?</p>
+        <h2>The detail your<br>room is missing.</h2>
+        <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+        <p class="footer-cta-phone"><span class="footer-cta-phone-label">Studio direct</span><a href="tel:7737842628">(773) 784-2628</a></p>
+      </div>
+      <div class="footer-cta-actions"><a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a></div>
+    </section>
+    <footer class="footer"><p>© 2026 Foundry Art</p></footer>
+  </div>
+</section>
+
+<!-- ══ 3 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 3</span>
+    <span class="opt-name">Tile in hand</span>
+    <span class="opt-note">Studio process shot rather than an interior — puts the making in the footer.</span>
+  </div>
+  <div class="site-footer v v2">
+    <div class="site-footer-bowl" aria-hidden="true"></div><div class="art" aria-hidden="true"></div>
+    <section class="footer-cta" aria-label="Call to action">
+      <div class="footer-cta-text">
+        <p class="section-eyebrow">Ready to start?</p>
+        <h2>The detail your<br>room is missing.</h2>
+        <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+        <p class="footer-cta-phone"><span class="footer-cta-phone-label">Studio direct</span><a href="tel:7737842628">(773) 784-2628</a></p>
+      </div>
+      <div class="footer-cta-actions"><a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a></div>
+    </section>
+    <footer class="footer"><p>© 2026 Foundry Art</p></footer>
+  </div>
+</section>
+
+<!-- ══ 4 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 4</span>
+    <span class="opt-name">Limestone floor</span>
+    <span class="opt-note">Crop sits at the footer&rsquo;s exact tone &mdash; no colour correction applied.</span>
+  </div>
+  <div class="site-footer v v3">
+    <div class="site-footer-bowl" aria-hidden="true"></div><div class="art" aria-hidden="true"></div>
+    <section class="footer-cta" aria-label="Call to action">
+      <div class="footer-cta-text">
+        <p class="section-eyebrow">Ready to start?</p>
+        <h2>The detail your<br>room is missing.</h2>
+        <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+        <p class="footer-cta-phone"><span class="footer-cta-phone-label">Studio direct</span><a href="tel:7737842628">(773) 784-2628</a></p>
+      </div>
+      <div class="footer-cta-actions"><a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a></div>
+    </section>
+    <footer class="footer"><p>© 2026 Foundry Art</p></footer>
+  </div>
+</section>
+
+<!-- ══ 5 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 5</span>
+    <span class="opt-name">Foyer, mono</span>
+    <span class="opt-note">The closer photo converted to black-and-white.</span>
+  </div>
+  <div class="site-footer v v8">
+    <div class="site-footer-bowl" aria-hidden="true"></div><div class="art" aria-hidden="true"></div>
+    <section class="footer-cta" aria-label="Call to action">
+      <div class="footer-cta-text">
+        <p class="section-eyebrow">Ready to start?</p>
+        <h2>The detail your<br>room is missing.</h2>
+        <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+        <p class="footer-cta-phone"><span class="footer-cta-phone-label">Studio direct</span><a href="tel:7737842628">(773) 784-2628</a></p>
+      </div>
+      <div class="footer-cta-actions"><a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a></div>
+    </section>
+    <footer class="footer"><p>© 2026 Foundry Art</p></footer>
+  </div>
+</section>
+
+<!-- ══ 6 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 6</span>
+    <span class="opt-name">Fireplace</span>
+    <span class="opt-note">A living space rather than a bath or kitchen; warm stone and firelight.</span>
+  </div>
+  <div class="site-footer v v5">
+    <div class="site-footer-bowl" aria-hidden="true"></div><div class="art" aria-hidden="true"></div>
+    <section class="footer-cta" aria-label="Call to action">
+      <div class="footer-cta-text">
+        <p class="section-eyebrow">Ready to start?</p>
+        <h2>The detail your<br>room is missing.</h2>
+        <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+        <p class="footer-cta-phone"><span class="footer-cta-phone-label">Studio direct</span><a href="tel:7737842628">(773) 784-2628</a></p>
+      </div>
+      <div class="footer-cta-actions"><a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a></div>
+    </section>
+    <footer class="footer"><p>© 2026 Foundry Art</p></footer>
+  </div>
+</section>
+
+<!-- ══ 7 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 7</span>
+    <span class="opt-name">Moon Blossom in hand</span>
+    <span class="opt-note">Tile toward camera, hand falling away behind it &mdash; three planes of recession.</span>
+  </div>
+  <div class="site-footer v v6">
+    <div class="site-footer-bowl" aria-hidden="true"></div><div class="art" aria-hidden="true"></div>
+    <section class="footer-cta" aria-label="Call to action">
+      <div class="footer-cta-text">
+        <p class="section-eyebrow">Ready to start?</p>
+        <h2>The detail your<br>room is missing.</h2>
+        <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+        <p class="footer-cta-phone"><span class="footer-cta-phone-label">Studio direct</span><a href="tel:7737842628">(773) 784-2628</a></p>
+      </div>
+      <div class="footer-cta-actions"><a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a></div>
+    </section>
+    <footer class="footer"><p>© 2026 Foundry Art</p></footer>
+  </div>
+</section>
+
+<!-- ══ 8 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 8</span>
+    <span class="opt-name">Sun in hand</span>
+    <span class="opt-note">Deeper relief than Moon Blossom, so the raking light reads harder.</span>
+  </div>
+  <div class="site-footer v v7">
+    <div class="site-footer-bowl" aria-hidden="true"></div><div class="art" aria-hidden="true"></div>
+    <section class="footer-cta" aria-label="Call to action">
+      <div class="footer-cta-text">
+        <p class="section-eyebrow">Ready to start?</p>
+        <h2>The detail your<br>room is missing.</h2>
+        <p>Hand cast in solid bronze. Shipped direct from our Chicago studio.</p>
+        <p class="footer-cta-phone"><span class="footer-cta-phone-label">Studio direct</span><a href="tel:7737842628">(773) 784-2628</a></p>
+      </div>
+      <div class="footer-cta-actions"><a href="/foundry-art/shop/" class="btn-primary-lg">Shop Now</a></div>
+    </section>
+    <footer class="footer"><p>© 2026 Foundry Art</p></footer>
+  </div>
+</section>
+
+
+</body>
+</html>
