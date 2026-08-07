@@ -2626,6 +2626,10 @@
     const HOLD = 1600;        // pause at each end of the timeline
     let stopped = false;      // a real interaction ends autoplay permanently
     let dir = 1, raf = null, lastT = 0, holdUntil = 0;
+    // Track position in a float: the range input's step="1" quantizes its
+    // value, so reading it back each frame would round away the sub-unit
+    // per-frame increments and the drift would never accumulate.
+    let pos = 0;
 
     function activeRange() {
       const unit = units.find(u => !u.hidden);
@@ -2638,13 +2642,19 @@
       if (t < holdUntil) return;
       const range = activeRange();
       if (!range) return;
-      let v = Number(range.value) + dir * (200 / DURATION) * dt;
-      if (v >= 200) { v = 200; dir = -1; holdUntil = t + HOLD; }
-      else if (v <= 0) { v = 0; dir = 1; holdUntil = t + HOLD; }
-      range.value = v;
+      pos += dir * (200 / DURATION) * dt;
+      if (pos >= 200) { pos = 200; dir = -1; holdUntil = t + HOLD; }
+      else if (pos <= 0) { pos = 0; dir = 1; holdUntil = t + HOLD; }
+      range.value = pos;
       range.dispatchEvent(new Event('input'));
     }
-    function start() { if (!raf && !stopped) { lastT = 0; raf = requestAnimationFrame(frame); } }
+    function start() {
+      if (raf || stopped) return;
+      const r = activeRange();
+      pos = r ? Number(r.value) : 0;
+      lastT = 0;
+      raf = requestAnimationFrame(frame);
+    }
     function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
     function kill() { stopped = true; stop(); }
 
