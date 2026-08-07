@@ -2614,8 +2614,9 @@
   // Patina scrub autoplay (care page) — the slider drifts through the
   // timeline on its own once the section is in view, reversing at the ends
   // with a short hold, so the component advertises its interactivity.
-  // Mirrors the insitu-carousel conventions: pauses on hover, stops for
-  // good on any real interaction, and skips under prefers-reduced-motion.
+  // Stops for good on any real interaction and skips under
+  // prefers-reduced-motion. Deliberately no hover-pause: the unit spans
+  // most of the viewport, so a resting cursor would hide the motion.
   function initPatinaAutoplay() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const units = Array.from(document.querySelectorAll('[data-scrub]'));
@@ -2653,14 +2654,12 @@
       ['pointerdown', 'keydown', 'touchstart'].forEach(ev => range.addEventListener(ev, kill, { passive: true }));
       u.querySelectorAll('.fa-scrub-labels button, [data-alloy-switch] button')
         .forEach(b => b.addEventListener('click', kill));
-      u.addEventListener('mouseenter', stop);
-      u.addEventListener('mouseleave', start);
     });
 
     const target = document.querySelector('.fa-alloy--patina') || units[0];
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) start(); else stop(); });
-    }, { threshold: 0.35 });
+    }, { threshold: 0.2 });
     io.observe(target);
   }
 
