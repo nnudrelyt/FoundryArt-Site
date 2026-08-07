@@ -1,0 +1,11 @@
+# Kept in git, never deployed — these are internal and were publicly
+# readable on the production domain until this file existed.
+docs/
+_styles/
+_cap/
+
+# Root-level project docs
+DESIGN-SYSTEM.md
+NOTICE.md
+README.md
+*.md

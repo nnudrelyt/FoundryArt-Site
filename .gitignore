@@ -1,5 +1,7 @@
 .DS_Store
 .vercel
 
-# Internal review/exploration pages — not part of the site
+# Scratch exploration pages — the photo library now lives in
+# docs/photo-library/ (tracked in git, excluded from deploys)
 _styles/
+_cap/
