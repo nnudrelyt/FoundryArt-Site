@@ -2512,6 +2512,8 @@
     initInsituAutoscroll();
     initInsituScrollIndicator();
     initFaqAccordion();
+    initPatinaScrub();
+    initAlloySwitch();
     // No standalone renderShopGrid() — initFacets() performs the first render
     // via applyShop(). Calling it here too would double-render, and the second
     // pass would ignore the active filters.
@@ -2593,6 +2595,7 @@
 
   }
 
+
   // FAQ accordion — click to toggle, multiple can be open simultaneously.
   // Uses grid-template-rows 0fr → 1fr for smooth height animation without
   // needing to measure element height in JS.
@@ -2604,6 +2607,65 @@
         const open = item.classList.toggle('is-open');
         trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
+    });
+  }
+
+  // Alloy switch (care page) — segmented control that swaps which alloy's
+  // scrub panel is shown. The control is duplicated inside each panel (so it
+  // can sit above the scrubber), so state is written to every switch button
+  // in the section, not just the one that was clicked. Each panel keeps its
+  // own slider state, so toggling back returns to where the user left it.
+  function initAlloySwitch() {
+    document.querySelectorAll('.fa-alloy').forEach(scope => {
+      const btns = scope.querySelectorAll('[data-alloy-switch] button[data-alloy]');
+      if (!btns.length) return;
+      btns.forEach(b => b.addEventListener('click', () => {
+        const key = b.dataset.alloy;
+        btns.forEach(x => {
+          const on = x.dataset.alloy === key;
+          x.classList.toggle('active', on);
+          x.setAttribute('aria-pressed', String(on));
+        });
+        scope.querySelectorAll('[data-alloy-panel]').forEach(p => { p.hidden = p.dataset.alloyPanel !== key; });
+        scope.querySelectorAll('[data-alloy-note]').forEach(n => { n.hidden = n.dataset.alloyNote !== key; });
+      }));
+    });
+  }
+
+  // Patina age scrub (care page) — one photo per alloy, slider crossfades
+  // New → aged → buffed. Range 0–200: 0–100 fades the aged layer in over the
+  // new tile, 100–200 fades the buffed layer over that. Stage labels animate
+  // the slider to their position so the ageing always reads as motion.
+  function initPatinaScrub() {
+    document.querySelectorAll('[data-scrub]').forEach(unit => {
+      const range = unit.querySelector('.fa-scrub-range');
+      const mid = unit.querySelector('[data-scrub-mid]');
+      const end = unit.querySelector('[data-scrub-end]');
+      if (!range || !mid || !end) return;
+      const labels = unit.querySelectorAll('.fa-scrub-labels button');
+      const caps = unit.querySelectorAll('.fa-scrub-cap');
+
+      function render(v) {
+        mid.style.opacity = Math.min(v / 100, 1);
+        end.style.opacity = Math.max((v - 100) / 100, 0);
+        const stage = v < 50 ? 0 : v < 150 ? 1 : 2;
+        labels.forEach((b, i) => b.classList.toggle('active', i === stage));
+        caps.forEach((c, i) => c.classList.toggle('active', i === stage));
+      }
+      range.addEventListener('input', () => render(+range.value));
+
+      labels.forEach(b => b.addEventListener('click', () => {
+        const target = +b.dataset.jump;
+        const start = +range.value;
+        const t0 = performance.now();
+        (function step(t) {
+          const p = Math.min((t - t0) / 450, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          range.value = start + (target - start) * eased;
+          render(+range.value);
+          if (p < 1) requestAnimationFrame(step);
+        })(t0);
+      }));
     });
   }
 

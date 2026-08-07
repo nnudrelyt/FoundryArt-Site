@@ -1,2 +1,5 @@
 .DS_Store
 .vercel
+
+# Internal review/exploration pages — not part of the site
+_styles/

@@ -1730,10 +1730,12 @@ body[data-section="foundry-art"] .site-footer-bowl {
   background: url('/assets/images/hero/footer-bowl.webp') no-repeat 100% center;
   background-size: auto 120%;
 }
-/* CTA stacks to one column; padding + gaps trimmed to keep the region compact */
+/* CTA stacks to one column. The 28px trim held the region at ~647px; raised
+   to 86px for the +15-20% height Tyler asked for, which buys the inner padding
+   proportions room to breathe. Bowl/room art still covers the full region. */
 body[data-section="foundry-art"] .footer-cta {
   grid-template-columns: 1fr;
-  padding-top: 28px; padding-bottom: 28px;
+  padding-top: 86px; padding-bottom: 86px;
   gap: 56px;   /* phone→button spacer (61px → 56px, ~8% tighter) */
 }
 body[data-section="foundry-art"] .footer-cta h2 { margin-bottom: 22px; }
@@ -12851,3 +12853,824 @@ body[data-page="checkout"] .trade-row .trade-fields .trade-id-input {
    so picture-wrapped shots rendered at natural size and blew the grid out. */
 body[data-tech-page] .wire-img > picture { position: absolute; inset: 0; z-index: 1; display: block; }
 body[data-tech-page] .wire-img > picture > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EDITORIAL BAND SYSTEM  —  /foundry-art/how-its-made/ + /foundry-art/care/
+   ────────────────────────────────────────────────────────────────────────
+   Large alternating photo/copy bands, aging triptychs, and pull quotes.
+   The older .tech-patina split caps at 1000px with a 3:2 image, which reads
+   small; these bands run to 1320px and give the photograph the long edge.
+   Scoped to body[data-tech-page] — Foundry Art tech pages only.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+body[data-tech-page] .fa-wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+
+/* ── Alternating band ─────────────────────────────────────────────────── */
+body[data-tech-page] .fa-band {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  align-items: center;
+  margin: 0 auto 96px;
+}
+/* Flip: place the copy first visually without reordering the DOM, so the
+   reading order stays image→copy for assistive tech on every band. */
+body[data-tech-page] .fa-band--flip .fa-band-media { order: 2; }
+body[data-tech-page] .fa-band--flip .fa-band-copy  { order: 1; }
+
+body[data-tech-page] .fa-band-media .wire-img {
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  width: 100%;
+}
+body[data-tech-page] .fa-band--tall .fa-band-media .wire-img { aspect-ratio: 4 / 5; }
+body[data-tech-page] .fa-band-media .wire-img > img,
+body[data-tech-page] .fa-band-media .wire-img > picture > img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+body[data-tech-page] .fa-band-caption {
+  font-size: var(--fs-fine);
+  color: var(--mid);
+  margin-top: 10px;
+  font-style: italic;
+}
+body[data-tech-page] .fa-band-copy .section-body { max-width: 46ch; }
+body[data-tech-page] .fa-band-copy .section-body + .section-body { margin-top: 18px; }
+
+/* Small stat/emphasis line under band copy */
+body[data-tech-page] .fa-stat {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 26px;
+  line-height: 1.3;
+  color: var(--bronze);
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ── Full-bleed hero image ────────────────────────────────────────────── */
+body[data-tech-page] .fa-hero-img {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  overflow: hidden;
+  margin-bottom: 72px;
+  position: relative;
+}
+body[data-tech-page] .fa-hero-img > img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+/* ── Pull quote ───────────────────────────────────────────────────────── */
+body[data-tech-page] .fa-quote {
+  max-width: 900px;
+  margin: 0 auto 96px;
+  text-align: center;
+  padding: 56px 40px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+body[data-tech-page] .fa-quote p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 30px;
+  line-height: 1.45;
+  font-weight: 300;
+  color: var(--charcoal);
+  font-style: italic;
+}
+body[data-tech-page] .fa-quote cite {
+  display: block;
+  margin-top: 22px;
+  font-family: 'Jost', sans-serif;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--bronze);
+}
+
+/* ── Three-step sequence (crucible / pour / excavation) ───────────────── */
+body[data-tech-page] .fa-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin: 0 auto 96px;
+  list-style: none;
+  padding: 0;
+}
+body[data-tech-page] .fa-steps figure { margin: 0; }
+body[data-tech-page] .fa-steps .wire-img { aspect-ratio: 1; overflow: hidden; margin-bottom: 18px; }
+body[data-tech-page] .fa-steps .wire-img > img,
+body[data-tech-page] .fa-steps .wire-img > picture > img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+body[data-tech-page] .fa-steps figcaption strong {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 8px;
+}
+body[data-tech-page] .fa-steps figcaption span {
+  display: block;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--slate-l);
+}
+
+/* ── Aging triptych (new → aged → buffed) ─────────────────────────────── */
+body[data-tech-page] .fa-triptych {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin: 28px 0 0;
+  list-style: none;
+  padding: 0;
+}
+body[data-tech-page] .fa-triptych figure { margin: 0; }
+body[data-tech-page] .fa-triptych .wire-img {
+  aspect-ratio: 1;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: var(--white);
+}
+body[data-tech-page] .fa-triptych .wire-img > img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+body[data-tech-page] .fa-triptych figcaption strong {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 6px;
+}
+body[data-tech-page] .fa-triptych figcaption span {
+  display: block;
+  font-size: var(--fs-fine);
+  line-height: 1.55;
+  color: var(--slate-l);
+}
+body[data-tech-page] .fa-alloy { margin: 0 auto 80px; }
+body[data-tech-page] .fa-alloy-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+body[data-tech-page] .fa-alloy-head h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--charcoal);
+}
+body[data-tech-page] .fa-alloy-head p {
+  font-size: var(--fs-fine);
+  color: var(--mid);
+}
+
+/* ── Care option cards ────────────────────────────────────────────────── */
+body[data-tech-page] .fa-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin: 36px auto 96px;
+}
+body[data-tech-page] .fa-option .wire-img { aspect-ratio: 1; overflow: hidden; margin-bottom: 16px; }
+body[data-tech-page] .fa-option .wire-img > img,
+body[data-tech-page] .fa-option .wire-img > picture > img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+body[data-tech-page] .fa-option h3 {
+  font-family: 'Jost', sans-serif;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 8px;
+}
+body[data-tech-page] .fa-option p {
+  font-size: var(--fs-fine);
+  line-height: 1.6;
+  color: var(--slate-l);
+}
+body[data-tech-page] .fa-option strong { color: var(--oxblood); font-weight: 500; }
+
+/* ── Emerson closer ───────────────────────────────────────────────────── */
+body[data-tech-page] .fa-closer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin: 0 auto 96px;
+  padding-top: 72px;
+  border-top: 1px solid var(--rule);
+}
+body[data-tech-page] .fa-closer .wire-img { aspect-ratio: 4 / 3; overflow: hidden; }
+body[data-tech-page] .fa-closer .wire-img > img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+body[data-tech-page] .fa-closer blockquote p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--charcoal);
+}
+body[data-tech-page] .fa-closer cite {
+  display: block;
+  margin-top: 22px;
+  font-family: 'Jost', sans-serif;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--bronze);
+}
+
+/* ── Anxiety-killer callout (solid through and through) ───────────────── */
+body[data-tech-page] .fa-assure {
+  max-width: 1320px;
+  margin: 0 auto 96px;
+  padding: 32px 40px;
+  background: var(--bronze-bg);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: center;
+}
+body[data-tech-page] .fa-assure .fa-assure-label {
+  font-family: 'Jost', sans-serif;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--bronze);
+  white-space: nowrap;
+}
+body[data-tech-page] .fa-assure p {
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--slate);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  body[data-tech-page] .fa-wrap { padding: 0 24px; }
+  body[data-tech-page] .fa-band { grid-template-columns: 1fr; gap: 28px; margin-bottom: 64px; }
+  /* Reset the flip so stacked bands always read image-then-copy. */
+  body[data-tech-page] .fa-band--flip .fa-band-media,
+  body[data-tech-page] .fa-band--flip .fa-band-copy { order: 0; }
+  /* Copy column runs 706-784 to balance the photo, but body text set to that
+   full width read long — hold the measure at 58ch and let the column keep
+   its width for the headline and the step number. */
+body[data-tech-page] .fa-band-copy .section-body { max-width: 58ch; }
+  body[data-tech-page] .fa-options { grid-template-columns: repeat(2, 1fr); }
+  body[data-tech-page] .fa-closer { grid-template-columns: 1fr; gap: 32px; }
+  body[data-tech-page] .fa-hero-img { aspect-ratio: 16 / 9; margin-bottom: 48px; }
+  body[data-tech-page] .fa-quote p { font-size: 24px; }
+  body[data-tech-page] .fa-closer blockquote p { font-size: 26px; }
+  body[data-tech-page] .fa-assure { grid-template-columns: 1fr; gap: 12px; padding: 24px; }
+}
+@media (max-width: 700px) {
+  body[data-tech-page] .fa-steps { grid-template-columns: 1fr; }
+  body[data-tech-page] .fa-triptych { grid-template-columns: 1fr; }
+  body[data-tech-page] .fa-options { grid-template-columns: 1fr; }
+  body[data-tech-page] .fa-quote { padding: 40px 20px; }
+}
+
+/* ── Wireframe-only annotations (remove before launch) ────────────────── */
+body[data-tech-page] .fa-flag {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #8a7a63;
+  background: #F4EFE6;
+  border-left: 2px solid var(--bronze-l);
+  padding: 8px 12px;
+  margin-top: 14px;
+}
+body[data-tech-page] .fa-photo-needed {
+  aspect-ratio: 1;
+  border: 1px dashed var(--bronze-l);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 16px;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #8a7a63;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TECH PAGES — how-its-made / care
+   Composed from the Foundry Art shell, measured off /foundry-art/ at 1600px.
+   claremonttile.com is a CONTENT + PHOTOGRAPHY source only — no layout,
+   type or colour values are taken from it.
+
+   Shell values this block relies on:
+     left gutter 64px (= .nav padding-left, where the menu icon sits)
+     grounds: #fff (.products) · cream body (.craft) · --charcoal (.brand-band)
+              · #E5E0D7 (.guidance)
+     type: .section-headline 52/500 Cormorant · .section-body 19 Jost
+           · .section-eyebrow 13/500 Jost · .brand-band quote 72/300 bronze
+   ══════════════════════════════════════════════════════════════════════════ */
+
+body[data-tech-page] .page.tech-page { max-width: none; padding: 0; background: none; }
+body[data-tech-page] .fa-wrap { max-width: none; margin: 0; padding: 0; }
+
+/* ── Hero — full-bleed photograph carrying title, tagline and lede ── */
+body[data-tech-page] .fa-hero {
+  position: relative;
+  min-height: clamp(460px, 54vw, 760px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+body[data-tech-page] .fa-hero-media { position: absolute; inset: 0; }
+body[data-tech-page] .fa-hero-media picture { display: contents; }
+body[data-tech-page] .fa-hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* The shell's .hero scrim is a 90deg left-weighted gradient because its copy
+   sits in a 52% left column. This hero runs its type across the full width,
+   so it takes an even vertical wash instead. */
+body[data-tech-page] .fa-hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg,
+    rgba(10,18,20,0.38) 0%, rgba(10,18,20,0.56) 55%, rgba(10,18,20,0.42) 100%);
+}
+body[data-tech-page] .fa-hero-content {
+  position: relative; z-index: 2;
+  width: 100%;
+  padding: 96px 64px;              /* 64 = the menu-icon gutter */
+  text-align: center;
+}
+body[data-tech-page] .fa-hero .page-title {
+  color: #fff;
+  font-size: clamp(38px, 4vw, 64px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.5px;
+  margin: 0 0 22px;
+  max-width: none;
+  text-wrap: balance;
+}
+body[data-tech-page] .fa-hero .fa-tagline {
+  /* = .section-eyebrow, lifted to the light bronze the shell uses on dark */
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #D9C0A3;
+  margin: 0 0 26px;
+  display: flex; flex-wrap: wrap;
+  justify-content: center; align-items: baseline;
+  gap: 6px 20px;
+}
+body[data-tech-page] .fa-hero .fa-tagline span + span::before {
+  content: '\2022'; margin-right: 20px; color: rgba(217,192,163,0.55);
+}
+body[data-tech-page] .fa-hero .page-sub {
+  font-size: 19px;                 /* = .section-body */
+  line-height: 1.55; font-weight: 400;
+  color: rgba(255,255,255,0.86);
+  max-width: 62ch; margin: 0 auto;
+}
+
+/* ── Step components — seven image/copy blocks alternating down the page.
+   Track group is centred so the content reads as a 1440 column while the
+   white ground still runs full-bleed (the section is the grid, so centring
+   the tracks is what caps the content without boxing the background).
+   Media at 620 is the midpoint between the 460 that read too small and the
+   800 half-bleed that swamped the copy. ── */
+body[data-tech-page] .fa-band {
+  display: grid;
+  /* Midpoint between the 620/668 that read too narrow and the 760/900 that
+     ran too wide — still grows on large monitors, just brought in. */
+  grid-template-columns: minmax(0, 690px) minmax(0, 784px);
+  justify-content: center;
+  align-items: center;
+  gap: 76px;
+  margin: 0;
+  padding: 64px;                 /* was 104 — the step-to-step gap read as a break */
+  background: #fff;              /* every alternating band on white */
+}
+/* grid-row pinned on BOTH children: the media is first in the DOM, so once a
+   flipped band pins it to column 2, grid's sparse auto-placement cannot
+   backtrack to row 1 / column 1 for the copy and opens a second row instead —
+   which dropped the copy below the photo on every flipped band. */
+body[data-tech-page] .fa-band-media { grid-column: 1; grid-row: 1; }
+body[data-tech-page] .fa-band-copy  { grid-column: 2; grid-row: 1; padding: 0; max-width: none; }
+/* Flip swaps the tracks rather than just the order, so the photo keeps its
+   620 cap and the copy its measure in both directions. */
+body[data-tech-page] .fa-band--flip { grid-template-columns: minmax(0, 784px) minmax(0, 690px); }
+body[data-tech-page] .fa-band--flip .fa-band-media { grid-column: 2; grid-row: 1; order: 0; }
+body[data-tech-page] .fa-band--flip .fa-band-copy  { grid-column: 1; grid-row: 1; order: 0; }
+body[data-tech-page] .fa-band-media .wire-img,
+body[data-tech-page] .fa-band--tall .fa-band-media .wire-img { aspect-ratio: 4 / 3; }
+/* Copy column runs 706-784 to balance the photo, but body text set to that
+   full width read long — hold the measure at 58ch and let the column keep
+   its width for the headline and the step number. */
+body[data-tech-page] .fa-band-copy .section-body { max-width: 58ch; }
+body[data-tech-page] .fa-band-caption { padding: 0; }
+
+/* Promoted from an inline underlined link to .btn-secondary — DESIGN-SYSTEM
+   §9.3's light-ground variant (charcoal outline, transparent fill), which
+   already carries the shell's 3px radius and role sizing. */
+body[data-tech-page] .fa-band-link { margin-top: 30px; }
+/* .fa-textlink — the Foundry Art in-copy link. DESIGN-SYSTEM documents
+   --lw-accent-red for inline links, but that is the Linden palette and §1
+   scopes it away from these pages. The FA section's own convention exists
+   only as an inline style (cart:37, checkout:27/:206); this promotes those
+   exact values to a class so the treatment is reusable and reviewable. */
+body[data-tech-page] .fa-textlink {
+  font-family: 'Jost', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--bronze);
+  border-bottom: 1px solid var(--bronze-l);
+  padding-bottom: 3px;
+  transition: color .2s ease, border-color .2s ease;
+}
+body[data-tech-page] .fa-textlink:hover { color: var(--bronze-l); border-color: var(--bronze); }
+
+/* ── Step treatment: ghost numeral + mounted-print photo ──
+   Scoped to .fa-step so the full-bleed closer keeps its edge-to-edge photo
+   (a mat would contradict a photo pinned to the viewport edge). */
+
+/* Mounted print — cream mat, hairline keyline, soft lift. The keyline is
+   deliberately faint: it should describe the edge, not draw attention. */
+body[data-tech-page] .fa-step .fa-band-media .wire-img {
+  border: 20px solid #F6F3ED;
+  box-sizing: border-box;
+  box-shadow:
+    0 0 0 1px rgba(140, 98, 73, 0.13),
+    0 18px 40px -26px rgba(20, 37, 40, 0.36);
+}
+
+/* Ghost numeral — a watermark behind the copy, not a label. Sits above the
+   headline's cap line so it never crosses the text. */
+body[data-tech-page] .fa-step .fa-band-copy { position: relative; }
+body[data-tech-page] .fa-step .fa-step-num {
+  position: absolute;
+  /* -132 leaves the numeral peeking behind the headline's cap line rather
+     than sitting across it — deliberate watermark, not a collision. */
+  top: -132px;
+  left: -44px;
+  z-index: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(120px, 11vw, 200px);
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 1;
+  color: rgba(20, 37, 40, 0.065);
+  margin: 0;
+  pointer-events: none;
+  user-select: none;
+}
+/* An absolutely-positioned child paints ABOVE static siblings, so without
+   this the watermark sat on top of the copy instead of behind it. */
+body[data-tech-page] .fa-step .section-headline,
+body[data-tech-page] .fa-step .section-body { position: relative; z-index: 1; }
+
+/* Closer keeps the earlier full-bleed 50/50 treatment. */
+body[data-tech-page] .fa-band--bleed {
+  grid-template-columns: 1fr 1fr;
+  justify-content: stretch;
+  gap: 0;
+  padding: 0;
+  background: transparent;
+}
+body[data-tech-page] .fa-band--bleed .fa-band-media { grid-column: 1; grid-row: 1; }
+body[data-tech-page] .fa-band--bleed .fa-band-copy {
+  grid-column: 2; grid-row: 1;
+  padding: 72px 64px 72px 80px;
+  /* 680 broke "It only gets better from | here." across two lines */
+  max-width: 860px;
+}
+/* 1:1 ran 800px tall at 1600 and 16:9 dropped to 450 — 5:4 lands at 640,
+   the midpoint. Photo stays pinned to the left edge of the viewport. */
+body[data-tech-page] .fa-band--bleed .fa-band-media .wire-img { aspect-ratio: 5 / 4; }
+
+/* ── Photo callout — full-width photograph with centred copy + CTA,
+   the cross-link band (care → how-its-made). Same scrim family as .fa-hero,
+   weighted a touch darker because the copy sits mid-photo. ── */
+body[data-tech-page] .fa-callout {
+  position: relative;
+  min-height: clamp(420px, 40vw, 620px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+body[data-tech-page] .fa-callout-media { position: absolute; inset: 0; }
+body[data-tech-page] .fa-callout-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+body[data-tech-page] .fa-callout::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg,
+    rgba(10,18,20,0.44) 0%, rgba(10,18,20,0.6) 55%, rgba(10,18,20,0.48) 100%);
+}
+body[data-tech-page] .fa-callout-content {
+  position: relative; z-index: 2;
+  width: 100%;
+  max-width: 960px;
+  padding: 96px 64px;
+  text-align: center;
+}
+body[data-tech-page] .fa-callout .section-headline {
+  color: #fff;
+  margin-bottom: 18px;
+  text-wrap: balance;
+}
+body[data-tech-page] .fa-callout .section-body {
+  color: rgba(255,255,255,0.86);
+  max-width: 62ch;
+  margin: 0 auto;
+}
+body[data-tech-page] .fa-callout .fa-band-link { margin-top: 34px; }
+body[data-tech-page] .fa-callout .fa-textlink { color: #D9C0A3; border-color: rgba(217,192,163,0.55); }
+body[data-tech-page] .fa-callout .fa-textlink:hover { color: #fff; border-color: #D9C0A3; }
+
+/* ── Merged patina section — intro copy centred above the scrub, and the
+   tile+fader assembly centred beneath it as one unit. The head's children
+   centre themselves via text-align; the lede needs its margins freed from
+   the section child rule's margin-inline: 0. ── */
+body[data-tech-page] .fa-alloy--patina .fa-patina-head { text-align: center; }
+body[data-tech-page] .fa-alloy--patina .fa-patina-head .tech-lede { margin-inline: auto; margin-bottom: 88px; }
+body[data-tech-page] .fa-alloy--patina .fa-scrub {
+  grid-template-columns: minmax(0, 560px) minmax(0, 560px);
+  justify-content: center;
+}
+
+/* ── Alloy switch — segmented control that swaps which alloy's scrub
+   panel is shown. Lives inside each panel's controls column, above the
+   scrubber; initAlloySwitch keeps the duplicated buttons in sync. ── */
+body[data-tech-page] .fa-alloy-switch {
+  display: inline-flex;
+  border: 1px solid rgba(20,37,40,0.25);
+  flex-shrink: 0;
+}
+/* Full width of the controls column, so the segmented control spans the
+   same line length as the scrubber beneath it. */
+body[data-tech-page] .fa-scrub-controls .fa-alloy-switch { display: flex; width: 100%; margin-bottom: 36px; }
+body[data-tech-page] .fa-scrub-controls .fa-alloy-switch button { flex: 1; text-align: center; }
+body[data-tech-page] .fa-alloy-switch button {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  background: none; border: 0; cursor: pointer;
+  color: var(--slate-l);
+  padding: 12px 22px;
+  transition: background .2s ease, color .2s ease;
+}
+body[data-tech-page] .fa-alloy-switch button.active {
+  background: var(--charcoal);
+  color: #fff;
+}
+
+/* ── Age scrub — the interactive "same tile, decades apart" unit.
+   One photo per alloy; the slider crossfades New → aged → buffed. The
+   crossfade (not a wipe) is deliberate: the three photographs are not
+   pixel-registered, and a soft fade absorbs that where a seam would not. ── */
+body[data-tech-page] .fa-scrub {
+  display: grid;
+  grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+  gap: 64px;
+  align-items: center;
+}
+/* display:grid beats the UA's [hidden] rule — restate it so the alloy
+   switch can actually hide the inactive panel. */
+body[data-tech-page] .fa-scrub[hidden] { display: none; }
+/* Mounted print — same mat as the step photos, so the interactive tile
+   reads as part of the same family. */
+body[data-tech-page] .fa-scrub-mat {
+  border: 20px solid #F6F3ED;
+  outline: 1px solid rgba(20,37,40,0.08);
+  box-shadow: 0 18px 40px -18px rgba(20,37,40,0.28);
+  background: #F6F3ED;
+}
+body[data-tech-page] .fa-scrub-stage { position: relative; aspect-ratio: 1; overflow: hidden; }
+body[data-tech-page] .fa-scrub-stage img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+body[data-tech-page] .fa-scrub-stage img + img { opacity: 0; }
+/* One combined block — switch, labels, fader, caption — text left-aligned
+   inside, the block itself centred in the column beside the tile. */
+body[data-tech-page] .fa-scrub-controls { user-select: none; width: min(100%, 560px); justify-self: center; }
+body[data-tech-page] .fa-scrub-labels {
+  display: flex; justify-content: space-between;
+  margin-bottom: 16px;
+}
+body[data-tech-page] .fa-scrub-labels button {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  background: none; border: 0; cursor: pointer;
+  color: var(--slate-l);
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+body[data-tech-page] .fa-scrub-labels button.active { color: var(--bronze); border-color: var(--bronze-l); }
+body[data-tech-page] .fa-scrub-range {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 2px;
+  background: rgba(20,37,40,0.18);
+  outline: none;
+}
+body[data-tech-page] .fa-scrub-range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bronze);
+  border: 6px solid #fff;
+  box-shadow: 0 0 0 1px rgba(20,37,40,0.2), 0 4px 10px rgba(20,37,40,0.25);
+  cursor: grab;
+}
+body[data-tech-page] .fa-scrub-range:active::-webkit-slider-thumb { cursor: grabbing; }
+body[data-tech-page] .fa-scrub-range::-moz-range-thumb {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--bronze);
+  border: 6px solid #fff;
+  box-shadow: 0 0 0 1px rgba(20,37,40,0.2), 0 4px 10px rgba(20,37,40,0.25);
+  cursor: grab;
+}
+body[data-tech-page] .fa-scrub-range:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 8px;
+}
+body[data-tech-page] .fa-scrub-caption { margin-top: 28px; min-height: 84px; position: relative; }
+body[data-tech-page] .fa-scrub-cap {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity .25s ease;
+  font-size: 17px; line-height: 1.6; color: var(--slate);
+  /* 54ch: the narrowest measure where no caption breaks on a dangling
+     "The" — at 50–52 the buffing caption's first line still ends on one. */
+  max-width: 54ch;
+}
+body[data-tech-page] .fa-scrub-cap.active { opacity: 1; }
+body[data-tech-page] .fa-scrub-cap strong {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--bronze); margin-bottom: 6px;
+}
+@media (max-width: 900px) {
+  body[data-tech-page] .fa-scrub { grid-template-columns: 1fr; gap: 36px; }
+  body[data-tech-page] .fa-scrub-caption { min-height: 110px; }
+}
+
+/* ── Pull quote — the shell's .brand-band ── */
+body[data-tech-page] .fa-quote {
+  background: var(--charcoal);
+  max-width: none; margin: 0;
+  padding: 180px 64px;
+  text-align: center; border: 0;
+}
+body[data-tech-page] .fa-quote p {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(32px, 4.2vw, 72px);
+  font-weight: 300; line-height: 1.22; font-style: normal;
+  /* --bronze (#8C6249) is a light-ground accent and goes murky on charcoal.
+     Deliberately NOT reusing .brand-band's clipped bronze gradient — that
+     starts at opacity:0 and only animates in when app.js adds .is-revealed
+     to .brand-band, so borrowing it here would render the quote invisible. */
+  color: var(--bronze-l);
+  max-width: 1280px; margin-inline: auto;
+  text-wrap: balance;
+}
+body[data-tech-page] .fa-quote cite { margin-top: 40px; color: #D9C0A3; }
+
+/* ── Full-width sections (the six-step process, care's alloy blocks) ── */
+body[data-tech-page] .fa-wrap > section:not(.fa-band) { background: #fff; padding: 120px 64px; margin: 0; }
+body[data-tech-page] .fa-wrap > section:not(.fa-band) > * { max-width: 1440px; margin-inline: 0; }
+/* The patina section is centre-composed — free its children from the
+   left-pinned margin-inline: 0 above so head and scrub sit at true centre
+   on monitors wider than the 1440 content cap. */
+body[data-tech-page] .fa-wrap > section.fa-alloy--patina > * { margin-inline: auto; }
+body[data-tech-page] .tech-lede { max-width: 70ch; margin-bottom: 56px; }
+
+/* Six steps: 3-up × 2 rows. Photos sit well below the old 1:1 squares. */
+body[data-tech-page] .fa-steps {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 56px 40px;
+  max-width: 1440px;
+  margin: 0;
+}
+body[data-tech-page] .fa-steps .wire-img { aspect-ratio: 4 / 3; margin-bottom: 20px; }
+body[data-tech-page] .fa-steps figcaption strong { font-weight: 500; }
+
+body[data-tech-page] .fa-assure {
+  max-width: none; margin: 0;
+  padding: 120px 64px; background: #fff;
+}
+body[data-tech-page] .fa-assure > * { max-width: 1440px; margin-inline: 0; }
+body[data-tech-page] .fa-options { max-width: 1440px; margin-inline: 0; }
+
+/* ── Closing CTA — the .guidance bone ground ── */
+body[data-tech-page] .tech-cta {
+  max-width: none; background: #E5E0D7;
+  padding: 120px 64px; text-align: center;
+}
+body[data-tech-page] .tech-cta .section-body { font-size: 19px; margin-bottom: 32px; }
+
+@media (max-width: 1024px) {
+  body[data-tech-page] .fa-hero-content { padding: 64px 32px; }
+  body[data-tech-page] .fa-band,
+  body[data-tech-page] .fa-band--flip,
+  body[data-tech-page] .fa-band--bleed { grid-template-columns: minmax(0, 560px); gap: 32px; padding: 64px 32px; justify-content: center; }
+  body[data-tech-page] .fa-band--bleed .fa-band-copy { padding: 0; max-width: none; }
+  body[data-tech-page] .fa-band--bleed .fa-band-media .wire-img { aspect-ratio: 4 / 3; }
+  body[data-tech-page] .fa-band-media,
+  body[data-tech-page] .fa-band--flip .fa-band-media,
+  body[data-tech-page] .fa-band--bleed .fa-band-media { grid-column: 1; grid-row: auto; }
+  body[data-tech-page] .fa-band-copy,
+  body[data-tech-page] .fa-band--flip .fa-band-copy,
+  body[data-tech-page] .fa-band--bleed .fa-band-copy { grid-column: 1; grid-row: auto; }
+  body[data-tech-page] .fa-quote { padding: 96px 32px; }
+  body[data-tech-page] .fa-wrap > section:not(.fa-band),
+  body[data-tech-page] .fa-assure { padding: 64px 32px; }
+  body[data-tech-page] .fa-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; }
+  body[data-tech-page] .tech-cta { padding: 80px 32px; }
+  body[data-tech-page] .fa-hero .page-sub { font-size: 17px; }
+  body[data-tech-page] .fa-step .fa-step-num { top: -78px; left: -16px; font-size: 108px; }
+  body[data-tech-page] .fa-step .fa-band-media .wire-img { border-width: 12px; }
+}
+@media (max-width: 620px) {
+  body[data-tech-page] .fa-steps { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ══ Step motion — intro reveal + numeral parallax ══
+   SAFETY RULE FIRST: the resting state is fully visible. An earlier pass
+   hid the steps and revealed them from an IntersectionObserver, which left
+   every headline at opacity:0 — these pages run a transform-based
+   smooth-scroll that pins window.scrollY, so nothing ever registered as
+   entering the viewport and the content simply never came back. Content must
+   never depend on a script to become visible.
+
+   So: no JS at all. Both effects are CSS scroll-driven animations on view()
+   timelines, which read the element's own progress through the viewport and
+   are immune to the pinned scrollY. Anything that does not support them —
+   or anyone who prefers reduced motion — gets the static visible state,
+   because that is what is declared outside the @supports block. */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    body[data-tech-page] .fa-step .fa-band-media,
+    body[data-tech-page] .fa-step .section-headline,
+    body[data-tech-page] .fa-step .section-body {
+      animation: faStepRise linear both;
+      animation-timeline: view();
+      /* Resolves well before the band is centred, so the copy is settled by
+         the time it is actually being read. */
+      animation-range: entry 8% cover 26%;
+    }
+    /* Photo first, then headline, then body — a short read down the band. */
+    body[data-tech-page] .fa-step .section-headline { animation-range: entry 14% cover 32%; }
+    body[data-tech-page] .fa-step .section-body     { animation-range: entry 18% cover 38%; }
+
+    /* The numeral fades on the same timeline but owns its transform outright,
+       drifting against the static headline for the parallax. */
+    body[data-tech-page] .fa-step .fa-step-num {
+      animation: faNumeralDrift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
+@keyframes faStepRise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes faNumeralDrift {
+  from { opacity: .35; transform: translateY(34px); }
+  50%  { opacity: 1;   transform: translateY(0); }
+  to   { opacity: .55; transform: translateY(-34px); }
+}
+
+/* ── Patina slider ground ──
+   Sits directly under the hero now, so it needs to separate from both the
+   white step bands and the cream body. #EFF2F2 is a light cool neutral
+   pulled off the brand charcoal (#142528) rather than the warm cream
+   (#EEEDE8) — reads as light without repeating the body ground. */
+/* Needs .fa-wrap > section in the selector: the generic
+   `.fa-wrap > section:not(.fa-band) { background:#fff }` rule above scores
+   (0,3,2) and was overriding a plainer `.fa-alloy--patina` at (0,2,1). */
+body[data-tech-page] .fa-wrap > section.fa-alloy--patina {
+  background: #EFF2F2;
+  padding: 120px 64px;
+  margin: 0;
+  max-width: none;
+}
+body[data-tech-page] .fa-wrap > section.fa-alloy--patina > * { max-width: 1440px; margin-inline: auto; }
