@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Foundry Art — quote background textures</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css?v=qt1">
+<link rel="stylesheet" href="/assets/styles.css?v=qt1">
+<style>
+  /* ─────────────────────────────────────────────────────────────
+     QUOTE BACKGROUND TEXTURES — working review page.
+     Real .fa-quote bands at full size, stacked, each labelled.
+     Inspiration: the print samples shipped with Foundry Art tiles —
+     the box label's interlocking-circle lattice, its nested
+     thick-thin keyline frame, and the pamphlet's letterpress stock.
+     Serve from a local server rooted at the repo:
+       http://localhost:8766/docs/quote-textures/
+     Tracked in git; excluded from deploys via .vercelignore.
+
+     The ornament is one 64px SVG tile: a double-ring circle,
+     four vesica petals meeting at centre (N/E/S/W), and a small
+     diamond at each interstice — drawn from IMG_2490 (box lid).
+     ───────────────────────────────────────────────────────────── */
+  body { background: #fff; margin: 0; }
+
+  .opt-label {
+    display: flex; align-items: baseline; gap: 18px;
+    font-family: 'Jost', sans-serif;
+    background: #EEEDE8; padding: 18px 64px;
+  }
+  .opt-n {
+    font-size: 12px; font-weight: 500; letter-spacing: 2.5px;
+    text-transform: uppercase; color: #8C6249;
+  }
+  .opt-name { font-size: 15px; font-weight: 500; color: #142528; }
+  .opt-note { font-size: 14px; color: #6B7472; }
+
+  /* the real band, made a positioning context for the texture layer.
+     Option 6 shipped as a site-wide .fa-quote::before (styles.css) —
+     suppress it here so each option shows only its own texture. */
+  .fa-quote { position: relative; overflow: hidden; }
+  body[data-tech-page] .fa-quote::before { content: none; }
+  .fa-quote p, .fa-quote cite { position: relative; z-index: 2; }
+  .tex { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+  /* ── the lattice tile, as CSS custom props (bronze ink / black ink) ── */
+  :root {
+    --lattice-bronze: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><g fill='none' stroke='%23B7997E' stroke-width='1'><circle cx='32' cy='32' r='30'/><circle cx='32' cy='32' r='27.5'/><path d='M32 32 C27 23 27 11 32 4.5 C37 11 37 23 32 32 Z'/><path d='M32 32 C41 27 53 27 59.5 32 C53 37 41 37 32 32 Z'/><path d='M32 32 C37 41 37 53 32 59.5 C27 53 27 41 32 32 Z'/><path d='M32 32 C23 37 11 37 4.5 32 C11 27 23 27 32 32 Z'/><path d='M0 6 L6 0 L0 -6 L-6 0 Z'/><path d='M64 6 L70 0 L64 -6 L58 0 Z'/><path d='M0 70 L6 64 L0 58 L-6 64 Z'/><path d='M64 70 L70 64 L64 58 L58 64 Z'/></g></svg>");
+    --lattice-black:  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64'><g fill='none' stroke='%23000000' stroke-width='1'><circle cx='32' cy='32' r='30'/><circle cx='32' cy='32' r='27.5'/><path d='M32 32 C27 23 27 11 32 4.5 C37 11 37 23 32 32 Z'/><path d='M32 32 C41 27 53 27 59.5 32 C53 37 41 37 32 32 Z'/><path d='M32 32 C37 41 37 53 32 59.5 C27 53 27 41 32 32 Z'/><path d='M32 32 C23 37 11 37 4.5 32 C11 27 23 27 32 32 Z'/><path d='M0 6 L6 0 L0 -6 L-6 0 Z'/><path d='M64 6 L70 0 L64 -6 L58 0 Z'/><path d='M0 70 L6 64 L0 58 L-6 64 Z'/><path d='M64 70 L70 64 L64 58 L58 64 Z'/></g></svg>");
+    --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.72 0 0 0 0 0.60 0 0 0 0 0.49 0 0 0 0.9 0'/></filter><rect width='240' height='240' filter='url(%23p)'/></svg>");
+  }
+
+  /* 1 · WALLPAPER — the box-border density, tiling the whole band */
+  .t1 { background-image: var(--lattice-bronze); background-size: 56px 56px; opacity: .055; }
+
+  /* 2 · EDGES ONLY — same fill, cleared behind the text */
+  .t2 {
+    background-image: var(--lattice-bronze); background-size: 56px 56px; opacity: .08;
+    -webkit-mask-image: radial-gradient(ellipse 62% 68% at 50% 50%, transparent 36%, #000 78%);
+            mask-image: radial-gradient(ellipse 62% 68% at 50% 50%, transparent 36%, #000 78%);
+  }
+
+  /* 3 · LABEL FRAME — the box lid translated: lattice band held between
+     nested keylines, centre kept clean. Two rules + a pattern band. */
+  .t3 .band {
+    position: absolute; inset: 26px;
+    background-image: var(--lattice-bronze); background-size: 56px 56px;
+    opacity: .12;
+    border: 1px solid #B7997E;
+  }
+  .t3 .well {
+    position: absolute; inset: 84px;
+    background: var(--charcoal);
+    border: 1px solid rgba(183,153,126,.55);
+  }
+
+  /* 4 · WATERMARK — the same ornament blown up until it reads as light */
+  .t4 { background-image: var(--lattice-bronze); background-size: 340px 340px; background-position: center; opacity: .04; }
+
+  /* 5 · BLIND EMBOSS — stamped into the ground, not printed on it:
+     black impression offset 1px above a faint bronze highlight */
+  .t5a { background-image: var(--lattice-black);  background-size: 88px 88px; background-position: 0 0;   opacity: .18; }
+  .t5b { background-image: var(--lattice-bronze); background-size: 88px 88px; background-position: 0 1px; opacity: .05; }
+
+  /* 6 · PAPER TOOTH — no ornament; the pamphlet stock's grain on charcoal */
+  .t6 { background-image: var(--grain); background-size: 240px 240px; opacity: .05; }
+</style>
+</head>
+<body data-section="foundry-art" data-page="how-its-made" data-tech-page>
+
+<!-- ══ 1 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 1</span>
+    <span class="opt-name">Wallpaper</span>
+    <span class="opt-note">The box border&rsquo;s lattice at its native density, tiling the whole band.</span>
+  </div>
+  <div class="fa-quote">
+    <div class="tex t1" aria-hidden="true"></div>
+    <p>Bronze both darkens and grows brighter over time &mdash; reflecting light with a mysterious quality that embodies permanence, and reveals the turbulence of molten metal.</p>
+    <cite>Foundry Art</cite>
+  </div>
+</section>
+
+<!-- ══ 2 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 2</span>
+    <span class="opt-name">Edges only</span>
+    <span class="opt-note">Same lattice, dissolved behind the text &mdash; strongest at the corners.</span>
+  </div>
+  <div class="fa-quote">
+    <div class="tex t2" aria-hidden="true"></div>
+    <p>Bronze both darkens and grows brighter over time &mdash; reflecting light with a mysterious quality that embodies permanence, and reveals the turbulence of molten metal.</p>
+    <cite>Foundry Art</cite>
+  </div>
+</section>
+
+<!-- ══ 3 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 3</span>
+    <span class="opt-name">Label frame</span>
+    <span class="opt-note">The box lid literally: a lattice band held between nested keylines, clean well for the quote.</span>
+  </div>
+  <div class="fa-quote">
+    <div class="tex t3" aria-hidden="true"><div class="band"></div><div class="well"></div></div>
+    <p>Bronze both darkens and grows brighter over time &mdash; reflecting light with a mysterious quality that embodies permanence, and reveals the turbulence of molten metal.</p>
+    <cite>Foundry Art</cite>
+  </div>
+</section>
+
+<!-- ══ 4 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 4</span>
+    <span class="opt-name">Watermark</span>
+    <span class="opt-note">The ornament enlarged ~5&times; until it reads as a play of light, not a print.</span>
+  </div>
+  <div class="fa-quote">
+    <div class="tex t4" aria-hidden="true"></div>
+    <p>Bronze both darkens and grows brighter over time &mdash; reflecting light with a mysterious quality that embodies permanence, and reveals the turbulence of molten metal.</p>
+    <cite>Foundry Art</cite>
+  </div>
+</section>
+
+<!-- ══ 5 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 5</span>
+    <span class="opt-name">Blind emboss</span>
+    <span class="opt-note">Stamped rather than printed &mdash; a dark impression with a 1px bronze highlight.</span>
+  </div>
+  <div class="fa-quote">
+    <div class="tex t5a" aria-hidden="true"></div>
+    <div class="tex t5b" aria-hidden="true"></div>
+    <p>Bronze both darkens and grows brighter over time &mdash; reflecting light with a mysterious quality that embodies permanence, and reveals the turbulence of molten metal.</p>
+    <cite>Foundry Art</cite>
+  </div>
+</section>
+
+<!-- ══ 6 ══════════════════════════════════════════════════ -->
+<section class="opt">
+  <div class="opt-label">
+    <span class="opt-n">Option 6</span>
+    <span class="opt-name">Paper tooth</span>
+    <span class="opt-note">No ornament &mdash; the pamphlet stock&rsquo;s grain carried onto the charcoal.</span>
+  </div>
+  <div class="fa-quote">
+    <div class="tex t6" aria-hidden="true"></div>
+    <p>Bronze both darkens and grows brighter over time &mdash; reflecting light with a mysterious quality that embodies permanence, and reveals the turbulence of molten metal.</p>
+    <cite>Foundry Art</cite>
+  </div>
+</section>
+
+</body>
+</html>

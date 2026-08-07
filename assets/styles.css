@@ -791,6 +791,26 @@ body.drawer-open { overflow: hidden; }
 @keyframes brandSettle {
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
+/* Paper tooth — the pamphlet stock's grain carried onto every charcoal
+   quote band (chosen from docs/quote-textures/, option 6). One bronze-tinted
+   SVG turbulence tile at 5%: texture you feel more than see. Applied to the
+   shell's .brand-band and the tech pages' .fa-quote (its charcoal twin). */
+.brand-band::before,
+body[data-tech-page] .fa-quote::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.72 0 0 0 0 0.60 0 0 0 0 0.49 0 0 0 0.9 0'/></filter><rect width='240' height='240' filter='url(%23p)'/></svg>");
+  background-size: 240px 240px;
+  opacity: .05;
+}
+/* the pseudo is positioned, so the type must be too or the grain paints over
+   it (5% tint on the letterforms). brand-band's p/cite lose their transforms
+   once brandSettle finishes, which would drop them below the overlay. */
+.brand-band p, .brand-band cite { position: relative; }
+body[data-tech-page] .fa-quote { position: relative; overflow: hidden; }
+body[data-tech-page] .fa-quote > p,
+body[data-tech-page] .fa-quote > cite { position: relative; }
 @media (prefers-reduced-motion: reduce) {
   .brand-band p, .brand-band cite {
     animation: none;
