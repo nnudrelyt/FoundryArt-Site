@@ -13456,7 +13456,11 @@ body[data-tech-page] .fa-alloy--patina .fa-scrub {
    scrubber; initAlloySwitch keeps the duplicated buttons in sync. ── */
 body[data-tech-page] .fa-alloy-switch {
   display: inline-flex;
-  border: 1px solid rgba(20,37,40,0.25);
+  border: 1px solid rgba(20,37,40,0.2);
+  /* Foundry buttons are 3px; overflow clips the active segment's charcoal
+     fill to the same corner. */
+  border-radius: 3px;
+  overflow: hidden;
   flex-shrink: 0;
 }
 /* Full width of the controls column, so the segmented control spans the
@@ -13475,10 +13479,10 @@ body[data-tech-page] .fa-alloy-switch .sw-br { display: none; }
 body[data-tech-page] .fa-alloy-switch button {
   font-family: 'Jost', sans-serif;
   font-size: 13px; font-weight: 500;
-  letter-spacing: 1.2px; text-transform: uppercase;
+  letter-spacing: 1.8px; text-transform: uppercase;
   background: none; border: 0; cursor: pointer;
-  color: var(--slate-l);
-  padding: 12px 22px;
+  color: var(--slate);
+  padding: 14px 22px;
   transition: background .2s ease, color .2s ease;
 }
 body[data-tech-page] .fa-alloy-switch button.active {
@@ -13517,10 +13521,10 @@ body[data-tech-page] .fa-scrub-labels {
 }
 body[data-tech-page] .fa-scrub-labels button {
   font-family: 'Jost', sans-serif;
-  font-size: 13px; font-weight: 600;
-  letter-spacing: 1.5px; text-transform: uppercase;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 1.8px; text-transform: uppercase;
   background: none; border: 0; cursor: pointer;
-  color: var(--slate-l);
+  color: var(--slate);
   padding: 6px 0 4px;
   border-top: 2px solid transparent;
   transition: color .2s ease, border-color .2s ease;
@@ -13532,20 +13536,36 @@ body[data-tech-page] .fa-scrub-range {
   background: rgba(20,37,40,0.18);
   outline: none;
 }
+/* Fader-pill thumb, corner radius matched to the buttons. Three stacked
+   background layers, innermost first: the bronze bar (content-box, its
+   vertical light→deep run keeps it reading as machined metal), a bright
+   1px highlight ring around the bar (padding-box) that lifts it off the
+   face in slight relief, and the white face itself (border-box) lit from
+   above like the bar: white at the top shading grey toward the base. */
 body[data-tech-page] .fa-scrub-range::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
-  width: 26px; height: 26px; border-radius: 50%;
-  background: var(--bronze);
-  border: 6px solid #fff;
-  box-shadow: 0 0 0 1px rgba(20,37,40,0.2), 0 4px 10px rgba(20,37,40,0.25);
+  width: 12px; height: 30px; border-radius: 3px;
+  border: 2px solid transparent;
+  padding: 1px;
+  background:
+    linear-gradient(180deg, #9A6F53 0%, #8C6249 55%, #77523C 100%) content-box,
+    linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.5) 100%) padding-box,
+    linear-gradient(180deg, #FFFFFF 40%, #E7E5E0 100%) border-box;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.75),
+              0 0 0 1px rgba(20,37,40,0.06), 0 3px 8px rgba(20,37,40,0.2);
   cursor: grab;
 }
 body[data-tech-page] .fa-scrub-range:active::-webkit-slider-thumb { cursor: grabbing; }
 body[data-tech-page] .fa-scrub-range::-moz-range-thumb {
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--bronze);
-  border: 6px solid #fff;
-  box-shadow: 0 0 0 1px rgba(20,37,40,0.2), 0 4px 10px rgba(20,37,40,0.25);
+  width: 12px; height: 30px; border-radius: 3px;
+  border: 2px solid transparent;
+  padding: 1px;
+  background:
+    linear-gradient(180deg, #9A6F53 0%, #8C6249 55%, #77523C 100%) content-box,
+    linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.5) 100%) padding-box,
+    linear-gradient(180deg, #FFFFFF 40%, #E7E5E0 100%) border-box;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.75),
+              0 0 0 1px rgba(20,37,40,0.06), 0 3px 8px rgba(20,37,40,0.2);
   cursor: grab;
 }
 body[data-tech-page] .fa-scrub-range:focus-visible {
@@ -13557,7 +13577,7 @@ body[data-tech-page] .fa-scrub-cap {
   position: absolute; inset: 0;
   opacity: 0;
   transition: opacity .25s ease;
-  font-size: 17px; line-height: 1.6; color: var(--slate);
+  font-size: 19px; line-height: 1.6; color: var(--slate);
   /* 54ch: the narrowest measure where no caption breaks on a dangling
      "The" — at 50–52 the buffing caption's first line still ends on one. */
   max-width: 54ch;
@@ -13567,7 +13587,7 @@ body[data-tech-page] .fa-scrub-cap strong {
   display: block;
   font-family: 'Jost', sans-serif;
   font-size: 13px; font-weight: 500;
-  letter-spacing: 1.5px; text-transform: uppercase;
+  letter-spacing: 1.8px; text-transform: uppercase;
   color: var(--bronze); margin-bottom: 6px;
 }
 @media (max-width: 900px) {
