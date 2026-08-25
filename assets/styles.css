@@ -13456,11 +13456,7 @@ body[data-tech-page] .fa-alloy--patina .fa-scrub {
    scrubber; initAlloySwitch keeps the duplicated buttons in sync. ── */
 body[data-tech-page] .fa-alloy-switch {
   display: inline-flex;
-  border: 1px solid rgba(20,37,40,0.2);
-  /* Foundry buttons are 3px; overflow clips the active segment's charcoal
-     fill to the same corner. */
-  border-radius: 3px;
-  overflow: hidden;
+  border: 1px solid rgba(20,37,40,0.25);
   flex-shrink: 0;
 }
 /* Full width of the controls column, so the segmented control spans the
@@ -13479,10 +13475,10 @@ body[data-tech-page] .fa-alloy-switch .sw-br { display: none; }
 body[data-tech-page] .fa-alloy-switch button {
   font-family: 'Jost', sans-serif;
   font-size: 13px; font-weight: 500;
-  letter-spacing: 1.8px; text-transform: uppercase;
+  letter-spacing: 1.2px; text-transform: uppercase;
   background: none; border: 0; cursor: pointer;
-  color: var(--slate);
-  padding: 14px 22px;
+  color: var(--slate-l);
+  padding: 12px 22px;
   transition: background .2s ease, color .2s ease;
 }
 body[data-tech-page] .fa-alloy-switch button.active {
@@ -13521,10 +13517,10 @@ body[data-tech-page] .fa-scrub-labels {
 }
 body[data-tech-page] .fa-scrub-labels button {
   font-family: 'Jost', sans-serif;
-  font-size: 13px; font-weight: 500;
-  letter-spacing: 1.8px; text-transform: uppercase;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
   background: none; border: 0; cursor: pointer;
-  color: var(--slate);
+  color: var(--slate-l);
   padding: 6px 0 4px;
   border-top: 2px solid transparent;
   transition: color .2s ease, border-color .2s ease;
@@ -13536,36 +13532,20 @@ body[data-tech-page] .fa-scrub-range {
   background: rgba(20,37,40,0.18);
   outline: none;
 }
-/* Fader-pill thumb, corner radius matched to the buttons. Three stacked
-   background layers, innermost first: the bronze bar (content-box, its
-   vertical light→deep run keeps it reading as machined metal), a bright
-   1px highlight ring around the bar (padding-box) that lifts it off the
-   face in slight relief, and the white face itself (border-box) lit from
-   above like the bar: white at the top shading grey toward the base. */
 body[data-tech-page] .fa-scrub-range::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
-  width: 12px; height: 30px; border-radius: 3px;
-  border: 2px solid transparent;
-  padding: 1px;
-  background:
-    linear-gradient(180deg, #9A6F53 0%, #8C6249 55%, #77523C 100%) content-box,
-    linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.5) 100%) padding-box,
-    linear-gradient(180deg, #FFFFFF 40%, #E7E5E0 100%) border-box;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.75),
-              0 0 0 1px rgba(20,37,40,0.06), 0 3px 8px rgba(20,37,40,0.2);
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bronze);
+  border: 6px solid #fff;
+  box-shadow: 0 0 0 1px rgba(20,37,40,0.2), 0 4px 10px rgba(20,37,40,0.25);
   cursor: grab;
 }
 body[data-tech-page] .fa-scrub-range:active::-webkit-slider-thumb { cursor: grabbing; }
 body[data-tech-page] .fa-scrub-range::-moz-range-thumb {
-  width: 12px; height: 30px; border-radius: 3px;
-  border: 2px solid transparent;
-  padding: 1px;
-  background:
-    linear-gradient(180deg, #9A6F53 0%, #8C6249 55%, #77523C 100%) content-box,
-    linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.5) 100%) padding-box,
-    linear-gradient(180deg, #FFFFFF 40%, #E7E5E0 100%) border-box;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.75),
-              0 0 0 1px rgba(20,37,40,0.06), 0 3px 8px rgba(20,37,40,0.2);
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--bronze);
+  border: 6px solid #fff;
+  box-shadow: 0 0 0 1px rgba(20,37,40,0.2), 0 4px 10px rgba(20,37,40,0.25);
   cursor: grab;
 }
 body[data-tech-page] .fa-scrub-range:focus-visible {
@@ -13577,7 +13557,7 @@ body[data-tech-page] .fa-scrub-cap {
   position: absolute; inset: 0;
   opacity: 0;
   transition: opacity .25s ease;
-  font-size: 19px; line-height: 1.6; color: var(--slate);
+  font-size: 17px; line-height: 1.6; color: var(--slate);
   /* 54ch: the narrowest measure where no caption breaks on a dangling
      "The" — at 50–52 the buffing caption's first line still ends on one. */
   max-width: 54ch;
@@ -13587,7 +13567,7 @@ body[data-tech-page] .fa-scrub-cap strong {
   display: block;
   font-family: 'Jost', sans-serif;
   font-size: 13px; font-weight: 500;
-  letter-spacing: 1.8px; text-transform: uppercase;
+  letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--bronze); margin-bottom: 6px;
 }
 @media (max-width: 900px) {
@@ -13742,3 +13722,799 @@ body[data-tech-page] .fa-wrap > section.fa-alloy--patina {
   max-width: none;
 }
 body[data-tech-page] .fa-wrap > section.fa-alloy--patina > * { max-width: 1440px; margin-inline: auto; }
+
+
+/* ══════════════════════════════════════════════════════════
+   STUDIOS MENU — FULL-SCREEN TAKEOVER
+   ──────────────────────────────────────────────────────────
+   Replaces the 340px slide-in drawer. Layout is the Index II
+   configuration [data-menu-variant="e"]: serif studio index on the
+   left, photo pane on the right, rollover = axis shift
+   [data-hover-style="1"]. The A–D explorations and the review-only
+   switcher pill were dropped when E was selected (2026-08-25).
+   Link colors carry !important to clear the body[data-section="linden"]
+   red-link rule (see DESIGN-SYSTEM §8 known divergence).
+   ────────────────────────────────────────────────────────── */
+
+body.drawer-open { overflow: hidden; }
+
+.studios-drawer.studios-fs {
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  padding: 0;
+  gap: 0;
+  transform: none;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+  overflow-y: auto;
+}
+.studios-drawer.studios-fs.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 0.4s ease;
+}
+
+/* ── shared head band ── */
+.studios-fs .fs-head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 30px clamp(24px, 4vw, 64px) 22px;
+  flex: none;
+}
+.studios-fs .fs-lw-mark img { height: 30px; display: block; }
+.studios-fs .fs-lw-tag {
+  margin: 0;
+  font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  opacity: 0.62;
+}
+.studios-fs .fs-close {
+  position: absolute;
+  top: 26px;
+  right: 40px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 34px;
+  font-weight: 300;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+.studios-fs .fs-close:hover { opacity: 1; }
+
+.studios-fs .fs-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* panels rise on open */
+.studios-fs .fs-brand {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.studios-fs.open .fs-brand { opacity: 1; transform: none; }
+.studios-fs.open .fs-brand:nth-child(1) { transition-delay: 0.08s; }
+.studios-fs.open .fs-brand:nth-child(2) { transition-delay: 0.16s; }
+.studios-fs.open .fs-brand:nth-child(3) { transition-delay: 0.24s; }
+
+.studios-fs .fs-brand-media { display: block; overflow: hidden; }
+.studios-fs .fs-brand-mark img {
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+}
+.studios-fs .fs-brand-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.studios-fs .fs-brand-desc {
+  margin: 0;
+  font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
+  font-size: 17px;
+  line-height: 1.4;
+}
+.studios-fs .fs-brand-note {
+  margin: 0;
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+.studios-fs .fs-brand-links { display: flex; flex-direction: column; }
+.studios-fs .fs-brand-links-title { display: none; }
+.studios-fs .fs-menu-toggle { display: none; }
+.studios-fs .fs-brand-cta { display: none; }
+.studios-fs .fs-brand-chevron { display: none; }
+.studios-fs .fs-brands-eyebrow { display: none; }
+.studios-fs .fs-brand-links a,
+.studios-fs .fs-lw-nav a {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  text-decoration: none !important;
+}
+
+/* switcher pill — review chrome */
+
+/* ════════════════════════════════════════
+   VARIANT A — TRIPTYCH (parchment)
+   LW frames the studios: wordmark above,
+   main nav as a footer band below.
+   ════════════════════════════════════════ */
+
+/* ════════════════════════════════════════
+   VARIANT B — GALLERY (charcoal)
+   LW holds a quiet left rail; the studios
+   are full-height slices that breathe on hover.
+   ════════════════════════════════════════ */
+
+/* ════════════════════════════════════════
+   VARIANT C — INDEX (split)
+   An editorial index: serif brand list +
+   LW nav share the left column; one large
+   image pane crossfades on the right.
+   ════════════════════════════════════════ */
+
+/* ════════════════════════════════════════
+   MOBILE (≤760px) — all variants collapse
+   to one stacked scroll layout
+   ════════════════════════════════════════ */
+@media (max-width: 760px) {
+  .studios-fs[data-menu-variant] { background: var(--lw-bg-header, #E6E4DD); color: #000; }
+  .studios-fs[data-menu-variant] .fs-head {
+    flex-direction: column;
+    margin: 0;
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+  }
+  .studios-fs[data-menu-variant] .fs-lw-mark img,
+  .studios-fs[data-menu-variant] .fs-brand-mark img { filter: none; }
+  .studios-fs[data-menu-variant] .fs-close { top: 18px; right: 12px; }
+  .studios-fs[data-menu-variant] .fs-body { display: block; padding: 0 24px 90px; }
+  .studios-fs[data-menu-variant] .fs-brands {
+    display: block;
+    width: auto;
+    min-width: 0;
+    padding: 0;
+  }
+  .studios-fs[data-menu-variant] .fs-brand {
+    display: block;
+    position: static;
+    border: 0;
+    padding: 26px 0 0;
+    overflow: visible;
+  }
+  .studios-fs[data-menu-variant] .fs-brand-media {
+    position: static;
+    width: 100%;
+    height: 34vw;
+    max-height: 240px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .studios-fs[data-menu-variant] .fs-brand-media::after { display: none; }
+  .studios-fs[data-menu-variant] .fs-brand-info {
+    position: static;
+    padding: 14px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .studios-fs[data-menu-variant] .fs-brand-mark { display: block; }
+  .studios-fs[data-menu-variant] .fs-brand-mark img { height: 20px; }
+  .studios-fs[data-menu-variant] .fs-brand-name { display: none; }
+  .studios-fs[data-menu-variant] .fs-brand-desc,
+  .studios-fs[data-menu-variant] .fs-brand-links,
+  .studios-fs[data-menu-variant] .fs-brand-note {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    margin: 0;
+  }
+  .studios-fs[data-menu-variant] .fs-brand-desc { font-size: 15px; font-style: normal; color: inherit; }
+  .studios-fs[data-menu-variant] .fs-brand-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 18px;
+    row-gap: 6px;
+    padding: 0;
+  }
+  .studios-fs[data-menu-variant] .fs-brand-links a {
+    font-size: 12px;
+    font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+    font-style: normal;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #000 !important;
+  }
+  .studios-fs[data-menu-variant] .fs-brand-links a:first-child { display: none; }
+  .studios-fs[data-menu-variant] .fs-brand-note { display: none; }
+  .studios-fs[data-menu-variant] .fs-lw-nav {
+    position: static;
+    order: 0;
+    width: auto;
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.14);
+    margin-top: 30px;
+    padding: 22px 0 0;
+  }
+  .studios-fs[data-menu-variant] .fs-lw-heading {
+    width: 100%;
+    margin: 0;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  }
+  .studios-fs[data-menu-variant] .fs-lw-nav a {
+    font-size: 12px;
+    font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif) !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #000 !important;
+  }
+  .studios-fs[data-menu-variant] .fs-lw-login { border: 1px solid rgba(0, 0, 0, 0.4); padding: 7px 14px; margin: 0; }
+  
+}
+
+/* Late override — must trail the variant blocks to win the cascade:
+   below 1100px, variant A's nav band left-aligns so the review pill's
+   bottom-right corner stays clear of it. */
+
+/* ════════════════════════════════════════
+   VARIANT D — HYBRID (A × B)
+   A's parchment triptych, but the LW nav
+   sits above the tiles (no rules) and each
+   brand's content lives ON its tile behind
+   B's bottom-gradient disclosure. Trails
+   the other variant blocks + late overrides
+   so the cascade resolves in its favor.
+   ════════════════════════════════════════ */
+
+/* readability scrim — white text needs footing on the light Talisman and
+   marble tiles, so the gradient deepens (and rises) while disclosed */
+
+/* D collapses with everything else below 760px — the shared stacked
+   block already resets absolute media/info, gradients, and filters. */
+
+/* ════════════════════════════════════════
+   VARIANT E — INDEX II (C refined)
+   C's split index with every studio section
+   permanently open (hover only drives the
+   image crossfade) and the LW nav promoted
+   to the top band, right of the wordmark.
+   ════════════════════════════════════════ */
+.studios-fs[data-menu-variant="e"] {
+  --e-mark-h: clamp(18px, 1.58vw, 29px);
+  background: #ECEAE2;
+  color: #1B1B18;
+}
+.studios-fs[data-menu-variant="e"] .fs-head {
+  height: 92px;
+  padding: 0;
+  flex: none;
+}
+.studios-fs[data-menu-variant="e"] .fs-lw-mark {
+  position: fixed;
+  top: 28px;
+  left: 92px;
+  z-index: 24;
+}
+.studios-fs[data-menu-variant="e"] .fs-lw-mark img { height: 36px; }
+.studios-fs[data-menu-variant="e"] .fs-lw-tag {
+  position: fixed;
+  top: var(--e-tag-top, 72px);
+  left: var(--e-tag-left, 92px);
+  white-space: nowrap;
+  margin: 0;
+  font-size: 15px;
+  z-index: 24;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.5s ease 0.28s, transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.28s;
+}
+.studios-fs[data-menu-variant="e"].open .fs-lw-tag { opacity: 0.62; transform: none; }
+.studios-fs[data-menu-variant="e"] .fs-menu-toggle {
+  display: block;
+  position: fixed;
+  top: 24px;
+  left: 30px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  z-index: 25;
+}
+.studios-fs[data-menu-variant="e"] .fs-menu-toggle span {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 16px;
+  height: 1.6px;
+  border-radius: 0.8px;
+  background: #757367;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) 0.12s,
+              opacity 0.3s ease 0.12s,
+              background 0.3s ease 0.12s;
+}
+.studios-fs[data-menu-variant="e"] .fs-menu-toggle span:nth-child(1) { transform: translateY(calc(-50% - 5.2px)); }
+.studios-fs[data-menu-variant="e"] .fs-menu-toggle span:nth-child(2) { transform: translateY(-50%); }
+.studios-fs[data-menu-variant="e"] .fs-menu-toggle span:nth-child(3) { transform: translateY(calc(-50% + 5.2px)); }
+.studios-fs[data-menu-variant="e"].open .fs-menu-toggle span:nth-child(1) { transform: translateY(-50%) rotate(45deg); background: #1B1B18; }
+.studios-fs[data-menu-variant="e"].open .fs-menu-toggle span:nth-child(2) { opacity: 0; transform: translateY(-50%) scaleX(0.4); }
+.studios-fs[data-menu-variant="e"].open .fs-menu-toggle span:nth-child(3) { transform: translateY(-50%) rotate(-45deg); background: #1B1B18; }
+.studios-fs[data-menu-variant="e"] .fs-menu-toggle:hover span { background: #1B1B18; }
+@media (min-width: 761px) {
+  .studios-fs[data-menu-variant="e"] .fs-close { display: none; }
+}
+.studios-fs[data-menu-variant="e"] .fs-body {
+  flex-direction: row;
+  position: relative;
+}
+/* LW nav — under the wordmark, left-aligned, confined to the index column */
+.studios-fs[data-menu-variant="e"] .fs-lw-nav {
+  position: fixed;
+  top: 116px;
+  left: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  column-gap: clamp(14px, 1.8vw, 26px);
+  row-gap: 10px;
+  max-width: calc(46vw - clamp(48px, 6vw, 96px));
+  z-index: 5;
+}
+.studios-fs[data-menu-variant="e"] .fs-lw-heading { display: none; }
+.studios-fs[data-menu-variant="e"] .fs-lw-nav a[href="/tile-collections/"] { display: none; }
+.studios-fs[data-menu-variant="e"] .fs-lw-nav {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s;
+}
+.studios-fs[data-menu-variant="e"].open .fs-lw-nav { opacity: 1; transform: none; }
+.studios-fs[data-menu-variant="e"] .fs-lw-nav a {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1B1B18 !important;
+  transition: color 0.2s ease;
+}
+.studios-fs[data-menu-variant="e"] .fs-lw-nav a:hover { color: var(--bronze, #8C6249) !important; }
+.studios-fs[data-menu-variant="e"] .fs-lw-login {
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  padding: 6px 13px;
+}
+.studios-fs[data-menu-variant="e"] .fs-lw-login:hover { border-color: var(--bronze, #8C6249); }
+/* index column — every section open */
+.studios-fs[data-menu-variant="e"] .fs-brands {
+  width: var(--e-pane-left, 50vw);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  /* left = 92px so row text shares the wordmark/nav axis (row gutters cancel) */
+  padding: clamp(96px, 14vh, 150px) clamp(28px, 4vw, 64px) 30px 92px;
+}
+.studios-fs[data-menu-variant="e"] .fs-brands-eyebrow {
+  display: block;
+  margin: 0 0 clamp(12px, 2.4vh, 26px);
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+.studios-fs[data-menu-variant="e"] .fs-brand {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: clamp(14px, 2.2vh, 24px) 0;
+}
+/* the first row sits close under the eyebrow that names the group */
+@media (min-width: 761px) {
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow + .fs-brand .fs-brand-info { padding-top: clamp(16px, 3vh, 38px); }
+}
+.studios-fs[data-menu-variant="e"] .fs-brand:first-child { border-top: 1px solid rgba(0, 0, 0, 0.12); }
+.studios-fs[data-menu-variant="e"] .fs-brand-name { display: none; }
+.studios-fs[data-menu-variant="e"] .fs-brand-mark { display: block; }
+.studios-fs[data-menu-variant="e"] .fs-brand-mark img {
+  height: var(--e-mark-h);
+  width: auto;
+  display: block;
+  opacity: 0.75;
+  transition: opacity 0.25s ease;
+}
+/* optical balance: the long BW logotype reads heavy at equal cap height */
+.studios-fs[data-menu-variant="e"] .fs-brand[data-brand="bronzework-studio"] .fs-brand-mark img { height: calc(var(--e-mark-h) * 0.88); }
+.studios-fs[data-menu-variant="e"] .fs-brand[data-brand="foundry-art"] .fs-brand-mark img { height: calc(var(--e-mark-h) * 0.97); }
+/* the Talisman lifestyle shot is landscape — bias the crop toward the chair */
+.studios-fs[data-menu-variant="e"] .fs-brand[data-brand="talisman"] .fs-brand-media img { object-position: 32% 50%; }
+.studios-fs[data-menu-variant="e"] .fs-brand.focus .fs-brand-mark img,
+.studios-fs[data-menu-variant="e"] .fs-brand-mark:hover img { opacity: 1; }
+.studios-fs[data-menu-variant="e"] .fs-brand-desc {
+  max-height: none;
+  opacity: 1;
+  overflow: visible;
+  margin-top: 6px;
+  font-size: 15px;
+  font-style: italic;
+}
+.studios-fs[data-menu-variant="e"] .fs-brand-links {
+  max-height: none;
+  opacity: 1;
+  overflow: visible;
+  margin-top: 10px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 18px;
+  row-gap: 6px;
+}
+.studios-fs[data-menu-variant="e"] .fs-brand-links a {
+  font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bronze, #8C6249) !important;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+.studios-fs[data-menu-variant="e"] .fs-brand-links a:hover {
+  border-color: var(--bronze, #8C6249);
+}
+.studios-fs[data-menu-variant="e"] .fs-brand-links a:first-child { display: none; }
+.studios-fs[data-menu-variant="e"] .fs-brand-note {
+  max-height: none;
+  opacity: 0.5;
+  overflow: visible;
+  margin-top: 8px;
+  font-size: 10px;
+}
+/* image pane — crossfades on hover, as C */
+.studios-fs[data-menu-variant="e"] .fs-brand-media {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--e-pane-left, 50vw);
+  width: auto;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+.studios-fs[data-menu-variant="e"] .fs-brand.focus .fs-brand-media {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* top scrim: dark photos deepen under the white nav; light photos get a
+   parchment wash so ink links keep footing */
+.studios-fs[data-menu-variant="e"] .fs-brand-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.studios-fs[data-menu-variant="e"] .fs-brand[data-tone="dark"] .fs-brand-media::after {
+  background: linear-gradient(to bottom, rgba(10, 16, 17, 0.6) 0%, rgba(10, 16, 17, 0.24) 90px, transparent 170px);
+}
+.studios-fs[data-menu-variant="e"] .fs-brand[data-tone="light"] .fs-brand-media::after {
+  background: linear-gradient(to bottom, rgba(236, 234, 226, 0.9) 0%, rgba(236, 234, 226, 0.4) 90px, rgba(236, 234, 226, 0) 170px);
+}
+@media (max-width: 1680px) and (min-width: 761px) {
+  .studios-fs[data-menu-variant="e"] { --e-mark-h: clamp(26px, 2.6vw, 40px); }
+  .studios-fs[data-menu-variant="e"] .fs-brand-media { display: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brands {
+    width: 100%;
+    min-width: 0;
+    padding-right: clamp(28px, 8vw, 96px);
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav { max-width: calc(100vw - 96px); }
+}
+/* ≤760px: E joins the shared stacked layout (late resets, as D) */
+@media (max-width: 760px) {
+  .studios-fs[data-menu-variant="e"] .fs-head { height: auto; flex-direction: column; padding: 24px 24px 16px; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-mark { position: static; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-mark img { height: 30px; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-tag { position: static; margin: 0; transform: none; }
+  .studios-fs[data-menu-variant="e"] .fs-menu-toggle { display: none; }
+  .studios-fs[data-menu-variant="e"] .fs-close { width: 44px; height: 44px; background: none; color: inherit; font-size: 34px; opacity: 0.55; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-tag { display: block; }
+  .studios-fs[data-menu-variant="e"] .fs-body { display: block; padding: 0 24px 90px; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav {
+    position: static;
+    max-width: none;
+    justify-content: flex-start;
+    column-gap: 20px;
+    row-gap: 10px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.14);
+    padding: 22px 0 0;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brands { display: block; width: auto; min-width: 0; padding: 0; }
+  .studios-fs[data-menu-variant="e"] .fs-brand { border: 0; padding: 26px 0 0; }
+  .studios-fs[data-menu-variant="e"] .fs-brand:first-child { border: 0; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-mark { display: block; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-mark img { filter: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-name { display: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-media {
+    position: static;
+    width: 100%;
+    height: 34vw;
+    max-height: 240px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand-desc { font-style: normal; margin: 0; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-note,
+  .studios-fs[data-menu-variant="e"] .fs-brand-links,
+  .studios-fs[data-menu-variant="e"] .fs-brand-links-title { display: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--bronze, #8C6249) !important;
+    border: 1px solid rgba(140, 98, 73, 0.55);
+    padding: 11px 18px;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── E refinement: row rhythm + FA-shop rollover treatment ──
+   Rows become hover cards using the shop's product-card recipe
+   (lift, soft double shadow, bronze hairline ring, 0.16/1/0.3/1
+   easing). Element hairlines become inter-row dividers that get
+   out of the way of a hovered card. Desktop only — the ≤760px
+   stacked layout keeps its plain rows. */
+@media (min-width: 761px) {
+  /* NOTE: the row itself must stay non-positioned AND untransformed —
+     the studio image pane is an absolute child of .fs-body, and a
+     positioned or transformed row would become its containing block.
+     All card chrome (padding, ring, shadow, lift) therefore lives on
+     .fs-brand-info, the row's text wrapper; dividers ride on the row's
+     background-image. */
+  .studios-fs[data-menu-variant="e"] .fs-brand {
+    border: 0;
+    padding: 0;
+    margin: 0 -24px 0 -92px;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand:first-child { border: 0; }
+  .studios-fs[data-menu-variant="e"] .fs-brand + .fs-brand {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12));
+    background-repeat: no-repeat;
+    background-size: calc(100% - 36px) 1px;
+    background-position: 0 0;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand-info {
+    position: relative;
+    padding: clamp(44px, 7.5vh, 100px) 132px clamp(44px, 7.5vh, 100px) 92px;
+  }
+  /* the directional cue: a tall chevron sweeps in at the row's right edge */
+  .studios-fs[data-menu-variant="e"] .fs-cta-arrow { display: none !important; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-chevron {
+    display: block;
+    position: absolute;
+    right: 68px;
+    top: 50%;
+    color: var(--bronze, #8C6249);
+    opacity: 0;
+    transform: translate(-20px, -50%);
+    transition: opacity 0.4s ease 0.05s,
+                transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s;
+    pointer-events: none;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand-chevron svg {
+    display: block;
+    width: 30px;
+    height: 60px;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand:hover .fs-brand-chevron,
+  .studios-fs[data-menu-variant="e"] .fs-brand:focus-within .fs-brand-chevron {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand:hover .fs-brand-mark img { opacity: 1; }
+  /* ── rollover explorations (data-hover-style on the aside) ──
+     1 · Axis shift — content glides right; a bronze cursor bar rises
+     2 · Underline draw — a bronze rule draws beneath the wordmark
+     3 · Pure ink — no motion; wordmark and sentence deepen, CTA carries it */
+  .studios-fs[data-menu-variant="e"][data-hover-style="1"] .fs-brand-info {
+    transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    background-image: linear-gradient(var(--bronze, #8C6249), var(--bronze, #8C6249));
+    background-repeat: no-repeat;
+    background-size: 2px 0%;
+    background-position: 26px 55%;
+    transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+                background-size 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .studios-fs[data-menu-variant="e"][data-hover-style="1"] .fs-brand:hover .fs-brand-info {
+    transform: translateX(16px);
+    background-size: 2px 58%;
+  }
+
+/* the row is [wordmark] [customer sentence] [reveal CTA] */
+  .studios-fs[data-menu-variant="e"] .fs-brand-note,
+  .studios-fs[data-menu-variant="e"] .fs-brand-links,
+  .studios-fs[data-menu-variant="e"] .fs-brand-links-title { display: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-desc {
+    display: block;
+    max-height: none;
+    opacity: 0.8;
+    margin-top: 14px;
+    font-family: var(--lw-font-serif, 'Fanwood Text', Georgia, serif);
+    font-style: normal;
+    font-size: clamp(15px, 1.12vw, 23px);
+    line-height: 1.4;
+    max-width: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bronze, #8C6249) !important;
+    text-decoration: none !important;
+    border: 1px solid rgba(140, 98, 73, 0.55);
+    padding: 13px 24px;
+    width: fit-content;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.4s ease 0.06s,
+                transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.06s,
+                border-color 0.2s ease,
+                background 0.25s ease,
+                color 0.25s ease;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand:hover .fs-brand-cta,
+  .studios-fs[data-menu-variant="e"] .fs-brand:focus-within .fs-brand-cta {
+    opacity: 1;
+    transform: none;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand-cta:hover {
+    border-color: var(--bronze, #8C6249);
+    background: var(--bronze, #8C6249);
+    color: #FFFFFF !important;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-cta-arrow {
+    display: block;
+    transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand-cta:hover .fs-cta-arrow { transform: translateX(5px); }
+}
+
+/* ── E: top-row nav continuity (>1100px) ──
+   The closed .lw2-header nav (measured live at 1440: right-aligned to
+   30px, top 28, 13px/1px caps, gap 36, chip login w/ 30% ink border)
+   stays exactly in place on open — no band behind it. Links whose
+   center falls over the photo pane (right of the 50% seam, tracked by
+   .over-photo from syncNavTone) transition to the focused photo's
+   contrast tone; links over parchment stay ink. Trails every other E
+   block so these overrides win the cascade. */
+@media (min-width: 1681px) {
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav {
+    position: fixed;
+    top: 28px;
+    right: 30px;
+    left: auto;
+    max-width: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    column-gap: 36px;
+    row-gap: 0;
+    opacity: 1;
+    transform: none;
+    transition: none;
+    z-index: 24;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a {
+    font-size: 13px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    color: #000000 !important;
+    transition: color 0.45s ease, border-color 0.45s ease;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a:hover { color: var(--bronze, #8C6249) !important; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-login {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 6px 14px;
+    background: transparent;
+  }
+  .studios-fs[data-menu-variant="e"][data-photo-tone="dark"] .fs-lw-nav a.over-photo { color: #FFFFFF !important; }
+  .studios-fs[data-menu-variant="e"][data-photo-tone="dark"] .fs-lw-nav a.over-photo:hover { color: rgba(255, 255, 255, 0.75) !important; }
+  .studios-fs[data-menu-variant="e"][data-photo-tone="dark"] .fs-lw-login.over-photo { border-color: rgba(255, 255, 255, 0.6); }
+}
+
+/* ── E: REAL-header continuity (pages with .lw2-header, >1100px) ──
+   The replicated head could never track the closed header across
+   widths (its type and paddings scale with the viewport), so on LW
+   pages the actual .lw2-header now rides ABOVE the open menu:
+   fixed, band made transparent, links toned to the focused photo
+   (body[data-photo-tone] synced from the aside). Its own hamburger
+   svg morphs into the X in place. The menu's replicated head
+   (toggle/wordmark/tagline/nav) hides on these pages. body.menu-e
+   scopes all of it to variant E. */
+body.menu-e .lw2-header { transition: background 0.4s ease; }
+body.menu-e .lw2-studios-toggle svg rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) 0.12s,
+              opacity 0.3s ease 0.12s;
+}
+@media (min-width: 1681px) {
+  body.menu-e.drawer-open .lw2-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    background: transparent;
+  }
+  body.menu-e.drawer-open .lw2-studios-toggle,
+  body.menu-e.drawer-open .lw2-studios-toggle[aria-expanded="true"] { color: #1B1B18; }
+  body.menu-e.drawer-open .lw2-studios-toggle svg rect:nth-child(1) { transform: translateY(5.2px) rotate(45deg); }
+  body.menu-e.drawer-open .lw2-studios-toggle svg rect:nth-child(2) { opacity: 0; }
+  body.menu-e.drawer-open .lw2-studios-toggle svg rect:nth-child(3) { transform: translateY(-5.2px) rotate(-45deg); }
+  /* nav links + login chip adopt the focused photo's tone (the whole
+     row sits over the pane now that its left edge tracks the nav) */
+  body.menu-e.drawer-open .lw2-header .lw2-nav a { transition: color 0.45s ease, border-color 0.45s ease, background 0.45s ease; }
+  body.menu-e .lw2-header .lw2-nav a[href="/tile-collections/"] { transition: opacity 0.35s ease; }
+  body.menu-e.drawer-open .lw2-header .lw2-nav a[href="/tile-collections/"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+  body.menu-e.drawer-open[data-photo-tone="dark"] .lw2-header .lw2-nav a { color: #FFFFFF !important; }
+  body.menu-e.drawer-open[data-photo-tone="dark"] .lw2-header .lw2-nav a:hover { color: rgba(255, 255, 255, 0.75) !important; }
+  body.menu-e.drawer-open .lw2-header .lw2-nav .lw2-login { background: transparent; }
+  body.menu-e.drawer-open[data-photo-tone="dark"] .lw2-header .lw2-nav .lw2-login {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #FFFFFF !important;
+  }
+  /* the menu's own head duplicates retire on LW pages */
+  body.lw2-shell .studios-fs[data-menu-variant="e"] .fs-menu-toggle,
+  body.lw2-shell .studios-fs[data-menu-variant="e"] .fs-lw-mark,
+  body.lw2-shell .studios-fs[data-menu-variant="e"] .fs-lw-nav { display: none !important; }
+}

@@ -175,67 +175,199 @@
       <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile menu" aria-hidden="true">${mobileDrawer}
       </aside>
 
+${studiosMenuHTML(section)}
+    `;
+  }
+
+
+  // ────────────────────────────────────────────────────────
+  // Studios menu — FULL-SCREEN takeover
+  // Layout is the Index II configuration, keyed off [data-menu-variant="e"]
+  // in assets/styles.css: serif studio index left, photo pane right.
+  // ────────────────────────────────────────────────────────
+  function studiosMenuHTML(section) {
+    const BRANDS = [
+      {
+        key: 'bronzework-studio',
+        name: 'Bronzework Studio',
+        tone: 'light',
+        mark: '/assets/images/linden/wordmarks/trimmed/bronzework-studio.png',
+        image: '/assets/images/linden/autograph/Autograph-Dahlia-Whiskey-1-2048.jpg',
+        desc: 'Hand-carved metal tiles, liners, and trim in living bronze and zinc.',
+        cta: ['/bronzework-studio/', 'Explore our collections'],
+        linksTitle: 'Collections',
+        note: 'Available at fine tile showrooms',
+        links: [
+          ['/bronzework-studio/', 'Studio overview'],
+          ['/classic/', 'Classic'],
+          ['/autograph/', 'Autograph'],
+          ['/precision/', 'Precision'],
+        ],
+      },
+      {
+        key: 'foundry-art',
+        name: 'Foundry Art',
+        tone: 'dark',
+        mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.png',
+        image: '/assets/images/foundry-art-arrays/inset-tiles-array.jpg',
+        desc: 'Hand-cast bronze tiles and hardware, direct from our studio.',
+        cta: ['/foundry-art/shop/', 'Shop now'],
+        note: 'Shop online, direct from the studio',
+        links: [
+          ['/foundry-art/', 'Studio overview'],
+          ['/foundry-art/shop/', 'Inset Tiles &amp; Liners'],
+          ['/foundry-art/shop/', 'Cabinet Hardware'],
+        ],
+      },
+      {
+        key: 'talisman',
+        name: 'Talisman',
+        tone: 'light',
+        mark: '/assets/images/linden/wordmarks/trimmed/talisman.png',
+        image: '/assets/images/linden/talisman/Talisman-Swans-Trumpet-and-Spiral-Wave-Ancient-White-towel-crop-e1651606000674.jpg',
+        desc: 'Hand-sculpted ceramic tiles in a sophisticated stony white glaze.',
+        cta: ['/talisman/', 'Learn more'],
+        note: 'Direct from our studio',
+        links: [
+          ['/talisman/', 'Studio overview'],
+          ['/talisman/', 'White Ceramic Tiles &amp; Borders'],
+        ],
+      },
+    ];
+    const focus = BRANDS.some(b => b.key === section) ? section : 'bronzework-studio';
+
+    const panel = (b) => `
+        <div class="fs-brand${b.key === focus ? ' focus' : ''}" data-brand="${b.key}" data-tone="${b.tone}">
+          <a class="fs-brand-media" href="${b.links[0][0]}" data-studios-link aria-label="${b.name}">
+            <img src="${b.image}" alt="">
+          </a>
+          <div class="fs-brand-info">
+            <a class="fs-brand-mark" href="${b.links[0][0]}" data-studios-link>
+              <img src="${b.mark}" alt="${b.name}">
+            </a>
+            <a class="fs-brand-name" href="${b.links[0][0]}" data-studios-link>${b.name}</a>
+            <p class="fs-brand-desc">${b.desc}</p>
+            ${b.linksTitle ? `<p class="fs-brand-links-title">${b.linksTitle}</p>` : ''}
+            <nav class="fs-brand-links" aria-label="${b.name}">
+              ${b.links.map(([href, label]) => `<a href="${href}" data-studios-link>${label}</a>`).join('\n              ')}
+            </nav>
+            <a class="fs-brand-cta" href="${b.cta[0]}" data-studios-link>
+              <span>${b.cta[1]}</span>
+              <svg class="fs-cta-arrow" viewBox="0 0 26 10" width="26" height="10" aria-hidden="true"><path d="M0 5h22.5M18.5 1l5.5 4-5.5 4" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
+            </a>
+            <span class="fs-brand-chevron" aria-hidden="true">
+              <svg viewBox="0 0 22 44" width="22" height="44"><path d="M2 2l17 20-17 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <p class="fs-brand-note">${b.note}</p>
+          </div>
+        </div>`;
+
+    return `
       <div class="studios-scrim" data-studios-scrim></div>
-      <aside class="studios-drawer" id="studios-drawer" aria-label="Linden Workshops studios" aria-hidden="true">
-        <button class="studios-close" aria-label="Close studios menu" data-studios-close>×</button>
-        <a href="/" class="studios-eyebrow" data-studios-link aria-label="Linden Workshops home">
-          <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops" class="studios-eyebrow-mark">
-        </a>
-
-        <nav class="studios-links" aria-label="Menu">
-        ${/* "Collections" → "Our studios" (SL 7-23 light interim): the three items
-              below are the three studios under Linden, not product collections.
-              Naming them as studios makes the master-brand → studio hierarchy
-              legible and answers the Foundry-Art-vs-Bronzework confusion. */''}
-        <p class="studios-links-heading">Our studios</p>
-        <div class="studios-subnav">
-
-        <div class="studios-acc${expanded('bronzework-studio')}${active('bronzework-studio')}" data-studios-acc>
-          <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('bronzework-studio')}">
-            <span class="studios-acc-name">Bronzework Studio</span>
-            <span class="studios-acc-chevron" aria-hidden="true">▾</span>
+      <aside class="studios-drawer studios-fs" id="studios-drawer" data-menu-variant="e" data-hover-style="1" aria-label="Linden Workshops studios" aria-hidden="true">
+        <div class="fs-head">
+          <button class="fs-menu-toggle" aria-label="Close studios menu" data-studios-close>
+            <span></span><span></span><span></span>
           </button>
-          <div class="studios-acc-body">
-            <a href="/bronzework-studio/" data-studios-link><strong>Studio overview</strong></a>
-            <a href="/classic/" data-studios-link>Classic <small>Hand-Carved Bronze &amp; Zinc</small></a>
-            <a href="/autograph/" data-studios-link>Autograph <small>Graphic Bronze Borders &amp; Insets</small></a>
-            <a href="/precision/" data-studios-link>Precision <small>Extra Long Metal Liners &amp; Trim</small></a>
+          <a href="/" class="fs-lw-mark" data-studios-link aria-label="Linden Workshops home">
+            <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops">
+          </a>
+          <p class="fs-lw-tag">Three Studios. One Workshop.</p>
+          <button class="fs-close" aria-label="Close studios menu" data-studios-close>&times;</button>
+        </div>
+        <div class="fs-body">
+          <div class="fs-brands">
+          <p class="fs-brands-eyebrow">Our Collections</p>${BRANDS.map(panel).join('')}
           </div>
+          <nav class="fs-lw-nav" aria-label="Linden Workshops">
+            <p class="fs-lw-heading">Linden Workshops</p>
+            <a href="/tile-collections/" data-studios-link>Tile Collections</a>
+            <a href="/about/" data-studios-link>About</a>
+            <a href="/feature-gail-drury/" data-studios-link>Inspiration</a>
+            <a href="/our-team/" data-studios-link>Our Team</a>
+            <a href="/where-to-buy/" data-studios-link>Where to Buy</a>
+            <a href="/contact/" data-studios-link>Contact</a>
+            <a href="/showroom-zone/" class="fs-lw-login" data-studios-link>Showroom Login</a>
+          </nav>
         </div>
-
-        <div class="studios-acc${expanded('foundry-art')}${active('foundry-art')}" data-studios-acc>
-          <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('foundry-art')}">
-            <span class="studios-acc-name">Foundry Art</span>
-            <span class="studios-acc-chevron" aria-hidden="true">▾</span>
-          </button>
-          <div class="studios-acc-body">
-            <a href="/foundry-art/" data-studios-link><strong>Studio overview</strong></a>
-            <a href="/foundry-art/shop/" data-studios-link>Bronze Inset Tiles &amp; Liners <small>Shop the collection</small></a>
-            <a href="/foundry-art/shop/" data-studios-link>Cabinet Hardware <small>Knobs &amp; Pulls</small></a>
-          </div>
-        </div>
-
-        <div class="studios-acc${expanded('talisman')}${active('talisman')}" data-studios-acc>
-          <button class="studios-acc-head" data-studios-acc-toggle aria-expanded="${ariaExpanded('talisman')}">
-            <span class="studios-acc-name">Talisman</span>
-            <span class="studios-acc-chevron" aria-hidden="true">▾</span>
-          </button>
-          <div class="studios-acc-body">
-            <a href="/talisman/" data-studios-link><strong>Studio overview</strong></a>
-            <a href="/talisman/" data-studios-link>White Ceramic Tiles &amp; Borders <small>Legacy reorders</small></a>
-          </div>
-        </div>
-        </div>
-
-          <a href="/about/" data-studios-link>About</a>
-          <a href="/feature-gail-drury/" data-studios-link>Inspiration</a>
-          <a href="/our-team/" data-studios-link>Our Team</a>
-          <a href="/where-to-buy/" data-studios-link>Where to Buy</a>
-          <a href="/contact/" data-studios-link>Contact</a>
-          <a href="/showroom-zone/" data-studios-link>Showroom Login</a>
-        </nav>
       </aside>
     `;
+  }
+
+
+  // ────────────────────────────────────────────────────────
+  // Studios menu — hover focus + pane geometry
+  // ?menuopen=1 opens the takeover on load (kept for screenshotting).
+  // ────────────────────────────────────────────────────────
+  function initMenuVariants() {
+    const drawer = document.getElementById('studios-drawer');
+    if (!drawer || !drawer.classList.contains('studios-fs')) return;
+    const params = new URLSearchParams(location.search);
+
+    // Index II layout + axis-shift rollover — the selected configuration.
+    // body.menu-e keys the page-level rules that travel with this layout.
+    drawer.dataset.menuVariant = 'e';
+    drawer.dataset.hoverStyle = '1';
+    document.body.classList.add('menu-e');
+
+    // Hovering a brand row drives the right-pane image crossfade; the focused
+    // brand's photo tone (light/dark) keys the top nav's contrast color.
+    function setFocus(target) {
+      drawer.querySelectorAll('.fs-brand').forEach(b => b.classList.toggle('focus', b === target));
+      if (target) {
+        drawer.dataset.photoTone = target.dataset.tone || 'light';
+        document.body.dataset.photoTone = drawer.dataset.photoTone;
+      }
+    }
+    drawer.querySelectorAll('.fs-brand').forEach(brand => {
+      brand.addEventListener('mouseenter', () => setFocus(brand));
+    });
+
+    const focusBrand = params.get('focus');
+    if (focusBrand) {
+      setFocus(drawer.querySelector(`.fs-brand[data-brand="${focusBrand}"]`));
+    } else {
+      setFocus(drawer.querySelector('.fs-brand.focus'));
+    }
+
+    // Pages with the LW header keep the REAL header above the open menu
+    // (nothing can shift); the photo pane's left edge tracks the nav's left
+    // edge so no link ever straddles the seam.
+    const lw2Nav = document.querySelector('.lw2-header .lw2-nav');
+    if (document.querySelector('.lw2-header')) document.body.classList.add('lw2-shell');
+    function syncPane() {
+      const wide = window.innerWidth > 1680;
+      let paneLeft = window.innerWidth * 0.5;
+      const navEl = lw2Nav || drawer.querySelector('.fs-lw-nav');
+      if (wide && navEl) paneLeft = Math.round(navEl.getBoundingClientRect().left) - 28;
+      drawer.style.setProperty('--e-pane-left', paneLeft + 'px');
+      const realLogo = document.querySelector('.lw2-header .lw2-logo img');
+      if (realLogo) {
+        const lb = realLogo.getBoundingClientRect();
+        drawer.style.setProperty('--e-tag-left', Math.round(lb.left) + 'px');
+        drawer.style.setProperty('--e-tag-top', Math.round(lb.bottom + 8) + 'px');
+        // track the tagline out so its width locks to the wordmark's
+        const tag = drawer.querySelector('.fs-lw-tag');
+        if (tag && tag.textContent.trim()) {
+          tag.style.letterSpacing = '0px';
+          const natural = tag.getBoundingClientRect().width;
+          const chars = tag.textContent.trim().length - 1;
+          if (natural > 0 && chars > 0 && lb.width > natural) {
+            tag.style.letterSpacing = ((lb.width - natural) / chars).toFixed(2) + 'px';
+          }
+        }
+      }
+      drawer.querySelectorAll('.fs-lw-nav a').forEach(a => {
+        const box = a.getBoundingClientRect();
+        a.classList.toggle('over-photo', wide && (box.left + box.width / 2) > paneLeft);
+      });
+    }
+    syncPane();
+    window.addEventListener('resize', syncPane);
+
+    if (params.get('menuopen') === '1') {
+      document.querySelector('.studios-toggle')?.click();
+    }
   }
 
   function footerHTML() {
@@ -386,7 +518,7 @@
     const toggles = document.querySelectorAll('.studios-toggle');
     const drawer = document.getElementById('studios-drawer');
     const scrim = document.querySelector('[data-studios-scrim]');
-    const closeBtn = document.querySelector('[data-studios-close]');
+    const closeBtns = document.querySelectorAll('[data-studios-close]');
     if (!toggles.length || !drawer || !scrim) return;
 
     function setOpen(open) {
@@ -405,7 +537,7 @@
       });
     });
     scrim.addEventListener('click', () => setOpen(false));
-    if (closeBtn) closeBtn.addEventListener('click', () => setOpen(false));
+    closeBtns.forEach(btn => btn.addEventListener('click', () => setOpen(false)));
     document.querySelectorAll('[data-studios-link]').forEach(a => {
       // External or active-page links close the drawer on click
       a.addEventListener('click', () => setOpen(false));
@@ -2483,6 +2615,7 @@
     initDrawer();
     initNavAutoHide();
     initStudiosDrawer();
+    initMenuVariants();
     initFilterTabs();
     renderCartRows();      // build cart line items from the store BEFORE steppers bind
     initQtySteppers();
