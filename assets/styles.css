@@ -14230,9 +14230,41 @@ body.drawer-open { overflow: hidden; }
 .studios-fs[data-menu-variant="e"] .fs-brand[data-tone="light"] .fs-brand-media::after {
   background: linear-gradient(to bottom, rgba(236, 234, 226, 0.9) 0%, rgba(236, 234, 226, 0.4) 90px, rgba(236, 234, 226, 0) 170px);
 }
+
+/* Linden Workshops pane — the right half on open, before any studio is
+   hovered. Same geometry as a brand's media so the two crossfade in place;
+   .has-focus on the aside hands the pane over to the hovered studio. */
+.studios-fs[data-menu-variant="e"] .fs-lw-media {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--e-pane-left, 50vw);
+  width: auto;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+.studios-fs[data-menu-variant="e"].has-focus .fs-lw-media { opacity: 0; }
+.studios-fs[data-menu-variant="e"] .fs-lw-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Deeper than a brand photo's scrim: the sketches are pencil on white, so
+   the nav has line work rather than a flat field behind it. */
+.studios-fs[data-menu-variant="e"] .fs-lw-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(236, 234, 226, 0.97) 0%, rgba(236, 234, 226, 0.92) 62px, rgba(236, 234, 226, 0.55) 118px, rgba(236, 234, 226, 0) 210px);
+}
 @media (max-width: 1680px) and (min-width: 761px) {
   .studios-fs[data-menu-variant="e"] { --e-mark-h: clamp(26px, 2.6vw, 40px); }
-  .studios-fs[data-menu-variant="e"] .fs-brand-media { display: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-media,
+  .studios-fs[data-menu-variant="e"] .fs-lw-media { display: none; }
   .studios-fs[data-menu-variant="e"] .fs-brands {
     width: 100%;
     min-width: 0;
@@ -14260,6 +14292,7 @@ body.drawer-open { overflow: hidden; }
     border-top: 1px solid rgba(0, 0, 0, 0.14);
     padding: 22px 0 0;
   }
+  .studios-fs[data-menu-variant="e"] .fs-lw-media { display: none; }   /* no fixed pane on mobile */
   .studios-fs[data-menu-variant="e"] .fs-brands { display: block; width: auto; min-width: 0; padding: 0; }
   .studios-fs[data-menu-variant="e"] .fs-brand { border: 0; padding: 26px 0 0; }
   .studios-fs[data-menu-variant="e"] .fs-brand:first-child { border: 0; }

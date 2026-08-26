@@ -234,7 +234,10 @@ ${studiosMenuHTML(section)}
         ],
       },
     ];
-    const focus = BRANDS.some(b => b.key === section) ? section : 'bronzework-studio';
+    // Only a studio's own page pre-focuses its row. Everywhere else nothing is
+    // focused, so the Linden Workshops pane below holds the right half -- the
+    // master brand introduces itself before any one studio does.
+    const focus = BRANDS.some(b => b.key === section) ? section : '';
 
     const panel = (b) => `
         <div class="fs-brand${b.key === focus ? ' focus' : ''}" data-brand="${b.key}" data-tone="${b.tone}">
@@ -277,6 +280,9 @@ ${studiosMenuHTML(section)}
         </div>
         <div class="fs-body">
           <div class="fs-brands">
+          <div class="fs-lw-media" data-tone="light" aria-hidden="true">
+            <img src="/assets/images/process/sketches-bw.jpg" alt="">
+          </div>
           ${/* "Our studios", not "Our Collections" (SL 7-23): the three items
                 below are the three studios under Linden, not product lines.
                 Naming them as studios keeps the master-brand -> studio
@@ -317,23 +323,30 @@ ${studiosMenuHTML(section)}
 
     // Hovering a brand row drives the right-pane image crossfade; the focused
     // brand's photo tone (light/dark) keys the top nav's contrast color.
+    const lwMedia = drawer.querySelector('.fs-lw-media');
     function setFocus(target) {
       drawer.querySelectorAll('.fs-brand').forEach(b => b.classList.toggle('focus', b === target));
-      if (target) {
-        drawer.dataset.photoTone = target.dataset.tone || 'light';
-        document.body.dataset.photoTone = drawer.dataset.photoTone;
-      }
+      drawer.classList.toggle('has-focus', !!target);
+      const tone = target ? (target.dataset.tone || 'light')
+                          : (lwMedia && lwMedia.dataset.tone) || 'light';
+      drawer.dataset.photoTone = tone;
+      document.body.dataset.photoTone = tone;
     }
     drawer.querySelectorAll('.fs-brand').forEach(brand => {
       brand.addEventListener('mouseenter', () => setFocus(brand));
     });
+    // Leaving the list hands the pane back to whatever it opened on, so the LW
+    // photo returns instead of the last-hovered studio sticking around.
+    const brandsWrap = drawer.querySelector('.fs-brands');
+    if (brandsWrap) {
+      brandsWrap.addEventListener('mouseleave', () => setFocus(openingFocus));
+    }
 
     const focusBrand = params.get('focus');
-    if (focusBrand) {
-      setFocus(drawer.querySelector(`.fs-brand[data-brand="${focusBrand}"]`));
-    } else {
-      setFocus(drawer.querySelector('.fs-brand.focus'));
-    }
+    const openingFocus = focusBrand
+      ? drawer.querySelector(`.fs-brand[data-brand="${focusBrand}"]`)
+      : drawer.querySelector('.fs-brand.focus');
+    setFocus(openingFocus);
 
     // Pages with the LW header keep the REAL header above the open menu
     // (nothing can shift); the photo pane's left edge tracks the nav's left
