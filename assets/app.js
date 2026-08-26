@@ -277,7 +277,12 @@ ${studiosMenuHTML(section)}
         </div>
         <div class="fs-body">
           <div class="fs-brands">
-          <p class="fs-brands-eyebrow">Our Collections</p>${BRANDS.map(panel).join('')}
+          ${/* "Our studios", not "Our Collections" (SL 7-23): the three items
+                below are the three studios under Linden, not product lines.
+                Naming them as studios keeps the master-brand -> studio
+                hierarchy legible and answers the Foundry-Art-vs-Bronzework
+                confusion. Restored 2026-08-25 after the Index II pass. */''}
+          <p class="fs-brands-eyebrow">Our studios</p>${BRANDS.map(panel).join('')}
           </div>
           <nav class="fs-lw-nav" aria-label="Linden Workshops">
             <p class="fs-lw-heading">Linden Workshops</p>
