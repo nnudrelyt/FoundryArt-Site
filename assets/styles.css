@@ -889,11 +889,13 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
   max-width: 680px;   /* visual scope cap — keeps the body text from sprawling on wide monitors */
 }
 .craft-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
-.craft-step { display: flex; gap: 14px; align-items: center; }
-/* Small upright bronze square — vertically centered against the
-   bullet's entire copy block (label + body), not aligned to the
-   label baseline. Quieter mark; the alignment puts it in the
-   gutter beside the text rather than as a leading dot. */
+.craft-step { display: flex; gap: 14px; align-items: flex-start; }
+/* Small upright bronze square, sitting beside the LABEL rather than
+   centred on the whole copy block. margin-top centres it on the
+   label's line box: (line-box height - square) / 2, which is
+   (20.5 - 8) / 2 at >=1440 and (19 - 6) / 2 below it — both round
+   to 6px, so one value serves both. Revisit if the label's
+   font-size or line-height changes. */
 .craft-step-num {
   position: relative;
   font-size: 0;
@@ -901,6 +903,7 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
   min-width: 6px;
   height: 6px;
   flex-shrink: 0;
+  margin-top: 6px;
 }
 .craft-step-num::before {
   content: '';
@@ -916,7 +919,21 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
   color: var(--charcoal);
   margin-bottom: 6px;
 }
-.craft-step-text span { font-size: 15px; color: var(--mid); line-height: 1.55; }
+/* display:block so the measure cap applies — the span is inline by default.
+   max-width is px, not ch, per the note above .pdp-desc: `ch` measures the
+   "0" glyph, which is much narrower than the average letter here.
+   430px trims the measure from ~55 characters to ~48. text-wrap:pretty
+   is a guard, not load-bearing: the current copy sets no widows either
+   way, but it caught a lone "years." on step 2 before that line was
+   rewritten, and will catch the next one. */
+.craft-step-text span {
+  display: block;
+  font-size: 15px;
+  color: var(--mid);
+  line-height: 1.55;
+  max-width: 430px;
+  text-wrap: pretty;
+}
 /* Single team-photo block on the left. min-height matches the content
    column so the section reads as a balanced two-up. */
 .craft-images { display: block; }
@@ -1397,13 +1414,21 @@ body[data-page="home"] .product-card-cta:hover {
 .guidance-intro .section-headline { color: var(--charcoal); font-size: 30px; }
 .guidance-intro .section-body { color: var(--slate); }
 .guidance-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* Card is a flex column with a fixed padding used as the single margin
+   value on all four sides: the icon is pinned to the bottom-right at
+   exactly that inset, and the CTA is pushed to the bottom-left by
+   margin-top:auto. The grid stretches cards to equal height per row, so
+   the CTA lands on the same baseline across a row no matter how many
+   lines the body runs. */
 .guidance-card {
   background: var(--white);
   border: 1px solid var(--rule);
   padding: 24px;
   cursor: pointer;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  position: relative;
   box-shadow: 0 1px 2px rgba(20,37,40,0.03);
 }
 .guidance-card:hover {
@@ -1415,10 +1440,12 @@ body[data-page="home"] .product-card-cta:hover {
   width: 40px; height: 40px;
   background: transparent;
   color: var(--bronze);
-  margin-bottom: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
 }
 .guidance-card-icon svg { display: block; width: 100%; height: 100%; }
 /* Visually-hidden fallback for guidance cards that haven't been
@@ -1439,7 +1466,16 @@ body[data-page="home"] .product-card-cta:hover {
   margin-bottom: 10px;
   line-height: 1.15;
 }
-.guidance-card p { font-size: 17px; color: var(--mid); line-height: 1.6; }
+/* margin-bottom is the MINIMUM gap to the CTA; margin-top:auto on the CTA
+   opens it further on shorter cards. Two jobs:
+   1. Clear the icon. It is 40px tall and pinned to the same bottom inset as
+      the ~16px CTA, so it reaches ~24px higher; under 30px the body's last
+      line runs beneath it (caught at 375px on "How We Make Our Tiles").
+   2. Hold the card's height. Pulling the icon out of the top of the flow cut
+      50px at 1440+; carrying that space here instead keeps the cards at the
+      285/255 and 257/230 they measured before, with the padding left uniform
+      so the icon's inset stays equal on both edges. */
+.guidance-card p { font-size: 17px; color: var(--mid); line-height: 1.6; margin-bottom: 80px; }
 .guidance-card-cta-arrow {
   display: inline-block;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1449,7 +1485,9 @@ body[data-page="home"] .product-card-cta:hover {
 }
 .guidance-card-cta {
   display: inline-block;
-  margin-top: 14px;
+  margin-top: auto;          /* pin to the bottom of the stretched card */
+  align-self: flex-start;
+  margin-right: 64px;        /* stay clear of the icon in the opposite corner */
   font-size: 9px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -2917,8 +2955,8 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .section-body { font-size: 19px; line-height: 1.65; max-width: 680px; }
 
   /* Craft */
-  .craft-content { padding: 130px 80px 130px 96px; }
-  .craft-step-num { width: 8px; min-width: 8px; height: 8px; margin-top: 0; }   /* small upright square, centered by flex align-items */
+  .craft-content { padding: 130px 80px 130px 96px; max-width: 800px; }
+  .craft-step-num { width: 8px; min-width: 8px; height: 8px; margin-top: 6px; }   /* offset centres it on the label's line box */
   .craft-step-text strong { font-size: 14px; letter-spacing: 1.8px; margin-bottom: 8px; }
   .craft-step-text span { font-size: 17px; line-height: 1.55; }
   .craft-images .wire-img { min-height: 300px; }
@@ -2950,10 +2988,10 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .guidance-intro .section-headline { font-size: 46px; }
   .guidance-cards { gap: 26px; }
   .guidance-card { padding: 36px; }
-  .guidance-card-icon { width: 36px; height: 36px; margin-bottom: 20px; font-size: 10px; }
+  .guidance-card-icon { width: 36px; height: 36px; right: 36px; bottom: 36px; font-size: 10px; }
   .guidance-card h4 { font-size: 32px; margin-bottom: 14px; }
   .guidance-card p { font-size: 18px; line-height: 1.65; }
-  .guidance-card-cta { font-size: 12px; margin-top: 24px; letter-spacing: 2px; }
+  .guidance-card-cta { font-size: 12px; letter-spacing: 2px; margin-right: 60px; }
 
   /* Social proof / testimonials */
   .social-proof { padding: 130px 80px; }
