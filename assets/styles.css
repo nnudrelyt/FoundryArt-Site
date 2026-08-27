@@ -12830,10 +12830,19 @@ body[data-tech-page] .tech-specs { width: 100%; max-width: 760px; }
    row; taller cells give the content air off the rules. */
 body[data-tech-page] .tech-specs th { width: 150px; padding: 20px 24px 20px 0; }
 body[data-tech-page] .tech-specs td { padding: 20px 0; }
-/* 72ch, not the base 78: measured against these answers, 78 leaves lines
-   ending on danglers (on / the / tone / kitchen); 72 carries them down.
-   Two answers get &nbsp; glue in the markup for the same reason. */
-body[data-tech-page] .fa-faq-answer p { max-width: 72ch; }
+/* 88ch: the old 72 left the answers filling barely three-quarters of the
+   list row once the questions stepped up — the wider measure balances the
+   larger question type. Two answers keep &nbsp; glue against danglers. */
+body[data-tech-page] .fa-faq-answer p { max-width: 88ch; }
+/* Questions step up toward display scale on the tech pages — the base
+   22/28 read a size small against the section headlines (Aug 26 pass). */
+body[data-tech-page] .fa-faq-question { font-size: 26px; }
+@media (min-width: 1440px) {
+  body[data-tech-page] .fa-faq-question { font-size: 32px; }
+}
+@media (max-width: 560px) {
+  body[data-tech-page] .fa-faq-question { font-size: 21px; }
+}
 /* Spec table folded into an FAQ answer — align with the answer's 4px
    text inset, keep a beat before the per-piece note, and reserve the
    +/− icon column so cell text never runs beneath it. */
@@ -13426,6 +13435,10 @@ body[data-tech-page] .fa-band--bleed .fa-band-media .wire-img { aspect-ratio: 5 
 /* ── Photo callout — full-width photograph with centred copy + CTA,
    the cross-link band (care → how-its-made). Same scrim family as .fa-hero,
    weighted a touch darker because the copy sits mid-photo. ── */
+/* The closing band's photo mat sat 42px off the charcoal edge — extend the
+   band's white ground rather than margin the callout, which opened a cream
+   sliver between the white band and the dark photo. */
+body[data-page="care"] .fa-step:has(+ .fa-callout) { padding-bottom: 128px; }
 body[data-tech-page] .fa-callout {
   position: relative;
   min-height: clamp(420px, 40vw, 620px);
@@ -13608,6 +13621,11 @@ body[data-tech-page] .fa-quote {
   max-width: none; margin: 0;
   padding: 180px 64px;
   text-align: center; border: 0;
+  /* Care's two-line quote ran the band 164px shorter than How It's Made's
+     four-liner (581 vs 745 at 1600w). One shared height keeps the dark band
+     consistent page to page; shorter quotes centre in the extra room. */
+  min-height: 745px;
+  display: flex; flex-direction: column; justify-content: center;
 }
 body[data-tech-page] .fa-quote p {
   font-family: 'Cormorant Garamond', Georgia, serif;
@@ -13669,7 +13687,8 @@ body[data-tech-page] .tech-cta .section-body { font-size: 19px; margin-bottom: 3
   body[data-tech-page] .fa-band-copy,
   body[data-tech-page] .fa-band--flip .fa-band-copy,
   body[data-tech-page] .fa-band--bleed .fa-band-copy { grid-column: 1; grid-row: auto; }
-  body[data-tech-page] .fa-quote { padding: 96px 32px; }
+  body[data-tech-page] .fa-quote { padding: 96px 32px; min-height: 0; }
+  body[data-page="care"] .fa-step:has(+ .fa-callout) { padding-bottom: 96px; }
   body[data-tech-page] .fa-wrap > section:not(.fa-band),
   body[data-tech-page] .fa-assure { padding: 64px 32px; }
   body[data-tech-page] .fa-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; }
