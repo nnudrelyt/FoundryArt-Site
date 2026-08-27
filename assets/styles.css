@@ -14634,12 +14634,13 @@ body.menu-e .lw2-studios-toggle svg rect {
    so the rail wins there too. Photo-pane and real-header mechanics stay
    gated at 1681+ below. */
 @media (min-width: 1025px) {
-  /* panel atmosphere: a whisper of cream light from the top-left settling
-     into the parchment, under a 4.5% paper grain (inline SVG noise) */
+  /* panel atmosphere: light rises up and to the right (deepest parchment
+     low-left, cream high-right, echoing the seam scrim), under a 4.5%
+     paper grain (inline SVG noise) */
   .studios-fs[data-menu-variant="e"] {
     background:
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.045'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E") repeat,
-      linear-gradient(165deg, #F3F1E8 0%, #ECEAE2 52%, #E6E3D8 100%);
+      linear-gradient(55deg, #E6E3D8 0%, #ECEAE2 48%, #F3F1E8 100%);
   }
   .studios-fs[data-menu-variant="e"] {
     /* fluid scale: sized against viewport height so the rail claims tall
