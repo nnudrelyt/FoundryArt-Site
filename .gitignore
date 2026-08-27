@@ -5,3 +5,7 @@
 # docs/photo-library/ (tracked in git, excluded from deploys)
 _styles/
 _cap/
+
+# Generated archive thumbnails — regenerate with
+# python3 docs/photo-library/generate.py
+docs/photo-library/thumbs/
