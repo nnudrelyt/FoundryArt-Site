@@ -791,12 +791,10 @@ body.drawer-open { overflow: hidden; }
 @keyframes brandSettle {
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-/* Paper tooth — the pamphlet stock's grain carried onto every charcoal
-   quote band (chosen from docs/quote-textures/, option 6). One bronze-tinted
-   SVG turbulence tile at 5%: texture you feel more than see. Applied to the
-   shell's .brand-band and the tech pages' .fa-quote (its charcoal twin). */
-.brand-band::before,
-body[data-tech-page] .fa-quote::before {
+/* Paper tooth — the pamphlet stock's grain carried onto the shell's charcoal
+   .brand-band (chosen from docs/quote-textures/, option 6). One bronze-tinted
+   SVG turbulence tile at 5%: texture you feel more than see. */
+.brand-band::before {
   content: '';
   position: absolute; inset: 0; z-index: 0;
   pointer-events: none;
@@ -804,13 +802,39 @@ body[data-tech-page] .fa-quote::before {
   background-size: 240px 240px;
   opacity: .05;
 }
+/* Wallpaper — the box lid's lattice tiling the tech pages' .fa-quote band
+   (docs/quote-textures/, option 1, v2 ornament): single circle +15%,
+   quatrefoil turned 45deg, neighbours overlapping ~24%. Bronze ink at 5.5%.
+   Tile is 48x64 — background-size must stay in that ratio or the circles
+   go oval. The ::after is the sheet's .t1-grad depth scrim: a soft shadow
+   off the top edge (exponential-ish stops), above the texture, below the
+   type. SVG data URIs here must use single quotes internally — double
+   quotes terminate the url("...") and the declaration silently drops. */
+body[data-tech-page] .fa-quote::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='64' viewBox='0 0 48 64'><g fill='none' stroke='%23B7997E' stroke-width='1'><circle cx='-24.00' cy='32.00' r='31.62'/><g transform='rotate(45 -24.00 32.00)'><g transform='rotate(0 -24.00 32.00)'><path d='M-24.00 32.00 C-29.76 21.66 -29.76 7.84 -24.00 0.38 C-18.24 7.84 -18.24 21.66 -24.00 32.00 Z'/></g><g transform='rotate(90 -24.00 32.00)'><path d='M-24.00 32.00 C-29.76 21.66 -29.76 7.84 -24.00 0.38 C-18.24 7.84 -18.24 21.66 -24.00 32.00 Z'/></g><g transform='rotate(180 -24.00 32.00)'><path d='M-24.00 32.00 C-29.76 21.66 -29.76 7.84 -24.00 0.38 C-18.24 7.84 -18.24 21.66 -24.00 32.00 Z'/></g><g transform='rotate(270 -24.00 32.00)'><path d='M-24.00 32.00 C-29.76 21.66 -29.76 7.84 -24.00 0.38 C-18.24 7.84 -18.24 21.66 -24.00 32.00 Z'/></g></g><circle cx='24.00' cy='32.00' r='31.62'/><g transform='rotate(45 24.00 32.00)'><g transform='rotate(0 24.00 32.00)'><path d='M24.00 32.00 C18.24 21.66 18.24 7.84 24.00 0.38 C29.76 7.84 29.76 21.66 24.00 32.00 Z'/></g><g transform='rotate(90 24.00 32.00)'><path d='M24.00 32.00 C18.24 21.66 18.24 7.84 24.00 0.38 C29.76 7.84 29.76 21.66 24.00 32.00 Z'/></g><g transform='rotate(180 24.00 32.00)'><path d='M24.00 32.00 C18.24 21.66 18.24 7.84 24.00 0.38 C29.76 7.84 29.76 21.66 24.00 32.00 Z'/></g><g transform='rotate(270 24.00 32.00)'><path d='M24.00 32.00 C18.24 21.66 18.24 7.84 24.00 0.38 C29.76 7.84 29.76 21.66 24.00 32.00 Z'/></g></g><circle cx='72.00' cy='32.00' r='31.62'/><g transform='rotate(45 72.00 32.00)'><g transform='rotate(0 72.00 32.00)'><path d='M72.00 32.00 C66.24 21.66 66.24 7.84 72.00 0.38 C77.76 7.84 77.76 21.66 72.00 32.00 Z'/></g><g transform='rotate(90 72.00 32.00)'><path d='M72.00 32.00 C66.24 21.66 66.24 7.84 72.00 0.38 C77.76 7.84 77.76 21.66 72.00 32.00 Z'/></g><g transform='rotate(180 72.00 32.00)'><path d='M72.00 32.00 C66.24 21.66 66.24 7.84 72.00 0.38 C77.76 7.84 77.76 21.66 72.00 32.00 Z'/></g><g transform='rotate(270 72.00 32.00)'><path d='M72.00 32.00 C66.24 21.66 66.24 7.84 72.00 0.38 C77.76 7.84 77.76 21.66 72.00 32.00 Z'/></g></g><path d='M0.00 6.00 L6.00 0.00 L0.00 -6.00 L-6.00 0.00 Z'/><path d='M0.00 70.00 L6.00 64.00 L0.00 58.00 L-6.00 64.00 Z'/><path d='M48.00 6.00 L54.00 0.00 L48.00 -6.00 L42.00 0.00 Z'/><path d='M48.00 70.00 L54.00 64.00 L48.00 58.00 L42.00 64.00 Z'/></g></svg>");
+  background-size: 42px 56px;
+  opacity: .055;
+}
+body[data-tech-page] .fa-quote::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to bottom,
+    rgba(0,0,0,.24)  0%,
+    rgba(0,0,0,.12) 18%,
+    rgba(0,0,0,.045) 40%,
+    rgba(0,0,0,0)   66%);
+}
 /* the pseudo is positioned, so the type must be too or the grain paints over
    it (5% tint on the letterforms). brand-band's p/cite lose their transforms
    once brandSettle finishes, which would drop them below the overlay. */
 .brand-band p, .brand-band cite { position: relative; }
 body[data-tech-page] .fa-quote { position: relative; overflow: hidden; }
 body[data-tech-page] .fa-quote > p,
-body[data-tech-page] .fa-quote > cite { position: relative; }
+body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .brand-band p, .brand-band cite {
     animation: none;
