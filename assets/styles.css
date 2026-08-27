@@ -791,25 +791,17 @@ body.drawer-open { overflow: hidden; }
 @keyframes brandSettle {
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-/* Paper tooth — the pamphlet stock's grain carried onto the shell's charcoal
-   .brand-band (chosen from docs/quote-textures/, option 6). One bronze-tinted
-   SVG turbulence tile at 5%: texture you feel more than see. */
-.brand-band::before {
-  content: '';
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.72 0 0 0 0 0.60 0 0 0 0 0.49 0 0 0 0.9 0'/></filter><rect width='240' height='240' filter='url(%23p)'/></svg>");
-  background-size: 240px 240px;
-  opacity: .05;
-}
-/* Wallpaper — the box lid's lattice tiling the tech pages' .fa-quote band
-   (docs/quote-textures/, option 1, v2 ornament): single circle +15%,
-   quatrefoil turned 45deg, neighbours overlapping ~24%. Bronze ink at 5.5%.
+/* Wallpaper — the box lid's lattice on every charcoal quote band: the tech
+   pages' .fa-quote and the homepage's .brand-band, which carried the option-6
+   paper grain until now (docs/quote-textures/, option 1, v2 ornament):
+   single circle +15%, quatrefoil turned 45deg, neighbours overlapping ~24%.
+   Bronze ink at 5.5%.
    Tile is 48x64 — background-size must stay in that ratio or the circles
    go oval. The ::after is the sheet's .t1-grad depth scrim: a soft shadow
    off the top edge (exponential-ish stops), above the texture, below the
    type. SVG data URIs here must use single quotes internally — double
    quotes terminate the url("...") and the declaration silently drops. */
+.brand-band::before,
 body[data-tech-page] .fa-quote::before {
   content: '';
   position: absolute; inset: 0; z-index: 0;
@@ -818,6 +810,7 @@ body[data-tech-page] .fa-quote::before {
   background-size: 42px 56px;
   opacity: .055;
 }
+.brand-band::after,
 body[data-tech-page] .fa-quote::after {
   content: '';
   position: absolute; inset: 0; z-index: 0;
@@ -828,10 +821,12 @@ body[data-tech-page] .fa-quote::after {
     rgba(0,0,0,.045) 40%,
     rgba(0,0,0,0)   66%);
 }
-/* the pseudo is positioned, so the type must be too or the grain paints over
-   it (5% tint on the letterforms). brand-band's p/cite lose their transforms
-   once brandSettle finishes, which would drop them below the overlay. */
-.brand-band p, .brand-band cite { position: relative; }
+/* The band now carries TWO positioned pseudos, and ::after paints after the
+   element's content — so position:relative alone would leave the type under
+   the scrim. Both bands need an explicit z-index on p/cite. brand-band's
+   p/cite also lose their transforms once brandSettle finishes, which would
+   otherwise drop them below the overlay. */
+.brand-band p, .brand-band cite { position: relative; z-index: 1; }
 body[data-tech-page] .fa-quote { position: relative; overflow: hidden; }
 body[data-tech-page] .fa-quote > p,
 body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
