@@ -1495,6 +1495,7 @@ body[data-page="home"] .product-card-cta:hover {
   transition: color 0.2s ease;
 }
 .fa-faq-trigger:hover { color: var(--bronze); }
+.fa-faq-item.is-open .fa-faq-trigger { color: var(--bronze); }
 .fa-faq-question {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px;
@@ -1506,6 +1507,8 @@ body[data-page="home"] .product-card-cta:hover {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+  /* inset off the list's right edge so the mark doesn't ride the rule ends */
+  margin-right: 10px;
   color: var(--bronze);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
