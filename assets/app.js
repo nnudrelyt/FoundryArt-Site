@@ -275,13 +275,13 @@ ${studiosMenuHTML(section)}
           <a href="/" class="fs-lw-mark" data-studios-link aria-label="Linden Workshops home">
             <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops">
           </a>
-          <p class="fs-lw-tag">Three Studios. One Workshop.</p>
+          <p class="fs-lw-tag">Three Studios. One Vision.</p>
           <button class="fs-close" aria-label="Close studios menu" data-studios-close>&times;</button>
         </div>
         <div class="fs-body">
           <div class="fs-brands">
           <div class="fs-lw-media" data-tone="light" aria-hidden="true">
-            <img src="/assets/images/process/sketches-bw.jpg" alt="">
+            <img src="/assets/images/process/sketches.jpg" alt="">
           </div>
           ${/* "Our studios", not "Our Collections" (SL 7-23): the three items
                 below are the three studios under Linden, not product lines.
@@ -289,7 +289,9 @@ ${studiosMenuHTML(section)}
                 hierarchy legible and answers the Foundry-Art-vs-Bronzework
                 confusion. Restored 2026-08-25 after the Index II pass. */''}
           <p class="fs-brands-eyebrow">Our studios</p>${BRANDS.map(panel).join('')}
-          </div>
+          ${/* inside .fs-brands so the wide layout can flow the link column
+                in the room beneath the studio rows; fixed/absolute styling at
+                other widths is unaffected by the DOM home */''}
           <nav class="fs-lw-nav" aria-label="Linden Workshops">
             <p class="fs-lw-heading">Linden Workshops</p>
             <a href="/tile-collections/" data-studios-link>Tile Collections</a>
@@ -300,6 +302,7 @@ ${studiosMenuHTML(section)}
             <a href="/contact/" data-studios-link>Contact</a>
             <a href="/showroom-zone/" class="fs-lw-login" data-studios-link>Showroom Login</a>
           </nav>
+          </div>
         </div>
       </aside>
     `;
@@ -355,30 +358,19 @@ ${studiosMenuHTML(section)}
     if (document.querySelector('.lw2-header')) document.body.classList.add('lw2-shell');
     function syncPane() {
       const wide = window.innerWidth > 1680;
+      // index-rail round 3 (Figma): the photo seam holds at 42vw on wide
+      // desktops; nothing sits over the photo anymore, so no nav anchoring
       let paneLeft = window.innerWidth * 0.5;
-      const navEl = lw2Nav || drawer.querySelector('.fs-lw-nav');
-      if (wide && navEl) paneLeft = Math.round(navEl.getBoundingClientRect().left) - 28;
+      if (wide) paneLeft = Math.round(window.innerWidth * 0.42);
       drawer.style.setProperty('--e-pane-left', paneLeft + 'px');
       const realLogo = document.querySelector('.lw2-header .lw2-logo img');
       if (realLogo) {
         const lb = realLogo.getBoundingClientRect();
         drawer.style.setProperty('--e-tag-left', Math.round(lb.left) + 'px');
-        drawer.style.setProperty('--e-tag-top', Math.round(lb.bottom + 8) + 'px');
-        // track the tagline out so its width locks to the wordmark's
-        const tag = drawer.querySelector('.fs-lw-tag');
-        if (tag && tag.textContent.trim()) {
-          tag.style.letterSpacing = '0px';
-          const natural = tag.getBoundingClientRect().width;
-          const chars = tag.textContent.trim().length - 1;
-          if (natural > 0 && chars > 0 && lb.width > natural) {
-            tag.style.letterSpacing = ((lb.width - natural) / chars).toFixed(2) + 'px';
-          }
-        }
+        drawer.style.setProperty('--e-tag-top', Math.round(lb.bottom + 6) + 'px');
       }
-      drawer.querySelectorAll('.fs-lw-nav a').forEach(a => {
-        const box = a.getBoundingClientRect();
-        a.classList.toggle('over-photo', wide && (box.left + box.width / 2) > paneLeft);
-      });
+      // rail links never sit over the photo in this layout
+      drawer.querySelectorAll('.fs-lw-nav a').forEach(a => a.classList.remove('over-photo'));
     }
     syncPane();
     window.addEventListener('resize', syncPane);

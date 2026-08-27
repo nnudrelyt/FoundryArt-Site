@@ -5674,13 +5674,17 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
 
   /* HEADER — hide nav links (keep dot-grid as menu access), shrink wordmark */
   body[data-section="linden"] .lw2-header {
-    padding: 14px 18px !important;
+    padding: 16px 16px 16px 24px !important;
   }
   body[data-section="linden"] .lw2-header .lw2-nav { display: none; }
+  /* wordmark holds the top-left on open and close; the toggle rides right,
+     where the menu's close X takes its place */
+  body[data-section="linden"] .lw2-header-left { flex: 1; width: 100%; }
+  body[data-section="linden"] .lw2-header .lw2-logo { order: 1; }
+  body[data-section="linden"] .lw2-studios-toggle { order: 2; margin-left: auto; padding: 6px; }
   body[data-section="linden"] .lw2-header .lw2-logo img {
-    height: 24px !important;
+    height: 28px !important;
   }
-  body[data-section="linden"] .lw2-studios-toggle { padding: 6px; }
 
   /* HERO — dark McQueen photo, 36px Fanwood headline */
   body[data-section="linden"] .lw2-hero { min-height: 340px; }
@@ -5897,8 +5901,16 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
    ────────────────────────────────────────────────────────── */
 @media (min-width: 769px) and (max-width: 1024px) {
 
-  /* Header — show nav, slightly larger logo */
-  body[data-section="linden"] .lw2-header { padding: 18px 30px; }
+  /* Header — menu-only at tablet: the full nav can't fit 769-1024 without
+     wrapping, and every destination lives in the takeover. Wordmark holds
+     the 92px rail axis; the toggle rides right (touch pattern, as mobile).
+     22px top padding centers the 32px mark against the 44px toggle so the
+     open pane's fixed mark at (92,28) registers seam-free. */
+  body[data-section="linden"] .lw2-header { padding: 22px 16px 22px 92px; }
+  body[data-section="linden"] .lw2-header .lw2-nav { display: none; }
+  body[data-section="linden"] .lw2-header-left { flex: 1; }
+  body[data-section="linden"] .lw2-header .lw2-logo { order: 1; }
+  body[data-section="linden"] .lw2-studios-toggle { order: 2; margin-left: auto; }
   body[data-section="linden"] .lw2-header .lw2-logo img { height: 32px !important; }
 
   /* Hero — keep wordmark buttons visible at tablet (don't hide like mobile) */
@@ -13812,9 +13824,12 @@ body.drawer-open { overflow: hidden; }
   transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .studios-fs.open .fs-brand { opacity: 1; transform: none; }
-.studios-fs.open .fs-brand:nth-child(1) { transition-delay: 0.08s; }
-.studios-fs.open .fs-brand:nth-child(2) { transition-delay: 0.16s; }
-.studios-fs.open .fs-brand:nth-child(3) { transition-delay: 0.24s; }
+/* entrance stagger keyed to the rows themselves -- nth-child broke when
+   the eyebrow and media pane joined .fs-brands (BW landed on slot 3's
+   delay while FA/TAL matched nothing). Single source for all widths. */
+.studios-fs.open .fs-brand[data-brand="bronzework-studio"] { transition-delay: 0.18s; }
+.studios-fs.open .fs-brand[data-brand="foundry-art"] { transition-delay: 0.28s; }
+.studios-fs.open .fs-brand[data-brand="talisman"] { transition-delay: 0.38s; }
 
 .studios-fs .fs-brand-media { display: block; overflow: hidden; }
 .studios-fs .fs-brand-mark img {
@@ -13886,7 +13901,7 @@ body.drawer-open { overflow: hidden; }
     flex-direction: column;
     margin: 0;
     padding: 24px 24px 16px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+    border-bottom: 1px solid rgba(140, 98, 73, 0.10);
   }
   .studios-fs[data-menu-variant] .fs-lw-mark img,
   .studios-fs[data-menu-variant] .fs-brand-mark img { filter: none; }
@@ -14033,13 +14048,25 @@ body.drawer-open { overflow: hidden; }
   left: var(--e-tag-left, 92px);
   white-space: nowrap;
   margin: 0;
-  font-size: 15px;
+  font-size: 18px;
+  letter-spacing: 0.8px;
   z-index: 24;
   opacity: 0;
   transform: translateX(-6px);
   transition: opacity 0.5s ease 0.28s, transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.28s;
 }
-.studios-fs[data-menu-variant="e"].open .fs-lw-tag { opacity: 0.62; transform: none; }
+.studios-fs[data-menu-variant="e"].open .fs-lw-tag { opacity: 0.7; transform: none; }
+/* a short bronze accent leads the tagline, balancing the lockup's width */
+.studios-fs[data-menu-variant="e"] .fs-lw-tag::before {
+  content: '';
+  display: inline-block;
+  width: 36px;
+  height: 1px;
+  background: var(--bronze, #8C6249);
+  vertical-align: middle;
+  margin-right: 12px;
+  transform: translateY(-1px);
+}
 .studios-fs[data-menu-variant="e"] .fs-menu-toggle {
   display: block;
   position: fixed;
@@ -14130,10 +14157,12 @@ body.drawer-open { overflow: hidden; }
   display: block;
   margin: 0 0 clamp(12px, 2.4vh, 26px);
   font-family: var(--lw-font-sans, 'Open Sans', Helvetica, sans-serif);
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  opacity: 0.5;
+  color: var(--bronze, #8C6249);
+  opacity: 1;
 }
 .studios-fs[data-menu-variant="e"] .fs-brand {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -14274,9 +14303,9 @@ body.drawer-open { overflow: hidden; }
 }
 /* ≤760px: E joins the shared stacked layout (late resets, as D) */
 @media (max-width: 760px) {
-  .studios-fs[data-menu-variant="e"] .fs-head { height: auto; flex-direction: column; padding: 24px 24px 16px; }
+  .studios-fs[data-menu-variant="e"] .fs-head { height: auto; flex-direction: column; padding: 26px 24px 16px; }
   .studios-fs[data-menu-variant="e"] .fs-lw-mark { position: static; }
-  .studios-fs[data-menu-variant="e"] .fs-lw-mark img { height: 30px; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-mark img { height: 28px; }
   .studios-fs[data-menu-variant="e"] .fs-lw-tag { position: static; margin: 0; transform: none; }
   .studios-fs[data-menu-variant="e"] .fs-menu-toggle { display: none; }
   .studios-fs[data-menu-variant="e"] .fs-close { width: 44px; height: 44px; background: none; color: inherit; font-size: 34px; opacity: 0.55; }
@@ -14398,6 +14427,18 @@ body.drawer-open { overflow: hidden; }
   .studios-fs[data-menu-variant="e"][data-hover-style="1"] .fs-brand:hover .fs-brand-info {
     transform: translateX(16px);
     background-size: 2px 58%;
+  }
+  /* the eyebrow-tightened first row: its info box loses top padding, so the
+     box-centered hover chrome (cursor bar, chevron) sits low against the
+     text — recenter both on the content by half the padding difference */
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow + .fs-brand {
+    --e-row-skew: calc((clamp(44px, 7.5vh, 100px) - clamp(16px, 3vh, 38px)) / 2);
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow + .fs-brand .fs-brand-chevron {
+    top: calc(50% - var(--e-row-skew));
+  }
+  .studios-fs[data-menu-variant="e"][data-hover-style="1"] .fs-brands-eyebrow + .fs-brand .fs-brand-info {
+    background-position: 26px calc(55% - var(--e-row-skew));
   }
 
 /* the row is [wordmark] [customer sentence] [reveal CTA] */
@@ -14528,6 +14569,8 @@ body.menu-e .lw2-studios-toggle svg rect {
   }
   body.menu-e.drawer-open .lw2-studios-toggle,
   body.menu-e.drawer-open .lw2-studios-toggle[aria-expanded="true"] { color: #1B1B18; }
+  /* the morphed X keeps the hamburger's red rollover */
+  body.menu-e.drawer-open .lw2-studios-toggle:hover { color: #a31414; }
   body.menu-e.drawer-open .lw2-studios-toggle svg rect:nth-child(1) { transform: translateY(5.2px) rotate(45deg); }
   body.menu-e.drawer-open .lw2-studios-toggle svg rect:nth-child(2) { opacity: 0; }
   body.menu-e.drawer-open .lw2-studios-toggle svg rect:nth-child(3) { transform: translateY(-5.2px) rotate(-45deg); }
@@ -14546,8 +14589,308 @@ body.menu-e .lw2-studios-toggle svg rect {
     border-color: rgba(255, 255, 255, 0.6);
     color: #FFFFFF !important;
   }
-  /* the menu's own head duplicates retire on LW pages */
+  /* the menu's own head duplicates retire on LW pages (the fs-lw-nav no
+     longer retires -- it relocates to the column under the brands below) */
   body.lw2-shell .studios-fs[data-menu-variant="e"] .fs-menu-toggle,
-  body.lw2-shell .studios-fs[data-menu-variant="e"] .fs-lw-mark,
-  body.lw2-shell .studios-fs[data-menu-variant="e"] .fs-lw-nav { display: none !important; }
+  body.lw2-shell .studios-fs[data-menu-variant="e"] .fs-lw-mark { display: none !important; }
+}
+
+/* ── E: index-rail layout, round 3 (wide desktop) ──
+   From Tyler's Figma pass (Linden Workshops — Studios Menu / Desktop · 1920).
+   One left rail: eyebrow → condensed studio list → page-link list → login,
+   all on a 626px column with bronze hairlines inset to it. Photo seam holds
+   at 42vw. The wordmark keeps its closed size and position on open (the
+   step-up retired); the support line is fixed 17px / 3px tracking (the
+   width-lock retired). Row rollover = axis shift + rail-edge cursor bar +
+   chevron — no CTA reveal; links echo the same treatment.
+   Applies to every cursor layout (761+); trails the older mid-range block
+   so the rail wins there too. Photo-pane and real-header mechanics stay
+   gated at 1681+ below. */
+@media (min-width: 761px) {
+  /* panel atmosphere: a whisper of cream light from the top-left settling
+     into the parchment, under a 4.5% paper grain (inline SVG noise) */
+  .studios-fs[data-menu-variant="e"] {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.045'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E") repeat,
+      linear-gradient(165deg, #F3F1E8 0%, #ECEAE2 52%, #E6E3D8 100%);
+  }
+  .studios-fs[data-menu-variant="e"] {
+    /* fluid scale: sized against viewport height so the rail claims tall
+       screens (floors keep the 1080 fit) */
+    --e-mark-h: clamp(20px, 2.6vh, 34px);
+    --e-hairline: rgba(140, 98, 73, 0.10);
+    --e-rail-w: clamp(626px, 34vw, 700px);
+    --e-row-pad: clamp(24px, 3vh, 40px);
+    --e-link-pad: clamp(15px, 2vh, 28px);
+  }
+
+  /* rail */
+  .studios-fs[data-menu-variant="e"] .fs-brands {
+    justify-content: flex-start;
+    /* the 92px fs-head sits above this block; ~3.5vh tucks the eyebrow up
+       to ~130px from the top, close under the wordmark/tagline */
+    padding-top: clamp(28px, 3.5vh, 44px);
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow {
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  /* studio list: tight rows, bronze hairlines bookending the group */
+  .studios-fs[data-menu-variant="e"] .fs-brand {
+    margin: 0;
+    max-width: var(--e-rail-w);
+    border-bottom: 1px solid var(--e-hairline);
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow + .fs-brand { border-top: 1px solid var(--e-hairline); }
+  .studios-fs[data-menu-variant="e"] .fs-brand + .fs-brand { background-image: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-info {
+    padding: var(--e-row-pad) 0;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow + .fs-brand .fs-brand-info { padding-top: var(--e-row-pad); }
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow + .fs-brand { --e-row-skew: 0px; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-desc {
+    font-size: clamp(19px, 1.65vh, 22px);
+    margin-top: 10px;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand-cta { display: none !important; }
+
+  /* rollover chrome: shift + chevron only (the cursor bar is retired) */
+  .studios-fs[data-menu-variant="e"][data-hover-style="1"] .fs-brand-info { background-image: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-chevron { right: 8px; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-chevron svg { width: 18px; height: 36px; }
+
+  /* entrance cascade: opacity only on the row -- a transform here would
+     become the fixed photo pane's containing block */
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow {
+    opacity: 0;
+    transition: opacity 0.5s ease 0.12s;
+  }
+  .studios-fs[data-menu-variant="e"].open .fs-brands-eyebrow { opacity: 1; }
+  /* row delays come from the base per-brand stagger rules */
+  .studios-fs[data-menu-variant="e"] .fs-brand {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .studios-fs[data-menu-variant="e"].open .fs-brand { opacity: 1; }
+
+  /* page links: a bronze list continuing the rail, hairline between rows */
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav {
+    position: static;
+    /* no extra gap: the studio list's bookend rule reads as the first
+       link boundary, so the rhythm above ABOUT matches the list's own */
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: 0;
+    column-gap: 0;
+    max-width: var(--e-rail-w);
+    opacity: 1;
+    transform: none;
+    transition: none;
+    z-index: 5;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a:not(.fs-lw-login) {
+    position: relative;
+    padding: var(--e-link-pad) 0 var(--e-link-pad) 9px;
+    border-bottom: 1px solid var(--e-hairline);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--bronze, #8C6249) !important;
+    opacity: 0;
+    transition: opacity 0.45s ease var(--e-ln-d, 0.4s),
+                transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+                color 0.25s ease;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a[href="/about/"] { --e-ln-d: 0.44s; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a[href="/feature-gail-drury/"] { --e-ln-d: 0.5s; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a[href="/our-team/"] { --e-ln-d: 0.56s; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a[href="/where-to-buy/"] { --e-ln-d: 0.62s; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a[href="/contact/"] { --e-ln-d: 0.68s; }
+  .studios-fs[data-menu-variant="e"].open .fs-lw-nav a { opacity: 1; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a:not(.fs-lw-login):hover {
+    transform: translateX(12px);
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a:not(.fs-lw-login)::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid var(--bronze, #8C6249);
+    border-right: 2px solid var(--bronze, #8C6249);
+    opacity: 0;
+    transform: translate(-10px, -50%) rotate(45deg);
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a:not(.fs-lw-login):hover::after {
+    opacity: 1;
+    transform: translate(0, -50%) rotate(45deg);
+  }
+
+  /* login: a bronze-outlined button closing the rail; red ink on rollover */
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav { flex: 1 1 auto; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a.fs-lw-login {
+    position: static;
+    /* pinned to the column's bottom, mobile-style */
+    margin-top: auto;
+    margin-bottom: clamp(20px, 2.6vh, 34px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: var(--e-link-pad) 0;
+    border: 1px solid var(--e-hairline);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--bronze, #8C6249) !important;
+    background: transparent;
+    background-image: none;
+    opacity: 0;
+    transform: none;
+    transition: opacity 0.45s ease 0.74s, color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+  .studios-fs[data-menu-variant="e"].open .fs-lw-nav a.fs-lw-login { opacity: 1; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a.fs-lw-login:hover {
+    background: var(--bronze, #8C6249);
+    border-color: var(--bronze, #8C6249);
+    color: #FFFFFF !important;
+  }
+}
+
+/* wide desktop only: real-header continuity + the photo pane's dressing */
+@media (min-width: 1681px) {
+  /* real header on open: the whole nav row bows out -- links and the login
+     chip both live in the rail now */
+  body.menu-e .lw2-header .lw2-nav a { transition: opacity 0.35s ease, color 0.2s ease; }
+  body.menu-e.drawer-open .lw2-header .lw2-nav a {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* tobacco seam: a soft dark scrim bleeding right from the panel's edge,
+     lifting the parchment off the photography */
+  .studios-fs[data-menu-variant="e"] .fs-lw-media::before,
+  .studios-fs[data-menu-variant="e"] .fs-brand-media::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    /* deepest at the top-left seam, lifting down and to the right */
+    background: linear-gradient(125deg,
+      rgba(44, 30, 20, 0.32) 0%,
+      rgba(44, 30, 20, 0.10) 26%,
+      rgba(44, 30, 20, 0) 52%);
+  }
+
+  /* photo scrims: one subtle diagonal parchment wash from the top-left,
+     replacing the old top bands (nothing overlays the photo anymore) */
+  .studios-fs[data-menu-variant="e"] .fs-lw-media::after,
+  .studios-fs[data-menu-variant="e"] .fs-brand[data-tone="dark"] .fs-brand-media::after,
+  .studios-fs[data-menu-variant="e"] .fs-brand[data-tone="light"] .fs-brand-media::after {
+    background: linear-gradient(135deg, rgba(236, 234, 226, 0.30) 0%, rgba(236, 234, 226, 0) 65%);
+  }
+
+  /* photo pane settles: a slow drift from 1.045 to rest as it takes focus */
+  .studios-fs[data-menu-variant="e"] .fs-lw-media img,
+  .studios-fs[data-menu-variant="e"] .fs-brand-media img {
+    transform: scale(1.045);
+    transition: transform 1.6s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .studios-fs[data-menu-variant="e"].open .fs-lw-media img,
+  .studios-fs[data-menu-variant="e"] .fs-brand.focus .fs-brand-media img { transform: scale(1); }
+}
+
+/* ── tablet (761-1024): seam-free handoff to the menu-only header ── */
+@media (min-width: 761px) and (max-width: 1024px) {
+  .studios-fs[data-menu-variant="e"] .fs-lw-mark { top: 30px; }
+  .studios-fs[data-menu-variant="e"] .fs-lw-mark img { height: 32px; }
+  .studios-fs[data-menu-variant="e"] .fs-menu-toggle {
+    left: auto;
+    right: 16px;
+    top: 24px;
+  }
+}
+
+/* ── mobile: the rail system translated to touch ──
+   Bronze hairlines, stacked bronze link list, and the outlined login button
+   join the ≤760 card layout; cards keep their photos and visible CTAs
+   (touch has no rollover to lean on). */
+@media (max-width: 760px) {
+  .studios-fs[data-menu-variant="e"] { --e-hairline: rgba(140, 98, 73, 0.10); }
+  /* the mobile list mirrors desktop: no card photos, no CTA buttons --
+     rows are mark + sentence, the row itself is the target */
+  .studios-fs[data-menu-variant="e"] .fs-brand-media { display: none; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-cta { display: none !important; }
+  .studios-fs[data-menu-variant="e"] .fs-brand { padding: 16px 0 18px; position: relative; }
+  /* a resting chevron marks each row as a destination (no hover on touch);
+     positioning the row is safe here -- the media pane it would capture on
+     desktop is display:none at this width */
+  .studios-fs[data-menu-variant="e"] .fs-brand-chevron {
+    display: block;
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--bronze, #8C6249);
+    opacity: 1;
+    pointer-events: none;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand-chevron svg { display: block; width: 12px; height: 24px; }
+  .studios-fs[data-menu-variant="e"] .fs-brand-desc { font-size: 17px; margin-top: 6px; max-width: calc(100% - 48px); }
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow { margin-bottom: 0; }
+  .studios-fs[data-menu-variant="e"] .fs-brands-eyebrow + .fs-brand { padding-top: 14px; }
+  /* air above the eyebrow and below the login; close moves to the left.
+     The bottom air lives on .fs-brands -- fs-body is a fixed-height flex
+     child whose own padding can't follow its overflowing content */
+  .studios-fs[data-menu-variant="e"] .fs-body { padding: 20px 24px 0; }
+  .studios-fs[data-menu-variant="e"] .fs-brands { padding-bottom: 72px; }
+  .studios-fs[data-menu-variant="e"] .fs-head { align-items: flex-start; }
+  .studios-fs[data-menu-variant="e"] .fs-close {
+    right: 16px;
+    left: auto;
+    top: 18px;
+    transform: none;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-tag {
+    transition: opacity 0.6s ease 0.12s,
+                transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.12s;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-brand + .fs-brand { border-top: 1px solid var(--e-hairline); }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav {
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: 0;
+    margin-top: 20px;
+    border-top: 1px solid var(--e-hairline);
+    padding: 0;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a:not(.fs-lw-login) {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--e-hairline);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: var(--bronze, #8C6249) !important;
+  }
+  .studios-fs[data-menu-variant="e"] .fs-lw-nav a.fs-lw-login {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    padding: 12px 0;
+    border: 1px solid var(--e-hairline);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--bronze, #8C6249) !important;
+  }
 }
