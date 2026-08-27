@@ -1420,7 +1420,8 @@ body[data-page="home"] .product-card-cta:hover {
   border: 1px solid var(--rule);
   /* 3px is the Foundry small-control radius — the same value carried by
      .btn-primary/.btn-secondary/.btn-ghost under body[data-section="foundry-art"],
-     the nav CTA, chips and facet checkboxes. */
+     the nav CTA, chips and facet checkboxes. (A 6px trial read too soft
+     against the square-cornered buttons — rolled back 8/27.) */
   border-radius: 3px;
   padding: 24px;
   cursor: pointer;
@@ -1488,7 +1489,8 @@ body[data-page="home"] .product-card-cta:hover {
   margin-top: auto;          /* pin to the bottom of the stretched card */
   align-self: flex-start;
   margin-right: 64px;        /* stay clear of the icon in the opposite corner */
-  font-size: 9px;
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--bronze);
@@ -2991,7 +2993,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .guidance-card-icon { width: 36px; height: 36px; right: 36px; bottom: 36px; font-size: 10px; }
   .guidance-card h4 { font-size: 32px; margin-bottom: 14px; }
   .guidance-card p { font-size: 20px; line-height: 1.6; }
-  .guidance-card-cta { font-size: 12px; letter-spacing: 2px; margin-right: 60px; }
+  .guidance-card-cta { font-size: 13px; letter-spacing: 2px; margin-right: 60px; }
 
   /* Social proof / testimonials */
   .social-proof { padding: 130px 80px; }
