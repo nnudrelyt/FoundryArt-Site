@@ -12909,7 +12909,18 @@ body[data-tech-page] .fa-faq-question { font-size: 26px; }
    +/− icon column so cell text never runs beneath it. */
 body[data-tech-page] .fa-faq-answer .specs-table {
   margin: 4px 4px 20px;
-  max-width: min(760px, calc(100% - 64px));
+  /* Was capped min(760px, ...): the table filled barely two-thirds of the
+     answer card next to 88ch prose. Now it runs the card's width, still
+     reserving the +/- icon column. */
+  max-width: calc(100% - 64px);
+}
+/* Values step up to the answer type's scale (17px, 19px at 1440+); labels
+   follow a step behind. Base .specs-table stays 11/13 for the PDP tables. */
+body[data-tech-page] .tech-specs th { font-size: 12px; }
+body[data-tech-page] .tech-specs td { font-size: 17px; line-height: 1.6; }
+@media (min-width: 1440px) {
+  body[data-tech-page] .tech-specs th { font-size: 14px; width: 180px; }
+  body[data-tech-page] .tech-specs td { font-size: 19px; }
 }
 body[data-tech-page] .tech-note {
   font-size: var(--fs-fine);
@@ -13677,17 +13688,16 @@ body[data-tech-page] .fa-scrub-cap {
   transition: opacity .25s ease;
   font-size: 19px; line-height: 1.6; color: var(--slate);
   /* 54ch: the narrowest measure where no caption breaks on a dangling
-     "The" — at 50–52 the buffing caption's first line still ends on one. */
+     "The" — at 50–52 the buffing caption's first line still ends on one.
+     Centred (8/27): text-align centres the lines, margin-inline centres
+     the capped block inside the absolute inset. */
   max-width: 54ch;
+  margin-inline: auto;
+  text-align: center;
 }
 body[data-tech-page] .fa-scrub-cap.active { opacity: 1; }
-body[data-tech-page] .fa-scrub-cap strong {
-  display: block;
-  font-family: 'Jost', sans-serif;
-  font-size: 13px; font-weight: 500;
-  letter-spacing: 1.8px; text-transform: uppercase;
-  color: var(--bronze); margin-bottom: 6px;
-}
+/* The caption's <strong> eyebrow was removed 8/27 — the slider's label row
+   already names the active stage, so the caption is body copy only. */
 @media (max-width: 900px) {
   /* .fa-alloy--patina included: its two-column override outranks the plain
      .fa-scrub selector, so the collapse must match its specificity. */
