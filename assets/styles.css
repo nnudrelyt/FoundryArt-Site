@@ -1498,7 +1498,10 @@ body[data-page="home"] .product-card-cta:hover {
   padding-bottom: 2px;
   transition: color 0.2s ease;
 }
-.guidance-card:hover .guidance-card-cta { color: var(--charcoal); }
+/* Rollover reads in the house red (--lw-accent-red, the LW link/CTA red)
+   rather than charcoal. The arrow span inherits color, so one rule covers
+   type and arrow together. */
+.guidance-card:hover .guidance-card-cta { color: var(--lw-accent-red); }
 
 /* ══════════════════════════════════════ FA FAQ ACCORDION ══════════════════════════════════════ */
 .fa-faq {
