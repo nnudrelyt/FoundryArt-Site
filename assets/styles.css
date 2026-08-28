@@ -304,6 +304,14 @@ body[data-section="foundry-art"] header:has(> .nav.nav-hidden) {
 body[data-section="foundry-art"] :is(.nav-links, .nav-cart, .nav-cta) {
   font-size: var(--fs-eyebrow);
 }
+/* FA nav steps past the floor (8/27): a size up, a weight up, and wider
+   tracking. Scoped to the FA shell — Linden and the showroom navs share
+   these classes via app.js navHTML and keep their finished construction. */
+body[data-section="foundry-art"] .nav-links {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2.1px;
+}
 /* This used to keep a lone "Tiles" link once the other three were hidden, on
    the reasoning that it was the header's only route to the shop. A single
    surviving item reads as an incomplete menu rather than a deliberate one —
@@ -618,13 +626,16 @@ body.drawer-open { overflow: hidden; }
   background: transparent;
   color: var(--white);
 }
+/* Sits BELOW the headline as a subhead (8/27) — same letterspaced-caps
+   voice, repositioned. margin-top pulls it into the headline's shadow;
+   margin-bottom hands off to .hero-sub. */
 .hero-eyebrow {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #D9C0A3;     /* lighter bronze, reads against the scrim + photo */
-  margin-bottom: 20px;
+  margin: -4px 0 26px;
 }
 .hero-headline {
   font-family: 'Cormorant Garamond', serif;
@@ -645,18 +656,45 @@ body.drawer-open { overflow: hidden; }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 
 /* Hero-scoped button overrides — work over the dark photo */
+/* Single CTA since 8/27 (See Design Ideas removed) — steps up to carry the
+   hero alone. font-weight 500 matches the FA nav's Shop Now. */
 .hero .btn-primary {
   background: var(--bronze);
   color: var(--white);
-  padding: 16px 32px;
-  font-size: 11px;
-  letter-spacing: 2px;
+  padding: 19px 44px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2.2px;
   min-height: 44px;
 }
+/* Chevron rides in on hover, on the guidance-card arrows' curve. It sits
+   absolutely inside the right padding (44px leaves room), so the button's
+   width and the label's position never move — the colours and lift are the
+   button's original hover. (An inverted charcoal/bronze flip was tried
+   8/27 and rolled back same day: colours stay.) */
+.hero .btn-primary { position: relative; }
+.hero .btn-primary .btn-chevron {
+  position: absolute;
+  right: 22px;   /* ~20% tighter to the label than the first cut (was 18px, ~22px gap) */
+  top: 50%;
+  opacity: 0;
+  transform: translate(-6px, -50%);
+  font-size: 1.35em;
+  line-height: 1;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Hover leaves the fill alone (8/27): the chevron + lift are the whole
+   interaction. */
 .hero .btn-primary:hover {
-  background: var(--bronze-l);
-  color: var(--charcoal);
   transform: translateY(-1px);
+}
+.hero .btn-primary:hover .btn-chevron {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .btn-primary .btn-chevron { transition: none; }
 }
 .hero .btn-secondary {
   background: transparent;
@@ -1486,6 +1524,7 @@ body[data-page="home"] .product-card-cta:hover {
 }
 .guidance-card-cta {
   display: inline-block;
+  position: relative;        /* anchors the drawn underline */
   margin-top: auto;          /* pin to the bottom of the stretched card */
   align-self: flex-start;
   margin-right: 64px;        /* stay clear of the icon in the opposite corner */
@@ -1494,9 +1533,27 @@ body[data-page="home"] .product-card-cta:hover {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--bronze);
-  border-bottom: 1px solid var(--bronze-l);
-  padding-bottom: 2px;
+  padding-bottom: 2px;       /* holds the old border-bottom's spacing */
   transition: color 0.2s ease;
+}
+/* Underline fades up as it settles down into place on rollover (8/27) —
+   starts 4px high at zero opacity, lands on the baseline. Always the house
+   red, matching the hover type. (A left-to-right scaleX draw was the first
+   cut, replaced same day.) */
+.guidance-card-cta::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--lw-accent-red);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.guidance-card:hover .guidance-card-cta::after { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .guidance-card-cta::after { transition: none; }
 }
 /* Rollover reads in the house red (--lw-accent-red, the LW link/CTA red)
    rather than charcoal. The arrow span inherits color, so one rule covers
@@ -2944,7 +3001,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .hero-eyebrow { font-size: clamp(11px, 0.85vw, 14px); margin-bottom: clamp(18px, 1.5vw, 28px); letter-spacing: 3.5px; }
   .hero-headline { font-size: clamp(60px, 5vw, 100px); line-height: 1.02; margin-bottom: clamp(20px, 2vw, 32px); letter-spacing: -1px; }
   .hero-sub { font-size: clamp(17px, 1.3vw, 22px); max-width: 600px; margin-bottom: clamp(36px, 3vw, 52px); line-height: 1.6; }
-  .hero .btn-primary, .hero .btn-secondary { padding: 16px 32px; font-size: clamp(11px, 0.9vw, 13px); letter-spacing: 2.2px; }
+  .hero .btn-primary { padding: 20px 48px; font-size: clamp(13px, 1vw, 15px); letter-spacing: 2.4px; }
   .hero-badge { gap: 52px; margin-top: 60px; padding-top: 34px; }
   .badge-item { font-size: 13px; }
   .badge-item strong { font-size: 15px; }
@@ -10449,8 +10506,8 @@ body[data-page="home"] .hero-ctas {
   transform: translateY(16px);
   animation: fa-forge-settle 0.75s cubic-bezier(0.34, 1.08, 0.64, 1) forwards;
 }
-body[data-page="home"] .hero-eyebrow  { animation-delay: 0.50s; }
-body[data-page="home"] .hero-headline { animation-delay: 0.65s; }
+body[data-page="home"] .hero-headline { animation-delay: 0.50s; }
+body[data-page="home"] .hero-eyebrow  { animation-delay: 0.65s; }
 body[data-page="home"] .hero-sub      { animation-delay: 0.80s; }
 body[data-page="home"] .hero-ctas     { animation-delay: 0.95s; }
 @keyframes fa-forge-settle {

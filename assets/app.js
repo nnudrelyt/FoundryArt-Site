@@ -40,20 +40,24 @@
             <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art"></a>
           </div>
           <div class="nav-links">
-            ${link('/foundry-art/shop/', 'Tiles', 'shop')}
+            ${/* Nav order mirrors the homepage's section order: craft (#story),
+                  featured tiles (#products), design ideas, guidance. All four
+                  are homepage anchors as of 8/27 — Tiles left /foundry-art/shop/
+                  for the featured-tiles section (the shop stays one click away
+                  via its "View all" link and the Shop Now button); About
+                  replaced "Our Story" and took its #story target, and the
+                  umbrella-brand /about/ page left the FA nav in the same pass
+                  (a real destination since SL 7-23 — still carried by the
+                  studios drawer and the injected footer). */''}
+            ${link('/foundry-art/#story', 'About', 'story')}
+            ${link('/foundry-art/#products', 'Tiles', 'shop')}
             ${link('/foundry-art/#design-ideas', 'Design Ideas', 'design')}
-            ${link('/foundry-art/#story', 'Our Story', 'story')}
             ${/* "How to Buy" promised a purchasing walkthrough and delivered a
                   PDF library plus an FAQ. The section already calls itself
                   "Expert Guidance" and its anchor is #guidance — the nav label
                   was the only thing on the site describing it as a checkout
                   path. */''}
             ${link('/foundry-art/#guidance', 'Guidance', 'guide')}
-            ${/* About the umbrella brand (SL 7-23: moved out of the footer). A
-                  real destination, not a homepage anchor. Below 1024 .nav-links
-                  is hidden for Foundry Art, so the studios drawer + injected
-                  footer below carry About on tablet/mobile. */''}
-            ${link('/about/', 'About', 'about')}
           </div>
           <!-- No .nav-hamburger in the Foundry Art nav. Three of the four links
                above are homepage anchors and are fine to drop on small screens;
