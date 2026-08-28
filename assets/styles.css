@@ -13173,16 +13173,23 @@ body[data-tech-page] .tech-specs th { width: 150px; padding: 20px 24px 20px 0; }
 body[data-tech-page] .tech-specs td { padding: 20px 0; }
 /* 88ch: the old 72 left the answers filling barely three-quarters of the
    list row once the questions stepped up — the wider measure balances the
-   larger question type. Two answers keep &nbsp; glue against danglers. */
-body[data-tech-page] .fa-faq-answer p { max-width: 88ch; }
+   larger question type. Two answers keep &nbsp; glue against danglers.
+   8/28: the homepage FAQ joins every rule in this set — its answers ran
+   the full row width and its question ladder had drifted from the care
+   page's; one FAQ spec now serves both. */
+body[data-tech-page] .fa-faq-answer p,
+body[data-page="home"] .fa-faq-answer p { max-width: 88ch; }
 /* Questions step up toward display scale on the tech pages — the base
    22/28 read a size small against the section headlines (Aug 26 pass). */
-body[data-tech-page] .fa-faq-question { font-size: 26px; }
+body[data-tech-page] .fa-faq-question,
+body[data-page="home"] .fa-faq-question { font-size: 26px; }
 @media (min-width: 1440px) {
-  body[data-tech-page] .fa-faq-question { font-size: 32px; }
+  body[data-tech-page] .fa-faq-question,
+  body[data-page="home"] .fa-faq-question { font-size: 32px; }
 }
 @media (max-width: 560px) {
-  body[data-tech-page] .fa-faq-question { font-size: 21px; }
+  body[data-tech-page] .fa-faq-question,
+  body[data-page="home"] .fa-faq-question { font-size: 21px; }
 }
 /* Spec table folded into an FAQ answer — align with the answer's 4px
    text inset, keep a beat before the per-piece note, and reserve the
