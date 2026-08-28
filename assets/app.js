@@ -2715,6 +2715,15 @@ ${studiosMenuHTML(section)}
     const grid = document.querySelector('.insitu-grid');
     const indicator = document.querySelector('[data-insitu-indicator]');
     if (!grid || !indicator) return;
+    // Mobile (8/28): the rail's images drop loading="lazy" so the peeking
+    // second card is painted before any swipe — a lazy offscreen-right
+    // image left the sliver blank, defeating the affordance.
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      grid.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        img.loading = 'eager';
+        if (!img.complete) img.decode?.().catch(() => {});
+      });
+    }
     const thumb = indicator.querySelector('.insitu-scroll-thumb');
     const update = () => {
       const sw = grid.scrollWidth;

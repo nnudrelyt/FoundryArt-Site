@@ -2902,16 +2902,28 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
      lived only <=560, so tablets/large phones kept small fixed tiles and
      the "much larger" direction never landed there. Height capped so
      ~740px viewports don't produce a 1000px card. */
-  /* Swipe affordance (8/28): at (100vw - 44) the next card's sliver was
-     8px — invisible, and the rail read as a single image. 100vw - 56 with
-     an 8px gap yields a 24px peek at 375 (grows with viewport) for a ~4%
-     narrower card. */
-  .insitu-grid { gap: 8px; scroll-snap-type: x mandatory; scroll-padding-left: 24px; }
-  .insitu-grid > .insitu-tile {
-    flex: 0 0 calc(100vw - 56px);
-    height: min(calc((100vw - 56px) * 1.42), 660px);
-    scroll-snap-align: start;
+  /* Center-snap carousel (8/28, per Tyler: neighbors must reveal at the
+     browser's own edges). The grid cancels the section's 24px gutter to
+     run full-bleed; each card snaps CENTERED, so the previous and next
+     cards bleed in from the left and right screen edges — 36px minus the
+     8px gap = a 28px sliver each side. Gutter-registered snapping can
+     never show a left neighbor; centering is what makes both edges live. */
+  .insitu-grid {
+    gap: 8px;                 /* Tyler redirected mid-round: cards +10% instead of doubling this */
+    margin-inline: -24px;
+    scroll-snap-type: x mandatory;
   }
+  /* tile reveal opt-out lives beside the reveal rules (~L10520) */
+  .insitu-grid > .insitu-tile {
+    /* +10% (8/28): 100vw-72 -> 100vw-40 (335 vs 303 at 375). The mid-rail
+       sliver narrows to 12px a side — the visible-at-rest trade Tyler
+       chose over wider gaps. */
+    flex: 0 0 calc(100vw - 40px);
+    height: min(calc((100vw - 40px) * 1.42), 660px);
+    scroll-snap-align: center;
+  }
+  .insitu-grid > .insitu-tile:first-child { margin-left: 20px; }
+  .insitu-grid > .insitu-tile:last-child { margin-right: 20px; }
   /* Card corners take the FA control radius (8/28) — mobile only; the
      desktop rail keeps its square editorial frames. */
   .insitu-grid > .insitu-tile { border-radius: 3px; }
@@ -10689,6 +10701,17 @@ body[data-page="home"] .hardware-content.is-revealed .hardware-item:nth-child(3)
 
 /* Inspiration tiles: same click cascade on reveal */
 body[data-page="home"] .insitu-grid > .insitu-tile { opacity: 0; }
+/* Mobile (8/28): the center-snap rail's peeking neighbors must be visible
+   at rest, but a card hanging off the right edge never intersects, so the
+   per-tile reveal left the sliver as an empty dark strip until the first
+   swipe. Placed AFTER the pre-state above so it wins the cascade. */
+@media (max-width: 900px) {
+  body[data-page="home"] .insitu-grid > .insitu-tile {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed {
   animation: fa-forge-click 0.65s cubic-bezier(0.34, 1.08, 0.64, 1) both;
 }
