@@ -12637,7 +12637,14 @@ body[data-section="foundry-art"] :is(
   .btn-secondary,
   .btn-primary-lg,
   .btn-ghost,
-  .btn-sample
+  .btn-sample,
+  /* 8/27 audit: three filled Shop Now CTAs lived outside the .btn-*
+     family and were still square — the home shop-grid card CTA, the
+     design-ideas in-situ overlay, and the hardware overlay. All three
+     are FA-only (app.js product renderer + the FA homepage). */
+  .product-card-cta,
+  .insitu-overlay-cta,
+  .hardware-overlay-cta
 ) {
   border-radius: 3px;
 }
