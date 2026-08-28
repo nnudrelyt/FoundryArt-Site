@@ -245,6 +245,9 @@ body[data-section="foundry-art"] header:has(> .nav.nav-hidden) {
 .nav-account:hover { color: var(--bronze); }
 
 /* Foundry Art only — see the markup note in navHTML(). */
+/* Mobile nav cart: hidden on desktop. Doubled class beats .nav-cart-icon's
+   inline-flex below regardless of order. */
+.nav-cart.nav-cart--mobile { display: none; }
 .nav-cart-icon {
   display: inline-flex;
   align-items: center;
@@ -1028,6 +1031,7 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
 
 /* ══════════════════════════════════════ PRODUCT GRID (shared shop + homepage) ══════════════════════════════════════ */
 .products { padding: 80px 40px; background: var(--white); }
+.products-header .section-headline { font-size: 28px; }  /* was an inline style in the markup */
 .products-header {
   display: flex;
   align-items: flex-end;
@@ -1116,17 +1120,21 @@ body[data-page="home"] .product-card:hover .product-card-cta {
 body[data-page="home"] .product-card-cta:hover {
   background: var(--bronze-l);
 }
+/* Base = the desktop-tuned sizes (8/27). These were 38/22/26 with the
+   1440+ block overriding DOWN to 32/16/18, which left every narrower
+   width — mobile especially — carrying the untuned maximums: a card
+   label outweighing the page's section headlines. */
 .product-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 400;
   color: var(--charcoal);
   margin-bottom: 10px;
   line-height: 1.15;
   text-align: center;
 }
-.product-meta { font-size: 22px; color: #4A4640; margin-bottom: 16px; line-height: 1.5; text-align: center; }
-.product-price { font-size: 26px; color: var(--charcoal); font-weight: 500; text-align: center; }
+.product-meta { font-size: 16px; color: #4A4640; margin-bottom: 16px; line-height: 1.5; text-align: center; }
+.product-price { font-size: 18px; color: var(--charcoal); font-weight: 500; text-align: center; }
 .product-price .was { text-decoration: line-through; color: var(--mid); font-weight: 400; margin-right: 6px; }
 .product-price .sale { color: var(--sale); }
 .product-badge {
@@ -1399,6 +1407,7 @@ body[data-page="home"] .product-card-cta:hover {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;       /* "SHOP NOW" must never break (mobile 2-up) */
   font-family: 'Jost', sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -2814,7 +2823,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
 
   .hero { min-height: 560px; }
   .hero-content { width: 72%; padding: 56px 32px; }
-  .hero-headline { font-size: 38px; }
+  .hero-headline { font-size: clamp(50px, 14vw, 72px); }  /* fluid below 901 — fixed tiers read small between breakpoints */
   .hero-sub { max-width: 100%; }
   .hero::after {
     background: linear-gradient(
@@ -2831,7 +2840,11 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .craft-images .wire-img { min-height: 240px; max-height: 380px; }
 
   .products { padding: 56px 24px; }
-  .products-header { flex-direction: column; align-items: flex-start; }
+  .products-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+  /* Stacked header: the headline's 32px desktop margin plus the button made
+     a hole; the CTA follows the type tightly and the grid follows sooner. */
+  .products-header .section-headline { margin-bottom: 10px; }
+  .products-header .btn-secondary { margin-bottom: 8px; }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
 
   .design-ideas { padding: 56px 24px; }
@@ -2842,6 +2855,11 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .hardware-content { padding: 56px 24px; }
 
   .guidance { grid-template-columns: 1fr; padding: 56px 24px; }
+  /* Without this, .fa-faq--inline's desktop grid-column: 2 / -1 forces an
+     IMPLICIT second column in the collapsed 1fr grid — the intro renders
+     as a word-per-line sliver and the FAQ squeezes right (mobile audit,
+     8/27). auto puts everything back in the single column. */
+  .fa-faq--inline { grid-column: auto; }
 
   .social-proof { padding: 56px 24px; }
   .testimonials { grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -2879,7 +2897,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   /* The wordmark is 200px at its base 16px height — 55% of a 360px phone, and
      the single biggest consumer of nav width. 12px brings it to ~150px, which
      is what makes room for the Tiles link below. */
-  body[data-section="foundry-art"] .nav-logo img { height: 12px; }
+  /* FA wordmark height now set once for all mobile in the 1024 block (17px, 8/28) */
   /* …but the Foundry Art cart stays. It was hidden here because "CART 2" as a
      text link couldn't share the row with Shop Now; as a 44px icon it fits,
      and the cart is the one affordance a store shouldn't drop on mobile. Text
@@ -2890,7 +2908,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
 
   .hero { min-height: 600px; }
   .hero-content { width: 100%; padding: 48px 20px; background: transparent; }
-  .hero-headline { font-size: 32px; }
+  .hero-headline { font-size: clamp(50px, 14vw, 72px); }
   .hero-eyebrow { font-size: 13px; letter-spacing: 3.2px; margin-bottom: 22px; }
   .hero-badge { gap: 20px; }
   /* Mobile — uniform dark veil so type stays legible everywhere */
@@ -3029,9 +3047,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .products-header .section-headline { font-size: 42px !important; }
   .product-grid { gap: 48px 36px; }
   .product-card .wire-img { margin-bottom: 20px; }
-  .product-name { font-size: 32px; margin-bottom: 10px; }
-  .product-meta { font-size: 16px; margin-bottom: 16px; }
-  .product-price { font-size: 18px; }
+  /* .product-name/meta/price now match the base (moved there 8/27) */
   .product-cta { font-size: 11px; }
 
   /* Design Ideas */
@@ -3183,8 +3199,19 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .nav { padding: 12px 14px; }
 
   .hero-content { padding: 40px 16px; }
-  .hero-headline { font-size: 30px; }
-  .hero-eyebrow { font-size: 13px; letter-spacing: 2.6px; }
+  /* Shop cards read as a tall column of gaps at 375 — tighten the stack. */
+  .product-card .product-name { margin-top: 14px; }
+  .product-card .product-meta { margin-top: 4px; }
+  .product-card .price { margin-top: 8px; }
+  body[data-page="home"] .product-card-cta { margin-top: 14px; }
+  .hero-headline { font-size: clamp(50px, 14vw, 72px); }
+  /* Subhead on phones: two lines — the descriptor, then EST. 1990 •
+     Chicago together (8/27, per Tyler). Children run A, sep, B, sep, C:
+     A goes block, the first separator hides, B • C stay inline. */
+  .hero-eyebrow { font-size: 12px; letter-spacing: 2.2px; line-height: 2; }
+  .hero-sub { font-size: 18px; line-height: 1.65; }
+  .hero-eyebrow span:nth-child(1) { display: block; }
+  .hero-eyebrow span:nth-child(2) { display: none; }
 
   .brand-band { padding: 88px 14px; }
   .brand-band p { font-size: 26px; }
@@ -3197,7 +3224,16 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .social-proof,
   .footer-cta { padding-left: 14px; padding-right: 14px; }
 
-  .section-headline { font-size: 26px; }
+  /* One section-headline size at phone widths. The high-specificity
+     variants (products' 28, FAQ's 34, guidance's 30) are folded in
+     explicitly so every section h2 lands on 30 (type audit, 8/27). */
+  .section-headline,
+  .products-header .section-headline,
+  .fa-faq-header .section-headline,
+  .guidance-intro .section-headline { font-size: 30px; }
+  .product-name { font-size: 22px; margin-bottom: 6px; }
+  .product-meta { font-size: 14px; margin-bottom: 10px; }
+  .product-price { font-size: 16px; }
   .footer-cta-text h2 { font-size: 32px; }
 
   .insitu-grid > .insitu-tile { flex: 0 0 280px; height: 360px; }
@@ -12863,7 +12899,28 @@ body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover input
    .nav-links globally here would drag it up into 901–1024 on all three. */
 @media (max-width: 1024px) {
   body[data-section="foundry-art"] .nav-links { display: none; }
+  /* Mobile bar follows the Linden header pattern (8/28): wordmark left,
+     menu icon pushed right — same order:2 / margin-left:auto move the
+     .lw2-studios-toggle makes on Linden phones — with the cart sitting
+     immediately left of it. nav-left flexes across the bar; the logo
+     leads, the cart takes the auto margin, the toggle closes the row.
+     (561-1024 the Shop Now pill still sits after the toggle on the far
+     right; at <=560 it hides and the row is exactly [FA .... cart menu].) */
+  body[data-section="foundry-art"] .nav-left { flex: 1; gap: 16px; }
+  body[data-section="foundry-art"] .nav-left .nav-logo { order: -1; margin-right: auto; }
+  body[data-section="foundry-art"] .nav-cart--mobile { display: inline-flex; order: 1; }
+  body[data-section="foundry-art"] .nav-left .studios-toggle { order: 2; }
+  body[data-section="foundry-art"] .nav-right .nav-cart { display: none; }
+  /* Slightly larger wordmark on mobile (8/28) */
+  body[data-section="foundry-art"] .nav-logo img { height: 17px; }
 }
+/* The wordmark sits flush with the content's left edge (8/28): the nav's
+   gutters mirror .hero-content's tier-for-tier, so the logo, headline and
+   copy share one left line down the page. */
+@media (max-width: 1024px) { body[data-section="foundry-art"] .nav { padding-left: 64px; padding-right: 56px; } }  /* base .hero-content runs 64/56 */
+@media (max-width: 900px)  { body[data-section="foundry-art"] .nav { padding-left: 32px; padding-right: 32px; } }
+@media (max-width: 560px)  { body[data-section="foundry-art"] .nav { padding-left: 20px; padding-right: 20px; } }
+@media (max-width: 480px)  { body[data-section="foundry-art"] .nav { padding-left: 16px; padding-right: 16px; } }
 
 /* ══════════════════════════════════════════════════════════════════════════
    TECHNICAL INFORMATION PAGE  (/foundry-art/care/)

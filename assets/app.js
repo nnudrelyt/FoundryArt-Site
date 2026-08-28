@@ -36,7 +36,23 @@
     if (section === 'foundry-art') {
       const link = (href, label, key) => `<a href="${href}" data-nav-key="${key}">${label}</a>`;
       navInner = `
-          <div class="nav-left">${dotGrid}
+          <div class="nav-left">
+            <!-- Mobile-only cart (8/28): on phones the cart sits LEFT of the
+                 studios toggle (and its open/close X state), per Tyler. Same
+                 markup as the nav-right cart; CSS swaps which one shows at
+                 1024. Both badges stay in sync — every updater targets
+                 [data-cart-count] via querySelectorAll. -->
+            <a href="/foundry-art/cart/" class="nav-cart nav-cart-icon nav-cart--mobile">
+              <span class="sr-only">Cart,</span>
+              <svg class="nav-cart-glyph" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <path d="M2.5 3.5h2.7l2.3 10.8h10.6"/>
+                <path d="M6 6.8h15.5l-1.9 5.9H7.3"/>
+                <circle cx="9.6" cy="18.6" r="1.35" fill="currentColor" stroke="none"/>
+                <circle cx="17.4" cy="18.6" r="1.35" fill="currentColor" stroke="none"/>
+              </svg>
+              <span class="nav-cart-count" data-cart-count>2</span>
+              <span class="sr-only" data-cart-count-label>items</span>
+            </a>${dotGrid}
             <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art"></a>
           </div>
           <div class="nav-links">
@@ -217,10 +233,13 @@ ${studiosMenuHTML(section)}
         desc: 'Hand-cast bronze tiles and hardware, direct from our studio.',
         cta: ['/foundry-art/shop/', 'Shop now'],
         note: 'Shop online, direct from the studio',
+        /* Mirrors the FA top nav (8/27 pass): About / Tiles / Design
+           Ideas / Guidance, in the homepage's section order. */
         links: [
-          ['/foundry-art/', 'Studio overview'],
-          ['/foundry-art/shop/', 'Inset Tiles &amp; Liners'],
-          ['/foundry-art/shop/', 'Cabinet Hardware'],
+          ['/foundry-art/#story', 'About'],
+          ['/foundry-art/#products', 'Tiles'],
+          ['/foundry-art/#design-ideas', 'Design Ideas'],
+          ['/foundry-art/#guidance', 'Guidance'],
         ],
       },
       {
@@ -1185,7 +1204,7 @@ ${studiosMenuHTML(section)}
       total:    document.querySelector('[data-summary-total]'),
       count:    document.querySelector('[data-summary-count]'),
       lines:    document.querySelector('[data-cart-lines]'),
-      nav:      document.querySelector('[data-cart-count]'),
+      nav:      document.querySelectorAll('[data-cart-count]'),   /* both nav carts (desktop + mobile instance) */
       shipping: document.querySelector('[data-cart-shipping]'),
     };
 
@@ -1263,7 +1282,7 @@ ${studiosMenuHTML(section)}
       if (els.total)    els.total.textContent = money(subtotal + shipCost);
       if (els.count)    els.count.textContent = qtyTotal;
       if (els.lines)    els.lines.textContent = rows.length;
-      if (els.nav)      els.nav.textContent = qtyTotal;
+      if (els.nav)      els.nav.forEach(el => { el.textContent = qtyTotal; });
       if (!rows.length) showEmpty();
     }
 
