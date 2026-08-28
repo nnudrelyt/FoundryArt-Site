@@ -2727,7 +2727,21 @@ ${studiosMenuHTML(section)}
       thumb.style.width = (visibleRatio * 100) + '%';
       thumb.style.left = (scrollRatio * (1 - visibleRatio) * 100) + '%';
     };
-    grid.addEventListener('scroll', update, { passive: true });
+    // Mobile scrubber reveal (8/28): visible only while the rail is
+    // being swiped, fading out ~1s after the last scroll. Desktop keeps
+    // its native styled scrollbar and never adds the class.
+    let hideTimer = null;
+    // No width gate: on desktop the indicator carries no styles, so the
+    // class is inert there — and matchMedia misreports inside emulated
+    // panes, which is exactly where this gets tested.
+    const activity = () => {
+      indicator.classList.add('is-active');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => indicator.classList.remove('is-active'), 1000);
+    };
+    grid.addEventListener('scroll', () => { update(); activity(); }, { passive: true });
+    ['touchstart', 'pointerdown'].forEach(ev =>
+      grid.addEventListener(ev, activity, { passive: true }));
     window.addEventListener('resize', update);
     // Image loads can shift scrollWidth — re-measure after images decode.
     grid.querySelectorAll('img').forEach(img => {
@@ -2909,6 +2923,9 @@ ${studiosMenuHTML(section)}
     const grid = document.querySelector('.insitu-grid');
     if (!grid) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // No auto-drift on touch layouts (8/28): the phone rail is snap-scrolled
+    // by hand, and a self-moving row fights the snap points.
+    if (window.matchMedia('(max-width: 768px)').matches) return;
 
     const SPEED = 1.5;       // px per frame at 60fps ≈ 90px/s
     const PAUSE_AFTER_INTERACT_MS = 2500;
@@ -2964,6 +2981,18 @@ ${studiosMenuHTML(section)}
   function initHardwareGallery() {
     const grid = document.querySelector('[data-hardware-grid]');
     if (!grid) return;
+    // Mobile mosaic (8/28): the tiles run image-only (overlay hidden in
+    // CSS), so the white studio shots would just repeat the shop grid.
+    // Swap each tile to its mounted lifestyle shot — the same image the
+    // desktop hover reveals in the large pane.
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      grid.querySelectorAll('.hardware-item[data-large]').forEach(item => {
+        const img = item.querySelector('.wire-img img');
+        if (!img) return;
+        img.src = item.dataset.large;
+        if (item.dataset.largeAlt) img.alt = item.dataset.largeAlt;
+      });
+    }
     const largeImg = document.querySelector('[data-hardware-large] > img');
     if (!largeImg) return;
     // Preload alt large views so the first hover swap is instant

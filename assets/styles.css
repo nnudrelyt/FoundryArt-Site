@@ -1372,6 +1372,48 @@ body[data-page="home"] .product-card-cta:hover {
   width: 100%;               /* expand inside centered flex parent */
   max-width: 600px;
 }
+/* Mobile port of Complete the Look (8/28, Tyler's pick of three explored
+   treatments): a pure-image mosaic — the lead piece full width, the pair
+   beneath, no overlay, name or button. The tiles are already links with
+   aria-labels and img alt text, so stripping the visible chrome loses no
+   accessible names; the section intro carries the selling copy. Desktop
+   keeps its grid and hover overlay untouched. */
+@media (max-width: 768px) {
+  /* The desktop large-image pane is redundant on phones (8/28) — the
+     mosaic IS the imagery — and the foyer photo moves from
+     .hardware-content onto the section so it runs the full height
+     behind copy and mosaic alike. */
+  .hardware { display: block; }
+  .hardware-image { display: none; }
+  .hardware {
+    background-color: var(--charcoal);
+    background-image:
+      linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
+      url('/assets/images/process/space-foyer-lotus-bw.jpg');
+    background-size: cover, cover;
+    background-position: center, center 25%;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply, normal;
+  }
+  .hardware-content { background: none; padding: 72px 24px 56px; }
+  .hardware-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: none;
+    margin-top: 40px;
+  }
+  .hardware-grid .hardware-item:first-child { grid-column: 1 / -1; }
+  .hardware-grid .hardware-item:first-child .wire-img { aspect-ratio: 4 / 3.4; }
+  .hardware-grid .hardware-overlay { display: none; }
+  /* These two also live in the <=560 block; repeated here so 561-768
+     (large phones / small tablets) get them too (8/28). */
+  .footer-cta-actions .btn-primary-lg {
+    padding: 19px 44px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+  }
+}
 .hardware-item .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 8px; position: relative; overflow: hidden; }
 .hardware-item p { font-size: 10px; text-align: center; }
 /* Hover overlay restored to centered price + Shop Now button. */
@@ -1695,8 +1737,8 @@ body[data-page="home"] .product-card-cta:hover {
   .fa-faq-header { margin-bottom: 32px; }
   .fa-faq-header .section-headline { font-size: 28px; }
   .fa-faq-trigger { padding: 20px 0; gap: 16px; }
-  .fa-faq-question { font-size: 19px; }
-  .fa-faq-answer p { font-size: 15px; padding-bottom: 20px; padding-left: 0; padding-right: 0; }
+  .fa-faq-question { font-size: 24px; }
+  .fa-faq-answer p { font-size: 17px; line-height: 1.7; padding-bottom: 24px; padding-left: 0; padding-right: 20px; }  /* slight measure trim (8/28) */
 }
 
 /* Inline variant — FAQ nested inside the guidance section, sharing
@@ -1771,7 +1813,7 @@ body[data-page="home"] .product-card-cta:hover {
 }
 @media (max-width: 560px) {
   .footer-cta-text .footer-cta-phone { margin-top: 30px; }
-  .footer-cta-phone a { font-size: 28px; }
+  .footer-cta-phone a { font-size: 36px; }
 }
 
 /* ══════════════════════════════════════ SOCIAL PROOF (homepage) ══════════════════════════════════════ */
@@ -2856,13 +2898,52 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
 
   .design-ideas { padding: 56px 24px; }
-  .insitu-grid > .insitu-tile { flex: 0 0 380px; height: 480px; }
+  /* Viewport-sized across the whole mobile range (8/28) — the first cut
+     lived only <=560, so tablets/large phones kept small fixed tiles and
+     the "much larger" direction never landed there. Height capped so
+     ~740px viewports don't produce a 1000px card. */
+  /* Swipe affordance (8/28): at (100vw - 44) the next card's sliver was
+     8px — invisible, and the rail read as a single image. 100vw - 56 with
+     an 8px gap yields a 24px peek at 375 (grows with viewport) for a ~4%
+     narrower card. */
+  .insitu-grid { gap: 8px; scroll-snap-type: x mandatory; scroll-padding-left: 24px; }
+  .insitu-grid > .insitu-tile {
+    flex: 0 0 calc(100vw - 56px);
+    height: min(calc((100vw - 56px) * 1.42), 660px);
+    scroll-snap-align: start;
+  }
+  /* Card corners take the FA control radius (8/28) — mobile only; the
+     desktop rail keeps its square editorial frames. */
+  .insitu-grid > .insitu-tile { border-radius: 3px; }
+  /* Scrubber (8/28): the always-on native scrollbar goes; the custom
+     [data-insitu-indicator] — JS-driven but unstyled until now — becomes
+     a hairline track that fades in while swiping and back out at rest
+     (the .is-active class comes from initInsituScrollIndicator). */
+  .insitu-grid { scrollbar-width: none; }
+  .insitu-grid::-webkit-scrollbar { display: none; }
+  .insitu-scroll-indicator {
+    position: relative;
+    height: 2px;
+    margin: 20px 24px 0;      /* clear air below the cards */
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 1px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .insitu-scroll-indicator.is-active { opacity: 1; }
+  .insitu-scroll-thumb {
+    position: absolute; top: 0; bottom: 0;
+    background: var(--bronze-l);
+    border-radius: 1px;
+  }
 
   .hardware { grid-template-columns: 1fr; }
   .hardware-image { min-height: 320px; }
   .hardware-content { padding: 56px 24px; }
 
-  .guidance { grid-template-columns: 1fr; padding: 56px 24px; }
+  .guidance { grid-template-columns: 1fr; padding: 56px 24px; gap: 20px; }  /* intro->cards gap 40 -> 20 (8/28) */
+  .fa-faq-answer p { padding-right: 20px; }  /* slight measure trim; must sit after the base 4px rule (8/28) */
+  .guidance-card-cta { font-size: 13px; }   /* +30% from the 10px base (8/28) */
   /* Without this, .fa-faq--inline's desktop grid-column: 2 / -1 forces an
      IMPLICIT second column in the collapsed 1fr grid — the intro renders
      as a word-per-line sliver and the FAQ squeezes right (mobile audit,
@@ -2930,7 +3011,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   }
 
   .brand-band { padding: 104px 16px; }
-  .brand-band p { font-size: 28px; line-height: 1.35; letter-spacing: 0.2px; }
+  .brand-band p { font-size: 33px; line-height: 1.3; letter-spacing: 0.2px; }
   .brand-band cite { font-size: 10px; margin-top: 22px; }
 
   .craft-content { padding: 40px 16px; }
@@ -2941,7 +3022,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .filter-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
 
   .design-ideas { padding: 40px 16px; }
-  .insitu-grid > .insitu-tile { flex: 0 0 320px; height: 410px; }
+  /* insitu tiles: sized in the <=900 block (8/28) */
 
   .hardware-image { min-height: 260px; }
   .hardware-content { padding: 40px 16px; }
@@ -2954,8 +3035,21 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .testimonials { grid-template-columns: 1fr; }
 
   .footer-cta { padding: 40px 16px; }
-  .footer-cta-text h2 { font-size: 36px; }
+  .footer-cta-text h2 { font-size: clamp(38px, 10.5vw, 48px); line-height: 1.12; }
+  /* Body copy at hero-sub scale; must live AFTER the base 16px rule at
+     ~L1823 or it loses the cascade. The eyebrow keeps its pinned 13px
+     via its higher-specificity rule. */
+  .footer-cta-text p { font-size: 18px; line-height: 1.65; }
   .footer-cta-actions { width: 100%; }
+  /* Footer Shop Now matches the hero CTA's construction (19px/44px pad,
+     13->14px type) and steps the weight to 600 — the page's closing
+     button shouldn't be its quietest (8/28). */
+  .footer-cta-actions .btn-primary-lg {
+    padding: 19px 44px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+  }
   .btn-primary-lg, .btn-ghost { white-space: normal; }
 
   .footer { padding: 24px 16px; flex-direction: column; align-items: flex-start; }
@@ -2963,7 +3057,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   /* Shopping */
   .page { padding: 32px 16px 48px; }
   .breadcrumb { padding: 12px 16px; font-size: 9px; }
-  .shop-grid { grid-template-columns: 1fr; }
+  .shop-grid { grid-template-columns: 1fr; gap: 19px; }   /* row gap 32 -> 19, ~40% trim (8/28) */
   .cross-sell-grid { grid-template-columns: 1fr; }
   .field-grid { grid-template-columns: 1fr; }
   .cart-table thead { display: none; }
@@ -3208,6 +3302,12 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .nav { padding: 12px 14px; }
 
   .hero-content { padding: 40px 24px; }   /* phone gutter 16 -> 24 (8/28), meets the bar's 24 inset */
+  /* Guidance cards: one height for all four, a step shorter than the
+     tallest ran naturally (8/28). The stacked column has no grid stretch,
+     so min-height does the equalizing; the body's min gap comes down with
+     it and margin-top:auto still pins the CTA. */
+  .guidance-card { min-height: 280px; }
+  .guidance-card p { margin-bottom: 28px; }
   /* Shop cards read as a tall column of gaps at 375 — tighten the stack. */
   .product-card .product-name { margin-top: 14px; }
   .product-card .product-meta { margin-top: 4px; }
@@ -3223,7 +3323,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .hero-eyebrow span:nth-child(2) { display: none; }
 
   .brand-band { padding: 88px 14px; }
-  .brand-band p { font-size: 26px; }
+  .brand-band p { font-size: 32px; }
 
   .craft-content,
   .products,
@@ -3240,12 +3340,14 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .products-header .section-headline,
   .fa-faq-header .section-headline,
   .guidance-intro .section-headline { font-size: 30px; }
-  .product-name { font-size: 22px; margin-bottom: 6px; }
+  .product-name { font-size: 30px; margin-bottom: 6px; }   /* 22 -> 26 -> 30 across the 8/28 rounds (+15% on the second pass) */
   .product-meta { font-size: 14px; margin-bottom: 10px; }
   .product-price { font-size: 16px; }
-  .footer-cta-text h2 { font-size: 32px; }
+  .footer-cta-text h2 { font-size: clamp(38px, 10.5vw, 48px); line-height: 1.12; }
 
-  .insitu-grid > .insitu-tile { flex: 0 0 280px; height: 360px; }
+  /* The old 280x360 phone override lived here and silently out-cascaded
+     every larger-card attempt (three rounds' worth, 8/28) — the tiles are
+     viewport-sized in the <=900 block now, so this block adds nothing. */
   .hardware-grid { gap: 10px; }
 }
 
