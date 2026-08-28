@@ -307,6 +307,14 @@ body[data-section="foundry-art"] header:has(> .nav.nav-hidden) {
 body[data-section="foundry-art"] :is(.nav-links, .nav-cart, .nav-cta) {
   font-size: var(--fs-eyebrow);
 }
+/* Desktop wordmark: the trimmed mark renders all-ink, so the old 16/18px
+   box heights suddenly meant ~12% larger glyphs. These hold the glyphs at
+   their pre-swap visual size (16 * 50/56, 18 * 50/56); the registration
+   gain stays. */
+body[data-section="foundry-art"] .nav-logo img { height: 14.5px; }
+@media (min-width: 1440px) {
+  body[data-section="foundry-art"] .nav-logo img { height: 16.5px; }
+}
 /* FA nav steps past the floor (8/27): a size up, a weight up, and wider
    tracking. Scoped to the FA shell — Linden and the showroom navs share
    these classes via app.js navHTML and keep their finished construction. */
@@ -2893,6 +2901,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
 @media (max-width: 560px) {
   .nav { padding: 14px 16px; }
   .nav-cta { display: none; }
+  body[data-section="foundry-art"] .nav-right { display: none; }  /* empty at this width; its flex gap misaligns the toggle */
   .nav-cart { display: none; }
   /* The wordmark is 200px at its base 16px height — 55% of a 360px phone, and
      the single biggest consumer of nav width. 12px brings it to ~150px, which
@@ -2907,7 +2916,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .confirm-addresses { grid-template-columns: 1fr; gap: 24px; }
 
   .hero { min-height: 600px; }
-  .hero-content { width: 100%; padding: 48px 20px; background: transparent; }
+  .hero-content { width: 100%; padding: 48px 24px; background: transparent; }
   .hero-headline { font-size: clamp(50px, 14vw, 72px); }
   .hero-eyebrow { font-size: 13px; letter-spacing: 3.2px; margin-bottom: 22px; }
   .hero-badge { gap: 20px; }
@@ -3198,7 +3207,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .nav-logo img { height: 14px; }
   .nav { padding: 12px 14px; }
 
-  .hero-content { padding: 40px 16px; }
+  .hero-content { padding: 40px 24px; }   /* phone gutter 16 -> 24 (8/28), meets the bar's 24 inset */
   /* Shop cards read as a tall column of gaps at 375 — tighten the stack. */
   .product-card .product-name { margin-top: 14px; }
   .product-card .product-meta { margin-top: 4px; }
@@ -3222,7 +3231,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .hardware-content,
   .guidance,
   .social-proof,
-  .footer-cta { padding-left: 14px; padding-right: 14px; }
+  .footer-cta { padding-left: 24px; padding-right: 24px; }   /* 14 -> 24 (8/28) */
 
   /* One section-headline size at phone widths. The high-specificity
      variants (products' 28, FAQ's 34, guidance's 30) are folded in
@@ -12911,16 +12920,41 @@ body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover input
   body[data-section="foundry-art"] .nav-cart--mobile { display: inline-flex; order: 1; }
   body[data-section="foundry-art"] .nav-left .studios-toggle { order: 2; }
   body[data-section="foundry-art"] .nav-right .nav-cart { display: none; }
-  /* Slightly larger wordmark on mobile (8/28) */
-  body[data-section="foundry-art"] .nav-logo img { height: 17px; }
+  /* ── The Linden mobile-bar spec, verbatim (8/28, per Tyler: one system,
+     FA varies only the wordmark, the cart, white background, and sticky
+     behavior). Measured off the live LW bar at 375: 80px tall, padding
+     16px 16px 16px 24px, 44x44 toggle in #757367 inset 16 from the right,
+     wordmark at x24. The earlier per-tier content-gutter mirroring is
+     superseded by the system inset. */
+  body[data-section="foundry-art"] .nav {
+    min-height: 80px;
+    padding: 16px 16px 16px 24px;
+  }
+  /* FA caps wordmark: 20px reads optically level with LW's 28px serif
+     (caps carry no ascenders/descenders) — but the FA lockup runs ~14:1,
+     286px wide at 20px, which overflows a 375 bar next to two 44px
+     controls. The mark shrinks with available space instead: 20px from
+     ~500px down to ~17px at 375. */
+  body[data-section="foundry-art"] .nav-left .nav-logo { min-width: 0; }
+  body[data-section="foundry-art"] .nav-logo img {
+    height: auto; width: auto;
+    /* 20px read oversized once the trimmed mark stopped wasting canvas —
+       the same number suddenly meant ~17% larger glyphs. Scaled back 22%
+       (8/28, per Tyler); registration unchanged. */
+    max-height: 15.5px; max-width: 100%;
+  }
+  body[data-section="foundry-art"] .nav-left { gap: 4px; }
+  /* An empty nav-right still costs the .nav's 16px flex gap, pushing the
+     toggle to a 32px right inset instead of LW's 16. At <=560 all three
+     of its children are display:none, so the container goes too. */
+  body[data-section="foundry-art"] .nav-left .studios-toggle,
+  body[data-section="foundry-art"] .nav-cart--mobile {
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 6px;
+    color: #757367;           /* LW's warm control gray */
+  }
 }
-/* The wordmark sits flush with the content's left edge (8/28): the nav's
-   gutters mirror .hero-content's tier-for-tier, so the logo, headline and
-   copy share one left line down the page. */
-@media (max-width: 1024px) { body[data-section="foundry-art"] .nav { padding-left: 64px; padding-right: 56px; } }  /* base .hero-content runs 64/56 */
-@media (max-width: 900px)  { body[data-section="foundry-art"] .nav { padding-left: 32px; padding-right: 32px; } }
-@media (max-width: 560px)  { body[data-section="foundry-art"] .nav { padding-left: 20px; padding-right: 20px; } }
-@media (max-width: 480px)  { body[data-section="foundry-art"] .nav { padding-left: 16px; padding-right: 16px; } }
 
 /* ══════════════════════════════════════════════════════════════════════════
    TECHNICAL INFORMATION PAGE  (/foundry-art/care/)

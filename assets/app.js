@@ -53,7 +53,10 @@
               <span class="nav-cart-count" data-cart-count>2</span>
               <span class="sr-only" data-cart-count-label>items</span>
             </a>${dotGrid}
-            <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art"></a>
+            <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><!-- trimmed mark (8/28): the original foundry-art.png carries 133px of
+                 transparent padding per side (16.6% of canvas), so the glyphs sat
+                 ~37px right of wherever the box was aligned. The trimmed file is
+                 0/0. --><img src="/assets/images/linden/wordmarks/trimmed/foundry-art.png" alt="Foundry Art"></a>
           </div>
           <div class="nav-links">
             ${/* Nav order mirrors the homepage's section order: craft (#story),
