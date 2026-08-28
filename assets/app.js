@@ -2933,8 +2933,11 @@ ${studiosMenuHTML(section)}
     if (!grid) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     // No auto-drift on touch layouts (8/28): the phone rail is snap-scrolled
-    // by hand, and a self-moving row fights the snap points.
-    if (window.matchMedia('(max-width: 768px)').matches) return;
+    // by hand, and a self-moving row fights the snap points. Checked LIVE in
+    // the tick, not once at load — an early return here meant crossing the
+    // breakpoint (resize, device-emulation toggle) without a reload killed
+    // the drift on desktop permanently.
+    const touchLayout = window.matchMedia('(max-width: 768px)');
 
     const SPEED = 1.5;       // px per frame at 60fps ≈ 90px/s
     const PAUSE_AFTER_INTERACT_MS = 2500;
@@ -2957,7 +2960,7 @@ ${studiosMenuHTML(section)}
     );
 
     function tick() {
-      if (!paused) {
+      if (!paused && !touchLayout.matches) {
         grid.scrollLeft += SPEED * dir;
         const max = grid.scrollWidth - grid.clientWidth;
         if (grid.scrollLeft >= max - 1) dir = -1;
