@@ -935,7 +935,7 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
   justify-content: center;
   max-width: 680px;   /* visual scope cap — keeps the body text from sprawling on wide monitors */
 }
-.craft-steps { display: flex; flex-direction: column; gap: 30px; margin-top: 36px; }  /* 14/16 -> 30/36 (8/29): the passages breathe like the heading->lede beat above */
+.craft-steps { display: flex; flex-direction: column; gap: 30px; margin-top: 8px; }  /* lede->first-step total = its 24px margin + this: 36 -> 8 halves the ~60px gap (8/29) */
 .craft-step { display: flex; gap: 14px; align-items: flex-start; }
 /* Small upright bronze square, sitting beside the LABEL rather than
    centred on the whole copy block. margin-top centres it on the
@@ -958,7 +958,7 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
   font-size: 13px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--charcoal);
+  color: var(--bronze);     /* charcoal -> bronze (8/29) */
   margin-bottom: 6px;
 }
 /* display:block so the measure cap applies — the span is inline by default.
