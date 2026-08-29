@@ -943,15 +943,10 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
    (20.5 - 8) / 2 at >=1440 and (19 - 6) / 2 below it — both round
    to 6px, so one value serves both. Revisit if the label's
    font-size or line-height changes. */
-.craft-step-num {
-  position: relative;
-  font-size: 0;
-  width: 6px;
-  min-width: 6px;
-  height: 6px;
-  flex-shrink: 0;
-  margin-top: 6px;
-}
+/* 8/29: bullets removed — the tracked-caps labels carry the steps alone
+   and the text sits flush with the lede above. The ::before square and
+   its centering math retire with the element. */
+.craft-step-num { display: none; }
 .craft-step-num::before {
   content: '';
   position: absolute;
@@ -975,9 +970,9 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
    rewritten, and will catch the next one. */
 .craft-step-text span {
   display: block;
-  font-size: 15px;
+  font-size: 16px;          /* matches .section-body (8/29) */
   color: var(--mid);
-  line-height: 1.55;
+  line-height: 1.65;
   max-width: 430px;
   text-wrap: pretty;
 }
@@ -3170,9 +3165,9 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
 
   /* Craft */
   .craft-content { padding: 130px 80px 130px 96px; max-width: 800px; }
-  .craft-step-num { width: 8px; min-width: 8px; height: 8px; margin-top: 6px; }   /* offset centres it on the label's line box */
+  /* .craft-step-num retired 8/29 (bullets removed) */
   .craft-step-text strong { font-size: 14px; letter-spacing: 1.8px; margin-bottom: 8px; }
-  .craft-step-text span { font-size: 17px; line-height: 1.55; }
+  .craft-step-text span { font-size: 19px; line-height: 1.65; max-width: 480px; }  /* matches .section-body's 19 (8/29); measure widened a step for the larger type */
   .craft-images .wire-img { min-height: 300px; }
 
   /* Products section + grid */
