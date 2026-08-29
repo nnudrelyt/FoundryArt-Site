@@ -307,6 +307,16 @@ body[data-section="foundry-art"] header:has(> .nav.nav-hidden) {
 body[data-section="foundry-art"] :is(.nav-links, .nav-cart, .nav-cta) {
   font-size: var(--fs-eyebrow);
 }
+/* Desktop toggle registration matches the Linden header exactly (8/29):
+   LW pins its studios toggle at x30 with an 18px gap to the wordmark at
+   every desktop width, while FA's drifted with its padding tiers (40 at
+   base, 64 at 1440+) — the icon visibly jumped when crossing between the
+   two homepages. Left padding pins to 30 and the gap to 18; the right
+   side keeps FA's own insets. The logo lands at x92, same as LW's. */
+@media (min-width: 1025px) {
+  body[data-section="foundry-art"] .nav { padding-left: 30px; }
+  body[data-section="foundry-art"] .nav-left { gap: 18px; }
+}
 /* Desktop wordmark: the trimmed mark renders all-ink, so the old 16/18px
    box heights suddenly meant ~12% larger glyphs. These hold the glyphs at
    their pre-swap visual size (16 * 50/56, 18 * 50/56); the registration
