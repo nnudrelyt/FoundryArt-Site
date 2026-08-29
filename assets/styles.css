@@ -14741,15 +14741,8 @@ body.drawer-open { overflow: hidden; }
   background: linear-gradient(to bottom, rgba(236, 234, 226, 0.97) 0%, rgba(236, 234, 226, 0.92) 62px, rgba(236, 234, 226, 0.55) 118px, rgba(236, 234, 226, 0) 210px);
 }
 @media (max-width: 1680px) and (min-width: 1025px) {
+  /* laptop tier keeps the photo pane; only the brand marks step down */
   .studios-fs[data-menu-variant="e"] { --e-mark-h: clamp(26px, 2.6vw, 40px); }
-  .studios-fs[data-menu-variant="e"] .fs-brand-media,
-  .studios-fs[data-menu-variant="e"] .fs-lw-media { display: none; }
-  .studios-fs[data-menu-variant="e"] .fs-brands {
-    width: 100%;
-    min-width: 0;
-    padding-right: clamp(28px, 8vw, 96px);
-  }
-  .studios-fs[data-menu-variant="e"] .fs-lw-nav { max-width: calc(100vw - 96px); }
 }
 /* ≤760px: E joins the shared stacked layout (late resets, as D) */
 @media (max-width: 1024px) {
@@ -14947,6 +14940,16 @@ body.drawer-open { overflow: hidden; }
     transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   .studios-fs[data-menu-variant="e"] .fs-brand-cta:hover .fs-cta-arrow { transform: translateX(5px); }
+}
+
+/* laptop band: the index column is too narrow for a one-line sentence,
+   so descriptions wrap instead of clipping to an ellipsis */
+@media (max-width: 1680px) and (min-width: 1025px) {
+  .studios-fs[data-menu-variant="e"] .fs-brand-desc {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
 }
 
 /* ── E: top-row nav continuity (>1100px) ──
