@@ -1756,7 +1756,7 @@ body[data-page="home"] .product-card-cta:hover {
 
 /* Mobile */
 @media (max-width: 560px) {
-  .fa-faq { padding: 56px 16px 72px; }
+  .fa-faq { padding: 56px 24px 72px; }   /* 16 -> 24 (8/29): the FA phone gutter */
   .fa-faq-header { margin-bottom: 32px; }
   .fa-faq-header .section-headline { font-size: 28px; }
   .fa-faq-trigger { padding: 20px 0; gap: 16px; }
@@ -15363,5 +15363,27 @@ body.menu-e .lw2-studios-toggle svg rect {
     margin-bottom: clamp(20px, 2.8vh, 44px);
     padding: clamp(14px, 1.9vh, 27px) 0;
     font-size: 15px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TECH PAGES — PHONE GUTTERS (8/29)
+   The care/how-its-made sections ran 64px side padding at every width
+   (and the hero/bands 32px via the 1024 block) while the FA homepage
+   standardized on a 24px gutter for <=900. One override brings every
+   tech-page band onto the home gutter; desktop keeps its 64
+   (= the menu-icon gutter, by design).
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  body[data-tech-page] .fa-band,
+  body[data-tech-page] .fa-wrap > section:not(.fa-band),
+  body[data-tech-page] .fa-wrap > section.fa-alloy--patina,
+  body[data-tech-page] .fa-hero-content,
+  body[data-tech-page] .fa-band--bleed,
+  body[data-tech-page] .fa-quote,
+  body[data-tech-page] .fa-assure,
+  body[data-tech-page] .tech-cta {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
