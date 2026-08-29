@@ -232,7 +232,7 @@ ${studiosMenuHTML(section)}
         name: 'Foundry Art',
         tone: 'dark',
         mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.png',
-        image: '/assets/images/foundry-art-arrays/inset-tiles-array.jpg',
+        image: '/assets/images/foundry-art-arrays/straight-line-square-orchid.jpg',   /* 8/28: Straight Line & Square, Traditional Bronze, orchid scene */
         desc: 'Hand-cast bronze tiles and hardware, direct from our studio.',
         cta: ['/foundry-art/shop/', 'Shop now'],
         note: 'Shop online, direct from the studio',
