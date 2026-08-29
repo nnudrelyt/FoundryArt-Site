@@ -1660,10 +1660,16 @@ body[data-page="home"] .product-card-cta:hover {
   font-size: 22px;
   font-weight: 500;
   line-height: 1.25;
-  /* 8/28: long questions ran right up to the +/- mark before wrapping —
-     the flex gap alone was the only buffer. The reserved band makes the
-     text break well before the indicator's column. */
-  padding-right: 64px;
+  /* 8/28 second cut: a 64px guard changed nothing visible — the longest
+     question still fit on one line inside it. A hard measure is what
+     actually forces the break: px, not ch, per the note above .pdp-desc.
+     600px wraps "What's the difference between Traditional and White
+     Bronze?" to two lines at the base 26px; the 1440+ override scales
+     with the 32px type. Short questions stay one line. */
+  max-width: 600px;
+}
+@media (min-width: 1440px) {
+  .fa-faq-question { max-width: 740px; }
 }
 .fa-faq-icon {
   position: relative;
