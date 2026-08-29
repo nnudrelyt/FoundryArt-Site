@@ -567,12 +567,15 @@ body.drawer-open { overflow: hidden; }
   position: absolute;
   inset: 0;
   z-index: 1;
+  /* 8/28: the wash used to clear to 0 on the right, leaving the video
+     bare where text can reach — a light ~16% floor now runs edge to
+     edge for contrast, kept subtle per Tyler. */
   background: linear-gradient(
     90deg,
     rgba(0,0,0,0.55) 0%,
     rgba(0,0,0,0.42) 28%,
-    rgba(0,0,0,0.10) 55%,
-    rgba(0,0,0,0) 78%
+    rgba(0,0,0,0.18) 55%,
+    rgba(0,0,0,0.16) 78%
   );
   pointer-events: none;
 }

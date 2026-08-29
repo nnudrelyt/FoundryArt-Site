@@ -230,6 +230,11 @@ ${studiosMenuHTML(section)}
       {
         key: 'foundry-art',
         name: 'Foundry Art',
+        /* 8/28: the brand's identity links (wordmark, name, photo) go to
+           the FA homepage plain — links[0] became the #story anchor when
+           the panel took the top nav's links, which made "Foundry Art"
+           itself land mid-page. */
+        home: '/foundry-art/',
         tone: 'dark',
         mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.png',
         image: '/assets/images/foundry-art-arrays/straight-line-square-orchid.jpg',   /* 8/28: Straight Line & Square, Traditional Bronze, orchid scene */
@@ -267,14 +272,14 @@ ${studiosMenuHTML(section)}
 
     const panel = (b) => `
         <div class="fs-brand${b.key === focus ? ' focus' : ''}" data-brand="${b.key}" data-tone="${b.tone}">
-          <a class="fs-brand-media" href="${b.links[0][0]}" data-studios-link aria-label="${b.name}">
+          <a class="fs-brand-media" href="${b.home || b.links[0][0]}" data-studios-link aria-label="${b.name}">
             <img src="${b.image}" alt="">
           </a>
           <div class="fs-brand-info">
-            <a class="fs-brand-mark" href="${b.links[0][0]}" data-studios-link>
+            <a class="fs-brand-mark" href="${b.home || b.links[0][0]}" data-studios-link>
               <img src="${b.mark}" alt="${b.name}">
             </a>
-            <a class="fs-brand-name" href="${b.links[0][0]}" data-studios-link>${b.name}</a>
+            <a class="fs-brand-name" href="${b.home || b.links[0][0]}" data-studios-link>${b.name}</a>
             <p class="fs-brand-desc">${b.desc}</p>
             ${b.linksTitle ? `<p class="fs-brand-links-title">${b.linksTitle}</p>` : ''}
             <nav class="fs-brand-links" aria-label="${b.name}">
