@@ -1332,8 +1332,11 @@ body[data-page="home"] .product-card-cta:hover {
   background-image:
     linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
     url('/assets/images/process/lotus-limestone-angle-bw.jpg');
-  background-size: cover, 118%;
-  background-position: center, center 25%;
+  /* 8/29: cover, not 118% width — that sizing only filled the panel by
+     accident of the old portrait foyer's ratio; the landscape limestone
+     shot ran short of the component's height under it. */
+  background-size: cover, cover;
+  background-position: center, center 35%;
   background-repeat: no-repeat;
   background-blend-mode: multiply, normal;
   padding: 100px 56px;
