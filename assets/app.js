@@ -237,7 +237,7 @@ ${studiosMenuHTML(section)}
         home: '/foundry-art/',
         tone: 'dark',
         mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.png',
-        image: '/assets/images/foundry-art-arrays/straight-line-square-orchid.jpg',   /* 8/28: Straight Line & Square, Traditional Bronze, orchid scene */
+        image: '/assets/images/foundry-art-arrays/stl-orchid-close.jpg',   /* 8/29: FA_STL_Orchid_Close_03-05, orchid close scene */
         desc: 'Hand-cast bronze tiles and hardware, direct from our studio.',
         cta: ['/foundry-art/shop/', 'Shop now'],
         note: 'Shop online, direct from the studio',

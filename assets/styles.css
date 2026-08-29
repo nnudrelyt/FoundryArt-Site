@@ -14695,20 +14695,6 @@ body.drawer-open { overflow: hidden; }
   opacity: 1;
   pointer-events: auto;
 }
-/* top scrim: dark photos deepen under the white nav; light photos get a
-   parchment wash so ink links keep footing */
-.studios-fs[data-menu-variant="e"] .fs-brand-media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.studios-fs[data-menu-variant="e"] .fs-brand[data-tone="dark"] .fs-brand-media::after {
-  background: linear-gradient(to bottom, rgba(10, 16, 17, 0.6) 0%, rgba(10, 16, 17, 0.24) 90px, transparent 170px);
-}
-.studios-fs[data-menu-variant="e"] .fs-brand[data-tone="light"] .fs-brand-media::after {
-  background: linear-gradient(to bottom, rgba(236, 234, 226, 0.9) 0%, rgba(236, 234, 226, 0.4) 90px, rgba(236, 234, 226, 0) 170px);
-}
 
 /* Linden Workshops pane — the right half on open, before any studio is
    hovered. Same geometry as a brand's media so the two crossfade in place;
@@ -14730,15 +14716,6 @@ body.drawer-open { overflow: hidden; }
   height: 100%;
   object-fit: cover;
   display: block;
-}
-/* Deeper than a brand photo's scrim: the sketches are pencil on white, so
-   the nav has line work rather than a flat field behind it. */
-.studios-fs[data-menu-variant="e"] .fs-lw-media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(236, 234, 226, 0.97) 0%, rgba(236, 234, 226, 0.92) 62px, rgba(236, 234, 226, 0.55) 118px, rgba(236, 234, 226, 0) 210px);
 }
 @media (max-width: 1680px) and (min-width: 1025px) {
   /* laptop tier keeps the photo pane; only the brand marks step down */
@@ -15241,14 +15218,6 @@ body.menu-e .lw2-studios-toggle svg rect {
       rgba(44, 30, 20, 0.32) 0%,
       rgba(44, 30, 20, 0.10) 26%,
       rgba(44, 30, 20, 0) 52%);
-  }
-
-  /* photo scrims: one subtle diagonal parchment wash from the top-left,
-     replacing the old top bands (nothing overlays the photo anymore) */
-  .studios-fs[data-menu-variant="e"] .fs-lw-media::after,
-  .studios-fs[data-menu-variant="e"] .fs-brand[data-tone="dark"] .fs-brand-media::after,
-  .studios-fs[data-menu-variant="e"] .fs-brand[data-tone="light"] .fs-brand-media::after {
-    background: linear-gradient(135deg, rgba(236, 234, 226, 0.30) 0%, rgba(236, 234, 226, 0) 65%);
   }
 
   /* photo pane settles: a slow drift from 1.045 to rest as it takes focus */
