@@ -1756,7 +1756,13 @@ body[data-page="home"] .product-card-cta:hover {
   background: transparent;
 }
 .fa-faq--inline .fa-faq-list {
-  max-width: none;   /* fill the guidance-section container width */
+  /* 8/28: was max-width:none ("fill the guidance-section container"),
+     which is why the homepage rows ran the full column while the care
+     page capped at 900/1080 — the right margin Tyler flagged. The base
+     caps flow through now; margin 0 keeps the list on the column's left
+     edge (the base centers with auto margins, which would break rank
+     with the intro and cards above). */
+  margin: 0;
 }
 .fa-faq--inline .fa-faq-header {
   margin: 0 0 32px;
