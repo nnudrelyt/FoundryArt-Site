@@ -1660,6 +1660,10 @@ body[data-page="home"] .product-card-cta:hover {
   font-size: 22px;
   font-weight: 500;
   line-height: 1.25;
+  /* 8/28: long questions ran right up to the +/- mark before wrapping —
+     the flex gap alone was the only buffer. The reserved band makes the
+     text break well before the indicator's column. */
+  padding-right: 64px;
 }
 .fa-faq-icon {
   position: relative;
