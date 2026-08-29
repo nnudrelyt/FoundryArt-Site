@@ -1773,9 +1773,9 @@ body[data-page="home"] .product-card-cta:hover {
 
      The cards-to-heading gap is this margin PLUS the .guidance grid's row-gap
      (40px here, 64px at 1440+), so the margin is the only half that can move:
-     8px lands the total at 48px, half the 96px it was. */
+     24px lands the total at 64px (8/29: was 8px/48px total, bumped ~33%). */
   padding: 0;
-  margin-top: 8px;
+  margin-top: 24px;
   background: transparent;
 }
 .fa-faq--inline .fa-faq-list {
@@ -1795,13 +1795,13 @@ body[data-page="home"] .product-card-cta:hover {
 /* The heading is a plain .section-headline now (same class as "Not sure where
    to start?" above it), so the old bespoke .fa-faq-title scale is gone. */
 @media (min-width: 1440px) {
-  .fa-faq--inline { margin-top: 8px; }   /* + 64px row-gap = 72px, half of 144 */
+  .fa-faq--inline { margin-top: 32px; }   /* + 64px row-gap = 96px (8/29: was 8px/72px total, bumped ~33%) */
   .fa-faq--inline .fa-faq-header { margin-bottom: 40px; }
 }
 @media (max-width: 560px) {
-  /* The 40px row-gap alone is already about half the old 76px, so there is no
-     margin left to give back here. */
-  .fa-faq--inline { margin-top: 0; }
+  /* 8/29: measured row-gap at phone width is 20px, so 8px margin lands the
+     cards-to-title gap at 28px (was 20px, bumped 40% like desktop). */
+  .fa-faq--inline { margin-top: 8px; }
   .fa-faq--inline .fa-faq-header { margin-bottom: 20px; }
 }
 
