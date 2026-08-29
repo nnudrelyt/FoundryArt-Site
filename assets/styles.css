@@ -1331,7 +1331,7 @@ body[data-page="home"] .product-card-cta:hover {
   background-color: var(--charcoal);
   background-image:
     linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-    url('/assets/images/process/space-foyer-lotus-bw.jpg');
+    url('/assets/images/process/lotus-limestone-angle-bw.jpg');
   background-size: cover, 118%;
   background-position: center, center 25%;
   background-repeat: no-repeat;
@@ -1389,7 +1389,7 @@ body[data-page="home"] .product-card-cta:hover {
     background-color: var(--charcoal);
     background-image:
       linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-      url('/assets/images/process/space-foyer-lotus-bw.jpg');
+      url('/assets/images/process/lotus-limestone-angle-bw.jpg');
     background-size: cover, cover;
     background-position: center, center 25%;
     background-repeat: no-repeat;
