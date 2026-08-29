@@ -935,7 +935,7 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
   justify-content: center;
   max-width: 680px;   /* visual scope cap — keeps the body text from sprawling on wide monitors */
 }
-.craft-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+.craft-steps { display: flex; flex-direction: column; gap: 30px; margin-top: 36px; }  /* 14/16 -> 30/36 (8/29): the passages breathe like the heading->lede beat above */
 .craft-step { display: flex; gap: 14px; align-items: flex-start; }
 /* Small upright bronze square, sitting beside the LABEL rather than
    centred on the whole copy block. margin-top centres it on the
@@ -968,12 +968,14 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
    is a guard, not load-bearing: the current copy sets no widows either
    way, but it caught a lone "years." on step 2 before that line was
    rewritten, and will catch the next one. */
+/* 8/29: the step body IS lede copy now — .section-body's size, color
+   (--slate, not --mid) and 680 measure, so the two read as one voice. */
 .craft-step-text span {
   display: block;
-  font-size: 16px;          /* matches .section-body (8/29) */
-  color: var(--mid);
+  font-size: 16px;
+  color: var(--slate);
   line-height: 1.65;
-  max-width: 430px;
+  max-width: 680px;
   text-wrap: pretty;
 }
 /* Single team-photo block on the left. min-height matches the content
@@ -3166,8 +3168,8 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   /* Craft */
   .craft-content { padding: 130px 80px 130px 96px; max-width: 800px; }
   /* .craft-step-num retired 8/29 (bullets removed) */
-  .craft-step-text strong { font-size: 14px; letter-spacing: 1.8px; margin-bottom: 8px; }
-  .craft-step-text span { font-size: 19px; line-height: 1.65; max-width: 480px; }  /* matches .section-body's 19 (8/29); measure widened a step for the larger type */
+  .craft-step-text strong { font-size: 14px; letter-spacing: 1.8px; margin-bottom: 10px; }
+  .craft-step-text span { font-size: 19px; line-height: 1.65; }  /* 680 measure from base */
   .craft-images .wire-img { min-height: 300px; }
 
   /* Products section + grid */
