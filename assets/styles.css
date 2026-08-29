@@ -13193,8 +13193,13 @@ body[data-tech-page] .tech-specs td { padding: 20px 0; }
    8/28: the homepage FAQ joins every rule in this set — its answers ran
    the full row width and its question ladder had drifted from the care
    page's; one FAQ spec now serves both. */
+/* 8/28: the 88ch cap alone could still exceed the indicator's column at
+   some widths — answers ended a hair PAST the +/- marks while questions
+   stopped short, which read as misalignment. The min() keeps 88ch as the
+   ceiling but always ends the text ~110px before the row's right edge,
+   clear of the icon zone. */
 body[data-tech-page] .fa-faq-answer p,
-body[data-page="home"] .fa-faq-answer p { max-width: 88ch; }
+body[data-page="home"] .fa-faq-answer p { max-width: min(88ch, calc(100% - 110px)); }
 /* Questions step up toward display scale on the tech pages — the base
    22/28 read a size small against the section headlines (Aug 26 pass). */
 body[data-tech-page] .fa-faq-question,
