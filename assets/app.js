@@ -2930,10 +2930,12 @@ ${studiosMenuHTML(section)}
     startObs.observe(section);
   }
 
-  // Hero video needs no JS loop masking: carving-wax-loop-v3.mp4 has its tail
-  // crossfaded over its head, so the last frame already matches the first
-  // (seam MSE 2868 -> 31). The previous build dipped the video to opacity 0
-  // against the black backdrop, which read as a flash to black — SL 7-22-26.
+  // Hero video needs no JS loop masking: carving-wax-loop-v4-boomerang.mp4
+  // plays the smoothed footage forward then mirrored back (dupe frames removed,
+  // motion-interpolated to true 24fps), so both turn points are continuous by
+  // construction — no crossfade, no seam. The build before v3 dipped the video
+  // to opacity 0 against the black backdrop, which read as a flash to black —
+  // SL 7-22-26.
 
   function initHardwareGallery() {
     const grid = document.querySelector('[data-hardware-grid]');
