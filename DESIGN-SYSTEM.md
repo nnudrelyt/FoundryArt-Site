@@ -370,28 +370,21 @@ showroom-only deltas, and the reason for each:
   white instead. The 80px top comes in to 64 — it was sized to give a colour band
   breathing room, and without the band it reads as a hole. The 88px bottom stays:
   the panel is the last block before the footer.
-- **Mixed faces across the group titles (brand-owner direction, 2026-09-01).** Named
-  heading by heading, and confirmed as deliberate:
+- **Group titles are sans labels, not headings (brand-owner direction, 2026-09-01).**
+  Settled after several passes:
 
   | Heading | Face |
   |---|---|
-  | `Literature` (h2) | Fanwood 32px — the shared rule, unmodified |
-  | `Tear Sheets` (h3) | **Open Sans 600 17px** |
-  | `Installation and Cleaning` (h3) | **Open Sans 600 17px** |
-  | `Other` (h3) | Fanwood 24px, via `.lw2-zone-lit-group-title--serif` |
+  | `Literature` (h2) | Fanwood 32px / 26px mobile — the shared rule, unmodified |
+  | The three group titles (h3) | **Open Sans 600 15px**, `letter-spacing: 0.02em` |
   | Sheet names (h4) | **Open Sans 16px** |
 
-  So two of three sibling group titles are sans and the third is serif. **This is
-  asked-for, not drift — don't normalise it.** The sans size steps *down* from the
-  Fanwood value it replaces (24 → 17px) because Open Sans reads noticeably larger at
-  a matched size. `--serif` is an appearance-named modifier because nothing
-  structural distinguishes "Other" from its siblings; the distinction is purely a
-  client aesthetic call, and naming it for anything else would imply a rule that
-  isn't there.
-  **The rules and their mobile step-downs live together in the trailing block**,
-  after the shared `@media` rules — a size restated only in the earlier 640px block
-  is dead, because the trailing rules match at equal specificity and win on order.
-  This bit us once already.
+  At 15px the group titles sit *below* the 16px sheet names they head, so they read
+  as labels above each set rather than as headings in their own right; weight and
+  tracking carry them. The size holds at every breakpoint — no mobile step-down.
+  **The rules live in the trailing block**, after the shared `@media` rules — a size
+  restated only in the earlier 640px block is dead, because the trailing rules match
+  at equal specificity and win on order. This bit us once already.
 - **The document carries its own edge.** A consequence of the white panel: a white
   PDF page on a white ground has no boundary. So the 18px white mat is dropped
   (`padding: 0`), a `--lw-border-subtle` hairline is drawn on the sheet, and a soft

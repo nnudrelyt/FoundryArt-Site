@@ -10406,23 +10406,15 @@ body[data-page="classic"] .lw2-coll-intro p.lw2-coll-intro-tagline {
    on white has no edge at all. So the document itself gets the edge: the white
    mat is dropped, a hairline is drawn on the sheet, and a soft shadow lifts it
    off the page. Reads as a sheet of paper rather than a bleeding rectangle. */
-/* Type faces on this page, per brand-owner direction. "Literature" and "Other"
-   keep the LW serif; the two descriptive group titles take Open Sans; the sheet
-   names take Open Sans. That leaves the three sibling group titles deliberately
-   mixed — it was asked for explicitly, so don't "correct" it to match.
-   The sans size steps down from the Fanwood value it replaces, since Open Sans
-   reads noticeably larger at a matched size. */
+/* Type faces on this page, per brand-owner direction. "Literature" keeps the LW
+   serif at the shared size; all three group titles take Open Sans at 15px, which
+   makes them read as labels above each set rather than as headings in their own
+   right — the weight and tracking carry them against the 16px sheet names below. */
 body[data-page="showroom-zone"] .lw2-zone-lit-group-title {
   font-family: 'Open Sans', Helvetica, sans-serif;
-  font-size: 17px;      /* was Fanwood 24px */
+  font-size: 15px;      /* was Fanwood 24px */
   font-weight: 600;
   letter-spacing: 0.02em;
-}
-body[data-page="showroom-zone"] .lw2-zone-lit-group-title--serif {
-  font-family: 'Fanwood Text', Georgia, serif;
-  font-size: 24px;
-  font-weight: 400;
-  letter-spacing: normal;
 }
 body[data-page="showroom-zone"] .lw2-coll-info-card :is(h3, h4) {
   font-family: 'Open Sans', Helvetica, sans-serif;
@@ -10473,8 +10465,6 @@ body[data-page="showroom-zone"] .lw2-coll-info-grid {
   }
   /* The face swap above sits after the shared @media step-downs, so the mobile
      sizes have to be restated here or the desktop values hold on phones. */
-  body[data-page="showroom-zone"] .lw2-zone-lit-group-title { font-size: 16px; }
-  body[data-page="showroom-zone"] .lw2-zone-lit-group-title--serif { font-size: 21px; }
 }
 
 /* -- ALSO AVAILABLE FROM: live tan panel + wordmark heading + large 3:2 images -- */
