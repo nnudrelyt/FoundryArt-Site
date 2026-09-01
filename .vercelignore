@@ -9,3 +9,12 @@ DESIGN-SYSTEM.md
 NOTICE.md
 README.md
 *.md
+
+# Agent working directory. `.claude/worktrees/` holds a full checkout per
+# in-progress branch, and the whole tree was being served publicly — every
+# unreleased branch was browsable at the production domain, and launch.json
+# leaked local filesystem paths. Verified live 2026-09-01.
+.claude/
+
+# Local preview helper; contains absolute local paths.
+scripts/
