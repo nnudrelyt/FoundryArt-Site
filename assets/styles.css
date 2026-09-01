@@ -245,6 +245,9 @@ body[data-section="foundry-art"] header:has(> .nav.nav-hidden) {
 .nav-account:hover { color: var(--bronze); }
 
 /* Foundry Art only — see the markup note in navHTML(). */
+/* Mobile nav cart: hidden on desktop. Doubled class beats .nav-cart-icon's
+   inline-flex below regardless of order. */
+.nav-cart.nav-cart--mobile { display: none; }
 .nav-cart-icon {
   display: inline-flex;
   align-items: center;
@@ -303,6 +306,32 @@ body[data-section="foundry-art"] header:has(> .nav.nav-hidden) {
    predates the type floor and was never brought up to it. */
 body[data-section="foundry-art"] :is(.nav-links, .nav-cart, .nav-cta) {
   font-size: var(--fs-eyebrow);
+}
+/* Desktop toggle registration matches the Linden header exactly (8/29):
+   LW pins its studios toggle at x30 with an 18px gap to the wordmark at
+   every desktop width, while FA's drifted with its padding tiers (40 at
+   base, 64 at 1440+) — the icon visibly jumped when crossing between the
+   two homepages. Left padding pins to 30 and the gap to 18; the right
+   side keeps FA's own insets. The logo lands at x92, same as LW's. */
+@media (min-width: 1025px) {
+  body[data-section="foundry-art"] .nav { padding-left: 30px; }
+  body[data-section="foundry-art"] .nav-left { gap: 18px; }
+}
+/* Desktop wordmark: the trimmed mark renders all-ink, so the old 16/18px
+   box heights suddenly meant ~12% larger glyphs. These hold the glyphs at
+   their pre-swap visual size (16 * 50/56, 18 * 50/56); the registration
+   gain stays. */
+body[data-section="foundry-art"] .nav-logo img { height: 14.5px; }
+@media (min-width: 1440px) {
+  body[data-section="foundry-art"] .nav-logo img { height: 16.5px; }
+}
+/* FA nav steps past the floor (8/27): a size up, a weight up, and wider
+   tracking. Scoped to the FA shell — Linden and the showroom navs share
+   these classes via app.js navHTML and keep their finished construction. */
+body[data-section="foundry-art"] .nav-links {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2.1px;
 }
 /* This used to keep a lone "Tiles" link once the other three were hidden, on
    the reasoning that it was the header's only route to the shop. A single
@@ -548,12 +577,15 @@ body.drawer-open { overflow: hidden; }
   position: absolute;
   inset: 0;
   z-index: 1;
+  /* 8/28: the wash used to clear to 0 on the right, leaving the video
+     bare where text can reach — a light ~16% floor now runs edge to
+     edge for contrast, kept subtle per Tyler. */
   background: linear-gradient(
     90deg,
     rgba(0,0,0,0.55) 0%,
     rgba(0,0,0,0.42) 28%,
-    rgba(0,0,0,0.10) 55%,
-    rgba(0,0,0,0) 78%
+    rgba(0,0,0,0.18) 55%,
+    rgba(0,0,0,0.16) 78%
   );
   pointer-events: none;
 }
@@ -618,13 +650,16 @@ body.drawer-open { overflow: hidden; }
   background: transparent;
   color: var(--white);
 }
+/* Sits BELOW the headline as a subhead (8/27) — same letterspaced-caps
+   voice, repositioned. margin-top pulls it into the headline's shadow;
+   margin-bottom hands off to .hero-sub. */
 .hero-eyebrow {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #D9C0A3;     /* lighter bronze, reads against the scrim + photo */
-  margin-bottom: 20px;
+  margin: -4px 0 26px;
 }
 .hero-headline {
   font-family: 'Cormorant Garamond', serif;
@@ -645,18 +680,45 @@ body.drawer-open { overflow: hidden; }
 .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
 
 /* Hero-scoped button overrides — work over the dark photo */
+/* Single CTA since 8/27 (See Design Ideas removed) — steps up to carry the
+   hero alone. font-weight 500 matches the FA nav's Shop Now. */
 .hero .btn-primary {
   background: var(--bronze);
   color: var(--white);
-  padding: 16px 32px;
-  font-size: 11px;
-  letter-spacing: 2px;
+  padding: 19px 44px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2.2px;
   min-height: 44px;
 }
+/* Chevron rides in on hover, on the guidance-card arrows' curve. It sits
+   absolutely inside the right padding (44px leaves room), so the button's
+   width and the label's position never move — the colours and lift are the
+   button's original hover. (An inverted charcoal/bronze flip was tried
+   8/27 and rolled back same day: colours stay.) */
+.hero .btn-primary { position: relative; }
+.hero .btn-primary .btn-chevron {
+  position: absolute;
+  right: 22px;   /* ~20% tighter to the label than the first cut (was 18px, ~22px gap) */
+  top: 50%;
+  opacity: 0;
+  transform: translate(-6px, -50%);
+  font-size: 1.35em;
+  line-height: 1;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Hover leaves the fill alone (8/27): the chevron + lift are the whole
+   interaction. */
 .hero .btn-primary:hover {
-  background: var(--bronze-l);
-  color: var(--charcoal);
   transform: translateY(-1px);
+}
+.hero .btn-primary:hover .btn-chevron {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .btn-primary .btn-chevron { transition: none; }
 }
 .hero .btn-secondary {
   background: transparent;
@@ -791,25 +853,17 @@ body.drawer-open { overflow: hidden; }
 @keyframes brandSettle {
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-/* Paper tooth — the pamphlet stock's grain carried onto the shell's charcoal
-   .brand-band (chosen from docs/quote-textures/, option 6). One bronze-tinted
-   SVG turbulence tile at 5%: texture you feel more than see. */
-.brand-band::before {
-  content: '';
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.72 0 0 0 0 0.60 0 0 0 0 0.49 0 0 0 0.9 0'/></filter><rect width='240' height='240' filter='url(%23p)'/></svg>");
-  background-size: 240px 240px;
-  opacity: .05;
-}
-/* Wallpaper — the box lid's lattice tiling the tech pages' .fa-quote band
-   (docs/quote-textures/, option 1, v2 ornament): single circle +15%,
-   quatrefoil turned 45deg, neighbours overlapping ~24%. Bronze ink at 5.5%.
+/* Wallpaper — the box lid's lattice on every charcoal quote band: the tech
+   pages' .fa-quote and the homepage's .brand-band, which carried the option-6
+   paper grain until now (docs/quote-textures/, option 1, v2 ornament):
+   single circle +15%, quatrefoil turned 45deg, neighbours overlapping ~24%.
+   Bronze ink at 5.5%.
    Tile is 48x64 — background-size must stay in that ratio or the circles
    go oval. The ::after is the sheet's .t1-grad depth scrim: a soft shadow
    off the top edge (exponential-ish stops), above the texture, below the
    type. SVG data URIs here must use single quotes internally — double
    quotes terminate the url("...") and the declaration silently drops. */
+.brand-band::before,
 body[data-tech-page] .fa-quote::before {
   content: '';
   position: absolute; inset: 0; z-index: 0;
@@ -818,6 +872,7 @@ body[data-tech-page] .fa-quote::before {
   background-size: 42px 56px;
   opacity: .055;
 }
+.brand-band::after,
 body[data-tech-page] .fa-quote::after {
   content: '';
   position: absolute; inset: 0; z-index: 0;
@@ -828,10 +883,12 @@ body[data-tech-page] .fa-quote::after {
     rgba(0,0,0,.045) 40%,
     rgba(0,0,0,0)   66%);
 }
-/* the pseudo is positioned, so the type must be too or the grain paints over
-   it (5% tint on the letterforms). brand-band's p/cite lose their transforms
-   once brandSettle finishes, which would drop them below the overlay. */
-.brand-band p, .brand-band cite { position: relative; }
+/* The band now carries TWO positioned pseudos, and ::after paints after the
+   element's content — so position:relative alone would leave the type under
+   the scrim. Both bands need an explicit z-index on p/cite. brand-band's
+   p/cite also lose their transforms once brandSettle finishes, which would
+   otherwise drop them below the overlay. */
+.brand-band p, .brand-band cite { position: relative; z-index: 1; }
 body[data-tech-page] .fa-quote { position: relative; overflow: hidden; }
 body[data-tech-page] .fa-quote > p,
 body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
@@ -888,20 +945,18 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
   justify-content: center;
   max-width: 680px;   /* visual scope cap — keeps the body text from sprawling on wide monitors */
 }
-.craft-steps { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
-.craft-step { display: flex; gap: 14px; align-items: center; }
-/* Small upright bronze square — vertically centered against the
-   bullet's entire copy block (label + body), not aligned to the
-   label baseline. Quieter mark; the alignment puts it in the
-   gutter beside the text rather than as a leading dot. */
-.craft-step-num {
-  position: relative;
-  font-size: 0;
-  width: 6px;
-  min-width: 6px;
-  height: 6px;
-  flex-shrink: 0;
-}
+.craft-steps { display: flex; flex-direction: column; gap: 30px; margin-top: 8px; }  /* lede->first-step total = its 24px margin + this: 36 -> 8 halves the ~60px gap (8/29) */
+.craft-step { display: flex; gap: 14px; align-items: flex-start; }
+/* Small upright bronze square, sitting beside the LABEL rather than
+   centred on the whole copy block. margin-top centres it on the
+   label's line box: (line-box height - square) / 2, which is
+   (20.5 - 8) / 2 at >=1440 and (19 - 6) / 2 below it — both round
+   to 6px, so one value serves both. Revisit if the label's
+   font-size or line-height changes. */
+/* 8/29: bullets removed — the tracked-caps labels carry the steps alone
+   and the text sits flush with the lede above. The ::before square and
+   its centering math retire with the element. */
+.craft-step-num { display: none; }
 .craft-step-num::before {
   content: '';
   position: absolute;
@@ -913,10 +968,26 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
   font-size: 13px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--charcoal);
+  color: var(--bronze);     /* charcoal -> bronze (8/29) */
   margin-bottom: 6px;
 }
-.craft-step-text span { font-size: 15px; color: var(--mid); line-height: 1.55; }
+/* display:block so the measure cap applies — the span is inline by default.
+   max-width is px, not ch, per the note above .pdp-desc: `ch` measures the
+   "0" glyph, which is much narrower than the average letter here.
+   430px trims the measure from ~55 characters to ~48. text-wrap:pretty
+   is a guard, not load-bearing: the current copy sets no widows either
+   way, but it caught a lone "years." on step 2 before that line was
+   rewritten, and will catch the next one. */
+/* 8/29: the step body IS lede copy now — .section-body's size, color
+   (--slate, not --mid) and 680 measure, so the two read as one voice. */
+.craft-step-text span {
+  display: block;
+  font-size: 16px;
+  color: var(--slate);
+  line-height: 1.65;
+  max-width: 680px;
+  text-wrap: pretty;
+}
 /* Single team-photo block on the left. min-height matches the content
    column so the section reads as a balanced two-up. */
 .craft-images { display: block; }
@@ -978,6 +1049,7 @@ body[data-tech-page] .fa-quote > cite { position: relative; z-index: 1; }
 
 /* ══════════════════════════════════════ PRODUCT GRID (shared shop + homepage) ══════════════════════════════════════ */
 .products { padding: 80px 40px; background: var(--white); }
+.products-header .section-headline { font-size: 28px; }  /* was an inline style in the markup */
 .products-header {
   display: flex;
   align-items: flex-end;
@@ -1066,17 +1138,21 @@ body[data-page="home"] .product-card:hover .product-card-cta {
 body[data-page="home"] .product-card-cta:hover {
   background: var(--bronze-l);
 }
+/* Base = the desktop-tuned sizes (8/27). These were 38/22/26 with the
+   1440+ block overriding DOWN to 32/16/18, which left every narrower
+   width — mobile especially — carrying the untuned maximums: a card
+   label outweighing the page's section headlines. */
 .product-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 400;
   color: var(--charcoal);
   margin-bottom: 10px;
   line-height: 1.15;
   text-align: center;
 }
-.product-meta { font-size: 22px; color: #4A4640; margin-bottom: 16px; line-height: 1.5; text-align: center; }
-.product-price { font-size: 26px; color: var(--charcoal); font-weight: 500; text-align: center; }
+.product-meta { font-size: 16px; color: #4A4640; margin-bottom: 16px; line-height: 1.5; text-align: center; }
+.product-price { font-size: 18px; color: var(--charcoal); font-weight: 500; text-align: center; }
 .product-price .was { text-decoration: line-through; color: var(--mid); font-weight: 400; margin-right: 6px; }
 .product-price .sale { color: var(--sale); }
 .product-badge {
@@ -1265,9 +1341,12 @@ body[data-page="home"] .product-card-cta:hover {
   background-color: var(--charcoal);
   background-image:
     linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-    url('/assets/images/process/space-foyer-lotus-bw.jpg');
-  background-size: cover, 118%;
-  background-position: center, center 25%;
+    url('/assets/images/process/lotus-limestone-angle-bw.jpg');
+  /* 8/29: cover, not 118% width — that sizing only filled the panel by
+     accident of the old portrait foyer's ratio; the landscape limestone
+     shot ran short of the component's height under it. */
+  background-size: cover, cover;
+  background-position: center, center 35%;
   background-repeat: no-repeat;
   background-blend-mode: multiply, normal;
   padding: 100px 56px;
@@ -1305,6 +1384,48 @@ body[data-page="home"] .product-card-cta:hover {
   margin-top: 56px;
   width: 100%;               /* expand inside centered flex parent */
   max-width: 600px;
+}
+/* Mobile port of Complete the Look (8/28, Tyler's pick of three explored
+   treatments): a pure-image mosaic — the lead piece full width, the pair
+   beneath, no overlay, name or button. The tiles are already links with
+   aria-labels and img alt text, so stripping the visible chrome loses no
+   accessible names; the section intro carries the selling copy. Desktop
+   keeps its grid and hover overlay untouched. */
+@media (max-width: 768px) {
+  /* The desktop large-image pane is redundant on phones (8/28) — the
+     mosaic IS the imagery — and the foyer photo moves from
+     .hardware-content onto the section so it runs the full height
+     behind copy and mosaic alike. */
+  .hardware { display: block; }
+  .hardware-image { display: none; }
+  .hardware {
+    background-color: var(--charcoal);
+    background-image:
+      linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
+      url('/assets/images/process/lotus-limestone-angle-bw.jpg');
+    background-size: cover, cover;
+    background-position: center, center 25%;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply, normal;
+  }
+  .hardware-content { background: none; padding: 72px 24px 56px; }
+  .hardware-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: none;
+    margin-top: 40px;
+  }
+  .hardware-grid .hardware-item:first-child { grid-column: 1 / -1; }
+  .hardware-grid .hardware-item:first-child .wire-img { aspect-ratio: 4 / 3.4; }
+  .hardware-grid .hardware-overlay { display: none; }
+  /* These two also live in the <=560 block; repeated here so 561-768
+     (large phones / small tablets) get them too (8/28). */
+  .footer-cta-actions .btn-primary-lg {
+    padding: 19px 44px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+  }
 }
 .hardware-item .wire-img { aspect-ratio: 1; width: 100%; margin-bottom: 8px; position: relative; overflow: hidden; }
 .hardware-item p { font-size: 10px; text-align: center; }
@@ -1349,6 +1470,7 @@ body[data-page="home"] .product-card-cta:hover {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;       /* "SHOP NOW" must never break (mobile 2-up) */
   font-family: 'Jost', sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -1397,13 +1519,26 @@ body[data-page="home"] .product-card-cta:hover {
 .guidance-intro .section-headline { color: var(--charcoal); font-size: 30px; }
 .guidance-intro .section-body { color: var(--slate); }
 .guidance-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+/* Card is a flex column with a fixed padding used as the single margin
+   value on all four sides: the icon is pinned to the bottom-right at
+   exactly that inset, and the CTA is pushed to the bottom-left by
+   margin-top:auto. The grid stretches cards to equal height per row, so
+   the CTA lands on the same baseline across a row no matter how many
+   lines the body runs. */
 .guidance-card {
   background: var(--white);
   border: 1px solid var(--rule);
+  /* 3px is the Foundry small-control radius — the same value carried by
+     .btn-primary/.btn-secondary/.btn-ghost under body[data-section="foundry-art"],
+     the nav CTA, chips and facet checkboxes. (A 6px trial read too soft
+     against the square-cornered buttons — rolled back 8/27.) */
+  border-radius: 3px;
   padding: 24px;
   cursor: pointer;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  position: relative;
   box-shadow: 0 1px 2px rgba(20,37,40,0.03);
 }
 .guidance-card:hover {
@@ -1415,10 +1550,12 @@ body[data-page="home"] .product-card-cta:hover {
   width: 40px; height: 40px;
   background: transparent;
   color: var(--bronze);
-  margin-bottom: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
 }
 .guidance-card-icon svg { display: block; width: 100%; height: 100%; }
 /* Visually-hidden fallback for guidance cards that haven't been
@@ -1439,7 +1576,17 @@ body[data-page="home"] .product-card-cta:hover {
   margin-bottom: 10px;
   line-height: 1.15;
 }
-.guidance-card p { font-size: 17px; color: var(--mid); line-height: 1.6; }
+/* margin-bottom is the MINIMUM gap to the CTA; margin-top:auto on the CTA
+   opens it further on shorter cards. Two jobs:
+   1. Clear the icon. It is 40px tall and pinned to the same bottom inset as
+      the ~16px CTA, so it reaches ~24px higher; under 30px the body's last
+      line runs beneath it (caught at 375px on "How We Make Our Tiles").
+   2. Hold the card's height. Pulling the icon out of the top of the flow cut
+      50px at 1440+; carrying that space here instead restored it, with the
+      padding left uniform so the icon's inset stays equal on both edges.
+      With the body at 20px the second row wraps to two lines too, so all
+      four cards now measure a uniform 289px at 1440+ (they were 285/255). */
+.guidance-card p { font-size: 18px; color: var(--mid); line-height: 1.6; margin-bottom: 80px; }
 .guidance-card-cta-arrow {
   display: inline-block;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1449,16 +1596,41 @@ body[data-page="home"] .product-card-cta:hover {
 }
 .guidance-card-cta {
   display: inline-block;
-  margin-top: 14px;
-  font-size: 9px;
+  position: relative;        /* anchors the drawn underline */
+  margin-top: auto;          /* pin to the bottom of the stretched card */
+  align-self: flex-start;
+  margin-right: 64px;        /* stay clear of the icon in the opposite corner */
+  font-size: 10px;
+  font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--bronze);
-  border-bottom: 1px solid var(--bronze-l);
-  padding-bottom: 2px;
+  padding-bottom: 2px;       /* holds the old border-bottom's spacing */
   transition: color 0.2s ease;
 }
-.guidance-card:hover .guidance-card-cta { color: var(--charcoal); }
+/* Underline fades up as it settles down into place on rollover (8/27) —
+   starts 4px high at zero opacity, lands on the baseline. Always the house
+   red, matching the hover type. (A left-to-right scaleX draw was the first
+   cut, replaced same day.) */
+.guidance-card-cta::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--lw-accent-red);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.guidance-card:hover .guidance-card-cta::after { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .guidance-card-cta::after { transition: none; }
+}
+/* Rollover reads in the house red (--lw-accent-red, the LW link/CTA red)
+   rather than charcoal. The arrow span inherits color, so one rule covers
+   type and arrow together. */
+.guidance-card:hover .guidance-card-cta { color: var(--lw-accent-red); }
 
 /* ══════════════════════════════════════ FA FAQ ACCORDION ══════════════════════════════════════ */
 .fa-faq {
@@ -1495,17 +1667,30 @@ body[data-page="home"] .product-card-cta:hover {
   transition: color 0.2s ease;
 }
 .fa-faq-trigger:hover { color: var(--bronze); }
+.fa-faq-item.is-open .fa-faq-trigger { color: var(--bronze); }
 .fa-faq-question {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px;
   font-weight: 500;
   line-height: 1.25;
+  /* 8/28 second cut: a 64px guard changed nothing visible — the longest
+     question still fit on one line inside it. A hard measure is what
+     actually forces the break: px, not ch, per the note above .pdp-desc.
+     600px wraps "What's the difference between Traditional and White
+     Bronze?" to two lines at the base 26px; the 1440+ override scales
+     with the 32px type. Short questions stay one line. */
+  max-width: 600px;
+}
+@media (min-width: 1440px) {
+  .fa-faq-question { max-width: 740px; }
 }
 .fa-faq-icon {
   position: relative;
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+  /* inset off the list's right edge so the mark doesn't ride the rule ends */
+  margin-right: 10px;
   color: var(--bronze);
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1571,12 +1756,12 @@ body[data-page="home"] .product-card-cta:hover {
 
 /* Mobile */
 @media (max-width: 560px) {
-  .fa-faq { padding: 56px 16px 72px; }
+  .fa-faq { padding: 56px 24px 72px; }   /* 16 -> 24 (8/29): the FA phone gutter */
   .fa-faq-header { margin-bottom: 32px; }
   .fa-faq-header .section-headline { font-size: 28px; }
   .fa-faq-trigger { padding: 20px 0; gap: 16px; }
-  .fa-faq-question { font-size: 19px; }
-  .fa-faq-answer p { font-size: 15px; padding-bottom: 20px; padding-left: 0; padding-right: 0; }
+  .fa-faq-question { font-size: 24px; }
+  .fa-faq-answer p { font-size: 17px; line-height: 1.7; padding-bottom: 24px; padding-left: 0; padding-right: 20px; }  /* slight measure trim (8/28) */
 }
 
 /* Inline variant — FAQ nested inside the guidance section, sharing
@@ -1588,13 +1773,19 @@ body[data-page="home"] .product-card-cta:hover {
 
      The cards-to-heading gap is this margin PLUS the .guidance grid's row-gap
      (40px here, 64px at 1440+), so the margin is the only half that can move:
-     8px lands the total at 48px, half the 96px it was. */
+     24px lands the total at 64px (8/29: was 8px/48px total, bumped ~33%). */
   padding: 0;
-  margin-top: 8px;
+  margin-top: 24px;
   background: transparent;
 }
 .fa-faq--inline .fa-faq-list {
-  max-width: none;   /* fill the guidance-section container width */
+  /* 8/28: was max-width:none ("fill the guidance-section container"),
+     which is why the homepage rows ran the full column while the care
+     page capped at 900/1080 — the right margin Tyler flagged. The base
+     caps flow through now; margin 0 keeps the list on the column's left
+     edge (the base centers with auto margins, which would break rank
+     with the intro and cards above). */
+  margin: 0;
 }
 .fa-faq--inline .fa-faq-header {
   margin: 0 0 32px;
@@ -1604,13 +1795,13 @@ body[data-page="home"] .product-card-cta:hover {
 /* The heading is a plain .section-headline now (same class as "Not sure where
    to start?" above it), so the old bespoke .fa-faq-title scale is gone. */
 @media (min-width: 1440px) {
-  .fa-faq--inline { margin-top: 8px; }   /* + 64px row-gap = 72px, half of 144 */
+  .fa-faq--inline { margin-top: 32px; }   /* + 64px row-gap = 96px (8/29: was 8px/72px total, bumped ~33%) */
   .fa-faq--inline .fa-faq-header { margin-bottom: 40px; }
 }
 @media (max-width: 560px) {
-  /* The 40px row-gap alone is already about half the old 76px, so there is no
-     margin left to give back here. */
-  .fa-faq--inline { margin-top: 0; }
+  /* 8/29: measured row-gap at phone width is 20px, so 8px margin lands the
+     cards-to-title gap at 28px (was 20px, bumped 40% like desktop). */
+  .fa-faq--inline { margin-top: 8px; }
   .fa-faq--inline .fa-faq-header { margin-bottom: 20px; }
 }
 
@@ -1651,7 +1842,7 @@ body[data-page="home"] .product-card-cta:hover {
 }
 @media (max-width: 560px) {
   .footer-cta-text .footer-cta-phone { margin-top: 30px; }
-  .footer-cta-phone a { font-size: 28px; }
+  .footer-cta-phone a { font-size: 36px; }
 }
 
 /* ══════════════════════════════════════ SOCIAL PROOF (homepage) ══════════════════════════════════════ */
@@ -2711,7 +2902,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
 
   .hero { min-height: 560px; }
   .hero-content { width: 72%; padding: 56px 32px; }
-  .hero-headline { font-size: 38px; }
+  .hero-headline { font-size: clamp(50px, 14vw, 72px); }  /* fluid below 901 — fixed tiers read small between breakpoints */
   .hero-sub { max-width: 100%; }
   .hero::after {
     background: linear-gradient(
@@ -2728,17 +2919,77 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .craft-images .wire-img { min-height: 240px; max-height: 380px; }
 
   .products { padding: 56px 24px; }
-  .products-header { flex-direction: column; align-items: flex-start; }
+  .products-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+  /* Stacked header: the headline's 32px desktop margin plus the button made
+     a hole; the CTA follows the type tightly and the grid follows sooner. */
+  .products-header .section-headline { margin-bottom: 10px; }
+  .products-header .btn-secondary { margin-bottom: 8px; }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
 
   .design-ideas { padding: 56px 24px; }
-  .insitu-grid > .insitu-tile { flex: 0 0 380px; height: 480px; }
+  /* Viewport-sized across the whole mobile range (8/28) — the first cut
+     lived only <=560, so tablets/large phones kept small fixed tiles and
+     the "much larger" direction never landed there. Height capped so
+     ~740px viewports don't produce a 1000px card. */
+  /* Center-snap carousel (8/28, per Tyler: neighbors must reveal at the
+     browser's own edges). The grid cancels the section's 24px gutter to
+     run full-bleed; each card snaps CENTERED, so the previous and next
+     cards bleed in from the left and right screen edges — 36px minus the
+     8px gap = a 28px sliver each side. Gutter-registered snapping can
+     never show a left neighbor; centering is what makes both edges live. */
+  .insitu-grid {
+    gap: 8px;                 /* Tyler redirected mid-round: cards +10% instead of doubling this */
+    margin-inline: -24px;
+    scroll-snap-type: x mandatory;
+  }
+  /* tile reveal opt-out lives beside the reveal rules (~L10520) */
+  .insitu-grid > .insitu-tile {
+    /* +10% (8/28): 100vw-72 -> 100vw-40 (335 vs 303 at 375). The mid-rail
+       sliver narrows to 12px a side — the visible-at-rest trade Tyler
+       chose over wider gaps. */
+    flex: 0 0 calc(100vw - 40px);
+    height: min(calc((100vw - 40px) * 1.42), 660px);
+    scroll-snap-align: center;
+  }
+  .insitu-grid > .insitu-tile:first-child { margin-left: 20px; }
+  .insitu-grid > .insitu-tile:last-child { margin-right: 20px; }
+  /* Card corners take the FA control radius (8/28) — mobile only; the
+     desktop rail keeps its square editorial frames. */
+  .insitu-grid > .insitu-tile { border-radius: 3px; }
+  /* Scrubber (8/28): the always-on native scrollbar goes; the custom
+     [data-insitu-indicator] — JS-driven but unstyled until now — becomes
+     a hairline track that fades in while swiping and back out at rest
+     (the .is-active class comes from initInsituScrollIndicator). */
+  .insitu-grid { scrollbar-width: none; }
+  .insitu-grid::-webkit-scrollbar { display: none; }
+  .insitu-scroll-indicator {
+    position: relative;
+    height: 2px;
+    margin: 20px 24px 0;      /* clear air below the cards */
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 1px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .insitu-scroll-indicator.is-active { opacity: 1; }
+  .insitu-scroll-thumb {
+    position: absolute; top: 0; bottom: 0;
+    background: var(--bronze-l);
+    border-radius: 1px;
+  }
 
   .hardware { grid-template-columns: 1fr; }
   .hardware-image { min-height: 320px; }
   .hardware-content { padding: 56px 24px; }
 
-  .guidance { grid-template-columns: 1fr; padding: 56px 24px; }
+  .guidance { grid-template-columns: 1fr; padding: 56px 24px; gap: 20px; }  /* intro->cards gap 40 -> 20 (8/28) */
+  .fa-faq-answer p { padding-right: 20px; }  /* slight measure trim; must sit after the base 4px rule (8/28) */
+  .guidance-card-cta { font-size: 13px; }   /* +30% from the 10px base (8/28) */
+  /* Without this, .fa-faq--inline's desktop grid-column: 2 / -1 forces an
+     IMPLICIT second column in the collapsed 1fr grid — the intro renders
+     as a word-per-line sliver and the FAQ squeezes right (mobile audit,
+     8/27). auto puts everything back in the single column. */
+  .fa-faq--inline { grid-column: auto; }
 
   .social-proof { padding: 56px 24px; }
   .testimonials { grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -2772,11 +3023,12 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
 @media (max-width: 560px) {
   .nav { padding: 14px 16px; }
   .nav-cta { display: none; }
+  body[data-section="foundry-art"] .nav-right { display: none; }  /* empty at this width; its flex gap misaligns the toggle */
   .nav-cart { display: none; }
   /* The wordmark is 200px at its base 16px height — 55% of a 360px phone, and
      the single biggest consumer of nav width. 12px brings it to ~150px, which
      is what makes room for the Tiles link below. */
-  body[data-section="foundry-art"] .nav-logo img { height: 12px; }
+  /* FA wordmark height now set once for all mobile in the 1024 block (17px, 8/28) */
   /* …but the Foundry Art cart stays. It was hidden here because "CART 2" as a
      text link couldn't share the row with Shop Now; as a 44px icon it fits,
      and the cart is the one affordance a store shouldn't drop on mobile. Text
@@ -2786,8 +3038,8 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .confirm-addresses { grid-template-columns: 1fr; gap: 24px; }
 
   .hero { min-height: 600px; }
-  .hero-content { width: 100%; padding: 48px 20px; background: transparent; }
-  .hero-headline { font-size: 32px; }
+  .hero-content { width: 100%; padding: 48px 24px; background: transparent; }
+  .hero-headline { font-size: clamp(50px, 14vw, 72px); }
   .hero-eyebrow { font-size: 13px; letter-spacing: 3.2px; margin-bottom: 22px; }
   .hero-badge { gap: 20px; }
   /* Mobile — uniform dark veil so type stays legible everywhere */
@@ -2800,7 +3052,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   }
 
   .brand-band { padding: 104px 16px; }
-  .brand-band p { font-size: 28px; line-height: 1.35; letter-spacing: 0.2px; }
+  .brand-band p { font-size: 37px; line-height: 1.3; letter-spacing: 0.2px; }
   .brand-band cite { font-size: 10px; margin-top: 22px; }
 
   .craft-content { padding: 40px 16px; }
@@ -2811,7 +3063,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .filter-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
 
   .design-ideas { padding: 40px 16px; }
-  .insitu-grid > .insitu-tile { flex: 0 0 320px; height: 410px; }
+  /* insitu tiles: sized in the <=900 block (8/28) */
 
   .hardware-image { min-height: 260px; }
   .hardware-content { padding: 40px 16px; }
@@ -2824,8 +3076,21 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .testimonials { grid-template-columns: 1fr; }
 
   .footer-cta { padding: 40px 16px; }
-  .footer-cta-text h2 { font-size: 36px; }
+  .footer-cta-text h2 { font-size: clamp(38px, 10.5vw, 48px); line-height: 1.12; }
+  /* Body copy at hero-sub scale; must live AFTER the base 16px rule at
+     ~L1823 or it loses the cascade. The eyebrow keeps its pinned 13px
+     via its higher-specificity rule. */
+  .footer-cta-text p { font-size: 18px; line-height: 1.65; }
   .footer-cta-actions { width: 100%; }
+  /* Footer Shop Now matches the hero CTA's construction (19px/44px pad,
+     13->14px type) and steps the weight to 600 — the page's closing
+     button shouldn't be its quietest (8/28). */
+  .footer-cta-actions .btn-primary-lg {
+    padding: 19px 44px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2.2px;
+  }
   .btn-primary-lg, .btn-ghost { white-space: normal; }
 
   .footer { padding: 24px 16px; flex-direction: column; align-items: flex-start; }
@@ -2833,7 +3098,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   /* Shopping */
   .page { padding: 32px 16px 48px; }
   .breadcrumb { padding: 12px 16px; font-size: 9px; }
-  .shop-grid { grid-template-columns: 1fr; }
+  .shop-grid { grid-template-columns: 1fr; gap: 19px; }   /* row gap 32 -> 19, ~40% trim (8/28) */
   .cross-sell-grid { grid-template-columns: 1fr; }
   .field-grid { grid-template-columns: 1fr; }
   .cart-table thead { display: none; }
@@ -2898,7 +3163,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .hero-eyebrow { font-size: clamp(11px, 0.85vw, 14px); margin-bottom: clamp(18px, 1.5vw, 28px); letter-spacing: 3.5px; }
   .hero-headline { font-size: clamp(60px, 5vw, 100px); line-height: 1.02; margin-bottom: clamp(20px, 2vw, 32px); letter-spacing: -1px; }
   .hero-sub { font-size: clamp(17px, 1.3vw, 22px); max-width: 600px; margin-bottom: clamp(36px, 3vw, 52px); line-height: 1.6; }
-  .hero .btn-primary, .hero .btn-secondary { padding: 16px 32px; font-size: clamp(11px, 0.9vw, 13px); letter-spacing: 2.2px; }
+  .hero .btn-primary { padding: 20px 48px; font-size: clamp(13px, 1vw, 15px); letter-spacing: 2.4px; }
   .hero-badge { gap: 52px; margin-top: 60px; padding-top: 34px; }
   .badge-item { font-size: 13px; }
   .badge-item strong { font-size: 15px; }
@@ -2914,10 +3179,10 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .section-body { font-size: 19px; line-height: 1.65; max-width: 680px; }
 
   /* Craft */
-  .craft-content { padding: 130px 80px 130px 96px; }
-  .craft-step-num { width: 8px; min-width: 8px; height: 8px; margin-top: 0; }   /* small upright square, centered by flex align-items */
-  .craft-step-text strong { font-size: 14px; letter-spacing: 1.8px; margin-bottom: 8px; }
-  .craft-step-text span { font-size: 17px; line-height: 1.55; }
+  .craft-content { padding: 130px 80px 130px 96px; max-width: 800px; }
+  /* .craft-step-num retired 8/29 (bullets removed) */
+  .craft-step-text strong { font-size: 14px; letter-spacing: 1.8px; margin-bottom: 10px; }
+  .craft-step-text span { font-size: 19px; line-height: 1.65; }  /* 680 measure from base */
   .craft-images .wire-img { min-height: 300px; }
 
   /* Products section + grid */
@@ -2926,9 +3191,7 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .products-header .section-headline { font-size: 42px !important; }
   .product-grid { gap: 48px 36px; }
   .product-card .wire-img { margin-bottom: 20px; }
-  .product-name { font-size: 32px; margin-bottom: 10px; }
-  .product-meta { font-size: 16px; margin-bottom: 16px; }
-  .product-price { font-size: 18px; }
+  /* .product-name/meta/price now match the base (moved there 8/27) */
   .product-cta { font-size: 11px; }
 
   /* Design Ideas */
@@ -2947,10 +3210,10 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .guidance-intro .section-headline { font-size: 46px; }
   .guidance-cards { gap: 26px; }
   .guidance-card { padding: 36px; }
-  .guidance-card-icon { width: 36px; height: 36px; margin-bottom: 20px; font-size: 10px; }
+  .guidance-card-icon { width: 36px; height: 36px; right: 36px; bottom: 36px; font-size: 10px; }
   .guidance-card h4 { font-size: 32px; margin-bottom: 14px; }
-  .guidance-card p { font-size: 18px; line-height: 1.65; }
-  .guidance-card-cta { font-size: 12px; margin-top: 24px; letter-spacing: 2px; }
+  .guidance-card p { font-size: 20px; line-height: 1.6; }
+  .guidance-card-cta { font-size: 13px; letter-spacing: 2px; margin-right: 60px; }
 
   /* Social proof / testimonials */
   .social-proof { padding: 130px 80px; }
@@ -3079,12 +3342,29 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .nav-logo img { height: 14px; }
   .nav { padding: 12px 14px; }
 
-  .hero-content { padding: 40px 16px; }
-  .hero-headline { font-size: 30px; }
-  .hero-eyebrow { font-size: 13px; letter-spacing: 2.6px; }
+  .hero-content { padding: 40px 24px; }   /* phone gutter 16 -> 24 (8/28), meets the bar's 24 inset */
+  /* Guidance cards: one height for all four, a step shorter than the
+     tallest ran naturally (8/28). The stacked column has no grid stretch,
+     so min-height does the equalizing; the body's min gap comes down with
+     it and margin-top:auto still pins the CTA. */
+  .guidance-card { min-height: 280px; }
+  .guidance-card p { margin-bottom: 28px; }
+  /* Shop cards read as a tall column of gaps at 375 — tighten the stack. */
+  .product-card .product-name { margin-top: 14px; }
+  .product-card .product-meta { margin-top: 4px; }
+  .product-card .price { margin-top: 8px; }
+  body[data-page="home"] .product-card-cta { margin-top: 14px; }
+  .hero-headline { font-size: clamp(50px, 14vw, 72px); }
+  /* Subhead on phones: two lines — the descriptor, then EST. 1990 •
+     Chicago together (8/27, per Tyler). Children run A, sep, B, sep, C:
+     A goes block, the first separator hides, B • C stay inline. */
+  .hero-eyebrow { font-size: 12px; letter-spacing: 2.2px; line-height: 2; }
+  .hero-sub { font-size: 18px; line-height: 1.65; }
+  .hero-eyebrow span:nth-child(1) { display: block; }
+  .hero-eyebrow span:nth-child(2) { display: none; }
 
   .brand-band { padding: 88px 14px; }
-  .brand-band p { font-size: 26px; }
+  .brand-band p { font-size: 36px; }
 
   .craft-content,
   .products,
@@ -3092,12 +3372,23 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   .hardware-content,
   .guidance,
   .social-proof,
-  .footer-cta { padding-left: 14px; padding-right: 14px; }
+  .footer-cta { padding-left: 24px; padding-right: 24px; }   /* 14 -> 24 (8/28) */
 
-  .section-headline { font-size: 26px; }
-  .footer-cta-text h2 { font-size: 32px; }
+  /* One section-headline size at phone widths. The high-specificity
+     variants (products' 28, FAQ's 34, guidance's 30) are folded in
+     explicitly so every section h2 lands on 30 (type audit, 8/27). */
+  .section-headline,
+  .products-header .section-headline,
+  .fa-faq-header .section-headline,
+  .guidance-intro .section-headline { font-size: 34px; }   /* 30 -> 34 (8/28 bump) */
+  .product-name { font-size: 30px; margin-bottom: 6px; }   /* 22 -> 26 -> 30 across the 8/28 rounds (+15% on the second pass) */
+  .product-meta { font-size: 14px; margin-bottom: 10px; }
+  .product-price { font-size: 16px; }
+  .footer-cta-text h2 { font-size: clamp(38px, 10.5vw, 48px); line-height: 1.12; }
 
-  .insitu-grid > .insitu-tile { flex: 0 0 280px; height: 360px; }
+  /* The old 280x360 phone override lived here and silently out-cascaded
+     every larger-card attempt (three rounds' worth, 8/28) — the tiles are
+     viewport-sized in the <=900 block now, so this block adds nothing. */
   .hardware-grid { gap: 10px; }
 }
 
@@ -10600,8 +10891,8 @@ body[data-page="home"] .hero-ctas {
   transform: translateY(16px);
   animation: fa-forge-settle 0.75s cubic-bezier(0.34, 1.08, 0.64, 1) forwards;
 }
-body[data-page="home"] .hero-eyebrow  { animation-delay: 0.50s; }
-body[data-page="home"] .hero-headline { animation-delay: 0.65s; }
+body[data-page="home"] .hero-headline { animation-delay: 0.50s; }
+body[data-page="home"] .hero-eyebrow  { animation-delay: 0.65s; }
 body[data-page="home"] .hero-sub      { animation-delay: 0.80s; }
 body[data-page="home"] .hero-ctas     { animation-delay: 0.95s; }
 @keyframes fa-forge-settle {
@@ -10636,6 +10927,17 @@ body[data-page="home"] .hardware-content.is-revealed .hardware-item:nth-child(3)
 
 /* Inspiration tiles: same click cascade on reveal */
 body[data-page="home"] .insitu-grid > .insitu-tile { opacity: 0; }
+/* Mobile (8/28): the center-snap rail's peeking neighbors must be visible
+   at rest, but a card hanging off the right edge never intersects, so the
+   per-tile reveal left the sliver as an empty dark strip until the first
+   swipe. Placed AFTER the pre-state above so it wins the cascade. */
+@media (max-width: 900px) {
+  body[data-page="home"] .insitu-grid > .insitu-tile {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 body[data-page="home"] .insitu-grid > .insitu-tile.is-revealed {
   animation: fa-forge-click 0.65s cubic-bezier(0.34, 1.08, 0.64, 1) both;
 }
@@ -12731,7 +13033,14 @@ body[data-section="foundry-art"] :is(
   .btn-secondary,
   .btn-primary-lg,
   .btn-ghost,
-  .btn-sample
+  .btn-sample,
+  /* 8/27 audit: three filled Shop Now CTAs lived outside the .btn-*
+     family and were still square — the home shop-grid card CTA, the
+     design-ideas in-situ overlay, and the hardware overlay. All three
+     are FA-only (app.js product renderer + the FA homepage). */
+  .product-card-cta,
+  .insitu-overlay-cta,
+  .hardware-overlay-cta
 ) {
   border-radius: 3px;
 }
@@ -12950,6 +13259,52 @@ body[data-page="shop"]:not([data-product-slug]) .facet-list li label:hover input
    .nav-links globally here would drag it up into 901–1024 on all three. */
 @media (max-width: 1024px) {
   body[data-section="foundry-art"] .nav-links { display: none; }
+  /* Mobile bar follows the Linden header pattern (8/28): wordmark left,
+     menu icon pushed right — same order:2 / margin-left:auto move the
+     .lw2-studios-toggle makes on Linden phones — with the cart sitting
+     immediately left of it. nav-left flexes across the bar; the logo
+     leads, the cart takes the auto margin, the toggle closes the row.
+     (561-1024 the Shop Now pill still sits after the toggle on the far
+     right; at <=560 it hides and the row is exactly [FA .... cart menu].) */
+  body[data-section="foundry-art"] .nav-left { flex: 1; gap: 16px; }
+  body[data-section="foundry-art"] .nav-left .nav-logo { order: -1; margin-right: auto; }
+  body[data-section="foundry-art"] .nav-cart--mobile { display: inline-flex; order: 1; }
+  body[data-section="foundry-art"] .nav-left .studios-toggle { order: 2; }
+  body[data-section="foundry-art"] .nav-right .nav-cart { display: none; }
+  /* ── The Linden mobile-bar spec, verbatim (8/28, per Tyler: one system,
+     FA varies only the wordmark, the cart, white background, and sticky
+     behavior). Measured off the live LW bar at 375: 80px tall, padding
+     16px 16px 16px 24px, 44x44 toggle in #757367 inset 16 from the right,
+     wordmark at x24. The earlier per-tier content-gutter mirroring is
+     superseded by the system inset. */
+  body[data-section="foundry-art"] .nav {
+    min-height: 80px;
+    padding: 16px 16px 16px 24px;
+  }
+  /* FA caps wordmark: 20px reads optically level with LW's 28px serif
+     (caps carry no ascenders/descenders) — but the FA lockup runs ~14:1,
+     286px wide at 20px, which overflows a 375 bar next to two 44px
+     controls. The mark shrinks with available space instead: 20px from
+     ~500px down to ~17px at 375. */
+  body[data-section="foundry-art"] .nav-left .nav-logo { min-width: 0; }
+  body[data-section="foundry-art"] .nav-logo img {
+    height: auto; width: auto;
+    /* 20px read oversized once the trimmed mark stopped wasting canvas —
+       the same number suddenly meant ~17% larger glyphs. Scaled back 22%
+       (8/28, per Tyler); registration unchanged. */
+    max-height: 15.5px; max-width: 100%;
+  }
+  body[data-section="foundry-art"] .nav-left { gap: 4px; }
+  /* An empty nav-right still costs the .nav's 16px flex gap, pushing the
+     toggle to a 32px right inset instead of LW's 16. At <=560 all three
+     of its children are display:none, so the container goes too. */
+  body[data-section="foundry-art"] .nav-left .studios-toggle,
+  body[data-section="foundry-art"] .nav-cart--mobile {
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 6px;
+    color: #757367;           /* LW's warm control gray */
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -13044,23 +13399,53 @@ body[data-tech-page] .tech-specs th { width: 150px; padding: 20px 24px 20px 0; }
 body[data-tech-page] .tech-specs td { padding: 20px 0; }
 /* 88ch: the old 72 left the answers filling barely three-quarters of the
    list row once the questions stepped up — the wider measure balances the
-   larger question type. Two answers keep &nbsp; glue against danglers. */
-body[data-tech-page] .fa-faq-answer p { max-width: 88ch; }
+   larger question type. Two answers keep &nbsp; glue against danglers.
+   8/28: the homepage FAQ joins every rule in this set — its answers ran
+   the full row width and its question ladder had drifted from the care
+   page's; one FAQ spec now serves both. */
+/* 8/28: the 88ch cap alone could still exceed the indicator's column at
+   some widths — answers ended a hair PAST the +/- marks while questions
+   stopped short, which read as misalignment. The min() keeps 88ch as the
+   ceiling but always ends the text ~110px before the row's right edge,
+   clear of the icon zone. */
+body[data-tech-page] .fa-faq-answer p,
+body[data-page="home"] .fa-faq-answer p { max-width: 88ch; }
+/* 8/29: the -110px clamp is a DESKTOP concern (clearing the +/- column).
+   Applied unscoped it strangled phone measures to ~230px — four words a
+   line. Wide screens only. */
+@media (min-width: 901px) {
+  body[data-tech-page] .fa-faq-answer p,
+  body[data-page="home"] .fa-faq-answer p { max-width: min(88ch, calc(100% - 110px)); }
+}
 /* Questions step up toward display scale on the tech pages — the base
    22/28 read a size small against the section headlines (Aug 26 pass). */
-body[data-tech-page] .fa-faq-question { font-size: 26px; }
+body[data-tech-page] .fa-faq-question,
+body[data-page="home"] .fa-faq-question { font-size: 26px; }
 @media (min-width: 1440px) {
-  body[data-tech-page] .fa-faq-question { font-size: 32px; }
+  body[data-tech-page] .fa-faq-question,
+  body[data-page="home"] .fa-faq-question { font-size: 32px; }
 }
 @media (max-width: 560px) {
-  body[data-tech-page] .fa-faq-question { font-size: 21px; }
+  body[data-tech-page] .fa-faq-question,
+  body[data-page="home"] .fa-faq-question { font-size: 21px; }
 }
 /* Spec table folded into an FAQ answer — align with the answer's 4px
    text inset, keep a beat before the per-piece note, and reserve the
    +/− icon column so cell text never runs beneath it. */
 body[data-tech-page] .fa-faq-answer .specs-table {
   margin: 4px 4px 20px;
-  max-width: min(760px, calc(100% - 64px));
+  /* Was capped min(760px, ...): the table filled barely two-thirds of the
+     answer card next to 88ch prose. Now it runs the card's width, still
+     reserving the +/- icon column. */
+  max-width: calc(100% - 64px);
+}
+/* Values step up to the answer type's scale (17px, 19px at 1440+); labels
+   follow a step behind. Base .specs-table stays 11/13 for the PDP tables. */
+body[data-tech-page] .tech-specs th { font-size: 12px; }
+body[data-tech-page] .tech-specs td { font-size: 17px; line-height: 1.6; }
+@media (min-width: 1440px) {
+  body[data-tech-page] .tech-specs th { font-size: 14px; width: 180px; }
+  body[data-tech-page] .tech-specs td { font-size: 19px; }
 }
 body[data-tech-page] .tech-note {
   font-size: var(--fs-fine);
@@ -13828,17 +14213,16 @@ body[data-tech-page] .fa-scrub-cap {
   transition: opacity .25s ease;
   font-size: 19px; line-height: 1.6; color: var(--slate);
   /* 54ch: the narrowest measure where no caption breaks on a dangling
-     "The" — at 50–52 the buffing caption's first line still ends on one. */
+     "The" — at 50–52 the buffing caption's first line still ends on one.
+     Centred (8/27): text-align centres the lines, margin-inline centres
+     the capped block inside the absolute inset. */
   max-width: 54ch;
+  margin-inline: auto;
+  text-align: center;
 }
 body[data-tech-page] .fa-scrub-cap.active { opacity: 1; }
-body[data-tech-page] .fa-scrub-cap strong {
-  display: block;
-  font-family: 'Jost', sans-serif;
-  font-size: 13px; font-weight: 500;
-  letter-spacing: 1.8px; text-transform: uppercase;
-  color: var(--bronze); margin-bottom: 6px;
-}
+/* The caption's <strong> eyebrow was removed 8/27 — the slider's label row
+   already names the active stage, so the caption is body copy only. */
 @media (max-width: 900px) {
   /* .fa-alloy--patina included: its two-column override outranks the plain
      .fa-scrub selector, so the collapse must match its specificity. */
@@ -14508,20 +14892,6 @@ body.drawer-open { overflow: hidden; }
   opacity: 1;
   pointer-events: auto;
 }
-/* top scrim: dark photos deepen under the white nav; light photos get a
-   parchment wash so ink links keep footing */
-.studios-fs[data-menu-variant="e"] .fs-brand-media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.studios-fs[data-menu-variant="e"] .fs-brand[data-tone="dark"] .fs-brand-media::after {
-  background: linear-gradient(to bottom, rgba(10, 16, 17, 0.6) 0%, rgba(10, 16, 17, 0.24) 90px, transparent 170px);
-}
-.studios-fs[data-menu-variant="e"] .fs-brand[data-tone="light"] .fs-brand-media::after {
-  background: linear-gradient(to bottom, rgba(236, 234, 226, 0.9) 0%, rgba(236, 234, 226, 0.4) 90px, rgba(236, 234, 226, 0) 170px);
-}
 
 /* Linden Workshops pane — the right half on open, before any studio is
    hovered. Same geometry as a brand's media so the two crossfade in place;
@@ -14544,25 +14914,9 @@ body.drawer-open { overflow: hidden; }
   object-fit: cover;
   display: block;
 }
-/* Deeper than a brand photo's scrim: the sketches are pencil on white, so
-   the nav has line work rather than a flat field behind it. */
-.studios-fs[data-menu-variant="e"] .fs-lw-media::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(236, 234, 226, 0.97) 0%, rgba(236, 234, 226, 0.92) 62px, rgba(236, 234, 226, 0.55) 118px, rgba(236, 234, 226, 0) 210px);
-}
 @media (max-width: 1680px) and (min-width: 1025px) {
+  /* laptop tier keeps the photo pane; only the brand marks step down */
   .studios-fs[data-menu-variant="e"] { --e-mark-h: clamp(26px, 2.6vw, 40px); }
-  .studios-fs[data-menu-variant="e"] .fs-brand-media,
-  .studios-fs[data-menu-variant="e"] .fs-lw-media { display: none; }
-  .studios-fs[data-menu-variant="e"] .fs-brands {
-    width: 100%;
-    min-width: 0;
-    padding-right: clamp(28px, 8vw, 96px);
-  }
-  .studios-fs[data-menu-variant="e"] .fs-lw-nav { max-width: calc(100vw - 96px); }
 }
 /* ≤760px: E joins the shared stacked layout (late resets, as D) */
 @media (max-width: 1024px) {
@@ -14760,6 +15114,16 @@ body.drawer-open { overflow: hidden; }
     transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
   .studios-fs[data-menu-variant="e"] .fs-brand-cta:hover .fs-cta-arrow { transform: translateX(5px); }
+}
+
+/* laptop band: the index column is too narrow for a one-line sentence,
+   so descriptions wrap instead of clipping to an ellipsis */
+@media (max-width: 1680px) and (min-width: 1025px) {
+  .studios-fs[data-menu-variant="e"] .fs-brand-desc {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
 }
 
 /* ── E: top-row nav continuity (>1100px) ──
@@ -15053,14 +15417,6 @@ body.menu-e .lw2-studios-toggle svg rect {
       rgba(44, 30, 20, 0) 52%);
   }
 
-  /* photo scrims: one subtle diagonal parchment wash from the top-left,
-     replacing the old top bands (nothing overlays the photo anymore) */
-  .studios-fs[data-menu-variant="e"] .fs-lw-media::after,
-  .studios-fs[data-menu-variant="e"] .fs-brand[data-tone="dark"] .fs-brand-media::after,
-  .studios-fs[data-menu-variant="e"] .fs-brand[data-tone="light"] .fs-brand-media::after {
-    background: linear-gradient(135deg, rgba(236, 234, 226, 0.30) 0%, rgba(236, 234, 226, 0) 65%);
-  }
-
   /* photo pane settles: a slow drift from 1.045 to rest as it takes focus */
   .studios-fs[data-menu-variant="e"] .fs-lw-media img,
   .studios-fs[data-menu-variant="e"] .fs-brand-media img {
@@ -15176,5 +15532,27 @@ body.menu-e .lw2-studios-toggle svg rect {
     margin-bottom: clamp(20px, 2.8vh, 44px);
     padding: clamp(14px, 1.9vh, 27px) 0;
     font-size: 15px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TECH PAGES — PHONE GUTTERS (8/29)
+   The care/how-its-made sections ran 64px side padding at every width
+   (and the hero/bands 32px via the 1024 block) while the FA homepage
+   standardized on a 24px gutter for <=900. One override brings every
+   tech-page band onto the home gutter; desktop keeps its 64
+   (= the menu-icon gutter, by design).
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  body[data-tech-page] .fa-band,
+  body[data-tech-page] .fa-wrap > section:not(.fa-band),
+  body[data-tech-page] .fa-wrap > section.fa-alloy--patina,
+  body[data-tech-page] .fa-hero-content,
+  body[data-tech-page] .fa-band--bleed,
+  body[data-tech-page] .fa-quote,
+  body[data-tech-page] .fa-assure,
+  body[data-tech-page] .tech-cta {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }

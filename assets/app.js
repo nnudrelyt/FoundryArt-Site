@@ -36,24 +36,47 @@
     if (section === 'foundry-art') {
       const link = (href, label, key) => `<a href="${href}" data-nav-key="${key}">${label}</a>`;
       navInner = `
-          <div class="nav-left">${dotGrid}
-            <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><img src="/assets/images/linden/wordmarks/foundry-art.png" alt="Foundry Art"></a>
+          <div class="nav-left">
+            <!-- Mobile-only cart (8/28): on phones the cart sits LEFT of the
+                 studios toggle (and its open/close X state), per Tyler. Same
+                 markup as the nav-right cart; CSS swaps which one shows at
+                 1024. Both badges stay in sync — every updater targets
+                 [data-cart-count] via querySelectorAll. -->
+            <a href="/foundry-art/cart/" class="nav-cart nav-cart-icon nav-cart--mobile">
+              <span class="sr-only">Cart,</span>
+              <svg class="nav-cart-glyph" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">
+                <path d="M2.5 3.5h2.7l2.3 10.8h10.6"/>
+                <path d="M6 6.8h15.5l-1.9 5.9H7.3"/>
+                <circle cx="9.6" cy="18.6" r="1.35" fill="currentColor" stroke="none"/>
+                <circle cx="17.4" cy="18.6" r="1.35" fill="currentColor" stroke="none"/>
+              </svg>
+              <span class="nav-cart-count" data-cart-count>2</span>
+              <span class="sr-only" data-cart-count-label>items</span>
+            </a>${dotGrid}
+            <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><!-- trimmed mark (8/28): the original foundry-art.png carries 133px of
+                 transparent padding per side (16.6% of canvas), so the glyphs sat
+                 ~37px right of wherever the box was aligned. The trimmed file is
+                 0/0. --><img src="/assets/images/linden/wordmarks/trimmed/foundry-art.png" alt="Foundry Art"></a>
           </div>
           <div class="nav-links">
-            ${link('/foundry-art/shop/', 'Tiles', 'shop')}
+            ${/* Nav order mirrors the homepage's section order: craft (#story),
+                  featured tiles (#products), design ideas, guidance. All four
+                  are homepage anchors as of 8/27 — Tiles left /foundry-art/shop/
+                  for the featured-tiles section (the shop stays one click away
+                  via its "View all" link and the Shop Now button); About
+                  replaced "Our Story" and took its #story target, and the
+                  umbrella-brand /about/ page left the FA nav in the same pass
+                  (a real destination since SL 7-23 — still carried by the
+                  studios drawer and the injected footer). */''}
+            ${link('/foundry-art/#story', 'About', 'story')}
+            ${link('/foundry-art/#products', 'Tiles', 'shop')}
             ${link('/foundry-art/#design-ideas', 'Design Ideas', 'design')}
-            ${link('/foundry-art/#story', 'Our Story', 'story')}
             ${/* "How to Buy" promised a purchasing walkthrough and delivered a
                   PDF library plus an FAQ. The section already calls itself
                   "Expert Guidance" and its anchor is #guidance — the nav label
                   was the only thing on the site describing it as a checkout
                   path. */''}
             ${link('/foundry-art/#guidance', 'Guidance', 'guide')}
-            ${/* About the umbrella brand (SL 7-23: moved out of the footer). A
-                  real destination, not a homepage anchor. Below 1024 .nav-links
-                  is hidden for Foundry Art, so the studios drawer + injected
-                  footer below carry About on tablet/mobile. */''}
-            ${link('/about/', 'About', 'about')}
           </div>
           <!-- No .nav-hamburger in the Foundry Art nav. Three of the four links
                above are homepage anchors and are fine to drop on small screens;
@@ -207,16 +230,24 @@ ${studiosMenuHTML(section)}
       {
         key: 'foundry-art',
         name: 'Foundry Art',
+        /* 8/28: the brand's identity links (wordmark, name, photo) go to
+           the FA homepage plain — links[0] became the #story anchor when
+           the panel took the top nav's links, which made "Foundry Art"
+           itself land mid-page. */
+        home: '/foundry-art/',
         tone: 'dark',
         mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.png',
         image: '/assets/images/foundry-art-arrays/inset-tiles-array.jpg',
         desc: 'Hand-cast bronze tiles and hardware, direct from our studio.',
         cta: ['/foundry-art/shop/', 'Shop now'],
         note: 'Shop online, direct from the studio',
+        /* Mirrors the FA top nav (8/27 pass): About / Tiles / Design
+           Ideas / Guidance, in the homepage's section order. */
         links: [
-          ['/foundry-art/', 'Studio overview'],
-          ['/foundry-art/shop/', 'Inset Tiles &amp; Liners'],
-          ['/foundry-art/shop/', 'Cabinet Hardware'],
+          ['/foundry-art/#story', 'About'],
+          ['/foundry-art/#products', 'Tiles'],
+          ['/foundry-art/#design-ideas', 'Design Ideas'],
+          ['/foundry-art/#guidance', 'Guidance'],
         ],
       },
       {
@@ -241,14 +272,14 @@ ${studiosMenuHTML(section)}
 
     const panel = (b) => `
         <div class="fs-brand${b.key === focus ? ' focus' : ''}" data-brand="${b.key}" data-tone="${b.tone}">
-          <a class="fs-brand-media" href="${b.links[0][0]}" data-studios-link aria-label="${b.name}">
+          <a class="fs-brand-media" href="${b.home || b.links[0][0]}" data-studios-link aria-label="${b.name}">
             <img src="${b.image}" alt="">
           </a>
           <div class="fs-brand-info">
-            <a class="fs-brand-mark" href="${b.links[0][0]}" data-studios-link>
+            <a class="fs-brand-mark" href="${b.home || b.links[0][0]}" data-studios-link>
               <img src="${b.mark}" alt="${b.name}">
             </a>
-            <a class="fs-brand-name" href="${b.links[0][0]}" data-studios-link>${b.name}</a>
+            <a class="fs-brand-name" href="${b.home || b.links[0][0]}" data-studios-link>${b.name}</a>
             <p class="fs-brand-desc">${b.desc}</p>
             ${b.linksTitle ? `<p class="fs-brand-links-title">${b.linksTitle}</p>` : ''}
             <nav class="fs-brand-links" aria-label="${b.name}">
@@ -1181,7 +1212,7 @@ ${studiosMenuHTML(section)}
       total:    document.querySelector('[data-summary-total]'),
       count:    document.querySelector('[data-summary-count]'),
       lines:    document.querySelector('[data-cart-lines]'),
-      nav:      document.querySelector('[data-cart-count]'),
+      nav:      document.querySelectorAll('[data-cart-count]'),   /* both nav carts (desktop + mobile instance) */
       shipping: document.querySelector('[data-cart-shipping]'),
     };
 
@@ -1259,7 +1290,7 @@ ${studiosMenuHTML(section)}
       if (els.total)    els.total.textContent = money(subtotal + shipCost);
       if (els.count)    els.count.textContent = qtyTotal;
       if (els.lines)    els.lines.textContent = rows.length;
-      if (els.nav)      els.nav.textContent = qtyTotal;
+      if (els.nav)      els.nav.forEach(el => { el.textContent = qtyTotal; });
       if (!rows.length) showEmpty();
     }
 
@@ -2689,6 +2720,15 @@ ${studiosMenuHTML(section)}
     const grid = document.querySelector('.insitu-grid');
     const indicator = document.querySelector('[data-insitu-indicator]');
     if (!grid || !indicator) return;
+    // Mobile (8/28): the rail's images drop loading="lazy" so the peeking
+    // second card is painted before any swipe — a lazy offscreen-right
+    // image left the sliver blank, defeating the affordance.
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      grid.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        img.loading = 'eager';
+        if (!img.complete) img.decode?.().catch(() => {});
+      });
+    }
     const thumb = indicator.querySelector('.insitu-scroll-thumb');
     const update = () => {
       const sw = grid.scrollWidth;
@@ -2701,7 +2741,21 @@ ${studiosMenuHTML(section)}
       thumb.style.width = (visibleRatio * 100) + '%';
       thumb.style.left = (scrollRatio * (1 - visibleRatio) * 100) + '%';
     };
-    grid.addEventListener('scroll', update, { passive: true });
+    // Mobile scrubber reveal (8/28): visible only while the rail is
+    // being swiped, fading out ~1s after the last scroll. Desktop keeps
+    // its native styled scrollbar and never adds the class.
+    let hideTimer = null;
+    // No width gate: on desktop the indicator carries no styles, so the
+    // class is inert there — and matchMedia misreports inside emulated
+    // panes, which is exactly where this gets tested.
+    const activity = () => {
+      indicator.classList.add('is-active');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => indicator.classList.remove('is-active'), 1000);
+    };
+    grid.addEventListener('scroll', () => { update(); activity(); }, { passive: true });
+    ['touchstart', 'pointerdown'].forEach(ev =>
+      grid.addEventListener(ev, activity, { passive: true }));
     window.addEventListener('resize', update);
     // Image loads can shift scrollWidth — re-measure after images decode.
     grid.querySelectorAll('img').forEach(img => {
@@ -2883,6 +2937,12 @@ ${studiosMenuHTML(section)}
     const grid = document.querySelector('.insitu-grid');
     if (!grid) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // No auto-drift on touch layouts (8/28): the phone rail is snap-scrolled
+    // by hand, and a self-moving row fights the snap points. Checked LIVE in
+    // the tick, not once at load — an early return here meant crossing the
+    // breakpoint (resize, device-emulation toggle) without a reload killed
+    // the drift on desktop permanently.
+    const touchLayout = window.matchMedia('(max-width: 768px)');
 
     const SPEED = 1.5;       // px per frame at 60fps ≈ 90px/s
     const PAUSE_AFTER_INTERACT_MS = 2500;
@@ -2905,7 +2965,7 @@ ${studiosMenuHTML(section)}
     );
 
     function tick() {
-      if (!paused) {
+      if (!paused && !touchLayout.matches) {
         grid.scrollLeft += SPEED * dir;
         const max = grid.scrollWidth - grid.clientWidth;
         if (grid.scrollLeft >= max - 1) dir = -1;
@@ -2930,14 +2990,28 @@ ${studiosMenuHTML(section)}
     startObs.observe(section);
   }
 
-  // Hero video needs no JS loop masking: carving-wax-loop-v3.mp4 has its tail
-  // crossfaded over its head, so the last frame already matches the first
-  // (seam MSE 2868 -> 31). The previous build dipped the video to opacity 0
-  // against the black backdrop, which read as a flash to black — SL 7-22-26.
+  // Hero video needs no JS loop masking: carving-wax-loop-v4-boomerang.mp4
+  // plays the smoothed footage forward then mirrored back (dupe frames removed,
+  // motion-interpolated to true 24fps), so both turn points are continuous by
+  // construction — no crossfade, no seam. The build before v3 dipped the video
+  // to opacity 0 against the black backdrop, which read as a flash to black —
+  // SL 7-22-26.
 
   function initHardwareGallery() {
     const grid = document.querySelector('[data-hardware-grid]');
     if (!grid) return;
+    // Mobile mosaic (8/28): the tiles run image-only (overlay hidden in
+    // CSS), so the white studio shots would just repeat the shop grid.
+    // Swap each tile to its mounted lifestyle shot — the same image the
+    // desktop hover reveals in the large pane.
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      grid.querySelectorAll('.hardware-item[data-large]').forEach(item => {
+        const img = item.querySelector('.wire-img img');
+        if (!img) return;
+        img.src = item.dataset.large;
+        if (item.dataset.largeAlt) img.alt = item.dataset.largeAlt;
+      });
+    }
     const largeImg = document.querySelector('[data-hardware-large] > img');
     if (!largeImg) return;
     // Preload alt large views so the first hover swap is instant
