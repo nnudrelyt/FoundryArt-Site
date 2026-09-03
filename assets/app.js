@@ -193,10 +193,10 @@ ${studiosMenuHTML(section)}
         tone: 'light',
         mark: '/assets/images/linden/wordmarks/trimmed/bronzework-studio.png',
         image: '/assets/images/linden/autograph/Autograph-Dahlia-Whiskey-1-2048.jpg',
-        desc: 'Hand-carved metal tiles, liners, and trim in living bronze and zinc.',
+        desc: 'Solid metal tiles and trim in bronze, brass, stainless steel, and zinc.',
         cta: ['/bronzework-studio/', 'Explore our collections'],
         linksTitle: 'Collections',
-        note: 'Available at fine tile showrooms',
+        note: 'Available exclusively at luxury tile and stone showrooms',
         links: [
           ['/bronzework-studio/', 'Studio overview'],
           ['/classic/', 'Classic'],
@@ -210,7 +210,7 @@ ${studiosMenuHTML(section)}
         tone: 'dark',
         mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.png',
         image: '/assets/images/foundry-art-arrays/inset-tiles-array.jpg',
-        desc: 'Hand-cast bronze tiles and hardware, direct from our studio.',
+        desc: 'Hand-cast solid bronze tile and hardware, direct from our studio.',
         cta: ['/foundry-art/shop/', 'Shop now'],
         note: 'Shop online, direct from the studio',
         links: [
@@ -225,7 +225,7 @@ ${studiosMenuHTML(section)}
         tone: 'light',
         mark: '/assets/images/linden/wordmarks/trimmed/talisman.png',
         image: '/assets/images/linden/talisman/Talisman-Swans-Trumpet-and-Spiral-Wave-Ancient-White-towel-crop-e1651606000674.jpg',
-        desc: 'Hand-sculpted ceramic tiles in a sophisticated stony white glaze.',
+        desc: 'Timeless decorative ceramic tiles.',
         cta: ['/talisman/', 'Learn more'],
         note: 'Direct from our studio',
         links: [
