@@ -346,6 +346,62 @@ cascade, exactly as it does for classic. Decisions taken:
 - The precision rules are mostly scoped `body[data-page="precision"]`. To propagate, **generalise those selectors to the shared `autograph|precision|classic|instinct` list** (or duplicate per page), then per page swap: parent wordmark, collection title, sub-nav anchors, carousel slides + tagline, the two profile cards (image + finish copy), the finish band, the Design Ideas image set + captions, the Further-Information PDFs, and the two "Also available" sibling collections.
 - Match each against its live page with the same inspector-at-reviewer-width method before shipping.
 
+**Further Information panel now shared with `/showroom-zone/` (2026-09-01).** The
+Showroom Zone's Literature block *is* §8.7 — `body[data-page="showroom-zone"]` was
+added to the 12 shared `.lw2-coll-info*` / `.lw2-coll-section-title` selector groups
+(base + both `@media` blocks) and to the four precision-block `:is()` overrides, so
+the panel, thumbnails and card labels come from one definition. Five
+showroom-only deltas, and the reason for each:
+
+- **Card titles accept `h3` or `h4`.** The zone nests its cards under group
+  headings (`h3` Tear Sheets / Installation and Cleaning / Other), so the card
+  labels step down to `h4`. The showroom-zone twins of the card-title rules are
+  written `.lw2-coll-info-card :is(h3, h4)`.
+- **Fixed-width, centred tracks instead of `repeat(4, 1fr)`.** Collection pages run
+  one 4-up row; the zone runs groups of 4 / 3 / 1. `repeat(auto-fit, 230px)` +
+  `justify-content: center` collapses the unused tracks so short groups centre under
+  their heading instead of hanging off the left, and each breakpoint's `max-width` is
+  a `calc()` off the shared `--zone-card` / `--zone-gap` pair so the measure can't
+  drift from the gap. This block **must stay after the precision `:is()` overrides** —
+  they match at equal specificity and would otherwise win on source order. Tablet
+  wraps 4 → 3 + 1 rather than squeezing the thumbnails below their native width.
+- **White panel (brand-owner direction, 2026-09-01).** The collection pages'
+  `#E0E0E0` ground is what separates the thumbnails from the page; the zone runs on
+  white instead. The 80px top comes in to 64 — it was sized to give a colour band
+  breathing room, and without the band it reads as a hole. The 88px bottom stays:
+  the panel is the last block before the footer.
+- **Group titles are sans labels, not headings (brand-owner direction, 2026-09-01).**
+  Settled after several passes:
+
+  | Heading | Face |
+  |---|---|
+  | `Literature` (h2) | Fanwood 32px / 26px mobile — the shared rule, unmodified |
+  | The three group titles (h3) | **Open Sans 600 15px**, `letter-spacing: 0.02em` |
+  | Sheet names (h4) | **Open Sans 16px** |
+
+  At 15px the group titles sit *below* the 16px sheet names they head, so they read
+  as labels above each set rather than as headings in their own right; weight and
+  tracking carry them. The size holds at every breakpoint — no mobile step-down.
+  **The rules live in the trailing block**, after the shared `@media` rules — a size
+  restated only in the earlier 640px block is dead, because the trailing rules match
+  at equal specificity and win on order. This bit us once already.
+- **The document carries its own edge.** A consequence of the white panel: a white
+  PDF page on a white ground has no boundary. So the 18px white mat is dropped
+  (`padding: 0`), a `--lw-border-subtle` hairline is drawn on the sheet, and a soft
+  shadow lifts it off the page — a sheet of paper rather than a bleeding rectangle.
+  Hover deepens both, alongside the shared red label rollover.
+
+The page carries **no contact form of its own** — the footer form is the only one, and
+the price-list note links to it (`#contact`). Everything else is existing idiom: the
+hero follows the `/contact/` leaf and the price-list note is a plain centred measure.
+The note sits **with the hero, above the literature** — it answers the question
+showroom staff arrive with, so it shouldn't trail the list — and reads as part of the
+same opening statement, so the hero's bottom padding is half a normal section break
+(28px desktop / 16px mobile) rather than the full 56/32. The gate and the
+zone are two states of the same URL, as on live — the prototype swaps them on submit
+without checking a password (a client-side check would be theatre), and
+`?showroom=open` deep-links past it for review.
+
 ---
 
 ## 9. Foundry Art shell

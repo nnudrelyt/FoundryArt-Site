@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Showroom Login — Linden Workshops</title>
-<meta name="description" content="Password-protected showroom zone for Linden Workshops trade partners.">
+<title>Showroom Zone — Linden Workshops</title>
+<meta name="description" content="Password-protected Showroom Zone for Linden Workshops trade partners — Bronzework Studio tear sheets, installation and cleaning guides, and display board order forms.">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#e6e4dd">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='15' font-weight='400' fill='%23000000' text-anchor='middle'%3ELW%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@100..900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/tokens.css?v=20260903-443">
-<link rel="stylesheet" href="/assets/styles.css?v=20260903-443">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fanwood+Text:ital@0;1&family=Jost:wght@100..900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css?v=20260903-480">
+<link rel="stylesheet" href="/assets/styles.css?v=20260903-480">
 </head>
 <body data-page="showroom-zone" data-section="linden">
 
@@ -42,16 +43,123 @@
   <main class="lw2-gate-page">
 
     <!-- Password gate — mirrors the WordPress password-protected screen on
-         the live /showroom-zone/ page. Non-functional in the prototype;
-         real auth wires up at launch. -->
-    <section class="lw2-gate">
+         the live /showroom-zone/ page. Prototype only: submitting swaps in
+         the Showroom Zone below without checking the value. Real auth wires
+         up at launch, at which point the gate and the zone become two
+         server-rendered states of this same URL (as they are on live).
+         Reviewers can deep-link past it with /showroom-zone/?showroom=open. -->
+    <section class="lw2-gate" id="showroom-gate">
       <p class="lw2-gate-intro">This content is password-protected. To view it, please enter the password below.</p>
-      <form class="lw2-gate-form" onsubmit="event.preventDefault();" aria-label="Enter password to view protected content">
+      <form class="lw2-gate-form" id="showroom-gate-form" aria-label="Enter password to view protected content">
         <label for="gate-pw">Password:</label>
         <input id="gate-pw" type="password" autocomplete="current-password" spellcheck="false">
         <button type="submit">Enter</button>
       </form>
     </section>
+
+    <!-- ─── SHOWROOM ZONE — the page behind the login ─────────────── -->
+    <div class="lw2-zone" id="showroom-zone-content" hidden>
+
+      <!-- HERO — centered Fanwood headline + subhead (the /contact/ leaf idiom) -->
+      <section class="lw2-zone-hero">
+        <h1>Welcome to the Bronzework Studio<br>Showroom Zone</h1>
+        <p class="lw2-zone-subhead">Helpful product information for you and your customers</p>
+      </section>
+
+      <!-- PRICE LIST — not published online; routes to phone / footer form.
+           Sits with the hero, above the literature: it is the answer to the
+           question showroom staff arrive with, so it shouldn't trail the list. -->
+      <section class="lw2-zone-price">
+        <p class="lw2-zone-price-lead">Our current price list is dated January 1, 2026.</p>
+        <p>We don&rsquo;t post our price lists online, so if you need a fresh copy, please call us at <a href="tel:7737842628">773-784-2628</a>, send an email, or use the <a href="#contact">contact form at the bottom of this page</a>.</p>
+      </section>
+
+      <!-- LITERATURE — the collection-detail Further Information panel
+           (DS §8.7: .lw2-coll-info + .lw2-coll-info-card), grouped into the
+           three headings the live list uses. Every PDF is the current file
+           from the Linden Workshops media library. -->
+      <section class="lw2-coll-info" id="literature" aria-labelledby="literature-title">
+        <h2 class="lw2-coll-section-title" id="literature-title">Literature</h2>
+
+        <div class="lw2-zone-lit-group">
+          <h3 class="lw2-zone-lit-group-title">Tear Sheets</h3>
+          <div class="lw2-coll-info-grid">
+
+            <a href="https://lindenworkshops.com/wp-content/uploads/BWS-tear-sheet-Autograph-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Autograph tear sheet (PDF, opens in a new tab)">
+              <div class="lw2-coll-info-img">
+                <picture><source type="image/webp" srcset="/assets/images/linden/autograph/BWS-tear-sheet-Autograph-2024-08-08_Page_1-230x300.webp"><img src="/assets/images/linden/autograph/BWS-tear-sheet-Autograph-2024-08-08_Page_1-230x300.jpg" alt="Autograph tear sheet PDF preview" loading="lazy" width="230" height="300"></picture>
+              </div>
+              <h4>Autograph Tear Sheet</h4>
+            </a>
+
+            <a href="https://lindenworkshops.com/wp-content/uploads/BWS-tear-sheet-Classic-5-pages-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Classic Liners and Insets tear sheet (PDF, opens in a new tab)">
+              <div class="lw2-coll-info-img">
+                <picture><source type="image/webp" srcset="/assets/images/linden/classic/BWS-tear-sheet-Classic-4-pages-2024-08-08_Page_1-230x300.webp"><img src="/assets/images/linden/classic/BWS-tear-sheet-Classic-4-pages-2024-08-08_Page_1-230x300.jpg" alt="Classic Liners and Insets tear sheet PDF preview" loading="lazy" width="230" height="300"></picture>
+              </div>
+              <h4>Classic Liners and Insets Tear Sheet</h4>
+            </a>
+
+            <a href="https://lindenworkshops.com/wp-content/uploads/BWS-tear-sheet-Precision-Dome-2024-08-06.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Precision Dome Liner tear sheet (PDF, opens in a new tab)">
+              <div class="lw2-coll-info-img">
+                <picture><source type="image/webp" srcset="/assets/images/linden/precision/BWS-tear-sheet-Precision-Dome-2024-08-06_Page_1-1900x2459-230x300.webp"><img src="/assets/images/linden/precision/BWS-tear-sheet-Precision-Dome-2024-08-06_Page_1-1900x2459-230x300.jpg" alt="Precision Dome Liner tear sheet PDF preview" loading="lazy" width="230" height="300"></picture>
+              </div>
+              <h4>Precision Dome Liner Tear Sheet</h4>
+            </a>
+
+            <a href="https://lindenworkshops.com/wp-content/uploads/BWS-tear-sheet-Precision-Square-2-25-25.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Precision Square Liner tear sheet (PDF, opens in a new tab)">
+              <div class="lw2-coll-info-img">
+                <picture><source type="image/webp" srcset="/assets/images/linden/precision/BWS-tear-sheet-Precision-Square-2-25-25_Page_1-230x300.webp"><img src="/assets/images/linden/precision/BWS-tear-sheet-Precision-Square-2-25-25_Page_1-230x300.jpg" alt="Precision Square Liner tear sheet PDF preview" loading="lazy" width="230" height="300"></picture>
+              </div>
+              <h4>Precision Square Liner Tear Sheet</h4>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="lw2-zone-lit-group">
+          <h3 class="lw2-zone-lit-group-title">Installation and Cleaning</h3>
+          <div class="lw2-coll-info-grid">
+
+            <a href="https://lindenworkshops.com/wp-content/uploads/BWS-Installation-and-Cleaning-BRONZE-and-ZINC-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Bronze and Zinc installation and cleaning guide (PDF, opens in a new tab)">
+              <div class="lw2-coll-info-img">
+                <picture><source type="image/webp" srcset="/assets/images/linden/autograph/BWS-Installation-and-Cleaning-BRONZE-and-ZINC-2024-08-08-230x300.webp"><img src="/assets/images/linden/autograph/BWS-Installation-and-Cleaning-BRONZE-and-ZINC-2024-08-08-230x300.jpg" alt="Bronze and Zinc installation and cleaning PDF preview" loading="lazy" width="230" height="300"></picture>
+              </div>
+              <h4>Bronze and Zinc</h4>
+            </a>
+
+            <a href="https://lindenworkshops.com/wp-content/uploads/BWS-Installation-and-Cleaning-Precision-DOME-liners-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Precision Dome Liners installation and cleaning guide (PDF, opens in a new tab)">
+              <div class="lw2-coll-info-img">
+                <picture><source type="image/webp" srcset="/assets/images/linden/showroom-zone/BWS-Installation-and-Cleaning-Precision-DOME-liners-2024-08-08-232x300.webp"><img src="/assets/images/linden/showroom-zone/BWS-Installation-and-Cleaning-Precision-DOME-liners-2024-08-08-232x300.jpg" alt="Precision Dome Liners installation and cleaning PDF preview" loading="lazy" width="232" height="300"></picture>
+              </div>
+              <h4>Precision Dome Liners</h4>
+            </a>
+
+            <a href="https://lindenworkshops.com/wp-content/uploads/BWS-Installation-and-Cleaning-Precision-Square-Brass-Stainless-liners-2024-08-08.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Precision Square Liners installation and cleaning guide (PDF, opens in a new tab)">
+              <div class="lw2-coll-info-img">
+                <picture><source type="image/webp" srcset="/assets/images/linden/precision/BWS-Installation-and-Cleaning-Precision-Square-Brass-Stainless-liners-2024-08-08-230x300.webp"><img src="/assets/images/linden/precision/BWS-Installation-and-Cleaning-Precision-Square-Brass-Stainless-liners-2024-08-08-230x300.jpg" alt="Precision Square Liners installation and cleaning PDF preview" loading="lazy" width="230" height="300"></picture>
+              </div>
+              <h4>Precision Square Liners</h4>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="lw2-zone-lit-group">
+          <h3 class="lw2-zone-lit-group-title">Other</h3>
+          <div class="lw2-coll-info-grid">
+
+            <a href="https://lindenworkshops.com/wp-content/uploads/Display-Boards-LINDEN-WORKSHOPS-Bronzework-Studio-2026-Fillable-.pdf" class="lw2-coll-info-card" target="_blank" rel="noopener" aria-label="Display Boards order form (PDF, opens in a new tab)">
+              <div class="lw2-coll-info-img">
+                <picture><source type="image/webp" srcset="/assets/images/linden/showroom-zone/Display-Boards-LINDEN-WORKSHOPS-Bronzework-Studio-2026-232x300.webp"><img src="/assets/images/linden/showroom-zone/Display-Boards-LINDEN-WORKSHOPS-Bronzework-Studio-2026-232x300.jpg" alt="Display Boards order form PDF preview" loading="lazy" width="232" height="300"></picture>
+              </div>
+              <h4>Display Boards</h4>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
 
   </main>
 
@@ -112,6 +220,45 @@
     </div>
   </footer>
 
-  <script src="/assets/app.js?v=20260903-443"></script>
+  <script src="/assets/app.js?v=20260903-480"></script>
+
+  <!-- Gate → zone. Prototype only: no password is checked, because a
+       client-side check would be theatre, not security. At launch the
+       server renders one state or the other for this same URL. -->
+  <script>
+  (function () {
+    var gate = document.getElementById('showroom-gate');
+    var zone = document.getElementById('showroom-zone-content');
+    var form = document.getElementById('showroom-gate-form');
+    if (!gate || !zone || !form) return;
+
+    function unlock(focus) {
+      gate.hidden = true;
+      zone.hidden = false;
+      if (focus) {
+        var h1 = zone.querySelector('h1');
+        if (h1) { h1.setAttribute('tabindex', '-1'); h1.focus(); }
+      }
+    }
+
+    // Deep link for review: /showroom-zone/?showroom=open
+    try {
+      if (new URLSearchParams(location.search).get('showroom') === 'open') {
+        unlock(false);
+        // The browser resolved any #hash while the zone was still hidden, so
+        // re-run it now that the real page height exists.
+        if (location.hash) {
+          var target = document.getElementById(location.hash.slice(1));
+          if (target) target.scrollIntoView();
+        }
+      }
+    } catch (e) {}
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      unlock(true);
+    });
+  })();
+  </script>
 </body>
 </html>
