@@ -47,8 +47,8 @@ window.FA_ACCOUNT = {
       date: '2 June 2026',
       status: 'Delivered',
       items: [
-        { slug: 'cabochon-3x3', name: 'Cabochon', sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 8, sku: 'FA-CAB-3-TB', weight: 0.8 },
-        { slug: 'lotus-3x3',    name: 'Lotus',    sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 4, sku: 'FA-LOT-3-TB', weight: 0.8 },
+        { slug: 'cabochon-3x3', name: 'Cabochon', sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 8, sku: 'TCAB33', weight: 0.8 },
+        { slug: 'lotus-3x3',    name: 'Lotus',    sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 4, sku: 'TLOT33', weight: 0.8 },
       ],
       subtotal: 1110.00,
       discount: 222.00,                // 20% trade
@@ -63,8 +63,8 @@ window.FA_ACCOUNT = {
       date: '28 June 2026',
       status: 'Shipped',
       items: [
-        { slug: 'moon-blossom-3x3', name: 'Moon Blossom', sizeLabel: '3×3 inch', finish: 'White Bronze', price: 92.50, qty: 3, sku: 'FA-MBL-3-WB', weight: 0.8 },
-        { slug: 'cabochon-1x1-knob', name: 'Cabochon Knob', sizeLabel: '1×1 inch', finish: 'Traditional Bronze', price: 42.00, qty: 6, sku: 'FA-CAB-KNB', weight: 0.2 },
+        { slug: 'moon-blossom-3x3', name: 'Moon Blossom', sizeLabel: '3×3 inch', finish: 'White Bronze', price: 92.50, qty: 3, sku: 'WMOB33', weight: 0.8 },
+        { slug: 'cabochon-1x1-knob', name: 'Cabochon Knob', sizeLabel: '1×1 inch', finish: 'Traditional Bronze', price: 42.00, qty: 6, sku: 'TCAB11K', weight: 0.2 },
       ],
       subtotal: 529.50,
       discount: 105.90,
@@ -79,7 +79,7 @@ window.FA_ACCOUNT = {
       date: '14 July 2026',
       status: 'Processing',
       items: [
-        { slug: 'center-square-2x2', name: 'Center Square', sizeLabel: '2×2 inch', finish: 'Traditional Bronze', price: 52.00, qty: 10, sku: 'FA-CSQ-2-TB', weight: 0.4 },
+        { slug: 'center-square-2x2', name: 'Center Square', sizeLabel: '2×2 inch', finish: 'Traditional Bronze', price: 52.00, qty: 10, sku: 'TCEN22', weight: 0.4 },
       ],
       subtotal: 520.00,
       discount: 104.00,
@@ -94,8 +94,8 @@ window.FA_ACCOUNT = {
       date: '11 April 2026',
       status: 'Delivered',
       items: [
-        { slug: 'sample-water-3x3', parentSlug: 'water-3x3', type: 'sample', name: 'Water', sizeLabel: 'Sample · 1×1 inch', finish: 'White Bronze', price: 0, qty: 1, sku: 'FA-SAMPLE-WAT-3-WB', weight: 0.05 },
-        { slug: 'sample-sun-3x3',   parentSlug: 'sun-3x3',   type: 'sample', name: 'Sun',   sizeLabel: 'Sample · 1×1 inch', finish: 'Traditional Bronze', price: 0, qty: 1, sku: 'FA-SAMPLE-SUN-3-TB', weight: 0.05 },
+        { slug: 'sample-water-3x3', parentSlug: 'water-3x3', type: 'sample', name: 'Water', sizeLabel: 'Sample · 1×1 inch', finish: 'White Bronze', price: 0, qty: 1, sku: 'FA-SAMPLE-WWTR33', weight: 0.05 },
+        { slug: 'sample-sun-3x3',   parentSlug: 'sun-3x3',   type: 'sample', name: 'Sun',   sizeLabel: 'Sample · 1×1 inch', finish: 'Traditional Bronze', price: 0, qty: 1, sku: 'FA-SAMPLE-TSUN33', weight: 0.05 },
       ],
       subtotal: 0,
       discount: 0,

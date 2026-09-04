@@ -1,7 +1,38 @@
 // Foundry Art — placeholder catalog (modeled on Claremont Tile's current Foundry Art listings)
 // Source of truth for shop grid + PDPs. All images remain wire-img placeholders.
 
+// SKUs are the studio's own retail price-list codes (Foundry Art RETAIL Prices
+// 2026): <alloy><pattern><size>, e.g. TLOT33 = Traditional Lotus 3x3,
+// WLOT33 the White Bronze twin; knobs take a K suffix, pulls are TFAP05P /
+// WFAP05P. `sku` here is the FIRST listed finish; skuForFinish() in app.js
+// swaps the leading T/W. Quoting the studio's own code means what a customer
+// reads off an order is what gets picked in Chicago.
 window.FA_PRODUCTS = [
+  // Grid order ("Best match") groups by size — all the 3x3s, then 2x2, then
+  // 1x1, then hardware. Merchandising rank within each group is unchanged.
+  // Appending new pieces to the end instead stranded Square 3x3 and the 2x2
+  // Lotus / Moon Blossom away from their own size.
+  //
+  // ────────────────────────────────────────────────────────
+  // Added from the Foundry Art RETAIL Prices 2026 list (effective 2026-01-01).
+  // These 14 pieces are on the price list but were missing from the catalog.
+  //
+  // Photography for all 14 came from the client's own archive
+  // (Foundry Art/_Assets/Photography — the mirror of Stacza's Drive folders),
+  // so unlike the older placeholder shots it is rights-clear. See
+  // assets/images/NOTICE.md for the per-folder source map.
+  //
+  // If a future piece arrives before its photography does, set
+  // `photoPending: true` on it — productCardHTML(), the cart thumbnails and
+  // the PDPs all omit the <img> and show a "photography pending" label instead
+  // of a broken-image glyph. Nothing sets it today.
+  //
+  // LINERS from the same price list are deliberately NOT here — every liner is
+  // a 10 in. piece and all 8 SKUs are out of stock and will not be re-cast.
+  // That exclusion covers the liners ONLY: the 10-inch PULL is a separate
+  // product and is listed below, White Bronze only.
+  // ────────────────────────────────────────────────────────
+
   {
     slug: 'lotus-3x3',
     name: 'Lotus',
@@ -14,7 +45,7 @@ window.FA_PRODUCTS = [
     salePrice: null,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.7,
-    sku: 'FA-LOT-3-TB',
+    sku: 'TLOT33',
     description: 'A stylized lotus blossom motif — one of our oldest patterns, originally carved in 1991. Used singly as a focal inset or repeated in a band.',
     popularity: 2,
     released: 1,
@@ -32,7 +63,7 @@ window.FA_PRODUCTS = [
     salePrice: null,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.7,
-    sku: 'FA-CAB-3-TB',
+    sku: 'TCAB33',
     description: 'A raised dome center against a flat field — the most ordered piece in our catalog. Works as a single accent or repeated for a grid effect.',
     popularity: 1,
     released: 2,
@@ -50,7 +81,7 @@ window.FA_PRODUCTS = [
     salePrice: null,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.7,
-    sku: 'FA-MBL-3-TB',
+    sku: 'TMOB33',
     description: 'A botanical motif with a soft crescent at its base — pairs naturally with limestone and travertine fields.',
     popularity: 5,
     released: 5,
@@ -68,7 +99,7 @@ window.FA_PRODUCTS = [
     salePrice: null,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.7,
-    sku: 'FA-SUN-3-TB',
+    sku: 'TSUN33',
     description: 'Radiant sunburst rays from a central boss. A statement piece — works well as a singular focal point.',
     popularity: 6,
     released: 6,
@@ -86,7 +117,7 @@ window.FA_PRODUCTS = [
     salePrice: null,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.7,
-    sku: 'FA-WAT-3-TB',
+    sku: 'TWTR33',
     description: 'Flowing horizontal lines suggesting calm water. Subtle enough to repeat in a continuous band.',
     popularity: 8,
     released: 7,
@@ -103,7 +134,7 @@ window.FA_PRODUCTS = [
     price: 92.50,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.7,
-    sku: 'FA-GRD-3-TB',
+    sku: 'TGRI33',
     description: 'A clean nine-square grid pattern. Modernist and geometric — pairs with crisp porcelain fields.',
     popularity: 9,
     released: 9,
@@ -120,10 +151,28 @@ window.FA_PRODUCTS = [
     price: 92.50,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.7,
-    sku: 'FA-PIN-3-TB',
+    sku: 'TPIN33',
     description: 'Rotational geometric motif. Reads as movement when repeated in a row of three or more.',
     popularity: 10,
     released: 8,
+    inStock: true,
+  },
+  {
+    slug: 'square-3x3',
+    name: 'Square',
+    size: '3×3',
+    sizeLabel: '3×3 inch',
+    pattern: 'Square',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 92.50,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.7,
+    sku: 'TSQU33',
+    description: 'A recessed square set inside a raised border — the most restrained piece in the 3×3 range. Reads as architecture rather than ornament against honed limestone.',
+    popularity: 14,
+    released: 14,
     inStock: true,
   },
   {
@@ -138,7 +187,7 @@ window.FA_PRODUCTS = [
     salePrice: null,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.4,
-    sku: 'FA-CAB-2-TB',
+    sku: 'TCAB22',
     description: 'The Cabochon motif at 2×2 inch — drops perfectly into a 2×2 tumbled stone field.',
     popularity: 4,
     released: 3,
@@ -155,10 +204,46 @@ window.FA_PRODUCTS = [
     price: 68.50,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.3,
-    sku: 'FA-CSQ-2-TB',
+    sku: 'TCEN22',
     description: 'A small raised square centered in a flat field. Restrained and architectural.',
     popularity: 11,
     released: 10,
+    inStock: true,
+  },
+  {
+    slug: 'lotus-2x2',
+    name: 'Lotus',
+    size: '2×2',
+    sizeLabel: '2×2 inch',
+    pattern: 'Lotus',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 68.50,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.3,
+    sku: 'TLOT22',
+    description: 'The 1991 Lotus carving at mid scale. Small enough to run as a repeating band, large enough that the petal relief still catches light.',
+    popularity: 15,
+    released: 15,
+    inStock: true,
+  },
+  {
+    slug: 'moon-blossom-2x2',
+    name: 'Moon Blossom',
+    size: '2×2',
+    sizeLabel: '2×2 inch',
+    pattern: 'Moon Blossom',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 68.50,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.3,
+    sku: 'TMOB22',
+    description: 'Moon Blossom at 2×2 — the crescent tightens at this size and the piece reads as a single quiet mark rather than a botanical.',
+    popularity: 16,
+    released: 16,
     inStock: true,
   },
   {
@@ -173,10 +258,118 @@ window.FA_PRODUCTS = [
     salePrice: null,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.13,
-    sku: 'FA-CAB-1-TB',
+    sku: 'TCAB11',
     description: 'The smallest format Cabochon — used as a punctuation between larger field tiles.',
     popularity: 3,
     released: 4,
+    inStock: true,
+  },
+  {
+    slug: 'lotus-1x1',
+    name: 'Lotus',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Lotus',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 50.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.13,
+    sku: 'TLOT11',
+    description: 'Lotus reduced to a single square inch. Set one at each corner of a field tile, or run a row of them as a dotted border.',
+    popularity: 17,
+    released: 17,
+    inStock: true,
+  },
+  {
+    slug: 'moon-blossom-1x1',
+    name: 'Moon Blossom',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Moon Blossom',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 50.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.11,
+    sku: 'TMOB11',
+    description: 'The smallest Moon Blossom. At this scale the motif abstracts into a soft rosette — good for punctuating a large stone field.',
+    popularity: 18,
+    released: 18,
+    inStock: true,
+  },
+  {
+    slug: 'aspen-leaf-1x1',
+    name: 'Aspen Leaf',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Aspen Leaf',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 50.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.13,
+    sku: 'TASL11',
+    description: 'A single aspen leaf in low relief, veins carved by hand. Reads botanical up close and as texture from across the room.',
+    popularity: 19,
+    released: 19,
+    inStock: true,
+  },
+  {
+    slug: 'dove-1x1',
+    name: 'Dove',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Dove',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 50.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.13,
+    sku: 'TDOV11',
+    description: 'A dove in profile with a folded wing — one of the few figurative pieces in the catalog. Traditionally set singly rather than repeated.',
+    popularity: 20,
+    released: 20,
+    inStock: true,
+  },
+  {
+    slug: 'pinwheel-1x1',
+    name: 'Pinwheel',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Pinwheel',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 50.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.13,
+    sku: 'TPIN11',
+    description: 'Pinwheel at inset scale. The rotational geometry still turns at one inch; three or more in a row read as movement.',
+    popularity: 21,
+    released: 21,
+    inStock: true,
+  },
+  {
+    slug: 'pyramid-1x1',
+    name: 'Pyramid',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Pyramid',
+    category: 'Accent Tiles',
+    subcategory: 'insets',
+    price: 50.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.13,
+    sku: 'TPYR11',
+    description: 'Four flat planes rising to a point. No carving at all — the piece is pure geometry, and it does its work with shadow.',
+    popularity: 22,
+    released: 22,
     inStock: true,
   },
   {
@@ -190,37 +383,16 @@ window.FA_PRODUCTS = [
     price: 56.00,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.2,
-    sku: 'FA-CAB-KNB',
+    sku: 'TCAB11K',
     description: 'Our Cabochon motif as a cabinet knob. Same hand-cast bronze as our tiles — perfect carry-through detail.',
     popularity: 7,
     released: 11,
     inStock: true,
   },
   {
-    slug: 'bar-pull',
-    name: '5-inch Pull',
-    // Hardware is shot mounted, not on the tile sweep — so it lives outside
-    // /products/<slug>/ and needs an explicit path.
-    image: '/assets/images/hardware/pull-5in-mounted.jpg',
-    size: '5in',
-    sizeLabel: '5 inch',
-    pattern: 'Cabochon',
-    category: 'Knobs & Pulls',
-    subcategory: 'pulls',
-    price: 75.00,
-    salePrice: null,
-    finishes: ['Traditional Bronze', 'White Bronze'],
-    weight: 0.5,
-    sku: 'FA-CAB-PUL',
-    description: 'The Cabochon motif drawn out into a five-inch bar pull. Cast in the same solid bronze as our tiles, so drawer and door hardware carries the detail through from the backsplash.',
-    popularity: 12,
-    released: 13,
-    inStock: true,
-  },
-  {
     slug: 'lotus-knob',
     name: 'Lotus Knob',
-    image: '/assets/images/hardware/lotus-knob-mounted.jpg',
+    image: '/assets/images/hardware/lotus-knob-mounted.webp',
     size: '1×1',
     sizeLabel: '1×1 inch',
     pattern: 'Lotus',
@@ -230,12 +402,155 @@ window.FA_PRODUCTS = [
     salePrice: null,
     finishes: ['Traditional Bronze', 'White Bronze'],
     weight: 0.2,
-    sku: 'FA-LOT-KNB',
+    sku: 'TLOT11K',
     description: 'Our 1991 Lotus blossom brought down to knob scale. The floral relief still reads clearly at the hand — a quiet carry-through from a Lotus tile inset.',
     popularity: 13,
     released: 12,
     inStock: true,
   },
+  {
+    slug: 'dove-knob',
+    name: 'Dove Knob',
+    // Hardware is shot mounted, outside the /products/<slug>/ convention.
+    image: '/assets/images/hardware/dove-knob-mounted.webp',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Dove',
+    category: 'Knobs & Pulls',
+    subcategory: 'knobs',
+    price: 56.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.2,
+    sku: 'TDOV11K',
+    description: 'Our Dove motif as a cabinet knob. The wing relief sits under the thumb, so the detail is felt as much as seen.',
+    popularity: 23,
+    released: 23,
+    inStock: true,
+  },
+  {
+    slug: 'aspen-leaf-knob',
+    name: 'Aspen Leaf Knob',
+    // Hardware is shot mounted, outside the /products/<slug>/ convention.
+    image: '/assets/images/hardware/aspen-leaf-knob-mounted.webp',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Aspen Leaf',
+    category: 'Knobs & Pulls',
+    subcategory: 'knobs',
+    price: 56.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.2,
+    sku: 'TASL11K',
+    description: 'The Aspen Leaf carving at knob scale. The stem runs down to the mounting post, so the leaf reads right way up on a drawer front.',
+    popularity: 24,
+    released: 24,
+    inStock: true,
+  },
+  {
+    slug: 'pinwheel-knob',
+    name: 'Pinwheel Knob',
+    // Hardware is shot mounted, outside the /products/<slug>/ convention.
+    image: '/assets/images/hardware/pinwheel-knob-mounted.webp',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Pinwheel',
+    category: 'Knobs & Pulls',
+    subcategory: 'knobs',
+    price: 56.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.2,
+    sku: 'TPIN11K',
+    description: 'Pinwheel as a cabinet knob — the rotational geometry gives the hand an obvious place to turn.',
+    popularity: 25,
+    released: 25,
+    inStock: true,
+  },
+  {
+    slug: 'pyramid-knob',
+    name: 'Pyramid Knob',
+    // Hardware is shot mounted, outside the /products/<slug>/ convention.
+    image: '/assets/images/hardware/pyramid-knob-mounted.webp',
+    size: '1×1',
+    sizeLabel: '1×1 inch',
+    pattern: 'Pyramid',
+    category: 'Knobs & Pulls',
+    subcategory: 'knobs',
+    price: 56.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.2,
+    sku: 'TPYR11K',
+    description: 'The Pyramid brought to hardware. A faceted point in solid bronze — the simplest knob we cast, and the one that wears best.',
+    popularity: 26,
+    released: 26,
+    inStock: true,
+  },
+  {
+    slug: 'bar-pull',
+    name: '5-inch Pull',
+    // Hardware is shot mounted, not on the tile sweep — so it lives outside
+    // /products/<slug>/ and needs an explicit path.
+    image: '/assets/images/hardware/pull-5in-mounted.webp',
+    size: '5in',
+    sizeLabel: '5 inch',
+    pattern: 'Cabochon',
+    category: 'Knobs & Pulls',
+    subcategory: 'pulls',
+    price: 75.00,
+    salePrice: null,
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    weight: 0.5,
+    sku: 'TFAP05P',
+    description: 'The Cabochon motif drawn out into a five-inch bar pull. Cast in the same solid bronze as our tiles, so drawer and door hardware carries the detail through from the backsplash.',
+    popularity: 12,
+    released: 13,
+    inStock: true,
+    // Both finishes are flagged "Limited Inventory" on the 2026 retail list.
+    limitedStock: true,
+  },
+  {
+    slug: 'bar-pull-10',
+    name: '10-inch Pull',
+    // The card leads with White Bronze — it is the alloy you can actually buy.
+    image: '/assets/images/hardware/pull-10in-white-mounted.webp',
+    size: '10in',
+    sizeLabel: '10 inch',
+    pattern: 'Cabochon',
+    category: 'Knobs & Pulls',
+    subcategory: 'pulls',
+    price: 237.00,
+    salePrice: null,
+    // Both alloys are listed so the piece reads like every other product, and
+    // so a designer who knows the Traditional pull can still find and compare
+    // it. Availability is carried per finish rather than by hiding one.
+    finishes: ['Traditional Bronze', 'White Bronze'],
+    // Any finish named here cannot be ordered. Absent = available.
+    // TFAP10P is greyed out as Discontinued on the 2026 retail list.
+    finishAvailability: { 'Traditional Bronze': 'Discontinued' },
+    // Explicit per-finish imagery; both are mounted shots from the same
+    // studio pair, so switching alloys compares like with like.
+    finishImages: {
+      'Traditional Bronze': '/assets/images/hardware/pull-10in-mounted.webp',
+      'White Bronze': '/assets/images/hardware/pull-10in-white-mounted.webp',
+    },
+    weight: 0.7,
+    sku: 'TFAP10P',
+    // Extra gallery shots beyond the finish views. The in-hand frame is
+    // monochrome, so it reads as scale and heft without committing to an
+    // alloy — which is why it can sit on a White-Bronze-only listing.
+    extraShots: [
+      { label: 'In hand', src: '/assets/images/hardware/pull-10in-in-hand-bw.webp' },
+    ],
+    description: 'The Cabochon pull drawn out to ten inches, for appliance panels and tall pantry doors. Cast in one piece, so the bar has no seam at the center.',
+    popularity: 27,
+    released: 27,
+    inStock: true,
+    limitedStock: true,
+  },
+
 ];
 
 // Sample spec — samples are NOT catalog products (see FA_SAMPLE usage
@@ -252,16 +567,6 @@ window.FA_SAMPLE = {
 
 // Convenience lookup
 window.FA_PRODUCT_BY_SLUG = Object.fromEntries(window.FA_PRODUCTS.map(p => [p.slug, p]));
-
-// Categories with counts (for shop sidebar)
-window.FA_CATEGORIES = [
-  { slug: 'all', label: 'All', count: window.FA_PRODUCTS.length },
-  { slug: 'accent-tiles', label: 'Accent Tiles', count: window.FA_PRODUCTS.filter(p => p.category === 'Accent Tiles').length },
-  { slug: 'insets', label: 'Insets', count: window.FA_PRODUCTS.filter(p => p.subcategory === 'insets').length },
-  { slug: 'liners', label: 'Liners', count: 0 },
-  { slug: 'knobs-pulls', label: 'Knobs & Pulls', count: window.FA_PRODUCTS.filter(p => p.category === 'Knobs & Pulls').length },
-  { slug: 'on-sale', label: 'On Sale', count: window.FA_PRODUCTS.filter(p => p.salePrice).length },
-];
 
 // Formatters
 window.FA_FMT = {

@@ -56,7 +56,7 @@
             <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><!-- trimmed mark (8/28): the original foundry-art.png carries 133px of
                  transparent padding per side (16.6% of canvas), so the glyphs sat
                  ~37px right of wherever the box was aligned. The trimmed file is
-                 0/0. --><img src="/assets/images/linden/wordmarks/trimmed/foundry-art.png" alt="Foundry Art"></a>
+                 0/0. --><img src="/assets/images/linden/wordmarks/trimmed/foundry-art.webp" alt="Foundry Art"></a>
           </div>
           <div class="nav-links">
             ${/* Nav order mirrors the homepage's section order: craft (#story),
@@ -214,8 +214,8 @@ ${studiosMenuHTML(section)}
         key: 'bronzework-studio',
         name: 'Bronzework Studio',
         tone: 'light',
-        mark: '/assets/images/linden/wordmarks/trimmed/bronzework-studio.png',
-        image: '/assets/images/linden/autograph/Autograph-Dahlia-Whiskey-1-2048.jpg',
+        mark: '/assets/images/linden/wordmarks/trimmed/bronzework-studio.webp',
+        image: '/assets/images/linden/autograph/Autograph-Dahlia-Whiskey-1-2048.webp',
         desc: 'Solid metal tiles and trim in bronze, brass, stainless steel, and zinc.',
         cta: ['/bronzework-studio/', 'Explore our collections'],
         linksTitle: 'Collections',
@@ -236,8 +236,8 @@ ${studiosMenuHTML(section)}
            itself land mid-page. */
         home: '/foundry-art/',
         tone: 'dark',
-        mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.png',
-        image: '/assets/images/foundry-art-arrays/inset-tiles-array.jpg',
+        mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.webp',
+        image: '/assets/images/foundry-art-arrays/inset-tiles-array.webp',
         desc: 'Hand-cast solid bronze tile and hardware, direct from our studio.',
         cta: ['/foundry-art/shop/', 'Shop now'],
         note: 'Shop online, direct from the studio',
@@ -254,8 +254,8 @@ ${studiosMenuHTML(section)}
         key: 'talisman',
         name: 'Talisman',
         tone: 'light',
-        mark: '/assets/images/linden/wordmarks/trimmed/talisman.png',
-        image: '/assets/images/linden/talisman/Talisman-Swans-Trumpet-and-Spiral-Wave-Ancient-White-towel-crop-e1651606000674.jpg',
+        mark: '/assets/images/linden/wordmarks/trimmed/talisman.webp',
+        image: '/assets/images/linden/talisman/Talisman-Swans-Trumpet-and-Spiral-Wave-Ancient-White-towel-crop-e1651606000674.webp',
         desc: 'Timeless decorative ceramic tiles.',
         cta: ['/talisman/', 'Learn more'],
         note: 'Direct from our studio',
@@ -304,7 +304,7 @@ ${studiosMenuHTML(section)}
             <span></span><span></span><span></span>
           </button>
           <a href="/" class="fs-lw-mark" data-studios-link aria-label="Linden Workshops home">
-            <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops">
+            <img src="/assets/images/linden/wordmarks/linden-workshops.webp" alt="Linden Workshops">
           </a>
           <p class="fs-lw-tag">Three Studios. One Vision.</p>
           <button class="fs-close" aria-label="Close studios menu" data-studios-close>&times;</button>
@@ -667,8 +667,8 @@ ${studiosMenuHTML(section)}
     // prototype opens populated like the live-site screenshots. A user-
     // emptied cart persists as [] and is never re-seeded.
     const SEED = [
-      { slug: 'cabochon-3x3', name: 'Cabochon', sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 2, sku: 'FA-CAB-3-TB', weight: 0.7 },
-      { slug: 'lotus-3x3',    name: 'Lotus',    sizeLabel: '3×3 inch', finish: 'White Bronze',       price: 92.50, qty: 1, sku: 'FA-LOT-3-WB', weight: 0.7 },
+      { slug: 'cabochon-3x3', name: 'Cabochon', sizeLabel: '3×3 inch', finish: 'Traditional Bronze', price: 92.50, qty: 2, sku: 'TCAB33', weight: 0.7 },
+      { slug: 'lotus-3x3',    name: 'Lotus',    sizeLabel: '3×3 inch', finish: 'White Bronze',       price: 92.50, qty: 1, sku: 'WLOT33', weight: 0.7 },
     ];
     function read() { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) { return []; } }
     function write(items) { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) {} document.dispatchEvent(new CustomEvent('fa-cart-change')); }
@@ -772,13 +772,31 @@ ${studiosMenuHTML(section)}
   const thumbFor = (slug, parentSlug) => {
     const key = parentSlug || slug;
     const prod = (window.FA_PRODUCT_BY_SLUG || {})[key];
-    return (prod && prod.image) || '/assets/images/products/' + key + '/main.jpg';
+    // photoPending pieces have no file to point at — say so instead of
+    // pointing at a 404 and letting the browser draw a broken-image glyph.
+    if (prod && prod.photoPending) return null;
+    return (prod && prod.image) || '/assets/images/products/' + key + '/main.webp';
+  };
+
+  // Cart / checkout / order-received all render the same square. Both
+  // .cart-thumb and .summary-item-thumb already carry a --wire-fill background
+  // and center their own text, so a pending piece just gets the label.
+  const thumbHTML = (i, cls) => {
+    const src = thumbFor(i.slug, i.parentSlug);
+    const alt = `${i.name} ${i.sizeLabel}`;
+    return src
+      ? `<div class="${cls}"><img src="${src}" alt="${alt}" loading="lazy"></div>`
+      : `<div class="${cls}" role="img" aria-label="${alt} — photography pending"><span>Photo pending</span></div>`;
   };
   // Per-item shipping weights come from the 2026 retail pricelist and live on
   // the product; the size heuristic is only a fallback for anything without one.
   const weightForSize = s => /1×1/.test(s) ? 0.13 : (/2×2/.test(s) ? 0.4 : 0.7);
   const weightFor = p => (typeof p.weight === 'number' ? p.weight : weightForSize(p.size));
-  const skuForFinish = (p, f) => /white/i.test(f) ? p.sku.replace(/-TB$/, '-WB') : p.sku.replace(/-WB$/, '-TB');
+  // Price-list codes encode the alloy in the leading character — T=Traditional
+  // Bronze, W=White Bronze — so one swap covers tiles, knobs and pulls. (The
+  // previous scheme rewrote a -TB/-WB suffix, which hardware SKUs never had,
+  // so every knob and pull reported the same SKU for both alloys.)
+  const skuForFinish = (p, f) => (/white/i.test(f) ? 'W' : 'T') + p.sku.slice(1);
   const setText = (sel, t) => { const el = document.querySelector(sel); if (el) el.textContent = t; };
 
   // Nav cart badge(s) reflect the store on every page.
@@ -813,14 +831,18 @@ ${studiosMenuHTML(section)}
                  qty, sku: skuForFinish(product, finish), weight: weightFor(product) });
       updateNavCount();
       btn.textContent = 'Added to cart ✓'; btn.disabled = true;
-      setTimeout(() => { btn.textContent = label; btn.disabled = false; }, 1600);
+      setTimeout(() => {
+        const sel = document.querySelector('[data-finish-target] .swatch.selected');
+        if (sel && sel.dataset.finishStatus) return;   // still unorderable — stay closed
+        btn.textContent = label; btn.disabled = false;
+      }, 1600);
     });
   }
 
   // PDP → order samples.
   //
   // Samples are synthesized from FA_SAMPLE + the parent product rather than
-  // being catalog entries, so FA_PRODUCTS stays at 13 and the shop grid, facet
+  // being catalog entries, so FA_PRODUCTS holds only real SKUs and the shop grid, facet
   // counts and cross-sell are untouched. The 'swatch-<parent>' slug is what
   // keeps a sample a distinct cart line under Cart's existing slug+finish
   // identity — no change to sameLine/setQty/remove needed.
@@ -838,7 +860,7 @@ ${studiosMenuHTML(section)}
       finish,
       price: spec.price,
       qty: 1,
-      sku: spec.skuPrefix + '-' + skuForFinish(product, finish).replace(/^FA-/, ''),
+      sku: spec.skuPrefix + '-' + skuForFinish(product, finish),
       weight: spec.weight,          // a cut swatch, not the full tile's weight
     };
   }
@@ -894,7 +916,7 @@ ${studiosMenuHTML(section)}
             <tr data-cart-row data-slug="${i.slug}" data-finish="${i.finish}" data-weight="${i.weight}" data-line-type="${i.type || 'product'}">
               <td class="cart-item-cell" data-label="Product">
                 <div class="cart-item">
-                  <div class="cart-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
+                  ${thumbHTML(i, 'cart-thumb')}
                   <div class="cart-item-info"><strong>${i.name}</strong><span>${i.sizeLabel} · SKU: ${i.sku}</span></div>
                 </div>
               </td>
@@ -920,7 +942,7 @@ ${studiosMenuHTML(section)}
     if (!wrap) return;
     wrap.innerHTML = Cart.items().map(i => `
         <div class="summary-item">
-          <div class="summary-item-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name}" loading="lazy"></div>
+          ${thumbHTML(i, 'summary-item-thumb')}
           <div class="summary-item-info"><strong>${i.name} × ${i.qty}</strong><span>${i.sizeLabel.replace(' inch', '')} · ${i.finish}</span></div>
           <div class="summary-item-price">${fmtMoney(i.price * i.qty)}</div>
         </div>`).join('');
@@ -1175,7 +1197,7 @@ ${studiosMenuHTML(section)}
           <tr>
             <td>
               <div class="cart-item">
-                <div class="cart-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
+                ${thumbHTML(i, 'cart-thumb')}
                 <div class="cart-item-info"><strong>${i.name} × ${i.qty}</strong><span>${i.sizeLabel.replace(' inch', '')} · ${i.finish} · SKU: ${i.sku}</span></div>
               </div>
             </td>
@@ -1343,7 +1365,7 @@ ${studiosMenuHTML(section)}
           <tr>
             <td>
               <div class="cart-item">
-                <div class="cart-thumb"><img src="${thumbFor(i.slug, i.parentSlug)}" alt="${i.name} ${i.sizeLabel}" loading="lazy"></div>
+                ${thumbHTML(i, 'cart-thumb')}
                 <div class="cart-item-info"><strong>${i.name} × ${i.qty}</strong><span>${String(i.sizeLabel).replace(' inch', '')} · ${i.finish} · SKU: ${i.sku}</span></div>
               </div>
             </td>
@@ -1878,9 +1900,53 @@ ${studiosMenuHTML(section)}
   // ────────────────────────────────────────────────────────
   // Swatch picker (PDP material chooser) — swaps main image
   // ────────────────────────────────────────────────────────
+  // ────────────────────────────────────────────────────────
+  // Per-finish availability (PDP)
+  //
+  // A finish can be unorderable while the product itself is still listed —
+  // an alloy the studio has stopped casting. Rather than hiding it (which
+  // loses a designer who came looking for it), the finish stays selectable
+  // and everything that would let you buy it goes quiet: a flag on the
+  // image, one line under the picker, and a closed buy path.
+  //
+  // Returns a sync function, or null when the page has no such finish, so
+  // initSwatches() can call it without every other PDP paying for it.
+  // ────────────────────────────────────────────────────────
+  function initFinishAvailability() {
+    const row = document.querySelector('.swatch-row');
+    if (!row || !row.querySelector('[data-finish-status]')) return null;
+
+    const flag   = document.querySelector('[data-finish-flag]');
+    const note   = document.querySelector('[data-finish-note]');
+    const addBtn = document.querySelector('.pdp-actions .btn-primary');
+    const sample = document.querySelector('.pdp-actions .btn-sample');
+    const qty    = document.querySelector('.qty-row .qty-stepper');
+    // Captured before anything toggles it, so restoring is exact.
+    const addLabel = addBtn ? addBtn.textContent : '';
+
+    function sync() {
+      const sel = row.querySelector('.swatch.selected');
+      const status = sel && sel.dataset.finishStatus;
+      if (flag) {
+        flag.textContent = status || '';
+        flag.hidden = !status;
+      }
+      if (note) note.hidden = !status;
+      if (qty) qty.classList.toggle('is-disabled', !!status);
+      if (sample) sample.disabled = !!status;
+      if (addBtn) {
+        addBtn.disabled = !!status;
+        addBtn.textContent = status ? status + ' — not available' : addLabel;
+      }
+    }
+    sync();
+    return sync;
+  }
+
   function initSwatches() {
     const swatches = document.querySelectorAll('.swatch-row .swatch');
     if (!swatches.length) return;
+    const syncAvailability = initFinishAvailability();
 
     const mainImage = document.querySelector('.pdp-gallery .main-image img');
     const mainLabel = document.querySelector('.pdp-gallery .main-image span');
@@ -1895,12 +1961,29 @@ ${studiosMenuHTML(section)}
         s.classList.add('selected');
         s.setAttribute('aria-checked', 'true');
 
-        const newSrc = s.dataset.finishSrc;
-        if (!newSrc || !mainImage) return;
-
         // Derive finish label from the swatch chip class
         const chip = s.querySelector('.swatch-chip');
         const finishLabel = chip && chip.classList.contains('white') ? 'White Bronze' : 'Traditional';
+
+        // The label is updated first: a photoPending PDP has no <img> to swap,
+        // and the label is then the only thing telling you which finish is live.
+        if (mainLabel) {
+          mainLabel.textContent = mainLabel.textContent.replace(/Traditional|White Bronze/, finishLabel);
+        }
+
+        if (syncAvailability) syncAvailability();
+
+        // Keep the displayed SKU on the chosen alloy — TPYR11K vs WPYR11K are
+        // different products to the studio, so showing one for both misquotes.
+        const skuEl = document.querySelector('[data-pdp-sku]');
+        const prod = (window.FA_PRODUCT_BY_SLUG || {})[document.body.getAttribute('data-product-slug')];
+        if (skuEl && prod) {
+          const full = s.querySelector('.swatch-label');
+          skuEl.textContent = skuForFinish(prod, full ? full.textContent : finishLabel);
+        }
+
+        const newSrc = s.dataset.finishSrc;
+        if (!newSrc || !mainImage) return;
 
         // Quick fade-swap on main image
         mainImage.style.opacity = '0';
@@ -1909,11 +1992,6 @@ ${studiosMenuHTML(section)}
           mainImage.alt = mainImage.alt.replace(/Traditional Bronze finish|White Bronze finish/, finishLabel + (finishLabel === 'White Bronze' ? ' finish' : ' Bronze finish'));
           mainImage.style.opacity = '';
         }, 130);
-
-        // Update label overlay
-        if (mainLabel) {
-          mainLabel.textContent = mainLabel.textContent.replace(/Traditional|White Bronze/, finishLabel);
-        }
 
         // Sync the corresponding thumb to the active state
         thumbs.forEach(t => {
@@ -1937,19 +2015,12 @@ ${studiosMenuHTML(section)}
   // ────────────────────────────────────────────────────────
   const FACET_DEFS = {
     'cat-insets': p => p.subcategory === 'insets',
-    'cat-liners': p => p.subcategory === 'liners',
     'cat-knobs':  p => p.category === 'Knobs & Pulls',
-    'cat-sale':   p => !!p.salePrice,
     'size-3':     p => p.size === '3×3',
     'size-2':     p => p.size === '2×2',
     'size-1':     p => p.size === '1×1',
     'size-5':     p => p.size === '5in',
-    'pat-cab':    p => p.pattern === 'Cabochon',
-    'pat-lot':    p => p.pattern === 'Lotus',
-    'pat-mb':     p => p.pattern === 'Moon Blossom',
-    'pat-sun':    p => p.pattern === 'Sun',
-    'pat-grd':    p => p.pattern === 'Grid',
-    'pat-pin':    p => p.pattern === 'Pinwheel',
+    'size-10':    p => p.size === '10in',
   };
 
   // Sale items must sort by what the customer actually pays, or the four
@@ -2338,26 +2409,44 @@ ${studiosMenuHTML(section)}
   // ────────────────────────────────────────────────────────
   // Render helpers (shop grid + cross-sell)
   // ────────────────────────────────────────────────────────
+  // The grid is a shopping surface: count the finishes you can actually order,
+  // not the ones the catalog lists. A discontinued alloy still appears on the
+  // PDP for reference, but it should not inflate "2 colors" on the card.
+  const orderableFinishes = p =>
+    p.finishes.filter(f => !((p.finishAvailability || {})[f]));
+
   function productCardHTML(p) {
     const onSale = !!p.salePrice;
     const priceBlock = onSale
       ? `<div class="product-price"><span class="was">${window.FA_FMT.price(p.wasPrice)}</span><span class="sale">${window.FA_FMT.price(p.salePrice)}</span></div>`
       : `<div class="product-price">${window.FA_FMT.price(p.price)}</div>`;
-    const badge = onSale ? `<span class="product-badge">Sale</span>` : '';
-    // Most products live at /products/<slug>/main.jpg; hardware overrides it.
-    const imgSrc = p.image || `/assets/images/products/${p.slug}/main.jpg`;
+    // Sale wins the badge slot; otherwise surface the 2026 price list's
+    // "Limited Inventory" flag so nobody specs a piece the studio is running out of.
+    const badge = onSale
+      ? `<span class="product-badge">Sale</span>`
+      : (p.limitedStock ? `<span class="product-badge is-limited">Limited</span>` : '');
+    // Most products live at /products/<slug>/main.webp; hardware overrides it.
+    // photoPending pieces have no shot at all — emit no <img> so the .wire-img
+    // label shows through instead of the browser's broken-image glyph.
+    const imgSrc = p.image || `/assets/images/products/${p.slug}/main.webp`;
     const imgAlt = `${p.name} ${p.sizeLabel} ${p.pattern} accent tile`;
+    const imgTag = p.photoPending
+      ? ''
+      : `<img src="${imgSrc}" alt="${imgAlt}" loading="lazy">`;
+    const wireLabel = p.photoPending
+      ? `${p.pattern} ${p.size} — photography pending`
+      : `${p.pattern} ${p.size}`;
     return `
       <a href="/foundry-art/product/${p.slug}/" class="product-card">
         <div class="img-wrap">
           ${badge}
           <div class="wire-img" role="img" aria-label="${p.name} ${p.sizeLabel}">
-            <span>${p.pattern} ${p.size}</span>
-            <img src="${imgSrc}" alt="${imgAlt}" loading="lazy">
+            <span>${wireLabel}</span>
+            ${imgTag}
           </div>
         </div>
         <div class="product-name">${p.name}</div>
-        <div class="product-meta">${p.sizeLabel} · ${p.finishes.length} color${p.finishes.length === 1 ? '' : 's'}</div>
+        <div class="product-meta">${p.sizeLabel} · ${orderableFinishes(p).length} color${orderableFinishes(p).length === 1 ? '' : 's'}</div>
         ${priceBlock}
         <span class="product-card-cta">Shop Now <span aria-hidden="true">&rarr;</span></span>
       </a>
@@ -2365,12 +2454,17 @@ ${studiosMenuHTML(section)}
   }
 
   // Takes an optional pre-filtered/sorted list; defaults to the whole catalog.
-  // productCardHTML is deliberately untouched so renderCrossSell() and
-  // renderShopSidebar() cannot regress.
+  // productCardHTML is deliberately untouched so renderCrossSell() cannot
+  // regress.
+  // data-shop-grid-limit caps how many cards render — the homepage "Featured
+  // tiles" strip sets it so the section stays a teaser rather than the whole
+  // catalog. The shop page leaves it off and shows everything.
   function renderShopGrid(list) {
     const grid = document.querySelector('[data-shop-grid]');
     if (!grid || !window.FA_PRODUCTS) return;
-    const items = list || window.FA_PRODUCTS;
+    let items = list || window.FA_PRODUCTS;
+    const limit = parseInt(grid.dataset.shopGridLimit, 10);
+    if (Number.isFinite(limit) && limit > 0) items = items.slice(0, limit);
     grid.innerHTML = items.map(p => productCardHTML(p)).join('');
   }
 
@@ -2380,14 +2474,6 @@ ${studiosMenuHTML(section)}
     const exclude = wrap.dataset.exclude || '';
     const picks = window.FA_PRODUCTS.filter(p => p.slug !== exclude).slice(0, 3);
     wrap.innerHTML = picks.map(p => productCardHTML(p)).join('');
-  }
-
-  function renderShopSidebar() {
-    const sidebar = document.querySelector('[data-shop-categories]');
-    if (!sidebar || !window.FA_CATEGORIES) return;
-    sidebar.innerHTML = window.FA_CATEGORIES.map((c, i) =>
-      `<li><a href="#" class="${i === 0 ? 'active' : ''}">${c.label} <span class="count">${c.count}</span></a></li>`
-    ).join('');
   }
 
   // ────────────────────────────────────────────────────────
@@ -2693,7 +2779,6 @@ ${studiosMenuHTML(section)}
     // via applyShop(). Calling it here too would double-render, and the second
     // pass would ignore the active filters.
     renderCrossSell();
-    renderShopSidebar();
 
     // Account. initCheckoutAccount() must come after initCheckout() and
     // initTradeToggle() above — all three touch the same trade fields.
