@@ -32,6 +32,15 @@ Until then, the `updates` branch is the only place these images live. Do not pro
 | center-square-2x2 | main.jpg + 2 gallery |
 | cabochon-1x1 | main.jpg + 2 gallery |
 | cabochon-1x1-knob | main.jpg + 2 gallery |
+| square-3x3 | main + traditional + white + 1 gallery — client archive |
+| lotus-2x2 | main + traditional + white + 1 gallery — client archive |
+| moon-blossom-2x2 | main + traditional + white + 1 gallery — client archive, 600px |
+| lotus-1x1 | main + traditional + white + 1 gallery — client archive |
+| moon-blossom-1x1 | main + traditional + white + 1 gallery — client archive, 600px |
+| aspen-leaf-1x1 | main + traditional + white + 1 gallery — client archive |
+| dove-1x1 | main + traditional + white + 1 gallery — client archive |
+| pinwheel-1x1 | main + traditional + white + 1 gallery — client archive |
+| pyramid-1x1 | main + traditional + white + 1 gallery — client archive |
 
 ### Hero — `assets/images/hero/`
 - `bronze-liners-marble.png` — used as homepage hero (Track A + Track B)
@@ -57,6 +66,73 @@ Until then, the `updates` branch is the only place these images live. Do not pro
 - `pull-5in-mounted.jpg` — alternate, not currently wired
 
 ## What's still placeholder
+
+### The 2026 price-list additions (added 2026-09-04) — CLIENT-SUPPLIED, rights-clear
+
+Fourteen pieces from the *Foundry Art RETAIL Prices 2026* list were added to the
+catalog on 2026-09-04. **Their photography came from the client's own archive**,
+not from a third-party site — `Foundry Art/_Assets/Photography`, the Dropbox
+mirror of the Google Drive folders Stacza shares. Unlike everything listed above,
+these do **not** need to be re-shot or re-licensed before launch.
+
+Sources, by folder:
+
+- **`Foundry Art Insets-White Background-JPG/`** — 800×800, named by price-list
+  SKU code, same shoot as the existing on-site flats. Used for
+  `square-3x3` (TSQU33/WSQU33), `lotus-2x2` (TLOT22/WLOT22),
+  `lotus-1x1` (TLOT11/WLOT11), `aspen-leaf-1x1` (TASL11/WASL11),
+  `dove-1x1` (TDOV11/WDOV11), `pinwheel-1x1` (TPIN11/WPIN11) and
+  `pyramid-1x1` (TPYR11/WPYR11) → `traditional.jpg` + `white.jpg` (+ `main.jpg`,
+  a copy of `traditional.jpg`, matching the existing folders).
+- **`ALL Foundry Art Individual Tiles/Foundry Art Tile Images - 2015 Website finals/`**
+  — 600×600. Used for `moon-blossom-2x2` (`FA-MoonBlossom-Med-*`) and
+  `moon-blossom-1x1` (`FA-MoonBlossom-Gem-*`). **Moon Blossom is absent from the
+  white-background set at all three sizes** — worth asking Stacza whether a
+  white-background MOB set exists that did not make it into the mirror. Until
+  then these two sit at 600px while their neighbours are 800px.
+- **`Foundry Art Insets-Oblique Angle-JPG/`** — 600×600 angled views, used as
+  `gallery-1.jpg` (the "Studio shot" thumb) on all nine tiles above.
+- **`Foundry Art Knobs and Pulls/FA Knobs and Pulls Mounted-PSD/`** — 2240×2240
+  layered PSDs, flattened to 800px JPEG with
+  `sips -s format jpeg -s formatOptions 82 -Z 800`. Both alloys exist, so the
+  three new knobs carry a real White Bronze shot rather than reusing the
+  Traditional one: `aspen-leaf-knob`, `pinwheel-knob`, `pyramid-knob` →
+  `<piece>-mounted.jpg` (Traditional) + `<piece>-white-mounted.jpg` (White
+  Bronze). `bar-pull-10` → `pull-10in-white-mounted.jpg`, White Bronze only,
+  because Traditional (TFAP10P) is discontinued on the 2026 list.
+
+`dove-knob` was the fourteenth and already had `hardware/dove-knob-mounted.jpg`
+sitting unused in the tree.
+
+**One exception to the rights-clear claim above.**
+`hardware/pull-10in-in-hand-bw.jpg` is the in-hand frame from Claremont Tile's
+live listing (`claremonttile.com/wp-content/uploads/2018/01/Foundry-Art-cabinet-drawer-pull-metal-bronze-10in-hand-copy.jpg`,
+added 2026-09-04 at the brand owner's request so the 10-inch pull matches what
+customers already see at retail). It carries the same placeholder status as the
+Claremont photography listed further up and must be cleared or replaced before
+launch. It was chosen over Claremont's other two shots because it is monochrome:
+those are Traditional Bronze, and this catalog lists the pull in White Bronze
+only, so a colour frame would show the wrong alloy.
+
+The 10-inch pull now lists **both** alloys, matching Claremont's page and the
+rest of the catalog, with Traditional Bronze marked discontinued per the 2026
+list rather than hidden. Its Traditional shot (`pull-10in-mounted.jpg`) is the
+archive's own `Foundry Art Pull 10 inch Traditional Bronze mounted.psd`, so it
+is rights-clear and pairs with the White Bronze frame from the same shoot.
+
+Still worth reconciling with Stacza: Claremont sells the Traditional pull as
+available, the price list calls it discontinued. One of the two is out of date.
+
+**The archive covers 26 of the 27 catalogued pieces**, so it is the route to
+retiring the Claremont Tile placeholders above — the only gap is Moon Blossom's
+white-background treatment, including the 3×3 that is already live. Re-sourcing
+the other eleven was deliberately left out of this pass (brand owner, 2026-09-04:
+the current on-site shots look right as they are).
+
+Not used: the archive also holds a **Square 2×2** (`FA_Square_2x2_*`) that does
+not appear on the 2026 price list.
+
+### Other
 
 A "Wall Hook" hardware item on the homepage has no real photography available yet — it falls back to the `wire-img` label "Wall Hook — photography pending".
 

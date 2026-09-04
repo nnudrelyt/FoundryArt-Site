@@ -1155,6 +1155,11 @@ body[data-page="home"] .product-card-cta:hover {
 .product-price { font-size: 18px; color: var(--charcoal); font-weight: 500; text-align: center; }
 .product-price .was { text-decoration: line-through; color: var(--mid); font-weight: 400; margin-right: 6px; }
 .product-price .sale { color: var(--sale); }
+/* "Limited" reuses the badge slot but in bronze, not the sale red — it is a
+   supply note, not a discount. White on --bronze is 5.6:1. */
+.product-badge.is-limited {
+  background: var(--bronze);
+}
 .product-badge {
   display: inline-block;
   position: absolute;
@@ -2122,7 +2127,9 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
    Background made transparent so the page bg shows through where the
    scaled photo no longer covers — avoids the "thick border" cream
    ring around 3×3 photos. */
-.product-card[href*="-3x3"] .wire-img {
+/* :has(> img) — a photoPending 3x3 card has no <img>, and dropping the fill
+   there would leave the "photography pending" label floating on bare page bg. */
+.product-card[href*="-3x3"] .wire-img:has(> img) {
   background: transparent;
 }
 .product-card[href*="-3x3"] .wire-img > img {
@@ -2233,6 +2240,53 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
   margin-bottom: 28px;
   padding-bottom: 24px;
 }
+
+/* ── Unavailable finish ───────────────────────────────────
+   An alloy the studio no longer casts stays on the page and stays
+   selectable — hiding it loses the designer who came looking for it.
+   The material selector is deliberately NOT styled for this: a struck,
+   greyed swatch made the picker the loudest thing in the column, and the
+   picker is a picker. The state is carried around it instead — a flag on
+   the photograph, one line beneath the row, an Availability row in the
+   specs, and a buy path that closes. */
+
+/* Flag on the photograph. Charcoal, not the sale red — this is a fact about
+   the catalog, not an alert. Same corner as the shop card's badge so the two
+   read as one family. */
+.finish-flag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  background: rgba(20, 37, 40, 0.86);
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-size: var(--fs-fine);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 11px;
+  border-radius: 3px;
+}
+
+/* One sentence under the picker, only while the finish is selected. */
+.finish-availability-note {
+  margin: 10px 0 0;
+  font-size: var(--fs-fine);
+  line-height: 1.6;
+  color: var(--mid);
+}
+.finish-availability-note a { color: var(--bronze); border-bottom: 1px solid var(--bronze-l); white-space: nowrap; }
+
+/* Buy path closed. Disabled rather than removed, so the row keeps its shape
+   and you can see exactly what would have been possible. */
+.pdp-actions .btn-primary:disabled,
+.pdp-actions .btn-sample:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.qty-stepper.is-disabled { opacity: 0.45; pointer-events: none; }
 
 .form-group { margin-bottom: 22px; }
 .form-group label {
@@ -2836,6 +2890,16 @@ body[data-section="foundry-art"] .footer-copy { color: rgba(255,255,255,0.55); }
 .btn-sample:hover { background: var(--bronze); color: var(--white); }
 
 /* Populated reviews (Track B PDP) */
+/* Newly listed pieces have no reviews. Say so plainly rather than hiding
+   the tab — an empty tab reads as broken, an honest line does not. */
+.reviews-empty {
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--mid);
+  max-width: 60ch;
+}
+.reviews-empty a { color: var(--bronze); border-bottom: 1px solid var(--bronze-l); }
+
 .reviews-list { display: flex; flex-direction: column; gap: 24px; }
 .review {
   padding-bottom: 24px;
@@ -13170,6 +13234,7 @@ body[data-section="foundry-art"] :is(
   body[data-page="shop"]:not([data-product-slug]) .shop-sidebar[data-fa-open] .facet-group h5 {
     margin-top: 0;
   }
+
 }
 
 /* Small-screen affordance only — above the breakpoint the rail is back and
