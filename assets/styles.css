@@ -6211,14 +6211,20 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
 }
 
 /* ══════════════════════════════════════════════════════════
-   TABLET (769–1024) — single column cards but full panel width,
-   hero wordmarks visible, type scales between mobile and desktop.
+   HEADER — MENU-ONLY BAND (769–1279)
+   The seven-link .lw2-nav needs ~1207px to sit on one line beside the
+   wordmark (633px of link text + 6x28 gaps + a 325px logo/toggle block
+   + 80px of header padding). Below that the flex items give up width
+   and the labels break mid-phrase — "TILE / COLLECTIONS", "OUR / TEAM",
+   "WHERE / TO BUY" — so the whole band goes menu-only up to 1279 and
+   the studios drawer carries the links. Header only: the layout blocks
+   below keep their own 1024 tablet ceiling.
    ────────────────────────────────────────────────────────── */
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1279px) {
 
-  /* Header — tablet runs the mobile spec verbatim: menu-only, wordmark
-     28px on the 24 axis, toggle right. The open menu <=1024 is the mobile
-     layout, so the registration is shared rule-for-rule. */
+  /* runs the mobile spec verbatim: menu-only, wordmark 28px on the 24
+     axis, toggle right. The open menu <=1024 is the mobile layout, so
+     the registration is shared rule-for-rule. */
   body[data-section="linden"] .lw2-header { padding: 16px 16px 16px 24px !important; }
   @media (min-width: 769px) {
     /* the tablet content column sits at 40px -- the header follows it
@@ -6230,6 +6236,14 @@ body[data-section="linden"] #foundry-art .lw2-card-body {
   body[data-section="linden"] .lw2-header .lw2-logo { order: 1; }
   body[data-section="linden"] .lw2-studios-toggle { order: 2; margin-left: auto; padding: 6px; }
   body[data-section="linden"] .lw2-header .lw2-logo img { height: 28px !important; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   TABLET (769–1024) — single column cards but full panel width,
+   hero wordmarks visible, type scales between mobile and desktop.
+   (Header moved out to the 769–1279 band above.)
+   ────────────────────────────────────────────────────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
 
   /* Hero — keep wordmark buttons visible at tablet (don't hide like mobile) */
   body[data-section="linden"] .lw2-hero h1 {
@@ -12261,9 +12275,15 @@ body[data-product-slug] .swatch-label { font-size: 15px; }
    fails at 15px. #846556 -> #6B5645 keeps the cast-metal read and clears AA
    across the whole sweep (5.28:1 at the lightest point). Same on the pewter
    side, measured against charcoal rather than white. */
+/* No stroke on the traditional fill -- the gradient is dark enough to hold
+   its own edge against the white panel, and the outline was reading as a
+   second, competing border just inside the row. Kept transparent rather
+   than removed so the 1px box survives and selecting doesn't shift the row.
+   White Bronze keeps its #8F8B7E stroke: that fill is light enough that it
+   would otherwise dissolve into the panel. */
 body[data-product-slug] .swatch.selected:has(.swatch-chip.traditional) {
   background: linear-gradient(135deg, #846556 0%, #6B5645 100%);
-  border-color: #5E4B3C;
+  border-color: transparent;
   box-shadow: none;
 }
 body[data-product-slug] .swatch.selected:has(.swatch-chip.traditional) .swatch-label {
