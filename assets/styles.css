@@ -1346,7 +1346,7 @@ body[data-page="home"] .product-card-cta:hover {
   background-color: var(--charcoal);
   background-image:
     linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-    url('/assets/images/process/lotus-limestone-angle-bw.jpg');
+    url('/assets/images/process/lotus-limestone-angle-bw.webp');
   /* 8/29: cover, not 118% width — that sizing only filled the panel by
      accident of the old portrait foyer's ratio; the landscape limestone
      shot ran short of the component's height under it. */
@@ -1407,7 +1407,7 @@ body[data-page="home"] .product-card-cta:hover {
     background-color: var(--charcoal);
     background-image:
       linear-gradient(rgba(20, 37, 40, 0.62), rgba(20, 37, 40, 0.62)),
-      url('/assets/images/process/lotus-limestone-angle-bw.jpg');
+      url('/assets/images/process/lotus-limestone-angle-bw.webp');
     background-size: cover, cover;
     background-position: center, center 25%;
     background-repeat: no-repeat;
@@ -9719,7 +9719,7 @@ body[data-page="feature-drury"] .lw2-article-hero {
   position: relative;
   min-height: var(--lw-article-hero-min-h-d);
   background-color: var(--lw-article-hero-bg-fallback);
-  background-image: url('/assets/images/linden/drury/Well-Dressed-Hero-1600x900.jpg');
+  background-image: url('/assets/images/linden/drury/Well-Dressed-Hero-1600x900.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -392,7 +392,7 @@ window.FA_PRODUCTS = [
   {
     slug: 'lotus-knob',
     name: 'Lotus Knob',
-    image: '/assets/images/hardware/lotus-knob-mounted.jpg',
+    image: '/assets/images/hardware/lotus-knob-mounted.webp',
     size: '1×1',
     sizeLabel: '1×1 inch',
     pattern: 'Lotus',
@@ -412,7 +412,7 @@ window.FA_PRODUCTS = [
     slug: 'dove-knob',
     name: 'Dove Knob',
     // Hardware is shot mounted, outside the /products/<slug>/ convention.
-    image: '/assets/images/hardware/dove-knob-mounted.jpg',
+    image: '/assets/images/hardware/dove-knob-mounted.webp',
     size: '1×1',
     sizeLabel: '1×1 inch',
     pattern: 'Dove',
@@ -432,7 +432,7 @@ window.FA_PRODUCTS = [
     slug: 'aspen-leaf-knob',
     name: 'Aspen Leaf Knob',
     // Hardware is shot mounted, outside the /products/<slug>/ convention.
-    image: '/assets/images/hardware/aspen-leaf-knob-mounted.jpg',
+    image: '/assets/images/hardware/aspen-leaf-knob-mounted.webp',
     size: '1×1',
     sizeLabel: '1×1 inch',
     pattern: 'Aspen Leaf',
@@ -452,7 +452,7 @@ window.FA_PRODUCTS = [
     slug: 'pinwheel-knob',
     name: 'Pinwheel Knob',
     // Hardware is shot mounted, outside the /products/<slug>/ convention.
-    image: '/assets/images/hardware/pinwheel-knob-mounted.jpg',
+    image: '/assets/images/hardware/pinwheel-knob-mounted.webp',
     size: '1×1',
     sizeLabel: '1×1 inch',
     pattern: 'Pinwheel',
@@ -472,7 +472,7 @@ window.FA_PRODUCTS = [
     slug: 'pyramid-knob',
     name: 'Pyramid Knob',
     // Hardware is shot mounted, outside the /products/<slug>/ convention.
-    image: '/assets/images/hardware/pyramid-knob-mounted.jpg',
+    image: '/assets/images/hardware/pyramid-knob-mounted.webp',
     size: '1×1',
     sizeLabel: '1×1 inch',
     pattern: 'Pyramid',
@@ -493,7 +493,7 @@ window.FA_PRODUCTS = [
     name: '5-inch Pull',
     // Hardware is shot mounted, not on the tile sweep — so it lives outside
     // /products/<slug>/ and needs an explicit path.
-    image: '/assets/images/hardware/pull-5in-mounted.jpg',
+    image: '/assets/images/hardware/pull-5in-mounted.webp',
     size: '5in',
     sizeLabel: '5 inch',
     pattern: 'Cabochon',
@@ -515,7 +515,7 @@ window.FA_PRODUCTS = [
     slug: 'bar-pull-10',
     name: '10-inch Pull',
     // The card leads with White Bronze — it is the alloy you can actually buy.
-    image: '/assets/images/hardware/pull-10in-white-mounted.jpg',
+    image: '/assets/images/hardware/pull-10in-white-mounted.webp',
     size: '10in',
     sizeLabel: '10 inch',
     pattern: 'Cabochon',
@@ -533,8 +533,8 @@ window.FA_PRODUCTS = [
     // Explicit per-finish imagery; both are mounted shots from the same
     // studio pair, so switching alloys compares like with like.
     finishImages: {
-      'Traditional Bronze': '/assets/images/hardware/pull-10in-mounted.jpg',
-      'White Bronze': '/assets/images/hardware/pull-10in-white-mounted.jpg',
+      'Traditional Bronze': '/assets/images/hardware/pull-10in-mounted.webp',
+      'White Bronze': '/assets/images/hardware/pull-10in-white-mounted.webp',
     },
     weight: 0.7,
     sku: 'TFAP10P',
@@ -542,7 +542,7 @@ window.FA_PRODUCTS = [
     // monochrome, so it reads as scale and heft without committing to an
     // alloy — which is why it can sit on a White-Bronze-only listing.
     extraShots: [
-      { label: 'In hand', src: '/assets/images/hardware/pull-10in-in-hand-bw.jpg' },
+      { label: 'In hand', src: '/assets/images/hardware/pull-10in-in-hand-bw.webp' },
     ],
     description: 'The Cabochon pull drawn out to ten inches, for appliance panels and tall pantry doors. Cast in one piece, so the bar has no seam at the center.',
     popularity: 27,
@@ -567,14 +567,6 @@ window.FA_SAMPLE = {
 
 // Convenience lookup
 window.FA_PRODUCT_BY_SLUG = Object.fromEntries(window.FA_PRODUCTS.map(p => [p.slug, p]));
-
-// Categories with counts (for shop sidebar)
-window.FA_CATEGORIES = [
-  { slug: 'all', label: 'All', count: window.FA_PRODUCTS.length },
-  { slug: 'accent-tiles', label: 'Accent Tiles', count: window.FA_PRODUCTS.filter(p => p.category === 'Accent Tiles').length },
-  { slug: 'insets', label: 'Insets', count: window.FA_PRODUCTS.filter(p => p.subcategory === 'insets').length },
-  { slug: 'knobs-pulls', label: 'Knobs & Pulls', count: window.FA_PRODUCTS.filter(p => p.category === 'Knobs & Pulls').length },
-];
 
 // Formatters
 window.FA_FMT = {

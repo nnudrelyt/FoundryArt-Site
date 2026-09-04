@@ -56,7 +56,7 @@
             <a href="/foundry-art/" class="nav-logo" aria-label="Foundry Art home"><!-- trimmed mark (8/28): the original foundry-art.png carries 133px of
                  transparent padding per side (16.6% of canvas), so the glyphs sat
                  ~37px right of wherever the box was aligned. The trimmed file is
-                 0/0. --><img src="/assets/images/linden/wordmarks/trimmed/foundry-art.png" alt="Foundry Art"></a>
+                 0/0. --><img src="/assets/images/linden/wordmarks/trimmed/foundry-art.webp" alt="Foundry Art"></a>
           </div>
           <div class="nav-links">
             ${/* Nav order mirrors the homepage's section order: craft (#story),
@@ -214,8 +214,8 @@ ${studiosMenuHTML(section)}
         key: 'bronzework-studio',
         name: 'Bronzework Studio',
         tone: 'light',
-        mark: '/assets/images/linden/wordmarks/trimmed/bronzework-studio.png',
-        image: '/assets/images/linden/autograph/Autograph-Dahlia-Whiskey-1-2048.jpg',
+        mark: '/assets/images/linden/wordmarks/trimmed/bronzework-studio.webp',
+        image: '/assets/images/linden/autograph/Autograph-Dahlia-Whiskey-1-2048.webp',
         desc: 'Solid metal tiles and trim in bronze, brass, stainless steel, and zinc.',
         cta: ['/bronzework-studio/', 'Explore our collections'],
         linksTitle: 'Collections',
@@ -236,8 +236,8 @@ ${studiosMenuHTML(section)}
            itself land mid-page. */
         home: '/foundry-art/',
         tone: 'dark',
-        mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.png',
-        image: '/assets/images/foundry-art-arrays/inset-tiles-array.jpg',
+        mark: '/assets/images/linden/wordmarks/trimmed/foundry-art.webp',
+        image: '/assets/images/foundry-art-arrays/inset-tiles-array.webp',
         desc: 'Hand-cast solid bronze tile and hardware, direct from our studio.',
         cta: ['/foundry-art/shop/', 'Shop now'],
         note: 'Shop online, direct from the studio',
@@ -254,8 +254,8 @@ ${studiosMenuHTML(section)}
         key: 'talisman',
         name: 'Talisman',
         tone: 'light',
-        mark: '/assets/images/linden/wordmarks/trimmed/talisman.png',
-        image: '/assets/images/linden/talisman/Talisman-Swans-Trumpet-and-Spiral-Wave-Ancient-White-towel-crop-e1651606000674.jpg',
+        mark: '/assets/images/linden/wordmarks/trimmed/talisman.webp',
+        image: '/assets/images/linden/talisman/Talisman-Swans-Trumpet-and-Spiral-Wave-Ancient-White-towel-crop-e1651606000674.webp',
         desc: 'Timeless decorative ceramic tiles.',
         cta: ['/talisman/', 'Learn more'],
         note: 'Direct from our studio',
@@ -304,7 +304,7 @@ ${studiosMenuHTML(section)}
             <span></span><span></span><span></span>
           </button>
           <a href="/" class="fs-lw-mark" data-studios-link aria-label="Linden Workshops home">
-            <img src="/assets/images/linden/wordmarks/linden-workshops.png" alt="Linden Workshops">
+            <img src="/assets/images/linden/wordmarks/linden-workshops.webp" alt="Linden Workshops">
           </a>
           <p class="fs-lw-tag">Three Studios. One Vision.</p>
           <button class="fs-close" aria-label="Close studios menu" data-studios-close>&times;</button>
@@ -775,7 +775,7 @@ ${studiosMenuHTML(section)}
     // photoPending pieces have no file to point at — say so instead of
     // pointing at a 404 and letting the browser draw a broken-image glyph.
     if (prod && prod.photoPending) return null;
-    return (prod && prod.image) || '/assets/images/products/' + key + '/main.jpg';
+    return (prod && prod.image) || '/assets/images/products/' + key + '/main.webp';
   };
 
   // Cart / checkout / order-received all render the same square. Both
@@ -2425,10 +2425,10 @@ ${studiosMenuHTML(section)}
     const badge = onSale
       ? `<span class="product-badge">Sale</span>`
       : (p.limitedStock ? `<span class="product-badge is-limited">Limited</span>` : '');
-    // Most products live at /products/<slug>/main.jpg; hardware overrides it.
+    // Most products live at /products/<slug>/main.webp; hardware overrides it.
     // photoPending pieces have no shot at all — emit no <img> so the .wire-img
     // label shows through instead of the browser's broken-image glyph.
-    const imgSrc = p.image || `/assets/images/products/${p.slug}/main.jpg`;
+    const imgSrc = p.image || `/assets/images/products/${p.slug}/main.webp`;
     const imgAlt = `${p.name} ${p.sizeLabel} ${p.pattern} accent tile`;
     const imgTag = p.photoPending
       ? ''
@@ -2454,8 +2454,8 @@ ${studiosMenuHTML(section)}
   }
 
   // Takes an optional pre-filtered/sorted list; defaults to the whole catalog.
-  // productCardHTML is deliberately untouched so renderCrossSell() and
-  // renderShopSidebar() cannot regress.
+  // productCardHTML is deliberately untouched so renderCrossSell() cannot
+  // regress.
   // data-shop-grid-limit caps how many cards render — the homepage "Featured
   // tiles" strip sets it so the section stays a teaser rather than the whole
   // catalog. The shop page leaves it off and shows everything.
@@ -2474,14 +2474,6 @@ ${studiosMenuHTML(section)}
     const exclude = wrap.dataset.exclude || '';
     const picks = window.FA_PRODUCTS.filter(p => p.slug !== exclude).slice(0, 3);
     wrap.innerHTML = picks.map(p => productCardHTML(p)).join('');
-  }
-
-  function renderShopSidebar() {
-    const sidebar = document.querySelector('[data-shop-categories]');
-    if (!sidebar || !window.FA_CATEGORIES) return;
-    sidebar.innerHTML = window.FA_CATEGORIES.map((c, i) =>
-      `<li><a href="#" class="${i === 0 ? 'active' : ''}">${c.label} <span class="count">${c.count}</span></a></li>`
-    ).join('');
   }
 
   // ────────────────────────────────────────────────────────
@@ -2787,7 +2779,6 @@ ${studiosMenuHTML(section)}
     // via applyShop(). Calling it here too would double-render, and the second
     // pass would ignore the active filters.
     renderCrossSell();
-    renderShopSidebar();
 
     // Account. initCheckoutAccount() must come after initCheckout() and
     // initTradeToggle() above — all three touch the same trade fields.
