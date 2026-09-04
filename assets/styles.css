@@ -15620,12 +15620,19 @@ body.menu-e .lw2-studios-toggle svg rect {
    the sort control, which is the tallest thing in it, so the count is pushed
    down while the rail's heading starts at the very top of the column.
 
-   The 11.25px is measured, not guessed, and it is the sum of two things:
+   The sort control had `line-height: normal`, so its height depended on
+   which face happened to be painting its text when layout ran — 45.5px with
+   Jost, 41.5px on the fallback. That is a 4px jump in the toolbar on every
+   cold load, and it made this alignment unrepeatable: the same page measured
+   9.25px one load and 11.25px the next. The line-height is pinned below so
+   the row is a known height, and the lead-in follows from it:
      · the count is centred against the 45.5px select, so it sits
        (45.5 - 20.5) / 2 = 12.5px below the row top;
      · the heading is 13px Jost against the count's 14px, which puts its
        baseline ~1.25px higher inside its own box.
    12.5 - 1.25 = 11.25px of lead-in on the first group.
+
+   Measure this after `document.fonts.ready` if it ever needs re-deriving.
 
    Verified identical at 1025 / 1280 / 1440 / 1600 — none of the three
    drivers (heading 13px, count 14px, select 45.5px) changes across desktop
@@ -15639,4 +15646,12 @@ body.menu-e .lw2-studios-toggle svg rect {
   body[data-page="shop"]:not([data-product-slug]) .shop-sidebar .facet-group:first-child {
     padding-top: 11.25px;
   }
+}
+
+/* The sort control's height must not depend on which face is painting when
+   layout runs. 15px Jost resolves `normal` to 21.5px; the fallback resolves
+   it to 17.5px, and the 4px difference moved the whole product grid on every
+   cold load. Pinned: 21.5 + 22 padding + 2 border = 45.5px, always. */
+body[data-page="shop"]:not([data-product-slug]) .shop-sort select {
+  line-height: 21.5px;
 }
